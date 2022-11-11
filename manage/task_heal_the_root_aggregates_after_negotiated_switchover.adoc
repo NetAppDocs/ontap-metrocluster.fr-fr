@@ -1,0 +1,50 @@
+---
+permalink: manage/task_heal_the_root_aggregates_after_negotiated_switchover.html 
+sidebar: sidebar 
+keywords: data, aggregate, heal, root, preparation, switchback, operation, negotiate, switchover 
+summary: 'Une fois les agrégats de données résolus, vous devez corriger les agrégats racine en vue de l"opération de rétablissement.' 
+---
+= Corrigez les agrégats racine après un basculement négocié
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Une fois les agrégats de données résolus, vous devez corriger les agrégats racine en vue de l'opération de rétablissement.
+
+La phase d'agrégats de données du processus de correction MetroCluster doit avoir été réalisée avec succès.
+
+.Étapes
+. Revenez aux agrégats en miroir en exécutant la commande MetroCluster Healing -phase root-Aggregates.
++
+[listing]
+----
+cluster_A::> metrocluster heal -phase root-aggregates
+[Job 137] Job succeeded: Heal Root Aggregates is successful
+----
++
+Si la correction est vetotée, vous avez la possibilité de réémission de la commande MetroCluster Heal avec le paramètre --override-vetos. Si vous utilisez ce paramètre facultatif, le système remplace tout veto logiciel qui empêche l'opération de correction.
+
+. Vérifiez que l'opération d'autorétablissement est terminée en exécutant la commande MetroCluster opération show sur le cluster sain :
++
+[listing]
+----
+
+cluster_A::> metrocluster operation show
+  Operation: heal-root-aggregates
+      State: successful
+ Start Time: 7/29/2014 20:54:41
+   End Time: 7/29/2014 20:54:42
+     Errors: -
+----
+. Vérifiez et supprimez les disques défectueux appartenant au site de secours en exécutant la commande suivante sur le site sain : `disk show -broken`
+. Met sous tension ou démarre chaque module de contrôleur sur le site de reprise sur incident.
++
+Si le système affiche l'invite DU CHARGEUR, exécutez le `boot_ontap` commande.
+
+. Une fois les nœuds démarrés, vérifiez que les agrégats racine sont en miroir.
++
+Si les deux plexes sont présents, la resynchronisation s'effectue automatiquement si les plexes ne sont pas synchronisés. Si un plex a échoué, ce plex doit être détruit et le miroir doit être recréé à l'aide de la commande Storage aggregate-name pour rétablir la relation miroir.
+
+

@@ -1,0 +1,90 @@
+---
+permalink: disaster-recovery/task_verify_assignment_mcip.html 
+sidebar: sidebar 
+keywords: verify, adp, verify, drives, pool, automatically, assign 
+summary: Sur les systèmes configurés pour ADP, vous devez vérifier que les disques du pool 0 ont été automatiquement affectés. 
+---
+= Vérification de l'affectation automatique ou de l'affectation manuelle des disques du pool 0
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Sur les systèmes configurés pour ADP, vous devez vérifier que les disques du pool 0 ont été automatiquement affectés. Sur les systèmes qui ne sont pas configurés pour ADP, vous devez affecter manuellement les disques 0 du pool.
+
+
+
+== Vérification de l'affectation des disques du pool 0 sur les systèmes ADP sur le site de secours (systèmes IP MetroCluster)
+
+Si des disques ont été remplacés sur le site de secours et que le système est configuré pour ADP, vous devez vérifier que les disques distants sont visibles pour les nœuds et qu'ils ont été correctement attribués.
+
+.Étape
+. Vérifiez que les disques du pool 0 sont affectés automatiquement :
++
+`disk show`
+
++
+Dans l'exemple suivant pour un système AFF A800 sans tiroirs externes, un trimestre (8 disques) a été automatiquement attribué au nœud_A_1 et un trimestre a été automatiquement attribué au nœud_A_2. Les disques restants seront des disques distants (pool1) pour les nœuds_B_1 et les nœuds_B_2.
+
++
+[listing]
+----
+cluster_A::*> disk show
+                 Usable     Disk      Container           Container
+Disk             Size       Shelf Bay Type    Type        Name      Owner
+---------------- ---------- ----- --- ------- ----------- --------- --------
+node_A_1:0n.12   1.75TB     0     12  SSD-NVM shared      aggr0     node_A_1
+node_A_1:0n.13   1.75TB     0     13  SSD-NVM shared      aggr0     node_A_1
+node_A_1:0n.14   1.75TB     0     14  SSD-NVM shared      aggr0     node_A_1
+node_A_1:0n.15   1.75TB     0     15  SSD-NVM shared      aggr0     node_A_1
+node_A_1:0n.16   1.75TB     0     16  SSD-NVM shared      aggr0     node_A_1
+node_A_1:0n.17   1.75TB     0     17  SSD-NVM shared      aggr0     node_A_1
+node_A_1:0n.18   1.75TB     0     18  SSD-NVM shared      aggr0     node_A_1
+node_A_1:0n.19   1.75TB     0     19  SSD-NVM shared      -         node_A_1
+node_A_2:0n.0    1.75TB     0     0   SSD-NVM shared      aggr0_node_A_2_0 node_A_2
+node_A_2:0n.1    1.75TB     0     1   SSD-NVM shared      aggr0_node_A_2_0 node_A_2
+node_A_2:0n.2    1.75TB     0     2   SSD-NVM shared      aggr0_node_A_2_0 node_A_2
+node_A_2:0n.3    1.75TB     0     3   SSD-NVM shared      aggr0_node_A_2_0 node_A_2
+node_A_2:0n.4    1.75TB     0     4   SSD-NVM shared      aggr0_node_A_2_0 node_A_2
+node_A_2:0n.5    1.75TB     0     5   SSD-NVM shared      aggr0_node_A_2_0 node_A_2
+node_A_2:0n.6    1.75TB     0     6   SSD-NVM shared      aggr0_node_A_2_0 node_A_2
+node_A_2:0n.7    1.75TB     0     7   SSD-NVM shared      -         node_A_2
+node_A_2:0n.24   -          0     24  SSD-NVM unassigned  -         -
+node_A_2:0n.25   -          0     25  SSD-NVM unassigned  -         -
+node_A_2:0n.26   -          0     26  SSD-NVM unassigned  -         -
+node_A_2:0n.27   -          0     27  SSD-NVM unassigned  -         -
+node_A_2:0n.28   -          0     28  SSD-NVM unassigned  -         -
+node_A_2:0n.29   -          0     29  SSD-NVM unassigned  -         -
+node_A_2:0n.30   -          0     30  SSD-NVM unassigned  -         -
+node_A_2:0n.31   -          0     31  SSD-NVM unassigned  -         -
+node_A_2:0n.36   -          0     36  SSD-NVM unassigned  -         -
+node_A_2:0n.37   -          0     37  SSD-NVM unassigned  -         -
+node_A_2:0n.38   -          0     38  SSD-NVM unassigned  -         -
+node_A_2:0n.39   -          0     39  SSD-NVM unassigned  -         -
+node_A_2:0n.40   -          0     40  SSD-NVM unassigned  -         -
+node_A_2:0n.41   -          0     41  SSD-NVM unassigned  -         -
+node_A_2:0n.42   -          0     42  SSD-NVM unassigned  -         -
+node_A_2:0n.43   -          0     43  SSD-NVM unassigned  -         -
+32 entries were displayed.
+----
+
+
+
+
+== Affectation des disques du pool 0 sur des systèmes non-ADP sur le site de secours (configurations MetroCluster IP)
+
+Si des disques ont été remplacés sur le site de secours et que le système n'est pas configuré pour ADP, vous devez affecter manuellement de nouveaux disques au pool 0.
+
+Pour les systèmes ADP, les lecteurs sont automatiquement affectés.
+
+.Étapes
+. Sur l'un des nœuds de remplacement du site après incident, réaffectez les disques du pool de nœuds 0 :
++
+`storage disk assign -n number-of-replacement disks -p 0`
+
++
+Cette commande attribue les disques nouvellement ajoutés (et non possédés) sur le site de secours. Vous devez attribuer le même nombre et la même taille de disques (ou plus) que celui qui était avant l'incident. Le `storage disk assign` la page man contient plus d'informations sur la réalisation d'une affectation de disque plus granulaire.
+
+. Répétez l'étape sur l'autre nœud de remplacement sur le site de secours.
+

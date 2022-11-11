@@ -1,0 +1,47 @@
+---
+permalink: install-fc/concept_considerations_8510.html 
+sidebar: sidebar 
+keywords: preparing, prepare, metrocluster, mcc, installation, install, differences, configurations, between, considerations, all, san, array, asa, cluster, peering, prerequisites, dedicated, ports, sharing, data, ports, native, disk, shelves, array, luns, transitions, 7-mode, isls, tdm/wdm, fabric-attached, iod, ood, encryption, devices, unmirrored, aggregates, maintenance, requiring, power, shutdown, firewall, hardware, racking, cabling, setup, checklist, all san array, asa 
+summary: 'Lorsque vous préparez l"installation de MetroCluster, vous devez comprendre l"architecture matérielle et les composants requis de MetroCluster.' 
+---
+= Conditions requises pour l'utilisation d'un commutateur Brocade DCX 8510-8
+:allow-uri-read: 
+
+
+* Les commutateurs DCX 8510-8 utilisés dans les configurations MetroCluster doivent être achetés auprès de NetApp.
+* Pour plus d'évolutivité, vous devez laisser un bloc de ports entre les configurations MetroCluster si vous ne câbler que deux MetroClusters dans des modules 4x48 ports. Cela vous permet d'étendre l'utilisation des ports dans les configurations MetroCluster sans être à nouveau activé.
+* Chaque commutateur Brocade DCX 8510-8 de la configuration MetroCluster doit être correctement configuré pour les ports ISL et les connexions de stockage. Pour l'utilisation des ports, reportez-vous à la section suivante : link:concept_port_assignments_for_fc_switches_when_using_ontap_9_1_and_later.html["Affectation de ports pour les commutateurs FC lors de l'utilisation de ONTAP 9.1 et versions ultérieures"].
+* Les liens ISL ne peuvent pas être partagés. Chaque MetroCluster requiert deux liens ISL pour chaque structure.
+* Le commutateur DCX 8510-8 utilisé pour la connectivité MetroCluster backend ne doit pas être utilisé pour une autre connectivité.
++
+Les périphériques non MetroCluster ne doivent pas être connectés à ces commutateurs et le trafic non MetroCluster ne doit pas circuler via les commutateurs DCX 8510-8.
+
+* Une carte de ligne peut être connectée à des ONTAP *ou* à des MetroClustereurs ONTAP 7-mode.
+
+
+
+NOTE: Les fichiers RCF ne sont pas disponibles pour ce commutateur.
+
+Les conditions suivantes sont requises pour l'utilisation de deux commutateurs Brocade DCX 8510-8 :
+
+* Vous devez disposer d'un commutateur DCX 8510-8 sur chaque site.
+* Vous devez utiliser un minimum de deux lames 48 ports qui contiennent des SFP 16 Gb sur chaque switch.
+
+
+Les conditions suivantes sont requises pour l'utilisation de quatre commutateurs DCX 8510-8 sur chaque site en configuration MetroCluster :
+
+* Vous devez avoir deux commutateurs DCX 8510-8 sur chaque site.
+* Vous devez utiliser au moins une lame 48 ports pour chaque commutateur DCX 8510-8.
+* Chaque serveur lame est configuré en tant que commutateur virtuel à l'aide de structures virtuelles.
+
+
+Les produits NetApp suivants ne sont pas pris en charge par les commutateurs Brocade DCX 8510-8 :
+
+* Config Advisor
+* Contrôle de l'état de santé de la structure
+* MyAutoSupport (les risques système peuvent afficher des faux positifs)
+* Active IQ Unified Manager (anciennement OnCommand Unified Manager)
+
+
+
+NOTE: S'assurer que tous les composants nécessaires à cette configuration se trouvent dans le https://mysupport.netapp.com/matrix["Matrice d'interopérabilité NetApp"]. Pour plus d'informations sur les configurations prises en charge, consultez la section Remarques de l'outil Interoperability Matrix Tool.

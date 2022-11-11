@@ -1,0 +1,74 @@
+---
+permalink: upgrade/task_change_the_ha_config_setts_mcc_add_a_2nd_controller.html 
+sidebar: sidebar 
+keywords: metrocluster, upgrade, change, ha, config, sett, existing, new, controller, modules 
+summary: 'Lorsque vous développez une configuration MetroCluster, vous devez mettre à jour le paramètre ha-config du module de contrôleur existant et du nouveau module de contrôleur. Vous devez également déterminer l"ID système du nouveau module de contrôleur.' 
+---
+= Modification du paramètre HA-config sur les modules de contrôleur existants et nouveaux
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Lorsque vous développez une configuration MetroCluster, vous devez mettre à jour le paramètre ha-config du module de contrôleur existant et du nouveau module de contrôleur. Vous devez également déterminer l'ID système du nouveau module de contrôleur.
+
+Cette tâche est effectuée en mode Maintenance sur les modules de contrôleur existants et nouveaux.
+
+.Étapes
+. Modifiez le paramètre ha-config du module de contrôleur existant :
++
+.. Afficher le paramètre ha-config du module de contrôleur et du châssis existants :
++
+`ha-config show`
+
++
+Le paramètre ha-config est "mcc-2n" pour tous les composants car le module de contrôleur était dans une configuration MetroCluster à deux nœuds.
+
+.. Remplacez le paramètre ha-config du module de contrôleur existant par "`mcc`": +
+`ha-config modify controller mcc`
+.. Remplacez le paramètre ha-config du châssis existant par `mcc`:
++
+`ha-config modify chassis mcc`
+
+.. Récupérer l'ID système du module de contrôleur existant :
++
+`sysconfig`
+
++
+Notez l'ID du système. Vous en avez besoin lorsque vous définissez l'ID de partenaire sur le nouveau module de contrôleur.
+
+.. Quitter le mode Maintenance pour revenir à l'invite DU CHARGEUR :
++
+`halt`
+
+
+
+. Modifiez le paramètre ha-config et récupérez l'ID système du nouveau module de contrôleur :
++
+.. Si le nouveau module de contrôleur n'est pas déjà en mode de maintenance, démarrez-le en mode maintenance :
++
+`boot_ontap maint`
+
+.. Remplacez le paramètre ha-config du nouveau module de contrôleur par `mcc`:
++
+`ha-config modify controller mcc`
+
+.. Définissez le paramètre ha-config du nouveau châssis sur mcc :
++
+`ha-config modify chassis mcc`
+
+.. Récupérer l'ID système du nouveau module de contrôleur :
++
+`sysconfig`
+
++
+Notez l'ID du système. Lorsque vous définissez l'ID de partenaire et affectez des disques au nouveau module de contrôleur,
+
+.. Quitter le mode Maintenance pour revenir à l'invite DU CHARGEUR :
++
+`halt`
+
+
+
+

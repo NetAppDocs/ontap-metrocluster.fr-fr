@@ -1,0 +1,162 @@
+---
+permalink: install-fc/concept_AFF_A900_cisco_port_config.html 
+sidebar: sidebar 
+keywords: AFF, A900, Cisco, ONTAP, FAS, FC, metrocluster 
+summary: Les tableaux présentent le nombre maximal de configurations prises en charge, avec huit modules de contrôleur AFF A900 dans un groupe DR. 
+---
+= Utilisation des ports Cisco pour les contrôleurs AFF A900 ou FAS9500 dans une configuration MetroCluster exécutant ONTAP 9.10.1 ou une version ultérieure
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+Les tableaux présentent le nombre maximal de configurations prises en charge, avec huit modules de contrôleur AFF A900 ou FAS9500 dans un groupe de reprise sur incident.
+
+[NOTE]
+====
+* Le tableau suivant montre les systèmes équipés de huit ports FC-VI. Les AFF A900 et FAS9500 disposent de huit ports FC-VI (a, b, c et d pour FC-VI-1 et FC-VI-2).
+* MetroCluster 2 ou DR 2 n'est pas pris en charge par les commutateurs 9132T.
+
+
+====
+|===
+
+
+6+| Configurations utilisant FibreBridge 7500N ou 7600N utilisant les deux ports FC (FC1 et FC2) 
+
+
+6+| MetroCluster 1 ou DR Groupe 1 
+
+
+2.2+| Composant .2+| Port 3+| Modèle du switch Cisco 
+
+
+| Se connecte au commutateur FC... | 9132T (1 LEM) | 9132T (2 LEM) 
+
+
+2.12+| controller_x_1 | Port a du FC-VI-1 | 1 | LEM1-1 | LEM1-1 
+
+
+| Port b FC-VI-1 | 2 | LEM1-1 | LEM1-1 
+
+
+| Port c FC-VI-1 | 1 | LEM1-2 | LEM1-2 
+
+
+| Port d FC-VI-1 | 2 | LEM1-2 | LEM1-2 
+
+
+| Port a du FC-VI-2 | 1 | LEM1-3 | LEM1-3 
+
+
+| Port b FC-VI-2 | 2 | LEM1-3 | LEM1-3 
+
+
+| Port c FC-VI-2 | 1 | LEM1-4 | LEM1-4 
+
+
+| Port d FC-VI-2 | 2 | LEM1-4 | LEM1-4 
+
+
+| Port a du HBA | 1 | LEM1-5 | LEM1-5 
+
+
+| Port b de l'adaptateur HBA | 2 | LEM1-5 | LEM1-5 
+
+
+| Port c de l'adaptateur HBA | 1 | LEM1-6 | LEM1-6 
+
+
+| Port d de l'adaptateur HBA | 2 | LEM1-6 | LEM1-6 
+
+
+2.12+| controller_x_2 | Port a du FC-VI-1 | 1 | LEM1-7 | LEM1-7 
+
+
+| Port b FC-VI-1 | 2 | LEM1-7 | LEM1-7 
+
+
+| Port c FC-VI-1 | 1 | LEM1-8 | LEM1-8 
+
+
+| Port d FC-VI-1 | 2 | LEM1-8 | LEM1-8 
+
+
+| Port a du FC-VI-2 | 1 | LEM1-9 | LEM1-9 
+
+
+| Port b FC-VI-2 | 2 | LEM1-9 | LEM1-9 
+
+
+| Port c FC-VI-2 | 1 | LEM1-10 | LEM1-10 
+
+
+| Port d FC-VI-2 | 2 | LEM1-10 | LEM1-10 
+
+
+| Port a du HBA | 1 | LEM1-11 | LEM1-11 
+
+
+| Port b de l'adaptateur HBA | 2 | LEM1-11 | LEM1-11 
+
+
+| Port c de l'adaptateur HBA | 1 | LEM1-12 | LEM1-12 
+
+
+| Port d de l'adaptateur HBA | 2 | LEM1-12 | LEM1-12 
+
+
+.4+| Pile 1 .2+| bridge_x_1a | FC1 | 1 | LEM1-13 | LEM1-13 
+
+
+| FC2 | 2 | LEM1-13 | LEM1-13 
+
+
+.2+| bridge_x_1b | FC1 | 1 | LEM1-14 | LEM1-14 
+
+
+| FC2 | 2 | LEM1-14 | LEM1-14 
+
+
+.4+| Pile 2 .2+| bridge_x_2a | FC1 | 1 | - | LEM1-15 
+
+
+| FC2 | 2 | - | LEM1-15 
+
+
+.2+| bridge_x_2b | FC1 | 1 | - | LEM1-16 
+
+
+| FC2 | 2 | - | LEM1-16 
+
+
+.4+| Pile 3 .2+| bridge_x_3a | FC1 | 1 | - | LEM2-1 
+
+
+| FC2 | 2 | - | LEM2-1 
+
+
+.2+| bridge_x_3b | FC1 | 1 | - | LEM2-2 
+
+
+| FC2 | 2 | - | LEM2-2 
+
+
+.4+| Pile y .2+| pont_x_ya | FC1 | 1 | - | LEM2-3 
+
+
+| FC2 | 2 | - | LEM2-3 
+
+
+.2+| bridge_x_yb | FC1 | 1 | - | LEM2-4 
+
+
+| FC2 | 2 | - | LEM2-4 
+|===
+[NOTE]
+====
+* Des ponts supplémentaires peuvent être reliés aux ports LEM2-5 à LEM2-8 en commutateurs 9132T avec 2 modules LEM.
+* Une seule (1) pile de ponts est prise en charge avec les commutateurs 9132T et un module LEM.
+
+
+====

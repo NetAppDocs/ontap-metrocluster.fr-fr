@@ -1,0 +1,67 @@
+---
+permalink: upgrade/concept_choosing_an_upgrade_method_mcc.html 
+sidebar: sidebar 
+keywords: metrocluster, upgrade, choose, upgrade, refresh, method 
+summary: 'La procédure de mise à niveau ou de mise à jour que vous utilisez dépend du modèle de plateforme, de l"étendue de la mise à niveau et du type de configuration MetroCluster.' 
+---
+= Commencez ici : vous avez le choix entre une mise à niveau du contrôleur, une mise à jour du système ou une extension
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+En fonction du périmètre de la mise à niveau de l'équipement, vous avez choisi une procédure de mise à niveau du contrôleur, de mise à jour du système ou d'extension.
+
+* Les procédures de mise à niveau du contrôleur s'appliquent uniquement aux modules de contrôleur. Les contrôleurs sont remplacés par un nouveau modèle de contrôleur.
++
+Les modèles de tiroirs de stockage ne sont pas mis à niveau.
+
++
+** Dans le cadre des procédures de basculement et de rétablissement, le basculement MetroCluster est utilisé pour fournir aux clients un service sans interruption pendant la mise à niveau des modules de contrôleur sur le cluster partenaire.
+** Dans le cadre d'une procédure de mise à niveau du contrôleur basée sur le transfert d'agrégats, les opérations de transfert d'agrégats servent à déplacer des données de l'ancienne configuration vers la nouvelle configuration mise à niveau, et ce sans interruption.
+
+
+* Les procédures de mise à jour s'appliquent aux contrôleurs et aux tiroirs de stockage.
++
+Dans les procédures de mise à jour, de nouveaux contrôleurs et tiroirs sont ajoutés à la configuration MetroCluster, créant un deuxième groupe de reprise sur incident. Ensuite, les données sont migrées sans interruption vers les nouveaux nœuds.
+
++
+Les contrôleurs d'origine sont ensuite retirés du cluster.
+
+* Les procédures d'extension permettent d'ajouter des contrôleurs et des tiroirs à la configuration MetroCluster sans supprimer aucun.
++
+La procédure que vous utilisez dépend du type de MetroCluster et du nombre de contrôleurs existants.
+
+
+
+[cols="2,5"]
+|===
+
+
+| Type de mise à niveau | Aller à... 
+
+
+ a| 
+Mise à niveau du contrôleur
+ a| 
+link:../upgrade/concept_choosing_controller_upgrade_mcc.html["Choisir la procédure de mise à niveau du contrôleur"]
+
+
+
+ a| 
+Mise à jour du système
+ a| 
+link:../upgrade/concept_choosing_tech_refresh_mcc.html["Choisir une procédure de rafraîchissement du système"]
+
+
+
+ a| 
+De développement
+ a| 
+* link:../upgrade/task_expand_a_two_node_mcc_fc_configuration_to_a_four_node_fc_configuration_supertask.html["MetroCluster à deux nœuds à quatre nœuds"]
+* link:../upgrade/task_expand_a_four_node_mcc_fc_configuration_to_an_eight_node_configuration.html["MetroCluster FC à quatre nœuds à huit"]
+* link:../upgrade/task_expand_a_four_node_mcc_ip_configuration.html["MetroCluster IP à quatre nœuds sur huit"]
+
+
+|===

@@ -1,0 +1,60 @@
+---
+permalink: maintain/task_fb_hot_add_shelf_prepare_7500n.html 
+sidebar: sidebar 
+keywords: metrocluster, maintain, service, prepare, hot, add, sas, disk, shelves 
+summary: 'La préparation à l"ajout à chaud d"un tiroir disque SAS implique le téléchargement des documents ainsi que le firmware du disque et du tiroir disque.' 
+---
+= Préparation à l'ajout à chaud de tiroirs disques SAS
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+La préparation à l'ajout à chaud d'un tiroir disque SAS implique le téléchargement des documents ainsi que le firmware du disque et du tiroir disque.
+
+* Votre système doit être une configuration prise en charge et doit exécuter une version prise en charge de ONTAP.
+* Tous les disques et tiroirs disques du système doivent exécuter la dernière version du firmware.
++
+Vous pouvez mettre à jour le firmware des disques et des tiroirs dans la configuration MetroCluster avant d'ajouter des tiroirs.
+
++
+https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-ug-rdg/home.html["Mise à niveau, rétablissement ou mise à niveau vers une version antérieure"]
+
+
+
+
+NOTE: Si votre système exécute une version prise en charge de ONTAP, vous pouvez utiliser plusieurs modules IOM12 et IOM6 au sein de la même pile. Pour déterminer si votre version de ONTAP prend en charge la combinaison de tiroirs, Reportez-vous à la matrice d'interopérabilité (IMT).https://mysupport.netapp.com/NOW/products/interoperability[NetApp interopérabilité] si votre version de ONTAP n'est pas prise en charge, et vous ne pouvez pas mettre à niveau ou déclasser les modules IOM sur la pile existante ou le nouveau tiroir à ajouter à une combinaison de modules IOM prise en charge, vous devez effectuer l'une des opérations suivantes :
+
+* Démarrez une nouvelle pile sur un nouveau port SAS (si elle est prise en charge par la paire de ponts).
+* Démarrer une nouvelle pile sur une paire de ponts supplémentaire.
+
+
+.Étapes
+. Téléchargez ou consultez les documents suivants depuis le site de support NetApp :
++
+** https://mysupport.netapp.com/matrix["Matrice d'interopérabilité NetApp"]
+** Le _Guide d'installation_ pour votre modèle de tiroir disque.
+
+
+. Vérifiez que le tiroir disque que vous ajoutez à chaud est pris en charge.
++
+https://mysupport.netapp.com/matrix["Matrice d'interopérabilité NetApp"]
+
+. Téléchargez les derniers firmwares des tiroirs disques et disques :
++
+
+NOTE: Dans cette étape, vous ne remplissez que la partie de téléchargement des instructions fournies dans les liens. Vous devez suivre les étapes indiquées dans le link:task_fb_hot_add_a_disk_shelf_install_7500n.html["Ajout à chaud d'un tiroir disque"] section relative à l'installation du tiroir disque.
+
++
+.. Téléchargez le micrologiciel du disque et faites une copie des instructions du micrologiciel du disque pour vous y référer ultérieurement.
++
+https://mysupport.netapp.com/site/downloads/firmware/disk-drive-firmware["Téléchargements NetApp : firmware de disque"]
+
+.. Téléchargez le firmware du tiroir disque et effectuez une copie des instructions du firmware du tiroir disque pour vous y référer ultérieurement.
++
+https://mysupport.netapp.com/site/downloads/firmware/disk-shelf-firmware["Téléchargements NetApp : firmware des tiroirs disques"]
+
+
+
+

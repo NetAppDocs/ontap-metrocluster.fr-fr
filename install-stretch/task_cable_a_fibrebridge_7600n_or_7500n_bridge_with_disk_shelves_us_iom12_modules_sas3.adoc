@@ -1,0 +1,51 @@
+---
+permalink: install-stretch/task_cable_a_fibrebridge_7600n_or_7500n_bridge_with_disk_shelves_us_iom12_modules_sas3.html 
+sidebar: sidebar 
+keywords: metrocluster, stretch, installation, cable, fibrebridge, bridge, disk, shelves, iom12, modules 
+summary: Après avoir configuré le pont, vous pouvez commencer à câbler le système. 
+---
+= Câblage d'un pont FiberBridge 7600N ou 7500N avec des tiroirs disques utilisant des modules IOM12
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Après avoir configuré le pont, vous pouvez commencer à câbler le système.
+
+Pour les tiroirs disques, insérez un connecteur de câble SAS avec la languette de retrait orientée vers le bas (sous le connecteur).
+
+.Étapes
+. Connectez en série les tiroirs disques de chaque pile :
++
+.. En commençant avec le premier tiroir logique de la pile, connectez le port E/S A 3 au port 1 du module d'E/S suivant. Répétez le processus jusqu'à ce que chaque module d'E/S A de la pile soit connecté.
+.. Répétez la sous-étape précédente pour l'IOM B.
+.. Répétez les sous-étapes précédentes pour chaque pile.
+
+
++
+Le _Guide d'installation et de maintenance_ de votre modèle de tiroir disque fournit des informations détaillées sur la configuration en série des tiroirs disques.
+
+. Mettez les tiroirs sous tension, puis définissez les ID de tiroir.
++
+** Vous devez mettre chaque tiroir disque hors tension puis sous tension.
+** Ils doivent être uniques pour chaque tiroir disque SAS dans chaque groupe DR MetroCluster (y compris les deux sites).
+
+
+. Reliez les tiroirs disques aux ponts FiberBridge.
++
+.. Pour la première pile de tiroirs disques, reliez le module d'E/S A du premier tiroir au port SAS A du FibreBridge A. Reliez le module d'E/S E/S B du dernier tiroir au port SAS A du FibreBridge B.
+.. Pour les piles de tiroirs supplémentaires, répétez l'étape précédente en utilisant le port SAS suivant disponible sur les ponts FiberBridge, en utilisant le port B pour la deuxième pile, le port C pour la troisième pile et le port D pour la quatrième pile.
+.. Lors du câblage, connectez les piles basées sur des modules IOM12 et IOM3/IOM6 au même pont tant qu'elles sont connectées à des ports SAS distincts.
++
+
+NOTE: Chaque pile peut utiliser différents modèles d'E/S, mais tous les tiroirs disques d'une pile doivent utiliser le même modèle.
+
+
+
++
+L'illustration suivante montre les tiroirs disques connectés à une paire de ponts FiberBridge 7600N ou 7500N :
+
+
+
+image::../media/mcc_cabling_bridge_and_sas3_stack_with_7500n_and_multiple_stacks.gif[pont de câblage mcc et pile sas3 avec 7500n et plusieurs piles]

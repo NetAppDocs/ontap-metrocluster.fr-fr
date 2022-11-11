@@ -1,0 +1,36 @@
+---
+permalink: install-stretch/task_rack_the_hardware_components_2_node_stretch_sas.html 
+sidebar: sidebar 
+keywords: metrocluster, stretch, installation, rack, hardware, components 
+summary: 'Si vous n"avez pas reçu l"équipement déjà installé dans les armoires, vous devez installer les composants en rack.' 
+---
+= Mise en rack des composants matériels
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Si vous n'avez pas reçu l'équipement déjà installé dans les armoires, vous devez installer les composants en rack.
+
+Cette tâche doit être effectuée sur les deux sites MetroCluster.
+
+.Étapes
+. Planifiez le positionnement des composants MetroCluster.
++
+La quantité d'espace rack nécessaire dépend du modèle de plateforme des contrôleurs de stockage, des types de commutateurs et du nombre de piles de tiroirs disques dans votre configuration.
+
+. Le respect des pratiques d'atelier standard pour travailler avec des équipements électriques permet de vous assurer que vous êtes correctement mis à la terre.
+. Installez les contrôleurs de stockage sur le rack ou l'armoire.
++
+https://docs.netapp.com/platstor/index.jsp["Centre de documentation AFF et FAS"]
+
+. Installez les tiroirs disques, connectez-les en série dans chaque pile, mettez-les sous tension et définissez les identifiants des tiroirs.
++
+Pour plus d'informations sur la configuration des tiroirs disques et sur la configuration des identifiants de tiroirs, reportez-vous au guide approprié pour votre modèle de tiroir disque.
+
++
+
+NOTE: Ils doivent être uniques pour chaque tiroir disque SAS dans chaque groupe DR MetroCluster (y compris les deux sites). Lorsque vous définissez manuellement les ID de tiroir, vous devez mettre le tiroir disque sous tension.
+
+

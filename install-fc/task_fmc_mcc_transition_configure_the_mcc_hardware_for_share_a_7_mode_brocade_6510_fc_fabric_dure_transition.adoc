@@ -1,0 +1,40 @@
+---
+permalink: install-fc/task_fmc_mcc_transition_configure_the_mcc_hardware_for_share_a_7_mode_brocade_6510_fc_fabric_dure_transition.html 
+sidebar: sidebar 
+keywords: metrocluster, fabric, installation, hardware, brocade, fc, transition 
+summary: 'Si votre configuration 7-mode Fabric MetroCluster utilise des commutateurs Brocade 6510, vous pouvez partager les structures de commutateurs existantes avec la nouvelle configuration clustered MetroCluster. Les structures de commutation partagées signifient que la nouvelle configuration MetroCluster ne nécessite pas de nouvelle structure de commutateurs distincte. Cette configuration temporaire n"est prise en charge qu"avec le commutateur Brocade 6510 à des fins de transition.' 
+---
+= Configuration du matériel pour partager une structure Brocade 6510 FC lors de la transition
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Si votre configuration 7-mode Fabric MetroCluster utilise des commutateurs Brocade 6510, vous pouvez partager les structures de commutateurs existantes avec la nouvelle configuration clustered MetroCluster. Les structures de commutation partagées signifient que la nouvelle configuration MetroCluster ne nécessite pas de nouvelle structure de commutateurs distincte. Cette configuration temporaire n'est prise en charge qu'avec le commutateur Brocade 6510 à des fins de transition.
+
+.Avant de commencer
+* 7-mode Fabric MetroCluster doit utiliser des commutateurs Brocade 6510.
++
+Si la configuration MetroCluster n'utilise pas actuellement de commutateurs Brocade 6510, les commutateurs doivent être mis à niveau vers Brocade 6510 avant d'utiliser cette procédure.
+
+* La configuration 7-mode Fabric MetroCluster doit uniquement utiliser des tiroirs de stockage SAS.
++
+Si la configuration existante intègre des tiroirs de stockage FC (p. ex., DS14mk4 FC), le partage de la structure des commutateurs FC n'est pas pris en charge.
+
+* Les SFP sur les ports commutés utilisés par la nouvelle configuration clustered MetroCluster doivent prendre en charge des taux de 16 Gbit/s.
++
+La structure 7-mode MetroCluster existante peut rester connectée aux ports via des SFP 8 Gbits/s ou 16 Gbits/s.
+
+* Sur chacun des quatre commutateurs Brocade 6510, les ports 24 à 45 doivent être disponibles pour connecter les ports des nouveaux composants MetroCluster.
+* Vérifiez que les liaisons interswitch existantes (ISL) sont dans les ports 46 et 47.
+* Les commutateurs Brocade 6510 doivent exécuter une version de firmware FOS prise en charge par la configuration 7-mode Fabric MetroCluster et clustered ONTAP MetroCluster.
+
+
+Une fois la structure partagée et la configuration MetroCluster terminée, vous pouvez effectuer la transition des données depuis la configuration 7-mode Fabric MetroCluster.
+
+Après la transition des données, vous pouvez supprimer le câblage MetroCluster de structure 7-mode et, si vous le souhaitez, transférer le câblage clustered ONTAP MetroCluster vers les ports aux numéros inférieurs précédemment utilisés pour le câblage MetroCluster 7-mode. Les ports sont illustrés dans la section « examen des affectations de ports de commutateurs FC pour un MetroCluster à quatre nœuds ». Vous devez régler le zoning pour les ports réorganisés.
+
+link:concept_port_assignments_for_fc_switches_when_using_ontap_9_1_and_later.html["Affectation de ports pour les commutateurs FC lors de l'utilisation de ONTAP 9.1 et versions ultérieures"]
+
+http://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-7mtt-dctg/home.html["Transition basée sur la copie"]

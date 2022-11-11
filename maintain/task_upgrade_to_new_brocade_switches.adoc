@@ -1,0 +1,178 @@
+---
+permalink: maintain/task_upgrade_to_new_brocade_switches.html 
+sidebar: sidebar 
+keywords: metrocluster, maintain, service, cluster, new, brocade, fc, switches 
+summary: Si vous effectuez une mise à niveau vers de nouveaux commutateurs FC Brocade, vous devez remplacer les commutateurs de la première structure, vérifier que la configuration MetroCluster est entièrement opérationnelle, puis remplacer les commutateurs de la deuxième structure. 
+---
+= Mise à niveau vers les nouveaux commutateurs Brocade FC
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Si vous effectuez une mise à niveau vers de nouveaux commutateurs FC Brocade, vous devez remplacer les commutateurs de la première structure, vérifier que la configuration MetroCluster est entièrement opérationnelle, puis remplacer les commutateurs de la deuxième structure.
+
+* La configuration MetroCluster doit être saine et en fonctionnement normal.
+* Les structures de commutateurs MetroCluster sont constituées de quatre commutateurs Brocade.
++
+Les illustrations des étapes suivantes présentent les interrupteurs actuels.
+
+* Les commutateurs doivent exécuter le dernier firmware pris en charge.
++
+https://mysupport.netapp.com/matrix["Matrice d'interopérabilité NetApp"^]
+
+* Cette procédure ne génère aucune interruption et peut être effectuée en deux heures environ.
+* Vous avez besoin du mot de passe d'administration et de l'accès à un serveur FTP ou SCP.
+
+
+Les structures du commutateur sont mises à niveau une par une.
+
+À la fin de cette procédure, les quatre commutateurs seront mis à niveau vers de nouveaux commutateurs.
+
+image::../media/brocade_upgr_to_g620_replacement_completed.gif[remplacement du commutateur brocade upgr à g620 terminé]
+
+.Étapes
+. Désactiver la première structure de commutation :
++
+`*FC_switch_A_1:admin> switchCfgPersistentDisable*`
+
++
+[listing]
+----
+FC_switch_A_1:admin> switchCfgPersistentDisable
+----
++
+image::../media/brocade_upgr_to_g620_fab_1_down.gif[mise à niveau brocade vers g620 fab 1 down]
+
+. Remplacer les anciens commutateurs sur un site MetroCluster.
++
+.. Décâbler et retirer le commutateur désactivé.
+.. Installez le nouveau commutateur dans le rack.
++
+image::../media/brocade_upgr_to_g620_replaced_a_1.gif[brocade upgr à g620 a remplacé un 1]
+
+.. Désactiver les nouveaux commutateurs :
++
+`switchCfgPersistentDisable`
+
++
+La commande désactive les deux commutateurs dans la structure du commutateur.
+
++
+[listing]
+----
+FC_switch_A_1:admin> switchCfgPersistentDisable
+----
+.. Reliez le nouveau commutateur à l'aide des attributions de ports recommandées.
++
+link:concept_port_assignments_for_fc_switches_when_using_ontap_9_0.html["Affectation des ports pour les commutateurs FC lors de l'utilisation de ONTAP 9.0"]
+
++
+link:concept_port_assignments_for_fc_switches_when_using_ontap_9_1_and_later.html["Affectation de ports pour les commutateurs FC lors de l'utilisation de ONTAP 9.1 et versions ultérieures"]
+
+.. Répétez ces sous-étapes sur le site MetroCluster partenaire pour remplacer le second commutateur de la première structure de commutateur.
++
+Les deux commutateurs de la structure 1 ont été remplacés.
+
++
+image::../media/brocade_upgr_to_g620_replaced_b_1.gif[la mise à niveau brocade vers g620 a remplacé b 1]
+
+
+
+. Mettez les nouveaux commutateurs sous tension et laissez-les démarrer.
+. Téléchargez les fichiers RCF pour le nouveau commutateur.
+. Appliquez les fichiers RCF sur les deux nouveaux commutateurs de la structure en suivant les instructions de la page de téléchargement.
+. Enregistrez la configuration du commutateur :
++
+`cfgSave`
+
+. Attendre 10 minutes pour permettre la stabilisation de la configuration.
+. Vérifier la connectivité sur les disques en saisissant la commande suivante sur l'un des nœuds MetroCluster :
++
+`run local sysconfig -v`
+
++
+Le résultat montre les disques connectés aux ports initiateurs du contrôleur, et identifie les tiroirs connectés aux ponts FC-SAS :
+
++
+[listing]
+----
+
+node_A_1> run local sysconfig -v
+NetApp Release 9.3.2X18: Sun Dec 13 01:23:24 PST 2017
+System ID: 4068741258 (node_A_1); partner ID: 4068741260 (node_B_1)
+System Serial Number: 940001025471 (node_A_1)
+System Rev: 70
+System Storage Configuration: Multi-Path HA**<=== Configuration should be multi-path HA**
+.
+.
+.
+slot 0: FC Host Adapter 0g (QLogic 8324 rev. 2, N-port, <UP>)**<=== Initiator port**
+		Firmware rev:      7.5.0
+		Flash rev:         0.0.0
+		Host Port Id:      0x60130
+		FC Node Name:      5:00a:098201:bae312
+		FC Port Name:      5:00a:098201:bae312
+		SFP Vendor:        UTILITIES CORP.
+		SFP Part Number:   FTLF8529P3BCVAN1
+		SFP Serial Number: URQ0Q9R
+		SFP Capabilities:  4, 8 or 16 Gbit
+		Link Data Rate:    16 Gbit
+		Switch Port:       brcd6505-fcs40:1
+  **<List of disks visible to port\>**
+		 ID     Vendor   Model            FW    Size
+		brcd6505-fcs29:12.126L1527     : NETAPP   X302_HJUPI01TSSM NA04 847.5GB (1953525168 512B/sect)
+		brcd6505-fcs29:12.126L1528     : NETAPP   X302_HJUPI01TSSA NA02 847.5GB (1953525168 512B/sect)
+		.
+		.
+		.
+		**<List of FC-to-SAS bridges visible to port\>**
+		FC-to-SAS Bridge:
+		brcd6505-fcs40:12.126L0        : ATTO     FibreBridge6500N 1.61  FB6500N102980
+		brcd6505-fcs42:13.126L0        : ATTO     FibreBridge6500N 1.61  FB6500N102980
+		brcd6505-fcs42:6.126L0         : ATTO     FibreBridge6500N 1.61  FB6500N101167
+		brcd6505-fcs42:7.126L0         : ATTO     FibreBridge6500N 1.61  FB6500N102974
+		.
+		.
+		.
+  **<List of storage shelves visible to port\>**
+		brcd6505-fcs40:12.shelf6: DS4243  Firmware rev. IOM3 A: 0200  IOM3 B: 0200
+		brcd6505-fcs40:12.shelf8: DS4243  Firmware rev. IOM3 A: 0200  IOM3 B: 0200
+		.
+		.
+		.
+----
+. Pour revenir à l'invite du commutateur, vérifiez la version du micrologiciel du commutateur :
++
+`firmwareShow`
+
++
+Les commutateurs doivent exécuter le dernier firmware pris en charge.
+
++
+https://mysupport.netapp.com/matrix["Matrice d'interopérabilité NetApp"]
+
+. Simuler une opération de basculement :
++
+.. Depuis l'invite d'un nœud, passez au niveau de privilège avancé : +
+`set -privilege advanced`
++
+Vous devez répondre par « y » lorsque vous êtes invité à continuer en mode avancé et afficher l'invite du mode avancé (*>).
+
+.. Effectuer le basculement avec le `-simulate` paramètre :
++
+`metrocluster switchover -simulate`
+
+.. Retour au niveau de privilège admin :
++
+`set -privilege admin`
+
+
+
+. Répétez les étapes précédentes sur la seconde structure de commutateur.
+
+
+Après avoir répété ces étapes, les quatre commutateurs ont été mis à niveau et la configuration MetroCluster fonctionne normalement.
+
+image::../media/brocade_upgr_to_g620_replacement_completed.gif[remplacement du commutateur brocade upgr à g620 terminé]

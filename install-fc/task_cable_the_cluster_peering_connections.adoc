@@ -1,0 +1,33 @@
+---
+permalink: install-fc/task_cable_the_cluster_peering_connections.html 
+sidebar: sidebar 
+keywords: metrocluster, fabric, installation, cable, cluster, peering, connections 
+summary: Vous devez câbler les ports du module de contrôleur utilisés pour le peering de cluster, de sorte qu’ils disposent d’une connectivité avec le cluster sur le site partenaire. 
+---
+= Câblage des connexions de peering de cluster
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous devez câbler les ports du module de contrôleur utilisés pour le peering de cluster, de sorte qu’ils disposent d’une connectivité avec le cluster sur le site partenaire.
+
+Cette tâche doit être effectuée sur chaque module de contrôleur de la configuration MetroCluster.
+
+Au moins deux ports sur chaque module de contrôleur doivent être utilisés pour le peering de cluster.
+
+La bande passante minimale recommandée pour les ports et la connectivité réseau est de 1 GbE.
+
+.Étape
+. Identifier et câbler au moins deux ports pour peering de cluster et vérifier qu'ils disposent d'une connectivité réseau avec le cluster partenaire.
++
+Le peering de cluster peut être effectué sur des ports dédiés ou sur des ports data. L'utilisation de ports dédiés fournit un débit plus élevé pour le trafic de peering de cluster.
+
+
+
+http://docs.netapp.com/ontap-9/topic/com.netapp.doc.exp-clus-peer/home.html["Configuration cluster et SVM peering express"]
+
+Chaque site MetroCluster est configuré comme homologue de son site partenaire. Vous devez connaître les conditions préalables et les instructions pour configurer les relations de peering et décider de l'utilisation de ports partagés ou dédiés pour ces relations.
+
+link:concept_prepare_for_the_mcc_installation.html["Facteurs à prendre en compte lors de la configuration du peering de clusters"]

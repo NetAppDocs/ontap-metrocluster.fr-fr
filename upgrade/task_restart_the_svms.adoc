@@ -1,0 +1,45 @@
+---
+permalink: upgrade/task_restart_the_svms.html 
+sidebar: sidebar 
+keywords: metrocluster, upgrade, restart, svm 
+summary: Après avoir étendu la configuration MetroCluster, vous devez redémarrer les SVM. 
+---
+= Redémarrage des SVM
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Après avoir étendu la configuration MetroCluster, vous devez redémarrer les SVM.
+
+.Étapes
+. Identifier les SVM à redémarrer :
++
+`metrocluster vserver show`
+
++
+Cette commande affiche les SVM sur les deux clusters MetroCluster.
+
+. Redémarrer les SVM sur le premier cluster :
++
+.. Passez en mode privilège avancé, puis appuyez sur `*y*` lorsque vous y êtes invité :
++
+`set -privilege advanced`
+
+.. Redémarrage des SVM :
++
+`vserver start -vserver _SVM_name_ -force true`
+
+.. Revenir en mode de privilège admin :
++
+`set -privilege admin`
+
+
+
+. Répétez l'étape précédente sur le cluster partenaire.
+. Vérifier que les SVM sont bien en état :
++
+`metrocluster vserver show`
+
+

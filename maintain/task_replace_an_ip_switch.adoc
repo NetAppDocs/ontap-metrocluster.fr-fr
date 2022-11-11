@@ -1,0 +1,122 @@
+---
+permalink: maintain/task_replace_an_ip_switch.html 
+sidebar: sidebar 
+keywords: metrocluster, maintain, service, replace, ip, switch 
+summary: 'Vous devrez peut-être remplacer un commutateur défectueux ou mettre à niveau ou rétrograder un commutateur. Le nouveau commutateur peut être le même que l"ancien commutateur en cas de défaillance d"un commutateur, ou vous pouvez modifier le type de commutateur \(mettre à niveau ou rétrograder le commutateur\).' 
+---
+= Remplacement d'un commutateur IP
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous devrez peut-être remplacer un commutateur défectueux ou mettre à niveau ou rétrograder un commutateur. Le nouveau commutateur peut être identique à l'ancien commutateur en cas de défaillance d'un commutateur ou vous pouvez modifier le type de commutateur (mettre à niveau ou rétrograder le commutateur).
+
+Si vous souhaitez remplacer un commutateur défectueux par le même type de commutateur, il vous suffit de remplacer le commutateur défectueux. Si vous souhaitez mettre à niveau ou rétrograder un commutateur, vous devez régler deux commutateurs se trouvant sur le même réseau. Deux commutateurs se trouvent sur le même réseau s'ils sont connectés avec un lien ISL et ne sont pas situés sur le même site. Par exemple, le réseau 1 inclut IP_switch_A_1 et IP_switch_B_1. Le réseau 2 inclut IP_switch_A_2 et IP_switch_B_2 comme indiqué dans le schéma ci-dessous :
+
+image::../media/mcc_ip_hardware_architecture_ip_interconnect.png[interconnexion ip de l'architecture matérielle du mcc]
+
+Cette procédure s'applique lorsque vous utilisez des commutateurs validés par NetApp. Si vous utilisez des switchs conformes à MetroCluster, reportez-vous au fournisseur du commutateur.
+
+Si vous mettez à niveau ou déclarez les réseaux, vous devez répéter cette procédure pour le second réseau.
+
+.Étapes
+. Vérifier l'état de santé de la configuration.
++
+.. Vérifier que la MetroCluster est configurée et en mode normal sur chaque cluster : `*metrocluster show*`
++
+[listing]
+----
+cluster_A::> metrocluster show
+Cluster                   Entry Name          State
+------------------------- ------------------- -----------
+ Local: cluster_A         Configuration state configured
+                          Mode                normal
+                          AUSO Failure Domain auso-on-cluster-disaster
+Remote: cluster_B         Configuration state configured
+                          Mode                normal
+                          AUSO Failure Domain auso-on-cluster-disaster
+----
+.. Vérifier que la mise en miroir est activée sur chaque nœud : `*metrocluster node show*`
++
+[listing]
+----
+cluster_A::> metrocluster node show
+DR                           Configuration  DR
+Group Cluster Node           State          Mirroring Mode
+----- ------- -------------- -------------- --------- --------------------
+1     cluster_A
+              node_A_1       configured     enabled   normal
+      cluster_B
+              node_B_1       configured     enabled   normal
+2 entries were displayed.
+----
+.. Vérifier que les composants MetroCluster sont sains : `*metrocluster check run*`
++
+[listing]
+----
+cluster_A::> metrocluster check run
+
+Last Checked On: 10/1/2014 16:03:37
+
+Component           Result
+------------------- ---------
+nodes               ok
+lifs                ok
+config-replication  ok
+aggregates          ok
+4 entries were displayed.
+
+Command completed. Use the "metrocluster check show -instance" command or sub-commands in "metrocluster check" directory for detailed results.
+To check if the nodes are ready to do a switchover or switchback operation, run "metrocluster switchover -simulate" or "metrocluster switchback -simulate", respectively.
+----
+.. Vérifier qu'il n'y a pas d'alerte de santé : `*system health alert show*`
+
+
+. Configurer le nouveau commutateur avant l'installation.
++
+
+NOTE: Si vous mettez à niveau ou déclariez les commutateurs, vous devez configurer tous les commutateurs du réseau.
+
++
+Suivez les étapes de la section _Configuration des commutateurs IP_ dans link:https://docs.netapp.com/us-en/ontap-metrocluster/install-ip/using_rcf_generator.html["Installation et configuration de MetroCluster IP."]
+
++
+Assurez-vous d'appliquer le fichier RCF approprié pour le commutateur _A_1, _A_2, _B_1 ou _B_2. Si le nouveau switch est identique à l'ancien switch, vous devez appliquer le même fichier RCF.
+
++
+Si vous mettez à niveau ou déclasser un commutateur, appliquez le fichier RCF le plus récent pris en charge pour le nouveau commutateur.
+
+. Lancer la commande port show pour afficher des informations sur les ports réseau :
++
+`*network port show*`
+
+. Débrancher les connexions ISL du commutateur distant qui se connecte à l'ancien commutateur.
++
+Vous devez déconnecter les connexions ISL des ports de l'IP_switch_A_1 qui se connectent à IP_switch_B_1.
+
+. Mettez le commutateur hors tension, retirez les câbles et retirez physiquement IP_Switch_B_1.
+. Installer le nouveau commutateur.
++
+Branchez d'abord le nouveau commutateur (y compris les liens ISL) conformément aux étapes de la section _câblage des commutateurs IP_ du link:https://docs.netapp.com/us-en/ontap-metrocluster/install-ip/using_rcf_generator.html["Installation et configuration de MetroCluster IP"].
+
++
+[NOTE]
+====
+Les ports utilisés peuvent être différents de ceux de l'ancien commutateur si le type de commutateur est différent. Si vous effectuez une mise à niveau ou une rétrogradation des commutateurs, procédez à *PAS* de câble reliant les liens ISL locaux. Seuls les câbles ISL locaux sont câblés si vous mettez à niveau ou restaurez les commutateurs sur le second réseau, et les deux commutateurs d’un site sont de même type.
+
+====
+. Mettez le ou les commutateurs sous tension.
++
+Si le nouveau commutateur est le même, mettez le nouveau commutateur sous tension. Si vous effectuez une mise à niveau ou une rétrogradation des commutateurs, mettez les deux commutateurs sous tension. La configuration peut fonctionner avec deux commutateurs différents sur chaque site jusqu'à la mise à jour du second réseau.
+
+. Vérifiez que la configuration MetroCluster fonctionne correctement en répétant l'étape 1.
++
+Si vous effectuez une mise à niveau ou une rétrogradation des commutateurs du premier réseau, vous pouvez voir certaines alertes relatives à la mise en grappe locale.
+
++
+
+NOTE: Si vous mettez à niveau ou déclarez les réseaux, répétez toutes les étapes pour le second réseau.
+
+

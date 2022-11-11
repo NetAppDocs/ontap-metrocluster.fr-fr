@@ -1,0 +1,34 @@
+---
+permalink: install-fc/concept_AFF_A900_port_assign_fc_switches_ontap_9_1.html 
+sidebar: sidebar 
+keywords: AFF, A900, ONTAP, FAS, FC, Brocade, ISL, Cisco, metrocluster 
+summary: 'Vous devez vérifier que vous utilisez les affectations de ports spécifiées lors du câblage des commutateurs FC lors de l"utilisation de ONTAP 9.1 et versions ultérieures.' 
+---
+= Affectation de ports pour les commutateurs FC avec les systèmes AFF A900 ou FAS9500
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+Vous devez vérifier que vous utilisez les affectations de ports spécifiées lors du câblage des commutateurs FC lors de l'utilisation de ONTAP 9.10.1 et versions ultérieures.
+
+Les ports qui ne sont pas utilisés pour la connexion de ports d'initiateur, de ports FC-VI ou de liens ISL peuvent être reconfigurés pour agir en tant que ports de stockage. Toutefois, si les CFR soutenus sont utilisés, le zonage doit être modifié en conséquence.
+
+Si les FC pris en charge sont utilisés, il se peut que les ports ISL ne se connectent pas aux mêmes ports indiqués et qu'ils doivent être reconfigurés manuellement.
+
+Si vous avez configuré vos commutateurs à l'aide des affectations de ports pour ONTAP 9, vous pouvez continuer à utiliser les affectations plus anciennes. Cependant, les nouvelles configurations qui exécutent ONTAP 9.1 ou une version ultérieure doivent utiliser les attributions de ports indiquées ici.
+
+
+
+== Instructions générales de câblage
+
+Lors de l'utilisation des tables de câblage, il est important de connaître les consignes suivantes :
+
+* Les systèmes de stockage AFF A900 ou FAS9500 nécessitent huit ports FC-VI. Si vous utilisez un AFF A900 ou FAS9500, vous devez utiliser la configuration à huit ports. Si la configuration inclut les autres modèles de système de stockage, utilisez le câblage indiqué dans les tableaux, mais ignorez le câblage pour les ports FC-VI inutiles.
+* Si deux configurations MetroCluster partagent des liens ISL, utilisez les mêmes affectations de port que pour un câblage MetroCluster à huit nœuds.
+* Le nombre de liens ISL que vous reliez peut varier en fonction des exigences du site.
+* Voir la section sur les considérations relatives à ISL.
++
+link:concept_considerations_isls_mcfc.html["Considérations relatives aux liens ISL"]
+
+

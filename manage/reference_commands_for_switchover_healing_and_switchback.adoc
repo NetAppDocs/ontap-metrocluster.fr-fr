@@ -1,0 +1,70 @@
+---
+permalink: manage/reference_commands_for_switchover_healing_and_switchback.html 
+sidebar: sidebar 
+keywords: ontap, command, perform, metrocluster, disaster, recovery, process, switchover, heal, switchback 
+summary: Il existe des commandes ONTAP spécifiques pour exécuter les processus de reprise sur incident de MetroCluster. 
+---
+= Commandes de basculement, de rétablissement et de rétablissement
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Il existe des commandes ONTAP spécifiques pour exécuter les processus de reprise sur incident de MetroCluster.
+
+[cols="1,2"]
+|===
+
+
+| Les fonctions que vous recherchez... | Utilisez cette commande... 
+
+
+ a| 
+Vérifiez que le basculement peut être effectué sans erreur ni vetos.
+ a| 
+`metrocluster switchover -simulate` + au niveau de privilège avancé
+
+
+
+ a| 
+Vérifiez que le rétablissement peut être effectué sans erreur ni veto.
+ a| 
+`metrocluster switchback -simulate` + au niveau de privilège avancé
+
+
+
+ a| 
+Basculer vers les nœuds partenaires (basculement négocié).
+ a| 
+`metrocluster switchover`
+
+
+
+ a| 
+Basculement vers les nœuds partenaires (basculement forcé)
+ a| 
+`metrocluster switchover -forced-on-disaster true`
+
+
+
+ a| 
+Effectuez la réparation des agrégats de données.
+ a| 
+`metrocluster heal -phase aggregates`
+
+
+
+ a| 
+Effectuer un ajustement root des agrégats.
+ a| 
+`metrocluster heal -phase root-aggregates`
+
+
+
+ a| 
+Revenez aux nœuds de base.
+ a| 
+`metrocluster switchback`
+
+|===

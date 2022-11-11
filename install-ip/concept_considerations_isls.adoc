@@ -1,0 +1,259 @@
+---
+permalink: install-ip/concept_considerations_isls.html 
+sidebar: sidebar 
+keywords: isl, isls, layer 2, layer 3, shared switch 
+summary: Vous devez connaître les exigences ISL pour votre configuration. 
+---
+= Considérations relatives aux liens ISL
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+Vous devez connaître les exigences ISL pour votre configuration.
+
+
+
+== Exigences de base en matière de liaison ISL MetroCluster
+
+Les exigences suivantes doivent être satisfaites pour les liens ISL dans toutes les configurations IP MetroCluster :
+
+* Un port de commutateur ISL à vitesse native doit être connecté à un port de commutateur ISL à vitesse native.
++
+Par exemple, un port 40 Gbits/s se connecte à un port 40 Gbits/s.
+
+* Un port 10 Gbits/s en mode natif (c'est-à-dire sans câble de dérivation) peut se connecter à un port 10 Gbits/s en mode natif.
+* Les liens ISL entre les commutateurs IP MetroCluster et le réseau client, ainsi que les liens ISL entre les commutateurs intermédiaires, doivent être les mêmes règles en termes de vitesse.
+* Le nombre de liens ISL entre les commutateurs MetroCluster et les commutateurs du réseau du client, et le nombre de liens ISL entre les commutateurs du réseau client, n'ont pas besoin de correspondre.
++
+Par exemple, les commutateurs MetroCluster peuvent se connecter via deux liens ISL vers les commutateurs intermédiaires, et les commutateurs intermédiaires peuvent se connecter mutuellement à l'aide de 10 liens ISL.
+
+* La vitesse des liens ISL entre les commutateurs MetroCluster et les commutateurs réseau du client, et la vitesse des liens ISL entre les commutateurs du réseau client, n'ont pas besoin de correspondre.
++
+Par exemple, les commutateurs MetroCluster peuvent se connecter via un lien ISL de 40 Gbits/s vers les commutateurs intermédiaires, et les commutateurs intermédiaires peuvent se connecter mutuellement à l'aide de liens ISL de 100 Gbits/s.
+
+* Le nombre et la vitesse de liaisons ISL reliant chaque commutateur MetroCluster au commutateur intermédiaire doivent être identiques sur les deux sites MetroCluster.
+
+
+
+
+== Exigences ISL dans des réseaux partagés de couche 2
+
+Quand link:../install-ip/concept_considerations_layer_2.html["Partage du trafic ISL dans un réseau partagé"], Vous devez vous assurer que la capacité et la taille des liens ISL sont correctes. Une faible latence est primordiale pour la réplication des données entre les sites MetroCluster. Les problèmes de latence sur ces connexions peuvent affecter les E/S client
+
+Nous vous recommandons de lire ces sections afin de calculer correctement la capacité de bout en bout requise des liens ISL. Le cache non volatile continu et la réplication du stockage avec faible latence sont des opérations stratégiques dans les configurations MetroCluster. La latence du réseau interne affecte la latence et le débit observés par les E/S client.
+
+
+
+=== Limites de latence et de perte de paquets sur les liens ISL
+
+Les exigences suivantes doivent être remplies pour le trafic aller-retour entre les commutateurs IP MetroCluster du site_A et du site_B, avec la configuration MetroCluster en état de fonctionnement stable :
+
+* La latence du aller-retour doit être inférieure ou égale à 7 ms.
++
+La distance maximale est de 700 km, de sorte que la distance entre les sites est limitée par la latence ou la distance maximale, selon la première atteinte.
+
++
+Comme la distance entre deux sites MetroCluster augmente, la latence augmente, généralement dans la plage de 1 ms temps de retard aller-retour par 100 km (62 miles). Cette latence dépend également de l'accord de niveau de service du réseau (SLA) en termes de bande passante des liaisons ISL, de débit de transmission des paquets et de gigue sur le réseau. Des pertes de bande passante, de gigue élevée et de paquets aléatoires conduisent à différents mécanismes de récupération par les commutateurs ou le moteur TCP sur les modules de contrôleur pour une livraison réussie des paquets. Ces mécanismes de restauration peuvent augmenter la latence globale.
+
++
+Tout périphérique qui contribue à la latence doit être pris en compte.
+
+* La perte de paquets doit être inférieure ou égale à 0.01 %.
++
+La perte de paquets comprend la perte physique ou la perte due à la congestion ou à la sursouscription.
+
++
+Les pertes de paquets peuvent provoquer des retransmissions et réduire la fenêtre de congestion.
+
+* La valeur de gigue prise en charge est de 3 ms pour le trajet aller-retour (ou 1.5 ms pour un aller-retour).
+* Le réseau doit allouer et maintenir le SLA pour la bande passante requise pour le trafic MetroCluster, en tenant compte des microrafales et des pics de trafic.
++
+Une bande passante faible peut entraîner des retards de mise en file d'attente et des chutes de queue sur les commutateurs. Si vous utilisez ONTAP 9.7 ou version ultérieure, l'intermédiaire réseau entre les deux sites doit fournir une bande passante minimale de 4.5 Gbit/s pour la configuration MetroCluster.
+
+* Le trafic MetroCluster ne doit pas consommer la totalité de la bande passante et a des répercussions négatives sur le trafic non MetroCluster.
+* La surveillance du réseau du réseau partagé doit être configurée pour surveiller l'utilisation des liens ISL, les erreurs (DROPs, rabats de liaison, corruption, etc.) et les défaillances.
+
+
+
+
+=== Limites de connexion et mise en circuit dans les commutateurs du client
+
+Les commutateurs intermédiaires fournis par le client doivent répondre aux exigences suivantes :
+
+* Le nombre de commutateurs intermédiaires n'est pas limité et plus de deux commutateurs entre les commutateurs IP MetroCluster sont pris en charge.
++
+Les commutateurs IP MetroCluster doivent être situés aussi près que possible des commutateurs intermédiaires fournissant la liaison long-courriers. Toutes les connexions ISL le long de la route doivent être conformes à toutes les exigences des liaisons ISL MetroCluster.
+
+* Les liens ISL du réseau client (les liens ISL entre les commutateurs du client) doivent être configurés de manière à assurer une bande passante suffisante et à préserver l'ordre de livraison.
++
+Cela peut être fait avec la mise en circuit d'un nombre suffisant de liens et l'application de stratégies d'équilibrage de charge pour préserver l'ordre.
+
+
+
+
+
+=== Autres exigences réseau
+
+Les commutateurs intermédiaires fournis par le client doivent répondre aux exigences suivantes :
+
+* Le réseau du client doit fournir les mêmes VLAN entre les sites correspondant aux VLAN MetroCluster définis dans le fichier RCF.
++
+Les VLAN de couche 2 dont les ID correspondent aux VLAN MetroCluster doivent s'étendre sur le réseau partagé.
+
++
+** Dans ONTAP 9.7 et versions antérieures, les systèmes FAS2750 et AFF A220 requièrent les VLAN 10 et 20.
+** Dans ONTAP 9.8 et versions ultérieures, FAS2750, AFF A220, FAS500f, AFF A250, Les systèmes FAS8300, AFF A400 et FAS8700 utilisent par défaut VLAN 10 et 20. Vous pouvez configurer d'autres VLAN pendant la création de l'interface et ils doivent être dans la plage 101-4096. Pour toutes les plates-formes mentionnées précédemment, vous pouvez uniquement spécifier le VLAN lors de la création de l'interface. Une fois les interfaces MetroCluster créées, l'ID de VLAN ne peut pas être modifié. Pour toutes les autres plates-formes non mentionnées précédemment, vous pouvez utiliser n'importe quel VLAN et vous pouvez modifier l'ID VLAN de ces plateformes à tout moment, mais un nouveau fichier RCF est créé ou appliqué.
+
+
+
+
+--
+[NOTE]
+====
+RcfFileGenerator ne permet pas la création d'un fichier RCF à l'aide de VLAN non pris en charge par la plate-forme.
+
+Le RcfFileGenerator peut restreindre l'utilisation de certains ID de VLAN (par exemple, s'ils sont destinés à une utilisation ultérieure). En règle générale, les VLAN réservés sont jusqu'à 100 inclus.
+
+====
+--
+* La taille MTU doit être définie sur 9216 sur tous les périphériques du réseau de bout en bout.
+* Aucun autre trafic ne peut être configuré avec une priorité plus élevée que la classe de service (CS) cinq.
+* ECN (notification explicite de congestion) doit être configuré sur tous les chemins de bout en bout.
+
+
+
+
+=== Exigences de câblage lors de l'utilisation de liens ISL partagés
+
+[role="lead"]
+Lorsque vous utilisez des liens ISL partagés dans une configuration IP MetroCluster, vous devez connaître les exigences relatives à la liaison ISL MetroCluster de bout en bout exécutée depuis les ports du contrôleur sur le site A vers les ports de contrôleur sur le site B.
+
+
+NOTE: Vous devez suivre le  MetroCluster ISL requirements.
+
+
+
+=== Nombre de liens ISL et de câbles de dérivation dans le réseau partagé
+
+Le nombre de liens ISL reliant les commutateurs IP MetroCluster au réseau partagé varie en fonction du modèle du commutateur et du type de port.
+
+|===
+
+
+| Modèle de commutateur IP MetroCluster | Type de port | Nombre de liens ISL 
+
+
+ a| 
+Commutateurs BES-53248 pris en charge par Broadcom
+ a| 
+Ports natifs
+ a| 
+4 liens ISL avec 10 ou 25 Gbit/s
+
+
+
+ a| 
+Cisco 3132Q-V
+ a| 
+Ports natifs
+ a| 
+6 liens ISL avec des ports 40 Gbit/s
+
+
+
+ a| 
+Cisco 3132Q-V
+ a| 
+Câbles de dérivation
+ a| 
+16 liens ISL 10 Gbit/s
+
+
+
+ a| 
+Cisco 3232C
+ a| 
+Ports natifs
+ a| 
+6 liens ISL avec 40 ou 100 Gbit/s
+
+
+
+ a| 
+Cisco 3232C
+ a| 
+Câbles de dérivation
+ a| 
+16 liens ISL 10 Gbit/s
+
+
+
+ a| 
+Cisco 9336C-FX2 (pas de connexion des tiroirs NS224)
+ a| 
+Ports natifs
+ a| 
+6 liens ISL avec 40 ou 100 Gbits/s
+
+
+
+ a| 
+Cisco 9336C-FX2 (pas de connexion des tiroirs NS224)
+ a| 
+Câbles de dérivation
+ a| 
+16 liens ISL avec un débit de 10 Gbit/s.
+
+
+
+ a| 
+Cisco 9336C-FX2 (connexion des tiroirs NS224)
+ a| 
+Ports natifs (2)
+ a| 
+4 liens ISL avec 40 ou 100 Gbits/s
+
+
+
+ a| 
+Cisco 9336C-FX2 (connexion des tiroirs NS224)
+ a| 
+Câbles de dérivation (2)
+ a| 
+16 liens ISL avec un débit de 10 Gbit/s.
+
+|===
+* L'utilisation de ports ISL 40 ou 100 Gbit/s sur le commutateur BES-53248 requiert une licence supplémentaire.
+* Lorsque vous créez les fichiers RCF pour un Cisco 9336C-FX2 (connexion de tiroirs NS224), vous devez choisir de configurer les ISL en mode natif *ou*.
+* L'utilisation de câbles de dérivation (un port physique est utilisé comme ports 4 x 10 Gbit/s) est prise en charge sur les commutateurs Cisco.
+* Les fichiers RCF des commutateurs IP disposent de ports en mode natif ou en mode écorché configurés.
++
+Une combinaison de ports ISL en mode natif de vitesse du port et en mode écorché n'est pas prise en charge. Tous les liens ISL des commutateurs IP MetroCluster vers les commutateurs intermédiaires d'un réseau doivent être de la même vitesse et de la même longueur.
+
+* L'utilisation de dispositifs de cryptage externes (par exemple, le cryptage de liaison externe ou le cryptage fourni via des périphériques WDM) est prise en charge tant que la latence en aller-retour reste conforme aux exigences ci-dessus.
+
+
+Pour des performances optimales, vous devez utiliser au moins un liens ISL de 1 x 40 Gbits/s ou plusieurs liens ISL de 10 Gbits/s par réseau. Il est fortement déconseillé d'utiliser un seul lien ISL de 10 Gbit/s par réseau pour les systèmes AFF A800.
+
+Le débit théorique maximal des liens ISL partagés (par exemple, 240 Gbit/s avec six liens ISL de 40 Gbit/s) est un scénario idéal. Lorsque plusieurs liens ISL sont utilisés, un équilibrage statistique de la charge peut avoir un impact sur le débit maximal. Un équilibrage irrégulier peut survenir et réduire le débit sur un lien ISL unique.
+
+Si la configuration utilise des VLAN L2, ils doivent couvrir les sites de manière native. Le recouvrement VLAN tel que le LAN extensible virtuel (VXLAN) n'est pas pris en charge.
+
+Les liens ISL transportant du trafic MetroCluster doivent être des liaisons natives entre les commutateurs. Les services de partage de liens tels que les liens MPLS (Multi protocole Label Switching) ne sont pas pris en charge.
+
+
+
+=== Prise en charge des liens ISL WAN sur le commutateur Broadcom BES-53248
+
+* Nombre minimum de liens ISL par structure : 1 (10 GbE, 25 GbE, 40 GbE ou 100 GbE)
+* Nombre maximal de liens ISL 10 GbE par structure : 4
+* Nombre maximal de liens ISL 25 GbE par structure : 4
+* Nombre maximal de liens ISL 40 GbE par structure : 2
+* Nombre maximal de liens ISL 100 GbE par structure : 2
+
+
+Un WAN ISL 40 GbE ou 100 GbE requiert un fichier RCF version 1.40 ou supérieure.
+
+
+NOTE: Des licences supplémentaires sont requises pour les ports supplémentaires.

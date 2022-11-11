@@ -1,0 +1,163 @@
+---
+permalink: upgrade/task_assign_disk_ownership_to_non_aff_systems_mcc.html 
+sidebar: sidebar 
+keywords: metrocluster, upgrade, assign, disk, ownership, aff, systems 
+summary: 'Si les nœuds MetroCluster ne sont pas affectés correctement, ou si vous utilisez des tiroirs disques DS460C dans votre configuration, il est nécessaire d"attribuer des disques à chacun des nœuds de la configuration MetroCluster selon le tiroir par tiroir. Vous allez créer une configuration dans laquelle chaque nœud a le même nombre de disques dans ses pools de disques locaux et distants.' 
+---
+= Assignation de la propriété des disques dans des systèmes non-AFF
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Si les nœuds MetroCluster ne sont pas affectés correctement, ou si vous utilisez des tiroirs disques DS460C dans votre configuration, il est nécessaire d'attribuer des disques à chacun des nœuds de la configuration MetroCluster selon le tiroir par tiroir. Vous allez créer une configuration dans laquelle chaque nœud a le même nombre de disques dans ses pools de disques locaux et distants.
+
+Les contrôleurs de stockage doivent être en mode maintenance.
+
+Si votre configuration n'inclut pas de tiroirs disques DS460C, cette tâche n'est pas requise si les disques ont été correctement attribués lors de leur réception par l'usine.
+
+[NOTE]
+====
+Le pool 0 contient toujours les disques qui se trouvent sur le même site que le système de stockage qui les possède.
+
+Le pool 1 contient toujours les disques distants du système de stockage qui les possèdent.
+
+====
+Si votre configuration inclut des tiroirs disques DS460C, il est conseillé d'attribuer manuellement les disques en suivant les instructions suivantes pour chaque tiroir 12 disques :
+
+|===
+
+
+| Affectez ces disques dans le tiroir... | À ce nœud et pool... 
+
+
+ a| 
+0 - 2
+ a| 
+Pool du nœud local 0
+
+
+
+ a| 
+3 - 5
+ a| 
+Pool 0 du nœud partenaire HA
+
+
+
+ a| 
+6 - 8
+ a| 
+Partenaire DR du pool du nœud local 1
+
+
+
+ a| 
+9 - 11
+ a| 
+Partenaire de reprise après incident du pool de partenaires de haute disponibilité 1
+
+|===
+Ce modèle d'affectation de disque permet de s'assurer qu'un agrégat est au moins affecté en cas de mise hors ligne d'un tiroir.
+
+.Étapes
+. Si ce n'est pas le cas, démarrez chaque système en mode maintenance.
+. Assigner les tiroirs disques aux nœuds situés sur le premier site (site A) :
++
+Les tiroirs disques du même site que le nœud sont affectés au pool 0 et les tiroirs disques situés sur le site partenaire sont affectés au pool 1.
+
++
+Vous devez affecter un nombre égal de tiroirs à chaque pool.
+
++
+.. Sur le premier nœud, attribuer systématiquement les tiroirs disques locaux à pool 0 et les tiroirs disques distants à pool 1 :
++
+`disk assign -shelf _local-switch-name:shelf-name.port_ -p _pool_`
+
++
+Si le contrôleur de stockage Controller_A_1 dispose de quatre tiroirs, vous exécutez les commandes suivantes :
+
++
+[listing]
+----
+*> disk assign -shelf FC_switch_A_1:1-4.shelf1 -p 0
+*> disk assign -shelf FC_switch_A_1:1-4.shelf2 -p 0
+
+*> disk assign -shelf FC_switch_B_1:1-4.shelf1 -p 1
+*> disk assign -shelf FC_switch_B_1:1-4.shelf2 -p 1
+----
+.. Répétez le processus pour le second nœud du site local, en affectant systématiquement les tiroirs disques locaux au pool 0 et les tiroirs disques distants au pool 1 :
++
+`disk assign -shelf _local-switch-name:shelf-name.port_ -p _pool_`
+
++
+Si le contrôleur de stockage Controller_A_2 dispose de quatre tiroirs, vous exécutez les commandes suivantes :
+
++
+[listing]
+----
+*> disk assign -shelf FC_switch_A_1:1-4.shelf3 -p 0
+*> disk assign -shelf FC_switch_B_1:1-4.shelf4 -p 1
+
+*> disk assign -shelf FC_switch_A_1:1-4.shelf3 -p 0
+*> disk assign -shelf FC_switch_B_1:1-4.shelf4 -p 1
+----
+
+
+. Assigner les tiroirs disques aux nœuds situés sur le second site (site B) :
++
+Les tiroirs disques du même site que le nœud sont affectés au pool 0 et les tiroirs disques situés sur le site partenaire sont affectés au pool 1.
+
++
+Vous devez affecter un nombre égal de tiroirs à chaque pool.
+
++
+.. Sur le premier nœud du site distant, attribuer systématiquement ses tiroirs disques locaux à regrouper 0 et ses tiroirs disques distants à pool 1 :
++
+`disk assign -shelf _local-switch-nameshelf-name_ -p _pool_`
+
++
+Si le contrôleur de stockage Controller_B_1 dispose de quatre tiroirs, vous exécutez les commandes suivantes :
+
++
+[listing]
+----
+*> disk assign -shelf FC_switch_B_1:1-5.shelf1 -p 0
+*> disk assign -shelf FC_switch_B_1:1-5.shelf2 -p 0
+
+*> disk assign -shelf FC_switch_A_1:1-5.shelf1 -p 1
+*> disk assign -shelf FC_switch_A_1:1-5.shelf2 -p 1
+----
+.. Répétez le processus pour le second nœud du site distant en affectant systématiquement ses tiroirs disques locaux au pool 0 et ses tiroirs disques distants au pool 1 :
++
+`disk assign -shelf _shelf-name_ -p _pool_`
+
++
+Si le contrôleur de stockage Controller_B_2 dispose de quatre tiroirs, vous exécutez les commandes suivantes :
+
++
+[listing]
+----
+*> disk assign -shelf FC_switch_B_1:1-5.shelf3 -p 0
+*> disk assign -shelf FC_switch_B_1:1-5.shelf4 -p 0
+
+*> disk assign -shelf FC_switch_A_1:1-5.shelf3 -p 1
+*> disk assign -shelf FC_switch_A_1:1-5.shelf4 -p 1
+----
+
+
+. Confirmer les attributions de tiroirs :
++
+`storage show shelf`
+
+. Quitter le mode Maintenance :
++
+`halt`
+
+. Afficher le menu de démarrage :
++
+`boot_ontap menu`
+
+. Sur chaque nœud, sélectionnez l'option *4* pour initialiser tous les disques.
+

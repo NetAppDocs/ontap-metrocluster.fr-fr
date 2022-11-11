@@ -1,0 +1,181 @@
+---
+permalink: maintain/concept_where_to_find_procedures_for_mcc_maintenance_tasks.html 
+sidebar: sidebar 
+keywords: metrocluster, maintain, service, find, procedures, maintenance, tasks 
+summary: Sélectionnez la procédure correcte lorsque vous effectuez des tâches de maintenance matérielle MetroCluster. 
+---
+= Où trouver les procédures pour les tâches de maintenance MetroCluster
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Sélectionnez la procédure correcte lorsque vous effectuez des tâches de maintenance matérielle MetroCluster.
+
+
+NOTE: Avec la sortie de ONTAP 9.8, les procédures de mise à niveau et d'extension de MetroCluster ont été déplacées vers le link:../upgrade/concept_choosing_an_upgrade_method_mcc.html["Mise à niveau et extension de MetroCluster"] et link:../transition/concept_choosing_your_transition_procedure_mcc_transition.html["Transition de MetroCluster FC à MetroCluster IP"].
+
+|===
+
+
+| Composant | Type de MetroCluster (FC ou IP) | Tâche | Procédure 
+
+
+ a| 
+Logiciel ONTAP
+ a| 
+Les deux
+ a| 
+Mise à niveau du logiciel ONTAP
+ a| 
+https://docs.netapp.com/us-en/ontap/upgrade/index.html["Mise à niveau, rétablissement ou mise à niveau vers une version antérieure"^]
+
+
+
+ a| 
+Module de contrôleur
+ a| 
+Les deux
+ a| 
+Remplacement des FRU (modules de contrôleur, cartes PCIe, carte FC-VI, etc.)
+
+
+NOTE: Le déplacement d'un module de contrôleur de stockage ou d'une carte NVRAM entre les systèmes de stockage MetroCluster n'est pas pris en charge.
+ a| 
+https://docs.netapp.com/platstor/index.jsp["Centre de documentation AFF et FAS"]
+
+
+
+ a| 
+Mise à niveau et extension
+ a| 
+link:../upgrade/concept_choosing_an_upgrade_method_mcc.html["Mise à niveau et extension de MetroCluster®"]
+
+
+
+ a| 
+Transition de la connectivité FC à la connectivité IP
+ a| 
+link:../transition/concept_choosing_your_transition_procedure_mcc_transition.html["Transition de MetroCluster FC à MetroCluster IP"]
+
+
+
+ a| 
+Tiroir disque
+ a| 
+FC
+ a| 
+Ajout d'étagères (pile avec ponts ou étagère individuelle)
+ a| 
+link:task_hot_add_a_stack_to_exist_7500n_pair.html["Ajout à chaud d'une pile de tiroirs disques SAS à une paire existante de ponts FiberBridge 7500N"]
+
+link:task_fb_hot_add_stack_of_shelves_and_bridges.html["Ajout à chaud d'une pile de tiroirs disques SAS et de ponts vers un système MetroCluster"]
+
+link:task_fb_hot_add_shelf_prepare_7500n.html["Ajout à chaud d'un tiroir disque SAS à une pile de tiroirs disques SAS"]
+
+
+
+ a| 
+FC
+ a| 
+Retrait de la tablette
+ a| 
+link:task_hot_remove_storage_from_a_mcc_fc_configuration.html["Retrait à chaud du stockage d'une configuration MetroCluster FC"]
+
+
+
+ a| 
+FC
+ a| 
+Toutes les autres procédures de maintenance des tiroirs. Les procédures standard peuvent être utilisées.
+ a| 
+https://docs.netapp.com/platstor/topic/com.netapp.doc.hw-ds-sas3-service/home.html["Maintenance des tiroirs disques DS460C DS224C et DS212C"^]
+
+
+
+ a| 
+IP
+ a| 
+Toutes les procédures de maintenance des tiroirs. Les procédures standard peuvent être utilisées.
+
+Si vous ajoutez des tiroirs pour un agrégat non mis en miroir, reportez-vous à la section http://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-mcc-inst-cnfg-ip/GUID-EA385AF8-7786-4C3C-B5AE-1B4CFD3AD2EE.html["Considérations relatives à l'utilisation d'agrégats non mis en miroir"^]
+ a| 
+https://docs.netapp.com/platstor/topic/com.netapp.doc.hw-ds-sas3-service/home.html["Maintenance des tiroirs disques DS460C DS224C et DS212C"^]
+
+
+
+ a| 
+Les deux
+ a| 
+Ajout à chaud de tiroirs IOM12 à une pile de tiroirs IOM6
+ a| 
+https://docs.netapp.com/platstor/topic/com.netapp.doc.hw-ds-mix-hotadd/home.html["Ajout de tiroirs à chaud avec modules IOM12 à une pile de tiroirs avec modules IOM6"^]
+
+
+
+ a| 
+Pont FC-à-SAS
+ a| 
+FC
+ a| 
+Remplacement du pont
+ a| 
+link:task_replace_a_sle_fc_to_sas_bridge.html["Remplacement d'un pont FC-SAS unique"]
+
+link:task_fb_consolidate_replace_a_pair_of_fibrebridge_6500n_bridges_with_7500n_bridges.html["Remplacement d'une paire de ponts FiberBridge 6500N par des ponts 7600N ou 7500N"]
+
+link:task_replace_a_sle_fc_to_sas_bridge.html#hot-swapping-a-fibrebridge-7500n-with-a-7600n-bridge["Permutation à chaud d'un FibreBridge 7500N avec un pont 7600N"]
+
+
+
+ a| 
+FC
+ a| 
+Mise à niveau du micrologiciel
+ a| 
+link:task_update_firmware_on_a_fibrebridge_bridge_parent_topic.html["Mise à jour du micrologiciel sur un pont FiberBridge"]
+
+
+
+ a| 
+FC
+ a| 
+Remplacement d'un module d'alimentation défectueux
+ a| 
+link:reference_fb_replace_a_power_supply.html["Remplacement à chaud d'un module d'alimentation défectueux"]
+
+
+
+ a| 
+Commutateur FC
+ a| 
+FC
+ a| 
+Mise à niveau des commutateurs
+ a| 
+link:task_upgrade_to_new_brocade_switches.html["Mise à niveau vers les nouveaux commutateurs Brocade FC"]
+
+
+
+ a| 
+FC
+ a| 
+Remplacement du commutateur
+ a| 
+link:task_replace_a_brocade_fc_switch_mcc.html["Remplacement d'un commutateur FC Brocade (MetroCluster)"]
+
+link:task_replace_a_cisco_fc_switch_mcc.html["Remplacement d'un commutateur Cisco FC"]
+
+
+
+ a| 
+FC
+ a| 
+Mise à niveau du micrologiciel
+ a| 
+link:task_upgrade_or_downgrad_the_firmware_on_a_brocade_fc_switch_mcc.html["Mise à jour du micrologiciel sur un commutateur Brocade FC"]
+
+link:task_upgrade_or_downgrad_the_firmware_on_a_cisco_fc_switch_mcc.html["Mise à jour du firmware sur un commutateur Cisco FC"]
+
+|===

@@ -1,0 +1,720 @@
+---
+permalink: disaster-recovery/task_replace_hardware_and_boot_new_controllers.html 
+sidebar: sidebar 
+keywords: hardware, component, replace, individual, replacement, installation, guide, replacing, controller, booting, new 
+summary: 'Si des composants matériels doivent être remplacés, vous devez les remplacer à l"aide de leurs guides individuels de remplacement et d"installation de matériel.' 
+---
+= Remplacement du matériel et démarrage des nouveaux contrôleurs
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+
+
+== Remplacement du matériel sur le site d'incident
+
+Si des composants matériels doivent être remplacés, vous devez les remplacer à l'aide de leurs guides individuels de remplacement et d'installation de matériel.
+
+Les contrôleurs de stockage doivent être mis hors tension ou restent suspendus (affichage de l'invite DU CHARGEUR).
+
+.Étapes
+. Remplacer les composants si nécessaire.
++
+
+NOTE: À cette étape, vous remplacez et câissez les composants exactement comme ils étaient câblés avant l'incident. Vous ne devez pas mettre les composants sous tension.
+
++
+|===
+
+
+| Si vous remplacez... | Procédez comme suit... | Utilisation de ces guides... 
+
+
+ a| 
+Commutateurs FC dans une configuration MetroCluster FC
+ a| 
+.. Installer les nouveaux interrupteurs.
+.. Câbler les liaisons ISL. Ne mettez pas les commutateurs FC sous tension pour le moment.
+
+| link:../maintain/index.html["Gérer les composants MetroCluster"] 
+
+
+ a| 
+Commutateurs IP dans une configuration MetroCluster IP
+ a| 
+.. Installer les nouveaux interrupteurs.
+.. Câbler les liaisons ISL. Ne mettez pas les commutateurs IP sous tension pour le moment.
+
+ a| 
+link:../install-ip/concept_considerations_differences.html["Installation et configuration IP de MetroCluster : différences entre les configurations ONTAP MetroCluster"]
+
+
+
+ a| 
+Tiroirs disques
+ a| 
+.. Installation des tiroirs disques et des disques
++
+*** Les piles de tiroirs disques doivent être de la même configuration que sur le site survivant.
+*** Les disques de même taille ou plus doivent être de même type (SAS ou SATA).
+
+
+.. Reliez les tiroirs disques aux tiroirs adjacents au sein de la pile et au pont FC-SAS. Ne mettez pas les tiroirs disques sous tension pour le moment.
+
+| link:http://docs.netapp.com/platstor/index.jsp["Centre de documentation AFF et FAS"^] 
+
+
+ a| 
+Câbles SAS
+ a| 
+.. Installez les nouveaux câbles. Ne mettez pas les tiroirs disques sous tension pour le moment.
+
+ a| 
+link:http://docs.netapp.com/platstor/index.jsp["Centre de documentation AFF et FAS"^]
+
+
+
+ a| 
+Ponts FC-SAS dans une configuration MetroCluster FC
+ a| 
+.. Installez les ponts FC-SAS.
+.. Reliez les ponts FC-SAS.
++
+Connectez-les aux commutateurs FC ou aux modules de contrôleur, en fonction du type de configuration du MetroCluster.
+
++
+Ne mettez pas les ponts FC-SAS sous tension pour l'instant.
+
+
+ a| 
+link:../install-fc/index.html["Installation et configuration de la solution Fabric-Attached MetroCluster"]
+
+link:../install-stretch/concept_considerations_differences.html["Installation et configuration d'Stretch MetroCluster"]
+
+
+
+ a| 
+Modules de contrôleur
+ a| 
+.. Installez les nouveaux modules de contrôleur :
++
+*** Les modules de contrôleur doivent être du même modèle que ceux remplacés.
++
+Par exemple, 8080 modules de contrôleur doivent être remplacés par 8080 modules de contrôleur.
+
+*** Les modules de contrôleur ne doivent pas avoir déjà fait partie d'un cluster au sein de la configuration MetroCluster ou d'une configuration existante du cluster.
++
+Si c'était le cas, vous devez définir les valeurs par défaut et exécuter un processus « wipconconfig ».
+
+*** Vérifiez que toutes les cartes d'interface réseau (Ethernet ou FC, par exemple) se trouvent dans les mêmes emplacements que les anciens modules de contrôleur.
+
+
+.. Reliez les nouveaux modules de contrôleur aux anciens.
++
+Les ports qui connectent le module de contrôleur au stockage (par des connexions aux commutateurs IP ou FC, des ponts FC-SAS ou directement) doivent être identiques à ceux utilisés avant le sinistre.
+
++
+Ne mettez pas les modules de contrôleur sous tension pour le moment.
+
+
+ a| 
+link:http://docs.netapp.com/platstor/index.jsp["Centre de documentation AFF et FAS"^]
+
+|===
+. Vérifiez que tous les composants sont correctement câblés pour votre configuration.
++
+** link:../install-ip/using_rcf_generator.html["Configuration MetroCluster IP"]
+** link:../install-fc/task_fmc_mcc_transition_cable_the_new_mcc_controllers_to_the_exist_fc_fabrics.html["Configuration MetroCluster FAS-Attached"]
+
+
+
+
+
+
+== Détermination des ID système et des ID VLAN des anciens modules de contrôleur
+
+Après avoir remplacé tout le matériel sur le site de secours, vous devez déterminer les ID système des modules de contrôleur remplacés. Vous avez besoin des anciens identifiants système lorsque vous réaffectez des disques aux nouveaux modules de contrôleur. Si les systèmes sont AFF A220, AFF A250, AFF A400, AFF A800, FAS2750, Modèles FAS500f, FAS8300 ou FAS8700, vous devez également déterminer les ID VLAN utilisés par les interfaces IP MetroCluster.
+
+Tous les équipements du site de secours doivent être hors tension.
+
+Cette discussion présente des exemples de configurations à deux et quatre nœuds. Dans le cas de configurations à 8 nœuds, il faut tenir compte des éventuelles défaillances au niveau des nœuds supplémentaires sur le second groupe de reprise après incident.
+
+Dans le cas d'une configuration MetroCluster à deux nœuds, vous pouvez ignorer les références au deuxième module de contrôleur de chaque site.
+
+Les exemples de cette procédure se basent sur les hypothèses suivantes :
+
+* Le site A est le site sur incident.
+* Le noeud_A_1 a échoué et est en cours de remplacement complet.
+* Le noeud_A_2 est en panne et est en cours de remplacement complet.
++
+Le nœud _A_2 n'est présent que dans une configuration MetroCluster à quatre noeuds.
+
+* Le site B est le site survivant.
+* Le nœud_B_1 fonctionne correctement.
+* Le nœud_B_2 fonctionne correctement.
++
+Le nœud_B_2 est présent uniquement dans une configuration MetroCluster à quatre nœuds.
+
+
+
+Les modules de contrôleur disposent des ID système d'origine suivants :
+
+|===
+
+
+| Nombre de nœuds dans la configuration MetroCluster | Nœud | ID système d'origine 
+
+
+ a| 
+Quatre
+ a| 
+Nœud_A_1
+ a| 
+4068741258
+
+
+
+ a| 
+Nœud_A_2
+ a| 
+4068741260
+
+
+
+ a| 
+Nœud_B_1
+ a| 
+4068741254
+
+
+
+ a| 
+Nœud_B_2
+ a| 
+4068741256
+
+
+
+ a| 
+Deux
+ a| 
+Nœud_A_1
+ a| 
+4068741258
+
+
+
+ a| 
+Nœud_B_1
+ a| 
+4068741254
+
+|===
+.Étapes
+. Sur le site survivant, affichez les identifiants système des nœuds de la configuration MetroCluster.
++
+|===
+
+
+| Nombre de nœuds dans la configuration MetroCluster | Utilisez cette commande 
+
+
+ a| 
+Quatre ou huit
+ a| 
+`metrocluster node show -fields node-systemid,ha-partner-systemid,dr-partner-systemid,dr-auxiliary-systemid`
+
+
+
+ a| 
+Deux
+ a| 
+`metrocluster node show -fields node-systemid,dr-partner-systemid`
+
+|===
++
+Dans cet exemple de configuration MetroCluster à quatre nœuds, les anciens ID système suivants sont récupérés :
+
++
+** Node_A_1 : 4068741258
+** Node_A_2 : 4068741260
++
+Les disques appartenant aux anciens modules de contrôleur possèdent toujours ces ID système.
+
++
+[listing]
+----
+metrocluster node show -fields node-systemid,ha-partner-systemid,dr-partner-systemid,dr-auxiliary-systemid
+
+dr-group-id cluster    node      node-systemid ha-partner-systemid dr-partner-systemid dr-auxiliary-systemid
+----------- ---------- --------  ------------- ------ ------------ ------ ------------ ------ --------------
+1           Cluster_A  Node_A_1  4068741258    4068741260          4068741254          4068741256
+1           Cluster_A  Node_A_2  4068741260    4068741258          4068741256          4068741254
+1           Cluster_B  Node_B_1  -             -                   -                   -
+1           Cluster_B  Node_B_2  -             -                   -                   -
+4 entries were displayed.
+----
+
+
++
+Dans cet exemple de configuration MetroCluster à deux nœuds, l'ancien ID système suivant est récupéré :
+
++
+** Node_A_1 : 4068741258
++
+Les disques appartenant à l'ancien module de contrôleur possèdent toujours cet ID système.
+
++
+[listing]
+----
+metrocluster node show -fields node-systemid,dr-partner-systemid
+
+dr-group-id cluster    node      node-systemid dr-partner-systemid
+----------- ---------- --------  ------------- ------------
+1           Cluster_A  Node_A_1  4068741258    4068741254
+1           Cluster_B  Node_B_1  -             -
+2 entries were displayed.
+----
+
+
+. Pour les configurations IP MetroCluster utilisant le service ONTAP Mediator, obtenez l'adresse IP du service ONTAP Mediator :
++
+`storage iscsi-initiator show -node * -label mediator`
+
+. Si les systèmes sont des modèles AFF A220, AFF A400, FAS2750, FAS8300 ou FAS8700, Déterminez les ID VLAN :
++
+`metrocluster interconnect show`
+
++
+Les ID VLAN sont inclus dans le nom de la carte affiché dans la colonne adapter de la sortie.
+
++
+Dans cet exemple, les ID VLAN sont 120 et 130 :
+
++
+[listing]
+----
+metrocluster interconnect show
+                          Mirror   Mirror
+                  Partner Admin    Oper
+Node Partner Name Type    Status   Status  Adapter Type   Status
+---- ------------ ------- -------- ------- ------- ------ ------
+Node_A_1 Node_A_2 HA      enabled  online
+                                           e0a-120 iWARP  Up
+                                           e0b-130 iWARP  Up
+         Node_B_1 DR      enabled  online
+                                           e0a-120 iWARP  Up
+                                           e0b-130 iWARP  Up
+         Node_B_2 AUX     enabled  offline
+                                           e0a-120 iWARP  Up
+                                           e0b-130 iWARP  Up
+Node_A_2 Node_A_1 HA      enabled  online
+                                           e0a-120 iWARP  Up
+                                           e0b-130 iWARP  Up
+         Node_B_2 DR      enabled  online
+                                           e0a-120 iWARP  Up
+                                           e0b-130 iWARP  Up
+         Node_B_1 AUX     enabled  offline
+                                           e0a-120 iWARP  Up
+                                           e0b-130 iWARP  Up
+12 entries were displayed.
+----
+
+
+
+
+== Isolation des disques de remplacement du site survivant (configurations MetroCluster IP)
+
+Vous devez isoler des disques de remplacement en mettant hors service les connexions des initiateurs iSCSI MetroCluster des autres nœuds.
+
+Cette procédure n'est requise que sur les configurations IP de MetroCluster.
+
+.Étapes
+. Depuis l'invite du nœud survivant, passez au niveau de privilège avancé :
++
+`set -privilege advanced`
+
++
+Vous devez répondre avec `y` lorsque vous êtes invité à passer en mode avancé et à afficher l'invite du mode avancé (*).
+
+. Déconnectez les initiateurs iSCSI des deux noeuds survivants du groupe DR :
++
+`storage iscsi-initiator disconnect -node surviving-node -label *`
+
++
+Cette commande doit être émise deux fois, une fois pour chacun des autres nœuds.
+
++
+L'exemple suivant montre les commandes de déconnexion des initiateurs du site B :
+
++
+[listing]
+----
+site_B::*> storage iscsi-initiator disconnect -node node_B_1 -label *
+site_B::*> storage iscsi-initiator disconnect -node node_B_2 -label *
+----
+. Retour au niveau de privilège admin :
++
+`set -privilege admin`
+
+
+
+
+
+== Effacement de la configuration sur un module de contrôleur
+
+[role="lead"]
+Avant d'utiliser un nouveau module de contrôleur dans la configuration MetroCluster, il faut effacer la configuration existante.
+
+.Étapes
+. Si nécessaire, arrêtez le nœud pour afficher l'invite DU CHARGEUR :
++
+`halt`
+
+. Dans l'invite DU CHARGEUR, définissez les variables environnementales sur les valeurs par défaut :
++
+`set-defaults`
+
+. Enregistrez l'environnement :
++
+`saveenv`
+
+. À l'invite DU CHARGEUR, lancez le menu de démarrage :
++
+`boot_ontap menu`
+
+. À l'invite du menu de démarrage, effacez la configuration :
++
+`wipeconfig`
+
++
+Répondez `yes` à l'invite de confirmation.
+
++
+Le nœud redémarre et le menu de démarrage s'affiche de nouveau.
+
+. Dans le menu de démarrage, sélectionnez l'option *5* pour démarrer le système en mode Maintenance.
++
+Répondez `yes` à l'invite de confirmation.
+
+
+
+
+
+== Démarrage réseau des nouveaux modules de contrôleur
+
+Si la version de ONTAP des nouveaux modules de contrôleur est différente de celle des modules survivants, vous devez effectuer le démarrage sur le réseau des nouveaux modules de contrôleur.
+
+.Avant de commencer
+* Vous devez avoir accès à un serveur HTTP.
+* Vous devez avoir accès au site de support NetApp pour télécharger les fichiers système nécessaires pour votre plateforme et la version du logiciel ONTAP qui s'exécute sur celui-ci.
++
+https://mysupport.netapp.com/site/global/dashboard["Support NetApp"^]
+
+
+
+.Étapes
+. Accédez au https://mysupport.netapp.com/site/["Site de support NetApp"^] pour télécharger les fichiers utilisés pour effectuer le démarrage sur le réseau du système.
+. Téléchargez le logiciel ONTAP approprié depuis la section de téléchargement de logiciels du site du support NetApp et stockez le fichier ontap-version_image.tgz dans un répertoire accessible en ligne.
+. Accédez au répertoire accessible sur le Web et vérifiez que les fichiers dont vous avez besoin sont disponibles.
++
+|===
+
+
+| Si le modèle de plateforme est... | Alors... 
+
+
+| Systèmes de la gamme FAS/AFF8000 | Extrayez le contenu d'ontap-version_image.tgzfile dans le répertoire cible : tar -zxvf ontap-version_image.tgz REMARQUE : si vous extrayez le contenu sous Windows, utilisez 7-Zip ou WinRAR pour extraire l'image netboot. Votre liste de répertoires doit contenir un dossier netboot avec un fichier de noyau:netboot/kernel 
+
+
+| Tous les autres systèmes | Votre liste de répertoires doit contenir un dossier netboot avec un fichier du noyau : ontap-version_image.tgz vous n'avez pas besoin d'extraire le fichier ontap-version_image.tgz. 
+|===
+. À l'invite DU CHARGEUR, configurez la connexion netboot pour les LIF de gestion :
++
+** Si l'adressage IP est DHCP, configurez la connexion automatique :
++
+`ifconfig e0M -auto`
+
+** Si l'adressage IP est statique, configurez la connexion manuelle :
++
+`ifconfig e0M -addr=ip_addr -mask=netmask` `-gw=gateway`
+
+
+
+. Effectuer la démarrage sur le réseau.
++
+** Si la plate-forme est un système de la série 80xx, utilisez la commande suivante :
++
+`netboot \http://web_server_ip/path_to_web-accessible_directory/netboot/kernel`
+
+** Si la plateforme est un autre système, utilisez la commande suivante :
++
+`netboot \http://web_server_ip/path_to_web-accessible_directory/ontap-version_image.tgz`
+
+
+
+. Dans le menu de démarrage, sélectionnez l'option *(7) installer le nouveau logiciel en premier* pour télécharger et installer la nouvelle image logicielle sur le périphérique d'amorçage.
++
+ Disregard the following message: "This procedure is not supported for Non-Disruptive Upgrade on an HA pair". It applies to nondisruptive upgrades of software, not to upgrades of controllers.
+. Si vous êtes invité à poursuivre la procédure, entrez `y`, Et lorsque vous êtes invité à saisir l'URL du fichier image : `\http://web_server_ip/path_to_web-accessible_directory/ontap-version_image.tgz`
++
+....
+Enter username/password if applicable, or press Enter to continue.
+....
+. Assurez-vous d'entrer `n` pour ignorer la restauration de la sauvegarde lorsque vous voyez une invite similaire à la suivante :
++
+....
+Do you want to restore the backup configuration now? {y|n}
+....
+. Redémarrez en entrant `y` lorsque vous voyez une invite similaire à la suivante :
++
+....
+The node must be rebooted to start using the newly installed software. Do you want to reboot now? {y|n}
+....
+. Dans le menu Boot, sélectionnez *option 5* pour passer en mode Maintenance.
+. Si vous disposez d'une configuration MetroCluster à quatre nœuds, répétez cette procédure sur l'autre nouveau module de contrôleur.
+
+
+
+
+== Détermination des ID système des modules de contrôleur de remplacement
+
+Après avoir remplacé tout le matériel sur le site de secours, vous devez déterminer l'ID système du ou des modules du contrôleur de stockage nouvellement installé.
+
+Vous devez effectuer cette procédure avec les modules de remplacement du contrôleur en mode Maintenance.
+
+Cette section présente des exemples de configurations à deux et quatre nœuds. Pour les configurations à deux nœuds, vous pouvez ignorer les références au second nœud de chaque site. Dans le cas de configurations à 8 nœuds, il faut tenir compte des nœuds supplémentaires sur le second groupe DR. Les exemples illustrent les hypothèses suivantes :
+
+* Le site A est le site sur incident.
+* Le noeud_A_1 a été remplacé.
+* Le noeud_A_2 a été remplacé.
++
+Présenter uniquement dans les configurations MetroCluster à quatre nœuds.
+
+* Le site B est le site survivant.
+* Le nœud_B_1 fonctionne correctement.
+* Le nœud_B_2 fonctionne correctement.
++
+Présenter uniquement dans les configurations MetroCluster à quatre nœuds.
+
+
+
+Les exemples de cette procédure utilisent des contrôleurs avec les ID système suivants :
+
+|===
+
+
+| Nombre de nœuds dans la configuration MetroCluster | Nœud | ID système d'origine | Nouvel ID système | S'associe à ce nœud comme partenaire de reprise après incident 
+
+
+ a| 
+Quatre
+ a| 
+Nœud_A_1
+ a| 
+4068741258
+ a| 
+1574774970
+ a| 
+Nœud_B_1
+
+
+
+ a| 
+Nœud_A_2
+ a| 
+4068741260
+ a| 
+1574774991
+ a| 
+Nœud_B_2
+
+
+
+ a| 
+Nœud_B_1
+ a| 
+4068741254
+ a| 
+inchangé
+ a| 
+Nœud_A_1
+
+
+
+ a| 
+Nœud_B_2
+ a| 
+4068741256
+ a| 
+inchangé
+ a| 
+Nœud_A_2
+
+
+
+ a| 
+Deux
+ a| 
+Nœud_A_1
+ a| 
+4068741258
+ a| 
+1574774970
+ a| 
+Nœud_B_1
+
+
+
+ a| 
+Nœud_B_1
+ a| 
+4068741254
+ a| 
+inchangé
+ a| 
+Nœud_A_1
+
+|===
+
+NOTE: Dans une configuration MetroCluster à quatre nœuds, le système détermine les partenariats de reprise après incident en associant le nœud avec l'ID système le plus bas du site_A et le nœud avec l'ID système le plus bas du site_B. Étant donné que les ID système changent, les paires DR peuvent être différentes une fois les remplacements du contrôleur terminés qu'ils n'étaient pas avant l'incident.
+
+Dans l'exemple précédent :
+
+* Le nœud_A_1 (1574774970) sera associé au nœud_B_1 (4068741254)
+* Le nœud_A_2 (1574774991) sera associé au nœud_B_2 (4068741256)
+
+
+.Étapes
+. Pour faire passer le nœud en mode maintenance, afficher l'ID système local de chaque nœud : `disk show`
++
+Dans l'exemple suivant, le nouvel ID système local est 1574774970 :
+
++
+[listing]
+----
+*> disk show
+ Local System ID: 1574774970
+ ...
+----
+. Sur le second nœud, répétez l'étape précédente.
++
+
+NOTE: Cette étape n'est pas requise dans une configuration MetroCluster à deux nœuds.
+
++
+Dans l'exemple suivant, le nouvel ID système local est 1574774991 :
+
++
+[listing]
+----
+*> disk show
+ Local System ID: 1574774991
+ ...
+----
+
+
+
+
+== Vérification de l'état ha-config des composants
+
+Dans une configuration MetroCluster, l'état ha-config du module de contrôleur et des composants du châssis doit être défini sur « mcc » ou « mcc-2n » afin qu'ils s'démarrent correctement.
+
+Le système doit être en mode Maintenance.
+
+Cette tâche doit être effectuée sur chaque nouveau module de contrôleur.
+
+.Étapes
+. En mode Maintenance, afficher l'état HA du module de contrôleur et du châssis :
++
+`ha-config show`
+
++
+L'état correct de haute disponibilité dépend de votre configuration MetroCluster.
+
++
+|===
+
+
+| Nombre de contrôleurs dans la configuration MetroCluster | L'état HAUTE DISPONIBILITÉ de tous les composants doit être... 
+
+
+ a| 
+Configuration FC MetroCluster à huit ou quatre nœuds
+ a| 
+mcc
+
+
+
+ a| 
+Configuration FC MetroCluster à deux nœuds
+ a| 
+mcc-2n
+
+
+
+ a| 
+Configuration MetroCluster IP
+ a| 
+ccip
+
+|===
+. Si l'état système affiché du contrôleur n'est pas correct, définissez l'état HA pour le module de contrôleur :
++
+|===
+
+
+| Nombre de contrôleurs dans la configuration MetroCluster | Commande 
+
+
+ a| 
+Configuration FC MetroCluster à huit ou quatre nœuds
+ a| 
+`ha-config modify controller mcc`
+
+
+
+ a| 
+Configuration FC MetroCluster à deux nœuds
+ a| 
+`ha-config modify controller mcc-2n`
+
+
+
+ a| 
+Configuration MetroCluster IP
+ a| 
+`ha-config modify controller mccip`
+
+|===
+. Si l'état du système affiché du châssis n'est pas correct, définissez l'état de haute disponibilité du châssis :
++
+|===
+
+
+| Nombre de contrôleurs dans la configuration MetroCluster | Commande 
+
+
+ a| 
+Configuration FC MetroCluster à huit ou quatre nœuds
+ a| 
+`ha-config modify chassis mcc`
+
+
+
+ a| 
+Configuration FC MetroCluster à deux nœuds
+ a| 
+`ha-config modify chassis mcc-2n`
+
+
+
+ a| 
+Configuration MetroCluster IP
+ a| 
+`ha-config modify chassis mccip`
+
+|===
+. Répétez ces étapes sur l'autre nœud de remplacement.
+

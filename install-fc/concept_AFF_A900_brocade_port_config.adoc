@@ -1,0 +1,568 @@
+---
+permalink: install-fc/concept_AFF_A900_brocade_port_config.html 
+sidebar: sidebar 
+keywords: AFF, A900, ONTAP, FAS, FC, Brocade, metrocluster 
+summary: 'Les tableaux suivants montrent l"utilisation des ports sur les commutateurs Brocade pour les systèmes AFF A900' 
+---
+= Utilisation des ports Brocade pour les contrôleurs AFF A900 ou FAS9500 dans une configuration MetroCluster exécutant ONTAP 9.10.1 ou une version ultérieure
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+Les tableaux suivants indiquent l'utilisation des ports sur les commutateurs Brocade. Les tableaux présentent la configuration maximale prise en charge, avec huit modules de contrôleur dans quatre groupes de reprise sur incident. Les systèmes AFF A900 et FAS9500 disposent de huit ports FC-VI (a, b, c et d pour FC-VI-1 et FC-VI-2).
+
+|===
+
+
+9+| Configurations utilisant FibreBridge 7500N ou 7600N utilisant les deux ports FC (FC1 et FC2) 
+
+
+9+| MetroCluster 1 ou DR Groupe 1 
+
+
+2.2+| Composant .2+| Port 6+| Modèle de commutateur Brocade 
+
+
+| Se connecte au commutateur FC... | 6510 | 6505, G610 | G620, G620-1 | G630, G630-1 | G720 
+
+
+2.12+| controller_x_1 | Port a du FC-VI-1 | 1 | 0 | 0 | 0 | 0 | 0 
+
+
+| Port b FC-VI-1 | 2 | 0 | 0 | 0 | 0 | 0 
+
+
+| Port c FC-VI-1 | 1 | 1 | 1 | 1 | 1 | 1 
+
+
+| Port d FC-VI-1 | 2 | 1 | 1 | 1 | 1 | 1 
+
+
+| Port a du FC-VI-2 | 1 | 20 | 16 | 16 | 16 | 2 
+
+
+| Port b FC-VI-2 | 2 | 20 | 16 | 16 | 16 | 2 
+
+
+| Port c FC-VI-2 | 1 | 21 | 17 | 17 | 17 | 3 
+
+
+| Port d FC-VI-2 | 2 | 21 | 17 | 17 | 17 | 3 
+
+
+| Port a du HBA | 1 | 2 | 2 | 2 | 2 | 8 
+
+
+| Port b de l'adaptateur HBA | 2 | 2 | 2 | 2 | 2 | 8 
+
+
+| Port c de l'adaptateur HBA | 1 | 3 | 3 | 3 | 3 | 9 
+
+
+| Port d de l'adaptateur HBA | 2 | 3 | 3 | 3 | 3 | 9 
+
+
+2.12+| controller_x_2 | Port a du FC-VI-1 | 1 | 4 | 4 | 4 | 4 | 4 
+
+
+| Port b FC-VI-1 | 2 | 4 | 4 | 4 | 4 | 4 
+
+
+| Port c FC-VI-1 | 1 | 5 | 5 | 5 | 5 | 5 
+
+
+| Port d FC-VI-1 | 2 | 5 | 5 | 5 | 5 | 5 
+
+
+| Port a du FC-VI-2 | 1 | 22 | 18 | 20 | 20 | 6 
+
+
+| Port b FC-VI-2 | 2 | 22 | 18 | 20 | 20 | 6 
+
+
+| Port c FC-VI-2 | 1 | 23 | 19 | 21 | 21 | 7 
+
+
+| Port d FC-VI-2 | 2 | 23 | 19 | 21 | 21 | 7 
+
+
+| Port a du HBA | 1 | 6 | 6 | 6 | 6 | 12 
+
+
+| Port b de l'adaptateur HBA | 2 | 6 | 6 | 6 | 6 | 12 
+
+
+| Port c de l'adaptateur HBA | 1 | 7 | 7 | 7 | 7 | 13 
+
+
+| Port d de l'adaptateur HBA | 2 | 7 | 7 | 7 | 7 | 13 
+
+
+.4+| Pile 1 .2+| bridge_x_1a | FC1 | 1 | 8 | 8 | 8 | 8 | 10 
+
+
+| FC2 | 2 | 8 | 8 | 8 | 8 | 10 
+
+
+.2+| bridge_x_1b | FC1 | 1 | 9 | 9 | 9 | 9 | 11 
+
+
+| FC2 | 2 | 9 | 9 | 9 | 9 | 11 
+
+
+.4+| Pile 2 .2+| bridge_x_2a | FC1 | 1 | 10 | 10 | 10 | 10 | 14 
+
+
+| FC2 | 2 | 10 | 10 | 10 | 10 | 14 
+
+
+.2+| bridge_x_2b | FC1 | 1 | 11 | 11 | 11 | 11 | 15 
+
+
+| FC2 | 2 | 11 | 11 | 11 | 11 | 15 
+
+
+.4+| Pile 3 .2+| bridge_x_3a | FC1 | 1 | 12 | 12 | 12 | 12 | 16 
+
+
+| FC2 | 2 | 12 | 12 | 12 | 12 | 16 
+
+
+.2+| bridge_x_3b | FC1 | 1 | 13 | 13 | 13 | 13 | 17 
+
+
+| FC2 | 2 | 13 | 13 | 13 | 13 | 17 
+
+
+.4+| Pile y .2+| pont_x_ya | FC1 | 1 | 14 | 14 | 14 | 14 | 20 
+
+
+| FC2 | 2 | 14 | 14 | 14 | 14 | 20 
+
+
+.2+| bridge_x_yb | FC1 | 1 | 15 | 15 | 15 | 15 | 21 
+
+
+| FC2 | 2 | 15 | 15 | 15 | 15 | 21 
+
+
+ a| 
+
+NOTE: Des ponts supplémentaires peuvent être câblés sur les ports 16-19 en 6510 commutateurs.
+
+|===
+|===
+
+
+9+| Configurations utilisant FibreBridge 7500N ou 7600N utilisant les deux ports FC (FC1 et FC2) 
+
+
+9+| MetroCluster 2 ou DR Groupe 2 
+
+
+2.2+| Composant .2+| Port 6+| Modèle de commutateur Brocade 
+
+
+| Se connecte au commutateur FC... | 6510 | 6505, G610 | G620, G620-1 | G630, G630-1 | G720 
+
+
+2.12+| controller_x_3 | Port a du FC-VI-1 | 1 | 24 | - | 18 | 18 | 18 
+
+
+| Port b FC-VI-1 | 2 | 24 | - | 18 | 18 | 18 
+
+
+| Port c FC-VI-1 | 1 | 25 | - | 19 | 19 | 19 
+
+
+| Port d FC-VI-1 | 2 | 25 | - | 19 | 19 | 19 
+
+
+| Port a du FC-VI-2 | 1 | 36 | - | 36 | 36 | 24 
+
+
+| Port b FC-VI-2 | 2 | 36 | - | 36 | 36 | 24 
+
+
+| Port c FC-VI-2 | 1 | 37 | - | 37 | 37 | 25 
+
+
+| Port d FC-VI-2 | 2 | 37 | - | 37 | 37 | 25 
+
+
+| Port a du HBA | 1 | 26 | - | 24 | 24 | 26 
+
+
+| Port b de l'adaptateur HBA | 2 | 26 | - | 24 | 24 | 26 
+
+
+| Port c de l'adaptateur HBA | 1 | 27 | - | 25 | 25 | 27 
+
+
+| Port d de l'adaptateur HBA | 2 | 27 | - | 25 | 25 | 27 
+
+
+2.12+| controller_x_4 | Port a du FC-VI-1 | 1 | 28 | - | 22 | 22 | 22 
+
+
+| Port b FC-VI-1 | 2 | 28 | - | 22 | 22 | 22 
+
+
+| Port c FC-VI-1 | 1 | 29 | - | 23 | 23 | 23 
+
+
+| Port d FC-VI-1 | 2 | 29 | - | 23 | 23 | 23 
+
+
+| Port a du FC-VI-2 | 1 | 38 | - | 38 | 38 | 28 
+
+
+| Port b FC-VI-2 | 2 | 38 | - | 38 | 38 | 28 
+
+
+| Port c FC-VI-2 | 1 | 39 | - | 39 | 39 | 29 
+
+
+| Port d FC-VI-2 | 2 | 39 | - | 39 | 39 | 29 
+
+
+| Port a du HBA | 1 | 30 | - | 28 | 28 | 30 
+
+
+| Port b de l'adaptateur HBA | 2 | 30 | - | 28 | 28 | 30 
+
+
+| Port c de l'adaptateur HBA | 1 | 31 | - | 29 | 29 | 31 
+
+
+| Port d de l'adaptateur HBA | 2 | 31 | - | 29 | 29 | 31 
+
+
+.4+| Pile 1 .2+| bridge_x_51a | FC1 | 1 | 32 | - | 26 | 26 | 32 
+
+
+| FC2 | 2 | 32 | - | 26 | 26 | 32 
+
+
+.2+| bridge_x_51b | FC1 | 1 | 33 | - | 27 | 27 | 33 
+
+
+| FC2 | 2 | 33 | - | 27 | 27 | 33 
+
+
+.4+| Pile 2 .2+| bridge_x_52a | FC1 | 1 | 34 | - | 30 | 30 | 34 
+
+
+| FC2 | 2 | 34 | - | 30 | 30 | 34 
+
+
+.2+| bridge_x_52b | FC1 | 1 | 35 | - | 31 | 31 | 35 
+
+
+| FC2 | 2 | 35 | - | 31 | 31 | 35 
+
+
+.4+| Pile 3 .2+| bridge_x_53a | FC1 | 1 | - | - | 32 | 32 | 36 
+
+
+| FC2 | 2 | - | - | 32 | 32 | 36 
+
+
+.2+| bridge_x_53b | FC1 | 1 | - | - | 33 | 33 | 37 
+
+
+| FC2 | 2 | - | - | 33 | 33 | 37 
+
+
+.4+| Pile y .2+| bridge_x_5ya | FC1 | 1 | - | - | 34 | 34 | 38 
+
+
+| FC2 | 2 | - | - | 34 | 34 | 38 
+
+
+.2+| bridge_x_5yb | FC1 | 1 | - | - | 35 | 35 | 39 
+
+
+| FC2 | 2 | - | - | 35 | 35 | 39 
+
+
+ a| 
+
+NOTE: MetroCluster 2 ou DR 2 ne prend en charge que deux (2) piles de ponts avec 6510 commutateurs.
+
+
+
+ a| 
+
+NOTE: MetroCluster 2 ou DR 2 n'est pas pris en charge avec les commutateurs 6505, G610.
+
+|===
+|===
+
+
+5+| Configurations utilisant FibreBridge 7500N ou 7600N utilisant les deux ports FC (FC1 et FC2) 
+
+
+5+| MetroCluster 3 ou DR Group 3 
+
+
+2.2+| Composant .2+| Port 2+| Modèle de commutateur Brocade 
+
+
+| Se connecte au commutateur FC... | G630, G630-1 
+
+
+2.12+| controller_x_5 | Port a du FC-VI-1 | 1 | 48 
+
+
+| Port b FC-VI-1 | 2 | 48 
+
+
+| Port c FC-VI-1 | 1 | 49 
+
+
+| Port d FC-VI-1 | 2 | 49 
+
+
+| Port a du FC-VI-2 | 1 | 64 
+
+
+| Port b FC-VI-2 | 2 | 64 
+
+
+| Port c FC-VI-2 | 1 | 65 
+
+
+| Port d FC-VI-2 | 2 | 65 
+
+
+| Port a du HBA | 1 | 50 
+
+
+| Port b de l'adaptateur HBA | 2 | 50 
+
+
+| Port c de l'adaptateur HBA | 1 | 51 
+
+
+| Port d de l'adaptateur HBA | 2 | 51 
+
+
+2.12+| controller_x_6 | Port a du FC-VI-1 | 1 | 52 
+
+
+| Port b FC-VI-1 | 2 | 52 
+
+
+| Port c FC-VI-1 | 1 | 53 
+
+
+| Port d FC-VI-1 | 2 | 53 
+
+
+| Port a du FC-VI-2 | 1 | 68 
+
+
+| Port b FC-VI-2 | 2 | 68 
+
+
+| Port c FC-VI-2 | 1 | 69 
+
+
+| Port d FC-VI-2 | 2 | 69 
+
+
+| Port a du HBA | 1 | 54 
+
+
+| Port b de l'adaptateur HBA | 2 | 54 
+
+
+| Port c de l'adaptateur HBA | 1 | 55 
+
+
+| Port d de l'adaptateur HBA | 2 | 55 
+
+
+.4+| Pile 1 .2+| bridge_x_1a | FC1 | 1 | 56 
+
+
+| FC2 | 2 | 56 
+
+
+.2+| bridge_x_1b | FC1 | 1 | 57 
+
+
+| FC2 | 2 | 57 
+
+
+.4+| Pile 2 .2+| bridge_x_2a | FC1 | 1 | 58 
+
+
+| FC2 | 2 | 58 
+
+
+.2+| bridge_x_2b | FC1 | 1 | 59 
+
+
+| FC2 | 2 | 59 
+
+
+.4+| Pile 3 .2+| bridge_x_3a | FC1 | 1 | 60 
+
+
+| FC2 | 2 | 60 
+
+
+.2+| bridge_x_3b | FC1 | 1 | 61 
+
+
+| FC2 | 2 | 61 
+
+
+.4+| Pile y .2+| pont_x_ya | FC1 | 1 | 62 
+
+
+| FC2 | 2 | 62 
+
+
+.2+| bridge_x_yb | FC1 | 1 | 63 
+
+
+| FC2 | 2 | 63 
+|===
+|===
+
+
+5+| Configurations utilisant FibreBridge 7500N ou 7600N utilisant les deux ports FC (FC1 et FC2) 
+
+
+5+| MetroCluster 4 ou DR Group 4 
+
+
+2.2+| Composant .2+| Port 2+| Modèle de commutateur Brocade 
+
+
+| Se connecte au commutateur FC... | G630, G630-1 
+
+
+2.12+| controller_x_7 | Port a du FC-VI-1 | 1 | 66 
+
+
+| Port b FC-VI-1 | 2 | 66 
+
+
+| Port c FC-VI-1 | 1 | 67 
+
+
+| Port d FC-VI-1 | 2 | 67 
+
+
+| Port a du FC-VI-2 | 1 | 84 
+
+
+| Port b FC-VI-2 | 2 | 84 
+
+
+| Port c FC-VI-2 | 1 | 85 
+
+
+| Port d FC-VI-2 | 2 | 85 
+
+
+| Port a du HBA | 1 | 72 
+
+
+| Port b de l'adaptateur HBA | 2 | 72 
+
+
+| Port c de l'adaptateur HBA | 1 | 73 
+
+
+| Port d de l'adaptateur HBA | 2 | 73 
+
+
+2.12+| controller_x_8 | Port a du FC-VI-1 | 1 | 70 
+
+
+| Port b FC-VI-1 | 2 | 70 
+
+
+| Port c FC-VI-1 | 1 | 71 
+
+
+| Port d FC-VI-1 | 2 | 71 
+
+
+| Port a du FC-VI-2 | 1 | 86 
+
+
+| Port b FC-VI-2 | 2 | 86 
+
+
+| Port c FC-VI-2 | 1 | 87 
+
+
+| Port d FC-VI-2 | 2 | 87 
+
+
+| Port a du HBA | 1 | 76 
+
+
+| Port b de l'adaptateur HBA | 2 | 76 
+
+
+| Port c de l'adaptateur HBA | 1 | 77 
+
+
+| Port d de l'adaptateur HBA | 2 | 77 
+
+
+.4+| Pile 1 .2+| bridge_x_51a | FC1 | 1 | 74 
+
+
+| FC2 | 2 | 74 
+
+
+.2+| bridge_x_51b | FC1 | 1 | 75 
+
+
+| FC2 | 2 | 75 
+
+
+.4+| Pile 2 .2+| bridge_x_52a | FC1 | 1 | 78 
+
+
+| FC2 | 2 | 78 
+
+
+.2+| bridge_x_52b | FC1 | 1 | 79 
+
+
+| FC2 | 2 | 79 
+
+
+.4+| Pile 3 .2+| bridge_x_53a | FC1 | 1 | 80 
+
+
+| FC2 | 2 | 80 
+
+
+.2+| bridge_x_53b | FC1 | 1 | 81 
+
+
+| FC2 | 2 | 81 
+
+
+.4+| Pile y .2+| bridge_x_5ya | FC1 | 1 | 82 
+
+
+| FC2 | 2 | 82 
+
+
+.2+| bridge_x_5yb | FC1 | 1 | 83 
+
+
+| FC2 | 2 | 83 
+|===

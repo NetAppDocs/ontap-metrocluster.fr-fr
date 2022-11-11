@@ -1,0 +1,864 @@
+---
+permalink: install-ip/task_switch_config_broadcom.html 
+sidebar: sidebar 
+keywords: ip, switch, connection, configuring, configure, broadcom, factory defaults 
+summary: 'Vous devez configurer les commutateurs IP Broadcom pour qu"ils servent d"interconnexion de cluster et pour la connectivité IP MetroCluster de back-end.' 
+---
+= Configuration des commutateurs IP Broadcom
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous devez configurer les commutateurs IP Broadcom pour qu'ils servent d'interconnexion de cluster et pour la connectivité IP MetroCluster de back-end.
+
+
+NOTE: Votre configuration nécessite des licences supplémentaires (6 licences de port de 100 Go) dans les scénarios suivants :
+
+* Vous utilisez les ports 53 et 54 en tant que MetroCluster ISL de 40 Gbits/s ou 100 Gbits/s.
+* Vous utilisez une plate-forme qui connecte le cluster local et les interfaces MetroCluster aux ports 49 - 52.
+
+
+
+
+== Réinitialisation des paramètres d'usine du commutateur IP Broadcom
+
+Avant d'installer une nouvelle version du logiciel de commutation et des RCFs, vous devez effacer les paramètres du commutateur Broadcom et effectuer une configuration de base.
+
+.Description de la tâche
+* Vous devez répéter ces étapes sur chacun des commutateurs IP de la configuration MetroCluster IP.
+* Vous devez être connecté au commutateur à l'aide de la console série.
+* Cette tâche réinitialise la configuration du réseau de gestion.
+
+
+.Étapes
+. Passez à l'invite de commande surélevée (`#`) : `enable`
++
+[listing]
+----
+(IP_switch_A_1)> enable
+(IP_switch_A_1) #
+----
+. Effacez la configuration de démarrage et supprimez la bannière
++
+.. Effacez la configuration de démarrage :
++
+*`erase startup-config`*
+
++
+[listing]
+----
+(IP_switch_A_1) #erase startup-config
+
+Are you sure you want to clear the configuration? (y/n) y
+
+(IP_switch_A_1) #
+----
++
+Cette commande n'efface pas la bannière.
+
+.. Supprimer la bannière :
++
+*`no set clibanner`*
+
++
+[listing]
+----
+(IP_switch_A_1) #configure
+(IP_switch_A_1)(Config) # no set clibanner
+(IP_switch_A_1)(Config) #
+----
+
+
+. Redémarrez le commutateur :*`(IP_switch_A_1) #reload*`
++
+[listing]
+----
+Are you sure you would like to reset the system? (y/n) y
+----
++
+
+NOTE: Si le système vous demande si vous souhaitez enregistrer la configuration non enregistrée ou modifiée avant de recharger le commutateur, sélectionnez *non*.
+
+. Attendre que le commutateur se recharge, puis se connecter au commutateur.
++
+L'utilisateur par défaut est « admin » et aucun mot de passe n'est défini. Une invite similaire à la commande suivante s'affiche :
+
++
+[listing]
+----
+(Routing)>
+----
+. Passer à l'invite de commande surélevée :
++
+`enable`
+
++
+[listing]
+----
+Routing)> enable
+(Routing) #
+----
+. Définissez le protocole du port de service sur `none`:
++
+`serviceport protocol none`
+
++
+[listing]
+----
+(Routing) #serviceport protocol none
+Changing protocol mode will reset ip configuration.
+Are you sure you want to continue? (y/n) y
+
+(Routing) #
+----
+. Attribuez l'adresse IP au port de service :
++
+`serviceport ip _ip-address_ _netmask_ _gateway_`
+
++
+L'exemple suivant montre l'adresse IP 10.10.10.10 attribuée à un port de service avec le sous-réseau 255.255.255.0 et la passerelle 10.10.10.1 :
+
++
+[listing]
+----
+(Routing) #serviceport ip 10.10.10.10 255.255.255.0 10.10.10.1
+----
+. Vérifiez que le port de service est correctement configuré :
++
+`show serviceport`
+
++
+L'exemple suivant indique que le port est activé et que les adresses correctes ont été attribuées :
+
++
+[listing]
+----
+(Routing) #show serviceport
+
+Interface Status............................... Up
+IP Address..................................... 10.10.10.10
+Subnet Mask.................................... 255.255.255.0
+Default Gateway................................ 10.10.10.1
+IPv6 Administrative Mode....................... Enabled
+IPv6 Prefix is ................................ fe80::dac4:97ff:fe56:87d7/64
+IPv6 Default Router............................ fe80::222:bdff:fef8:19ff
+Configured IPv4 Protocol....................... None
+Configured IPv6 Protocol....................... None
+IPv6 AutoConfig Mode........................... Disabled
+Burned In MAC Address.......................... D8:C4:97:56:87:D7
+
+(Routing) #
+----
+. Si vous le souhaitez, configurez le serveur SSH.
++
+
+NOTE: Le fichier RCF désactive le protocole Telnet. Si vous ne configurez pas le serveur SSH, vous pouvez uniquement accéder au pont à l'aide de la connexion du port série.
+
++
+.. Générer des clés RSA.
++
+[listing]
+----
+(Routing) #configure
+(Routing) (Config)#crypto key generate rsa
+----
+.. Générer des clés DSA (facultatif)
++
+[listing]
+----
+(Routing) #configure
+(Routing) (Config)#crypto key generate dsa
+----
+.. Si vous utilisez la version conforme FIPS de EFOS, générez les clés ECDSA. L'exemple suivant crée les clés d'une longueur de 256. Les valeurs valides sont 256, 384 ou 521.
++
+[listing]
+----
+(Routing) #configure
+(Routing) (Config)#crypto key generate ecdsa 256
+----
+.. Activez le serveur SSH.
++
+Si nécessaire, quittez le contexte de configuration.
+
++
+[listing]
+----
+(Routing) (Config)#end
+(Routing) #ip ssh server enable
+----
++
+
+NOTE: Si des clés existent déjà, il peut vous être demandé de les remplacer.
+
+
+
+. Si vous le souhaitez, configurez le domaine et le serveur de noms :
++
+`configure`
+
++
+L'exemple suivant montre le `ip domain` et `ip name server` commandes :
+
++
+[listing]
+----
+(Routing) # configure
+(Routing) (Config)#ip domain name lab.netapp.com
+(Routing) (Config)#ip name server 10.99.99.1 10.99.99.2
+(Routing) (Config)#exit
+(Routing) (Config)#
+----
+. Si vous le souhaitez, configurez le fuseau horaire et la synchronisation de l'heure (SNTP).
++
+L'exemple suivant montre le `sntp` Commandes, en spécifiant l'adresse IP du serveur SNTP et le fuseau horaire relatif.
+
++
+[listing]
+----
+(Routing) #
+(Routing) (Config)#sntp client mode unicast
+(Routing) (Config)#sntp server 10.99.99.5
+(Routing) (Config)#clock timezone -7
+(Routing) (Config)#exit
+(Routing) (Config)#
+----
+. Configurer le nom du commutateur :
++
+`hostname IP_switch_A_1`
+
++
+L'invite du commutateur affiche le nouveau nom :
+
++
+[listing]
+----
+(Routing) # hostname IP_switch_A_1
+
+(IP_switch_A_1) #
+----
+. Enregistrez la configuration :
++
+`write memory`
+
++
+Vous recevez des invites et des valeurs de sortie similaires à l'exemple suivant :
+
++
+[listing]
+----
+(IP_switch_A_1) #write memory
+
+This operation may take a few minutes.
+Management interfaces will not be available during this time.
+
+Are you sure you want to save? (y/n) y
+
+Config file 'startup-config' created successfully .
+
+
+Configuration Saved!
+
+(IP_switch_A_1) #
+----
+. Répétez les étapes précédentes sur les trois autres commutateurs de la configuration MetroCluster IP.
+
+
+
+
+== Téléchargement et installation du logiciel du commutateur Broadcom EFOS
+
+Vous devez télécharger le fichier du système d'exploitation du switch et le fichier RCF sur chaque commutateur de la configuration IP de MetroCluster.
+
+Cette tâche doit être répétée sur chaque commutateur de la configuration IP de MetroCluster.
+
+====
+*Notez ce qui suit :*
+
+* Lors de la mise à niveau de EFOS 3.4.x.x vers EFOS 3.7.x.x ou version ultérieure, le commutateur doit exécuter EFOS 3.4.4.6 (ou version 3.4.x.x ultérieure). Si vous exécutez une version antérieure à celle-ci, mettez d'abord le commutateur à niveau vers EFOS 3.4.4.6 (ou version ultérieure 3.4.x.x), puis mettez-le à niveau vers EFOS 3.7.x.x ou version ultérieure.
+* La configuration de EFOS 3.4.x.x et 3.7.x.x ou ultérieure est différente. Pour changer la version EFOS de 3.4.x.x à 3.7.x.x ou ultérieure, ou vice versa, le commutateur doit être réinitialisé aux valeurs par défaut et les fichiers RCF pour la version EFOS correspondante doivent être (ré)appliqués. Cette procédure nécessite un accès via le port série console.
+* À partir de la version 3.7.x.x ou ultérieure de EFOS, une version non conforme à la norme FIPS et une version conforme à la norme FIPS sont disponibles. Différentes étapes sont appliquées lorsque vous passez d'une version non conforme à FIPS à une version conforme FIPS ou inversement. Le fait de remplacer EFOS d'une version non conforme à la norme FIPS par une version conforme à la norme FIPS ou vice versa réinitialise les paramètres par défaut du commutateur. Cette procédure nécessite un accès via le port série console.
+
+
+====
+.Étapes
+. Vérifiez si votre version de EFOS est conforme à la norme FIPS ou non conforme à la norme FIPS à l'aide du `show fips status` commande. Dans les exemples suivants, `IP_switch_A_1` Utilise EFOS et conforme à la norme FIPS `IP_switch_A_2` Utilise EFOS non conforme à la norme FIPS.
++
+*Exemple 1*
+
++
+[listing]
+----
+IP_switch_A_1 #show fips status
+
+System running in FIPS mode
+
+IP_switch_A_1 #
+----
++
+*Exemple 2*
+
++
+[listing]
+----
+IP_switch_A_2 #show fips status
+                     ^
+% Invalid input detected at `^` marker.
+
+IP_switch_A_2 #
+----
+. Utilisez le tableau suivant pour déterminer la méthode à suivre :
++
+|===
+
+
+| *Procédure* | *Version actuelle de EFOS* | *Nouvelle version EFOS* | *Pas de niveau élevé* 
+
+
+ a| 
+Procédure de mise à niveau de EFOS entre deux versions (non conformes à la norme FIPS
+ a| 
+3.4.x.x
+ a| 
+3.4.x.x
+ a| 
+Installer la nouvelle image EFOS à l'aide de la méthode 1) les informations de configuration et de licence sont conservées
+
+
+
+ a| 
+3.4.4.6 (ou version ultérieure 3.4.x.x)
+ a| 
+3.7.x.x ou version ultérieure non conforme FIPS
+ a| 
+Mettre à niveau EFOS à l'aide de la méthode 1. Réinitialisez le commutateur sur les paramètres par défaut et appliquez le fichier RCF pour EFOS 3.7.x.x ou version ultérieure
+
+
+
+.2+| 3.7.x.x ou version ultérieure non conforme FIPS  a| 
+3.4.4.6 (ou version ultérieure 3.4.x.x)
+ a| 
+Rétrograder EFOS à l'aide de la méthode 1. Réinitialisez le commutateur sur les paramètres par défaut et appliquez le fichier RCF pour EFOS 3.4.x.x
+
+
+
+ a| 
+3.7.x.x ou version ultérieure non conforme FIPS
+ a| 
+Installez la nouvelle image EFOS à l'aide de la méthode 1. Les informations de configuration et de licence sont conservées
+
+
+
+ a| 
+Conforme à la norme FIPS 3.7.x.x ou ultérieure
+ a| 
+Conforme à la norme FIPS 3.7.x.x ou ultérieure
+ a| 
+Installez la nouvelle image EFOS à l'aide de la méthode 1. Les informations de configuration et de licence sont conservées
+
+
+
+ a| 
+Procédure de mise à niveau vers/à partir d'une version conforme à la norme FIPS EFOS
+ a| 
+Non conforme à la norme FIPS
+ a| 
+Conforme à la norme FIPS
+ a| 
+Installation de l'image EFOS à l'aide de la méthode 2. La configuration du commutateur et les informations de licence seront perdues.
+
+
+
+ a| 
+Conforme à la norme FIPS
+ a| 
+Non conforme à la norme FIPS
+
+|===
++
+** Méthode 1 :  to upgrade EFOS with downloading the software image to the backup boot partition
+** Méthode 2 :  to upgrade EFOS using the ONIE OS installation
+
+
+
+
+
+
+=== Procédure de mise à niveau de EFOS en téléchargeant l'image logicielle dans la partition de démarrage de sauvegarde
+
+Vous ne pouvez effectuer les étapes suivantes que si les deux versions EFOS ne sont pas conformes à la norme FIPS ou si les deux versions EFOS sont conformes à la norme FIPS.
+
+
+NOTE: N'utilisez pas ces étapes si une version est conforme à la norme FIPS et que l'autre est non conforme à la norme FIPS.
+
+.Étapes
+. Copier le logiciel du commutateur sur le commutateur : `+copy sftp://user@50.50.50.50/switchsoftware/efos-3.4.4.6.stk backup+`
++
+Dans cet exemple, le fichier système d'exploitation efos-3.4.4.6.stk est copié du serveur SFTP à 50.50.50.50 vers la partition de sauvegarde. Vous devez utiliser l'adresse IP de votre serveur TFTP/SFTP et le nom du fichier RCF que vous devez installer.
+
++
+[listing]
+----
+(IP_switch_A_1) #copy sftp://user@50.50.50.50/switchsoftware/efos-3.4.4.6.stk backup
+Remote Password:*************
+
+Mode........................................... SFTP
+Set Server IP.................................. 50.50.50.50
+Path........................................... /switchsoftware/
+Filename....................................... efos-3.4.4.6.stk
+Data Type...................................... Code
+Destination Filename........................... backup
+
+Management access will be blocked for the duration of the transfer
+Are you sure you want to start? (y/n) y
+
+File transfer in progress. Management access will be blocked for the duration of the transfer. Please wait...
+SFTP Code transfer starting...
+
+
+File transfer operation completed successfully.
+
+(IP_switch_A_1) #
+----
+. Configurez le commutateur pour qu'il démarre à partir de la partition de sauvegarde lors du prochain redémarrage du commutateur :
++
+`boot system backup`
+
++
+[listing]
+----
+(IP_switch_A_1) #boot system backup
+Activating image backup ..
+
+(IP_switch_A_1) #
+----
+. Vérifiez que la nouvelle image de démarrage sera active au prochain démarrage :
++
+`show bootvar`
+
++
+[listing]
+----
+(IP_switch_A_1) #show bootvar
+
+Image Descriptions
+
+ active :
+ backup :
+
+
+ Images currently available on Flash
+
+ ----  -----------  --------  ---------------  ------------
+ unit       active    backup   current-active   next-active
+ ----  -----------  --------  ---------------  ------------
+
+	1       3.4.4.2    3.4.4.6      3.4.4.2        3.4.4.6
+
+(IP_switch_A_1) #
+----
+. Enregistrez la configuration :
++
+`write memory`
+
++
+[listing]
+----
+(IP_switch_A_1) #write memory
+
+This operation may take a few minutes.
+Management interfaces will not be available during this time.
+
+Are you sure you want to save? (y/n) y
+
+
+Configuration Saved!
+
+(IP_switch_A_1) #
+----
+. Redémarrez le commutateur :
++
+`reload`
+
++
+[listing]
+----
+(IP_switch_A_1) #reload
+
+Are you sure you would like to reset the system? (y/n) y
+----
+. Attendez que le commutateur redémarre.
++
+
+NOTE: Dans de rares cas, le commutateur peut ne pas démarrer. Suivez le  to upgrade EFOS using the ONIE OS installation pour installer la nouvelle image.
+
+. Si vous passez de EFOS 3.4.x.x à EFOS 3.7.x.x ou vice versa, suivez les deux procédures suivantes pour appliquer la configuration correcte (RCF) :
++
+..  the Broadcom IP switch to factory defaults
+..  and installing the Broadcom RCF files
+
+
+. Répétez ces étapes sur les trois commutateurs IP restants de la configuration IP MetroCluster.
+
+
+
+
+=== Procédure de mise à niveau de EFOS à l'aide de l'installation ONIE OS
+
+Vous pouvez effectuer les étapes suivantes si une version de EFOS est conforme à la norme FIPS et que l'autre version de EFOS n'est pas compatible FIPS. Ces étapes peuvent être utilisées pour installer l'image EFOS 3.7.x.x non conforme à la norme FIPS ou à la norme FIPS à partir d'ONIE si le commutateur ne parvient pas à démarrer.
+
+.Étapes
+. Démarrez le commutateur en mode d'installation ONIE.
++
+Au cours du démarrage, sélectionnez ONIE lorsque l'écran suivant s'affiche :
+
++
+[listing]
+----
+ +--------------------------------------------------------------------+
+ |EFOS                                                                |
+ |*ONIE                                                               |
+ |                                                                    |
+ |                                                                    |
+ |                                                                    |
+ |                                                                    |
+ |                                                                    |
+ |                                                                    |
+ |                                                                    |
+ |                                                                    |
+ |                                                                    |
+ |                                                                    |
+ +--------------------------------------------------------------------+
+
+----
++
+Après avoir sélectionné « ONIE », le commutateur se charge et vous présente les choix suivants :
+
++
+[listing]
+----
+ +--------------------------------------------------------------------+
+ |*ONIE: Install OS                                                   |
+ | ONIE: Rescue                                                       |
+ | ONIE: Uninstall OS                                                 |
+ | ONIE: Update ONIE                                                  |
+ | ONIE: Embed ONIE                                                   |
+ | DIAG: Diagnostic Mode                                              |
+ | DIAG: Burn-In Mode                                                 |
+ |                                                                    |
+ |                                                                    |
+ |                                                                    |
+ |                                                                    |
+ |                                                                    |
+ +--------------------------------------------------------------------+
+
+----
++
+Le commutateur démarre maintenant en mode d'installation ONIE.
+
+. Arrêtez la détection ONIE et configurez l'interface ethernet
++
+Lorsque le message suivant s'affiche, appuyez sur <ENTER> pour appeler la console ONIE :
+
++
+[listing]
+----
+ Please press Enter to activate this console. Info: eth0:  Checking link... up.
+ ONIE:/ #
+----
++
+
+NOTE: La détection ONIE se poursuit et les messages sont imprimés sur la console.
+
++
+[listing]
+----
+Stop the ONIE discovery
+ONIE:/ # onie-discovery-stop
+discover: installer mode detected.
+Stopping: discover... done.
+ONIE:/ #
+----
+. Configurez l'interface ethernet et ajoutez la route à l'aide de `ifconfig eth0 <ipAddress> netmask <netmask> up` et `route add default gw <gatewayAddress>`
++
+[listing]
+----
+ONIE:/ # ifconfig eth0 10.10.10.10 netmask 255.255.255.0 up
+ONIE:/ # route add default gw 10.10.10.1
+----
+. Vérifiez que le serveur hébergeant le fichier d'installation ONIE est accessible :
++
+[listing]
+----
+ONIE:/ # ping 50.50.50.50
+PING 50.50.50.50 (50.50.50.50): 56 data bytes
+64 bytes from 50.50.50.50: seq=0 ttl=255 time=0.429 ms
+64 bytes from 50.50.50.50: seq=1 ttl=255 time=0.595 ms
+64 bytes from 50.50.50.50: seq=2 ttl=255 time=0.369 ms
+^C
+--- 50.50.50.50 ping statistics ---
+3 packets transmitted, 3 packets received, 0% packet loss
+round-trip min/avg/max = 0.369/0.464/0.595 ms
+ONIE:/ #
+----
+. Installez le nouveau logiciel du commutateur
++
+[listing]
+----
+
+ONIE:/ # onie-nos-install http:// 50.50.50.50/Software/onie-installer-x86_64
+discover: installer mode detected.
+Stopping: discover... done.
+Info: Fetching http:// 50.50.50.50/Software/onie-installer-3.7.0.4 ...
+Connecting to 50.50.50.50 (50.50.50.50:80)
+installer            100% |*******************************| 48841k  0:00:00 ETA
+ONIE: Executing installer: http:// 50.50.50.50/Software/onie-installer-3.7.0.4
+Verifying image checksum ... OK.
+Preparing image archive ... OK.
+----
++
+Le logiciel va installer puis redémarrer le commutateur. Laissez le commutateur redémarrer normalement dans la nouvelle version de EFOS.
+
+. Vérifier que le nouveau logiciel de commutateur est installé
++
+*`show bootvar`*
+
++
+[listing]
+----
+
+(Routing) #show bootvar
+Image Descriptions
+active :
+backup :
+Images currently available on Flash
+---- 	----------- -------- --------------- ------------
+unit 	active 	   backup   current-active  next-active
+---- 	----------- -------- --------------- ------------
+1 	3.7.0.4     3.7.0.4  3.7.0.4         3.7.0.4
+(Routing) #
+----
+. Terminez l'installation
++
+Le commutateur redémarre sans configuration appliquée et rétablit les paramètres par défaut. Suivez les deux procédures pour configurer les paramètres de base du commutateur et appliquer le fichier RCF comme indiqué dans les deux documents suivants :
+
++
+.. Configurer les paramètres de base du commutateur. Suivez l'étape 4 et les versions ultérieures :  the Broadcom IP switch to factory defaults
+.. Créez et appliquez le fichier RCF comme indiqué dans  and installing the Broadcom RCF files
+
+
+
+
+
+
+== Téléchargement et installation des fichiers RCF Broadcom
+
+Vous devez télécharger et installer le fichier RCF de commutateur sur chaque commutateur de la configuration IP de MetroCluster.
+
+Cette tâche nécessite un logiciel de transfert de fichiers, tel que FTP, TFTP, SFTP ou SCP, pour copier les fichiers sur les commutateurs.
+
+Ces étapes doivent être répétées sur chacun des commutateurs IP de la configuration MetroCluster IP.
+
+Il existe quatre fichiers RCF, un par pour chacun des quatre commutateurs de la configuration MetroCluster IP. Vous devez utiliser les fichiers RCF appropriés pour le modèle de commutateur que vous utilisez.
+
+|===
+
+
+| Commutateur | Fichier RCF 
+
+
+ a| 
+IP_switch_A_1
+ a| 
+v1.32_Switch-A1.txt
+
+
+
+ a| 
+IP_Switch_A_2
+ a| 
+v1.32_Switch-A2.txt
+
+
+
+ a| 
+IP_Switch_B_1
+ a| 
+v1.32_Switch-B1.txt
+
+
+
+ a| 
+IP_Switch_B_2
+ a| 
+v1.32_Switch-B2.txt
+
+|===
+
+NOTE: Fichiers RCF pour EFOS version 3.4.4.6 ou ultérieure 3.4.x.x. La version et la version 3.7.0.4 de EFOS sont différentes. Vous devez vous assurer que vous avez créé les fichiers RCF appropriés pour la version EFOS que le commutateur est en cours d'exécution.
+
+|===
+
+
+| Version EFOS | Version du fichier RCF 
+
+
+| 3.4.x.x | v1.3x, v1.4x 
+
+
+| 3.7.x.x | v2.x 
+|===
+.Étapes
+. Générez les fichiers RCF Broadcom pour MetroCluster IP.
++
+.. Téléchargez le https://mysupport.netapp.com/site/tools/tool-eula/rcffilegenerator["RcfFileGenerator pour MetroCluster IP"]
+.. Générez le fichier RCF pour votre configuration à l'aide de RcfFileGenerator pour MetroCluster IP.
++
+
+NOTE: Les modifications apportées aux fichiers RCF après le téléchargement ne sont pas prises en charge.
+
+
+
+. Copier les fichiers RCF sur les commutateurs :
++
+.. Copier les fichiers RCF sur le premier commutateur :
+`copy sftp://user@FTP-server-IP-address/RcfFiles/switch-specific-RCF/BES-53248_v1.32_Switch-A1.txt nvram:script BES-53248_v1.32_Switch-A1.scr`
++
+Dans cet exemple, le fichier RCF "BES-53248_v1.32_Switch-A1.txt" est copié du serveur SFTP à "50.50.50.50" vers le bootflash local. Vous devez utiliser l'adresse IP de votre serveur TFTP/SFTP et le nom du fichier RCF que vous devez installer.
+
++
+[listing]
+----
+(IP_switch_A_1) #copy sftp://user@50.50.50.50/RcfFiles/BES-53248_v1.32_Switch-A1.txt nvram:script BES-53248_v1.32_Switch-A1.scr
+
+Remote Password:*************
+
+Mode........................................... SFTP
+Set Server IP.................................. 50.50.50.50
+Path........................................... /RcfFiles/
+Filename....................................... BES-53248_v1.32_Switch-A1.txt
+Data Type...................................... Config Script
+Destination Filename........................... BES-53248_v1.32_Switch-A1.scr
+
+Management access will be blocked for the duration of the transfer
+Are you sure you want to start? (y/n) y
+
+File transfer in progress. Management access will be blocked for the duration of the transfer. Please wait...
+File transfer operation completed successfully.
+
+
+Validating configuration script...
+
+config
+
+set clibanner "***************************************************************************
+
+* NetApp Reference Configuration File (RCF)
+
+*
+
+* Switch    : BES-53248
+
+
+...
+The downloaded RCF is validated. Some output is being logged here.
+...
+
+
+Configuration script validated.
+File transfer operation completed successfully.
+
+(IP_switch_A_1) #
+----
+.. Vérifiez que le fichier RCF est enregistré comme script :
++
+`script list`
+
++
+[listing]
+----
+(IP_switch_A_1) #script list
+
+Configuration Script Name        Size(Bytes)  Date of Modification
+-------------------------------  -----------  --------------------
+BES-53248_v1.32_Switch-A1.scr             852   2019 01 29 18:41:25
+
+1 configuration script(s) found.
+2046 Kbytes free.
+(IP_switch_A_1) #
+----
+.. Appliquer le script RCF :
++
+`script apply BES-53248_v1.32_Switch-A1.scr`
+
++
+[listing]
+----
+(IP_switch_A_1) #script apply BES-53248_v1.32_Switch-A1.scr
+
+Are you sure you want to apply the configuration script? (y/n) y
+
+
+config
+
+set clibanner "********************************************************************************
+
+* NetApp Reference Configuration File (RCF)
+
+*
+
+* Switch    : BES-53248
+
+...
+The downloaded RCF is validated. Some output is being logged here.
+...
+
+Configuration script 'BES-53248_v1.32_Switch-A1.scr' applied.
+
+(IP_switch_A_1) #
+----
+.. Enregistrez la configuration :
++
+`write memory`
+
++
+[listing]
+----
+(IP_switch_A_1) #write memory
+
+This operation may take a few minutes.
+Management interfaces will not be available during this time.
+
+Are you sure you want to save? (y/n) y
+
+
+Configuration Saved!
+
+(IP_switch_A_1) #
+----
+.. Redémarrez le commutateur :
++
+`reload`
+
++
+[listing]
+----
+(IP_switch_A_1) #reload
+
+Are you sure you would like to reset the system? (y/n) y
+----
+.. Répétez les étapes précédentes pour chacun des trois autres commutateurs en veillant à copier le fichier RCF correspondant sur le commutateur correspondant.
+
+
+. Recharger l'interrupteur :
++
+`reload`
+
++
+[listing]
+----
+IP_switch_A_1# reload
+----
+. Répétez les étapes précédentes sur les trois autres commutateurs de la configuration MetroCluster IP.
+

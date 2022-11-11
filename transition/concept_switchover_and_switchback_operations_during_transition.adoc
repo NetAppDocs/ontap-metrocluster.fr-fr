@@ -1,0 +1,83 @@
+---
+permalink: transition/concept_switchover_and_switchback_operations_during_transition.html 
+sidebar: sidebar 
+keywords: stage, transition, process, metrocluster, switchover, heal, switchback, operation, fc, ip, workflow 
+summary: En fonction de la phase du processus de transition, les opérations de basculement, de rétablissement et de rétablissement de MetroCluster utilisent le flux de travail IP MetroCluster FC ou MetroCluster. 
+---
+= Les opérations de basculement, de rétablissement et de rétablissement s'effectuent sans interruption de l'activité
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+En fonction de la phase du processus de transition, les opérations de basculement, de rétablissement et de rétablissement de MetroCluster utilisent le flux de travail IP MetroCluster FC ou MetroCluster.
+
+Le tableau suivant indique les workflows utilisés à différentes étapes du processus de transition. Le basculement et le rétablissement ne sont parfois pas pris en charge.
+
+* Au sein du workflow MetroCluster FC, les étapes de basculement, de rétablissement et de rétablissement sont celles utilisées par une configuration MetroCluster FC.
+* Dans le workflow IP de MetroCluster, les étapes de basculement, de rétablissement et de rétablissement sont celles utilisées par une configuration IP de MetroCluster.
+* Dans le workflow unifié, lorsque les nœuds FC et IP sont configurés, les étapes dépendent de l'exécution d'NSO ou USO. Les détails sont présentés dans le tableau.
+
+
+Pour plus d'informations sur les flux de production FC et IP de MetroCluster pour le basculement, la résolution et le rétablissement, reportez-vous à link:../manage/concept_understanding_mcc_data_protection_and_disaster_recovery.html["Tout savoir sur la protection des données et la reprise après incident MetroCluster"].
+
+
+NOTE: Le basculement non planifié automatique n'est pas disponible pendant le processus de transition.
+
+[cols="2,1,3"]
+|===
+
+
+| Phase de transition | Le basculement négocié utilise ce flux de travail... | Le basculement non planifié utilise ce workflow... 
+
+
+ a| 
+Avant que les nœuds IP MetroCluster n'aient rejoint le cluster
+ a| 
+FC MetroCluster
+ a| 
+FC MetroCluster
+
+
+
+ a| 
+Une fois que les nœuds IP MetroCluster ont rejoint le cluster, avant le `metrocluster configure` la commande est exécutée
+ a| 
+Non pris en charge
+ a| 
+FC MetroCluster
+
+
+
+ a| 
+Après le `metrocluster configure` la commande a été émise. Un déplacement de volume peut être en cours.
+ a| 
+Unifié : tous les nœuds de site distant restent actifs et le rétablissement s'effectue automatiquement
+ a| 
+Système unifié :
+
+* Les agrégats en miroir détenus par le nœud FC MetroCluster sont mis en miroir si le stockage est accessible, tous les autres sont dégradés après le basculement.
+* Tous les nœuds du site distant peuvent démarrer.
+* Le `heal aggregate` et `heal root` les commandes doivent être exécutées manuellement.
+
+
+
+
+ a| 
+Les nœuds MetroCluster FC ont été non configurés.
+ a| 
+Non pris en charge
+ a| 
+IP MetroCluster
+
+
+
+ a| 
+Le `cluster unjoin` La commande a été exécutée sur les nœuds MetroCluster FC.
+ a| 
+IP MetroCluster
+ a| 
+IP MetroCluster
+
+|===

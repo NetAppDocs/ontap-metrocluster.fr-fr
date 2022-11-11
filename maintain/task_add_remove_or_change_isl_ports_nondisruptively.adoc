@@ -1,0 +1,127 @@
+---
+permalink: maintain/task_add_remove_or_change_isl_ports_nondisruptively.html 
+sidebar: sidebar 
+keywords: metrocluster, maintain, service, add, remove, change, isl, ports, nondisruptively 
+summary: Vous devrez peut-être ajouter, supprimer ou modifier des ports ISL. Vous pouvez convertir des ports ISL dédiés en ports ISL partagés ou modifier la vitesse des ports ISL sur un commutateur. Les liens ISL voyageant dans de grandes distances peuvent nécessiter une vitesse plus faible pour améliorer la qualité. Si vous ajoutez ou mettez à niveau du matériel, vous devrez également augmenter la vitesse des ports ISL pour profiter des mises à niveau système et ajouter des liens ISL à un commutateur IP Cisco. 
+---
+= Ajout, suppression ou modification de ports ISL sans interruption
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous devrez peut-être ajouter, supprimer ou modifier des ports ISL. Vous pouvez convertir des ports ISL dédiés en ports ISL partagés ou modifier la vitesse des ports ISL sur un commutateur. Les liens ISL voyageant dans de grandes distances peuvent nécessiter une vitesse plus faible pour améliorer la qualité. Si vous ajoutez ou mettez à niveau du matériel, vous devrez également augmenter la vitesse des ports ISL pour profiter des mises à niveau système et ajouter des liens ISL à un commutateur IP Cisco.
+
+Si vous convertissez des ports ISL dédiés en ports ISL partagés, assurez-vous que les nouveaux ports respectent le link:../install-ip/concept_considerations_layer_2.html["Exigences relatives aux ports ISL partagés"].
+
+Vous devez effectuer toutes les étapes des deux commutateurs pour assurer la connectivité ISL.
+
+La procédure suivante suppose que vous remplacez un ISL de 10 Go connecté au port du commutateur eth1/24/1 par deux liens ISL de 100 Go connectés aux ports de commutation 17 et 18.
+
+.Étapes
+. Désactivez les ports ISL des deux commutateurs dans la structure que vous souhaitez modifier.
++
+--
+
+NOTE: Vous n'avez besoin de désactiver les ports ISL actuels que si vous les déplacez vers un autre port, ou si la vitesse de l'ISL change. Si vous ajoutez un port ISL avec la même vitesse que les liens ISL existants, passez à l'étape 3.
+
+--
++
+Vous ne devez entrer qu'une seule commande de configuration pour chaque ligne et appuyer sur Ctrl-Z après avoir saisi toutes les commandes, comme illustré dans l'exemple suivant :
+
++
+[listing]
+----
+
+switch_A_1# conf t
+switch_A_1(config)# int eth1/24/1
+switch_A_1(config-if)# shut
+switch_A_1(config-if)#
+switch_A_1#
+
+switch_B_1# conf t
+switch_B_1(config)# int eth1/24/1
+switch_B_1(config-if)# shut
+switch_B_1(config-if)#
+switch_B_1#
+----
+. Retirez les câbles et émetteurs-récepteurs existants.
+. Modifiez le port ISL si nécessaire.
++
+[cols="30,70"]
+|===
+
+
+| Option | Étape 
+
+
+ a| 
+Pour modifier la vitesse d'un port ISL...
+ a| 
+Reliez les nouveaux liens ISL aux ports désignés, selon leur vitesse. Vous devez vous assurer que ces ports ISL pour votre commutateur sont répertoriés dans la section _MetroCluster IP installation and Configuration_.
+
+
+
+ a| 
+Pour ajouter un ISL...
+ a| 
+Insérez les QFSP dans les ports que vous ajoutez en tant que ports ISL. Assurez-vous qu'ils sont répertoriés dans la section _MetroCluster IP installation and Configuration_ et reliez-les en conséquence.
+
+|===
+. Activez tous les ports ISL (si non activés) sur les deux commutateurs dans la structure, en commençant par la commande suivante :
++
+`switch_A_1# conf t`
+
++
+Vous ne devez entrer qu'une seule commande de configuration par ligne et appuyer sur Ctrl-Z après avoir saisi toutes les commandes :
+
++
+[listing]
+----
+switch_A_1# conf t
+switch_A_1(config)# int eth1/17
+switch_A_1(config-if)# no shut
+switch_A_1(config-if)# int eth1/18
+switch_A_1(config-if)# no shut
+switch_A_1(config-if)#
+switch_A_1#
+switch_A_1# copy running-config startup-config
+
+switch_B_1# conf t
+switch_B_1(config)# int eth1/17
+switch_B_1(config-if)# no shut
+switch_B_1(config-if)# int eth1/18
+switch_B_1(config-if)# no shut
+switch_B_1(config-if)#
+switch_B_1#
+switch_B_1# copy running-config startup-config
+----
+. Vérifiez que les liens ISL sont établis entre les deux commutateurs :
++
+`switch_A_1# show int eth1/17,eth1/18 brief`
+
++
+Vous devez voir les interfaces ISL dans la sortie de la commande, comme dans l'exemple suivant :
+
++
+[listing]
+----
+switch_A_1# show int eth1/17,eth1/18 brief
+--------------------------------------------------------------------------------
+Ethernet      VLAN    Type Mode   Status  Reason                   Speed     Port
+Interface                                                                                                        Ch #
+--------------------------------------------------------------------------------
+Eth1/17       10         eth     access    up      none                       100G(D) 10
+Eth1/18       10         eth     access    up      none                       100G(D) 10
+
+switch_B_1# show int eth1/17,eth1/18 brief
+--------------------------------------------------------------------------------
+Ethernet      VLAN    Type Mode   Status  Reason                   Speed     Port
+Interface                                                                                                        Ch #
+--------------------------------------------------------------------------------
+Eth1/17       10         eth     access    up      none                       100G(D) 10
+Eth1/18       10         eth     access    up      none                       100G(D) 10
+----
+. Répéter la procédure pour le tissu 2.
+

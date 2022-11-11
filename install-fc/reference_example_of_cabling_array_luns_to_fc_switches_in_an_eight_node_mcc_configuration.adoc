@@ -1,0 +1,36 @@
+---
+permalink: install-fc/reference_example_of_cabling_array_luns_to_fc_switches_in_an_eight_node_mcc_configuration.html 
+sidebar: sidebar 
+keywords: metrocluster, fabric, installation, cabling, storage, array, ports, fc, switches, eight, node 
+summary: 'Dans une configuration MetroCluster avec des LUN de baie, vous devez connecter les ports de baie de stockage qui forment une paire de ports redondante avec d"autres commutateurs FC.' 
+---
+= Exemple de câblage des ports de la baie de stockage aux commutateurs FC dans une configuration MetroCluster à huit nœuds
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Dans une configuration MetroCluster avec des LUN de baie, vous devez connecter les ports de baie de stockage qui forment une paire de ports redondante avec d'autres commutateurs FC.
+
+Une configuration MetroCluster à huit nœuds se compose de deux groupes de reprise après incident à quatre nœuds. Le premier groupe DR comprend les nœuds suivants :
+
+* Controller_A_1
+* Contrôleur_A_2
+* Contrôleur_B_1
+* Contrôleur_B_2
+
+
+Le second groupe DR comprend les nœuds suivants :
+
+* Controller_A_3
+* Controller_A_4
+* Contrôleur_B_3
+* Contrôleur_B_4
+
+
+Pour raccorder les ports de matrice du premier groupe DR, vous pouvez utiliser les exemples de câblage pour une configuration MetroCluster à quatre nœuds pour le premier groupe DR.
+
+link:reference_example_of_cabling_array_luns_to_fc_switches_in_a_four_node_mcc_configuration.html["Exemple de câblage des ports de la baie de stockage aux commutateurs FC dans une configuration MetroCluster à quatre nœuds"]
+
+Pour câbler les ports de baie pour le second groupe DR, suivez les mêmes exemples et extrapoler pour les ports FC-VI et les ports FC initiator appartenant aux contrôleurs du deuxième groupe de reprise après incident.

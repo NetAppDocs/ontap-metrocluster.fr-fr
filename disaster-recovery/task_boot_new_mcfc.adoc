@@ -1,0 +1,124 @@
+---
+permalink: disaster-recovery/task_boot_new_mcfc.html 
+sidebar: sidebar 
+keywords: boot, controller, modules, fc 
+summary: 'Une fois le rétablissement de l"agrégat terminé pour les agrégats racine et de données, vous devez démarrer le ou les nœuds sur le site de reprise après incident.' 
+---
+= Démarrage des nouveaux modules de contrôleur (configurations MetroCluster FC)
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Une fois le rétablissement de l'agrégat terminé pour les agrégats racine et de données, vous devez démarrer le ou les nœuds sur le site de reprise après incident.
+
+Cette tâche commence par les nœuds affichant l'invite DU CHARGEUR.
+
+.Étapes
+. Afficher le menu de démarrage :
++
+`boot_ontap menu`
+
+. [[step2,Etape 2]]dans le menu d'amorçage, sélectionnez l'option 6, *mettre à jour la mémoire flash à partir de la configuration de sauvegarde*.
+. Répondez `y` à l'invite suivante :
++
+`This will replace all flash-based configuration with the last backup to disks. Are you sure you want to continue?: y`
+
++
+Le système démarre deux fois, la seconde fois pour charger la nouvelle configuration.
+
++
+
+NOTE: Si vous n'avez pas dégagé le contenu de la mémoire NVRAM d'un contrôleur de remplacement utilisé, le message suivant peut s'afficher de manière incohérente :
+`PANIC: NVRAM contents are invalid...`Si cela se produit, répétez ,Dans le menu de démarrage, sélectionnez l'option 6, *mettre à jour la mémoire flash à partir de la configuration de sauvegarde*. Pour démarrer le système sur l'invite ONTAP. Vous devez ensuite ,Réinitialisez Boot Recovery et rdb_corrompu bootargs
+
+. Mettre en miroir l'agrégat racine sur plex 0 :
++
+.. Attribuez trois disques pool0 au nouveau module de contrôleur.
+.. Mise en miroir de l'agrégat root pool1 plex :
++
+`aggr mirror root-aggr-name`
+
+.. Affectez des disques sans propriété à pool0 sur le nœud local
+
+
+. Si vous disposez d'une configuration à quatre nœuds, répétez les étapes précédentes sur l'autre nœud du site de secours.
+. Actualisez la configuration MetroCluster :
++
+.. Entrer en mode de privilège avancé :
++
+`set -privilege advanced`
+
+.. Actualisez la configuration :
++
+`metrocluster configure -refresh true`
+
+.. Revenir en mode de privilège admin :
++
+`set -privilege admin`
+
+
+
+. Vérifiez que les nœuds de remplacement sur le site d'incident sont prêts pour le rétablissement :
++
+`metrocluster node show`
+
++
+Les nœuds de remplacement doivent être en mode « en attente de restauration alternative ». S'ils sont en mode « normal », vous pouvez redémarrer les nœuds de remplacement. Après ce démarrage, les nœuds doivent être en mode « attente de restauration alternative ».
+
++
+L'exemple suivant montre que les nœuds de remplacement sont prêts pour le rétablissement :
+
++
+....
+
+cluster_B::> metrocluster node show
+DR                    Configuration  DR
+Grp Cluster Node      State          Mirroring Mode
+--- ------- --------- -------------- --------- --------------------
+1   cluster_B
+            node_B_1  configured     enabled   switchover completed
+            node_B_2  configured     enabled   switchover completed
+    cluster_A
+            node_A_1  configured     enabled   waiting for switchback recovery
+            node_A_2  configured     enabled   waiting for switchback recovery
+4 entries were displayed.
+
+cluster_B::>
+....
+
+
+Passez à la section link:../disaster-recovery/task_complete_recovery.html["Terminez le processus de reprise sur incident"].
+
+
+
+=== Réinitialisez boot_Recovery et rdb_corrompu bootargs
+
+[role="lead"]
+Si nécessaire, vous pouvez réinitialiser boot_Recovery et rdb_corrompu_bootargs
+
+.Étapes
+. Arrêtez le nœud en arrière à l'invite DU CHARGEUR :
++
+[listing]
+----
+node_A_1::*> halt -node _node-name_
+----
+. Vérifiez si les bootargs suivants ont été définis :
++
+[listing]
+----
+LOADER> printenv bootarg.init.boot_recovery
+LOADER> printenv bootarg.rdb_corrupt
+----
+. Si bootarg a été défini sur une valeur, désactivez-la et démarrez ONTAP :
++
+[listing]
+----
+LOADER> unsetenv bootarg.init.boot_recovery
+LOADER> unsetenv bootarg.rdb_corrupt
+LOADER> saveenv
+LOADER> bye
+----
+

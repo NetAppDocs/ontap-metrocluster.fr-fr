@@ -1,0 +1,305 @@
+---
+permalink: install-ip/concept_required_mcc_ip_components_and_naming_guidelines_mcc_ip.html 
+sidebar: sidebar 
+keywords: plan, metrocluster, ip, configuration, planning, require, hardware, software, clarity, conventions, component, documentation, naming, name, requirement, support, redundancy, switch, ontap, cluster, controller, module, gigabit, ethernet, adapter, pool, drive, drive, location, consideration, partial, populate, shelves, shelf, aff, a800, internal, iom12, iom, module, stack, four-node, raid-dp, raid4, AFF A800 internal drives 
+summary: Lors de la planification de votre configuration IP MetroCluster, vous devez connaître les composants matériels et logiciels requis et pris en charge. Pour plus de commodité et de clarté, vous devez également comprendre les conventions de dénomination utilisées pour les composants dans les exemples de la documentation. 
+---
+= Composants IP MetroCluster et conventions de nom requis
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Lors de la planification de votre configuration IP MetroCluster, vous devez connaître les composants matériels et logiciels requis et pris en charge. Pour plus de commodité et de clarté, vous devez également comprendre les conventions de dénomination utilisées pour les composants dans les exemples de la documentation.
+
+
+
+== Logiciels et matériel pris en charge
+
+Le matériel et le logiciel doivent être pris en charge pour la configuration MetroCluster IP.
+
+https://hwu.netapp.com["NetApp Hardware Universe"]
+
+Lorsque vous utilisez des systèmes AFF, tous les modules de contrôleur de la configuration MetroCluster doivent être configurés en tant que systèmes AFF.
+
+
+
+== La redondance matérielle est requise dans une configuration MetroCluster IP
+
+En raison de la redondance matérielle de la configuration IP MetroCluster, chaque site compte deux composants. Les lettres A et B sont attribuées arbitrairement aux sites, et les chiffres 1 et 2 sont attribués de façon arbitraire aux composantes individuelles.
+
+
+
+== Configuration requise pour le cluster ONTAP dans une configuration IP MetroCluster
+
+Les configurations IP MetroCluster requièrent deux clusters ONTAP, un sur chaque site MetroCluster.
+
+Le nom doit être unique dans la configuration MetroCluster.
+
+Exemples de noms :
+
+* Site A : cluster_A
+* Site B : cluster_B
+
+
+
+
+== Configuration du commutateur IP requise dans une configuration MetroCluster IP
+
+Les configurations IP de MetroCluster requièrent quatre commutateurs IP. Les quatre commutateurs forment deux fabrics de stockage de switch qui fournissent l'ISL entre chacun des clusters dans la configuration IP de MetroCluster.
+
+Les commutateurs IP offrent également une communication intracluster entre les modules de contrôleur de chaque cluster.
+
+Le nom doit être unique dans la configuration MetroCluster.
+
+Exemples de noms :
+
+* Site A : cluster_A
++
+** IP_switch_A_1
+** IP_Switch_A_2
+
+
+* Site B : cluster_B
++
+** IP_Switch_B_1
+** IP_Switch_B_2
+
+
+
+
+
+
+== Configuration requise pour le module de contrôleur dans une configuration IP MetroCluster
+
+Les configurations IP de MetroCluster requièrent quatre ou huit modules de contrôleur.
+
+Les modules de contrôleur de chaque site forment une paire haute disponibilité. Chaque module de contrôleur dispose d'un partenaire de reprise sur incident sur l'autre site.
+
+Chaque module de contrôleur doit exécuter la même version de ONTAP. Les modèles de plateforme pris en charge dépendent de la version ONTAP :
+
+* Les nouvelles installations IP MetroCluster sur les systèmes FAS ne sont pas prises en charge par ONTAP 9.4.
++
+Les configurations IP MetroCluster existantes sur les systèmes FAS peuvent être mises à niveau vers ONTAP 9.4.
+
+* Depuis ONTAP 9.5, les nouvelles installations MetroCluster IP sur les systèmes FAS sont prises en charge.
+* Depuis ONTAP 9.4, les modules de contrôleur configurés pour ADP sont pris en charge.
+
+
+
+
+=== Modèles de contrôleur limités à des configurations à quatre nœuds
+
+Ces modèles sont limités à quatre dans une configuration MetroCluster.
+
+* AVEC AFF A220
+* AFF A250
+* FAS2750
+* FAS500f
+
+
+Par exemple, les configurations suivantes ne sont pas prises en charge :
+
+* Configuration à huit nœuds composée de huit contrôleurs AFF A250.
+* Configuration à huit nœuds composée de quatre contrôleurs AFF 220 et de quatre contrôleurs FAS500f.
+* Deux configurations IP MetroCluster à quatre nœuds, chacune composée de contrôleurs AFF A250 et partageant les mêmes commutateurs internes.
+* Configuration à huit nœuds composée du groupe DR 1 avec contrôleurs AFF A250 et du groupe DR 2 avec contrôleurs FAS9000.
+
+
+Vous pouvez configurer deux configurations IP MetroCluster à quatre nœuds distinctes avec les mêmes commutateurs back-end si le deuxième MetroCluster n'inclut aucun des modèles ci-dessus.
+
+
+
+=== Exemples de noms
+
+Les noms d'exemple suivants sont utilisés dans la documentation :
+
+* Site A : cluster_A
++
+** Controller_A_1
+** Contrôleur_A_2
+
+
+* Site B : cluster_B
++
+** Contrôleur_B_1
+** Contrôleur_B_2
+
+
+
+
+
+
+== Configuration de la carte Gigabit Ethernet requise dans une configuration IP MetroCluster
+
+Les configurations IP MetroCluster utilisent un adaptateur Ethernet 40/100 Gbits/s ou 10/25 Gbits/s pour les interfaces IP vers les commutateurs IP utilisés pour la structure IP MetroCluster.
+
+|===
+
+
+| Modèle de plateforme | Adaptateur Gigabit Ethernet requis | Logement requis pour l'adaptateur | Ports 
+
+
+| AFF A900 ET FAS9500 | X91146A | Emplacement 5, emplacement 7 | e5b, e7b 
+
+
+ a| 
+AFF A700 ET FAS9000
+ a| 
+X91146A-C.
+ a| 
+Emplacement 5
+ a| 
+e5a, e5b
+
+
+
+ a| 
+AFF A800
+ a| 
+Ports X1146A/intégrés
+ a| 
+Emplacement 1
+ a| 
+e0b. e1b
+
+
+
+ a| 
+AFF A400 ET FAS8300
+ a| 
+X1146A
+ a| 
+Emplacement 1
+ a| 
+e1a, e1b
+
+
+
+ a| 
+AFF A300 ET FAS8200
+ a| 
+X1116A
+ a| 
+Emplacement 1
+ a| 
+e1a, e1b
+
+
+
+ a| 
+AFF A220 ET FAS2750
+ a| 
+Ports intégrés
+ a| 
+Emplacement 0
+ a| 
+e0a, e0b
+
+
+
+ a| 
+AFF A250 et FAS500f
+ a| 
+Ports intégrés
+ a| 
+Emplacement 0
+ a| 
+e0c, e0d
+
+
+
+ a| 
+AFF A320
+ a| 
+Ports intégrés
+ a| 
+Emplacement 0
+ a| 
+e0g, e0h
+
+|===
+
+
+== Exigences relatives au pool et au disque (minimum pris en charge)
+
+Il est recommandé d'utiliser huit tiroirs disques SAS (quatre tiroirs sur chaque site) pour autoriser la propriété des disques par tiroir.
+
+Une configuration IP MetroCluster à quatre nœuds nécessite la configuration minimale sur chaque site :
+
+* Chaque nœud possède au moins un pool local et un pool distant au niveau du site.
+* Au moins sept disques dans chaque pool.
++
+Dans une configuration MetroCluster à quatre nœuds avec un seul agrégat de données en miroir par nœud, la configuration minimale requiert 24 disques sur le site.
+
+
+
+Dans une configuration minimale prise en charge, chaque pool dispose de la disposition de disque suivante :
+
+* Trois disques racine
+* Trois disques de données
+* Un disque de rechange
+
+
+Dans une configuration minimale prise en charge, au moins un tiroir est requis par site.
+
+Les configurations MetroCluster prennent en charge RAID-DP et RAID4
+
+
+
+== Considérations relatives à l'emplacement des disques pour les tiroirs partiellement remplis
+
+Pour l'affectation automatique correcte des disques lorsque des tiroirs sont à moitié remplis (12 disques dans un tiroir de 24 disques), les disques doivent être situés dans les emplacements 0-5 et 18-23.
+
+Dans une configuration avec un tiroir partiellement rempli, les disques doivent être répartis de manière égale dans les quatre quadrants du shelf.
+
+
+
+== Considérations relatives à l'emplacement des disques pour les disques internes AFF A800
+
+Pour une mise en œuvre correcte de la fonction ADP, les emplacements des disques du système AFF A800 doivent être répartis en trimestres et les disques doivent être placés symétriquement au cours des trimestres.
+
+Un système AFF A800 dispose de 48 baies de disque. Les baies peuvent être divisées en quatre :
+
+* Premier trimestre :
++
+** Baies 0 - 5
+** Baies 24 - 29
+
+
+* Deuxième trimestre :
++
+** Baies 6 - 11
+** Baies 30 - 35
+
+
+* Troisième trimestre :
++
+** Baies 12 - 17
+** Baies 36 - 41
+
+
+* Quatrième trimestre :
++
+** Baies 18 - 23
+** Baies 42 - 47
+
+
+
+
+Si ce système est équipé de 16 disques durs, ils doivent être répartis symétriquement entre les quatre trimestres :
+
+* Quatre disques au premier trimestre : 0, 1, 2, 3
+* Quatre disques au deuxième trimestre : 6, 7, 8, 9
+* Quatre disques au troisième trimestre : 12, 13, 14, 15
+* Quatre disques au quatrième trimestre : 18, 19, 20, 21
+
+
+
+
+== Association de modules IOM12 et IOM 6 dans une pile
+
+Votre version de ONTAP doit prendre en charge le mélange des tiroirs. Reportez-vous à la https://mysupport.netapp.com/NOW/products/interoperability["Matrice d'interopérabilité NetApp (IMT)"] Pour vérifier si votre version de ONTAP prend en charge la combinaison de tiroirs.
+
+Pour plus de détails sur le mélange des étagères, voir https://docs.netapp.com/platstor/topic/com.netapp.doc.hw-ds-mix-hotadd/home.html["Ajout de tiroirs à chaud avec modules IOM12 à une pile de tiroirs avec modules IOM6"]

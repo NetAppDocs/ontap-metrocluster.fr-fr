@@ -1,0 +1,22 @@
+---
+permalink: transition/task_send_a_custom_autosupport_message_after_maintenance_4n_nondisruptive_mcc_transition.html 
+sidebar: sidebar 
+keywords: complete, completing, transition, autosupport, message, indicating, indicate, maintenance, automatic, case, creation, resume, send 
+summary: Une fois la transition terminée, vous devez envoyer un message AutoSupport indiquant la fin de la maintenance. La création automatique de dossier peut ainsi reprendre. 
+---
+= Envoi d'un message AutoSupport personnalisé après maintenance
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Une fois la transition terminée, vous devez envoyer un message AutoSupport indiquant la fin de la maintenance. La création automatique de dossier peut ainsi reprendre.
+
+. Pour reprendre la génération automatique de dossier de support, envoyez un message AutoSupport pour indiquer que la maintenance est terminée.
++
+.. Exécutez la commande suivante : `system node autosupport invoke -node * -type all -message MAINT=end`
+.. Répétez la commande sur le cluster partenaire.
+
+
+

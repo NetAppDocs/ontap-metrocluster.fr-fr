@@ -1,0 +1,43 @@
+---
+permalink: transition/task_apply_rcfs.html 
+sidebar: sidebar 
+keywords: Generating and applying RCFs to the new IP switches, review, requirement, preparing, prepare, transition, perform, procedure, order, completing, complete, step, task, moving, move, controller, storage, shelves, shelf, exist, configuration, direct, metrocluster, fc, ip, verify, health, removing, remove, tiebreaker, monitor, software, generating, generate, apply, rcf, switch, controller, configure, prepare, preparing 
+summary: Si vous utilisez de nouveaux commutateurs IP pour la configuration IP MetroCluster, vous devez configurer les switchs avec un fichier RCF personnalisé. 
+---
+= Génération et application des RCFC aux nouveaux commutateurs IP
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Si vous utilisez de nouveaux commutateurs IP pour la configuration IP MetroCluster, vous devez configurer les switchs avec un fichier RCF personnalisé.
+
+Cette tâche est requise si vous utilisez de nouveaux commutateurs.
+
+Si vous utilisez des commutateurs existants, passer à link:task_move_cluster_connections.html["Déplacement des connexions locales du cluster"].
+
+. Installez et installez les nouveaux commutateurs IP dans leur rack.
+. Préparez les commutateurs IP pour l'application des nouveaux fichiers RCF.
++
+Suivez les étapes de la section correspondant au fournisseur de votre commutateur du link:../install-ip/using_rcf_generator.html["Installation et configuration de MetroCluster IP"]
+
++
+** link:../install-ip/task_switch_config_broadcom.html["Réinitialisation des paramètres d'usine du commutateur IP Broadcom"]
+** link:../install-ip/task_switch_config_cisco.html["Réinitialisation des paramètres d'usine du commutateur IP Cisco"]
+
+
+. Mettez à jour le micrologiciel du commutateur vers une version prise en charge, si nécessaire.
+. Utilisez l'outil FCR Generator pour créer le fichier RCF en fonction de votre fournisseur de commutateur et des modèles de plateforme, puis mettez à jour les switchs avec le fichier.
++
+Suivez les étapes de la section correspondant à votre fournisseur de commutateur dans _MetroCluster IP installation and Configuration_.
+
++
+link:../install-ip/concept_considerations_differences.html["Installation et configuration de MetroCluster IP"]
+
++
+** link:../install-ip/task_switch_config_broadcom.html["Téléchargement et installation des fichiers RCF IP de Broadcom"]
+** link:../install-ip/task_switch_config_cisco.html["Téléchargement et installation des fichiers Cisco IP RCF"]
+
+
+

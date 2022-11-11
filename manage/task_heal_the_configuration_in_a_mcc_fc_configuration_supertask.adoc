@@ -1,0 +1,26 @@
+---
+permalink: manage/task_heal_the_configuration_in_a_mcc_fc_configuration_supertask.html 
+sidebar: sidebar 
+keywords: switchover, perform, heal, operation, restore, metrocluster, functionality, fc, configuration 
+summary: Après un basculement, vous devez effectuer les opérations de correction spécifiques afin de restaurer la fonctionnalité MetroCluster. 
+---
+= Corrigez la configuration dans une configuration MetroCluster FC
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Après un basculement, vous devez effectuer les opérations de correction spécifiques afin de restaurer la fonctionnalité MetroCluster.
+
+* Le basculement doit avoir été effectué et le site survivant doit servir de données.
+* Les nœuds du site d'incident doivent être suspendus ou éteints.
++
+Ils ne doivent pas être complètement démarrés pendant le processus de guérison.
+
+* Le stockage du site d'incident doit être accessible (les tiroirs sont mis sous tension, fonctionnels et accessibles).
+* Dans les configurations Fabric-Attached MetroCluster, les liaisons intercommutateurs (ISL) doivent être opérationnelles.
+* Dans les configurations MetroCluster à quatre nœuds, les nœuds du site survivant ne doivent pas être en état de basculement haute disponibilité (tous les nœuds doivent être opérationnels pour chaque paire haute disponibilité).
+
+
+L'opération de réparation doit d'abord être effectuée sur les agrégats de données, puis sur les agrégats racine.

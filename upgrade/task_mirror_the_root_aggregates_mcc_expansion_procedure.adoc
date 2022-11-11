@@ -1,0 +1,33 @@
+---
+permalink: upgrade/task_mirror_the_root_aggregates_mcc_expansion_procedure.html 
+sidebar: sidebar 
+keywords: metrocluster, upgrade, mirror, root, aggregate, new, controller 
+summary: 'Vous devez mettre en miroir l"agrégat racine pour garantir la protection des données lorsque vous ajoutez un contrôleur à une configuration MetroCluster.' 
+---
+= Mettre en miroir l'agrégat racine sur le nouveau contrôleur
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous devez mettre en miroir l'agrégat racine pour garantir la protection des données lorsque vous ajoutez un contrôleur à une configuration MetroCluster.
+
+Cette tâche doit être effectuée sur le nouveau module de contrôleur.
+
+. Mettre en miroir l'agrégat racine :
++
+`storage aggregate mirror _aggr_name_`
+
++
+La commande suivante met en miroir l'agrégat root pour Controller_A_1 :
+
++
+[listing]
+----
+controller_A_1::> storage aggregate mirror aggr0_controller_A_1
+----
++
+Cela met en miroir l'agrégat, il se compose d'un plex local et d'un plex distant situé sur le site MetroCluster distant.
+
+

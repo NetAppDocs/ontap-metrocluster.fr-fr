@@ -1,0 +1,30 @@
+---
+permalink: install-stretch/task_cable_the_cluster_peering_connections.html 
+sidebar: sidebar 
+keywords: metrocluster, stretch, installation, cable, custer, peering, connections 
+summary: Vous devez câbler les ports du module de contrôleur utilisés pour le peering de cluster, de sorte qu’ils disposent d’une connectivité avec le cluster sur le site partenaire. 
+---
+= Câblage des connexions de peering de cluster
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous devez câbler les ports du module de contrôleur utilisés pour le peering de cluster, de sorte qu’ils aient une connectivité avec le cluster sur leur site partenaire.
+
+Cette tâche doit être effectuée sur chaque module de contrôleur de la configuration MetroCluster.
+
+Au moins deux ports sur chaque module de contrôleur doivent être utilisés pour le peering de cluster.
+
+La bande passante minimale recommandée pour les ports et la connectivité réseau est de 1 GbE.
+
+.Étapes
+. Identifier et câbler au moins deux ports pour peering de cluster et vérifier qu'ils disposent d'une connectivité réseau avec le cluster partenaire.
++
+Le peering de cluster peut être effectué sur des ports dédiés ou sur des ports data. L'utilisation de ports dédiés fournit un débit plus élevé pour le trafic de peering de cluster.
+
++
+http://docs.netapp.com/ontap-9/topic/com.netapp.doc.exp-clus-peer/home.html["Configuration cluster et SVM peering express"]
+
+

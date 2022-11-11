@@ -1,0 +1,71 @@
+---
+permalink: maintain/task_add_lsls_to_a_cisco_fc_switch.html 
+sidebar: sidebar 
+keywords: metrocluster, maintain, service, add, isl, cisco, switch 
+summary: 'Si vous ajoutez ou mettez à niveau du matériel (contrôleurs supplémentaires ou plus rapides, ou commutateurs plus rapides), vous devrez peut-être ajouter des liens ISL à un commutateur.' 
+---
+= Ajout de lSLs à un commutateur Cisco
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Si vous ajoutez ou mettez à niveau du matériel (contrôleurs supplémentaires ou plus rapides, ou commutateurs plus rapides), vous devrez peut-être ajouter des liens ISL à un commutateur.
+
+Les étapes effectuées sur un commutateur doivent également être effectuées sur l'autre pour assurer la connectivité ISL.
+
+.Étapes
+. Désactiver les ports ISL des ISL pour être ajoutés sur les deux commutateurs dans la structure :
++
+`*FC_switch_A_1#config t*`
+
++
+Entrez les commandes de configuration, une par ligne. Terminez par CTRL-Z après avoir saisi toutes les commandes de configuration.
+
++
+[listing]
+----
+
+	FC_switch_A_1(config)# interface fc1/36
+	FC_switch_A_1(config-if)# shut
+	FC_switch_A_1(config)# end
+----
+. Insérez des SFP dans les ports que vous ajoutez en tant que ports ISL et reliez-les conformément au _Guide d'installation et de configuration_.
++
+Assurez-vous que ces ports sont répertoriés dans le _Guide d'installation et de configuration_ pour le commutateur auquel vous les ajoutez.
+
+. Configurez les ports ISL conformément au _installation and Configuration Guide_.
+. Activez tous les ports ISL (si non activés) sur les deux commutateurs dans la structure :
++
+`*FC_switch_A_1# config t*`
+
++
+Entrez les commandes de configuration, une par ligne. Fin avec CTRL-Z.
+
++
+[listing]
+----
+
+ FC_switch_A_1# interface fc1/36
+	FC_switch_A_1(config-if)# no shut
+	FC_switch_A_1(config)# end
+----
+. Vérifiez que les liens ISL sont établis entre les deux commutateurs :
++
+`*show topology isl*`
+
+. Répéter la procédure sur le second tissu :
++
+[listing]
+----
+--------------------------------------------------------------------------------
+	__________Local_________ _________Remote_________ VSAN Cost I/F  PC    I/F  Band
+	 PC Domain SwName   Port  Port   SwName Domain PC          Stat Stat Speed width
+	--------------------------------------------------------------------------------
+	  1   0x11 cisco9 fc1/36  fc1/36 cisco9 0xbc    1    1   15 up   up    16g   64g
+	  1   0x11 cisco9 fc1/40  fc1/40 cisco9 0xbc    1    1   15 up   up    16g   64g
+	  1   0x11 cisco9 fc1/44  fc1/44 cisco9 0xbc    1    1   15 up   up    16g   64g
+	  1   0x11 cisco9 fc1/48  fc1/48 cisco9 0xbc    1    1   15 up   up    16g   64g
+----
+

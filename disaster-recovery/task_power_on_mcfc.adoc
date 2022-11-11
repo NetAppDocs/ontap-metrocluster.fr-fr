@@ -1,0 +1,141 @@
+---
+permalink: disaster-recovery/task_power_on_mcfc.html 
+sidebar: sidebar 
+keywords: power, sas, storage, direct, attached, configuration, fabric 
+summary: Pour préparer le rétablissement, vous devez mettre les composants MetroCluster sous tension sur le site de reprise. 
+---
+= Mise sous tension de l'équipement sur le site de secours
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Pour préparer le rétablissement, vous devez mettre les composants MetroCluster sous tension sur le site de reprise. De plus, vous devez recâblage des connexions de stockage SAS dans des configurations MetroCluster en attachement direct et activer des ports de liaison non inter-commutateurs dans des configurations MetroCluster reliées en fabrique.
+
+Vous devez déjà avoir remplacé et câblé les composants MetroCluster exactement comme d'anciens.
+
+link:../install-fc/index.html["Installation et configuration de la solution Fabric-Attached MetroCluster"]
+
+link:../install-stretch/concept_considerations_differences.html["Installation et configuration d'Stretch MetroCluster"]
+
+Les exemples de cette procédure supposent ce qui suit :
+
+* Le site A est le site sur incident.
++
+** Le FC_Switch_A_1 a été remplacé.
+** Le FC_Switch_A_2 a été remplacé.
+
+
+* Le site B est le site survivant.
++
+** FC_Switch_B_1 fonctionne correctement.
+** La FC_Switch_B_2 fonctionne correctement.
+
+
+
+
+Les commutateurs FC ne sont présents que dans les configurations Fabric-Attached MetroCluster.
+
+.Étapes
+. Dans une configuration MetroCluster étendue utilisant un câblage SAS (et pas de structure de commutateur FC ou de ponts FC-SAS), connectez l'ensemble du stockage, y compris le stockage distant sur les deux sites.
++
+Le contrôleur sur le site d'incident doit rester hors tension ou à l'invite DU CHARGEUR.
+
+. Sur le site survivant, désactivez l'affectation automatique des disques :
++
+`storage disk option modify -autoassign off *`
+
++
+[listing]
+----
+cluster_B::> storage disk option modify -autoassign off *
+2 entries were modified.
+----
+. Sur le site survivant, vérifiez que l'affectation automatique du disque est désactivée :
++
+`storage disk option show`
+
++
+[listing]
+----
+cluster_B::> storage disk option show
+Node     BKg. FW. Upd.  Auto Copy   Auto Assign  Auto Assign Policy
+--------  -------------  -----------  -----------  ------------------
+node_B_1       on            on          off             default
+node_B_2       on            on          off             default
+2 entries were displayed.
+
+ cluster_B::>
+----
+. Allumer les tiroirs disques sur le site de reprise après incident et s'assurer que tous les disques fonctionnent.
+. Dans une configuration MetroCluster Bridge-Attached ou Fabric-Attached, activez tous les ponts FC-SAS au niveau du site de reprise après incident.
+. Si des disques ont été remplacés, laissez les contrôleurs hors tension ou à l'invite DU CHARGEUR.
+. Dans une configuration MetroCluster FAS, activez les ports non ISL sur les commutateurs FC.
++
+|===
+
+
+| Si le switch est... | Ensuite, procédez comme suit pour activer les ports... 
+
+
+ a| 
+Brocade
+ a| 
+.. Activer de manière persistante les ports connectés aux ponts FC-SAS : `portpersistentenable port-number`
++
+Dans l'exemple suivant, les ports 6 et 7 sont activés :
+
++
+[listing]
+----
+FC_switch_A_1:admin> portpersistentenable 6
+FC_switch_A_1:admin> portpersistentenable 7
+
+FC_switch_A_1:admin>
+----
+.. Activer de manière persistante les ports connectés aux HBA et aux adaptateurs FC-VI : `portpersistentenable port-number`
++
+Dans l'exemple suivant, les ports 6 et 7 sont activés :
+
++
+[listing]
+----
+FC_switch_A_1:admin> portpersistentenable 1
+FC_switch_A_1:admin> portpersistentenable 2
+FC_switch_A_1:admin> portpersistentenable 4
+FC_switch_A_1:admin> portpersistentenable 5
+FC_switch_A_1:admin>
+----
++
+
+NOTE: Pour les systèmes AFF A700 et FAS9000, vous devez activer de manière persistante les quatre ports FC-VI à l'aide de la commande switchcfgpersistent entenable.
+
+.. Répétez les sous-étapes a et b pour le second commutateur FC sur le site survivant.
+
+
+
+
+ a| 
+Cisco
+ a| 
+.. Passez en mode de configuration pour l'interface, puis activez les ports avec la commande no Arrêter.
++
+Dans l'exemple suivant, le port fc1/36 est désactivé :
+
++
+[listing]
+----
+FC_switch_A_1# conf t
+FC_switch_A_1(config)# interface fc1/36
+FC_switch_A_1(config)# no shut
+FC_switch_A_1(config-if)# end
+FC_switch_A_1# copy running-config startup-config
+----
+.. Vérifiez que le port du commutateur est activé : `show interface brief`
+.. Répétez les sous-étapes a et b sur les autres ports connectés aux ponts FC-SAS, aux HBA et aux adaptateurs FC-VI.
+.. Répétez les sous-étapes a, b et c pour le second commutateur FC sur le site survivant.
+
+
+|===
+

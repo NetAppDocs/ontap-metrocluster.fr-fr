@@ -1,0 +1,59 @@
+---
+permalink: maintain/concept_using_fibrebridge_7500n_bridges_in_mcc_configurations.html 
+sidebar: sidebar 
+keywords: metrocluster, maintain, service, support, fibrebridge, configurations 
+summary: 'Le pont FibreBridge 7500N est pris en charge en remplacement du pont FibreBridge 6500N ou en cas d"ajout d"un nouvel espace de stockage à la configuration MetroCluster. Les configurations prises en charge présentent des exigences de zoning et des restrictions concernant l"utilisation des ports FC du pont et des limites de la pile et des tiroirs de stockage.' 
+---
+= Prise en charge des ponts FiberBridge 7500N dans les configurations MetroCluster
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Le pont FibreBridge 7500N est pris en charge en remplacement du pont FibreBridge 6500N ou en cas d'ajout d'un nouvel espace de stockage à la configuration MetroCluster. Les configurations prises en charge présentent des exigences de segmentation et des restrictions sur l'utilisation des ports FC du pont, ainsi que des limites de la pile et des tiroirs de stockage.
+
+
+NOTE: Les ponts FiberBridge 6500N ne sont pas pris en charge dans les configurations exécutant ONTAP 9.8 et versions ultérieures.
+
+[cols="27,19,27,27"]
+|===
+| Cas d'utilisation | Modifications de zoning nécessaires ? | Restrictions | Procédure 
+
+
+ a| 
+Remplacement d'un pont FibreBridge 6500N par un seul pont FibreBridge 7500N
+ a| 
+Non
+ a| 
+Le pont FiberBridge 7500N doit être configuré exactement de la même manière que le pont FiberBridge 6500N, à l'aide d'un seul port FC et à la connexion à une seule pile. Le deuxième port FC du FiberBridge 7500N ne doit pas être utilisé.
+ a| 
+link:task_replace_a_sle_fc_to_sas_bridge.html["Remplacement à chaud d'un pont FibreBridge 6500N avec un pont FibreBridge 7600N ou 7500N"]
+
+
+
+ a| 
+Consolidation de plusieurs piles en remplaçant plusieurs paires de ponts FiberBridge 6500N par une seule paire de ponts FiberBridge 7500N
+ a| 
+Oui.
+ a| 
+Dans ce cas, vous sortez les ponts FibreBridge 6500N et remplacez-les par une seule paire de ponts FiberBridge 7500N.chaque paire de ponts FibreBridge 7500N ou 7600N peut prendre en charge jusqu'à quatre piles.
+
+À la fin de la procédure, le haut et le bas des piles doivent être connectés aux ports correspondants des ponts FiberBridge 7500N.
+ a| 
+link:task_fb_consolidate_replace_a_pair_of_fibrebridge_6500n_bridges_with_7500n_bridges.html["Remplacement d'une paire de ponts FiberBridge 6500N par des ponts 7600N ou 7500N"]
+
+
+
+ a| 
+Ajout d'un nouveau stockage grâce à l'ajout d'une nouvelle paire de ponts FiberBridge 7500N
+ a| 
+Oui.
+
+Vous devez ajouter des zones de stockage pour chaque port FC des nouveaux ponts.
+ a| 
+Vous devez disposer de ports disponibles sur la structure de commutation FC (dans une configuration MetroCluster FAS) ou sur les contrôleurs de stockage (dans une configuration MetroCluster étendue).chaque paire de ponts FibreBridge 7500N ou 7600N peut prendre en charge jusqu'à quatre piles.
+ a| 
+link:task_fb_hot_add_stack_of_shelves_and_bridges.html["Ajout à chaud d'une pile de tiroirs disques SAS et de ponts vers un système MetroCluster"]
+
+|===

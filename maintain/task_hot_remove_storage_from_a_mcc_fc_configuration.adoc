@@ -1,0 +1,146 @@
+---
+permalink: maintain/task_hot_remove_storage_from_a_mcc_fc_configuration.html 
+sidebar: sidebar 
+keywords: metrocluster, maintain, service, hot, remove, storage, fc, configuration 
+summary: 'Vous pouvez supprimer à chaud des tiroirs disques (en supprimant physiquement les tiroirs que les agrégats ont retirés des disques) d"une configuration MetroCluster FC qui est à disposition des données. Vous pouvez retirer à chaud une ou plusieurs étagères de n"importe où dans une pile de tiroirs ou en supprimer une.' 
+---
+= Retrait à chaud du stockage d'une configuration MetroCluster FC
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous pouvez supprimer à chaud les tiroirs disques (--retirer physiquement les tiroirs qui avaient été retirés des disques) d'une configuration MetroCluster FC qui est opérationnelle et transfère des données. Vous pouvez retirer à chaud une ou plusieurs étagères de n'importe où dans une pile de tiroirs ou en supprimer une.
+
+* Votre système doit être une configuration haute disponibilité multivoie, des chemins d'accès multiples, une configuration à quatre chemins d'accès (HA) ou à quatre chemins.
+* Dans une configuration MetroCluster FC à quatre nœuds, la paire haute disponibilité locale ne peut pas être à l'état de basculement.
+* Vous devez avoir déjà supprimé tous les agrégats des disques des tiroirs.
++
+
+IMPORTANT: Pour toute tentative de cette procédure sur des configurations FC non MetroCluster avec des agrégats du tiroir retiré, le système peut provoquer une défaillance de plusieurs disques.
+
++
+La suppression d'agrégats implique la division des agrégats en miroir sur les tiroirs que vous supprimez, puis la création d'agrégats en miroir avec un autre ensemble de disques.
+
++
+https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-psmg/home.html["Gestion des disques et des agrégats"]
+
+* Vous devez avoir supprimé la propriété des disques après avoir retiré les agrégats des disques des tiroirs.
++
+https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-psmg/home.html["Gestion des disques et des agrégats"]
+
+* Si vous retirez une ou plusieurs étagères d'une pile, vous devez tenir compte de la distance nécessaire pour contourner les étagères que vous retirez.
++
+Si les câbles actuels ne sont pas assez longs, vous devez disposer de câbles plus longs.
+
+
+
+Cette tâche s'applique aux configurations MetroCluster FC suivantes :
+
+* Configurations FC MetroCluster à connexion directe, dans lesquelles les tiroirs de stockage sont directement connectés aux contrôleurs de stockage par des câbles SAS
+* Des configurations MetroCluster FC reliées à une fabric ou à une passerelle, dans lesquelles les tiroirs de stockage sont connectés par le biais de ponts FC-SAS
+
+
+.Étapes
+. Vérifier le fonctionnement de la configuration MetroCluster dans ONTAP :
++
+.. Vérifier si le système est multipathed : +
+`*node run -node _node-name_ sysconfig -a*`
+.. Vérifier si des alertes d'intégrité sont disponibles sur les deux clusters :
++
+`*system health alert show*`
+
+.. Vérifier la configuration MetroCluster et que le mode opérationnel est normal : +
+`*metrocluster show*`
+.. Effectuer une vérification MetroCluster :
++
+`*metrocluster check run*`
+
+.. Afficher les résultats de la vérification MetroCluster :
++
+`*metrocluster check show*`
+
+.. Vérifier la présence d'alertes d'intégrité sur les commutateurs (le cas échéant) :
++
+`*storage switch show*`
+
+.. Exécutez Config Advisor.
++
+https://mysupport.netapp.com/site/tools/tool-eula/activeiq-configadvisor["Téléchargement NetApp : Config Advisor"]
+
+.. Une fois Config Advisor exécuté, vérifiez les résultats de l'outil et suivez les recommandations fournies dans la sortie pour résoudre tous les problèmes détectés.
+
+
+. Définissez le niveau de privilège sur avancé :
++
+`*set -privilege advanced*`
+
+. Vérifiez qu'aucun lecteur de boîte aux lettres ne se trouve sur les tiroirs :
+`*storage failover mailbox-disk show*`
+. Retirez la tablette conformément aux étapes du scénario correspondant.
++
+|===
+
+
+| Scénario | Étapes 
+
+
+ a| 
+Pour supprimer un agrégat lorsque le tiroir contient non mis en miroir, mis en miroir ou les deux types d'agrégat...
+ a| 
+.. Utilisez le `storage aggregate delete -aggregate _aggregate name_` commande de suppression de l'agrégat.
+.. Utilisez la procédure standard pour supprimer la propriété de tous les disques du shelf, puis retirez physiquement le shelf.
++
+Suivez les instructions du _SAS Disk shelfs Service Guide_ pour votre modèle de tiroir à chaud.
+
+
+
+
+
+ a| 
+Pour supprimer un plex d'un agrégat en miroir, il faut désmettre en miroir l'agrégat.
+ a| 
+.. Identifiez le plex que vous souhaitez supprimer en utilisant le `run -node local sysconfig -r` commande.
++
+Dans l'exemple suivant, vous pouvez identifier le plex à partir de la ligne `Plex /dpg_mcc_8020_13_a1_aggr1/plex0`. Dans ce cas, le plex à préciser est « plex0 ».
+
++
+[listing]
+----
+dpgmcc_8020_13_a1a2::storage aggregate> run -node local sysconfig -r
+*** This system has taken over dpg-mcc-8020-13-a1
+Aggregate dpg_mcc_8020_13_a1_aggr1 (online, raid_dp, mirrored) (block checksums)
+  Plex /dpg_mcc_8020_13_a1_aggr1/plex0 (online, normal, active, pool0)
+    RAID group /dpg_mcc_8020_13_a1_aggr1/plex0/rg0 (normal, block checksums)
+      RAID Disk Device                          HA  SHELF BAY CHAN Pool Type  RPM  Used (MB/blks)    Phys (MB/blks)
+      --------- ------                          ------------- ---- ---- ---- ----- --------------    --------------
+      dparity   mcc-cisco-8Gb-fab-2:1-1.126L16  0c    32  15  FC:B   0   SAS 15000 272000/557056000  274845/562884296
+      parity    mcc-cisco-8Gb-fab-2:1-1.126L18  0c    32  17  FC:B   0   SAS 15000 272000/557056000  274845/562884296
+      data      mcc-cisco-8Gb-fab-2:1-1.126L19  0c    32  18  FC:B   0   SAS 15000 272000/557056000  274845/562884296
+      data      mcc-cisco-8Gb-fab-2:1-1.126L21  0c    32  20  FC:B   0   SAS 15000 272000/557056000  274845/562884296
+      data      mcc-cisco-8Gb-fab-2:1-1.126L22  0c    32  21  FC:B   0   SAS 15000 272000/557056000  274845/562884296
+
+  Plex /dpg_mcc_8020_13_a1_aggr1/plex1 (online, normal, active, pool1)
+    RAID group /dpg_mcc_8020_13_a1_aggr1/plex1/rg0 (normal, block checksums)
+
+      RAID Disk Device                          HA  SHELF BAY CHAN Pool Type  RPM  Used (MB/blks)    Phys (MB/blks)
+      --------- ------                          ------------- ---- ---- ---- ----- --------------    --------------
+      dparity   mcc-cisco-8Gb-fab-3:1-1.126L37  0d    34  10  FC:A   1   SAS 15000 272000/557056000  280104/573653840
+      parity    mcc-cisco-8Gb-fab-3:1-1.126L14  0d    33  13  FC:A   1   SAS 15000 272000/557056000  280104/573653840
+      data      mcc-cisco-8Gb-fab-3:1-1.126L41  0d    34  14  FC:A   1   SAS 15000 272000/557056000  280104/573653840
+      data      mcc-cisco-8Gb-fab-3:1-1.126L15  0d    33  14  FC:A   1   SAS 15000 272000/557056000  280104/573653840
+      data      mcc-cisco-8Gb-fab-3:1-1.126L45  0d    34  18  FC:A   1   SAS 15000 272000/557056000  280104/573653840
+----
+.. Utilisez le `storage aggregate plex delete -aggregate _aggr_name_ -plex _plex_name_` commande de suppression du plex.
++
+plex définit le nom plex, tel que « plex3 » ou « plex6 ».
+
+.. Utilisez la procédure standard pour supprimer la propriété de tous les disques du shelf, puis retirez physiquement le shelf.
++
+Suivez les instructions du _SAS Disk shelfs Service Guide_ pour votre modèle de tiroir à chaud.
+
+
+
+|===
+

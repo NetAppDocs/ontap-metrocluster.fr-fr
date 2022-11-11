@@ -1,0 +1,121 @@
+---
+permalink: tiebreaker/reference_firewall_requirements_for_mcc_tiebreaker.html 
+sidebar: sidebar 
+keywords: metrocluster, tiebreaker, port, communicate, specific, service, firewall, requirement 
+summary: MetroCluster Tiebreaker utilise plusieurs ports pour communiquer avec des services spécifiques. 
+---
+= Exigences de pare-feu pour MetroCluster Tiebreaker
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+MetroCluster Tiebreaker utilise plusieurs ports pour communiquer avec des services spécifiques.
+
+Le tableau suivant répertorie les ports que vous devez autoriser dans votre pare-feu :
+
+|===
+
+
+| Port/services | Source | Destination | Objectif 
+
+
+ a| 
+443 / TCP
+ a| 
+Disjoncteur d'attache
+ a| 
+Internet
+ a| 
+Envoi de messages AutoSupport à NetApp
+
+
+
+ a| 
+22 / TCP
+ a| 
+Hôte de gestion
+ a| 
+Disjoncteur d'attache
+ a| 
+Gestion Tiebreaker
+
+
+
+ a| 
+443 / TCP
+ a| 
+Disjoncteur d'attache
+ a| 
+LIF Cluster-management
+ a| 
+Communications sécurisées au cluster via HTTP (SSL)
+
+
+
+ a| 
+22 / TCP
+ a| 
+Disjoncteur d'attache
+ a| 
+LIF Cluster-management
+ a| 
+Communications sécurisées vers le cluster via SSH
+
+
+
+ a| 
+443 / TCP
+ a| 
+Disjoncteur d'attache
+ a| 
+LIF node management
+ a| 
+Communications sécurisées vers le nœud via HTTP (SSL)
+
+
+
+ a| 
+22 / TCP
+ a| 
+Disjoncteur d'attache
+ a| 
+LIF node management
+ a| 
+Communications sécurisées vers le nœud via SSH
+
+
+
+ a| 
+162 / UDP
+ a| 
+Disjoncteur d'attache
+ a| 
+Hôte d'interruption SNMP
+ a| 
+Permet d'envoyer des alertes de notification des interruptions SNMP
+
+
+
+ a| 
+ICMP (ping)
+ a| 
+Disjoncteur d'attache
+ a| 
+LIF Cluster-management
+ a| 
+Vérifiez que l'IP du cluster est accessible
+
+
+
+ a| 
+ICMP (ping)
+ a| 
+Disjoncteur d'attache
+ a| 
+LIF node management
+ a| 
+Vérifiez si l'IP du nœud est accessible
+
+|===

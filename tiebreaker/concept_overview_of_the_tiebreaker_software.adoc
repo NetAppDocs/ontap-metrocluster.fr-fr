@@ -1,0 +1,146 @@
+---
+permalink: tiebreaker/concept_overview_of_the_tiebreaker_software.html 
+sidebar: sidebar 
+keywords: helpful, understand, netapp, metrocluster, tiebreaker, software, distinguish, failure, monitor, configuration, cli, setting, operation, overview, software, detect, site, intersite, connectivity, disaster, type, detection, time, man, page 
+summary: 'Il est utile de comprendre le logiciel NetApp MetroCluster Tiebreaker et le mode de distinction entre les types de défaillance, afin de surveiller efficacement les configurations MetroCluster. Vous pouvez utiliser l"interface de ligne de commandes Tiebreaker pour gérer les paramètres et contrôler le statut et les opérations des configurations MetroCluster.' 
+---
+= Présentation du logiciel disjoncteur d'attache
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Il est utile de comprendre le logiciel NetApp MetroCluster Tiebreaker et le mode de distinction entre les types de défaillance, afin de surveiller efficacement les configurations MetroCluster. Vous pouvez utiliser l'interface de ligne de commandes Tiebreaker pour gérer les paramètres et contrôler le statut et les opérations des configurations MetroCluster.
+
+
+
+== Détection des défaillances avec le logiciel NetApp MetroCluster Tiebreaker
+
+Il réside sur un hôte Linux Vous n'avez besoin du logiciel disjoncteur d'attache que si vous voulez surveiller deux clusters et connaître l'état de connectivité entre eux depuis un troisième site. Dans un cluster, ceci permet à chaque partenaire de distinguer une panne de liaison ISL ou de liaison intersite d'une panne de site.
+
+Après avoir installé le logiciel disjoncteur d'attache sur un hôte Linux, vous pouvez configurer les clusters dans une configuration MetroCluster afin de surveiller les incidents.
+
+
+
+== Détection des pannes de site par le logiciel disjoncteur d'attache
+
+Le logiciel NetApp MetroCluster Tiebreaker vérifie les nœuds dans une configuration MetroCluster et le cluster, afin de déterminer s'il y a lieu une défaillance sur site. Le logiciel disjoncteur d'attache déclenche également une alerte dans certaines conditions.
+
+
+
+=== Composants contrôlés par le logiciel disjoncteur d'attache
+
+Le logiciel disjoncteur d'attache surveille chaque contrôleur de la configuration MetroCluster en établissant des connexions redondantes via plusieurs chemins vers une LIF de gestion de nœud et vers la LIF de gestion de cluster, hébergées sur le réseau IP.
+
+Il surveille les composants suivants dans la configuration MetroCluster :
+
+* Nœuds via les interfaces de nœud locales
+* Le cluster via les interfaces désignées par le cluster
+* Cluster survivant pour évaluer s'il dispose d'une connectivité au site de reprise sur incident (interconnexion de NV, stockage et peering intercluster)
+
+
+En cas de perte de connexion entre le logiciel disjoncteur d'attache et tous les nœuds du cluster et le cluster lui-même, le cluster est déclaré « inaccessible » par le logiciel disjoncteur d'attache. Il faut environ trois à cinq secondes pour détecter une défaillance de connexion. Si un cluster est injoignable depuis le logiciel disjoncteur d'attache, le cluster survivant (le cluster toujours accessible) doit indiquer que tous les liens vers le cluster partenaire sont rompues avant que le logiciel disjoncteur d'attache ne déclenche une alerte.
+
+
+NOTE: Toutes les liaisons sont rompues si le cluster survivant ne peut plus communiquer avec le cluster sur le site de reprise sur incident via la connexion FC (interconnexion et stockage de NV) et le peering intercluster.
+
+
+
+=== Scénarios de défaillance pendant lesquels le logiciel disjoncteur d'attache déclenche une alerte
+
+Le logiciel disjoncteur d'attache déclenche une alerte lorsque le cluster (tous les nœuds) sur le site de secours est hors service ou inaccessible et que le cluster sur le site survivant indique l'état « LinksSevered ».
+
+Le logiciel disjoncteur d'attache n'déclenche pas d'alerte (ou l'alerte est vetotée) dans les scénarios suivants :
+
+* Dans une configuration MetroCluster à huit nœuds, si une paire haute disponibilité sur le site de reprise d'activité est en panne
+* Dans un cluster avec tous les nœuds sur le site de secours hors service, une paire HA sur le site survivant est en panne et le cluster sur le site survivant indique l'état « LinksSevered »
++
+Le logiciel disjoncteur d'attache déclenche une alerte, mais ONTAP véto ce qu'il alerte. Dans ce cas, un basculement manuel est également mis au veto
+
+* Tout scénario dans lequel le logiciel disjoncteur d'attache peut atteindre au moins un nœud ou l'interface de cluster sur le site de reprise sur incident, ou celui qui continue à atteindre l'un des nœuds du site de reprise sur incident via des peering FC (interconnexion et stockage) ou intercluster
+
+
+link:concept_risks_and_limitation_of_using_mcc_tiebreaker_in_active_mode.html["Risques et limitations liés à l'utilisation de MetroCluster Tiebreaker en mode actif"]
+
+
+
+== Comment le logiciel disjoncteur d'attache détecte les défaillances de connectivité intersite
+
+Ce logiciel vous alerte en cas de perte de toute connectivité entre les sites. MetroCluster
+
+
+
+=== Types de chemins réseau
+
+Selon la configuration, il existe trois types de chemins réseau entre les deux clusters dans une configuration MetroCluster :
+
+* *Réseau FC (présent dans les configurations Fabric-Attached MetroCluster)*
++
+Ce type de réseau se compose de deux fabriques de commutateurs FC redondantes. Chaque structure de commutateurs dispose de deux commutateurs FC, avec un commutateur de chaque structure de commutateurs situé en colocation avec un cluster. Chaque cluster possède deux commutateurs FC, un pour chaque structure de commutateurs. Tous les nœuds disposent d'une connectivité FC (interconnexion de NV et initiateur FCP) à chacun des commutateurs FC situés en colocation. Les données sont répliquées du cluster au niveau du cluster via le réseau ISL.
+
+* *Réseau de peering intercluster*
++
+Ce type de réseau se compose d'un chemin réseau IP redondant entre les deux clusters. Le réseau de peering de cluster assure la connectivité requise pour la mise en miroir de la configuration de la machine virtuelle de stockage (SVM). La configuration de l'ensemble des SVM sur un cluster est mise en miroir par le cluster partenaire.
+
+* *Réseau IP (présent dans les configurations IP MetroCluster)*
++
+Ce type de réseau est composé de deux réseaux de commutateurs IP redondants. Chaque réseau est doté de deux commutateurs IP, avec un commutateur de chaque structure de commutateur placé en même cas qu'un cluster. Chaque cluster possède deux commutateurs IP, un pour chaque structure de commutateurs. Tous les nœuds sont reliés à chacun des commutateurs FC situés en colocation. Les données sont répliquées du cluster au niveau du cluster via le réseau ISL.
+
+
+
+
+
+=== Surveillance de la connectivité entre sites
+
+Le logiciel disjoncteur d'attache récupère régulièrement l'état de la connectivité intersite à partir des nœuds. Si la connectivité de l'interconnexion NV est perdue et que le peering intercluster ne répond pas aux requêtes ping, les clusters supposent que les sites sont isolés et que le logiciel disjoncteur d'attache déclenche une alerte « LinksSevered ». Si un cluster identifie l'état « Linksys LinksSevered » et que l'autre cluster n'est pas accessible via le réseau, alors le logiciel disjoncteur d'attache déclenche une alerte « disaster ».
+
+
+
+== Comment les différents types d'incidents affectent le temps de détection des logiciels disjoncteur d'attache
+
+Pour mieux planifier la reprise après incident, le logiciel disjoncteur d'attache MetroCluster prend du temps à détecter un incident. Ce temps passé est le "temps de détection des disisaster". Le logiciel disjoncteur d'attache MetroCluster détecte le site après un incident dans un délai de 30 secondes à compter de la date d'incident et déclenche l'opération de reprise après incident afin d'informer le client des incidents.
+
+Le temps de détection dépend également du type de catastrophe et pourrait dépasser 30 secondes dans certains scénarios, surtout appelés « catastrophes rouantes ». Les principaux types de sinistre propagée sont les suivants :
+
+* Perte de puissance
+* Panique
+* Arrêt ou redémarrage
+* Perte des commutateurs FC sur le site d'incident
+
+
+
+
+=== Perte de puissance
+
+Le logiciel disjoncteur d'attache déclenche immédiatement une alerte lorsque le nœud cesse de fonctionner. En cas de panne de courant, l'ensemble des connexions et des mises à jour, telles que le peering intercluster, l'interconnexion NV et le disque de la boîte aux lettres, s'arrêtent. Le temps pris entre le cluster devenu injoignable, la détection de l'incident et le déclencheur, y compris la durée silencieuse par défaut de 5 secondes, ne doit pas dépasser 30 secondes.
+
+
+
+=== Panique
+
+Le logiciel disjoncteur d'attache déclenche une alerte lorsque la connexion d'interconnexion NV entre les sites est en panne et que le site survivant indique l'état « LinksSevered ». Cela se produit uniquement après la fin du processus de vidage de la coredump. Dans ce scénario, le temps pris entre le cluster devenu injoignable et la détection d'un incident peut être plus long ou environ égal au temps pris pour le processus de coredump. Dans de nombreux cas, la durée de détection est supérieure à 30 secondes.
+
+Si un noeud cesse de fonctionner mais ne génère pas de fichier pour le processus coredump, le temps de détection ne doit pas dépasser 30 secondes.
+
+
+
+=== Arrêt ou redémarrage
+
+Le logiciel disjoncteur d'attache déclenche une alerte uniquement lorsque le nœud est en panne et que le site survivant indique l'état « LinksSevered ». Le temps pris entre le cluster et devenu injoignable peut être plus de 30 secondes. Dans ce scénario, le temps nécessaire pour détecter un incident dépend du délai d'arrêt des nœuds du site d'incident.
+
+
+
+=== Perte des commutateurs FC sur le site d'incident (configuration MetroCluster FAS)
+
+Le logiciel disjoncteur d'attache déclenche une alerte lorsqu'un nœud ne fonctionne plus. Si les commutateurs FC sont perdus, le nœud tente alors de récupérer le chemin d'accès à un disque pendant environ 30 secondes. Pendant ce temps, le nœud est actif et répond sur le réseau de peering. Lorsque les deux commutateurs FC sont en panne et que le chemin d'accès à un disque ne peut pas être récupéré, le nœud génère une erreur MultiDiskFailure et s'arrête. Le temps passé entre la panne du commutateur FC et le nombre de fois où les nœuds ont produit des erreurs MultiDiskFailure est environ 30 secondes plus long. Ce délai supplémentaire de 30 secondes doit être ajouté au temps de détection de sinistre.
+
+
+
+== À propos de l'interface de ligne de commande Tiebreaker et des pages de manuels
+
+Vous pouvez notamment configurer à distance le logiciel disjoncteur d'attache et surveiller les configurations MetroCluster via l'interface de ligne de commande d'disjoncteur d'attache.
+
+L'invite de commande de l'interface de ligne de commande est représentée sous le logiciel NetApp MetroCluster Tiebreaker :>
+
+Les pages man sont disponibles dans la CLI en entrant le nom de commande applicable à l'invite.

@@ -1,0 +1,437 @@
+---
+permalink: install-fc/task_cable_the_isls_in_a_mcc_configuration_with_array_luns.html 
+sidebar: sidebar 
+keywords: metrocluster, fabric, installation, cable, isl, array, luns 
+summary: 'Vous devez connecter les commutateurs FC entre les sites via des liaisons intercommutateurs \(ISL\) pour former des fabrics de commutation dans votre configuration MetroCluster avec des LUN de baies.' 
+---
+= Câblage des liens ISL dans une configuration MetroCluster avec des LUN de baie
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous devez connecter les commutateurs FC entre les sites via des liens ISL pour former des structures de commutation dans votre configuration MetroCluster avec des LUN de baies.
+
+.Étapes
+. Connectez les commutateurs de chaque site à l'ISL ou aux ISL, en utilisant le câblage dans le tableau correspondant à votre configuration et à votre modèle de commutateur.
++
+Les numéros de port de commutation que vous pouvez utiliser pour les liens ISL FC sont les suivants :
+
++
+|===
+
+
+| Changer de modèle | Port ISL | Port du commutateur 
+
+
+ a| 
+Brocade 6520
+ a| 
+Port ISL 1
+ a| 
+23
+
+
+
+ a| 
+Port ISL 2
+ a| 
+47
+
+
+
+ a| 
+Port ISL 3
+ a| 
+71
+
+
+
+ a| 
+Port ISL 4
+ a| 
+95
+
+
+
+ a| 
+Brocade 6505
+ a| 
+Port ISL 1
+ a| 
+20
+
+
+
+ a| 
+Port ISL 2
+ a| 
+21
+
+
+
+ a| 
+Port ISL 3
+ a| 
+22
+
+
+
+ a| 
+Port ISL 4
+ a| 
+23
+
+
+
+ a| 
+Brocade 6510 et Brocade DCX 8510-8
+ a| 
+Port ISL 1
+ a| 
+40
+
+
+
+ a| 
+Port ISL 2
+ a| 
+41
+
+
+
+ a| 
+Port ISL 3
+ a| 
+42
+
+
+
+ a| 
+Port ISL 4
+ a| 
+43
+
+
+
+ a| 
+Port ISL 5
+ a| 
+44
+
+
+
+ a| 
+Port ISL 6
+ a| 
+45
+
+
+
+ a| 
+Port ISL 7
+ a| 
+46
+
+
+
+ a| 
+Port ISL 8
+ a| 
+47
+
+
+
+ a| 
+Brocade 7810
+ a| 
+Port ISL 1
+ a| 
+ge2 (10 Gbit/s)
+
+
+
+ a| 
+Port ISL 2
+ a| 
+Ge3 (10 Gbits/s)
+
+
+
+ a| 
+Port ISL 3
+ a| 
+ge4 (10 Gbit/s)
+
+
+
+ a| 
+Port ISL 4
+ a| 
+ge5 (10 Gbit/s)
+
+
+
+ a| 
+Port ISL 5
+ a| 
+Ge6 (10 Gbit/s)
+
+
+
+ a| 
+Port ISL 6
+ a| 
+Ge7 (10 Gbit/s)
+
+
+
+ a| 
+Brocade 7840
+
+*Remarque* : le commutateur Brocade 7840 prend en charge soit deux ports VE-40 Gbit/s, soit jusqu'à quatre ports VE-ports 10 Gbit/s par commutateur pour la création de liens ISL FCIP.
+ a| 
+Port ISL 1
+ a| 
+Ge0 (40 Gbits/s) ou ge2 (10 Gbits/s)
+
+
+
+ a| 
+Port ISL 2
+ a| 
+ge1 (40 Gbits/s) ou ge3 (10 Gbits/s)
+
+
+
+ a| 
+Port ISL 3
+ a| 
+ge10 (10 Gbit/s)
+
+
+
+ a| 
+Port ISL 4
+ a| 
+Ge11 (10 Gbit/s)
+
+
+
+ a| 
+Brocade G610
+ a| 
+Port ISL 1
+ a| 
+20
+
+
+
+ a| 
+Port ISL 2
+ a| 
+21
+
+
+
+ a| 
+Port ISL 3
+ a| 
+22
+
+
+
+ a| 
+Port ISL 4
+ a| 
+23
+
+
+
+ a| 
+BROCADE G620, G620-1, G630, G630-1, G720
+ a| 
+Port ISL 1
+ a| 
+40
+
+
+
+ a| 
+Port ISL 2
+ a| 
+41
+
+
+
+ a| 
+Port ISL 3
+ a| 
+42
+
+
+
+ a| 
+Port ISL 4
+ a| 
+43
+
+
+
+ a| 
+Port ISL 5
+ a| 
+44
+
+
+
+ a| 
+Port ISL 6
+ a| 
+45
+
+
+
+ a| 
+Port ISL 7
+ a| 
+46
+
+
+
+ a| 
+Port ISL 8
+ a| 
+47
+
+
+
+3+|  
+
+
+| Changer le mode l | Port ISL | Port du commutateur 
+
+
+.4+| Cisco 9396S  a| 
+ISL 1
+ a| 
+44
+
+
+
+ a| 
+ISL 2
+ a| 
+48
+
+
+
+ a| 
+ISL 3
+ a| 
+92
+
+
+
+ a| 
+ISL 4
+ a| 
+96
+
+
+
+ a| 
+Cisco 9250i avec licence à 24 ports
+ a| 
+ISL 1
+ a| 
+12
+
+
+
+ a| 
+ISL 2
+ a| 
+16
+
+
+
+ a| 
+ISL 3
+ a| 
+20
+
+
+
+ a| 
+ISL 4
+ a| 
+24
+
+
+
+ a| 
+Cisco 9148S
+ a| 
+ISL 1
+ a| 
+20
+
+
+
+ a| 
+ISL 2
+ a| 
+24
+
+
+
+ a| 
+ISL 3
+ a| 
+44
+
+
+
+ a| 
+ISL 4
+ a| 
+48
+
+
+
+.4+| Cisco 9132T  a| 
+ISL 1
+ a| 
+Port 13 du module MDS 1
+
+
+
+ a| 
+ISL 2
+ a| 
+Port 14 du module MDS 1
+
+
+
+ a| 
+ISL 3
+ a| 
+Port 15 du module MDS 1
+
+
+
+ a| 
+ISL 4
+ a| 
+Port 16 du module MDS 1
+
+
+
+3+| * Le commutateur Cisco 9250i utilise les ports FCIP pour l'ISL. L'utilisation des ports FCIP présente certaines limites et procédures. 
+
+
+3+| Les ports 40 à 48 sont des ports 10 GbE et ne sont pas utilisés dans la configuration MetroCluster. 
+|===
+

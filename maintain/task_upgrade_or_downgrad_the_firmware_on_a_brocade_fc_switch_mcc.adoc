@@ -1,0 +1,172 @@
+---
+permalink: maintain/task_upgrade_or_downgrad_the_firmware_on_a_brocade_fc_switch_mcc.html 
+sidebar: sidebar 
+keywords: metrocluster, maintain, service, upgrade, downgrade, firmware, brocade, fc, switch 
+summary: Pour mettre à niveau ou rétrograder le micrologiciel sur un commutateur FC Brocade, vous devez utiliser les commandes spécifiques à Brocade pour désactiver le commutateur, effectuer et vérifier la modification du micrologiciel, puis redémarrer et réactiver le commutateur. 
+---
+= Mise à niveau ou rétrogradation du micrologiciel sur un commutateur Brocade FC
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Pour mettre à niveau ou rétrograder le micrologiciel sur un commutateur FC Brocade, vous devez utiliser les commandes spécifiques à Brocade pour désactiver le commutateur, effectuer et vérifier la modification du micrologiciel, puis redémarrer et réactiver le commutateur.
+
+* Vous devez disposer des fichiers de micrologiciel.
+* Le système doit être correctement câblé.
+* Tous les chemins vers les tiroirs de stockage doivent être disponibles.
+* Les piles de tiroirs disques doivent être stables.
+* La structure du commutateur FC doit être saine.
+* Aucun composant défectueux ne peut être présent dans le système.
+* Le système doit fonctionner normalement.
+* Vous devez disposer du mot de passe administrateur et accéder à un serveur FTP ou SCP.
+
+
+La structure des commutateurs est désactivée lors d'une mise à niveau ou d'une mise à niveau vers une version antérieure du firmware, et la configuration MetroCluster s'appuie sur la deuxième structure pour continuer le fonctionnement.
+
+Cette tâche doit être effectuée successivement sur chaque structure de commutation afin que tous les commutateurs exécutent la même version de micrologiciel.
+
+
+NOTE: Cette procédure ne génère aucune interruption et ne prend qu'une heure.
+
+.Étapes
+. Connectez-vous à chacun des commutateurs de la structure.
++
+Les exemples présentés dans les étapes suivantes utilisent le commutateur `FC_switch_A_1`.
+
+. Désactiver chacun des commutateurs dans la structure :
++
+`*switchCfgPersistentDisable*`
+
++
+Si cette commande n'est pas disponible, exécutez le `switchDisable` commande.
+
++
+[listing]
+----
+FC_switch_A_1:admin> switchCfgPersistentDisable
+----
+. Téléchargez la version du micrologiciel souhaitée :
++
+`*firmwareDownload*`
+
++
+Lorsque vous êtes invité à entrer le nom du fichier, vous devez spécifier le sous-répertoire ou le chemin relatif du fichier de micrologiciel.
+
++
+Vous pouvez exécuter le `firmwareDownload` en même temps, sur les deux commutateurs, mais vous devez permettre au firmware de télécharger et de s'engager correctement avant de passer à l'étape suivante.
+
++
+[listing]
+----
+FC_switch_A_1:admin> firmwaredownload
+Server Name or IP Address: 10.64.203.188
+User Name: test
+File Name: v7.3.1b
+Network Protocol(1-auto-select, 2-FTP, 3-SCP, 4-SFTP) [1]: 2
+Password:
+Server IP: 10.64.203.188, Protocol IPv4
+Checking system settings for firmwaredownload...
+System settings check passed.
+----
+. Vérifiez que le micrologiciel a été téléchargé et que les deux partitions ont été validées :
++
+`*firmwareShow*`
+
++
+L'exemple suivant montre que le téléchargement du micrologiciel est terminé au fur et à mesure de la mise à jour des deux images :
+
++
+[listing]
+----
+FC_switch_A_1:admin> firmwareShow
+Appl     Primary/Secondary Versions
+
+------------------------------------------
+
+FOS      v7.3.1b
+
+         v7.3.1b
+----
+. Redémarrer les commutateurs :
++
+`*reboot*`
+
++
+Certaines versions de micrologiciel effectuent automatiquement une opération de redémarrage après la fin du téléchargement du micrologiciel. Le redémarrage de cette étape est requis même si le redémarrage a été effectué.
+
++
+[listing]
+----
+FC_switch_A_1:admin> reboot
+----
+. Vérifier si le nouveau micrologiciel est pour un niveau de micrologiciel intermédiaire ou pour une version finale spécifiée.
++
+Si le téléchargement concerne le niveau de micrologiciel intermédiaire, effectuez les deux étapes précédentes jusqu'à ce que la version spécifiée soit installée.
+
+. Activez les commutateurs :
++
+`*switchCfgPersistentEnable*`
+
++
+Si cette commande n'est pas disponible, le commutateur doit être dans le `enabled` après le `reboot` la commande est exécutée.
+
++
+[listing]
+----
+FC_switch_A_1:admin> switchCfgPersistentEnable
+----
+. Vérifiez que les commutateurs sont en ligne et que tous les périphériques sont correctement connectés :
++
+`*switchShow*`
+
++
+[listing]
+----
+FC_switch_A_1:admin> switchShow
+----
+. Vérifiez que les informations d'utilisation de la mémoire tampon pour un groupe de ports ou tous les groupes de ports du commutateur s'affichent correctement :
++
+`*portbuffershow*`
+
++
+[listing]
+----
+FC_switch_A_1:admin> portbuffershow
+----
+. Vérifiez que la configuration actuelle d'un port s'affiche correctement :
++
+`*portcfgshow*`
+
++
+[listing]
+----
+FC_switch_A_1:admin> portcfgshow
+----
++
+Vérifiez les paramètres du port, tels que la vitesse, le mode, la mise en circuit, le cryptage, Et compression, dans la sortie ISL (Inter-Switch Link). Vérifiez que les paramètres de port n'ont pas été affectés par le téléchargement du micrologiciel.
+
+. Vérifier le fonctionnement de la configuration MetroCluster dans ONTAP :
++
+.. Vérifier si le système est multipathed : +
+`*node run -node _node-name_ sysconfig -a*`
+.. Vérifier si les alertes d'intégrité des deux clusters sont disponibles : +
+`*system health alert show*`
+.. Vérifier la configuration MetroCluster et que le mode opérationnel est normal : +
+`*metrocluster show*`
+.. Effectuer une vérification MetroCluster : +
+`*metrocluster check run*`
+.. Afficher les résultats de la vérification MetroCluster : +
+`*metrocluster check show*`
+.. Vérifier l'absence d'alertes de santé sur les commutateurs (le cas échéant) : +
+`*storage switch show*`
+.. Exécutez Config Advisor.
++
+https://mysupport.netapp.com/site/tools/tool-eula/activeiq-configadvisor["Téléchargement NetApp : Config Advisor"]
+
+.. Une fois Config Advisor exécuté, vérifiez les résultats de l'outil et suivez les recommandations fournies dans la sortie pour résoudre tous les problèmes détectés.
+
+
+. Attendre 15 minutes avant de répéter cette procédure pour le second commutateur.
+

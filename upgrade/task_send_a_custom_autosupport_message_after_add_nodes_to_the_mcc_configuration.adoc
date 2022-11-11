@@ -1,0 +1,25 @@
+---
+permalink: upgrade/task_send_a_custom_autosupport_message_after_add_nodes_to_the_mcc_configuration.html 
+sidebar: sidebar 
+keywords: metrocluster, upgrade, send, custom, autosupport, message, add, nodes, configuration 
+summary: Vous devez émettre un message de AutoSupport pour informer le support technique de NetApp que la maintenance est terminée. 
+---
+= Envoi d'un message AutoSupport personnalisé après l'ajout de nœuds à la configuration MetroCluster
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous devez émettre un message de AutoSupport pour informer le support technique de NetApp que la maintenance est terminée.
+
+Cette tâche doit être effectuée sur chaque site MetroCluster.
+
+.Étapes
+. Connectez-vous au cluster au site_A.
+. Appeler un message AutoSupport indiquant la fin de la maintenance :
++
+`system node autosupport invoke -node * -type all -message MAINT=end`
+
+. Répétez cette étape sur le site du partenaire.
+

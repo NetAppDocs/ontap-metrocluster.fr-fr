@@ -1,0 +1,142 @@
+---
+permalink: install-fc/task_download_and_install_the_cisco_fc_switch_rcf_files.html 
+sidebar: sidebar 
+keywords: metrocluster, fabric, installation, download, install, cisco, fc, rcf, files 
+summary: Vous devez télécharger le fichier RCF sur chaque commutateur de la configuration MetroCluster Fabric. 
+---
+= Téléchargement et installation des fichiers Cisco FC RCF
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous devez télécharger le fichier RCF sur chaque commutateur de la configuration MetroCluster Fabric.
+
+Cette tâche nécessite un logiciel de transfert de fichiers, tel que FTP, TFTP (Trivial File Transfer Protocol), SFTP ou SCP (Secure Copy Protocol), pour copier les fichiers sur les commutateurs.
+
+Ces étapes doivent être répétées sur chacun des commutateurs FC Cisco de la configuration MetroCluster Fabric.
+
+Vous devez utiliser la version du logiciel de commutation prise en charge.
+
+https://hwu.netapp.com["NetApp Hardware Universe"]
+
+Il existe quatre fichiers RCF, un par pour chacun des quatre commutateurs de la configuration MetroCluster Fabric. Vous devez utiliser les fichiers RCF appropriés pour le modèle de commutateur que vous utilisez.
+
+|===
+
+
+| Commutateur | Fichier RCF 
+
+
+ a| 
+FC_Switch_A_1
+ a| 
+`NX3232_v1.80_Switch-A1.txt`
+
+
+
+ a| 
+FC_Switch_A_2
+ a| 
+`NX3232_v1.80_Switch-A2.txt`
+
+
+
+ a| 
+FC_Switch_B_1
+ a| 
+`NX3232_v1.80_Switch-B1.txt`
+
+
+
+ a| 
+FC_Switch_B_2
+ a| 
+`NX3232_v1.80_Switch-B2.txt`
+
+|===
+
+NOTE: Les sorties indiquées sont destinées aux commutateurs IP Cisco. Toutefois, ces étapes s'appliquent également aux commutateurs FC Cisco.
+
+.Étapes
+. Téléchargez les fichiers Cisco FC RCF sur https://mysupport.netapp.com/site/products/all/details/metrocluster-rcf/downloads-tab["Page de téléchargement de MetroCluster RCF"].
+. Copier les fichiers RCF sur les commutateurs.
++
+.. Copier les fichiers RCF sur le premier commutateur :
++
+`copy sftp://__root@FTP-server-IP-address/tftpboot/switch-specific-RCF__ bootflash: vrf management`
+
++
+Dans cet exemple, le `NX3232_v1.80_Switch-A1.txt` Le fichier RCF est copié depuis le serveur SFTP à `10.10.99.99` au bootflash local. Vous devez utiliser l'adresse IP de votre serveur TFTP/SFTP et le nom du fichier RCF que vous devez installer.
+
++
+[listing]
+----
+IP_switch_A_1# copy sftp://root@10.10.99.99/tftpboot/NX3232_v1.8T-X1_Switch-A1.txt bootflash: vrf management
+root@10.10.99.99's password: password
+sftp> progress
+Progress meter enabled
+sftp> get   /tftpboot/NX3232_v1.80_Switch-A1.txt /bootflash/NX3232_v1.80_Switch-A1.txt
+Fetching /tftpboot/NX3232_v1.80_Switch-A1.txt to /bootflash/NX3232_v1.80_Switch-A1.txt
+/tftpboot/NX3232_v1.80_Switch-A1.txt          100% 5141     5.0KB/s   00:00
+sftp> exit
+Copy complete, now saving to disk (please wait)...
+IP_switch_A_1#
+----
+.. Répétez la sous-étape précédente pour chacun des trois autres commutateurs en étant sûr de copier le fichier RCF correspondant sur le commutateur correspondant.
+
+
+. Vérifier sur chaque commutateur que le fichier RCF est présent sur chaque commutateur `bootflash` répertoire :
++
+`dir bootflash:`
+
++
+L'exemple suivant montre que les fichiers sont présents sur IP_switch_A_1 :
+
++
+[listing]
+----
+IP_switch_A_1# dir bootflash:
+                  .
+                  .
+                  .
+       5514    Jun 13 22:09:05 2017  NX3232_v1.80_Switch-A1.txt
+                  .
+                  .
+                  .
+
+Usage for bootflash://sup-local
+ 1779363840 bytes used
+13238841344 bytes free
+15018205184 bytes total
+IP_switch_A_1#
+----
+. Copiez le fichier RCF correspondant de la mémoire bootflash locale vers la configuration en cours d'exécution sur chaque commutateur :
++
+`copy bootflash:__switch-specific-RCF__.txt running-config`
+
+. Copiez les fichiers RCF de la configuration en cours d'exécution vers la configuration de démarrage de chaque commutateur :
++
+`copy running-config startup-config`
+
++
+Vous devez voir les résultats similaires à ce qui suit :
+
++
+[listing]
+----
+IP_switch_A_1# copy bootflash:NX3232_v1.80_Switch-A1.txt running-config
+IP_switch_A_1# copy running-config startup-config
+----
+. Recharger l'interrupteur :
++
+`reload`
+
++
+[listing]
+----
+IP_switch_A_1# reload
+----
+. Répétez les étapes précédentes sur les trois autres commutateurs de la configuration MetroCluster IP.
+

@@ -1,0 +1,54 @@
+---
+permalink: install-stretch/task_rack_the_hardware_components_mcc_2_node_stretch_atto.html 
+sidebar: sidebar 
+keywords: metrocluster, stretch, installation, rack, harware, components 
+summary: 'Si vous n"avez pas reçu l"équipement déjà installé dans les armoires, vous devez installer les composants en rack.' 
+---
+= Mise en rack des composants matériels
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Si vous n'avez pas reçu l'équipement déjà installé dans les armoires, vous devez installer les composants en rack.
+
+Cette tâche doit être effectuée sur les deux sites MetroCluster.
+
+.Étapes
+. Planifiez le positionnement des composants MetroCluster.
++
+L'espace rack dépend du modèle de plateforme des contrôleurs de stockage, des types de commutateurs et du nombre de piles de tiroirs disques de votre configuration.
+
+. Mettez-vous à la terre.
+. Installez les contrôleurs de stockage sur le rack ou l'armoire.
++
+https://docs.netapp.com/platstor/index.jsp["Centre de documentation AFF et FAS"]
+
+. Installez les tiroirs disques, mettez-les sous tension et définissez les ID de tiroir.
++
+** Vous devez mettre chaque tiroir disque hors tension puis sous tension.
+** Ils doivent être uniques pour chaque tiroir disque SAS dans chaque groupe DR MetroCluster (y compris les deux sites).
+
+
+. Installer chaque pont FC-to-SAS :
++
+.. Fixez les supports « L » à l'avant du pont à l'avant du rack (montage encastré) à l'aide des quatre vis.
++
+Les ouvertures des supports « L » du pont sont conformes à la norme de rack ETA-310-X pour les racks de 19 pouces (482.6 mm).
+
++
+Pour plus d'informations et une illustration de l'installation, reportez-vous au Manuel d'installation et d'utilisation de _ATTO FibreBridge pour votre modèle de pont_.
+
+.. Connectez chaque pont à une source d'alimentation qui fournit une mise à la masse correcte.
+.. Mettez chaque pont sous tension.
++
+
+NOTE: Pour une résilience maximale, les ponts reliés à la même pile de tiroirs disques doivent être connectés à différentes sources d'alimentation.
+
++
+Le voyant de l'état prêt du pont peut prendre jusqu'à 30 secondes pour indiquer que le pont a terminé sa séquence d'auto-test de mise sous tension.
+
+
+
+

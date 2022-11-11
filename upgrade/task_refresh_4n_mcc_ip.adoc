@@ -1,0 +1,168 @@
+---
+permalink: upgrade/task_refresh_4n_mcc_ip.html 
+sidebar: sidebar 
+keywords: metrocluster, upgrade, refresh, four, node, ip, configuration, add, autosupport 
+summary: 'Depuis ONTAP 9.8, vous pouvez mettre à niveau les contrôleurs et le stockage dans une configuration IP MetroCluster à quatre nœuds en étendant la configuration pour devenir une configuration temporaire à huit nœuds, puis en supprimant l"ancien groupe de reprise après incident.' 
+---
+= Mise à jour d'une configuration IP MetroCluster à quatre nœuds (ONTAP 9.8 et versions ultérieures)
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Depuis ONTAP 9.8, vous pouvez mettre à niveau les contrôleurs et le stockage dans une configuration IP MetroCluster à quatre nœuds en étendant la configuration pour devenir une configuration temporaire à huit nœuds, puis en supprimant l'ancien groupe de reprise après incident.
+
+.Description de la tâche
+* Cette procédure est prise en charge sur les systèmes exécutant ONTAP 9.8 et versions ultérieures.
+* Si vous mettez à niveau les commutateurs IP, ils doivent être mis à niveau avant d'effectuer cette procédure de mise à jour.
+* Les références aux « anciens nœuds » désignent les nœuds que vous souhaitez remplacer.
+* Cette procédure n'est pas prise en charge sur les systèmes AFF A320 configurés avec des commutateurs Broadcom BES-53248.
+* Cette procédure n'est pas prise en charge par les systèmes FAS2750, AFF A220, FAS500f et A250.
+
+
+.Étapes
+. Collecte des informations des anciens nœuds.
++
+À ce stade, la configuration à quatre nœuds apparaît comme illustré sur l'image suivante :
+
++
+image::../media/mcc_dr_group_a.png[mcc dr groupe a]
+
+. Pour éviter la génération automatique de dossiers de demande de support, envoyez un message AutoSupport pour indiquer que la mise à niveau est en cours.
++
+.. Lancer la commande suivante : +
+`system node autosupport invoke -node * -type all -message "MAINT=10h Upgrading _old-model_ to _new-model"_`
++
+L'exemple suivant spécifie une fenêtre de maintenance de 10 heures. Selon votre plan, il est possible que vous souhaitiez accorder plus de temps.
+
++
+Si la maintenance est terminée avant le temps écoulé, vous pouvez appeler un message AutoSupport indiquant la fin de la période de maintenance :
+
++
+`system node autosupport invoke -node * -type all -message MAINT=end`
+
+.. Répétez la commande sur le cluster partenaire.
+
+
+. Supprimez la configuration MetroCluster existante du logiciel disjoncteur d'attache, du médiateur ou d'autres logiciels pouvant initier le basculement.
++
+[cols="2*"]
+|===
+
+
+| Si vous utilisez... | Utilisez cette procédure... 
+
+
+ a| 
+Disjoncteur d'attache
+ a| 
+link:../tiebreaker/concept_configuring_the_tiebreaker_software.html#commands-for-modifying-metrocluster-tiebreaker-configurations["Suppression des configurations MetroCluster"] Dans le _MetroCluster Tiebreaker - Guide d'installation et de configuration_
+
+
+
+ a| 
+Médiateur
+ a| 
+Exécutez la commande suivante depuis l'invite ONTAP :
+
+`metrocluster configuration-settings mediator remove`
+
+
+
+ a| 
+Applications tierces
+ a| 
+Reportez-vous à la documentation du produit.
+
+|===
+. Effectuez toutes les étapes de la section link:../upgrade/task_expand_a_four_node_mcc_ip_configuration.html["Extension d'une configuration IP MetroCluster à quatre nœuds à une configuration à huit nœuds"] pour ajouter les nouveaux nœuds et stockage à la configuration.
++
+Lorsque la procédure d'extension est terminée, la configuration s'affiche comme illustré dans l'image suivante :
+
++
+image::../media/mcc_dr_group_b.png[mcc dr groupe b]
+
+. Déplacez les volumes CRS.
++
+Suivez les étapes de la section link:../maintain/task_move_a_metadata_volume_in_mcc_configurations.html["Déplacement d'un volume de métadonnées dans les configurations MetroCluster"].
+
+. Déplacez les données des anciens nœuds vers de nouveaux nœuds à l'aide des procédures suivantes de la section https://docs.netapp.com/platstor/topic/com.netapp.doc.hw-upgrade-controller/home.html["Autres procédures de plate-forme : guide Express de mise à niveau matérielle du contrôleur"^]
++
+.. Effectuez toutes les étapes de la section http://docs.netapp.com/platstor/topic/com.netapp.doc.hw-upgrade-controller/GUID-AFE432F6-60AD-4A79-86C0-C7D12957FA63.html["Création d'un agrégat et déplacement des volumes vers les nouveaux nœuds"^].
++
+
+NOTE: Vous pouvez choisir de mettre en miroir l'agrégat lors de sa création ou après sa création.
+
+.. Effectuez toutes les étapes de la section http://docs.netapp.com/platstor/topic/com.netapp.doc.hw-upgrade-controller/GUID-95CA9262-327D-431D-81AA-C73DEFF3DEE2.html["Déplacement des LIF de données non-SAN et des LIF de gestion du cluster vers les nouveaux nœuds"].
+
+
+. Suivez les étapes de la procédure de suppression de l'ancien groupe DR.
++
+link:concept_removing_a_disaster_recovery_group.html["Suppression d'un groupe de reprise après incident"]
+
++
+Après avoir supprimé l'ancien groupe DR (groupe DR un), la configuration s'affiche comme illustré dans l'image suivante :
+
++
+image::../media/mcc_dr_group_d.png[groupe dr mcc d]
+
+. Vérifier le mode opérationnel de la configuration MetroCluster et effectuer un contrôle MetroCluster.
++
+.. Vérifier la configuration MetroCluster et que le mode opérationnel est normal :
++
+`metrocluster show`
+
+.. Vérifiez que tous les nœuds attendus s'affichent :
++
+`metrocluster node show`
+
+.. Exécutez la commande suivante :
++
+`metrocluster check run`
+
+.. Afficher les résultats de la vérification MetroCluster :
++
+`metrocluster check show`
+
+
+
+. Restaurer la surveillance si nécessaire, en suivant la procédure de configuration.
++
+[cols="2*"]
+|===
+
+
+| Si vous utilisez... | Suivre cette procédure 
+
+
+ a| 
+Disjoncteur d'attache
+ a| 
+link:../tiebreaker/concept_configuring_the_tiebreaker_software.html#adding-metrocluster-configurations["Ajout des configurations MetroCluster"] Dans le _MetroCluster Tiebreaker installation et configuration_.
+
+
+
+ a| 
+Médiateur
+ a| 
+Lien :../install-ip/concept_mediator_requirements.html [Configuration du service du médiateur ONTAP à partir d'une configuration IP MetroCluster] dans la section _MetroCluster IP installation and Configuration_.
+
+
+
+ a| 
+Applications tierces
+ a| 
+Reportez-vous à la documentation du produit.
+
+|===
+. Pour reprendre la génération automatique de dossier de support, envoyez un message AutoSupport pour indiquer que la maintenance est terminée.
++
+.. Exécutez la commande suivante :
++
+`system node autosupport invoke -node * -type all -message MAINT=end`
+
+.. Répétez la commande sur le cluster partenaire.
+
+
+

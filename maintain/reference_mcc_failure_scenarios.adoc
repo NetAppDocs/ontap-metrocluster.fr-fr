@@ -1,0 +1,111 @@
+---
+permalink: maintain/reference_mcc_failure_scenarios.html 
+sidebar: sidebar 
+keywords: metrocluster, maintain, service, failure, recovery, scenarios 
+summary: Il est important de savoir comment la configuration MetroCluster répond aux différents événements de défaillance. 
+---
+= Scénarios de défaillance et de restauration de MetroCluster
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Il est important de savoir comment la configuration MetroCluster répond aux différents événements de défaillance.
+
+
+NOTE: Pour plus d'informations sur la restauration suite à des défaillances de nœud, reportez-vous à la section « choix de la procédure de restauration correcte » du link:../disaster-recovery/concept_dr_workflow.html["Restaurez vos données après un incident"].
+
+|===
+
+
+| Événement | Impact | Reprise après incident 
+
+
+ a| 
+Panne d'un seul nœud
+ a| 
+Un basculement est déclenché.
+ a| 
+La configuration restaure en cas de basculement local. RAID n'est pas affecté. Examinez les messages système et remplacez les unités remplaçables sur site si nécessaire.
+
+https://docs.netapp.com/platstor/index.jsp["Centre de documentation AFF et FAS"^]
+
+
+
+ a| 
+Une panne survient sur un site sur deux nœuds
+ a| 
+Deux nœuds ne pourront être basculeront que si le basculement automatique est activé dans le logiciel MetroCluster Tiebreaker.
+ a| 
+USO manuel si le basculement automatisé dans le logiciel MetroCluster Tiebreaker n'est pas activé.
+
+https://docs.netapp.com/platstor/index.jsp["Centre de documentation AFF et FAS"^]
+
+
+
+ a| 
+Interface IP MetroCluster--défaillance d'un port
+ a| 
+Le système est dégradé. Une défaillance de port supplémentaire affecte la mise en miroir haute disponibilité.
+ a| 
+Le second port est utilisé. Le contrôle de l'état génère une alerte si la liaison physique vers le port est interrompue. Examinez les messages système et remplacez les unités remplaçables sur site si nécessaire.
+
+https://docs.netapp.com/platstor/index.jsp["Centre de documentation AFF et FAS"^]
+
+
+
+ a| 
+Interface MetroCluster IP--défaillance des deux ports
+ a| 
+La capacité HAUTE DISPONIBILITÉ est affectée. RAID SyncMirror du nœud arrête la synchronisation.
+ a| 
+Une restauration manuelle immédiate est nécessaire, car il n'existe pas de basculement haute disponibilité. Examinez les messages système et remplacez les unités remplaçables sur site si nécessaire.
+
+https://docs.netapp.com/platstor/index.jsp["Centre de documentation AFF et FAS"^]
+
+
+
+ a| 
+Défaillance d'un commutateur IP MetroCluster
+ a| 
+Aucun impact. La redondance est assurée via le second réseau.
+ a| 
+Remplacer le commutateur défectueux si nécessaire.
+
+link:task_replace_an_ip_switch.html["Remplacement d'un commutateur IP"]
+
+
+
+ a| 
+Défaillance de deux commutateurs IP MetroCluster situés sur le même réseau
+ a| 
+Aucun impact. La redondance est assurée via le second réseau.
+ a| 
+Remplacer le commutateur défectueux si nécessaire.
+
+link:task_replace_an_ip_switch.html["Remplacement d'un commutateur IP"]
+
+
+
+ a| 
+Défaillance de deux commutateurs IP MetroCluster sur un site
+ a| 
+RAID SyncMirror du nœud arrête la synchronisation. La fonctionnalité HAUTE DISPONIBILITÉ est affectée et le cluster disparaît du quorum.
+ a| 
+Remplacer le commutateur défectueux si nécessaire.
+
+link:task_replace_an_ip_switch.html["Remplacement d'un commutateur IP"]
+
+
+
+ a| 
+Panne de deux commutateurs IP MetroCluster situés sur des sites différents et non sur le même réseau (défaillance diagonale)
+ a| 
+RAID SyncMirror du nœud arrête la synchronisation.
+ a| 
+RAID SyncMirror du nœud arrête la synchronisation. Le cluster et la haute disponibilité ne sont pas affectés. Remplacer le commutateur défectueux si nécessaire.
+
+link:task_replace_an_ip_switch.html["Remplacement d'un commutateur IP"]
+
+|===

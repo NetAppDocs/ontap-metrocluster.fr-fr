@@ -1,0 +1,98 @@
+---
+permalink: maintain/task_upgrade_firmware_on_mcc_ip_switches.html 
+sidebar: sidebar 
+keywords: metrocluster, maintain, service, upgrade, firmware. ip, switches, cisco, broadcom, efos, nxos, nx-os, software, install 
+summary: Mise à niveau du micrologiciel sur les commutateurs IP MetroCluster. 
+---
+= Mise à niveau du micrologiciel sur les commutateurs IP MetroCluster
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous devrez peut-être mettre à niveau le micrologiciel d'un commutateur IP MetroCluster.
+
+Vous devez répéter cette tâche sur chacun des commutateurs successivement.
+
+.Étapes
+. Vérifier l'état de santé de la configuration.
++
+.. Vérifier que la MetroCluster est configurée et en mode normal sur chaque cluster :
++
+`metrocluster show`
+
++
+[listing]
+----
+cluster_A::> metrocluster show
+Cluster                   Entry Name          State
+------------------------- ------------------- -----------
+ Local: cluster_A         Configuration state configured
+                          Mode                normal
+                          AUSO Failure Domain auso-on-cluster-disaster
+Remote: cluster_B         Configuration state configured
+                          Mode                normal
+                          AUSO Failure Domain auso-on-cluster-disaster
+----
+.. Vérifier que la mise en miroir est activée sur chaque nœud :
++
+`metrocluster node show`
+
++
+[listing]
+----
+cluster_A::> metrocluster node show
+DR                           Configuration  DR
+Group Cluster Node           State          Mirroring Mode
+----- ------- -------------- -------------- --------- --------------------
+1     cluster_A
+              node_A_1       configured     enabled   normal
+      cluster_B
+              node_B_1       configured     enabled   normal
+2 entries were displayed.
+----
+.. Vérifier que les composants MetroCluster sont sains :
++
+`metrocluster check run`
+
++
+[listing]
+----
+cluster_A::> metrocluster check run
+
+Last Checked On: 10/1/2014 16:03:37
+
+Component           Result
+------------------- ---------
+nodes               ok
+lifs                ok
+config-replication  ok
+aggregates          ok
+4 entries were displayed.
+
+Command completed. Use the "metrocluster check show -instance" command or sub-commands in "metrocluster check" directory for detailed results.
+To check if the nodes are ready to do a switchover or switchback operation, run "metrocluster switchover -simulate" or "metrocluster switchback -simulate", respectively.
+----
+.. Vérifier qu'il n'y a pas d'alerte de santé :
++
+`system health alert show`
+
+
+
+. Installer le logiciel sur le premier commutateur.
++
+
+NOTE: Vous devez installer le logiciel du commutateur sur les commutateurs dans l'ordre suivant : switch_A_1, switch_B_1, switch_A_2, switch_B_2.
+
++
+Suivez les étapes d'installation du logiciel du commutateur dans la rubrique pertinente des informations _MetroCluster IP installation and Configuration_ selon que le type de commutateur est Broadcom ou Cisco :
+
++
+** link:../install-ip/task_switch_config_broadcom.html#downloading-and-installing-the-broadcom-switch-efos-software["Téléchargement et installation du logiciel du commutateur Broadcom EFOS"]
+** link:../install-ip/task_switch_config_cisco.html#downloading-and-installing-the-cisco-switch-nx-os-software["Téléchargement et installation du logiciel du commutateur Cisco NX-OS"]
+
+
+. Répéter l'étape précédente pour chacun des commutateurs.
+. Répétez l'étape 1 pour vérifier l'intégrité de la configuration.
+

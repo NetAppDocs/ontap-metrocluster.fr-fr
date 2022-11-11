@@ -1,0 +1,44 @@
+---
+permalink: manage/task_verifiy_that_your_system_is_ready_for_a_switchover.html 
+sidebar: sidebar 
+keywords: simulate, option, preview, result, switchover, operation, verification, check, precondition, succesful, verify, ready, example 
+summary: 'Vous pouvez utiliser l"option -Simulate pour prévisualiser les résultats d"une opération de basculement. Une vérification vous permet de vérifier que la plupart des conditions préalables à une exécution réussie sont réunies avant de démarrer l"opération.' 
+---
+= Vérification de la disponibilité du système pour le basculement
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous pouvez utiliser le `-simulate` option permettant d'afficher un aperçu des résultats d'une opération de basculement. Une vérification vous permet de vérifier que la plupart des conditions préalables à une exécution réussie sont réunies avant de démarrer l'opération. Lancer ces commandes depuis le site qui resteront opérationnelles :
+
+. Définissez le niveau de privilège sur avancé : `set -privilege advanced`
+. Depuis le site qui restera opérationnel, simulez une opération de basculement : `metrocluster switchover -simulate`
+. Vérifiez le résultat renvoyé.
++
+La sortie indique si des vetos empêchent une opération de basculement. Chaque fois que vous exécutez une opération MetroCluster, vous devez vérifier un ensemble de critères pour la réussite de l'opération. Un "verto" est un mécanisme d'interdiction de l'opération si un ou plusieurs des critères ne sont pas remplis. Il existe deux types de veto : un veto "soft" et un veto "dur". Vous pouvez remplacer un droit de veto souple, mais pas un droit de veto dur. Par exemple, pour effectuer un basculement négocié dans une configuration MetroCluster à quatre nœuds, un critère est le bon fonctionnement des nœuds. Supposons qu'un nœud est en panne et qu'il a été repris par son partenaire de haute disponibilité. L'opération de basculement sera difficile à mettre en place car il s'agit d'un critère difficile que tous les nœuds doivent être actifs et en bon état. Comme il s'agit d'un droit de veto dur, vous ne pouvez pas annuler le droit de veto.
+
++
+
+IMPORTANT: Il est préférable de ne pas outrepasser le droit de veto.
+
+
+
+
+
+== Exemple : résultats de vérification
+
+L'exemple suivant montre les erreurs rencontrées dans une simulation d'une opération de basculement :
+
+[listing]
+----
+cluster4::*> metrocluster switchover -simulate
+
+[Job 126] Preparing the cluster for the switchover operation...
+[Job 126] Job failed: Failed to prepare the cluster for the switchover
+operation. Use the "metrocluster operation show" command to view detailed error
+information. Resolve the errors, then try the command again.
+----
+
+NOTE: Le basculement et le rétablissement négociés échoueront jusqu'au remplacement de tous les disques défaillants. Vous pouvez effectuer une reprise sur incident après le remplacement des disques défectueux. Si vous souhaitez ignorer l'avertissement relatif aux disques défectueux, vous pouvez ajouter un droit de veto en douceur pour le basculement et le rétablissement négociés.

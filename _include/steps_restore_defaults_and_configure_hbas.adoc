@@ -1,0 +1,132 @@
+= 
+:allow-uri-read: 
+
+
+Pour garantir la réussite de l'installation de MetroCluster, réinitialisez et restaurez les valeurs par défaut sur les modules de contrôleur.
+
+Cette tâche n'est requise que pour les configurations étendues utilisant des ponts FC-SAS.
+
+.Étapes
+. Dans l'invite DU CHARGEUR, renvoie les variables environnementales à leur paramètre par défaut :
++
+`set-defaults`
+
+. Démarrer le nœud en mode Maintenance, puis configurer les paramètres des HBA du système :
++
+.. Démarrage en mode maintenance :
++
+`boot_ontap maint`
+
+.. Vérifiez les paramètres actuels des ports :
++
+`ucadmin show`
+
+.. Mettez à jour les paramètres de port selon vos besoins.
+
+
++
+|===
+
+
+| Si vous disposez de ce type de HBA et du mode souhaité... | Utilisez cette commande... 
+
+
+ a| 
+FC CNA
+ a| 
+`ucadmin modify -m fc -t initiator _adapter_name_`
+
+
+
+ a| 
+Ethernet CNA
+ a| 
+`ucadmin modify -mode cna _adapter_name_`
+
+
+
+ a| 
+Cible FC
+ a| 
+`fcadmin config -t target _adapter_name_`
+
+
+
+ a| 
+Initiateur FC
+ a| 
+`fcadmin config -t initiator _adapter_name_`
+
+|===
+. Quitter le mode Maintenance :
++
+`halt`
+
++
+Une fois que vous avez exécuté la commande, attendez que le nœud s'arrête à l'invite DU CHARGEUR.
+
+. Redémarrez le nœud en mode maintenance pour que les modifications de configuration prennent effet :
++
+`boot_ontap maint`
+
+. Vérifiez les modifications que vous avez effectuées :
++
+|===
+
+
+| Si vous disposez de ce type de HBA... | Utilisez cette commande... 
+
+
+ a| 
+CNA
+ a| 
+`ucadmin show`
+
+
+
+ a| 
+FC
+ a| 
+`fcadmin show`
+
+|===
+. Quitter le mode Maintenance :
++
+`halt`
+
++
+Une fois que vous avez exécuté la commande, attendez que le nœud s'arrête à l'invite DU CHARGEUR.
+
+. Démarrez le nœud sur le menu de démarrage :
++
+`boot_ontap menu`
+
++
+Une fois que vous avez exécuté la commande, attendez que le menu de démarrage s'affiche.
+
+. Effacez la configuration du nœud en tapant « wipconconfig » à l'invite du menu de démarrage, puis appuyez sur entrée.
++
+L'écran suivant affiche l'invite du menu de démarrage :
+
++
+--
+....
+Please choose one of the following:
+
+     (1) Normal Boot.
+     (2) Boot without /etc/rc.
+     (3) Change password.
+     (4) Clean configuration and initialize all disks.
+     (5) Maintenance mode boot.
+     (6) Update flash from backup config.
+     (7) Install new software first.
+     (8) Reboot node.
+     (9) Configure Advanced Drive Partitioning.
+     Selection (1-9)?  wipeconfig
+ This option deletes critical system configuration, including cluster membership.
+ Warning: do not run this option on a HA node that has been taken over.
+ Are you sure you want to continue?: yes
+ Rebooting to finish wipeconfig request.
+....
+--
+

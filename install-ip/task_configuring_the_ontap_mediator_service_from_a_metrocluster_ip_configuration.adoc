@@ -1,0 +1,101 @@
+---
+permalink: install-ip/task_configuring_the_ontap_mediator_service_from_a_metrocluster_ip_configuration.html 
+sidebar: sidebar 
+keywords: metrocluster, mediator, configure 
+summary: Le service Mediator ONTAP doit être configuré sur le nœud ONTAP pour être utilisé dans une configuration IP MetroCluster. 
+---
+= Configurez le service Mediator ONTAP à partir d'une configuration IP MetroCluster
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Le service Mediator ONTAP doit être configuré sur le nœud ONTAP pour être utilisé dans une configuration IP MetroCluster.
+
+.Avant de commencer
+* Le médiateur ONTAP doit avoir été installé avec succès sur un emplacement réseau pouvant être atteint par les deux sites MetroCluster.
++
+link:https://docs.netapp.com/us-en/ontap/mediator/index.html["Installez ou mettez à niveau le service ONTAP Mediator"^]
+
+* Vous devez avoir l'adresse IP de l'hôte exécutant le service ONTAP Mediator.
+* Vous devez disposer du nom d'utilisateur et du mot de passe pour le service Mediator de ONTAP.
+* Tous les nœuds de la configuration IP de MetroCluster doivent être en ligne.
+
+
+
+CAUTION: Depuis ONTAP 9.12.1, vous pouvez activer la fonctionnalité de basculement forcé automatique MetroCluster dans une configuration IP MetroCluster. Cette fonction est une extension du basculement non planifié assisté par un médiateur. Avant d'activer cette fonction, consultez link:concept-risks-limitations-automatic-switchover.html["Risques et limitations liés à l'utilisation du basculement automatique forcé de MetroCluster"].
+
+.Description de la tâche
+* Cette tâche permet le basculement automatique non planifié par défaut.
+* Cette tâche peut être effectuée sur l'interface ONTAP de n'importe quel nœud de la configuration IP de MetroCluster.
+* Une seule installation du service Mediator ONTAP peut être configurée avec jusqu'à cinq configurations IP MetroCluster.
+
+
+.Étapes
+. Ajoutez le service médiateur ONTAP à ONTAP :
++
+`metrocluster configuration-settings mediator add -mediator-address _ip-address-of-mediator-host_`
+
++
+
+NOTE: Vous êtes invité à entrer le nom d'utilisateur et le mot de passe du compte d'utilisateur Mediator admin.
+
+. Vérifier que la fonction de basculement automatique est activée :
++
+`metrocluster show`
+
+. Vérifiez que le médiateur est en cours d'exécution.
++
+.. Afficher les disques virtuels du médiateur :
++
+`storage disk show -container-type mediator`
+
++
+....
+ cluster_A::> storage disk show -container-type mediator
+                        Usable           Disk    Container   Container
+ Disk                   Size Shelf Bay Type    Type        Name      Owner
+ ---------------- ---------- ----- --- ------- ----------- --------- --------
+ NET-1.5                   -     -   - VMDISK  mediator    -         node_A_2
+ NET-1.6                   -     -   - VMDISK  mediator    -         node_B_1
+ NET-1.7                   -     -   - VMDISK  mediator    -         node_B_2
+ NET-1.8                   -     -   - VMDISK  mediator    -         node_A_1
+....
+.. Définissez le mode de privilège sur Avancé :
++
+`set advanced`
+
++
+....
+ cluster_A::> set advanced
+....
+.. Afficher les initiateurs appelés médiateur :
++
+`storage iscsi-initiator show -label mediator`
+
++
+....
+ cluster_A::*> storage iscsi-initiator show -label mediator
+   (storage iscsi-initiator show)
+  +                                                                     Status
+ Node Type Label    Target Portal      Target Name                      Admin/Op
+ ---- ---- -------- ------------------ -------------------------------- --------
+ node_A_1
+      mailbox
+           mediator 1.1.1.1       iqn.2012-05.local:mailbox.target.6616cd3f-9ef1-11e9-aada-00a098ccf5d8:a05e1ffb-9ef1-11e9-8f68- 00a098cbca9e:1 up/up
+ node_A_2
+      mailbox
+           mediator 1.1.1.1       iqn.2012-05.local:mailbox.target.6616cd3f-9ef1-11e9-aada-00a098ccf5d8:a05e1ffb-9ef1-11e9-8f68-00a098cbca9e:1 up/up
+....
+
+
+. Pour configurer le basculement automatique forcé MetroCluster, exécutez la commande suivante : `metrocluster modify -allow-automatic-forced-switchover true`
++
+Avant d'activer cette fonction, consultez link:concept-risks-limitations-automatic-switchover.html["Risques et limitations liés à l'utilisation du basculement automatique forcé de MetroCluster"].
+
++
+....
+cluster_A::*> metrocluster modify -allow-automatic-forced-switchover true
+....
+

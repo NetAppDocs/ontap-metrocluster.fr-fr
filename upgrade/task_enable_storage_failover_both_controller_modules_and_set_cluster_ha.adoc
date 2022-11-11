@@ -1,0 +1,52 @@
+---
+permalink: upgrade/task_enable_storage_failover_both_controller_modules_and_set_cluster_ha.html 
+sidebar: sidebar 
+keywords: metrocluster, upgrade, enable, storage, failover, both, controller, module, cluster, ha 
+summary: Après avoir ajouté de nouveaux modules de contrôleur à la configuration MetroCluster, vous devez activer le basculement du stockage sur les deux modules de contrôleur et activer séparément la haute disponibilité du cluster. 
+---
+= Activation du basculement du stockage sur les deux modules de contrôleur et activation de la haute disponibilité du cluster
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Après avoir ajouté de nouveaux modules de contrôleur à la configuration MetroCluster, vous devez activer le basculement du stockage sur les deux modules de contrôleur et activer séparément la haute disponibilité du cluster.
+
+La configuration MetroCluster doit avoir déjà été actualisée à l'aide du `metrocluster configure -refresh true` commande.
+
+Cette tâche doit être effectuée sur chaque site MetroCluster.
+
+.Étapes
+. Activation du basculement du stockage :
++
+`storage failover modify -enabled true -node _existing-node-name_`
+
++
+La commande unique permet le basculement du stockage sur les deux modules de contrôleur.
+
+. Vérifiez que le basculement du stockage est activé :
++
+`storage failover show`
+
++
+La sortie doit être similaire à ce qui suit :
+
++
+[listing]
+----
+
+Node           Partner        Possible State Description
+-------------- -------------- -------- ----------------------
+old-ctlr        new-ctlr      true      Connected to new-ctlr
+new-ctlr        old-ctlr      true      Connected to old-ctlr
+2 entries were displayed.
+----
+. Activation de la haute disponibilité du cluster :
++
+`cluster ha modify -configured true`
+
++
+La haute disponibilité du cluster (HA) doit être configurée dans un cluster si celui-ci ne contient que deux nœuds et diffère de la haute disponibilité offerte par le basculement du stockage.
+
+

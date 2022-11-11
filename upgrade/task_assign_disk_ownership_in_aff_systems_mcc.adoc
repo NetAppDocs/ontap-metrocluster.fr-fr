@@ -1,0 +1,112 @@
+---
+permalink: upgrade/task_assign_disk_ownership_in_aff_systems_mcc.html 
+sidebar: sidebar 
+keywords: metrocluster, upgrade, assign, disk, ownership, aff, systems 
+summary: 'Si vous utilisez des systèmes AFF dans une configuration avec des agrégats en miroir et que les nœuds ne disposent pas des disques \(SSD\) correctement affectés, vous devez attribuer la moitié des disques de chaque tiroir à un nœud local et l"autre moitié des disques à son nœud partenaire haute disponibilité. Vous devez créer une configuration dans laquelle chaque nœud a le même nombre de disques dans ses pools de disques locaux et distants.' 
+---
+= Assignation de la propriété des disques dans les systèmes AFF
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Si vous utilisez des systèmes AFF dans une configuration avec des agrégats en miroir et que les nœuds ne disposent pas des disques (SSD) correctement affectés, vous devez attribuer la moitié des disques de chaque tiroir à un nœud local et l'autre moitié des disques à son nœud partenaire haute disponibilité. Vous devez créer une configuration dans laquelle chaque nœud a le même nombre de disques dans ses pools de disques locaux et distants.
+
+Les contrôleurs de stockage doivent être en mode maintenance.
+
+Cela ne s'applique pas aux configurations qui ne disposent pas d'agrégats en miroir, qui possèdent une configuration active/passive ou qui disposent d'un nombre inégal de disques dans les pools locaux et distants.
+
+Cette tâche n'est pas requise si les disques ont été correctement affectés lorsqu'ils ont été reçus de l'usine.
+
+
+NOTE: Le pool 0 contient toujours les disques qui se trouvent sur le même site que le système de stockage qui les possède, tandis que le pool 1 contient toujours les disques qui sont distants du système de stockage qui les possède.
+
+.Étapes
+. Si ce n'est pas le cas, démarrez chaque système en mode maintenance.
+. Assigner les disques aux nœuds situés sur le premier site (site A) :
++
+Vous devez affecter un nombre égal de disques à chaque pool.
+
++
+.. Sur le premier nœud, attribuer systématiquement la moitié des disques de chaque tiroir afin de regrouper 0 et l'autre moitié au pool du partenaire haute disponibilité 0: +
+`disk assign -disk _disk-name_ -p _pool_ -n _number-of-disks_`
++
+Si le contrôleur de stockage Controller_A_1 dispose de quatre tiroirs, chacun doté de 8 SSD, vous exécutez les commandes suivantes :
+
++
+[listing]
+----
+*> disk assign -shelf FC_switch_A_1:1-4.shelf1 -p 0 -n 4
+*> disk assign -shelf FC_switch_A_1:1-4.shelf2 -p 0 -n 4
+
+*> disk assign -shelf FC_switch_B_1:1-4.shelf1 -p 1 -n 4
+*> disk assign -shelf FC_switch_B_1:1-4.shelf2 -p 1 -n 4
+----
+.. Répétez le processus pour le second nœud sur le site local, en affectant systématiquement la moitié des disques de chaque tiroir au pool 1 et l'autre moitié au pool 1 du partenaire haute disponibilité : +
+`disk assign -disk _disk-name_ -p _pool_`
++
+Si le contrôleur de stockage Controller_A_1 dispose de quatre tiroirs, chacun doté de 8 SSD, vous exécutez les commandes suivantes :
+
++
+[listing]
+----
+*> disk assign -shelf FC_switch_A_1:1-4.shelf3 -p 0 -n 4
+*> disk assign -shelf FC_switch_B_1:1-4.shelf4 -p 1 -n 4
+
+*> disk assign -shelf FC_switch_A_1:1-4.shelf3 -p 0 -n 4
+*> disk assign -shelf FC_switch_B_1:1-4.shelf4 -p 1 -n 4
+----
+
+
+. Assigner les disques aux nœuds situés sur le second site (site B) :
++
+Vous devez affecter un nombre égal de disques à chaque pool.
+
++
+.. Sur le premier nœud du site distant, attribuer systématiquement la moitié des disques de chaque tiroir dans le pool 0 et l'autre moitié dans le pool 0: + du partenaire haute disponibilité
+`disk assign -disk _disk-name_ -p _pool_`
++
+Si le contrôleur de stockage Controller_B_1 dispose de quatre tiroirs, chacun doté de 8 SSD, vous exécutez les commandes suivantes :
+
++
+[listing]
+----
+*> disk assign -shelf FC_switch_B_1:1-5.shelf1 -p 0 -n 4
+*> disk assign -shelf FC_switch_B_1:1-5.shelf2 -p 0 -n 4
+
+*> disk assign -shelf FC_switch_A_1:1-5.shelf1 -p 1 -n 4
+*> disk assign -shelf FC_switch_A_1:1-5.shelf2 -p 1 -n 4
+----
+.. Répétez le processus pour le second nœud sur le site distant en affectant systématiquement la moitié des disques de chaque tiroir au pool 1 et l'autre moitié au pool 1 du partenaire haute disponibilité :
++
+`disk assign -disk _disk-name_ -p _pool_`
+
++
+Si le contrôleur de stockage Controller_B_2 dispose de quatre tiroirs, chacun doté de 8 SSD, vous exécutez les commandes suivantes :
+
++
+[listing]
+----
+*> disk assign -shelf FC_switch_B_1:1-5.shelf3 -p 0 -n 4
+*> disk assign -shelf FC_switch_B_1:1-5.shelf4 -p 0 -n 4
+
+*> disk assign -shelf FC_switch_A_1:1-5.shelf3 -p 1 -n 4
+*> disk assign -shelf FC_switch_A_1:1-5.shelf4 -p 1 -n 4
+----
+
+
+. Confirmez les attributions de disques :
++
+`storage show disk`
+
+. Quitter le mode Maintenance :
++
+`halt`
+
+. Afficher le menu de démarrage :
++
+`boot_ontap menu`
+
+. Sur chaque nœud, sélectionnez l'option *4* pour initialiser tous les disques.
+

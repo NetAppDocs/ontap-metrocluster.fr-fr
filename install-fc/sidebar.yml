@@ -1,0 +1,269 @@
+---
+section: install-fc
+title: Installez un MetroCluster connecté à un fabric
+entries:
+- title: Présentation
+  url: "/install-fc/index.html"
+- title: La préparation de l'installation de MetroCluster
+  entries:
+  - title: Différences entre les configurations ONTAP MetroCluster
+    url: "/install-fc/concept_considerations_differences.html"
+  - title: Peering de clusters
+    url: "/install-fc/concept_considerations_peering.html"
+  - title: Considérations relatives aux configurations MetroCluster avec tiroirs disques
+      natifs ou LUN de baies
+    url: "/install-fc/concept_considerations_array_luns.html"
+  - title: À prendre en compte lors de la transition de 7-mode vers ONTAP
+    url: "/install-fc/concept_considerations_7mt.html"
+  - title: Considérations relatives aux liens ISL
+    url: "/install-fc/concept_considerations_isls_mcfc.html"
+  - title: Considérations relatives à l'utilisation d'un équipement TDM/WDM avec des
+      configurations MetroCluster intégrées à la structure
+    url: "/install-fc/concept_tdm_wdm.html"
+  - title: Conditions requises pour l'utilisation d'un commutateur Brocade DCX 8510-8
+    url: "/install-fc/concept_considerations_8510.html"
+  - title: Considérations relatives à l'utilisation d'agrégats non mis en miroir
+    url: "/install-fc/concept_considerations_unmirrored_aggrs.html"
+  - title: Utilisation du pare-feu sur les sites MetroCluster
+    url: "/install-fc/concept_considerations_firewalls.html"
+- title: Choisissez la procédure d'installation adaptée à votre configuration
+  url: "/install-fc/concept_choosing_the_correct_installation_procedure_for_your_configuration_mcc_install.html"
+- title: Reliez une configuration MetroCluster Fabric-Attached
+  entries:
+  - title: Présentation
+    url: "/install-fc/task_configure_the_mcc_hardware_components_fabric.html"
+  - title: Composants d'une configuration Fabric MetroCluster
+    entries:
+    - title: Présentation
+      url: "/install-fc/concept_parts_of_a_fabric_mcc_configuration.html"
+    - title: Illustration des paires haute disponibilité locales dans une configuration
+        MetroCluster
+      url: "/install-fc/concept_illustration_of_the_local_ha_pairs_in_a_mcc_configuration.html"
+    - title: Illustration de ponts FC-SAS redondants
+      url: "/install-fc/concept_illustration_of_redundant_fc_to_sas_bridges.html"
+    - title: Commutateurs FC redondants
+      url: "/install-fc/concept_redundant_fc_switch_fabrics.html"
+    - title: Illustration du réseau de peering de cluster
+      url: "/install-fc/concept_cluster_peering_network_mcc.html"
+  - title: Composants FC MetroCluster et conventions de nom requis
+    url: "/install-fc/concept_required_mcc_components_and_naming_conventions_fabric_mcc.html"
+  - title: Fiche de configuration pour les commutateurs FC et les ponts FC-SAS
+    url: "/install-fc/reference_configuration_gathering_worksheet_for_fc_switches_and_fc_to_sas_bridges.html"
+  - title: Installez et câchez les composants MetroCluster
+    entries:
+    - title: Installez les composants matériels dans un rack
+      url: "/install-fc/task_rack_the_hardware_components_mcc_fabric_and_ip.html"
+    - title: Reliez les ports FC-VI et HBA du nouveau module de contrôleur aux commutateurs
+        FC
+      url: "/install-fc/task_cable_the_controller_module_s_fc_vi_hba_ports_to_the_fc_switches_controller_to_fc_sw.html"
+    - title: Relier les liens ISL entre les sites MetroCluster
+      url: "/install-fc/task_cable_the_isl_between_the_mcc_sites_fabric_config.html"
+    - title: Affectation de ports pour les systèmes utilisant deux ports d'initiateur
+      url: "/install-fc/concept_port_assignments_for_systems_using_two_initiator_ports.html"
+    - title: Affectation des ports pour les commutateurs FC lors de l'utilisation
+        de ONTAP 9.0
+      url: "/install-fc/concept_port_assignments_for_fc_switches_when_using_ontap_9_0.html"
+    - title: Affectation de ports pour les commutateurs FC lors de l'utilisation de
+        ONTAP 9.1 et versions ultérieures
+      url: "/install-fc/concept_port_assignments_for_fc_switches_when_using_ontap_9_1_and_later.html"
+    - title: Affectation de ports pour les commutateurs FC lors de l'utilisation des
+        systèmes AFF A900
+      url: "/install-fc/concept_AFF_A900_port_assign_fc_switches_ontap_9_1.html"
+      entries:
+      - title: Utilisation du port Brocade AFF A900 pour les contrôleurs exécutant
+          ONTAP 9.10.1 ou version ultérieure
+        url: "/install-fc/concept_AFF_A900_brocade_port_config.html"
+      - title: Utilisation du port Brocade AFF A900 pour les liens ISL exécutant ONTAP
+          9.10.1 ou une version ultérieure
+        url: "/install-fc/concept_AFF_A900_brocade_port_ISLs.html"
+      - title: AFF A900 contrôleurs d'utilisation des ports Cisco exécutant ONTAP
+          9.10.1 ou version ultérieure
+        url: "/install-fc/concept_AFF_A900_cisco_port_config.html"
+      - title: AFF A900 utilisation du port Cisco pour les liens ISL exécutant ONTAP
+          9.10.1 ou une version ultérieure
+        url: "/install-fc/concept_AFF_A900_cisco_ISLs.html"
+    - title: Câblage de l'interconnexion de cluster dans des configurations à huit
+        ou quatre nœuds
+      url: "/install-fc/task_cable_the_cluster_interconnect_in_four_node_configurations.html"
+    - title: Câbler les connexions de peering de cluster
+      url: "/install-fc/task_cable_the_cluster_peering_connections.html"
+    - title: Branchez les câbles de l'interconnexion haute disponibilité, si nécessaire
+      url: "/install-fc/task_cable_the_ha_interconnect.html"
+    - title: Branchez les câbles du système de gestion et des connexions de données
+      url: "/install-fc/task_cable_the_management_and_data_connections.html"
+  - title: Configuration des commutateurs FC
+    entries:
+    - title: Configuration des commutateurs FC Brocade avec des fichiers RCF
+      entries:
+      - title: Réinitialisez les paramètres d'usine du commutateur Brocade FC
+        url: "/install-fc/task_reset_the_brocade_fc_switch_to_factory_defaults.html"
+      - title: Téléchargez le fichier RCF de commutateur FC Brocade
+        url: "/install-fc/task_download_the_brocade_fc_rcf_switch_software.html"
+      - title: Installez le fichier RCF de commutateur FC Brocade
+        url: "/install-fc/task_install_the_brocade_fc_switch_rcf_file.html"
+    - title: Configurez les switchs Cisco FC avec des fichiers RCF
+      entries:
+      - title: Réinitialisez les paramètres d'usine du commutateur Cisco FC
+        url: "/install-fc/task_reset_the_cisco_fc_switch_to_factory_defaults.html"
+      - title: Téléchargez et installez le logiciel Cisco FC switch NX-OS
+        url: "/install-fc/task_download_and_install_the_cisco_fc_switch_software.html"
+      - title: Téléchargez et installez les fichiers RCF Cisco FC
+        url: "/install-fc/task_download_and_install_the_cisco_fc_switch_rcf_files.html"
+    - title: Configurez manuellement les commutateurs FC Brocade
+      url: "/install-fc/task_fcsw_brocade_configure_the_brocade_fc_switches_supertask.html"
+    - title: Configurez manuellement les commutateurs Cisco FC
+      url: "/install-fc/task_fcsw_cisco_configure_a_cisco_switch_supertask.html"
+  - title: Installez des ponts FC-SAS et des tiroirs disques SAS
+    url: "/install-fc/task_fb_new_install.html"
+- title: Configuration du matériel pour partager une structure FC Brocade 6510 pendant
+    la transition
+  entries:
+  - title: Présentation
+    url: "/install-fc/task_fmc_mcc_transition_configure_the_mcc_hardware_for_share_a_7_mode_brocade_6510_fc_fabric_dure_transition.html"
+  - title: Vérifiez les exigences en matière de licences Brocade
+    url: "/install-fc/concept_fcsw_brocade_reviewing_brocade_license_requirements.html"
+  - title: Installez les composants matériels dans un rack
+    url: "/install-fc/task_rack_the_hardware_components_mcc_fabric_and_ip.html"
+  - title: Connectez les nouveaux contrôleurs MetroCluster aux structures FC existantes
+    url: "/install-fc/task_fmc_mcc_transition_cable_the_new_mcc_controllers_to_the_exist_fc_fabrics.html"
+  - title: Configurez le partage des structures de commutation entre la configuration
+      7-mode et clustered MetroCluster
+    entries:
+    - title: Désactivez l'une des matrices de commutation
+      url: "/install-fc/task_fmc_mcc_transition_disable_one_of_the_switch_fabrics.html"
+    - title: Supprimer la segmentation TI et configurer les paramètres IOD
+      url: "/install-fc/task_fmc_mcc_transition_configure_zone_and_qos.html"
+    - title: Assurez-vous que les liens ISL sont dans le même port group et configurez
+        la segmentation
+      url: "/install-fc/task_fmc_mcc_transition_ensure_isls_are_in_the_same_port_group_and_configure_zon.html"
+    - title: Réactivez la structure du commutateur et vérifiez le fonctionnement
+      url: "/install-fc/task_fmc_mcc_transition_reenable_the_switch_fabric_and_verify_operation.html"
+- title: Configurez le logiciel MetroCluster dans ONTAP
+  url: "/install-fc/concept_configure_the_mcc_software_in_ontap.html"
+- title: Considérations relatives à l'utilisation du protocole IP virtuel et de passerelle
+    de frontières avec une configuration MetroCluster
+  url: "/install-fc/concept_considerations_for_using_virtual_ip_and_border_gateway_protocol_with_a_mcc_configuration.html"
+- title: Tester la configuration MetroCluster
+  url: "/install-fc/task_test_the_mcc_configuration.html"
+- title: Considérations relatives à la suppression des configurations MetroCluster
+  url: "/install-fc/concept_considerations_when_removing_mcc_configurations.html"
+- title: Planification et installation d'une configuration MetroCluster avec des LUN
+    de baie
+  entries:
+  - title: Planifiez une configuration MetroCluster avec des LUN de baies
+    url: "/install-fc/concept_planning_for_a_mcc_configuration_with_array_luns.html"
+  - title: Configuration MetroCluster prise en charge avec des LUN de baies
+    url: "/install-fc/reference_supported_mcc_configuration_with_array_luns.html"
+  - title: Configuration requise pour une MetroCluster avec des LUN de baies
+    url: "/install-fc/reference_requirements_for_a_mcc_configuration_with_array_luns_reference.html"
+  - title: Installez et câconnectez les composants MetroCluster dans une configuration
+      avec des LUN de baie
+    entries:
+    - title: Installez les composants matériels dans une configuration MetroCluster
+        avec des LUN de baie
+      url: "/install-fc/task_rack_the_hardware_components_in_a_mcc_configuration_with_array_luns.html"
+    - title: Préparez une baie de stockage à l'utilisation avec les systèmes ONTAP
+      url: "/install-fc/task_prepare_a_storage_array_for_use_with_ontap_systems.html"
+    - title: Les ports de commutation sont requis pour une configuration MetroCluster
+        avec des LUN de baie
+      url: "/install-fc/concept_switch_ports_required_for_a_eight_node_mcc_configuration_with_array_luns.html"
+    - title: Câbler les ports FC-VI et HBA dans une configuration MetroCluster avec
+        des LUN de baie
+      entries:
+      - title: Reliez les ports FC-VI et HBA dans une configuration MetroCluster à
+          deux nœuds (Fabric-Attached) avec des LUN de baie
+        url: "/install-fc/task_cable_the_fc_vi_and_hba_ports_to_switches_in_a_two_node_fabric_attached_mcc_configuration_with_array_luns.html"
+      - title: Reliez les ports FC-VI et HBA dans une configuration MetroCluster à
+          quatre nœuds (Fabric-Attached) avec des LUN de baie
+        url: "/install-fc/task_cable_the_fc_vi_and_hba_ports_to_switches_in_a_four_node_fabric_attached_mcc_configuration_with_array_luns.html"
+      - title: Reliez les ports FC-VI et HBA dans une configuration MetroCluster à
+          huit nœuds (Fabric-Attached) avec des LUN de baie
+        url: "/install-fc/task_cable_the_fc_vi_and_hba_ports_to_switches_in_an_eight_node_fabric_attached_mcc_configuration_with_array_luns.html"
+    - title: Câbler les liens ISL dans une configuration MetroCluster avec des LUN
+        de baie
+      url: "/install-fc/task_cable_the_isls_in_a_mcc_configuration_with_array_luns.html"
+    - title: Reliez l'interconnexion de cluster dans des configurations à huit ou
+        quatre nœuds
+      url: "/install-fc/task_cable_the_cluster_interconnect_in_four_node_configurations.html"
+    - title: Câbler les connexions de peering de cluster
+      url: "/install-fc/task_cable_the_cluster_peering_connections.html"
+    - title: Branchez les câbles de l'interconnexion haute disponibilité, si nécessaire
+      url: "/install-fc/task_cable_the_ha_interconnect.html"
+    - title: Branchez les câbles du système de gestion et des connexions de données
+      url: "/install-fc/task_cable_the_management_and_data_connections.html"
+    - title: Câbler les baies de stockage aux commutateurs FC dans une configuration
+        MetroCluster
+      entries:
+      - title: Présentation
+        url: "/install-fc/task_cable_storage_arrays_to_fc_switches_in_a_mcc_configuration.html"
+      - title: Exemple de câblage des ports de la baie de stockage aux commutateurs
+          FC dans une configuration MetroCluster à deux nœuds
+        url: "/install-fc/reference_example_of_cabling_array_luns_to_fc_switches_in_a_two_node_mcc_configuration.html"
+      - title: Exemple de câblage des ports de la baie de stockage aux commutateurs
+          FC dans une configuration MetroCluster à quatre nœuds
+        url: "/install-fc/reference_example_of_cabling_array_luns_to_fc_switches_in_a_four_node_mcc_configuration.html"
+      - title: Exemple de câblage des ports de la baie de stockage aux commutateurs
+          FC dans une configuration MetroCluster à huit nœuds
+        url: "/install-fc/reference_example_of_cabling_array_luns_to_fc_switches_in_an_eight_node_mcc_configuration.html"
+  - title: Segmentation de commutateur dans une configuration MetroCluster avec des
+      LUN de baie
+    entries:
+    - title: Conditions requises pour la segmentation des commutateurs dans une configuration
+        MetroCluster avec des LUN de baie
+      url: "/install-fc/reference_requirements_for_switch_zoning_in_a_mcc_configuration_with_array_luns.html"
+    - title: Exemple de segmentation de switch dans une configuration MetroCluster
+        à deux nœuds avec des LUN de baie
+      url: "/install-fc/concept_example_of_switch_zoning_in_a_two_node_mcc_configuration_with_array_luns.html"
+    - title: Exemple de segmentation de commutateur dans une configuration MetroCluster
+        à quatre nœuds avec des LUN de baie
+      url: "/install-fc/concept_example_of_switch_zoning_in_a_four_node_mcc_configuration_with_array_luns.html"
+    - title: Exemple de segmentation de commutateur dans une configuration MetroCluster
+        à huit nœuds avec des LUN de baie
+      url: "/install-fc/concept_example_of_switch_zoning_in_an_eight_node_mcc_configuration_with_array_luns.html"
+  - title: Configurez ONTAP dans une configuration MetroCluster avec des LUN de baie
+    entries:
+    - title: Vérification et configuration de l'état HA des composants en mode maintenance
+      url: "/install-fc/task_verify_the_ha_state_of_components_is_mcc_or_mcc_2n_in_maintenance_mode.html"
+    - title: Configuration de ONTAP sur un système qui n'utilise que des LUN de baie
+      url: "/install-fc/task_configure_ontap_on_a_system_that_uses_only_array_luns.html"
+    - title: Configurer le cluster
+      url: "/install-fc/concept_setting_up_the_cluster.html"
+    - title: Installez la licence pour l'utilisation des LUN de baie dans une configuration
+        MetroCluster
+      url: "/install-fc/task_install_the_license_for_us_array_luns_in_a_mcc_configuration.html"
+    - title: Configuration des ports FC-VI sur une carte X1132A-R6 à quatre ports
+        sur les systèmes FAS8020
+      url: "/install-fc/task_configure_fc_vi_ports_on_a_x1132a_r6_quad_port_card.html"
+    - title: Attribuez la propriété des LUN de baies
+      url: "/install-fc/task_assign_ownership_of_array_luns.html"
+    - title: Peer-to-peer des clusters
+      url: "/install-fc/task_peer_the_clusters_mcc_with_array_luns.html"
+    - title: Mettre en miroir les agrégats racine
+      url: "/install-fc/task_mirror_the_root_aggregates_mcc_with_array_luns.html"
+    - title: Création d'agrégats de données sur, implémentation et vérification de
+        la configuration MetroCluster
+      url: "/install-fc/task_create_data_aggregates_and_implement_the_configuration_mcc_with_array_luns.html"
+  - title: Implémentez une configuration MetroCluster avec des disques et des LUN
+      de baies
+    entries:
+    - title: Présentation
+      url: "/install-fc/concept_implementing_a_mcc_configuration_with_both_disks_and_array_luns.html"
+    - title: Considérations relatives à l'implémentation d'une configuration MetroCluster
+        avec des disques et des LUN de baies
+      url: "/install-fc/concept_considerations_for_implementing_a_mcc_configuration_with_disks_and_array_luns.html"
+    - title: Exemple de configuration MetroCluster à deux nœuds avec des disques et
+        des LUN de baies
+      url: "/install-fc/reference_example_of_a_two_node_fabric_attached_mcc_configuration_with_disks_and_array_luns.html"
+    - title: Exemple de configuration MetroCluster à quatre nœuds avec disques et
+        LUN de baie
+      url: "/install-fc/concept_example_of_a_four_node_mcc_configuration_with_disks_and_array_luns.html"
+- title: Comment utiliser Active IQ Unified Manager et ONTAP System Manager pour obtenir
+    des informations supplémentaires sur la configuration et le contrôle
+  entries:
+  - title: Synchronisez l'heure du système à l'aide du protocole NTP
+    url: "/install-fc/task_synchronize_the_system_time_us_ntp.html"
+- title: Considérations relatives à l'utilisation de ONTAP dans une configuration
+    MetroCluster
+  url: "/install-fc/concept_considerations_when_using_ontap_in_a_mcc_configuration.html"
+- title: Où trouver des informations complémentaires
+  url: "/install-fc/reference_where_to_find_additional_information_icg.html"

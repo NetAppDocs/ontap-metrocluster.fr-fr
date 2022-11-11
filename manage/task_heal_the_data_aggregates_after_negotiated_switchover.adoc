@@ -1,0 +1,62 @@
+---
+permalink: manage/task_heal_the_data_aggregates_after_negotiated_switchover.html 
+sidebar: sidebar 
+keywords: heal, data, aggregate, completing, complete, maintenance, test, process, resynchronize, prepare, disaster, operation, root, negotiate, switchover 
+summary: 'Après avoir effectué les opérations de maintenance ou de test, vous devez réparer les agrégats de données. Ce processus resynchronise les agrégats de données et prépare le site de reprise après incident pour un fonctionnement normal. Vous devez corriger les agrégats de données avant d"entreprendre le traitement des agrégats racine.' 
+---
+= Corrigez les agrégats de données après un basculement négocié
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Après avoir effectué les opérations de maintenance ou de test, vous devez réparer les agrégats de données. Ce processus resynchronise les agrégats de données et prépare le site de reprise après incident pour un fonctionnement normal. Vous devez corriger les agrégats de données avant d'entreprendre le traitement des agrégats racine.
+
+Toutes les mises à jour de configuration du cluster distant sont correctement répliquées vers le cluster local. Dans le cadre de cette procédure, vous mettez le stockage sous tension, mais vous ne devez pas et ne devez pas mettre les modules de contrôleur sous tension sur le site de secours.
+
+.Étapes
+. Assurez-vous que le basculement est terminé en exécutant la commande MetroCluster Operation show.
++
+[listing]
+----
+controller_A_1::> metrocluster operation show
+  Operation: switchover
+      State: successful
+ Start Time: 7/25/2014 20:01:48
+   End Time: 7/25/2014 20:02:14
+     Errors: -
+----
+. Resynchroniser les agrégats de données en exécutant la commande MetroCluster Healing -phase Aggregates du cluster survivant.
++
+[listing]
+----
+controller_A_1::> metrocluster heal -phase aggregates
+[Job 130] Job succeeded: Heal Aggregates is successful.
+----
++
+Si la correction est vetotée, vous avez la possibilité de réémission de la commande MetroCluster Heal avec le paramètre --override-vetos. Si vous utilisez ce paramètre facultatif, le système remplace tout veto logiciel qui empêche l'opération de correction.
+
+. Vérifiez que l'opération a été terminée en exécutant la commande MetroCluster Operation show.
++
+[listing]
+----
+controller_A_1::> metrocluster operation show
+    Operation: heal-aggregates
+      State: successful
+Start Time: 7/25/2014 18:45:55
+   End Time: 7/25/2014 18:45:56
+     Errors: -
+----
+. Vérifier l'état des agrégats en exécutant la commande Storage aggrshow.
++
+[listing]
+----
+controller_A_1::> storage aggregate show
+Aggregate     Size Available Used% State   #Vols  Nodes            RAID Status
+--------- -------- --------- ----- ------- ------ ---------------- ------------
+...
+aggr_b2    227.1GB   227.1GB    0% online       0 mcc1-a2          raid_dp, mirrored, normal...
+----
+. Si le stockage a été remplacé sur le site de reprise sur incident, il se peut que vous deviez redéfinir la mise en miroir des agrégats.
+

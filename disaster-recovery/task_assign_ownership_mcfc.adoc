@@ -1,0 +1,217 @@
+---
+permalink: disaster-recovery/task_assign_ownership_mcfc.html 
+sidebar: sidebar 
+keywords: assign, ownership, drives, replaced 
+summary: Si vous avez remplacé des disques lors de la restauration du matériel sur le site de secours, vous devez attribuer la propriété aux disques concernés. 
+---
+= Attribution de la propriété aux lecteurs remplacés
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Si vous avez remplacé des disques lors de la restauration du matériel sur le site de secours ou si vous deviez zéro disque ou retirer la propriété, vous devez attribuer la propriété aux disques concernés.
+
+Le site de secours doit avoir au moins autant de disques disponibles qu'il l'avait fait avant l'incident.
+
+La disposition des tiroirs disques et des disques doit répondre aux exigences de la section link:../install-ip/concept_required_mcc_ip_components_and_naming_guidelines_mcc_ip.html["Composant IP MetroCluster requis et nomenclature établie"] de la section link:../install-ip/concept_considerations_differences.html["Installation et configuration de MetroCluster IP"].
+
+Ces étapes sont réalisées sur le cluster sur le site de reprise sur incident.
+
+Cette procédure montre la réaffectation de tous les disques et la création de nouveaux plexes sur le site de secours. Les nouveaux plexes d'entreprise et d'plex local de site de secours.
+
+Cette section présente des exemples de configurations à deux et quatre nœuds. Pour les configurations à deux nœuds, vous pouvez ignorer les références au second nœud de chaque site. Dans le cas de configurations à 8 nœuds, il faut tenir compte des nœuds supplémentaires sur le second groupe DR. Les exemples illustrent les hypothèses suivantes :
+
+* Le site A est le site sur incident.
++
+** Le noeud_A_1 a été remplacé.
+** Le noeud_A_2 a été remplacé.
++
+Présenter uniquement dans les configurations MetroCluster à quatre nœuds.
+
+
+
+* Le site B est le site survivant.
++
+** Le nœud_B_1 fonctionne correctement.
+** Le nœud_B_2 fonctionne correctement.
++
+Présenter uniquement dans les configurations MetroCluster à quatre nœuds.
+
+
+
+
+
+Les modules de contrôleur disposent des ID système d'origine suivants :
+
+|===
+
+
+| Nombre de nœuds dans la configuration MetroCluster | Nœud | ID système d'origine 
+
+
+ a| 
+Quatre
+ a| 
+Nœud_A_1
+ a| 
+4068741258
+
+
+
+ a| 
+Nœud_A_2
+ a| 
+4068741260
+ a| 
+Nœud_B_1
+
+
+
+ a| 
+4068741254
+ a| 
+Nœud_B_2
+ a| 
+4068741256
+
+
+
+ a| 
+Deux
+ a| 
+Nœud_A_1
+ a| 
+4068741258
+
+|===
+Lors de l'attribution des entraînements, veillez à garder à l'esprit les points suivants :
+
+* L'ancien nombre de disques doit être au moins le même nombre de disques pour chaque nœud présent avant l'incident.
++
+Si un nombre inférieur de disques est spécifié ou présent, les opérations de correction peuvent ne pas être effectuées en raison d'un espace insuffisant.
+
+* Les nouveaux plexes à créer (node_B_x pool1) et les plexes locaux appartenant au site (node_B_x pool0).
+* Le nombre total de disques requis ne doit pas inclure les disques agrégat racine.
++
+Si n disques sont affectés dans la pool1 du site survivant, alors des disques n-3 doivent être affectés au site de secours en supposant que l'agrégat racine utilise trois disques.
+
+* Aucun des disques ne peut être affecté à un pool différent de celui auquel tous les autres disques de la même pile sont affectés.
+* Les disques appartenant au site survivant sont affectés au pool 1 et les disques appartenant au site de secours sont affectés au pool 0.
+
+
+.Étapes
+. Affectez les nouveaux disques sans propriétaire selon que vous disposez d'une configuration MetroCluster à quatre ou deux nœuds :
++
+** Pour les configurations MetroCluster à quatre nœuds, affectez les nouveaux disques non propriétaires aux pools de disques appropriés à l'aide de la série de commandes suivante sur les nœuds de remplacement :
++
+... Assigner systématiquement les disques remplacés par chaque nœud à leurs pools de disques respectifs :
++
+`disk assign -s sysid -n old-count-of-disks -p pool`
+
++
+Sur le site survivant, une commande d'affectation de disque pour chaque nœud :
+
++
+[listing]
+----
+cluster_B::> disk assign -s node_B_1-sysid -n old-count-of-disks -p 1 **\(remote pool of surviving site\)**
+cluster_B::> disk assign -s node_B_2-sysid -n old-count-of-disks -p 1 **\(remote pool of surviving site\)**
+cluster_B::> disk assign -s node_A_1-old-sysid -n old-count-of-disks -p 0 **\(local pool of disaster site\)**
+cluster_B::> disk assign -s node_A_2-old-sysid -n old-count-of-disks -p 0 **\(local pool of disaster site\)**
+----
++
+L'exemple suivant montre les commandes avec les ID système :
+
++
+[listing]
+----
+cluster_B::> disk assign -s 4068741254 -n 21 -p 1
+cluster_B::> disk assign -s 4068741256 -n 21 -p 1
+cluster_B::> disk assign -s 4068741258 -n 21 -p 0
+cluster_B::> disk assign -s 4068741260 -n 21 -p 0
+----
+... Confirmer la propriété des disques :
++
+`storage disk show -fields owner, pool`
+
++
+[listing]
+----
+storage disk show -fields owner, pool
+cluster_A::> storage disk show -fields owner, pool
+disk     owner          pool
+-------- ------------- -----
+0c.00.1  node_A_1      Pool0
+0c.00.2  node_A_1      Pool0
+.
+.
+.
+0c.00.8  node_A_1      Pool1
+0c.00.9  node_A_1      Pool1
+.
+.
+.
+0c.00.15 node_A_2      Pool0
+0c.00.16 node_A_2      Pool0
+.
+.
+.
+0c.00.22 node_A_2      Pool1
+0c.00.23 node_A_2      Pool1
+.
+.
+.
+----
+
+
+** Pour les configurations MetroCluster à deux nœuds, affectez les nouveaux disques non propriétaires aux pools de disques appropriés à l'aide de la série de commandes suivante sur le nœud de remplacement :
++
+... Afficher les ID de tiroir locaux :
++
+`run local storage show shelf`
+
+... Assigner les disques remplacés du nœud sain au pool 1:
++
+`run local disk assign -shelf shelf-id -n old-count-of-disks -p 1 -s node_B_1-sysid -f`
+
+... Assigner les disques remplacés du nœud de remplacement au pool 0:
++
+`run local disk assign -shelf shelf-id -n old-count-of-disks -p 0 -s node_A_1-sysid -f`
+
+
+
+
+
+. Sur le site survivant, activez à nouveau l'affectation automatique du disque :
++
+`storage disk option modify -autoassign on *`
+
++
+[listing]
+----
+cluster_B::> storage disk option modify -autoassign on *
+2 entries were modified.
+----
+. Sur le site survivant, vérifiez que l'affectation automatique des disques est activée :
++
+`storage disk option show`
+
++
+[listing]
+----
+ cluster_B::> storage disk option show
+ Node     BKg. FW. Upd.  Auto Copy   Auto Assign  Auto Assign Policy
+--------  -------------  -----------  -----------  ------------------
+node_B_1       on            on          on             default
+node_B_2       on            on          on             default
+2 entries were displayed.
+
+ cluster_B::>
+----
+
+
+link:https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-psmg/home.html["Gestion des disques et des agrégats"^]
+
+link:../manage/concept_understanding_mcc_data_protection_and_disaster_recovery.html#how-metrocluster-configurations-use-syncmirror-to-provide-data-redundancy["Comment les configurations MetroCluster assurent la redondance des données grâce à SyncMirror"]

@@ -1,0 +1,118 @@
+---
+permalink: install-fc/concept_parts_of_a_fabric_mcc_configuration.html 
+sidebar: sidebar 
+keywords: metrocluster, fabric, installation, configuration 
+summary: Lors de la planification de votre configuration MetroCluster, vous devez connaître les composants matériels et les interconnexions. 
+---
+= Composants d'une configuration Fabric MetroCluster
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Lors de la planification de votre configuration MetroCluster, vous devez connaître les composants matériels et les interconnexions.
+
+
+
+== Groupes de reprise après incident
+
+Une configuration Fabric MetroCluster se compose d'un ou deux groupes DR, selon le nombre de nœuds dans la configuration MetroCluster. Chaque groupe de reprise sur incident se compose de quatre nœuds.
+
+* Une configuration MetroCluster à huit nœuds se compose de deux groupes de reprise après incident.
+* Une configuration MetroCluster à quatre nœuds se compose d'un seul groupe de reprise après incident.
+
+
+L'illustration suivante présente l'organisation des nœuds dans une configuration MetroCluster à huit nœuds :
+
+image::../media/mcc_dr_groups_8_node.gif[mcc dr groups, nœud 8]
+
+L'illustration ci-dessous présente l'organisation des nœuds dans une configuration MetroCluster à quatre nœuds :
+
+image::../media/mcc_dr_groups_4_node.gif[mcc dr groups, nœud 4]
+
+
+
+== Principaux éléments matériels
+
+La configuration MetroCluster inclut les éléments matériels clés suivants :
+
+* Contrôleurs de stockage
++
+Les contrôleurs de stockage ne sont pas directement connectés au stockage, mais ils se connectent à deux fabriques de commutateurs FC redondantes.
+
+* Ponts FC-SAS
++
+Le pont FC-to-SAS connecte les piles de stockage SAS aux commutateurs FC, fournissant ainsi une passerelle entre les deux protocoles.
+
+* Commutateurs FC
++
+Les commutateurs FC fournissent le backbone long courrier ISL entre les deux sites. Les commutateurs FC fournissent les deux structures de stockage qui permettent la mise en miroir des données vers les pools de stockage distants.
+
+* Réseau de peering de cluster
++
+Le réseau de peering de cluster assure la connectivité en miroir de la configuration du cluster, y compris la configuration de la machine virtuelle de stockage (SVM). La configuration de l'ensemble des SVM sur un cluster est mise en miroir sur le cluster partenaire.
+
+
+
+
+
+== Configuration MetroCluster à 8 nœuds
+
+Une configuration à huit nœuds se compose de deux clusters, un sur chaque site géographiquement séparé. Cluster_A est situé sur le premier site MetroCluster. Cluster_B est situé sur le second site MetroCluster. Chaque site dispose d'une pile de stockage SAS. D'autres piles de stockage sont prises en charge, mais une seule s'affiche sur chaque site. Les paires haute disponibilité sont configurées comme des clusters sans commutateur, sans commutateurs d'interconnexion de cluster. Une configuration commutée est prise en charge, mais n'est pas affichée.
+
+Une configuration à huit nœuds comprend les connexions suivantes :
+
+* Des connexions FC des HBA de chaque contrôleur et des adaptateurs FC-VI à chacun des commutateurs FC
+* Une connexion FC de chaque pont FC-SAS à un commutateur FC
+* Des connexions SAS entre chaque tiroir SAS et entre le haut et le bas de chaque pile et un pont FC-SAS
+* Une interconnexion haute disponibilité entre chaque contrôleur de la paire haute disponibilité locale
++
+Si les contrôleurs prennent en charge une paire haute disponibilité à châssis unique, l'interconnexion haute disponibilité est interne, passant par le fond de panier, ce qui signifie qu'une interconnexion externe n'est pas requise.
+
+* Connexions Ethernet des contrôleurs vers le réseau fourni par le client, utilisé pour le peering de cluster
++
+La configuration de SVM est répliquée sur le réseau de peering de cluster.
+
+* Une interconnexion de cluster entre chaque contrôleur du cluster local
+
+
+
+
+== Configuration Fabric MetroCluster à quatre nœuds
+
+L'illustration suivante présente une vue simplifiée d'une configuration Fabric MetroCluster à quatre nœuds. Pour certaines connexions, une seule ligne représente plusieurs connexions redondantes entre les composants. Les connexions du réseau de gestion et de données ne sont pas affichées.
+
+image::../media/mcc_hardware_architecture_both_clusters.gif[architecture matérielle mcc deux clusters]
+
+L'illustration ci-dessous présente une vue plus détaillée de la connectivité au sein d'un seul cluster MetroCluster (la même configuration est utilisée pour les deux clusters) :
+
+image::../media/mcc_hardware_architecture_cluster_a_with_7500n.gif[cluster d'architecture matérielle mcc a avec 7500n]
+
+
+
+== Configuration Fabric MetroCluster à deux nœuds
+
+L'illustration suivante présente une vue simplifiée d'une configuration Fabric MetroCluster à deux nœuds. Pour certaines connexions, une seule ligne représente plusieurs connexions redondantes entre les composants. Les connexions du réseau de gestion et de données ne sont pas affichées.
+
+image::../media/mcc_hardware_architecture_both_clusters_2_node_fabric.gif[architecture matérielle mcc deux clusters structure à 2 nœuds]
+
+Une configuration à deux nœuds se compose de deux clusters, un sur chaque site géographiquement séparé. Cluster_A est situé sur le premier site MetroCluster. Cluster_B est situé sur le second site MetroCluster. Chaque site dispose d'une pile de stockage SAS. D'autres piles de stockage sont prises en charge, mais une seule s'affiche sur chaque site.
+
+
+NOTE: Dans une configuration à deux nœuds, les nœuds ne sont pas configurés en tant que paire haute disponibilité.
+
+L'illustration ci-dessous présente une vue plus détaillée de la connectivité au sein d'un seul cluster MetroCluster (la même configuration est utilisée pour les deux clusters) :
+
+image::../media/mcc_hardware_architecture_cluster_a_2_node_with_7500n.gif[architecture matérielle mcc en cluster avec 2 nœuds avec 7500n]
+
+Une configuration à deux nœuds comprend les connexions suivantes :
+
+* Des connexions FC entre l'adaptateur FC-VI sur chaque module de contrôleur
+* Des connexions FC reliant les HBA de chaque module de contrôleur au pont FC-SAS pour chaque pile de tiroirs SAS
+* Des connexions SAS entre chaque tiroir SAS et entre le haut et le bas de chaque pile et un pont FC-SAS
+* Connexions Ethernet des contrôleurs vers le réseau fourni par le client, utilisé pour le peering de cluster
++
+La configuration de SVM est répliquée sur le réseau de peering de cluster.
+
+

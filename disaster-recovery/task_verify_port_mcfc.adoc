@@ -1,0 +1,72 @@
+---
+permalink: disaster-recovery/task_verify_port_mcfc.html 
+sidebar: sidebar 
+keywords: verify, port, environmental, metrocluster, configuration 
+summary: Vous devez définir les variables environnementales sur le nœud, puis mettre hors tension pour préparer la configuration MetroCluster. 
+---
+= Vérification de la configuration des ports (configurations MetroCluster FC uniquement)
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous devez définir les variables environnementales sur le nœud, puis mettre hors tension pour préparer la configuration MetroCluster.
+
+Cette procédure est effectuée avec les modules de contrôleur de remplacement en mode Maintenance.
+
+Les étapes de vérification de la configuration des ports ne sont nécessaires que sur les systèmes qui utilisent des ports FC ou CNA en mode initiateur.
+
+.Étapes
+. En mode Maintenance, restaurez la configuration du port FC :
++
+`ucadmin modify -m fc -t initiatoradapter_name`
+
++
+Si vous ne souhaitez utiliser qu'une seule paire de ports de la configuration initiateur, entrez un nom d'adaptateur précis.
+
+. En fonction de votre configuration, effectuer l'une des opérations suivantes :
++
+|===
+
+
+| Si la configuration des ports FC est... | Alors... 
+
+
+ a| 
+La même chose pour les deux ports
+ a| 
+Répondez « y » à l'invite du système, car la modification d'un port dans une paire de ports modifie également l'autre port.
+
+
+
+ a| 
+Différente
+ a| 
+.. Répondez « n » lorsque le système vous le demande.
+.. Restaurez la configuration du port FC :
+
+
+`ucadmin modify -m fc -t initiator|targetadapter_name`
+
+|===
+. Quitter le mode Maintenance :
++
+`halt`
+
++
+Une fois que vous avez terminé d'exécuter la commande, attendez que le système s'arrête à l'invite DU CHARGEUR.
+
+. Redémarrez le nœud en mode maintenance pour que les modifications de configuration prennent effet :
++
+`boot_ontap maint`
+
+. Vérifier les valeurs des variables :
++
+`ucadmin show`
+
+. Quitter le mode Maintenance et afficher l'invite DU CHARGEUR :
++
+`halt`
+
+

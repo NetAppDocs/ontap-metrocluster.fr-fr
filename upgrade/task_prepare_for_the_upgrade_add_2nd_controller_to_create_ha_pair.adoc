@@ -1,0 +1,55 @@
+---
+permalink: upgrade/task_prepare_for_the_upgrade_add_2nd_controller_to_create_ha_pair.html 
+sidebar: sidebar 
+keywords: metrocluster, upgrade, prepare, upgrade 
+summary: Avant de procéder à la mise à niveau vers une paire haute disponibilité, vérifiez que votre système fonctionne avec toutes les exigences et que vous disposez de toutes les informations nécessaires. 
+---
+= Préparation de la mise à niveau
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Avant de procéder à la mise à niveau vers une paire haute disponibilité, vérifiez que votre système fonctionne avec toutes les exigences et que vous disposez de toutes les informations nécessaires.
+
+.Étapes
+. Identifiez les disques non assignés ou les disques de spare que vous pouvez affecter au nouveau module de contrôleur à l'aide des commandes suivantes :
++
+** `storage disk show -container-type spare`
+** `storage disk show -container-type unassigned`
+
+
+. Procédez comme suit :
++
+.. Déterminer l'emplacement des agrégats pour le nœud existant :
++
+`storage aggregate show`
+
+.. Si l'affectation automatique de la propriété de disque est activée, désactivez-la :
++
+`storage disk option modify -node _node_name_ -autoassign off`
+
+.. Eliminer la propriété sur les disques qui ne disposent pas d'agrégats sur eux :
++
+`storage disk removeowner _disk_name_`
+
+.. Répétez l'étape précédente pour autant de disques que nécessaire pour le nouveau nœud.
+
+
+. Vérifiez que les câbles sont prêts pour les connexions suivantes :
++
+** Connexions du cluster
++
+Si vous créez un cluster sans commutateur à deux nœuds, vous avez besoin de deux câbles pour connecter les modules de contrôleur. Dans le cas contraire, vous devez disposer d'un minimum de quatre câbles, deux pour chaque connexion de module de contrôleur au commutateur cluster-network. Les autres systèmes (comme la série 80xx) disposent par défaut de quatre ou six connexions de cluster.
+
+** Connexions d'interconnexion HAUTE DISPONIBILITÉ, si le système se trouve dans une paire haute disponibilité à double châssis
+
+
+. Vérifiez que vous disposez d'une console de port série disponible pour les modules de contrôleur.
+. Vérifiez que votre environnement répond aux exigences du site et du système.
++
+https://hwu.netapp.com["NetApp Hardware Universe"^]
+
+. Rassemblez toutes les adresses IP et tous les autres paramètres réseau du nouveau module de contrôleur.
+

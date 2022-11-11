@@ -1,0 +1,59 @@
+---
+permalink: install-fc/task_rack_the_hardware_components_mcc_fabric_and_ip.html 
+sidebar: sidebar 
+keywords: metrocluster, fabric, installation, rack, hardware, components 
+summary: 'Si vous n"avez pas reçu l"équipement déjà installé dans les armoires, vous devez installer les composants en rack.' 
+---
+= Mise en rack des composants matériels
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Si vous n'avez pas reçu l'équipement déjà installé dans les armoires, vous devez installer les composants en rack.
+
+Cette tâche doit être effectuée sur les deux sites MetroCluster.
+
+.Étapes
+. Planifiez le positionnement des composants MetroCluster.
++
+L'espace rack dépend du modèle de plateforme des modules de contrôleur, des types de switchs et du nombre de piles de tiroirs disques dans votre configuration.
+
+. Mettez-vous à la terre.
+. Installez les modules de contrôleur sur le rack ou l'armoire.
++
+https://docs.netapp.com/platstor/index.jsp["Centre de documentation AFF et FAS"]
+
+. Installez les commutateurs FC sur le rack ou l'armoire.
+. Installez les tiroirs disques, mettez-les sous tension, puis définissez les ID de tiroir.
++
+** Vous devez mettre chaque tiroir disque hors tension puis sous tension.
+** Ils doivent être uniques pour chaque tiroir disque SAS dans chaque groupe DR MetroCluster (y compris les deux sites).
+
+
+. Installer chaque pont FC-to-SAS :
++
+.. Fixez les supports « L » à l'avant du pont à l'avant du rack (montage encastré) à l'aide des quatre vis.
++
+Les ouvertures des supports « L » du pont sont conformes à la norme de rack ETA-310-X pour les racks de 19 pouces (482.6 mm).
+
++
+Le Manuel d'installation et d'utilisation _ATTO FibreBridge_ de votre modèle de pont contient plus d'informations et une illustration de l'installation.
+
++
+
+NOTE: Pour un accès approprié à l'espace des ports et une facilité de maintenance des FRU, vous devez laisser un espace 1U sous la paire de ponts et couvrir cet espace avec un panneau vierge sans outil.
+
+.. Connectez chaque pont à une source d'alimentation qui fournit une mise à la masse correcte.
+.. Mettez chaque pont sous tension.
++
+
+NOTE: Pour une résilience maximale, les ponts reliés à la même pile de tiroirs disques doivent être connectés à différentes sources d'alimentation.
+
++
+Le voyant de l'état prêt du pont peut prendre jusqu'à 30 secondes pour indiquer que le pont a terminé sa séquence d'auto-test de mise sous tension.
+
+
+
+

@@ -1,0 +1,66 @@
+---
+permalink: install-stretch/task_upgrade_the_configuration_to_fabric_attached_mcc.html 
+sidebar: sidebar 
+keywords: metrocluster, stretch, installation, transition, stretch, fabric, attacjed, configuration 
+summary: 'Dans une configuration MetroCluster FAS, les nœuds sont situés à différents emplacements. Cette différence géographique augmente la protection contre les incidents. Pour passer d"une configuration Stretch à une configuration MetroCluster Fabric-Attached, vous devez ajouter des commutateurs FC et, le cas échéant, des ponts FC-SAS à la configuration.' 
+---
+= Passer d'une configuration Stretch à une configuration MetroCluster Fabric-Attached
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Dans une configuration MetroCluster FAS, les nœuds sont situés à différents emplacements. Cette différence géographique augmente la protection contre les incidents. Pour passer d'une configuration Stretch à une configuration MetroCluster Fabric-Attached, vous devez ajouter des commutateurs FC et, le cas échéant, des ponts FC-SAS à la configuration.
+
+* Vous devez désactiver le basculement automatique sur les deux clusters en exécutant la `metrocluster modify -auto-switchover-failure-domain auto-disabled` commande.
+* Vous devez avoir arrêté les nœuds.
++
+Cette procédure est perturbatrice.
+
+
+
+La configuration MetroCluster doit être transférée sur les deux sites. Une fois la configuration MetroCluster mise à niveau, vous devez activer le basculement automatique sur les deux clusters. Vous devez également valider la configuration en exécutant le `metrocluster check run` commande.
+
+Cette procédure donne un aperçu des étapes requises. Pour les étapes détaillées, vous devez vous référer à des sections spécifiques dans le link:https://docs.netapp.com/us-en/ontap-metrocluster/install-fc/index.html["Installation et configuration de la solution Fabric-Attached MetroCluster"]. Il n'est pas nécessaire d'effectuer une installation et une configuration complètes.
+
+.Étapes
+. Préparez la mise à niveau en consultant attentivement la section « préparation de l'installation MetroCluster » du link:https://docs.netapp.com/us-en/ontap-metrocluster/install-fc/index.html["Installation et configuration de la solution Fabric-Attached MetroCluster"].
+. Installez, câconnectez et configurez les commutateurs et les ponts FC-SAS requis.
++
+
+NOTE: Nous vous recommandons d'utiliser les procédures de la section « câblage d'une configuration MetroCluster reliée à la structure » du link:https://docs.netapp.com/us-en/ontap-metrocluster/install-fc/index.html["Installation et configuration de la solution Fabric-Attached MetroCluster"].
+
+. Procédez comme suit pour actualiser la configuration MetroCluster.
++
+N'utilisez pas les procédures de la section "Configuration du logiciel MetroCluster dans ONTAP" située dans le lien https://docs.netapp.com/us-en/ontap-metrocluster/install-fc/index.html[Fabric-attached installation et configuration MetroCluster].
+
++
+.. Passez en mode de privilège avancé : +
+`*set -privilege advanced*`
+.. Actualisez la configuration MetroCluster : +
+`*metrocluster configure -refresh true*`
++
+La commande suivante actualise la configuration de MetroCluster sur tous les nœuds du groupe DR qui contient Controller_A_1 :
+
++
+[listing]
+----
+controller_A_1::*> metrocluster configure -refresh true
+[Job 009] Job succeeded: Configure is successful.
+----
+.. Revenir en mode de privilège admin: +
+`*set -privilege admin*`
+
+
+. Vérifiez que la configuration MetroCluster ne comporte pas d'erreurs, puis vérifiez qu'elle est opérationnelle.
++
+Vous devez utiliser les procédures décrites dans les sections suivantes du link:https://docs.netapp.com/us-en/ontap-metrocluster/install-fc/index.html["Installation et configuration de la solution Fabric-Attached MetroCluster"]:
+
++
+** Vérification des erreurs de configuration MetroCluster avec Config Advisor
+** Vérification du fonctionnement de la haute disponibilité locale
+** Vérification du basculement, de la résolution et du rétablissement
+
+
+

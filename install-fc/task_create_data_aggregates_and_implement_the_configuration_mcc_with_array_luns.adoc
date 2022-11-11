@@ -1,0 +1,48 @@
+---
+permalink: install-fc/task_create_data_aggregates_and_implement_the_configuration_mcc_with_array_luns.html 
+sidebar: sidebar 
+keywords: metrocluster, fabric, installation, create, data, aggregates, implementing, verify, configuration 
+summary: Vous devez créer des agrégats de données sur chaque nœud, implémenter et vérifier la configuration MetroCluster. 
+---
+= Création d'agrégats de données sur, implémentation et vérification de la configuration MetroCluster
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous devez créer des agrégats de données sur chaque nœud, implémenter et vérifier la configuration MetroCluster.
+
+.Étapes
+. Créez des agrégats de données sur chaque nœud :
++
+.. Créez un agrégat de données en miroir sur chaque nœud :
++
+link:task_mirror_the_root_aggregates_mcc_with_array_luns.html["Mettre en miroir les agrégats racine"].
+
+.. Si besoin, créez des agrégats de données non mis en miroir :
++
+link:concept_configure_the_mcc_software_in_ontap.html#creating-a-mirrored-data-aggregate-on-each-node["Créez un agrégat de données en miroir sur chaque nœud"].
+
+
+
+. link:concept_configure_the_mcc_software_in_ontap.html#implementing-the-metrocluster-configuration["Implémentez la configuration MetroCluster"].
+. link:concept_configure_the_mcc_software_in_ontap.html#configuring-metrocluster-components-for-health-monitoring["Configuration des commutateurs MetroCluster FC pour la surveillance de l'état"].
+. Vérifier et vérifier la configuration :
++
+.. link:concept_configure_the_mcc_software_in_ontap.html#checking-the-metrocluster-configuration["Vérifiez la configuration MetroCluster"].
+.. link:concept_configure_the_mcc_software_in_ontap.html#checking-for-metrocluster-configuration-errors-with-config-advisor["Recherchez les erreurs de configuration MetroCluster avec Config Advisor"].
+.. link:concept_configure_the_mcc_software_in_ontap.html#verifying-switchover-healing-and-switchback["Vérification du basculement, de la résolution et du rétablissement"].
+
+
+. Installer et configurer le logiciel MetroCluster Tiebreaker :
++
+.. link:../tiebreaker/task_install_the_tiebreaker_software.html["Installer le logiciel disjoncteur d'attache"].
+.. link:../tiebreaker/concept_configuring_the_tiebreaker_software.html["Configurer le logiciel disjoncteur d'attache"].
+
+
+. Définissez la destination des fichiers de sauvegarde de configuration :
++
+link:concept_configure_the_mcc_software_in_ontap.html#protecting-configuration-backup-files["Protéger les fichiers de sauvegarde de configuration"].
+
+

@@ -1,0 +1,85 @@
+= 
+:allow-uri-read: 
+
+
+[role="lead"]
+Réinitialisez et restaurez les valeurs par défaut sur les modules de contrôleur.
+
+. Dans l'invite DU CHARGEUR, valeurs par défaut des variables environnementales : `set-defaults`
+. Démarrez le nœud sur le menu de démarrage : `boot_ontap menu`
++
+Une fois que vous avez exécuté cette commande, attendez que le menu de démarrage s'affiche.
+
+. Effacez la configuration des nœuds :
++
+--
+** Si vous utilisez des systèmes configurés pour ADP, sélectionnez option `9a` dans le menu de démarrage, puis répondez `yes` lorsque vous y êtes invité.
++
+
+NOTE: Ce processus est perturbateur.
+
++
+L'écran suivant affiche l'invite du menu de démarrage :
+
++
+[listing]
+----
+
+Please choose one of the following:
+
+    (1) Normal Boot.
+    (2) Boot without /etc/rc.
+    (3) Change password.
+    (4) Clean configuration and initialize all disks.
+    (5) Maintenance mode boot.
+    (6) Update flash from backup config.
+    (7) Install new software first.
+    (8) Reboot node.
+    (9) Configure Advanced Drive Partitioning.
+    Selection (1-9)?  9a
+########## WARNING ##########
+
+    This is a disruptive operation and will result in the
+    loss of all filesystem data. Before proceeding further,
+    make sure that:
+    1) This option (9a) has been executed or will be executed
+    on the HA partner node, prior to reinitializing either
+    system in the HA-pair.
+    2) The HA partner node is currently in a halted state or
+    at the LOADER prompt.
+
+
+    Do you still want to continue (yes/no)? yes
+----
+
+
+--
++
+** Si votre système n'est pas configuré pour ADP, tapez `wipeconfig` À l'invite du menu de démarrage, puis appuyez sur entrée.
++
+L'écran suivant affiche l'invite du menu de démarrage :
+
++
+[listing]
+----
+
+Please choose one of the following:
+
+    (1) Normal Boot.
+    (2) Boot without /etc/rc.
+    (3) Change password.
+    (4) Clean configuration and initialize all disks.
+    (5) Maintenance mode boot.
+    (6) Update flash from backup config.
+    (7) Install new software first.
+    (8) Reboot node.
+    (9) Configure Advanced Drive Partitioning.
+    Selection (1-9)?  wipeconfig
+This option deletes critical system configuration, including cluster membership.
+Warning: do not run this option on a HA node that has been taken over.
+Are you sure you want to continue?: yes
+Rebooting to finish wipeconfig request.
+----
+
+
+

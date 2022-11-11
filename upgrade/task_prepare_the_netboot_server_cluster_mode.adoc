@@ -1,0 +1,70 @@
+---
+permalink: upgrade/task_prepare_the_netboot_server_cluster_mode.html 
+sidebar: sidebar 
+keywords: metrocluster, upgrade, prepare, netboot, server, download, image 
+summary: 'Lorsque vous êtes prêt à préparer le serveur netboot, vous devez télécharger l"image exacte du réseau ONTAP depuis le site de support NetApp vers le serveur netboot et noter l"adresse IP.' 
+---
+= Préparation du serveur netboot pour télécharger l'image
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Lorsque vous êtes prêt à préparer le serveur netboot, vous devez télécharger l'image exacte du réseau ONTAP depuis le site de support NetApp vers le serveur netboot et noter l'adresse IP.
+
+.Description de la tâche
+* Vous devez pouvoir accéder à un serveur HTTP à partir du système avant et après avoir ajouté le nouveau module de contrôleur.
+* Vous devez avoir accès au site de support NetApp pour télécharger les fichiers système nécessaires pour votre plateforme et votre version de ONTAP.
++
+https://mysupport.netapp.com/site/global/dashboard["Site de support NetApp"]
+
+* Les deux modules de contrôleur de la paire HA doivent exécuter la même version de ONTAP.
+
+
+.Étapes
+. Téléchargez le logiciel ONTAP approprié depuis la section de téléchargement des logiciels du site de support NetApp et stockez le `<ontap_version>_image.tgz` fichier dans un répertoire accessible sur le web.
++
+Le `<ontap_version>_image.tgz` fichier est utilisé pour effectuer un démarrage sur le réseau de votre système.
+
+. Accédez au répertoire accessible sur le Web et vérifiez que les fichiers dont vous avez besoin sont disponibles.
++
+|===
+
+
+| Pour... | Alors... 
+
+
+ a| 
+GAMMES FAS2200, FAS2500, FAS3200, FAS6200, FAS/AFF8000
+ a| 
+Extrayez le contenu du fichier ontap_version_image.tgz dans le répertoire cible :
+
+`tar -zxvf <ontap_version>_image.tgz`
+
+
+NOTE: Si vous extrayez le contenu sous Windows, utilisez 7-Zip ou WinRAR pour extraire l'image netboot.
+
+Votre liste de répertoires doit contenir un dossier netboot avec un fichier du noyau :
+
+`netboot/kernel`
+
+
+
+ a| 
+Tous les autres systèmes
+ a| 
+Votre liste de répertoires doit contenir le fichier suivant :
+
+`<ontap_version>_image.tgz`
+
+
+NOTE: Il n'est pas nécessaire d'extraire le contenu du fichier.
+
+|===
+. Déterminez l'adresse IP du module de contrôleur existant.
++
+Cette adresse est appelée plus loin dans cette procédure `_ip-address-of-existing controller_`.
+
+. Ping `_ip-address-of-existing controller_` Pour vérifier que l'adresse IP est accessible.
+

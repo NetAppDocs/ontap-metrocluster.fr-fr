@@ -1,0 +1,58 @@
+---
+permalink: upgrade/task_expand_a_two_node_mcc_fc_configuration_to_a_four_node_fc_configuration_supertask.html 
+sidebar: sidebar 
+keywords: metrocluster, upgrade, expand, two, node, fc, configuration, four 
+summary: 'L"extension d"une configuration FC MetroCluster à deux nœuds à une configuration FC MetroCluster à quatre nœuds implique d"ajouter un contrôleur à chaque cluster pour former une paire haute disponibilité sur chaque site MetroCluster, puis d"actualiser la configuration FC MetroCluster.' 
+---
+= Extension d'une configuration FC MetroCluster à deux nœuds à une configuration à quatre nœuds
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+L'extension d'une configuration FC MetroCluster à deux nœuds à une configuration FC MetroCluster à quatre nœuds implique d'ajouter un contrôleur à chaque cluster pour former une paire haute disponibilité sur chaque site MetroCluster, puis d'actualiser la configuration FC MetroCluster.
+
+.Avant de commencer
+* Les nœuds doivent exécuter ONTAP 9 ou version ultérieure dans une configuration FC MetroCluster.
++
+Cette procédure n'est pas prise en charge sur les versions antérieures de ONTAP ou dans les configurations MetroCluster IP.
+
+* Si les plateformes de votre configuration à deux nœuds ne sont pas prises en charge dans ONTAP 9.2 et que vous envisagez une mise à niveau vers des plateformes prises en charge dans ONTAP 9.2 _et_ étendre vers un cluster à quatre nœuds, vous devez mettre à niveau les plateformes de la configuration à deux nœuds _avant_ d'étendre la configuration MetroCluster FC.
+* La configuration FC MetroCluster existante doit être saine.
+* L'équipement que vous ajoutez doit être pris en charge et répondre à toutes les exigences décrites dans les procédures suivantes :
++
+link:../install-fc/index.html["Installation et configuration de la solution Fabric-Attached MetroCluster"]
+
++
+link:../install-stretch/concept_considerations_differences.html["Installation et configuration d'Stretch MetroCluster"]
+
+* Vous devez disposer de ports de commutateurs FC disponibles pour prendre en charge les nouveaux contrôleurs et les nouveaux ponts.
+* Vous avez besoin du mot de passe d'administration et de l'accès à un serveur FTP ou SCP.
+
+
+.Description de la tâche
+* Cette procédure s'applique uniquement aux configurations MetroCluster FC.
+* Cette procédure est perturbatrice et s'effectue en quatre heures environ.
+* Avant d'effectuer cette procédure, la configuration MetroCluster FC se compose de deux clusters à un seul nœud :
++
+image::../media/mcc_dr_groups_2_node.gif[mcc dr groups 2 nœuds]
+
++
+À l'issue de cette procédure, la configuration MetroCluster FC se compose de deux paires HA, une sur chaque site :
+
++
+image::../media/mcc_dr_groups_4_node.gif[mcc dr groups, nœud 4]
+
+* Les deux sites doivent être étendus de la même manière.
++
+Une configuration MetroCluster ne peut pas comprendre un nombre irrégulier de nœuds.
+
+* Cette procédure peut prendre plus d'une heure par site, avec un temps supplémentaire pour des tâches telles que l'initialisation des disques et le démarrage réseau des nouveaux nœuds.
++
+Le temps nécessaire à l'initialisation des disques dépend de la taille des disques.
+
+* Cette procédure utilise le workflow suivant :
+
+
+image::../media/workflow_mcc_2_to_4_node_expansion_high_level.gif[workflow mcc 2 à 4 nœuds, extension haut niveau]

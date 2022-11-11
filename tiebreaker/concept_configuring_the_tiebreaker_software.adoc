@@ -1,0 +1,204 @@
+---
+permalink: tiebreaker/concept_configuring_the_tiebreaker_software.html 
+sidebar: sidebar 
+keywords: installation, tiebreaker, software, add, modify, metrocluster, configuration, remove, configuring, configure, launch, cli, add, command, modify, removing 
+summary: 'Après avoir installé ce logiciel, vous pouvez ajouter ou modifier des configurations MetroCluster ou les supprimer du logiciel disjoncteur d"attache.' 
+---
+= Configuration du logiciel disjoncteur d'attache
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Après avoir installé ce logiciel, vous pouvez ajouter ou modifier des configurations MetroCluster ou les supprimer du logiciel disjoncteur d'attache.
+
+
+
+== Lancement de l'interface de ligne de commande du logiciel disjoncteur d'attache
+
+Après avoir installé le logiciel disjoncteur d'attache, vous devez lancer son interface de ligne de commande pour configurer le logiciel.
+
+. Lancez l'interface de ligne de commande à partir de l'invite de l'hôte sur lequel vous avez installé le logiciel :
++
+`netapp-metrocluster-tiebreaker-software-cli`
+
+
+
+
+
+== Ajout des configurations MetroCluster
+
+Après avoir installé le logiciel NetApp MetroCluster Tiebreaker, vous pouvez ajouter d'autres configurations MetroCluster, une à la fois.
+
+Vous devez avoir installé la configuration MetroCluster dans un environnement ONTAP et activé les paramètres dans le logiciel.
+
+. Utilisez l'interface de ligne de commande Tiebreaker pour ajouter les configurations MetroCluster,
++
+Si vous utilisez le nom d'hôte, il doit s'agir du nom de domaine complet (FQDN).
+
++
+L'exemple suivant montre la configuration du cluster_A :
+
++
+[listing]
+----
+
+NetApp MetroCluster Tiebreaker :> monitor add wizard
+Enter monitor Name: cluster_A
+Enter Cluster IP Address: 10.222.196.130
+Enter Cluster Username: admin
+Enter Cluster Password:
+Enter Peer Cluster IP Address: 10.222.196.40
+Enter Peer Cluster Username: admin
+Enter Peer Cluster Password:
+Successfully added monitor to NetApp MetroCluster Tiebreaker software.
+----
+. Vérifiez que la configuration MetroCluster a été correctement ajoutée à l'aide de l'interface de ligne de commande Tiebreaker `monitor show -status` commande.
++
+[listing]
+----
+
+NetApp MetroCluster Tiebreaker :> monitor show -status
+----
+. Désactiver le mode observateur pour le logiciel disjoncteur d'attache pour effectuer automatiquement un basculement après détection d'une défaillance de site :
++
+`monitor modify -monitor-name monitor_name -observer-mode false`
+
++
+[listing]
+----
+NetApp MetroCluster Tiebreaker :> monitor modify -monitor-name 8pack -observer-mode false
+Warning: If you are turning observer-mode to false, make sure to review the 'risks and limitations'
+as described in the MetroCluster Tiebreaker installation and configuration.
+Are you sure you want to enable automatic switchover capability for monitor "8pack"? [Y/N]: y
+----
+
+
+link:concept_risks_and_limitation_of_using_mcc_tiebreaker_in_active_mode.html["Risques et limitations liés à l'utilisation de MetroCluster Tiebreaker en mode actif"]
+
+
+
+== Commandes de modification des configurations d'MetroCluster Tiebreaker
+
+Vous pouvez modifier la configuration MetroCluster dès que vous devez modifier les paramètres.
+
+Vous pouvez utiliser la commande de modification du contrôle par le logiciel disjoncteur d'attache avec les options suivantes. Vous pouvez confirmer les modifications avec la commande Monitor show -status.
+
+[cols="30,70"]
+|===
+
+
+| Option | Description 
+
+
+ a| 
+-nom-moniteur
+ a| 
+Nom de la configuration MetroCluster
+
+
+
+ a| 
+-activer-surveiller
+ a| 
+Active et désactive la surveillance de la configuration MetroCluster
+
+
+
+ a| 
+-période-silencieuse
+ a| 
+Période en secondes pendant laquelle le logiciel MetroCluster Tiebreaker attend la détection d'une panne sur site
+
+
+
+ a| 
+-mode-observateur
+ a| 
+Le mode observateur (vrai) fournit uniquement la surveillance et ne déclenche pas de basculement en cas d'incident sur site. Le mode en ligne (FALSE) déclenche un basculement en cas d'incident sur site.
+
+* link:concept_overview_of_the_tiebreaker_software.html["Détection des pannes sur site par le logiciel disjoncteur d'attache"]
+* link:concept_risks_and_limitation_of_using_mcc_tiebreaker_in_active_mode.html["Risques et limitations liés à l'utilisation de MetroCluster Tiebreaker en mode actif"]
+
+
+|===
+L'exemple suivant modifie la période de silence pour la configuration.
+
+[listing]
+----
+
+NetApp MetroCluster Tiebreaker :> monitor modify -monitor-name cluster_A -silent-period 15
+Successfully modified monitor in NetApp MetroCluster Tiebreaker
+software.
+----
+Interface de ligne de commande d'disjoncteur logiciel `debug` la commande peut être utilisée pour modifier le mode de consignation.
+
+[cols="30,70"]
+|===
+
+
+| Commande | Description 
+
+
+ a| 
+état de débogage
+ a| 
+Affiche l'état du mode débogage
+
+
+
+ a| 
+activation du débogage
+ a| 
+Active le mode débogage pour la journalisation
+
+
+
+ a| 
+débogage désactivé
+ a| 
+Désactive le mode de débogage pour la journalisation
+
+|===
+Interface de ligne de commande d'disjoncteur logiciel `update-mcctb-password` la commande peut être utilisée pour mettre à jour le mot de passe utilisateur.
+
+[cols="30,70"]
+|===
+
+
+| Commande | Description 
+
+
+ a| 
+update-mcctb-password
+ a| 
+Le mot de passe utilisateur a été mis à jour
+
+|===
+
+
+== Suppression des configurations MetroCluster
+
+Vous pouvez supprimer la configuration MetroCluster surveillée par ce logiciel quand vous ne souhaitez plus surveiller une configuration MetroCluster.
+
+. Utiliser l'interface de ligne de commande Tiebreaker `monitor remove` Commande permettant de supprimer la configuration MetroCluster.
++
+Dans l'exemple suivant, « cluster_A » est supprimé du logiciel :
+
++
+[listing]
+----
+
+NetApp MetroCluster Tiebreaker :> monitor remove -monitor-name cluster_A
+Successfully removed monitor from NetApp MetroCluster Tiebreaker
+software.
+----
+. Vérifiez que la configuration MetroCluster est correctement supprimée à l'aide de l'interface de ligne de commande Tiebreaker `monitor show -status` commande.
++
+[listing]
+----
+
+NetApp MetroCluster Tiebreaker :> monitor show -status
+----
+

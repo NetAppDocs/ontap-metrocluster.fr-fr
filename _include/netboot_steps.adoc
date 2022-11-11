@@ -1,0 +1,63 @@
+= 
+:allow-uri-read: 
+
+
+.Étapes
+. Accédez au https://mysupport.netapp.com/site/["Site de support NetApp"^] pour télécharger les fichiers utilisés pour effectuer le démarrage sur le réseau du système.
+. Téléchargez le logiciel ONTAP approprié depuis la section de téléchargement de logiciels du site du support NetApp et stockez le fichier ontap-version_image.tgz dans un répertoire accessible en ligne.
+. Accédez au répertoire accessible sur le Web et vérifiez que les fichiers dont vous avez besoin sont disponibles.
++
+|===
+
+
+| Si le modèle de plateforme est... | Alors... 
+
+
+| Systèmes de la gamme FAS/AFF8000 | Extrayez le contenu d'ontap-version_image.tgzfile dans le répertoire cible : tar -zxvf ontap-version_image.tgz REMARQUE : si vous extrayez le contenu sous Windows, utilisez 7-Zip ou WinRAR pour extraire l'image netboot. Votre liste de répertoires doit contenir un dossier netboot avec un fichier de noyau:netboot/kernel 
+
+
+| Tous les autres systèmes | Votre liste de répertoires doit contenir un dossier netboot avec un fichier du noyau : ontap-version_image.tgz vous n'avez pas besoin d'extraire le fichier ontap-version_image.tgz. 
+|===
+. À l'invite DU CHARGEUR, configurez la connexion netboot pour les LIF de gestion :
++
+** Si l'adressage IP est DHCP, configurez la connexion automatique :
++
+`ifconfig e0M -auto`
+
+** Si l'adressage IP est statique, configurez la connexion manuelle :
++
+`ifconfig e0M -addr=ip_addr -mask=netmask` `-gw=gateway`
+
+
+
+. Effectuer la démarrage sur le réseau.
++
+** Si la plate-forme est un système de la série 80xx, utilisez la commande suivante :
++
+`netboot \http://web_server_ip/path_to_web-accessible_directory/netboot/kernel`
+
+** Si la plateforme est un autre système, utilisez la commande suivante :
++
+`netboot \http://web_server_ip/path_to_web-accessible_directory/ontap-version_image.tgz`
+
+
+
+. Dans le menu de démarrage, sélectionnez l'option *(7) installer le nouveau logiciel en premier* pour télécharger et installer la nouvelle image logicielle sur le périphérique d'amorçage.
++
+ Disregard the following message: "This procedure is not supported for Non-Disruptive Upgrade on an HA pair". It applies to nondisruptive upgrades of software, not to upgrades of controllers.
+. Si vous êtes invité à poursuivre la procédure, entrez `y`, Et lorsque vous êtes invité à saisir l'URL du fichier image : `\http://web_server_ip/path_to_web-accessible_directory/ontap-version_image.tgz`
++
+....
+Enter username/password if applicable, or press Enter to continue.
+....
+. Assurez-vous d'entrer `n` pour ignorer la restauration de la sauvegarde lorsque vous voyez une invite similaire à la suivante :
++
+....
+Do you want to restore the backup configuration now? {y|n}
+....
+. Redémarrez en entrant `y` lorsque vous voyez une invite similaire à la suivante :
++
+....
+The node must be rebooted to start using the newly installed software. Do you want to reboot now? {y|n}
+....
+

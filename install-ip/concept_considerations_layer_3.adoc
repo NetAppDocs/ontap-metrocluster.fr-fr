@@ -1,0 +1,53 @@
+---
+permalink: install-ip/concept_considerations_layer_3.html 
+sidebar: sidebar 
+keywords: differences, eight-node, four-node, fabric-attached, stretch, metrocluster ip, storage, bridges, fc-to-sas, atto, fibrebridge, SAS, local HA, auso, automatic unplanned switchover, array luns, mediator, tiebreaker 
+summary: 'Depuis ONTAP 9.9.1, les configurations MetroCluster IP peuvent être implémentées avec des connexions back-end IP-routées (couche 3).' 
+---
+= Considérations relatives aux réseaux étendus de couche 3
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+Depuis ONTAP 9.9.1, les configurations MetroCluster IP peuvent être implémentées avec des connexions back-end IP-routées (couche 3).
+
+Les commutateurs back-end MetroCluster sont connectés au réseau IP routé, soit directement aux routeurs (comme indiqué dans l'exemple simplifié suivant), soit via d'autres commutateurs.
+
+image::../media/mcc_layer3_backend.png[mcc layer3 backend]
+
+
+NOTE: NetApp prend uniquement en charge les switchs validés par NetApp. Ces switchs sont testés et vendus par NetApp. Ils sont répertoriés dans le link:https://mysupport.netapp.com/NOW/products/interoperability["Matrice d'interopérabilité NetApp (IMT)"] et po link:https://docs.netapp.com/us-en/ontap-metrocluster/install-ip/using_rcf_generator.html["Câblage des commutateurs IP"].
+
+L'environnement MetroCluster est configuré et câblé sous la forme d'une configuration IP MetroCluster standard, comme décrit dans la link:concept_parts_of_an_ip_mcc_configuration_mcc_ip.html["Configurer les composants matériels de MetroCluster"]. Lorsque vous effectuez la procédure d'installation et de câblage, vous devez effectuer les étapes spécifiques à la configuration de la couche 3 :
+
+* Les commutateurs MetroCluster peuvent être connectés directement au routeur ou à un ou plusieurs commutateurs intermédiaires. Le VLAN doit être étendu au périphérique de passerelle.
+* Vous utilisez le `-gateway` Paramètre permettant de configurer l'adresse d'interface MetroCluster IP (MCC-IP) avec une adresse de passerelle IP.
+
+
+Lorsque vous configurez des routeurs et des adresses IP de la passerelle, assurez-vous que les conditions suivantes sont remplies :
+
+* Sur chaque nœud, deux interfaces ne peuvent pas avoir la même adresse IP de passerelle.
+* Les interfaces correspondantes sur les paires haute disponibilité sur chaque site doivent avoir la même adresse IP de passerelle.
+* Les interfaces correspondantes sur un nœud et ses partenaires DR et aux ne peuvent pas avoir la même adresse IP de passerelle.
+* Les interfaces correspondantes sur un nœud et ses partenaires DR et aux doivent avoir le même ID VLAN.
+
+
+Les VLAN MetroCluster doivent s'étendre du commutateur Edge MetroCluster au routeur passerelle de manière à ce que le trafic MetroCluster atteigne la passerelle (reportez-vous au schéma ci-dessus). Les ID de VLAN pour les VLAN MetroCluster doivent être les mêmes sur chaque site. Cependant, les sous-réseaux peuvent être différents.
+
+Vous utilisez les fichiers RCF créés par l'outil RcfFileGenerator. Le réseau entre les nœuds MetroCluster et le routeur de passerelle doit fournir les mêmes ID VLAN que ceux définis dans le fichier RCF.
+
+
+
+== Exigences réseau routées par IP
+
+Le réseau routé par IP doit répondre aux exigences suivantes :
+
+* link:../install-ip/concept_considerations_isls.html#basic-metrocluster-isl-requirements["Exigences de base en matière de liaison ISL MetroCluster"]
+* link:../install-ip/concept_considerations_isls.html#isl-requirements-in-shared-layer-2-networks["Exigences ISL dans des réseaux partagés de couche 2"]
+* link:../install-ip/concept_considerations_layer_2.html#required-settings-on-intermediate-switches["Réglages requis sur les commutateurs intermédiaires"]
+* Le routage dynamique n'est pas pris en charge pour le trafic MetroCluster.
+* Seules les configurations MetroCluster à quatre nœuds sont prises en charge (deux nœuds sur chaque site).
+* Deux sous-réseaux sont requis sur chaque site MetroCluster : un sur chaque réseau.
+* L'affectation auto-IP n'est pas prise en charge.
+

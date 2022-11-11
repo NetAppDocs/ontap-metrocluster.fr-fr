@@ -1,0 +1,31 @@
+---
+permalink: upgrade/task_install_licenses_on_the_new_controller_module_cluster_mode.html 
+sidebar: sidebar 
+keywords: metrocluster, upgrade, install, license, new, controller, module 
+summary: 'Vous devez ajouter des licences pour le nouveau module de contrôleur pour tous les services ONTAP nécessitant des licences \(nœud verrouillé\) standard. Pour les fonctionnalités avec licences standard, chaque nœud du cluster doit disposer de sa propre clé pour cette fonctionnalité.' 
+---
+= Installation des licences pour le nouveau module de contrôleur
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous devez ajouter des licences pour le nouveau module de contrôleur pour tous les services ONTAP nécessitant des licences standard (verrouillées par des nœuds). Pour les fonctionnalités avec licences standard, chaque nœud du cluster doit disposer de sa propre clé pour cette fonctionnalité.
+
+Pour plus d'informations sur les licences, consultez l'article de la base de connaissances 3013749 : présentation des licences et références Data ONTAP 8.2 sur le site de support NetApp et _System Administration Reference_.
+
+.Étapes
+. Si nécessaire, procurez-vous les clés de licence pour le nouveau nœud sur le site de support NetApp dans la section My support (mon support) de la section My support (licences logicielles).
++
+Pour plus d'informations sur les remplacements de licences, consultez l'article de la base de connaissances link:https://kb.netapp.com/Advice_and_Troubleshooting/Flash_Storage/AFF_Series/Post_Motherboard_Replacement_Process_to_update_Licensing_on_a_AFF_FAS_system["Processus de remplacement post-carte mère pour la mise à jour des licences sur un système AFF/FAS."^]
+
+. Exécutez la commande suivante pour installer chaque clé de licence :
++
+`system license add -license-code _license_key_`
+
++
+Le `_license_key_` a 28 chiffres.
+
+. Répétez cette étape pour chaque licence standard (verrouillée par nœud) requise.
+

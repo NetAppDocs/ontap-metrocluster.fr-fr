@@ -1,0 +1,32 @@
+---
+permalink: install-fc/task_cable_the_ha_interconnect.html 
+sidebar: sidebar 
+keywords: metrocluster, fabric, installation, cable, ha, interconnect, cabling 
+summary: 'Si vous disposez d"une configuration MetroCluster à huit ou quatre nœuds et que les contrôleurs de stockage de paires haute disponibilité sont dans un châssis distinct, vous devez connecter l"interconnexion haute disponibilité entre les contrôleurs.' 
+---
+= Câblage de l'interconnexion haute disponibilité
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Si vous disposez d'une configuration MetroCluster à huit ou quatre nœuds et que les contrôleurs de stockage de paires haute disponibilité sont dans un châssis distinct, vous devez connecter l'interconnexion haute disponibilité entre les contrôleurs.
+
+.Description de la tâche
+* Cette tâche ne s'applique pas aux configurations MetroCluster à deux nœuds.
+* Cette tâche doit être effectuée sur les deux sites MetroCluster.
+* L'interconnexion haute disponibilité doit être câblée uniquement si les contrôleurs de stockage de la paire haute disponibilité se trouvent dans un châssis séparé.
++
+Certains modèles de contrôleur de stockage prennent en charge deux contrôleurs dans un seul châssis, auquel cas ils utilisent une interconnexion haute disponibilité interne.
+
+
+
+.Étapes
+. Reliez l'interconnexion haute disponibilité si le partenaire de haute disponibilité du contrôleur de stockage se trouve dans un châssis distinct.
++
+https://docs.netapp.com/platstor/index.jsp["Centre de documentation AFF et FAS"]
+
+. Si le site MetroCluster inclut deux paires haute disponibilité, répétez les étapes précédentes sur la seconde paire haute disponibilité.
+. Répétez cette tâche sur le site partenaire MetroCluster.
+

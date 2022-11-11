@@ -1,0 +1,25 @@
+---
+permalink: manage/task_send_a_custom_autosupport_message_prior_to_negotiated_switchover.html 
+sidebar: sidebar 
+keywords: perform, negotiate, switchover, autosupport, message, netapp, technical, support, maintenance, underway, failure, trigger, support, prevent, disruption, custom, prior 
+summary: 'Avant de procéder à un basculement négocié, vous devez émettre un message AutoSupport pour informer le support technique de NetApp que la maintenance est en cours. Le basculement négocié peut entraîner des erreurs de fonctionnement plex ou MetroCluster qui déclenchent des messages AutoSupport. Informer le support technique que la maintenance est en cours empêche l"ouverture d"un dossier en supposant une interruption de l"activité.' 
+---
+= Envoi d'un message AutoSupport personnalisé avant le basculement négocié
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Avant de procéder à un basculement négocié, vous devez émettre un message AutoSupport pour informer le support technique de NetApp que la maintenance est en cours. Le basculement négocié peut entraîner des erreurs de fonctionnement plex ou MetroCluster qui déclenchent des messages AutoSupport. Informer le support technique que la maintenance est en cours empêche l'ouverture d'un dossier en supposant une interruption de l'activité.
+
+Cette tâche doit être effectuée sur chaque site MetroCluster.
+
+.Étapes
+. Connectez-vous au cluster au site_A.
+. Appelez un message AutoSupport indiquant le début de la maintenance : `system node autosupport invoke -node * -type all -message MAINT=maintenance-window-in-hours`
++
+la fenêtre de maintenance en heures spécifie la durée de la fenêtre de maintenance et peut être maximale de 72 heures. Si la maintenance est terminée avant le temps qui s'est écoulé, vous pouvez lancer une commande pour indiquer que la période de maintenance a pris fin :``system node autosupport invoke -node * -type all -message MAINT=end``
+
+. Répétez cette étape sur le site du partenaire.
+

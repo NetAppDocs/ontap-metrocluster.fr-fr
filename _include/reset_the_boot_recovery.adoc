@@ -1,0 +1,31 @@
+= 
+:allow-uri-read: 
+
+
+[role="lead"]
+Si nécessaire, vous pouvez réinitialiser boot_Recovery et rdb_corrompu_bootargs
+
+.Étapes
+. Arrêtez le nœud en arrière à l'invite DU CHARGEUR :
++
+[listing]
+----
+node_A_1::*> halt -node _node-name_
+----
+. Vérifiez si les bootargs suivants ont été définis :
++
+[listing]
+----
+LOADER> printenv bootarg.init.boot_recovery
+LOADER> printenv bootarg.rdb_corrupt
+----
+. Si bootarg a été défini sur une valeur, désactivez-la et démarrez ONTAP :
++
+[listing]
+----
+LOADER> unsetenv bootarg.init.boot_recovery
+LOADER> unsetenv bootarg.rdb_corrupt
+LOADER> saveenv
+LOADER> bye
+----
+

@@ -1,0 +1,113 @@
+---
+permalink: install-fc/task_configure_fc_vi_ports_on_a_x1132a_r6_quad_port_card.html 
+sidebar: sidebar 
+keywords: metrocluster, fabric, installation, fc, vi, ports, quad, port, card 
+summary: 'Si vous utilisez la carte X1132A-R6 à quatre ports sur un système FAS8020, vous pouvez passer en mode de maintenance pour configurer les ports 1a et 1b pour FC-VI et pour l"utilisation d"un initiateur. Cela n"est pas nécessaire pour les systèmes MetroCluster reçus en usine, dans lesquels les ports sont configurés de façon appropriée pour votre configuration.' 
+---
+= Configuration des ports FC-VI sur une carte X1132A-R6 à quatre ports sur les systèmes FAS8020
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Si vous utilisez la carte X1132A-R6 à quatre ports sur un système FAS8020, vous pouvez passer en mode de maintenance pour configurer les ports 1a et 1b pour FC-VI et pour l'utilisation d'un initiateur. Cela n'est pas nécessaire pour les systèmes MetroCluster reçus en usine, dans lesquels les ports sont configurés de façon appropriée pour votre configuration.
+
+Cette tâche doit être effectuée en mode Maintenance.
+
+
+NOTE: Conversion d'un port FC en port FC-VI avec le `ucadmin` La commande n'est prise en charge que sur les systèmes FAS8020 et AFF 8020. La conversion de ports FC en ports FCVI n'est pas prise en charge sur toute autre plateforme.
+
+.Étapes
+. Désactiver les ports :
++
+`storage disable adapter 1a`
+
++
+`storage disable adapter 1b`
+
++
+[listing]
+----
+*> storage disable adapter 1a
+Jun 03 02:17:57 [controller_B_1:fci.adapter.offlining:info]: Offlining Fibre Channel adapter 1a.
+Host adapter 1a disable succeeded
+Jun 03 02:17:57 [controller_B_1:fci.adapter.offline:info]: Fibre Channel adapter 1a is now offline.
+*> storage disable adapter 1b
+Jun 03 02:18:43 [controller_B_1:fci.adapter.offlining:info]: Offlining Fibre Channel adapter 1b.
+Host adapter 1b disable succeeded
+Jun 03 02:18:43 [controller_B_1:fci.adapter.offline:info]: Fibre Channel adapter 1b is now offline.
+*>
+----
+. Vérifiez que les ports sont désactivés :
++
+`ucadmin show`
+
++
+[listing]
+----
+*> ucadmin show
+         Current  Current    Pending  Pending    Admin
+Adapter  Mode     Type       Mode     Type       Status
+-------  -------  ---------  -------  ---------  -------
+  ...
+  1a     fc       initiator  -        -          offline
+  1b     fc       initiator  -        -          offline
+  1c     fc       initiator  -        -          online
+  1d     fc       initiator  -        -          online
+----
+. Définir les ports a et b en mode FC-VI :
++
+`ucadmin modify -adapter 1a -type fcvi`
+
++
+La commande définit le mode sur les deux ports de la paire de ports 1a et 1b (même si seul 1a est spécifié dans la commande).
+
++
+[listing]
+----
+
+*> ucadmin modify -t fcvi 1a
+Jun 03 02:19:13 [controller_B_1:ucm.type.changed:info]: FC-4 type has changed to fcvi on adapter 1a. Reboot the controller for the changes to take effect.
+Jun 03 02:19:13 [controller_B_1:ucm.type.changed:info]: FC-4 type has changed to fcvi on adapter 1b. Reboot the controller for the changes to take effect.
+----
+. Vérifiez que la modification est en attente :
++
+`ucadmin show`
+
++
+[listing]
+----
+*> ucadmin show
+         Current  Current    Pending  Pending    Admin
+Adapter  Mode     Type       Mode     Type       Status
+-------  -------  ---------  -------  ---------  -------
+  ...
+  1a     fc       initiator  -        fcvi       offline
+  1b     fc       initiator  -        fcvi       offline
+  1c     fc       initiator  -        -          online
+  1d     fc       initiator  -        -          online
+----
+. Arrêter le contrôleur, puis redémarrer en mode maintenance.
+. Confirmer le changement de configuration :
++
+`ucadmin show local`
+
++
+[listing]
+----
+
+Node           Adapter  Mode     Type       Mode     Type       Status
+------------   -------  -------  ---------  -------  ---------  -----------
+...
+controller_B_1
+               1a       fc       fcvi       -        -          online
+controller_B_1
+               1b       fc       fcvi       -        -          online
+controller_B_1
+               1c       fc       initiator  -        -          online
+controller_B_1
+               1d       fc       initiator  -        -          online
+6 entries were displayed.
+----
+

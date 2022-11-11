@@ -1,0 +1,144 @@
+---
+permalink: maintain/task_upgrade_rcf_files_on_mcc_ip_switches.html 
+sidebar: sidebar 
+keywords: metrocluster, maintain, service, upgrade, rcf, files, ip, switches 
+summary: Il peut être nécessaire de mettre à niveau un fichier RCF sur un commutateur IP MetroCluster. Par exemple, une mise à niveau de ONTAP ou une mise à niveau du firmware du switch nécessite tous deux un nouveau fichier RCF. 
+---
+= Mettre à niveau les fichiers RCF sur les commutateurs IP MetroCluster
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Il peut être nécessaire de mettre à niveau un fichier RCF sur un commutateur IP MetroCluster. Par exemple, une mise à niveau de ONTAP ou une mise à niveau du firmware du switch nécessite tous deux un nouveau fichier RCF.
+
+
+
+== Assurez-vous que le fichier RCF est pris en charge
+
+Si vous modifiez la version de ONTAP en cours d'exécution sur les commutateurs, veillez à disposer d'un fichier RCF pris en charge pour cette version. Si vous utilisez le générateur FCR, le fichier RCF approprié sera généré pour vous.
+
+.Étapes
+. Utiliser les commandes suivantes des commutateurs pour vérifier la version du fichier RCF :
++
+[cols="30,70"]
+|===
+
+
+| À partir de ce commutateur... | Exécutez cette commande... 
+
+
+ a| 
+Commutateur Brocade
+ a| 
+`(IP_switch_A_1) # show clibanner`
+
+
+
+ a| 
+Commutateur Cisco
+ a| 
+`IP_switch_A_1# show banner motd`
+
+|===
++
+Pour l'un ou l'autre commutateur, recherchez la ligne du résultat indiquant la version du fichier RCF. Par exemple, le résultat suivant provient d'un commutateur Cisco, qui indique que la version du fichier RCF est « v1.80 ».
+
++
+....
+Filename : NX3232_v1.80_Switch-A2.txt
+....
+. Pour vérifier quels fichiers sont pris en charge pour une version, un commutateur et une plate-forme ONTAP spécifiques, utilisez le générateur de fichiers RcfFileGenerator. Si vous pouvez générer le fichier RCF pour la configuration dont vous disposez ou vers laquelle vous souhaitez procéder à la mise à niveau, ce fichier est pris en charge.
+. Pour vérifier que le micrologiciel du commutateur est pris en charge, reportez-vous aux sections suivantes :
++
+** https://hwu.netapp.com["Hardware Universe"]
+** https://mysupport.netapp.com/NOW/products/interoperability["Interopérabilité NetApp"]
+
+
+
+
+
+
+== Mettre à niveau les fichiers RCF
+
+Si vous installez un nouveau firmware du commutateur, vous devez installer le micrologiciel du commutateur avant de mettre à niveau le fichier RCF.
+
+Cette procédure perturbe le trafic sur le commutateur où le fichier RCF est mis à niveau. Le trafic reprend lorsque le nouveau fichier RCF est appliqué.
+
+.Étapes
+. Vérification de l'état de santé de la configuration.
++
+.. Vérifiez que les composants MetroCluster sont sains :
++
+`metrocluster check run`
+
++
+[listing]
+----
+cluster_A::*> metrocluster check run
+
+----
+
+
++
+L'opération s'exécute en arrière-plan.
+
++
+.. Après le `metrocluster check run` opération terminée, exécution `metrocluster check show` pour afficher les résultats.
++
+Après environ cinq minutes, les résultats suivants s'affichent :
+
++
+[listing]
+----
+-----------
+::*> metrocluster check show
+
+Last Checked On: 4/7/2019 21:15:05
+
+Component           Result
+------------------- ---------
+nodes               ok
+lifs                ok
+config-replication  ok
+aggregates          warning
+clusters            ok
+connections         not-applicable
+volumes             ok
+7 entries were displayed.
+----
+.. Vérifier l'état de l'opération de vérification MetroCluster en cours :
++
+`metrocluster operation history show -job-id 38`
+
+.. Vérifiez qu'il n'y a pas d'alerte de santé :
++
+`system health alert show`
+
+
+
+. Préparez les commutateurs IP pour l'application des nouveaux fichiers RCF.
++
+Suivez les étapes pour votre fournisseur de commutateur :
+
++
+** link:../install-ip/task_switch_config_broadcom.html["Réinitialisation des paramètres d'usine du commutateur IP Broadcom"]
+** link:../install-ip/task_switch_config_cisco.html["Réinitialisation des paramètres d'usine du commutateur IP Cisco"]
+
+
+. Téléchargez et installez le fichier RCF IP, selon votre fournisseur de commutateur.
++
+
+NOTE: Mettre à jour les interrupteurs dans l'ordre suivant : Switch_A_1, Switch_B_1, Switch_A_2, Switch_B_2
+
++
+** link:../install-ip/task_switch_config_broadcom.html#downloading-and-installing-the-broadcom-rcf-files["Téléchargement et installation des fichiers RCF IP de Broadcom"]
+** link:../install-ip/task_switch_config_cisco.html#downloading-and-installing-the-cisco-ip-rcf-files["Téléchargement et installation des fichiers Cisco IP RCF"]
++
+
+NOTE: Si vous disposez d'une configuration réseau L2 partagée ou L3, il se peut que vous deviez ajuster les ports ISL sur les commutateurs intermédiaire/client. Le mode de port de commutateur peut passer du mode « accès » au mode « réseau ». Ne procédez à la mise à niveau de la deuxième paire de commutateurs (A_2, B_2) que si la connectivité réseau entre les commutateurs A_1 et B_1 est pleinement opérationnelle et que le réseau fonctionne correctement.
+
+
+
+

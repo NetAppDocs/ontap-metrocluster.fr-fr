@@ -1,0 +1,71 @@
+---
+permalink: install-ip/task_rack_hw_components.html 
+sidebar: sidebar 
+keywords: metrocluster ip, rack hardware, components, racking 
+summary: 'Si vous n"avez pas reçu l"équipement déjà installé dans les armoires, vous devez installer les composants en rack.' 
+---
+= Mise en rack des composants matériels
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Si vous n'avez pas reçu l'équipement déjà installé dans les armoires, vous devez installer les composants en rack.
+
+Cette tâche doit être effectuée sur les deux sites MetroCluster.
+
+.Étapes
+. Planifiez le positionnement des composants MetroCluster.
++
+L'espace rack dépend du modèle de plateforme des modules de contrôleur, des types de switchs et du nombre de piles de tiroirs disques dans votre configuration.
+
+. Mettez-vous à la terre.
+. Installez les modules de contrôleur sur le rack ou l'armoire.
++
+https://library.netapp.com/ecm/ecm_download_file/ECMLP2842666["Instructions d'installation et de configuration des systèmes AFF A220/FAS2700"^]
+
++
+https://library.netapp.com/ecm/ecm_download_file/ECMLP2870798["Instructions d'installation et de configuration du système AFF A250"^]
+
++
+https://library.netapp.com/ecm/ecm_download_file/ECMLP2469722["Instructions d'installation et de configuration des systèmes AFF A300"^]
+
++
+https://docs.netapp.com/platstor/topic/com.netapp.doc.hw-a320-install-setup/home.html["Systèmes AFF A320 : installation et configuration"^]
+
++
+https://library.netapp.com/ecm/ecm_download_file/ECMLP2858854["Instructions d'installation et de configuration des systèmes AFF A400"^]
+
++
+https://library.netapp.com/ecm/ecm_download_file/ECMLP2873445["Instructions d'installation et de configuration des systèmes AFF A700"^]
+
++
+https://library.netapp.com/ecm/ecm_download_file/ECMLP2842668["Instructions d'installation et de configuration des systèmes AFF A800"^]
+
++
+https://library.netapp.com/ecm/ecm_download_file/ECMLP2872833["Instructions d'installation et de configuration des systèmes FAS500f"^]
+
++
+https://library.netapp.com/ecm/ecm_download_file/ECMLP2316769["Instructions d'installation et de configuration du système FAS8200"^]
+
++
+https://library.netapp.com/ecm/ecm_download_file/ECMLP2858856["Instructions d'installation et de configuration des systèmes FAS8300 et FAS8700"^]
+
++
+https://library.netapp.com/ecm/ecm_download_file/ECMLP2874463["Instructions d'installation et de configuration des systèmes FAS9000"^]
+
+
+
+. Installez les commutateurs IP sur le rack ou l'armoire.
+. Installez les tiroirs disques, mettez-les sous tension, puis définissez les ID de tiroir.
++
+** Vous devez mettre chaque tiroir disque hors tension puis sous tension.
+** Il est vivement recommandé d'utiliser des ID de tiroir unique pour chaque tiroir disque SAS dans chaque groupe MetroCluster DR afin de faciliter le dépannage.
+
+
++
+
+IMPORTANT: Ne câisez pas les tiroirs disques destinés à contenir actuellement des agrégats non mis en miroir. Vous devez patienter jusqu'à la fin de la configuration de MetroCluster et déployer les tiroirs destinés aux agrégats sans mise en miroir après l'utilisation de `metrocluster modify -enable-unmirrored-aggr-deployment true` commande.
+
+

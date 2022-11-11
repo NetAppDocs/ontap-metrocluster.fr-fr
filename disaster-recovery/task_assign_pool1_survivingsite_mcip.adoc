@@ -1,0 +1,31 @@
+---
+permalink: disaster-recovery/task_assign_pool1_survivingsite_mcip.html 
+sidebar: sidebar 
+keywords: adp, system, assign, surviving, site 
+summary: Sur le site survivant, vous devez attribuer manuellement des disques distants situés sur le site de reprise après incident au pool des nœuds survivants 1. 
+---
+= Assignation des disques au pool 1 sur le site survivant (configurations MetroCluster IP)
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Si des disques ont été remplacés sur le site de secours et que le système n'est pas configuré pour ADP, vous devez attribuer manuellement les disques distants situés sur le site de secours au pool des nœuds survivants 1. Vous devez identifier le nombre de disques à affecter.
+
+Pour les systèmes ADP, les lecteurs sont automatiquement affectés.
+
+.Étape
+. Sur le site survivant, attribuez les disques du pool 1 du premier nœud (distant) : `storage disk assign -n number-of-replacement disks -p 1 0m*`
++
+Cette commande attribue les disques que vous venez d'ajouter et qui ne possédiez pas sur le site de secours.
+
++
+La commande suivante attribue 22 disques :
+
++
+[listing]
+----
+cluster_B::> storage disk assign -n 22 -p 1 0m*
+----
+

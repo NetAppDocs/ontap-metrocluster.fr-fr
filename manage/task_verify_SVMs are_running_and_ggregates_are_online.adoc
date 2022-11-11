@@ -1,0 +1,55 @@
+---
+permalink: manage/task_verify_SVMs are_running_and_aggregates_are_online.html 
+sidebar: sidebar 
+keywords: switchover, dr, partner, ownership, disk, svm, online, confirm 
+summary: Une fois le basculement terminé, vérifier que les partenaires de reprise après incident ont pris la propriété des disques et que les SVM partenaires sont mis en ligne. 
+---
+= Vérifiez que les SVM sont exécutés et que les agrégats sont en ligne
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Une fois le basculement terminé, vérifier que les partenaires de reprise après incident ont pris la propriété des disques et que les SVM partenaires sont mis en ligne.
+
+Lorsque vous exécutez la commande Storage agmoyen plex show après un basculement de MetroCluster, l'état du plex0 de l'agrégat racine commuté est indéterminé et s'affiche comme ayant échoué. Pendant ce temps, la racine de commutation n'est pas mise à jour. L'état réel de ce plex ne peut être déterminé qu'après la phase de guérison MetroCluster.
+
+.Étapes
+. Vérifier que les agrégats ont été basculés à l'aide de la commande Storage aggry show.
++
+Dans cet exemple, les agrégats ont été basculés. L'agrégat racine (aggr0_b2) est dans un état dégradé. L'agrégat de données (b2_aggr2) est en état normal mis en miroir :
+
++
+[listing]
+----
+cluster_A::*> storage aggregate show
+
+.
+.
+.
+mcc1-b Switched Over Aggregates:
+Aggregate     Size Available Used% State   #Vols  Nodes            RAID Status
+--------- -------- --------- ----- ------- ------ ---------------- ------------
+aggr0_b2    227.1GB   45.1GB    80% online       0 node_A_1        raid_dp,
+                                                                   mirror
+                                                                   degraded
+b2_aggr1    227.1GB   200.3GB    20% online       0 node_A_1       raid_dp,
+                                                                   mirrored
+                                                                   normal
+----
+. Vérifier que les SVM secondaires ont été mis en ligne à l'aide de la commande vserver show.
++
+Dans cet exemple, les SVM de destination synchrone précédemment inactifs sur le site secondaire ont été activés et disposent d'un état d'exécution Admin :
+
++
+[listing]
+----
+cluster_A::*> vserver show
+                                          Admin      Operational  Root                 Name    Name
+Vserver           Type  Subtype           State      State        Volume    Aggregate  Service Mapping
+-----------       ----- ----------        ---------- -----------  --------- ---------- ------- -------
+...
+cluster_B-vs1b-mc data   sync-destination  running   running      vs1b_vol   aggr_b1   file    file
+----
+

@@ -1,0 +1,109 @@
+---
+permalink: maintain/task_power_off_an_entire_mcc_fc_configuration.html 
+sidebar: sidebar 
+keywords: metrocluster, maintain, service, power, off, entire, metrocluster, fc, configuration 
+summary: 'Vous devez mettre hors tension l"ensemble de la configuration FC MetroCluster et l"ensemble de l"équipement avant le début des opérations de maintenance ou de déplacement du site.' 
+---
+= Mise hors tension de l'ensemble d'une configuration MetroCluster FC
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous devez mettre hors tension l'ensemble de la configuration FC MetroCluster et l'ensemble de l'équipement avant le début des opérations de maintenance ou de déplacement du site.
+
+
+NOTE: Avec ONTAP 9.8, le `*storage switch*` la commande est remplacée par `*system switch*`. Les étapes suivantes présentent le `*storage switch*` Mais si vous exécutez ONTAP 9.8 ou version ultérieure, le `*system switch*` commande recommandée.
+
+. Vérifier la configuration MetroCluster des deux sites de la configuration MetroCluster.
++
+.. Vérifier la configuration MetroCluster et que le mode opérationnel est normal. +
+`*metrocluster show*`
+.. Vérifier la connectivité sur les disques en saisissant la commande suivante sur l'un des nœuds MetroCluster : +
+`*run local sysconfig -v*`
+.. Exécuter la commande suivante : +
+`*storage bridge show*`
+.. Exécuter la commande suivante : +
+`*storage port show*`
+.. Exécuter la commande suivante : +
+`*storage switch show*`
+.. Exécuter la commande suivante : +
+`*network port show*`
+.. Effectuer une vérification MetroCluster : +
+`*metrocluster check run*`
+.. Afficher les résultats de la vérification MetroCluster : +
+`*metrocluster check show*`
+
+
+. Désactivez AUSO en modifiant le domaine de défaillance AUSO sur
++
+`*auso-disabled*`
+
++
+[listing]
+----
+cluster_A_site_A::*>metrocluster modify -auto-switchover-failure-domain auso-disabled
+----
+. Vérifiez la modification à l'aide de la commande
++
+`*metrocluster operation show*`
+
++
+[listing]
+----
+
+	cluster_A_site_A::*> metrocluster operation show
+       Operation: modify
+           State: successful
+      Start Time: 4/25/2020 20:20:36
+        End Time: 4/25/2020 20:20:36
+          Errors: -
+----
+. Arrêtez les nœuds à l'aide de la commande suivante :
+`*halt*`
++
+** Pour une configuration MetroCluster à quatre ou huit nœuds, utilisez le paramètre :
+`*inhibit-takeover*`
++
+[listing]
+----
+system node halt -node node1_SiteA -inhibit-takeover true -ignore-quorum-warnings true
+----
+** Dans le cas d'une configuration MetroCluster à deux nœuds, utilisez la commande :
++
+[listing]
+----
+system node halt -node node1_SiteA -ignore-quorum-warnings true
+----
+
+
+. Mettez hors tension l'équipement suivant sur le site :
++
+** Contrôleurs de stockage
+** Commutateurs FC MetroCluster (si utilisés et si la configuration n'est pas une configuration Stretch à deux nœuds)
+** FibreBridge ATTO
+** Tiroirs de stockage
+
+
+. Attendez trente minutes, puis mettez l'équipement suivant sous tension sur le site :
++
+** Tiroirs de stockage
+** FibreBridge ATTO
+** Commutateurs FC MetroCluster
+** Contrôleurs de stockage
+
+
+. Une fois les contrôleurs mis sous tension, vérifiez la configuration MetroCluster des deux sites.
++
+Pour vérifier la configuration, répétez l'étape 1.
+
+. Effectuer des vérifications de cycle d'alimentation.
++
+.. Vérifier que tous les SVM source sont en ligne : +
+`*vserver show*`
+.. Démarrez tous les SVM source de synchronisation qui ne sont pas en ligne : +
+`*vserver start*`
+
+
+

@@ -1,0 +1,58 @@
+---
+permalink: install-fc/concept_considerations_for_using_virtual_ip_and_border_gateway_protocol_with_a_mcc_configuration.html 
+sidebar: sidebar 
+keywords: metrocluster, fabric, installation, virtual, ip, border, gateway, protocol, configuration 
+summary: 'Depuis ONTAP 9.5, ONTAP prend en charge la connectivité de couche 3 via l"adresse IP virtuelle \(VIP\) et le protocole BGP (Border Gateway Protocol\). L"association des protocoles VIP et BGP pour la redondance dans le réseau frontal avec la redondance MetroCluster interne offre une solution de reprise après incident de couche 3.' 
+---
+= Considérations relatives à l'utilisation du protocole IP virtuel et de passerelle de frontières avec une configuration MetroCluster
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Depuis ONTAP 9.5, ONTAP prend en charge la connectivité de couche 3 via l'adresse IP virtuelle (VIP) et le protocole BGP (Border Gateway Protocol). L'association des protocoles VIP et BGP pour la redondance dans le réseau frontal avec la redondance MetroCluster interne offre une solution de reprise après incident de couche 3.
+
+Consultez les instructions et l'illustration suivantes lors de la planification de votre solution de couche 3. Pour plus d'informations sur l'implémentation des protocoles VIP et BGP dans ONTAP, consultez link:https://docs.netapp.com/us-en/ontap/networking/configure_virtual_ip_@vip@_lifs.html["Configuration des LIFs IP virtuelles"^].
+
+image::../media/vip_and_bgp_in_metrocluster_2.png[vip et bgp dans MetroCluster 2]
+
+
+
+== Limitations de ONTAP
+
+ONTAP ne vérifie pas automatiquement que tous les nœuds des deux sites de la configuration MetroCluster sont configurés avec le peering BGP.
+
+ONTAP n'effectue pas l'agrégation de routes, mais annonce en permanence l'ensemble des adresses IP LIF virtuelles individuelles en tant que routes hôtes uniques.
+
+ONTAP ne prend pas en charge True Anycast : un seul nœud du cluster présente une adresse IP LIF virtuelle spécifique (mais il est accepté par toutes les interfaces physiques, qu'il s'agisse de LIF BGP, à condition que le port physique fasse partie du IPspace correct). Des LIF différentes peuvent migrer indépendamment les unes des autres vers des nœuds d'hébergement différents.
+
+
+
+== Instructions d'utilisation de cette solution de couche 3 avec une configuration MetroCluster
+
+Vous devez configurer correctement votre BGP et votre VIP pour assurer la redondance requise.
+
+Des scénarios de déploiement plus simples sont préférables aux architectures plus complexes (par exemple, un routeur de peering BGP est accessible sur un routeur intermédiaire non BGP). Cependant, ONTAP n'applique pas de restrictions de conception ou de topologie de réseau.
+
+Les LIFs VIP ne couvrent que le réseau front-end/data.
+
+Selon votre version de ONTAP, vous devez configurer les LIF de peering BGP dans le SVM nœud, et non pas dans le SVM système ou données. Dans ONTAP 9.8, les LIF BGP sont visibles dans le SVM du cluster (system) et les SVM du nœud ne sont plus présents.
+
+Chaque SVM de données requiert la configuration de toutes les adresses de passerelle de premier saut potentielles (en général, l'adresse IP de peering du routeur BGP), de sorte que le chemin de données de retour est disponible en cas de migration de LIF ou de basculement de MetroCluster.
+
+Les LIF BGP sont spécifiques au nœud, comme les LIF intercluster.- chaque nœud dispose d'une configuration unique, qui n'a pas besoin d'être répliqué sur les nœuds du site de reprise après incident.
+
+Une fois configuré, l'existence du v0a (v0b, etc.) valide en permanence la connectivité, garantissant ainsi qu'une migration ou un basculement de LIF réussit (contrairement à L2, où une configuration interrompue n'est visible qu'après l'interruption de service).
+
+Une différence architecturale majeure est que les clients ne doivent plus partager le même sous-réseau IP que le VIP des SVM de données. Un routeur L3 avec les fonctions de résilience et de redondance adaptées à l'entreprise (par exemple VRRP/HSRP) doit être sur le chemin entre le stockage et les clients pour que le VIP fonctionne correctement.
+
+Le processus fiable de mise à jour du protocole BGP permet de faciliter les migrations de LIF, car elles sont légèrement plus rapides et ont moins de risques d'interruption pour certains clients
+
+Vous pouvez configurer le protocole BGP pour détecter certaines classes de comportements erronées du réseau ou du switch plus rapidement que le protocole LACP, s'il est configuré en conséquence.
+
+Le protocole BGP (EBGP) externe utilise des nombres différents COMME des nœuds ONTAP et des routeurs de peering. Il est le déploiement privilégié pour faciliter l'agrégation et la redistribution des routes sur les routeurs. Le protocole BGP interne (IBGP) et l'utilisation de réflecteurs de routage ne sont pas impossibles mais hors du champ d'application d'une configuration VIP simple.
+
+Après le déploiement, il faut vérifier que la SVM de données est accessible lorsque la LIF virtuelle associée est migrée entre tous les nœuds sur chaque site (y compris le basculement MetroCluster) afin de vérifier la configuration correcte des routes statiques vers le même SVM de données.
+
+VIP fonctionne pour la plupart des protocoles IP (NFS, SMB, iSCSI).

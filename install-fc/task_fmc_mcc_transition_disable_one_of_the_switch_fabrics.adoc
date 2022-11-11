@@ -1,0 +1,86 @@
+---
+permalink: install-fc/task_fmc_mcc_transition_disable_one_of_the_switch_fabrics.html 
+sidebar: sidebar 
+keywords: metrocluster, fabric, installation, disable, switch, fabrics 
+summary: 'Vous devez désactiver l"une des matrices de commutation pour pouvoir modifier sa configuration. Une fois la configuration terminée et la réactivation de la structure du commutateur terminée, vous répétez le processus sur l"autre structure.' 
+---
+= Désactivation de l'une des matrices de commutation
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous devez désactiver l'une des matrices de commutation pour pouvoir modifier sa configuration. Une fois la configuration terminée et la réactivation de la structure du commutateur terminée, vous répétez le processus sur l'autre structure.
+
+Vous devez avoir exécuté l'utilitaire fmc_dc sur la configuration 7-mode Fabric MetroCluster existante et résolu les problèmes avant de lancer le processus de configuration.
+
+Pour assurer le fonctionnement continu de la configuration MetroCluster, vous ne devez pas désactiver la deuxième structure lorsque la première structure est désactivée.
+
+.Étapes
+. Désactiver chacun des commutateurs dans la structure :
++
+`switchCfgPersistentDisable`
+
++
+Si cette commande n'est pas disponible, utilisez le `switchDisable` commande.
+
++
+** L'exemple suivant montre la commande émise sur FC_Switch_A_1 :
++
+[listing]
+----
+FC_switch_A_1:admin> switchCfgPersistentDisable
+----
+** L'exemple suivant montre la commande émise sur FC_Switch_B_1 :
++
+[listing]
+----
+FC_switch_B_1:admin> switchCfgPersistentDisable
+----
+
+
+. Assurez-vous que la configuration 7-mode MetroCluster fonctionne correctement à l'aide de la structure redondante :
++
+.. Vérifier que le basculement du contrôleur fonctionne correctement : +
+`cf status`
++
+[listing]
+----
+node_A> cf status
+Controller Failover enabled, node_A is up.
+VIA Interconnect is up (link 0 down, link 1 up).
+----
+.. Vérifier que les disques sont visibles : +
+`storage show disk –p`
++
+[listing]
+----
+node_A> storage show disk –p
+
+PRIMARY                     PORT  SECONDARY          PORT SHELF BAY
+--------------------------- ----  ------------------ ---- ---------
+Brocade-6510-2K0GG:5.126L27  B                              1    0
+Brocade-6510-2K0GG:5.126L28  B                              1    1
+Brocade-6510-2K0GG:5.126L29  B                              1    2
+Brocade-6510-2K0GG:5.126L30  B                              1    3
+Brocade-6510-2K0GG:5.126L31  B                              1    4
+
+.
+.
+.
+----
+.. Vérifiez que les agrégats sont sains : +
+`aggr status`
++
+[listing]
+----
+node_A> aggr status
+           Aggr State           Status              Options
+          aggr0 online          raid_dp, aggr       root, nosnap=on
+                                mirrored
+                                64-bit
+----
+
+
+

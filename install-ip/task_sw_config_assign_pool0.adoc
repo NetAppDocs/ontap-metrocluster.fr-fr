@@ -1,0 +1,200 @@
+---
+permalink: install-ip/task_sw_config_assign_pool0.html 
+sidebar: sidebar 
+keywords: metrocluster, controller, assign drives, pool 0, disk assign 
+summary: 'Si vous n"avez pas reçu les systèmes préconfigurés en usine, vous devrez peut-être affecter manuellement les lecteurs du pool 0. Selon le modèle de plate-forme et si le système utilise ADP, vous devez affecter manuellement les lecteurs au pool 0 pour chaque nœud de la configuration IP MetroCluster. La procédure que vous utilisez dépend de la version de ONTAP que vous utilisez.' 
+---
+= Affectation manuelle de lecteurs au pool 0
+:allow-uri-read: 
+
+
+[role="lead"]
+Si vous n'avez pas reçu les systèmes préconfigurés en usine, vous devrez peut-être affecter manuellement les lecteurs du pool 0. Selon le modèle de plate-forme et si le système utilise ADP, vous devez affecter manuellement les lecteurs au pool 0 pour chaque nœud de la configuration IP MetroCluster. La procédure que vous utilisez dépend de la version de ONTAP que vous utilisez.
+
+
+
+== Affectation manuelle de lecteurs pour le pool 0 (ONTAP 9.4 et versions ultérieures)
+
+Si le système n'a pas été préconfiguré en usine et ne répond pas aux exigences relatives à l'affectation automatique des disques, vous devez affecter manuellement les disques du pool 0.
+
+Cette procédure s'applique aux configurations exécutant ONTAP 9.4 ou version ultérieure.
+
+Pour déterminer si votre système nécessite une affectation manuelle du disque, vous devez passer en revue link:concept_considerations_drive_assignment.html["Considérations relatives à l'affectation automatique des disques et aux systèmes ADP dans ONTAP 9.4 et versions ultérieures"].
+
+Effectuez les étapes suivantes en mode Maintenance. La procédure doit être effectuée sur chaque nœud de la configuration.
+
+Les exemples de cette section se basent sur les hypothèses suivantes :
+
+* Les disques des nœuds Node_A_1 et Node_A_2 sont propriétaires :
++
+** Site_A-shelf_1 (local)
+** Site_B-tiroir_2 (distant)
+
+
+* Les propriétaires des disques des nœuds_B_1 et Node_B_2 sont les suivants :
++
+** Site_B-shelf_1 (locale)
+** Site_A-shelf_2 (à distance)
+
+
+
+
+.Étapes
+. Afficher le menu de démarrage :
++
+`boot_ontap menu`
+
+. Sélectionnez l'option 9a.
++
+L'écran suivant affiche l'invite du menu de démarrage :
+
++
+[listing]
+----
+
+Please choose one of the following:
+
+    (1) Normal Boot.
+    (2) Boot without /etc/rc.
+    (3) Change password.
+    (4) Clean configuration and initialize all disks.
+    (5) Maintenance mode boot.
+    (6) Update flash from backup config.
+    (7) Install new software first.
+    (8) Reboot node.
+    (9) Configure Advanced Drive Partitioning.
+    Selection (1-9)?  9a
+########## WARNING ##########
+
+    This is a disruptive operation and will result in the
+    loss of all filesystem data. Before proceeding further,
+    make sure that:
+    1) This option (9a) has been executed or will be executed
+    on the HA partner node (and DR/DR-AUX partner nodes if
+    applicable), prior to reinitializing any system in the
+    HA-pair (or MetroCluster setup).
+    2) The HA partner node (and DR/DR-AUX partner nodes if
+    applicable) is currently waiting at the boot menu.
+
+    Do you still want to continue (yes/no)? yes
+----
+. Lorsque le nœud redémarre, appuyez sur Ctrl-C lorsque vous êtes invité à afficher le menu de démarrage, puis sélectionnez l'option *Maintenance mode boot*.
+. En mode Maintenance, attribuez manuellement des disques aux agrégats locaux sur le nœud :
++
+`disk assign _disk-id_ -p 0 -s _local-node-sysid_`
+
++
+Les disques doivent être affectés de manière symétrique, de sorte que chaque nœud dispose d'un nombre égal de disques. La procédure suivante concerne une configuration avec deux tiroirs de stockage sur chaque site.
+
++
+.. Lors de la configuration de node_A_1, affectez manuellement les disques des emplacements 0 à 11 dans la pool0 du nœud A1 à partir de site_A-shelf_1.
+.. Lors de la configuration de node_A_2, affectez manuellement les lecteurs de l'emplacement 12 à 23 dans la pool0 du nœud A2 à partir de site_A-shelf_1.
+.. Lors de la configuration de node_B_1, affectez manuellement les disques des emplacements 0 à 11 dans la pool0 du nœud B1 du site_B-shelf_1.
+.. Lors de la configuration de node_B_2, affectez manuellement les lecteurs de l'emplacement 12 à 23 dans la pool0 du nœud B2 à partir de site_B-shelf_1.
+
+
+. Quitter le mode Maintenance :
++
+`halt`
+
+. Afficher le menu de démarrage :
++
+`boot_ontap menu`
+
+. Sélectionnez l'option "4" dans le menu de démarrage et laissez le système démarrer.
+. Répétez cette procédure sur les autres nœuds de la configuration MetroCluster IP.
+. Passez à la section link:task_sw_config_setup_ontap.html["Configuration de ONTAP"].
+
+
+
+
+== Attribution manuelle de disques pour le pool 0 (ONTAP 9.3)
+
+Si vous avez au moins deux tiroirs disques pour chaque nœud, la fonctionnalité d'affectation automatique d'ONTAP vous permet d'attribuer automatiquement les disques locaux (pool 0).
+
+Lorsque le nœud est en mode Maintenance, vous devez d'abord attribuer un seul disque sur les tiroirs appropriés afin de regrouper 0. ONTAP attribue ensuite automatiquement le reste des disques du tiroir au même pool. Cette tâche n'est pas requise sur les systèmes reçus de l'usine, qui disposent du pool 0 pour contenir l'agrégat racine préconfiguré.
+
+Cette procédure s'applique aux configurations exécutant ONTAP 9.3.
+
+Cette procédure n'est pas requise si vous avez reçu votre configuration MetroCluster en usine. Les nœuds situés en usine sont configurés avec 0 disques pool et des agrégats racine.
+
+Cette procédure ne peut être utilisée que si vous disposez d'au moins deux tiroirs disques pour chaque nœud, ce qui permet l'affectation automatique des disques au niveau du tiroir. Si vous ne pouvez pas utiliser l'affectation automatique au niveau du tiroir, vous devez affecter manuellement vos disques locaux de sorte que chaque nœud dispose d'un pool local de disques (pool 0).
+
+Ces étapes doivent être effectuées en mode Maintenance.
+
+Les exemples de cette section supposent les tiroirs disques suivants :
+
+* Node_A_1 possède des disques sur :
++
+** Site_A-shelf_1 (local)
+** Site_B-tiroir_2 (distant)
+
+
+* Node_A_2 est connecté à :
++
+** Site_A-shelf_3 (local)
+** Site_B-shelf_4 (à distance)
+
+
+* Node_B_1 est connecté à :
++
+** Site_B-shelf_1 (locale)
+** Site_A-shelf_2 (à distance)
+
+
+* Node_B_2 est connecté à :
++
+** Site_B-shelf_3 (locale)
+** Site_A-shelf_4 (à distance)
+
+
+
+
+.Étapes
+. Assigner manuellement un seul disque pour l'agrégat racine sur chaque nœud :
++
+`disk assign _disk-id_ -p 0 -s _local-node-sysid_`
+
++
+L'assignation manuelle de ces disques permet à la fonctionnalité d'autoassignation des ONTAP d'assigner les autres disques de chaque shelf.
+
++
+.. Sur le nœud_A_1, affectez manuellement un disque du site local_A-shelf_1 au pool 0.
+.. Sur node_A_2, affectez manuellement un disque du site local_A-shelf_3 au pool 0.
+.. Sur le nœud_B_1, affectez manuellement un disque du site local_B-shelf_1 au pool 0.
+.. Sur le nœud_B_2, affectez manuellement un disque du site local_B-shelf_3 au pool 0.
+
+
+. Démarrez chaque nœud sur le site A, en utilisant l'option 4 du menu de démarrage :
++
+Vous devez effectuer cette étape sur un nœud avant de passer au nœud suivant.
+
++
+.. Quitter le mode Maintenance :
++
+`halt`
+
+.. Afficher le menu de démarrage :
++
+`boot_ontap menu`
+
+.. Sélectionnez l'option 4 dans le menu de démarrage et continuez.
+
+
+. Démarrez chaque nœud sur le site B, en utilisant l'option 4 du menu de démarrage :
++
+Vous devez effectuer cette étape sur un nœud avant de passer au nœud suivant.
+
++
+.. Quitter le mode Maintenance :
++
+`halt`
+
+.. Afficher le menu de démarrage :
++
+`boot_ontap menu`
+
+.. Sélectionnez l'option 4 dans le menu de démarrage et continuez.
+
+
+

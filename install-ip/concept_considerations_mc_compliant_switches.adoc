@@ -1,0 +1,436 @@
+---
+permalink: install-ip/concept_considerations_mc_compliant_switches.html 
+sidebar: sidebar 
+keywords: metrocluster ip, metrocluster-compliant switches, metrocluster-compliant, requirements, compliant 
+summary: 'Depuis ONTAP 9.7, les configurations IP MetroCluster peuvent prendre en charge les commutateurs qui ne sont pas validés par NetApp, à condition qu"ils soient conformes aux spécifications NetApp.' 
+---
+= Considérations relatives à l'utilisation de commutateurs conformes à MetroCluster
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Les commutateurs IP MetroCluster fournis par NetApp sont validés par NetApp. Depuis ONTAP 9.7, les configurations IP MetroCluster peuvent prendre en charge les commutateurs qui ne sont pas validés par NetApp, à condition qu'ils soient conformes aux spécifications NetApp.
+
+
+
+== Exigences générales
+
+Les exigences montrent comment configurer les switchs conformes à MetroCluster sans utiliser les fichiers RCF (Reference Configuration).
+
+* Les commutateurs qui se connectent aux nœuds MetroCluster peuvent supporter un trafic non MetroCluster.
+* Seules les plateformes qui fournissent des ports dédiés pour les interconnexions de cluster sans commutateur sont prises en charge. Les plateformes telles que FAS2750 et AFF A220 ne sont pas prises en charge, car le trafic MetroCluster et le trafic d'interconnexion MetroCluster partagent les mêmes ports réseau.
++
+La connexion des connexions locales de cluster à un commutateur conforme à MetroCluster n'est pas prise en charge.
+
+* L'interface IP MetroCluster peut être connectée à n'importe quel port de commutateur pouvant être configuré pour répondre aux exigences.
+* La vitesse des ports de switch doit être de 25 Gbit/s pour les plateformes FAS8200 et AFF A300, et d'au moins 40 Gbit/s pour toutes les autres plateformes (40 Gbit/s ou 100 Gbit/s).
+* Quatre commutateurs IP sont requis, deux pour chaque structure de commutateur.
+* Les liens ISL doivent être d'au moins 10 Gbits/s et doivent être dimensionnés de manière appropriée pour la charge sur la configuration MetroCluster.
+* La configuration MetroCluster doit être connectée à deux réseaux. La connexion des deux interfaces MetroCluster au même réseau ou commutateur n'est pas prise en charge. Chaque nœud MetroCluster doit être connecté à deux commutateurs réseau.
+* Le réseau doit répondre aux exigences suivantes :
++
+** link:../install-ip/concept_considerations_isls.html#basic-metrocluster-isl-requirements["Exigences de base en matière de liaison ISL MetroCluster"]
+** link:../install-ip/concept_considerations_isls.html#isl-requirements-in-shared-layer-2-networks["Exigences ISL dans des réseaux partagés de couche 2"]
+** link:../install-ip/concept_considerations_layer_2.html#required-settings-on-intermediate-switches["Réglages requis sur les commutateurs intermédiaires"]
+
+
+* Dans les configurations IP MetroCluster utilisant des commutateurs conformes à MetroCluster, la restauration vers ONTAP 9.6 ou une version antérieure n'est pas prise en charge.
+* La MTU de 9 9216 doit être configurée sur tous les switchs qui transportent le trafic IP de MetroCluster.
+
+
+
+
+== Exigences en matière de commutateurs et de câblage
+
+* Les switchs doivent prendre en charge la QoS/classification du trafic.
+* Les commutateurs doivent prendre en charge la notification explicite de congestion (ECN).
+* Les commutateurs doivent prendre en charge les règles d'équilibrage de charge L4 port-vlan pour préserver l'ordre le long du chemin.
+* Les commutateurs doivent prendre en charge le contrôle de débit L2 (L2FC).
+* Les câbles qui connectent les nœuds aux switchs doivent être achetés auprès de NetApp. Les câbles que nous fournissons doivent être pris en charge par le fournisseur du commutateur.
+
+
+
+
+== Limites
+
+Toute configuration ou fonctionnalité qui nécessite la connexion du cluster local à un commutateur n'est pas prise en charge. Par exemple, les configurations et procédures suivantes ne sont pas prises en charge :
+
+* Configurations MetroCluster à 8 nœuds
+* Passez des configurations FC MetroCluster aux configurations IP MetroCluster
+* Mise à jour d'une configuration IP MetroCluster à quatre nœuds
+
+
+
+
+== Vitesses réseau propres à la plateforme et modes de port des commutateurs pour les commutateurs compatibles avec MetroCluster
+
+Le tableau suivant fournit les vitesses réseau propres à la plateforme et les modes de port des commutateurs pour les commutateurs compatibles MetroCluster. Vous devez configurer le mode de port du commutateur comme indiqué dans le tableau.
+
+
+NOTE: Des valeurs manquantes indiquent que la plate-forme n'est pas prise en charge.
+
+|===
+
+
+| Plateforme | Vitesse du réseau (Gbit/s) | Mode de port du commutateur 
+
+
+ a| 
+AFF A900
+ a| 
+100
+ a| 
+mode coffre
+
+
+
+ a| 
+AFF A800
+ a| 
+40 ou 100
+ a| 
+mode d'accès
+
+
+
+ a| 
+AFF A700
+ a| 
+40
+ a| 
+mode d'accès
+
+
+
+ a| 
+AFF A400
+ a| 
+40 ou 100
+ a| 
+mode coffre
+
+
+
+ a| 
+AFF A320
+ a| 
+100
+ a| 
+mode d'accès
+
+
+
+ a| 
+AFF A300
+ a| 
+25
+ a| 
+mode d'accès
+
+
+
+ a| 
+AFF A250
+ a| 
+-
+ a| 
+-
+
+
+
+ a| 
+AVEC AFF A220
+ a| 
+-
+ a| 
+-
+
+
+
+ a| 
+FAS9000
+ a| 
+40
+ a| 
+mode d'accès
+
+
+
+ a| 
+FAS9500
+ a| 
+100
+ a| 
+mode coffre
+
+
+
+ a| 
+FAS8700
+ a| 
+100
+ a| 
+mode coffre
+
+
+
+ a| 
+FAS8300
+ a| 
+40 ou 100
+ a| 
+mode coffre
+
+
+
+ a| 
+FAS8200
+ a| 
+25
+ a| 
+mode d'accès
+
+
+
+ a| 
+FAS2750
+ a| 
+-
+ a| 
+-
+
+
+
+ a| 
+FAS500f
+ a| 
+-
+ a| 
+-
+
+|===
+
+
+== Hypothèses pour les exemples
+
+Les exemples fournis sont valables pour les commutateurs Cisco NX31xx et NX32xx. Si d'autres commutateurs sont utilisés, ces commandes peuvent être utilisées comme guidage, mais les commandes peuvent être différentes. Si une fonctionnalité illustrée dans les exemples n'est pas disponible sur le commutateur, cela signifie que ce dernier ne répond pas aux exigences minimales et ne peut pas être utilisé pour déployer une configuration MetroCluster. Ceci est vrai pour tout switch qui connecte une configuration MetroCluster et pour tous les commutateurs du chemin entre ces commutateurs.
+
+* Les ports ISL sont 15 et 16 et fonctionnent à une vitesse de 40 Gbits/s.
+* Le VLAN du réseau 1 est 10 et le VLAN du réseau 2 est 20. Des exemples peuvent être donnés pour un seul réseau.
+* L'interface MetroCluster est connectée au port 9 de chaque commutateur et fonctionne à une vitesse de 100 Gbit/s.
+* Le contexte complet des exemples n'est pas défini ou affiché. Vous devrez peut-être entrer d'autres informations de configuration, telles que le profil, le VLAN ou l'interface, pour exécuter les commandes.
+
+
+
+
+== Configuration de commutateur générique
+
+Un VLAN doit être configuré sur chaque réseau. L'exemple montre comment configurer un VLAN dans le réseau 10.
+
+Exemple :
+
+[listing]
+----
+# vlan 10
+----
+La stratégie d'équilibrage de charge doit être définie de manière à préserver l'ordre.
+
+Exemple :
+
+[listing]
+----
+# port-channel load-balance src-dst ip-l4port-vlan
+----
+Vous devez configurer les cartes d'accès et de classe, qui mappent le trafic RDMA et iSCSI aux classes appropriées.
+
+Tout le trafic TCP depuis et vers le port 65200 est mappé à la classe de stockage (iSCSI). Tout le trafic TCP depuis et vers le port 10006 est mappé à la classe RDMA.
+
+Exemple :
+
+[listing]
+----
+
+ip access-list storage
+  10 permit tcp any eq 65200 any
+  20 permit tcp any any eq 65200
+ip access-list rdma
+  10 permit tcp any eq 10006 any
+  20 permit tcp any any eq 10006
+
+class-map type qos match-all storage
+  match access-group name storage
+class-map type qos match-all rdma
+  match access-group name rdma
+----
+Vous devez configurer la règle d'entrée. La stratégie d'entrée mappe le trafic tel qu'il est classé dans les différents groupes CS. Dans cet exemple, le trafic RDMA est mappé au groupe CS 5 et le trafic iSCSI est mappé au groupe CS 4.
+
+Exemple :
+
+[listing]
+----
+
+policy-map type qos MetroClusterIP_Ingress
+class rdma
+  set dscp 40
+  set cos 5
+  set qos-group 5
+class storage
+  set dscp 32
+  set cos 4
+  set qos-group 4
+----
+Vous devez configurer la règle de sortie sur le commutateur. La stratégie de sortie mappe le trafic sur les files d'attente de sortie. Dans cet exemple, le trafic RDMA est mappé sur la file d'attente 5 et le trafic iSCSI est mappé à la file d'attente 4.
+
+Exemple :
+
+[listing]
+----
+
+policy-map type queuing MetroClusterIP_Egress
+class type queuing c-out-8q-q7
+  priority level 1
+class type queuing c-out-8q-q6
+  priority level 2
+class type queuing c-out-8q-q5
+  priority level 3
+  random-detect threshold burst-optimized ecn
+class type queuing c-out-8q-q4
+  priority level 4
+  random-detect threshold burst-optimized ecn
+class type queuing c-out-8q-q3
+  priority level 5
+class type queuing c-out-8q-q2
+  priority level 6
+class type queuing c-out-8q-q1
+  priority level 7
+class type queuing c-out-8q-q-default
+  bandwidth remaining percent 100
+  random-detect threshold burst-optimized ecn
+----
+Vous devez configurer un switch qui possède un trafic MetroCluster sur un ISL, mais ne se connecte pas à une interface MetroCluster. Dans ce cas, le trafic est déjà classé et ne doit être mappé qu'à la file d'attente appropriée. Dans l'exemple suivant, tout le trafic COS5 est mappé à la classe RDMA, et tout le trafic COS4 est mappé à la classe iSCSI. Notez que cela affectera *tout* du trafic COS5 et COS4, pas seulement le trafic MetroCluster. Si vous ne souhaitez mapper le trafic MetroCluster que, vous devez utiliser les cartes de classes ci-dessus pour identifier le trafic à l'aide des groupes d'accès.
+
+Exemple :
+
+[listing]
+----
+
+class-map type qos match-all rdma
+  match cos 5
+class-map type qos match-all storage
+  match cos 4
+----
+
+
+== Configuration des liens ISL
+
+Vous pouvez configurer un port en mode ligne réseau lors de la définition d'un VLAN autorisé.
+
+Il y a deux commandes, une à *set* la liste VLAN autorisés et une à *add* à la liste VLAN autorisés existante.
+
+Vous pouvez *définir* les VLAN autorisés comme indiqué dans l'exemple.
+
+Exemple :
+
+[listing]
+----
+switchport trunk allowed vlan 10
+----
+Vous pouvez *ajouter* un VLAN à la liste autorisée, comme indiqué dans l'exemple.
+
+Exemple :
+
+[listing]
+----
+switchport trunk allowed vlan add 10
+----
+Dans l’exemple, le port-Channel 10 est configuré pour le VLAN 10.
+
+Exemple :
+
+[listing]
+----
+
+interface port-channel10
+switchport mode trunk
+switchport trunk allowed vlan 10
+mtu 9216
+service-policy type queuing output MetroClusterIP_Egress
+----
+Les ports ISL doivent être configurés dans un canal de port et affectés aux files d'attente de sortie, comme indiqué dans l'exemple.
+
+Exemple :
+
+[listing]
+----
+
+interface eth1/15-16
+switchport mode trunk
+switchport trunk allowed vlan 10
+no lldp transmit
+no lldp receive
+mtu 9216
+channel-group 10 mode active
+service-policy type queuing output MetroClusterIP_Egress
+no shutdown
+----
+
+
+== Configuration des ports du nœud
+
+Vous devrez peut-être configurer le port de nœud en mode écorché. Dans cet exemple, les ports 25 et 26 sont configurés en mode de dérivation 4 x 25 Gbit/s.
+
+Exemple :
+
+[listing]
+----
+interface breakout module 1 port 25-26 map 25g-4x
+----
+Vous devrez peut-être configurer la vitesse du port de l'interface MetroCluster. L'exemple montre comment configurer la vitesse sur « auto ».
+
+Exemple :
+
+[listing]
+----
+speed auto
+----
+L'exemple suivant montre comment fixer la vitesse à 40 Gbits/s.
+
+Exemple :
+
+[listing]
+----
+speed 40000
+----
+Vous devrez peut-être configurer l'interface. Dans l'exemple suivant, la vitesse de l'interface est définie sur « auto ».
+
+Le port est en mode d'accès dans VLAN 10, MTU est défini sur 9216 et la règle d'entrée MetroCluster est attribuée.
+
+Exemple :
+
+[listing]
+----
+
+interface eth1/9
+description MetroCluster-IP Node Port
+speed auto
+switchport access vlan 10
+spanning-tree port type edge
+spanning-tree bpduguard enable
+mtu 9216
+flowcontrol receive on
+flowcontrol send on
+service-policy type qos input MetroClusterIP_Ingress
+no shutdown
+----
+Sur les ports 25 Gbit/s, il peut être nécessaire de définir le paramètre FEC sur « Off » comme indiqué dans l'exemple.
+
+Exemple :
+
+[listing]
+----
+fec off
+----
+
+NOTE: Vous devez toujours exécuter cette commande *après* l’interface est configurée. Il peut être nécessaire d'insérer un module émetteur-récepteur pour que la commande fonctionne.

@@ -1,0 +1,32 @@
+---
+permalink: disaster-recovery/task_verify_storage_mcfc.html 
+sidebar: sidebar 
+keywords: verify, storage, configuration 
+summary: 'Vous devez confirmer que l"ensemble du stockage est visible depuis les nœuds survivants.' 
+---
+= Vérification de la configuration du stockage
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous devez confirmer que l'ensemble du stockage est visible depuis les nœuds survivants.
+
+.Étapes
+. Vérifiez que la quantité et le type de tous les composants de stockage du site de reprise sur incident sont identiques sur le site survivant.
++
+Le nombre de piles de tiroirs disques, de tiroirs disques et de disques doit être identique sur le site survivant et sur le site de reprise après incident. Dans une configuration MetroCluster Bridge-Attached ou Fabric-Attached, les sites doivent disposer du même nombre de ponts FC-SAS.
+
+. Vérifier que tous les disques ayant été remplacés sur le site de secours ne sont pas détenus :
++
+`run local disk show-n`
+
++
+Les disques doivent apparaître comme n'appartenant pas.
+
+. Si aucun disque n'a été remplacé, vérifier que tous les disques sont présents :
++
+`disk show`
+
+

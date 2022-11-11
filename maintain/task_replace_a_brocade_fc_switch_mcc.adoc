@@ -1,0 +1,266 @@
+---
+permalink: maintain/task_replace_a_brocade_fc_switch_mcc.html 
+sidebar: sidebar 
+keywords: metrocluster, maintain, service, replace, brocade, fc, switch 
+summary: Vous devez utiliser cette procédure spécifique à Brocade pour remplacer un commutateur défectueux. 
+---
+= Remplacement d'un commutateur FC Brocade
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous devez utiliser cette procédure spécifique à Brocade pour remplacer un commutateur défectueux.
+
+Vous avez besoin du mot de passe d'administration et de l'accès à un serveur FTP ou SCP.
+
+Dans les exemples suivants, FC_switch_A_1 est le commutateur en bon état et FC_Switch_B_1 est le commutateur en bon état. L'utilisation du port du commutateur dans les exemples est présentée dans le tableau suivant :
+
+|===
+
+
+| Connexions de ports | Ports 
+
+
+ a| 
+Connexions FC-VI
+ a| 
+0, 3
+
+
+
+ a| 
+Connexions HBA
+ a| 
+1, 2, 4, 5
+
+
+
+ a| 
+Connexions « Bridge FC-to-SAS »
+ a| 
+6 février 7
+
+
+
+ a| 
+Connexions ISL
+ a| 
+10 février 11
+
+|===
+L'exemple montre deux ponts FC-SAS. Si vous en avez davantage, vous devez désactiver puis activer les ports supplémentaires.
+
+
+NOTE: Cette procédure ne génère aucune interruption et peut être effectuée en deux heures environ.
+
+L'utilisation de votre port de commutateur doit suivre les affectations recommandées.
+
+* link:concept_port_assignments_for_fc_switches_when_using_ontap_9_0.html["Affectation des ports pour les commutateurs FC lors de l'utilisation de ONTAP 9.0"]
+* link:concept_port_assignments_for_fc_switches_when_using_ontap_9_1_and_later.html["Affectation de ports pour les commutateurs FC lors de l'utilisation de ONTAP 9.1 et versions ultérieures"]
+
+
+.Étapes
+. Désactiver le commutateur en cours de remplacement en désactivant les ports ISL du commutateur en bon état dans la structure et les ports FC-VI et HBA sur le commutateur pour personnes en état de marche (si le commutateur pour personnes en état de fonctionnement est toujours en cours) :
++
+.. Désactiver les ports ISL sur le commutateur Healthy pour chaque port :
++
+`portcfgpersistentdisable _port-number_`
+
++
+[listing]
+----
+FC_switch_A_1:admin> portcfgpersistentdisable 10
+FC_switch_A_1:admin> portcfgpersistentdisable 11
+----
+.. Si le commutateur endommagé est toujours opérationnel, désactivez les ports FC-VI et HBA sur ce commutateur pour chaque port :
++
+`portcfgpersistentdisable _port-number_`
+
++
+[listing]
+----
+FC_switch_B_1:admin> portcfgpersistentdisable 0
+FC_switch_B_1:admin> portcfgpersistentdisable 1
+FC_switch_B_1:admin> portcfgpersistentdisable 2
+FC_switch_B_1:admin> portcfgpersistentdisable 3
+FC_switch_B_1:admin> portcfgpersistentdisable 4
+FC_switch_B_1:admin> portcfgpersistentdisable 5
+----
+
+
+. Si l'interrupteur douteux est toujours opérationnel, recueillir la sortie de l' `switchshow` commande.
++
+[listing]
+----
+FC_switch_B_1:admin> switchshow
+    switchName: FC_switch_B_1
+    switchType: 71.2
+    switchState:Online
+    switchMode: Native
+    switchRole: Subordinate
+    switchDomain:       2
+    switchId:   fffc01
+    switchWwn:  10:00:00:05:33:86:89:cb
+    zoning:             OFF
+    switchBeacon:       OFF
+----
+. Démarrez et préconfigurez le nouveau commutateur avant de l'installer physiquement :
++
+.. Mettez le nouveau commutateur sous tension et laissez-le démarrer.
+.. Vérifier que la version du firmware du commutateur correspond à la version des autres commutateurs FC :
++
+`firmwareShow`
+
+.. Configurez le nouveau commutateur comme décrit dans la procédure _MetroCluster installation and Configuration, mais ne passez pas à la procédure « Configuration de la segmentation sur les commutateurs Brocade FC ».
++
+https://docs.netapp.com/us-en/ontap-metrocluster/install-fc/index.html["Installation et configuration de la solution Fabric-Attached MetroCluster"]
+
++
+Vous configurez la segmentation ultérieurement dans cette procédure.
+
++
+
+NOTE: À ce stade, le nouveau commutateur n'est pas câblé à la configuration MetroCluster.
+
+.. Désactivez les ports FC-VI, HBA et de stockage du nouveau commutateur ainsi que les ports connectés aux ponts FC-SAS.
++
+[listing]
+----
+FC_switch_B_1:admin> portcfgpersistentdisable 0
+FC_switch_B_1:admin> portcfgpersistentdisable 1
+FC_switch_B_1:admin> portcfgpersistentdisable 2
+FC_switch_B_1:admin> portcfgpersistentdisable 3
+FC_switch_B_1:admin> portcfgpersistentdisable 4
+FC_switch_B_1:admin> portcfgpersistentdisable 5
+
+FC_switch_B_1:admin> portcfgpersistentdisable 6
+FC_switch_B_1:admin> portcfgpersistentdisable 7
+----
+
+
+. Remplacer physiquement le commutateur :
++
+.. Mettez le commutateur FC pour personnes malvoyantes hors tension.
+.. Mettez le commutateur FC de remplacement hors tension.
+.. Décâbler et déposer le commutateur pour facultés affaiblies, en notant avec précaution les câbles connectés à quels ports.
+.. Installez le commutateur de remplacement dans le rack.
+.. Branchez le commutateur de remplacement exactement comme l'ancien commutateur était câblé.
+.. Mettez le nouveau commutateur FC sous tension.
+
+
+. Si vous souhaitez activer le cryptage ISL, effectuez les tâches applicables dans link:https://docs.netapp.com/us-en/ontap-metrocluster/install-fc/index.html["Installation et configuration de la solution Fabric-Attached MetroCluster"].
++
+Si vous activez le chiffrement ISL, vous devez effectuer les tâches suivantes :
+
++
+** Désactiver la structure virtuelle
+** Régler la charge utile
+** Définissez la stratégie d'authentification
+** Activez le cryptage ISL sur les commutateurs Brocade
+
+
+. Terminer la configuration du nouveau commutateur :
++
+.. Activez les liens ISL :
++
+`portcfgpersistentenable _port-number_`
+
++
+[listing]
+----
+FC_switch_B_1:admin> portcfgpersistentenable 10
+FC_switch_B_1:admin> portcfgpersistentenable 11
+----
+.. Sur le commutateur de remplacement (FC_switch_B_1 dans l'exemple), vérifiez que les liens ISL sont en ligne :
++
+`switchshow`
+
++
+[listing]
+----
+FC_switch_B_1:admin> switchshow
+switchName: FC_switch_B_1
+switchType: 71.2
+switchState:Online
+switchMode: Native
+switchRole: Principal
+switchDomain:       4
+switchId:   fffc03
+switchWwn:  10:00:00:05:33:8c:2e:9a
+zoning:             OFF
+switchBeacon:       OFF
+
+Index Port Address Media Speed State  Proto
+==============================================
+...
+10   10    030A00 id   16G     Online  FC E-Port 10:00:00:05:33:86:89:cb "FC_switch_A_1"
+11   11    030B00 id   16G     Online  FC E-Port 10:00:00:05:33:86:89:cb "FC_switch_A_1" (downstream)
+...
+----
+.. Activez les ports de stockage qui se connectent aux ponts FC.
++
+[listing]
+----
+FC_switch_B_1:admin> portcfgpersistentenable 6
+FC_switch_B_1:admin> portcfgpersistentenable 7
+----
+.. Activez les ports de stockage, HBA et FC-VI.
++
+L'exemple suivant montre les commandes utilisées pour activer les ports qui connectent des adaptateurs HBA :
+
++
+[listing]
+----
+FC_switch_B_1:admin> portcfgpersistentenable 1
+FC_switch_B_1:admin> portcfgpersistentenable 2
+FC_switch_B_1:admin> portcfgpersistentenable 4
+FC_switch_B_1:admin> portcfgpersistentenable 5
+----
++
+L'exemple suivant montre les commandes utilisées pour activer les ports qui connectent les adaptateurs FC-VI :
+
++
+[listing]
+----
+FC_switch_B_1:admin> portcfgpersistentenable 0
+FC_switch_B_1:admin> portcfgpersistentenable 3
+----
+
+
+. Vérifiez que les ports sont en ligne :
++
+`switchshow`
+
+. Vérifier le fonctionnement de la configuration MetroCluster dans ONTAP :
++
+.. Vérifier si le système est multipathed :
++
+`node run -node _node-name_ sysconfig -a`
+
+.. Vérifier si des alertes d'intégrité sont disponibles sur les deux clusters :
++
+`system health alert show`
+
+.. Vérifier la configuration MetroCluster et que le mode opérationnel est normal :
++
+`metrocluster show`
+
+.. Effectuer une vérification MetroCluster :
++
+`metrocluster check run`
+
+.. Afficher les résultats de la vérification MetroCluster :
++
+`metrocluster check show`
+
+.. Vérifier la présence d'alertes d'intégrité sur les commutateurs (le cas échéant) :
++
+`storage switch show`
+
+.. Courez https://mysupport.netapp.com/site/tools/tool-eula/activeiq-configadvisor["Config Advisor"].
+.. Une fois Config Advisor exécuté, vérifiez les résultats de l'outil et suivez les recommandations fournies dans la sortie pour résoudre tous les problèmes détectés.
+
+
+

@@ -1,0 +1,64 @@
+---
+permalink: install-stretch/task_fb_new_install_prepare.html 
+sidebar: sidebar 
+keywords: metrocluster, stretch, installation, prepare 
+summary: 'Lorsque vous vous apprêtez à installer les ponts dans le cadre de votre nouveau système MetroCluster, vous devez vous assurer que votre système répond à certaines exigences. Cela inclut la conformité aux exigences d"installation et de configuration des ponts. Il est également nécessaire de télécharger les documents nécessaires, l"utilitaire ATTO Quickmenu et le firmware du pont.' 
+---
+= Préparation de l'installation
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Lorsque vous vous apprêtez à installer les ponts dans le cadre de votre nouveau système MetroCluster, vous devez vous assurer que votre système répond à certaines exigences. Cela inclut la conformité aux exigences d'installation et de configuration des ponts. Il est également nécessaire de télécharger les documents nécessaires, l'utilitaire ATTO Quickmenu et le firmware du pont.
+
+
+
+== Avant de commencer
+
+* Votre système doit déjà être installé dans un rack s'il n'a pas été livré dans une armoire système.
+* Votre configuration doit utiliser les modèles matériels et les versions logicielles pris en charge.
++
+https://mysupport.netapp.com/matrix["Matrice d'interopérabilité NetApp"]
+
++
+Dans le IMT, vous pouvez utiliser le champ solution de stockage pour sélectionner votre solution MetroCluster. Utilisez *Explorateur de composants* pour sélectionner les composants et la version ONTAP pour affiner votre recherche. Vous pouvez cliquer sur *Afficher les résultats* pour afficher la liste des configurations prises en charge qui correspondent aux critères.
+
+* Chaque commutateur FC doit disposer d'un port FC disponible pour qu'un pont puisse se connecter.
+* Vous devez vous familiariser avec la manière de gérer les câbles SAS ainsi qu'avec les considérations et les meilleures pratiques d'installation et de câblage des tiroirs disques.
++
+Le _Guide d'installation et de services_ de votre modèle de tiroir disque décrit les considérations et les meilleures pratiques.
+
+* L'ordinateur que vous utilisez pour configurer les ponts doit exécuter un navigateur Web pris en charge par ATTO pour utiliser l'interface graphique ATTO ExpressNAV.
++
+Les notes de mise à jour _ATTO Product Release Notes_ disposent d'une liste à jour des navigateurs Web pris en charge. Vous pouvez accéder à ce document à partir du site Web ATTO comme décrit dans les étapes suivantes.
+
+
+
+.Étapes
+. Téléchargez le _Guide d'installation et de maintenance_ pour votre modèle de tiroir disque :
+. Accédez au site Web ATTO à l'aide du lien fourni pour votre modèle FibreBridge et téléchargez le manuel et l'utilitaire du menu à navigation rapide.
++
+[NOTE]
+====
+Le Manuel d'installation et d'utilisation _ATTO FibreBridge_ pour votre pont modèle contient plus d'informations sur les interfaces de gestion.
+
+Pour accéder à ce document et à d'autres contenus sur le site Web ATTO, utilisez le lien fourni sur la page ATTO Fibrebridge Description.
+
+====
+. Rassemblez le matériel et les informations nécessaires pour utiliser les interfaces de gestion des ponts recommandées, l'interface graphique ATTO ExpressNAV et l'utilitaire ATTO Quicknavigation :
++
+.. Déterminez un nom d'utilisateur et un mot de passe non par défaut (pour accéder aux ponts).
++
+Vous devez modifier le nom d'utilisateur et le mot de passe par défaut.
+
+.. Si vous configurez la gestion IP des ponts, vous avez besoin du câble Ethernet blindé fourni avec les ponts (qui se connecte du port de gestion Ethernet du pont 1 à votre réseau).
+.. Si vous configurez la gestion IP des ponts, vous devez disposer d'une adresse IP, d'un masque de sous-réseau et d'informations de passerelle pour le port de gestion Ethernet 1 de chaque pont.
+.. Désactivez les clients VPN sur l'ordinateur que vous utilisez pour la configuration.
++
+Les clients VPN actifs provoquent l'échec de la recherche du menu à menu rapide pour les ponts.
+
+
+
+

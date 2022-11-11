@@ -1,0 +1,115 @@
+---
+permalink: disaster-recovery/task_perform_a_forced_switchover_after_a_disaster.html 
+sidebar: sidebar 
+keywords: disaster, occur, perform, surviving, cluster, survive, switchover, ensure, safe, data, service, force, fence, fencing, off, site, access, volume, nvfail, state, output, storage, aggregate, plex, show, command, indeterminate, metroxluster 
+summary: 'En cas d"incident, il existe une procédure à suivre sur le cluster de reprise après incident et sur le cluster survivant après le basculement pour assurer la sécurité et la continuité du service de données.' 
+---
+= Effectuer un basculement forcé après un incident
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+En cas d'incident, il existe une procédure à suivre sur le cluster de reprise après incident et sur le cluster survivant après le basculement pour assurer la sécurité et la continuité du service de données.
+
+Pour déterminer si un incident s'est produit, procédez comme suit :
+
+* Un administrateur
+* Le logiciel MetroCluster Tiebreaker, s'il est configuré
+* Le logiciel médiateur ONTAP, s'il est configuré
+
+
+
+
+== Escrime hors site de la catastrophe
+
+Après l'incident, si les nœuds du site de reprise doivent être remplacés, vous devez les arrêter pour que le site puisse reprendre le service. Si les clients accèdent aux nœuds avant la fin de la procédure de remplacement, vous risquez une corruption des données.
+
+.Étape
+. Arrêtez les nœuds sur le site du incident et gardez-les hors tension ou à l'invite DU CHARGEUR jusqu'à ce que l'ONTAP de démarrage soit indiqué :
++
+`system node halt -node disaster-site-node-name`
+
++
+Si les nœuds du site de secours ont été détruits ou ne peuvent pas être stoppés, mettez-les hors tension et ne démarrez pas les nœuds de remplacement avant d'avoir été dirigés dans la procédure de reprise.
+
+
+
+
+
+== Effectuer un basculement forcé
+
+Le processus de basculement, en plus d'assurer la continuité de l'activité lors des tests et de la maintenance, permet la restauration après une défaillance de site à l'aide d'une seule commande.
+
+.Avant de commencer
+* Au moins un des nœuds de site survivants doit être opérationnel avant le basculement.
+* Toutes les modifications de la configuration précédente doivent être effectuées avant d'effectuer une opération de rétablissement.
++
+Cette approche permet d'éviter la concurrence avec l'opération de basculement ou de rétablissement négociée.
+
+
+
+
+NOTE: Les configurations SnapMirror et SnapVault sont supprimées automatiquement.
+
+Le `metrocluster switchover` La commande bascule les nœuds dans tous les groupes DR dans la configuration MetroCluster. Par exemple, dans une configuration MetroCluster à 8 nœuds, il bascule les nœuds sur les deux groupes de reprise après incident.
+
+.Étapes
+. Mettre en œuvre le basculement :
++
+`metrocluster switchover -forced-on-disaster true`
+
++
+L'opération peut prendre quelques minutes.
+
+. Réponse `y` lorsque vous êtes invité à poursuivre le basculement.
+. Vérifiez que le basculement a été effectué correctement en exécutant la commande MetroCluster Operation show.
++
+....
+mcc1A::> metrocluster operation show
+  Operation: switchover
+ Start time: 10/4/2012 19:04:13
+      State: in-progress
+   End time: -
+     Errors:
+
+mcc1A::> metrocluster operation show
+  Operation: switchover
+ Start time: 10/4/2012 19:04:13
+      State: successful
+   End time: 10/4/2012 19:04:22
+     Errors: -
+....
++
+Si le basculement est vetoté, vous avez la possibilité de réémettre le `metrocluster switchover-forced-on-disaster true` commande avec `--override-vetoes` option. Si vous utilisez ce paramètre facultatif, le système remplace tout veto logiciel qui a empêché le basculement.
+
+
+
+Les relations SnapMirror doivent être réétablies après le basculement.
+
+
+
+== Le résultat de la commande plex show de l'agrégat de stockage est indéterminé après un basculement de MetroCluster
+
+Lorsque vous exécutez le `storage aggregate plex show` Commande après un basculement MetroCluster, l'état du plex0 de l'agrégat racine commuté est indéterminé et s'affiche comme ayant échoué. Pendant ce temps, la racine de commutation n'est pas mise à jour. L'état réel de ce plex ne peut être déterminé qu'après la phase de guérison MetroCluster.
+
+
+
+== Accès aux volumes dans l'état NVFAIL après un basculement
+
+Après un basculement, vous devez effacer l'état NVFAIL en réinitialisant le `-in-nvfailed-state` paramètre du `volume modify` commande de suppression de la restriction d'accès des clients aux données.
+
+La base de données ou le système de fichiers ne doit pas être en cours d'exécution ni tenter d'accéder au volume affecté.
+
+Réglage du `-in-nvfailed-state` le paramètre nécessite un privilège de niveau avancé.
+
+.Étape
+. Récupérer le volume à l'aide de `volume modify` commande avec `-in-nvfailed-state` paramètre défini sur faux.
+
+
+Pour obtenir des instructions sur l'examen de la validité des fichiers de base de données, reportez-vous à la documentation de votre logiciel de base de données spécifique.
+
+Si votre base de données utilise des LUN, suivez les étapes pour rendre les LUN accessibles à l'hôte après une panne de mémoire NVRAM.
+
+link:../manage/concept_monitoring_and_protecting_database_validity_by_using_nvfail.html["Surveillance et protection de la validité de la base de données à l'aide de NVFAIL"]

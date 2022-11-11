@@ -1,0 +1,51 @@
+---
+permalink: install-ip/concept_considerations_tdm_encryption.html 
+sidebar: sidebar 
+keywords: differences, eight-node, four-node, fabric-attached, stretch, metrocluster ip, storage, bridges, fc-to-sas, atto, fibrebridge, SAS, local HA, auso, automatic unplanned switchover, array luns, mediator, tiebreaker 
+summary: 'Vous devez tenir compte de certaines considérations relatives à l"utilisation de l"équipement de multiplexage dans la configuration IP MetroCluster.' 
+---
+= Utilisation de TDM/xWDM et de l'équipement de cryptage avec les configurations IP MetroCluster
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous devez tenir compte de certaines considérations relatives à l'utilisation de l'équipement de multiplexage dans la configuration IP MetroCluster.
+
+Ces considérations s'appliquent uniquement aux liaisons et aux commutateurs back-end MetroCluster dédiés et directs, et non aux liaisons partagées avec le trafic non MetroCluster.
+
+L'outil Hardware Universe fournit quelques remarques sur les exigences que les équipements TDM/xWDM doivent respecter pour fonctionner avec une configuration IP MetroCluster.
+
+https://hwu.netapp.com["NetApp Hardware Universe"]
+
+
+
+== Utilisation du cryptage sur WDM ou les périphériques de cryptage externes
+
+Lors de l'utilisation du cryptage sur des périphériques WDM dans la configuration IP MetroCluster, votre environnement doit satisfaire aux exigences suivantes :
+
+* Les dispositifs de cryptage externes ou l'équipement DWDM doivent avoir été certifiés par le fournisseur avec le commutateur en question.
++
+La certification doit couvrir le mode de fonctionnement (par exemple, la mise en circuit et le cryptage).
+
+* La latence et l'instabilité globales de bout en bout, y compris le cryptage, ne peuvent pas dépasser le maximum indiqué dans IMT ou dans ce document.
+
+
+
+
+== Considérations relatives aux SFP
+
+Tous les SFP ou SFP pris en charge par le fournisseur de l'équipement sont pris en charge pour les liens ISL de MetroCluster. Les SFP et les modules SFP peuvent être acquis auprès de NetApp ou du fournisseur de l'équipement.
+
+
+
+== Considérations relatives aux liens ISL
+
+Les liens ISL d'une structure (une structure) doivent être tous de la même vitesse et de la même longueur.
+
+Les liens ISL d'une structure doivent tous avoir la même topologie. Par exemple, ils doivent tous être des liens directs, ou si la configuration utilise WDM, ils doivent tous utiliser WDM.
+
+Si vous partagez des liens ISL avec un réseau non-MetroCluster, vous devez suivre les instructions de la section link:concept_considerations_layer_2.html["Considérations relatives au partage de réseaux privés de couche 2"].
+
+La différence maximale de distance entre le tissu 1 et le tissu 2 est de 20 km

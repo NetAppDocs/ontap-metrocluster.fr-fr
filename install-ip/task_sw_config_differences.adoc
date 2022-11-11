@@ -1,0 +1,67 @@
+---
+permalink: install-ip/task_sw_config_differences.html 
+sidebar: sidebar 
+keywords: metrocluster, configuration, ontap, node-level, configuration, node, site, relationship, configuring, configure, similarities, difference, 
+summary: 'La configuration des nœuds de chaque cluster dans une configuration MetroCluster est similaire à celle des nœuds d"un cluster standard.' 
+---
+= Similarités et différences entre les configurations cluster standard et MetroCluster
+:allow-uri-read: 
+
+
+[role="lead"]
+La configuration des nœuds de chaque cluster dans une configuration MetroCluster est similaire à celle des nœuds d'un cluster standard.
+
+La configuration MetroCluster est basée sur deux clusters standard. Physiquement, la configuration doit être symétrique. Chaque nœud présente la même configuration matérielle et tous les composants MetroCluster doivent être câblés et configurés. Cependant, la configuration logicielle de base des nœuds dans une configuration MetroCluster est identique à celle des nœuds d'un cluster standard.
+
+|===
+
+
+| Étape de configuration | Configuration standard en cluster | Configuration MetroCluster 
+
+
+ a| 
+Configurez la gestion, le cluster et la LIF de données sur chaque nœud.
+2+| La même chose dans les deux types de clusters 
+
+
+ a| 
+Configurer l'agrégat root.
+2+| La même chose dans les deux types de clusters 
+
+
+ a| 
+Configurez le cluster sur un nœud.
+2+| La même chose dans les deux types de clusters 
+
+
+ a| 
+Joignez l'autre nœud au cluster.
+2+| La même chose dans les deux types de clusters 
+
+
+ a| 
+Créez un agrégat racine en miroir.
+ a| 
+Facultatif
+ a| 
+Obligatoire
+
+
+
+ a| 
+Peer-to-peer des clusters
+ a| 
+Facultatif
+ a| 
+Obligatoire
+
+
+
+ a| 
+Activez la configuration MetroCluster.
+ a| 
+Ne s'applique pas
+ a| 
+Obligatoire
+
+|===

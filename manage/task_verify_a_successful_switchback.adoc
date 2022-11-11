@@ -1,0 +1,85 @@
+---
+permalink: manage/task_verify_a_successful_switchback.html 
+sidebar: sidebar 
+keywords: perform, switchback, aggregate, storage, virtual, machine, svm, switch, back, online, verify, successful 
+summary: 'Après le rétablissement, il convient de vérifier que tous les agrégats et machines virtuelles de stockage \(SVM\) sont basculés et en ligne.' 
+---
+= Vérification du rétablissement réussi
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Après le rétablissement, il vous faut vérifier que tous les agrégats et les serveurs virtuels de stockage sont basculés et en ligne.
+
+. Vérifier que les agrégats de données basculée sont basculée :
++
+`storage aggregate show`
+
++
+Dans l'exemple suivant, aggr_b2 sur le nœud B2 a été remis :
+
++
+[listing]
+----
+node_B_1::> storage aggregate show
+Aggregate     Size Available Used% State   #Vols  Nodes            RAID Status
+--------- -------- --------- ----- ------- ------ ---------------- ------------
+...
+aggr_b2    227.1GB   227.1GB    0% online       0 node_B_2   raid_dp,
+                                                                   mirrored,
+                                                                   normal
+----
+. Assurez-vous que tous les SVM de destination synchrone du cluster survivant sont inactifs (en affichant un état d'administration de « `Soutret') et que les SVM source de synchronisation sur le cluster de secours sont opérationnels :
++
+`vserver show -subtype sync-source`
+
++
+[listing]
+----
+node_B_1::> vserver show -subtype sync-source
+                               Admin      Root                       Name    Name
+Vserver     Type    Subtype    State      Volume     Aggregate       Service Mapping
+----------- ------- ---------- ---------- ---------- ----------      ------- -------
+...
+vs1a        data    sync-source
+                               running    vs1a_vol   node_B_2        file    file
+                                                                     aggr_b2
+
+node_A_1::> vserver show -subtype sync-destination
+                               Admin      Root                         Name    Name
+Vserver            Type    Subtype    State      Volume     Aggregate  Service Mapping
+-----------        ------- ---------- ---------- ---------- ---------- ------- -------
+...
+cluster_A-vs1a-mc  data    sync-destination
+                                      stopped    vs1a_vol   sosb_      file    file
+                                                                       aggr_b2
+----
++
+Les agrégats de destination de synchronisation dans la configuration MetroCluster possèdent le suffixe «`-mc » automatiquement ajouté à leur nom pour vous aider à les identifier.
+
+. Vérifiez que les opérations de rétablissement ont abouti en utilisant le `metrocluster operation show` commande.
++
+|===
+
+
+| Si la sortie de la commande affiche... | Alors... 
+
+
+ a| 
+L'état de l'opération de rétablissement a réussi.
+ a| 
+Le processus de rétablissement est terminé et vous pouvez poursuivre le fonctionnement du système.
+
+
+
+ a| 
+Que l'opération de rétablissement ou de rétablissement-continuation-agent soit partiellement réussie.
+ a| 
+Effectuez la correction suggérée fournie dans la sortie du `metrocluster operation show` commande.
+
+|===
+
+
+Vous devez répéter les sections précédentes pour effectuer le rétablissement dans la direction opposée. Si site_A a effectué un basculement du site_B, demandez à site_B de basculer du site_A.

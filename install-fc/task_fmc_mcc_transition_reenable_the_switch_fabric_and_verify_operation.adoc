@@ -1,0 +1,64 @@
+---
+permalink: install-fc/task_fmc_mcc_transition_reenable_the_switch_fabric_and_verify_operation.html 
+sidebar: sidebar 
+keywords: metrocluster, fabric, installation, reenable, switch, fabric, verify, operation 
+summary: Vous devez activer la structure de commutation FC et vous assurer que les commutateurs et les dispositifs fonctionnent correctement. 
+---
+= Réactivation de la structure du commutateur et vérification du fonctionnement
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous devez activer la structure de commutation FC et vous assurer que les commutateurs et les dispositifs fonctionnent correctement.
+
+.Étapes
+. Activez les commutateurs :
++
+`switchCfgPersistentEnable`
+
++
+Si cette commande n'est pas disponible, le commutateur doit être à l'état activé après le `fastBoot` la commande est émise.
+
++
+** L'exemple suivant montre la commande émise sur FC_Switch_A_1 :
++
+[listing]
+----
+FC_switch_A_1:admin> switchCfgPersistentEnable
+----
+** L'exemple suivant montre la commande émise sur FC_Switch_B_1 :
++
+[listing]
+----
+FC_switch_B_1:admin> switchCfgPersistentEnable
+----
+
+
+. Vérifiez que les commutateurs sont en ligne et que tous les périphériques sont correctement connectés :
++
+`switchShow`
+
++
+L'exemple suivant montre la commande émise sur FC_Switch_A_1 :
+
++
+[listing]
+----
+FC_switch_A_1:admin> switchShow
+----
++
+L'exemple suivant montre la commande émise sur FC_Switch_B_1 :
+
++
+[listing]
+----
+FC_switch_B_1:admin> switchShow
+----
+. Exécutez l'utilitaire fmc_dc pour vous assurer que le Fabric MetroCluster 7-mode fonctionne correctement.
++
+Vous pouvez ignorer les erreurs liées à la segmentation et à la mise en circuit de l'isolation du trafic (TI).
+
+. Répéter les tâches pour la deuxième structure de commutateur.
+

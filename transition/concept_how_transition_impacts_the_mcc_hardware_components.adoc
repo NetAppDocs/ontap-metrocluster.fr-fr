@@ -1,0 +1,41 @@
+---
+permalink: transition/concept_how_transition_impacts_the_mcc_hardware_components.html 
+sidebar: sidebar 
+keywords: complete, completing, transition, procedure, key, component, exist, metrocluster, configuration, replace, reconfigure, impact, hardware, component 
+summary: Une fois la procédure de transition terminée, les composants clés de la configuration MetroCluster existante ont été remplacés ou reconfigurés. 
+---
+= Quel est l'impact de la transition sur les composants matériels MetroCluster
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Une fois la procédure de transition terminée, les composants clés de la configuration MetroCluster existante ont été remplacés ou reconfigurés.
+
+* *Modules de contrôleur*
++
+Les modules de contrôleur existants sont remplacés par de nouveaux modules de contrôleur. Les modules de contrôleur existants sont désaffectés à l'issue des procédures de transition.
+
+* *Étagères de stockage*
++
+Les données sont déplacées des anciens tiroirs vers les nouveaux tiroirs. Les anciens tiroirs sont désaffectés à la fin des procédures de transition.
+
+* *MetroCluster (back-end) et commutateurs de cluster*
++
+La fonctionnalité du commutateur back-end est remplacée par la structure du commutateur IP. Si la configuration MetroCluster FC incluait des commutateurs FC et des ponts FC-to-SAS, ils sont désaffectés à la fin de cette procédure.
+
++
+Si la configuration MetroCluster FC utilisait des commutateurs de cluster pour l'interconnexion de cluster, ils peuvent, dans certains cas, être réutilisés pour fournir la structure de commutateur IP back-end. Les commutateurs du bloc d'instruments réutilisés doivent être reconfigurés à l'aide d'un RCFC spécifique à la plateforme et au commutateur. procédures.
+
++
+Si la configuration FC MetroCluster n'utilisait pas de commutateurs de cluster, de nouveaux commutateurs IP sont ajoutés pour fournir la structure du commutateur interne.
+
++
+link:concept_considerations_for_using_existing_ip_switches.html["Considérations relatives aux commutateurs IP"]
+
+* *Réseau de peering de clusters*
++
+Le réseau de peering de cluster existant fourni par le client peut être utilisé pour la nouvelle configuration IP de MetroCluster. Le peering de cluster est configuré sur les nœuds IP MetroCluster dans le cadre de la procédure de transition.
+
+

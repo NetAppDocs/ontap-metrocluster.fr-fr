@@ -1,0 +1,77 @@
+---
+permalink: install-ip/concept_considerations_unmirrored_aggrs.html 
+sidebar: sidebar 
+keywords: differences, eight-node, four-node, fabric-attached, stretch, metrocluster ip, storage, bridges, fc-to-sas, atto, fibrebridge, SAS, local HA, auso, automatic unplanned switchover, array luns, mediator, tiebreaker 
+summary: 'Si votre configuration inclut des agrégats sans mise en miroir, vous devez connaître les problèmes d"accès potentiels après les opérations de basculement.' 
+---
+= Avec des agrégats non mis en miroir
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Si votre configuration inclut des agrégats sans mise en miroir, vous devez connaître les problèmes d'accès potentiels après les opérations de basculement.
+
+
+
+== Considérations relatives aux agrégats non mis en miroir lors de tâches de maintenance nécessitant l'arrêt d'alimentation
+
+Si vous effectuez un basculement négocié pour des raisons de maintenance requérant une coupure d'alimentation à l'échelle du site, vous devez d'abord mettre manuellement hors ligne tous les agrégats non mis en miroir détenus par le site de secours.
+
+Si vous ne le faites pas, les nœuds du site survivant peuvent tomber en panne en raison de incohérences des disques. Cela peut se produire si les agrégats sans mise en miroir sont mis hors ligne ou manquants en raison de la perte de connectivité au stockage sur le site en cas de panne de courant ou de perte de liens ISL.
+
+
+
+== Considérations relatives aux agrégats non mis en miroir et aux espaces de noms hiérarchiques
+
+Si vous utilisez des espaces de noms hiérarchiques, vous devez configurer le chemin de jonction de sorte que tous les volumes de ce chemin soient sur des agrégats en miroir uniquement ou sur des agrégats non mis en miroir uniquement. La configuration d'agrégats non mis en miroir et en miroir dans le chemin de jonction peut empêcher l'accès aux agrégats non mis en miroir après le basculement.
+
+
+
+== Considérations relatives aux agrégats non mis en miroir et aux volumes de métadonnées CRS et aux volumes racines des SVM de données
+
+Le volume des métadonnées du service de réplication de la configuration (CRS) et les volumes root du SVM de données doivent se trouver sur un agrégat en miroir. Vous ne pouvez pas déplacer ces volumes vers des agrégats non mis en miroir. S'ils sont sur des agrégats sans miroir, les opérations négociées de basculement et de rétablissement sont vetotées. La commande MetroCluster check fournit un avertissement si c'est le cas.
+
+
+
+== Considérations relatives aux SVM et aux agrégats sans miroir
+
+Les SVM doivent être configurés sur des agrégats en miroir uniquement ou sur des agrégats sans miroir uniquement. La configuration d'une combinaison d'agrégats non mis en miroir et en miroir peut entraîner un basculement supérieur à 120 secondes et entraîner une panne des données en cas d'indisponibilité des agrégats non mis en miroir.
+
+
+
+== Considérations relatives aux agrégats sans miroir et à SAN
+
+Avant la version ONTAP 9.9.1, une LUN ne doit pas être localisée sur un agrégat sans miroir. La configuration d'une LUN sur un agrégat non mis en miroir peut entraîner un basculement supérieur à 120 secondes et une panne de données.
+
+
+
+== Considérations relatives à l'ajout de tiroirs de stockage pour les agrégats non mis en miroir
+
+
+NOTE: Si vous ajoutez des tiroirs qui seront utilisés pour les agrégats sans miroir dans une configuration MetroCluster IP, vous devez effectuer les opérations suivantes :
+
+. Avant de démarrer la procédure d'ajout des tiroirs, exécutez la commande suivante :
++
+`metrocluster modify -enable-unmirrored-aggr-deployment true`
+
+. Vérifiez que l'assignation automatique des disques est désactivée :
++
+`disk option show`
+
+. Suivez les étapes de la procédure pour ajouter les étagères.
+. Attribuez manuellement tous les disques du nouveau tiroir au nœud qui sera propriétaire de l'agrégat ou des agrégats sans miroir.
+. Créez les agrégats :
++
+`storage aggregate create`
+
+. Après avoir terminé la procédure, exécutez la commande suivante :
++
+`metrocluster modify -enable-unmirrored-aggr-deployment false`
+
+. Vérifiez que l'assignation automatique des disques est activée :
++
+`disk option show`
+
+

@@ -1,0 +1,328 @@
+---
+permalink: install-fc/concept_example_of_switch_zoning_in_a_four_node_mcc_configuration_with_array_luns.html 
+sidebar: sidebar 
+keywords: metrocluster, fabric, installation, switch, four, node, array, luns 
+summary: La segmentation des commutateurs définit les chemins entre les nœuds connectés. La configuration du zoning permet de définir les LUN de baie pouvant être visualisées par des systèmes ONTAP spécifiques. 
+---
+= Exemple de segmentation de commutateur dans une configuration MetroCluster à quatre nœuds avec des LUN de baie
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+La segmentation des commutateurs définit les chemins entre les nœuds connectés. La configuration du zoning permet de définir les LUN de baie pouvant être visualisées par des systèmes ONTAP spécifiques.
+
+Vous pouvez utiliser l'exemple suivant comme référence lors de la détermination du zoning pour une configuration MetroCluster à quatre nœuds avec des LUN de baie. L'exemple montre la segmentation à un seul initiateur sur une seule cible dans une configuration MetroCluster. Les lignes de l'exemple suivant représentent des zones plutôt que des connexions ; chaque ligne est étiquetée avec son numéro de zone :
+
+image::../media/v_series_metrocluster_zoning_example.gif[Ce graphique illustre les zones de commutation dans un exemple de configuration MetroCluster avec des LUN de matrice. Le graphique est décrit par le texte environnant.]
+
+Dans l'illustration, les LUN de baies sont allouées à chaque baie de stockage pour la configuration MetroCluster. Des LUN de taille égale sont provisionnées sur les baies de stockage de chaque site, ce qui est une exigence de SyncMirror. Chaque système ONTAP possède deux chemins d'accès aux LUN de baie. Les ports de la matrice de stockage sont redondants.
+
+Dans l'illustration, les paires de ports de matrice redondante pour les deux sites sont les suivantes :
+
+* Baie de stockage du site A :
++
+** Ports 1A et 2A
+** Ports 1B et 2B
+** Ports 1C et 2C
+** Ports 1D et 2D
+
+
+* Baie de stockage du site B :
++
+** Ports 1A' et 2A'
+** Ports 1B' et 2B'
+** Ports 1C' et 2C'
+** Ports 1D et 2D'
+
+
+
+
+Les paires de ports redondants sur chaque baie de stockage forment d'autres chemins. Par conséquent, les deux ports des paires de ports peuvent accéder aux LUN sur les baies de stockage respectives.
+
+Les tableaux suivants présentent les zones pour cet exemple :
+
+
+
+== Zones pour FC_Switch_A_1
+
+|===
+
+
+| Zone | Contrôleur ONTAP et port initiateur | Port de la matrice de stockage 
+
+
+ a| 
+z1
+ a| 
+Controller_A_1 : port 0a
+ a| 
+Orifice 1A
+
+
+
+ a| 
+z3
+ a| 
+Contrôleur_A_1 : port 0C
+ a| 
+Port 1A'
+
+
+
+ a| 
+z5
+ a| 
+Controller_A_2 : port 0a
+ a| 
+Port 1B
+
+
+
+ a| 
+z7
+ a| 
+Contrôleur_A_2 : port 0C
+ a| 
+Port 1B'
+
+|===
+
+
+== Zones pour FC_Switch_A_2
+
+|===
+
+
+| Zone | Contrôleur ONTAP et port initiateur | Port de la matrice de stockage 
+
+
+ a| 
+z2
+ a| 
+Contrôleur_A_1 : port 0b
+ a| 
+Port 2A'
+
+
+
+ a| 
+z4
+ a| 
+Contrôleur_A_1 : port 0d
+ a| 
+Orifice 2A
+
+
+
+ a| 
+z6
+ a| 
+Contrôleur_A_2 : port 0b
+ a| 
+Orifice 2B'
+
+
+
+ a| 
+z8
+ a| 
+Contrôleur_A_2 : port 0d
+ a| 
+Orifice 2B
+
+|===
+
+
+== Zones pour FC_Switch_B_1
+
+|===
+
+
+| Zone | Contrôleur ONTAP et port initiateur | Port de la matrice de stockage 
+
+
+ a| 
+z9
+ a| 
+Controller_B_1 : port 0a
+ a| 
+Orifice 1C'
+
+
+
+ a| 
+z11
+ a| 
+Contrôleur_B_1 : port 0C
+ a| 
+Orifice 1C
+
+
+
+ a| 
+z13
+ a| 
+Controller_B_2 : port 0a
+ a| 
+Port 1D'
+
+
+
+ a| 
+z15
+ a| 
+Contrôleur_B_2 : port 0C
+ a| 
+Port 1D
+
+|===
+
+
+== Zones pour FC_Switch_B_2
+
+|===
+
+
+| Zone | Contrôleur ONTAP et port initiateur | Port de la matrice de stockage 
+
+
+ a| 
+z10
+ a| 
+Contrôleur_B_1 : port 0b
+ a| 
+Port 2C
+
+
+
+ a| 
+z12
+ a| 
+Contrôleur_B_1 : port 0d
+ a| 
+Port 2C'
+
+
+
+ a| 
+z14
+ a| 
+Contrôleur_B_2 : port 0b
+ a| 
+Port 2D
+
+
+
+ a| 
+z16
+ a| 
+Contrôleur_B_2 : port 0d
+ a| 
+Port 2D'
+
+|===
+
+
+== Zones pour les connexions FC-VI du site A
+
+|===
+
+
+| Zone | Contrôleur ONTAP et port d'initiateur FC | Commutateur 
+
+
+ a| 
+ZX
+ a| 
+Controller_A_1 : port FC-VI a
+ a| 
+FC_Switch_A_1
+
+
+
+ a| 
+ZY
+ a| 
+Contrôleur_A_1 : port FC-VI b
+ a| 
+FC_Switch_A_2
+
+
+
+ a| 
+ZX
+ a| 
+Contrôleur_A_2 : port FC-VI a
+ a| 
+FC_Switch_A_1
+
+
+
+ a| 
+ZY
+ a| 
+Contrôleur_A_2 : port FC-VI b
+ a| 
+FC_Switch_A_2
+
+|===
+
+
+== Zones pour les connexions FC-VI sur le site B
+
+|===
+
+
+| Zone | Contrôleur ONTAP et port d'initiateur FC | Commutateur 
+
+
+ a| 
+ZX
+ a| 
+Contrôleur_B_1 : port FC-VI a
+ a| 
+FC_Switch_B_1
+
+
+
+ a| 
+ZY
+ a| 
+Contrôleur_B_1 : port FC-VI b
+ a| 
+FC_Switch_B_2
+
+
+
+ a| 
+ZX
+ a| 
+Contrôleur_B_2 : port FC-VI a
+ a| 
+FC_Switch_B_1
+
+
+
+ a| 
+ZY
+ a| 
+Contrôleur_B_2 : port FC-VI b
+ a| 
+FC_Switch_B_2
+
+|===
+.Informations associées
+* La segmentation des commutateurs définit les chemins entre les nœuds connectés. La configuration du zoning permet de définir les LUN de baie pouvant être visualisées par des systèmes ONTAP spécifiques.
++
+link:concept_example_of_switch_zoning_in_a_two_node_mcc_configuration_with_array_luns.html["Exemple de segmentation de switch dans une configuration MetroCluster à deux nœuds avec des LUN de baie"]
+
++
+link:concept_example_of_switch_zoning_in_an_eight_node_mcc_configuration_with_array_luns.html["Exemple de segmentation de commutateur dans une configuration MetroCluster à huit nœuds avec des LUN de baie"]
+
+* Lors de l'utilisation de la segmentation de commutateurs dans une configuration MetroCluster avec des LUN de baie, vous devez vous assurer que certaines exigences de base sont respectées.
++
+link:reference_requirements_for_switch_zoning_in_a_mcc_configuration_with_array_luns.html["Conditions requises pour la segmentation des commutateurs dans une configuration MetroCluster avec des LUN de baie"]
+
+

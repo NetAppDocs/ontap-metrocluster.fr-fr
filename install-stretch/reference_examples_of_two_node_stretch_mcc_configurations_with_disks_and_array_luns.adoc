@@ -1,0 +1,35 @@
+---
+permalink: install-stretch/reference_examples_of_two_node_stretch_mcc_configurations_with_disks_and_array_luns.html 
+sidebar: sidebar 
+keywords: metrocluster, stretch, installation, examples, two, node, stretch, configurations, disks, array, luns 
+summary: Pour configurer une configuration MetroCluster étendue avec des disques natifs et des LUN de baie, vous devez utiliser des ponts FC-SAS ou des câbles optiques SAS pour connecter les systèmes ONTAP aux tiroirs disques. Vous devez utiliser des commutateurs FC pour connecter des LUN de baies aux systèmes ONTAP. 
+---
+= Exemples de configurations MetroCluster étendues à deux nœuds avec des disques et des LUN de baie
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Pour configurer une configuration MetroCluster étendue avec des disques natifs et des LUN de baie, vous devez utiliser des ponts FC-SAS ou des câbles optiques SAS pour connecter les systèmes ONTAP aux tiroirs disques. De plus, les commutateurs FC doivent être utilisés pour connecter les LUN de baie aux systèmes ONTAP.
+
+Un minimum de huit ports HBA est nécessaire pour qu'un système ONTAP puisse se connecter à la fois aux disques natifs et aux LUN de la baie.
+
+Dans les exemples suivants représentant les configurations MetroCluster étendues à deux nœuds avec les disques et les LUN de baie, les ports HBA 0a à 0d sont utilisés pour la connexion avec les LUN de baie. Les ports HBA 1a à 1D sont utilisés pour les connexions avec des disques natifs.
+
+L'illustration suivante présente une configuration MetroCluster extensible à deux nœuds dans laquelle les disques natifs sont connectés aux systèmes ONTAP via des câbles optiques SAS :
+
+image::../media/two_node_mcc_combined_glowworm.gif[module mcc à deux nœuds avec ver de verre combiné]
+
+L'illustration suivante présente une configuration MetroCluster extensible à deux nœuds dans laquelle les disques natifs sont connectés aux systèmes ONTAP par ponts FC-SAS :
+
+image::../media/two_node_mcc_combined_armadillo.gif[mcc à deux nœuds combiné armadillo]
+
+L'illustration suivante présente une configuration MetroCluster extensible à deux nœuds avec les connexions LUN de la baie :
+
+image::../media/two_node_mcc_combined_array_luns.gif[lun de baie combinés mcc à deux nœuds]
+
+
+NOTE: Si nécessaire, vous pouvez également utiliser les mêmes commutateurs FC pour connecter les disques natifs et les LUN de baie aux contrôleurs de la configuration MetroCluster.
+
+https://docs.netapp.com/us-en/ontap-metrocluster/install-fc/index.html["Installation et configuration de la solution Fabric-Attached MetroCluster"]

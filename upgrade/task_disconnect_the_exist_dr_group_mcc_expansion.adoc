@@ -1,0 +1,27 @@
+---
+permalink: upgrade/task_disconnect_the_exist_dr_group_mcc_expansion.html 
+sidebar: sidebar 
+keywords: metrocluster, upgrade, disconnect, existing, dr, group, fabric 
+summary: Vous devez déconnecter les modules de contrôleur existants des commutateurs FC dans la structure. 
+---
+= Déconnexion du groupe DR existant de la structure
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous devez déconnecter les modules de contrôleur existants des commutateurs FC dans la structure.
+
+Cette tâche doit être effectuée sur chaque site MetroCluster.
+
+.Étapes
+. Désactivez les ports HBA qui connectent les modules de contrôleur existants à la structure du commutateur en cours de maintenance :
++
+`storage port disable -node _node-name_ -port _port-number_`
+
+. Sur les commutateurs FC locaux, retirer les câbles des ports des ponts HBA, FC-VI et ATTO du module de contrôleur existant.
++
+Vous devez étiqueter les câbles pour faciliter leur identification lorsque vous les recâetez. Seuls les ports ISL doivent rester câblés.
+
+

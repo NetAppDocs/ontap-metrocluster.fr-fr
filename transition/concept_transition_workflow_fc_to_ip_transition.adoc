@@ -1,0 +1,30 @@
+---
+permalink: transition/concept_transition_workflow_fc_to_ip_transition.html 
+sidebar: sidebar 
+keywords: follow, workflow, ensure, successful, nondisruptive, transition, metrocluster 
+summary: Vous devez suivre le workflow spécifique pour assurer une transition sans interruption. 
+---
+= Flux de travail pour une transition MetroCluster sans interruption
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous devez suivre le workflow spécifique pour assurer une transition sans interruption.
+
+Le processus de transition commence par une configuration FC MetroCluster à quatre nœuds saine.
+
+image::../media/transition_dr_group_1_fc_nodes.png[effectuer la transition des nœuds fc du groupe de reprise après incident]
+
+Les nouveaux nœuds IP MetroCluster sont ajoutés en tant que second groupe DR.
+
+image::../media/transition_dr_groups_fc_and_ip.png[transition des groupes de reprise après incident fc et ip]
+
+Les données sont transférées de l'ancien groupe de reprise après incident vers le nouveau groupe de reprise après incident, puis les anciens nœuds et leur stockage sont retirés de la configuration et désaffectés. Le processus se termine par une configuration IP MetroCluster à quatre nœuds.
+
+image::../media/transition_dr_group_2_ip.png[ip de groupe de reprise sur incident de transition 2]
+
+Vous utiliserez le workflow suivant pour effectuer la transition de la configuration MetroCluster.
+
+image::../media/workflow_4n_transition_nondisruptive.png[transition de flux de travail 4n sans interruption]

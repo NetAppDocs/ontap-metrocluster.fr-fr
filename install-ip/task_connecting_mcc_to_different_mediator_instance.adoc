@@ -1,0 +1,29 @@
+---
+permalink: install-ip/task_connecting_mcc_to_different_mediator_instance.html 
+sidebar: sidebar 
+keywords: metrocluster, mediator, configure, connect 
+summary: Si vous souhaitez connecter les nœuds MetroCluster à une autre instance de médiateur ONTAP, vous devez déconfigurer puis reconfigurer la connexion du médiateur dans le logiciel ONTAP. 
+---
+= Connexion d'une configuration MetroCluster à une instance de médiateur ONTAP différente
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Si vous souhaitez connecter les nœuds MetroCluster à une autre instance de médiateur ONTAP, vous devez déconfigurer puis reconfigurer la connexion du médiateur dans le logiciel ONTAP.
+
+Vous avez besoin du nom d'utilisateur, du mot de passe et de l'adresse IP de la nouvelle instance du médiateur ONTAP.
+
+Ces commandes peuvent être émises depuis n'importe quel nœud de la configuration MetroCluster.
+
+.Étapes
+. Supprimez le médiateur ONTAP actuel de la configuration MetroCluster :
++
+`metrocluster configuration-settings mediator remove`
+
+. Établissez la nouvelle connexion du médiateur ONTAP à la configuration MetroCluster :
++
+`metrocluster configuration-settings mediator add -mediator-address _ip-address-of-mediator-host_`
+
+

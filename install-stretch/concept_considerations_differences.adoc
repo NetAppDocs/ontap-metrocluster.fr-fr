@@ -1,0 +1,236 @@
+---
+permalink: install-stretch/concept_considerations_differences.html 
+sidebar: sidebar 
+keywords: metrocluster, stretch, installation, configurations, all san array, asa 
+summary: Les différentes configurations MetroCluster présentent des différences clés au niveau des composants requis. 
+---
+= Différences entre les configurations ONTAP MetroCluster
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Les différentes configurations MetroCluster présentent des différences clés au niveau des composants requis.
+
+Dans toutes les configurations, chacun des deux sites MetroCluster est configuré en tant que cluster ONTAP. Dans une configuration MetroCluster à deux nœuds, chaque nœud est configuré en tant que cluster à un seul nœud.
+
+|===
+
+
+| Fonction | Configurations IP 2+| Configurations intégrées à la structure 2+| Configurations Stretch 
+
+
+|  |  | *Quatre ou huit noeuds* | *Deux nœuds* | *Connexion pont à deux noeuds* | *Connexion directe à deux nœuds* 
+
+
+ a| 
+Nombre de contrôleurs
+ a| 
+Quatre ou huit*
+ a| 
+Quatre ou huit
+ a| 
+Deux
+ a| 
+Deux
+ a| 
+Deux
+
+
+
+ a| 
+Utilise une structure de stockage avec commutateur FC
+ a| 
+Non
+ a| 
+Oui.
+ a| 
+Oui.
+ a| 
+Non
+ a| 
+Non
+
+
+
+ a| 
+Utilise une structure de stockage avec commutateurs IP
+ a| 
+Oui.
+ a| 
+Non
+ a| 
+Non
+ a| 
+Non
+ a| 
+Non
+
+
+
+ a| 
+Utilise des ponts FC-SAS
+ a| 
+Non
+ a| 
+Oui.
+ a| 
+Oui.
+ a| 
+Oui.
+ a| 
+Non
+
+
+
+ a| 
+Utilise un stockage SAS direct
+ a| 
+Oui (local uniquement)
+ a| 
+Non
+ a| 
+Non
+ a| 
+Non
+ a| 
+Oui.
+
+
+
+ a| 
+Prend en charge ADP
+ a| 
+Oui (à partir de ONTAP 9.4)
+ a| 
+Non
+ a| 
+Non
+ a| 
+Non
+ a| 
+Non
+
+
+
+ a| 
+Prend en charge la haute disponibilité locale
+ a| 
+Oui.
+ a| 
+Oui.
+ a| 
+Non
+ a| 
+Non
+ a| 
+Non
+
+
+
+ a| 
+Prise en charge de l'AUSO ONTAP
+ a| 
+Non
+ a| 
+Oui.
+ a| 
+Oui.
+ a| 
+Oui.
+ a| 
+Oui.
+
+
+
+ a| 
+Prend en charge les agrégats sans miroir
+ a| 
+Oui (à partir de ONTAP 9.8)
+ a| 
+Oui.
+ a| 
+Oui.
+ a| 
+Oui.
+ a| 
+Oui.
+
+
+
+ a| 
+Prise en charge des LUN de baies
+ a| 
+Non
+ a| 
+Oui.
+ a| 
+Oui.
+ a| 
+Oui.
+ a| 
+Oui.
+
+
+
+ a| 
+Prend en charge le médiateur ONTAP
+ a| 
+Oui (à partir de ONTAP 9.7)
+ a| 
+Non
+ a| 
+Non
+ a| 
+Non
+ a| 
+Non
+
+
+
+ a| 
+Prise en charge d'MetroCluster Tiebreaker
+ a| 
+Oui (pas en combinaison avec le médiateur ONTAP)
+ a| 
+Oui.
+ a| 
+Oui.
+ a| 
+Oui.
+ a| 
+Oui.
+
+
+
+| Supports  for All SAN Array systems in MetroCluster configurations,Toutes les baies SAN  a| 
+Oui.
+ a| 
+Oui.
+ a| 
+Oui.
+ a| 
+Oui.
+ a| 
+Oui.
+
+|===
+*Important*
+
+Notez les éléments suivants pour les configurations IP MetroCluster à 8 nœuds :
+
+* Les configurations à huit nœuds sont prises en charge à partir de ONTAP 9.9.1.
+* Seuls les commutateurs MetroCluster validés par NetApp (commandés auprès de NetApp) sont pris en charge.
+* Les configurations utilisant des connexions back-end routées par IP (couche 3) ne sont pas prises en charge.
+* Les configurations utilisant des réseaux privés partagés de couche 2 ne sont pas prises en charge.
+* Les configurations utilisant un commutateur partagé Cisco 9336C-FX2 ne sont pas prises en charge.
+
+
+
+
+== Prise en charge de toutes les baies SAN dans les configurations MetroCluster
+
+Certaines baies SAN (ASAS) sont prises en charge dans les configurations MetroCluster. Dans la documentation MetroCluster, les informations relatives aux modèles AFF s'appliquent au système ASA correspondant. Par exemple, tous les câbles et autres informations du système AFF A400 s'appliquent également au système ASA AFF A400.
+
+Les configurations de plateforme prises en charge sont répertoriées dans le https://hwu.netapp.com["NetApp Hardware Universe"].

@@ -1,0 +1,97 @@
+---
+permalink: install-fc/concept_considerations_isls_mcfc.html 
+sidebar: sidebar 
+keywords: preparing, prepare, metrocluster, mcc, installation, install, differences, configurations, between, considerations, all, san, array, asa, cluster, peering, prerequisites, dedicated, ports, sharing, data, ports, native, disk, shelves, array, luns, transitions, 7-mode, isls, tdm/wdm, fabric-attached, iod, ood, encryption, devices, unmirrored, aggregates, maintenance, requiring, power, shutdown, firewall, hardware, racking, cabling, setup, checklist, all san array, asa, san 
+summary: Vous devez déterminer le nombre de liens ISL nécessaires pour chaque structure de commutateur FC dans la configuration MetroCluster. 
+---
+= Considérations relatives aux liens ISL
+:allow-uri-read: 
+
+
+[role="lead"]
+Vous devez déterminer le nombre de liens ISL nécessaires pour chaque structure de commutateur FC dans la configuration MetroCluster. Depuis ONTAP 9.2, au lieu d'avoir dédié des commutateurs FC et des liens ISL à chaque configuration MetroCluster, vous pouvez partager les quatre mêmes commutateurs.
+
+
+
+== Considérations relatives au partage des liens ISL (ONTAP 9.2)
+
+Depuis ONTAP 9.2, vous pouvez utiliser le partage ISL dans les cas suivants :
+
+* Une configuration MetroCluster à deux et un à quatre nœuds
+* Deux configurations MetroCluster distinctes à quatre nœuds
+* Deux configurations MetroCluster à deux nœuds distinctes
+* Deux groupes de reprise sur incident dans une configuration MetroCluster à 8 nœuds
+
+
+Le nombre de liens ISL requis entre les commutateurs partagés dépend de la bande passante des modèles de plateforme connectés aux commutateurs partagés.
+
+Lorsque vous déterminez le nombre de liens ISL nécessaires, pensez aux aspects suivants de votre configuration.
+
+* Les périphériques non MetroCluster ne doivent pas être connectés à un des commutateurs FC qui fournissent la connectivité MetroCluster interne.
+* Le partage des liens ISL est pris en charge sur tous les commutateurs, à l'exception des commutateurs Cisco 9250i et Cisco 9148.
+* Tous les nœuds doivent exécuter ONTAP 9.2 ou une version ultérieure.
+* Le câblage du commutateur FC pour le partage des liens ISL est le même que pour le câblage MetroCluster à huit nœuds.
+* Les fichiers RCF pour partage des liens ISL sont identiques à ceux du câblage MetroCluster à huit nœuds.
+* Vérifiez que toutes les versions matérielles et logicielles sont prises en charge.
++
+https://hwu.netapp.com["NetApp Hardware Universe"]
+
+* La vitesse et le nombre de liens ISL doivent être dimensionnés pour prendre en charge la charge client sur les deux systèmes MetroCluster.
+* Les liens ISL et les composants internes doivent être dédiés uniquement à la configuration de MetroCluster.
+* Le ISL doit utiliser l'une des vitesses prises en charge : 4 Gbits/s, 8 Gbits/s, 16 Gbits/s ou 32 Gbits/s.
+* Les liens ISL d'une structure (une structure) doivent être tous de la même vitesse et de la même longueur.
+* Les liens ISL d'une structure doivent tous avoir la même topologie. Par exemple, ils doivent tous être des liens directs, ou si votre système utilise WDM, ils doivent tous utiliser WDM.
+
+
+
+
+== Considérations ISL propres à la plateforme
+
+Le nombre de liens ISL recommandés est spécifique au modèle de la plateforme. Le tableau suivant présente les exigences ISL pour chaque modèle de structure par plateforme. Elle suppose que chaque ISL possède une capacité de 16 Gbit/s.
+
+|===
+
+
+| Modèle de plateforme | Nombre recommandé de liens ISL par groupe de reprise après incident de quatre nœuds (par structure de commutation) 
+
+
+ a| 
+AFF A900 ET FAS9500
+ a| 
+Huit
+
+
+
+ a| 
+AFF A700
+ a| 
+Six
+
+
+
+ a| 
+FAS9000
+ a| 
+Six
+
+
+
+ a| 
+8080
+ a| 
+Quatre
+
+
+
+ a| 
+Tous les autres
+ a| 
+Deux
+
+|===
+Si la structure de commutation prend en charge huit nœuds (dans le cadre d'une configuration MetroCluster à huit nœuds ou dans deux configurations à quatre nœuds qui partagent des liens ISL), la somme des liens ISL recommandés est la somme de celle requise pour chaque groupe de reprise après incident à quatre nœuds. Par exemple :
+
+* Si le groupe de reprise après incident 1 intègre quatre systèmes AFF A700, il requiert six liens ISL.
+* Si le groupe de reprise après incident 2 comprend quatre systèmes FAS8200, deux liens ISL sont nécessaires.
+* Le nombre total de liens ISL recommandés dans la structure du commutateur est de huit.
+

@@ -1,0 +1,220 @@
+---
+permalink: install-fc/concept_port_assignments_for_systems_using_two_initiator_ports.html 
+sidebar: sidebar 
+keywords: metrocluster, fabric, installation, port, assignments, systems, two, initiator, ports 
+summary: 'Vous pouvez configurer les systèmes FAS8020, AFF8020, FAS8200 et AFF A300 à partir d"un port d"initiateur unique pour chaque structure et de deux ports d"initiateur pour chaque contrôleur.' 
+---
+= Affectation de ports pour les systèmes utilisant deux ports d'initiateur
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous pouvez configurer les systèmes FAS8020, AFF8020, FAS8200 et AFF A300 à partir d'un port d'initiateur unique pour chaque structure et de deux ports d'initiateur pour chaque contrôleur.
+
+Vous pouvez suivre le câblage du pont FibreBridge 6500N ou du pont FibreBridge 7500N ou 7600N en utilisant un seul port FC (FC1 ou FC2). Au lieu d'utiliser quatre initiateurs, connectez uniquement deux initiateurs et laissez les deux autres connectés au port du commutateur vides.
+
+Vous devez appliquer le fichier RCF correct pour la configuration du pont FiberBridge 6500N.
+
+Si la segmentation est effectuée manuellement, suivre le zoning utilisé pour un pont FibreBridge 6500N ou un pont FibreBridge 7500N ou 7600N utilisant un port FC (FC1 ou FC2). Dans ce scénario, un port initiateur au lieu de deux est ajouté à chaque membre de zone par structure.
+
+Vous pouvez changer le zonage ou effectuer une mise à niveau d'un FibreBridge 6500 vers un FibreBridge 7500 en suivant la procédure _permutation à chaud d'un pont FibreBridge 6500N avec un pont FibreBridge 7500N ou 7600N_ du https://docs.netapp.com/us-en/ontap-metrocluster/maintain/index.html["Maintenance des composants MetroCluster"].
+
+Le tableau suivant présente les affectations de ports pour les commutateurs FC lors de l'utilisation de ONTAP 9.1 et versions ultérieures.
+
+|===
+
+
+4+| Configurations utilisant des ponts FibreBridge 6500N ou FibreBridge 7500N ou 7600N avec un seul port FC (FC1 ou FC2) uniquement 
+
+
+4+| *MetroCluster 1 ou DR Groupe 1* 
+
+
+.2+| *Composant* .2+| *Port* 2+| *Commutateurs Brocade modèles 6505, 6510, 6520, 7840, G620, G610 et DCX 8510-8* 
+
+
+| *Se connecte au commutateur FC...* | *Se connecte au port de commutateur...* 
+
+
+.8+| controller_x_1  a| 
+Port FC-VI a
+ a| 
+1
+ a| 
+0
+
+
+
+ a| 
+Port FC-VI b
+ a| 
+2
+ a| 
+0
+
+
+
+ a| 
+Port c FC-VI
+ a| 
+1
+ a| 
+1
+
+
+
+ a| 
+Port FC-VI d
+ a| 
+2
+ a| 
+1
+
+
+
+ a| 
+Port a du HBA
+ a| 
+1
+ a| 
+2
+
+
+
+ a| 
+Port b de l'adaptateur HBA
+ a| 
+2
+ a| 
+2
+
+
+
+ a| 
+Port c de l'adaptateur HBA
+ a| 
+-
+ a| 
+-
+
+
+
+ a| 
+Port d de l'adaptateur HBA
+ a| 
+-
+ a| 
+-
+
+
+
+ a| 
+Pile 1
+ a| 
+bridge_x_1a
+ a| 
+1
+ a| 
+8
+
+
+
+ a| 
+bridge_x_1b
+ a| 
+2
+ a| 
+8
+
+
+
+ a| 
+Pile y
+ a| 
+pont_x_ya
+ a| 
+1
+ a| 
+11
+
+
+
+ a| 
+bridge_x_yb
+ a| 
+2
+ a| 
+11
+
+|===
+Le tableau suivant montre les affectations de ports pour les commutateurs FC lors de l'utilisation de ONTAP 9.0.
+
+|===
+
+
+4+| *Configuration à deux nœuds MetroCluster* 
+
+
+.2+| *Composant* .2+| *Port* 2+| *Brocade 6505, 6510 ou DCX 8510-8* 
+
+
+| *FC_Switch_x_1* | *FC_Switch_x_2* 
+
+
+ a| 
+controller_x_1
+ a| 
+Port FC-VI a
+ a| 
+0
+ a| 
+-
+
+
+
+ a| 
+Port FC-VI b
+ a| 
+-
+ a| 
+0
+
+
+
+ a| 
+Port a du HBA
+ a| 
+1
+ a| 
+-
+
+
+
+ a| 
+Port b de l'adaptateur HBA
+ a| 
+-
+ a| 
+1
+
+
+
+ a| 
+Port c de l'adaptateur HBA
+ a| 
+2
+ a| 
+-
+
+
+
+ a| 
+Port d de l'adaptateur HBA
+ a| 
+-
+ a| 
+2
+
+|===

@@ -1,0 +1,227 @@
+---
+permalink: maintain/task_do_not_use_for_9_8_and_later_reconfigure_the_fc_switch_layout_for_ontap_9_1_or_later.html 
+sidebar: sidebar 
+keywords: metrocluster, maintain, service, reconfigure, fc, switch, layout, configured 
+summary: 'Si votre disposition de commutateur FC existante a été configurée avant ONTAP 9.1, vous devez reconfigurer la disposition des ports et appliquer les derniers fichiers RCF (Reference Configuration Files). Cette procédure s"applique uniquement aux configurations MetroCluster FC.' 
+---
+= Reconfiguration d'une disposition de commutateur FC configurée avant ONTAP 9.x.
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Si votre disposition de commutateur FC existante a été configurée avant ONTAP 9.1, vous devez reconfigurer la disposition des ports et appliquer les derniers fichiers RCF (Reference Configuration Files). Cette procédure s'applique uniquement aux configurations MetroCluster FC.
+
+Vous devez identifier les commutateurs FC présents dans le domaine de la structure.
+
+Vous avez besoin du mot de passe d'administration et de l'accès à un serveur FTP ou SCP.
+
+Vous devez effectuer cette tâche si votre disposition de commutateur FC existante a été configurée avant ONTAP 9.1. Il est _NOT_ nécessaire si vous effectuez une mise à niveau à partir d'une configuration de commutateur existante configurée pour ONTAP 9.1 ou version ultérieure.
+
+Cette procédure ne génère aucune interruption et prend environ quatre heures (à l'exception du rack et de la pile) lorsque les disques sont mis à zéro.
+
+
+
+== Envoi d'un message AutoSupport personnalisé avant de reconfigurer les commutateurs
+
+Avant de reconfigurer les commutateurs, vous devez envoyer un message AutoSupport pour informer le support technique de NetApp que la maintenance est en cours. Informer le support technique que la maintenance est en cours empêche l'ouverture d'un dossier en supposant une interruption de l'activité.
+
+Cette tâche doit être effectuée sur chaque site MetroCluster.
+
+.Étapes
+. Connectez-vous au cluster.
+. Appelez un message AutoSupport indiquant le début de la maintenance :
++
+`system node autosupport invoke -node * -type all -message MAINT=__maintenance-window-in-hours__*`
+
++
+la fenêtre de maintenance en heures spécifie la durée de la fenêtre de maintenance, avec un maximum de 72 heures. Si la maintenance est terminée avant le temps écoulé, vous pouvez appeler un message AutoSupport indiquant la fin de la période de maintenance :
+
++
+`system node autosupport invoke -node * -type all -message MAINT=end`
+
+. Répétez cette procédure sur le site du partenaire.
+
+
+
+
+== Vérification de l'état de santé de la configuration MetroCluster
+
+Vous devez vérifier l'état de santé de la configuration MetroCluster pour vérifier que celle-ci fonctionne correctement.
+
+.Étapes
+. Vérifiez que les composants MetroCluster sont sains :
++
+`metrocluster check run`
+
++
+[listing]
+----
+cluster_A::*> metrocluster check run
+
+----
++
+L'opération s'exécute en arrière-plan.
+
+. Après le `metrocluster check run` opération terminée, exécution `metrocluster check show` pour afficher les résultats.
++
+Après environ cinq minutes, les résultats suivants s'affichent :
+
++
+[listing]
+----
+-----------
+cluster_A::*> metrocluster check show
+
+Last Checked On: 4/7/2019 21:15:05
+
+Component           Result
+------------------- ---------
+nodes               ok
+lifs                ok
+config-replication  ok
+aggregates          warning
+clusters            ok
+connections         not-applicable
+volumes             ok
+7 entries were displayed.
+----
+. Pour vérifier le statut de l'opération MetroCluster check en cours d'exécution, utilisez la commande :
++
+`metrocluster operation history show -job-id 38`
+
+. Vérifiez qu'il n'y a pas d'alerte de santé :
++
+`system health alert show`
+
+
+
+
+
+== Vérification des erreurs de configuration MetroCluster
+
+Vous pouvez utiliser l'outil Config Advisor disponible sur le site de support NetApp pour rechercher des erreurs de configuration courantes.
+
+Config Advisor est un outil de validation de la configuration et de vérification de l'état de santé. Vous pouvez le déployer sur des sites sécurisés et sur des sites non sécurisés à des fins de collecte des données et d'analyse du système.
+
+
+NOTE: Le support pour Config Advisor est limité et n'est disponible qu'en ligne.
+
+. Téléchargez l'outil Config Advisor.
++
+https://mysupport.netapp.com/site/tools/tool-eula/activeiq-configadvisor["Téléchargement NetApp : Config Advisor"^]
+
+. Exécutez Config Advisor, examinez les résultats et suivez ses recommandations pour résoudre tout problème.
+
+
+
+
+== Désactivation persistante des commutateurs
+
+Vous devez désactiver les commutateurs dans la structure de manière persistante pour modifier sa configuration.
+
+Vous désactivez les switchs en exécutant les commandes sur la ligne de commande du switch ; les commandes utilisées pour ce faire ne sont pas des commandes ONTAP.
+
+.Étapes
+. Désactiver le commutateur de manière persistante :
++
+** Utilisez la commande suivante pour désactiver de manière persistante un commutateur Brocade :
++
+`FC_switch_A_1:admin> switchCfgPersistentDisable`
+
+** Utilisez la commande suivante pour désactiver un commutateur Cisco de manière persistante :
++
+`vsan [vsna #] suspend`
+
+
+
+
+
+
+
+== Détermination de la nouvelle disposition de câblage
+
+Vous devez déterminer le câblage reliant les nouveaux modules de contrôleur et les nouveaux tiroirs disques aux commutateurs FC existants.
+
+Cette tâche doit être effectuée sur chaque site MetroCluster.
+
+.Étapes
+. Utiliser https://docs.netapp.com/us-en/ontap-metrocluster/install-fc/index.html["Installation et configuration de la solution Fabric-Attached MetroCluster"^] Pour déterminer la disposition des câbles pour votre type de commutateur, utilisez l'utilisation des ports pour une configuration MetroCluster à huit nœuds.
++
+L'utilisation du port de commutateur FC doit correspondre à l'utilisation décrite dans le guide pour que les fichiers de configuration de référence (RCFs) puissent être utilisés.
+
++
+
+NOTE: Ne pas utiliser cette procédure si le câblage ne peut pas utiliser de RCFs.
+
+
+
+
+
+== Application de fichiers RCF et désactivation des commutateurs
+
+Vous devez appliquer les fichiers RCF appropriés afin de reconfigurer vos switchs en fonction des nouveaux nœuds. Après avoir appliqué les fichiers RCF, vous pouvez recâblage des commutateurs.
+
+L'utilisation du port de commutateur FC doit correspondre à l'utilisation décrite dans le https://docs.netapp.com/us-en/ontap-metrocluster/install-fc/index.html["Installation et configuration de la solution Fabric-Attached MetroCluster"^] Pour que les CFR puissent être utilisés.
+
+.Étapes
+. Recherchez les fichiers RCF correspondant à votre configuration.
++
+Vous devez utiliser les fichiers RCF correspondant à votre modèle de commutateur.
+
+. Appliquez les fichiers RCF en suivant les instructions de la page de téléchargement et réglez les paramètres ISL selon vos besoins.
+. Vérifier que la configuration du commutateur est enregistrée.
+. Reliez les deux ponts FC-SAS aux commutateurs FC à l'aide de la disposition de câblage que vous avez créée dans la section « Determine la nouvelle disposition de câblage ».
+. Vérifiez que les ports sont en ligne :
++
+** Pour les commutateurs Brocade, utilisez le `switchshow` commande.
+** Pour les commutateurs Cisco, utilisez le `show interface brief` commande.
+
+
+. Reliez les ports FC-VI des contrôleurs aux commutateurs.
+. Depuis les nœuds existants, vérifier que les ports FC-VI sont en ligne :
++
+`metrocluster interconnect adapter show`
+
++
+`metrocluster interconnect mirror show`
+
+
+
+
+
+== Activer de manière persistante les commutateurs
+
+Vous devez activer de manière persistante les commutateurs dans la structure.
+
+.Étapes
+. Activer le commutateur de manière persistante :
++
+** Pour les commutateurs Brocade, utilisez le `switchCfgPersistentenable` commande.
+** Pour les commutateurs Cisco, utilisez le no `suspend` commande. La commande suivante active de manière persistante un commutateur Brocade :
++
+[listing]
+----
+FC_switch_A_1:admin> switchCfgPersistentenable
+----
++
+La commande suivante active un commutateur Cisco :
+
++
+[listing]
+----
+vsan [vsna #]no suspend
+----
+
+
+
+
+
+
+== Vérification du basculement, de la résolution et du rétablissement
+
+Il est recommandé de vérifier les opérations de basculement, de rétablissement et de rétablissement de la configuration MetroCluster.
+
+. Utilisez les procédures de basculement, de rétablissement et de rétablissement négociés décrites dans le https://docs.netapp.com/us-en/ontap-metrocluster/disaster-recovery/concept_dr_workflow.html["Gestion et reprise après incident MetroCluster"^].
+

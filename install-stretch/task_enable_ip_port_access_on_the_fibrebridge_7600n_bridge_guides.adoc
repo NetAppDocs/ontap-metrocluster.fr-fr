@@ -1,0 +1,66 @@
+---
+permalink: install-stretch/task_enable_ip_port_access_on_the_fibrebridge_7600n_bridge_guides.html 
+sidebar: sidebar 
+keywords: metrocluster, stretch, installation, enable, ip, port, access, bridge, fibrebridge 
+summary: 'Si vous utilisez une version ONTAP antérieure à 9.5 ou si vous prévoyez d"utiliser un accès hors bande au pont FiberBridge 7600N à l"aide de telnet ou d"autres protocoles et services de port IP \(FTP, ExpressNAV, ICMP ou Quickmenu\), vous pouvez activer les services d"accès via le port de console.' 
+---
+= Activation de l'accès au port IP sur le pont FiberBridge 7600N si nécessaire
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Si vous utilisez une version ONTAP antérieure à 9.5 ou si vous prévoyez d'utiliser un accès hors bande au pont FiberBridge 7600N à l'aide de telnet ou d'autres protocoles et services de port IP (FTP, ExpressNAV, ICMP ou Quickmenu), vous pouvez activer les services d'accès via le port de console.
+
+Contrairement aux ponts ATTO FibreBridge 7500N et 6500N, le pont FibreBridge 7600N est livré avec tous les protocoles et services de port IP désactivés.
+
+Depuis ONTAP 9.5, _gestion intrabande_ des ponts sont pris en charge. Cela signifie que les ponts peuvent être configurés et surveillés depuis l'interface de ligne de commande de ONTAP via la connexion FC au pont. L'accès physique au pont via les ports Ethernet du pont n'est pas nécessaire et les interfaces utilisateur du pont ne sont pas requises.
+
+Depuis ONTAP 9.8, la fonction _gestion intrabande_ des ponts est prise en charge par défaut et la gestion SNMP hors bande est déconseillée.
+
+Cette tâche est obligatoire si vous utilisez *pas* la gestion intrabande pour gérer les ponts. Dans ce cas, vous devez configurer le pont via le port de gestion Ethernet.
+
+.Étapes
+. Accéder à l'interface de la console du pont en connectant un câble série au port série du pont FiberBridge 7600N.
+. À l'aide de la console, activez les services d'accès, puis enregistrez la configuration :
++
+`*set closeport none*`
+
++
+`*saveconfiguration*`
+
++
+Le `set closeport none` commande active tous les services d'accès sur le pont.
+
+. Désactivez un service, si vous le souhaitez, en émettant le `set closeport` et répéter la commande si nécessaire jusqu'à ce que tous les services souhaités soient désactivés :
++
+`*set closeport _service_*`
+
++
+Le `set closeport` commande désactive un seul service à la fois.
+
++
+`_service_` peut indiquer l'une des options suivantes :
+
++
+** espresso
+** ftp
+** icmp
+** menu à menu rapide
+** snmp
+** telnet + vous pouvez vérifier si un protocole spécifique est activé ou désactivé à l'aide de l' `get closeport` commande.
+
+
+. Si vous activez SNMP, vous devez également lancer la commande set SNMP Enabled :
++
+`*set SNMP enabled*`
+
++
+SNMP est le seul protocole qui nécessite une commande d'activation distincte.
+
+. Enregistrez la configuration :
++
+`*saveconfiguration*`
+
+

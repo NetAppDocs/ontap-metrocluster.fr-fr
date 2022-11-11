@@ -1,0 +1,79 @@
+---
+permalink: transition/concept_deciding_which_procedure_to_use_mcc_upgrade_transition_and_expansion_guide.html 
+sidebar: sidebar 
+keywords: difference, metrocluster, upgrade, expansion, transition, procedure, match, goal, deciding, decide 
+summary: Vous devez comprendre les différences entre une mise à niveau, une extension ou une transition MetroCluster et choisir la procédure qui correspond à votre objectif. 
+---
+= Décider de la procédure à utiliser
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous devez comprendre les différences entre une mise à niveau, une extension ou une transition MetroCluster et choisir la procédure qui correspond à votre objectif.
+
+* *Mise à niveau*
++
+Dans une procédure de mise à niveau, vous remplacez les modules de contrôleur par un nouveau modèle de module de contrôleur.
+
++
+** Les anciens modules de contrôleur sont retirés du cluster.
+** Le stockage n'est pas mis à niveau.
+** La technologie de l'infrastructure du commutateur de stockage n'a pas changé.
++
+Il reste la même configuration que MetroCluster IP, Fabric-Attached MetroCluster ou Stretch MetroCluster.
+
++
+link:../upgrade/concept_choosing_an_upgrade_method_mcc.html["Choisissez une méthode de mise à niveau ou de rafraîchissement"]
+
+
+
+* * Actualiser*
++
+En cas de mise à jour, vous remplacez les modules de contrôleurs par un nouveau modèle de module de contrôleur, puis vous remplacez les tiroirs de stockage.
+
++
+** Les anciens modules de contrôleur et tiroirs de stockage sont retirés du cluster.
+** La technologie d'infrastructure des commutateurs de stockage n'a pas changé, sauf si des commutateurs sont nécessaires pour prendre en charge les nouveaux modèles de plateforme.
++
+La configuration reste comme son type d'origine :
+
++
+*** IP MetroCluster
+*** MetroCluster intégré à la structure
+*** Configuration Stretch MetroCluster +link:../upgrade/concept_choosing_an_upgrade_method_mcc.html["Choisissez une méthode de mise à niveau ou de rafraîchissement"]
+
+
+
+
+* * Transition*
++
+Lors d'une procédure de transition, l'infrastructure des commutateurs back-end est passée des connexions ou des commutateurs FC aux commutateurs IP, et les modèles de plateforme sont remplacés.
+
++
+** De nouveaux modules de contrôleur sont ajoutés à la configuration.
+** Les modules de contrôleur d'origine sont retirés après la procédure.
+** Si la configuration d'origine utilisait des commutateurs d'interconnexion de cluster, ils peuvent être réutilisés, en fonction des modèles de commutateur et de plateforme.
+** Le rangement peut être réutilisé ou remplacé, selon les modèles de plate-forme.
++
+Si ces tiroirs ne sont pas réutilisés, les données sont déplacées de ces anciens tiroirs vers les nouveaux tiroirs.
+
++
+lien :./transition/concept_choosing_your_transition_procedure_mcc_transition.html
+
+
+
+* *Expansion*
++
+Dans une procédure d'extension, des nœuds et du stockage supplémentaires sont ajoutés à la configuration FC MetroCluster.
+
++
+** link:../upgrade/task_expand_a_two_node_mcc_fc_configuration_to_a_four_node_fc_configuration_supertask.html["Extension d'une configuration FC MetroCluster à deux nœuds à une configuration à quatre nœuds"]
+** link:../upgrade/task_expand_a_four_node_mcc_fc_configuration_to_an_eight_node_configuration.html["Extension d'une configuration FC MetroCluster à quatre nœuds à une configuration à huit nœuds"]
++
+LIEN SUPPRIMÉ POUR LA MIGRATION
+
+
+
+

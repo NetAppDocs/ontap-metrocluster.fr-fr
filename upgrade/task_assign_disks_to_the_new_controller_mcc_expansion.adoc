@@ -1,0 +1,45 @@
+---
+permalink: upgrade/task_assign_disks_to_the_new_controller_mcc_expansion.html 
+sidebar: sidebar 
+keywords: metrocluster, upgrade, assign, disks, new, controller, module 
+summary: Avant de terminer la configuration du nouveau module de contrôleur via netboot, vous devez affecter les disques. 
+---
+= Assignation des disques au nouveau module de contrôleur
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Avant de terminer la configuration du nouveau module de contrôleur via netboot, vous devez affecter les disques.
+
+Vous devez avoir l'assurance que suffisamment de pièces de rechange, de disques non assignés ou de disques affectés ne faisant pas partie d'un agrégat existant.
+
+link:task_prepare_for_the_upgrade_add_2nd_controller_to_create_ha_pair.html["Préparation de la mise à niveau"]
+
+Ces étapes sont effectuées sur le module de contrôleur existant.
+
+.Étapes
+. Assigner le disque racine au nouveau module de contrôleur :
++
+`storage disk assign -disk _disk_name_ -sysid _new_controller_sysID_ -force true`
+
++
+Si votre modèle de plateforme utilise la fonction de partitionnement de disque avancé, vous devez inclure le paramètre -root true :
+
++
+`storage disk assign -disk _disk_name_ -root true -sysid _new_controller_sysID_ -force true`
+
+. Assigner les disques restants nécessaires au nouveau module de contrôleur en entrant la commande suivante pour chaque disque :
++
+`storage disk assign -disk _disk_name_ -sysid _new_controller_sysID_ -force true`
+
+. Vérifiez que les affectations de disques sont correctes :
++
+`storage disk show -partitionownership*`
+
++
+
+NOTE: Assurez-vous d'avoir affecté tous les disques que vous souhaitez affecter au nouveau nœud.
+
+

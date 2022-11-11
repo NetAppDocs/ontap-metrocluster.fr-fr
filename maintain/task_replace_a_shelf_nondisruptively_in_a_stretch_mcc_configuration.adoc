@@ -1,0 +1,137 @@
+---
+permalink: maintain/task_replace_a_shelf_nondisruptively_in_a_stretch_mcc_configuration.html 
+sidebar: sidebar 
+keywords: metrocluster, maintain, service, replace, shelf, nondisruptively, stretch, configuration 
+summary: 'Vous pouvez remplacer des tiroirs disques sans interrompre l"activité dans une configuration MetroCluster étendue avec un tiroir disque plein ou un châssis de tiroir disque, et transférer les composants du tiroir que vous retirez.' 
+---
+= Remplacement d'un tiroir sans interruption dans une configuration MetroCluster extensible
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous pouvez remplacer des tiroirs disques sans interrompre l'activité dans une configuration MetroCluster étendue avec un tiroir disque plein ou un châssis de tiroir disque, et transférer les composants du tiroir que vous retirez.
+
+Le modèle de tiroir disque que vous installez doit répondre aux exigences du système de stockage spécifiées dans le link:https://hwu.netapp.com["Hardware Universe"^], Qui inclut les modèles de tiroirs pris en charge, les types de disques pris en charge, le nombre maximal de tiroirs disques d'une pile et les versions ONTAP prises en charge.
+
+.Étapes
+. Mettez-vous à la terre.
+. Identifiez tous les agrégats et volumes qui disposent de disques de la boucle contenant le tiroir que vous remplacez et notez le nom plex affecté.
++
+Chaque nœud peut contenir des disques de la boucle du tiroir et des agrégats ou des volumes hôtes affectés.
+
+. Choisissez l'une des deux options suivantes en fonction du scénario de remplacement que vous envisagez.
++
+** Si vous remplacez un tiroir disque complet, y compris le châssis tiroir, les disques et les modules d'E/S (IOM), effectuez l'action correspondante comme décrit dans le tableau ci-dessous :
++
+|===
+
+
+| Scénario | Action 
+
+
+ a| 
+Le plex affecté contient moins de disques du shelf affecté.
+ a| 
+Remplacer les disques un par un sur le shelf affecté par des pièces de rechange d'un autre shelf.
+
+
+NOTE: Vous pouvez mettre le plex hors ligne après avoir terminé le remplacement du disque.
+
+
+
+ a| 
+Le plex affecté contient plus de disques que ce qui se trouve dans le shelf affecté.
+ a| 
+Mettre le plex hors ligne, puis supprimer le plex.
+
+
+
+ a| 
+Le plex affecté dispose d'un disque du shelf affecté.
+ a| 
+Déplacez le plex hors ligne, mais ne le supprimez pas.
+
+|===
+** Si vous remplacez uniquement le châssis de tiroir disque et aucun autre composant, effectuez la procédure suivante :
++
+... Offline des plexes affectés depuis le contrôleur sur lequel ils sont hébergés :
++
+`aggregate offline`
+
+... Vérifiez que les plexes sont hors ligne :
++
+`aggregate status -r`
+
+
+
+
+
+. Identifier les ports SAS du contrôleur sur lesquels la boucle de tiroir affectée est connectée et désactiver les ports SAS sur les deux contrôleurs de site :
++
+`storage port disable -node _node_name_ -port _SAS_port_`
+
++
+La boucle affectée est connectée aux deux sites.
+
+. Attendez que ONTAP reconnaisse que le disque est manquant.
++
+.. Vérifiez que le disque est manquant :
++
+`sysconfig -a` ou `sysconfig -r`
+
+
+
+. Eteindre l'interrupteur de l'alimentation en panne du tiroir disque.
+. Débranchez tous les cordons d'alimentation du tiroir disque.
+. Enregistrez les ports depuis lesquels vous débranchez les câbles afin de pouvoir câbler le nouveau tiroir disque de la même manière.
+. Débranchez et retirez les câbles qui connectent le tiroir disque aux autres tiroirs disques ou au système de stockage.
+. Retirer le tiroir disque du rack.
++
+Pour rendre le tiroir disque plus léger et plus facile à manœuvrer, retirez les alimentations et le module IOM. Si vous installez un châssis de tiroir disque, retirez également les lecteurs ou supports de disque. Dans le cas contraire, évitez de retirer des disques ou des supports, car une manipulation excessive peut endommager le disque interne.
+
+. Installez et fixez le tiroir disque de remplacement sur les supports et le rack.
+. Si vous avez installé un châssis de tiroir disque, réinstallez les alimentations et le module d'E/S.
+. Reconfigurer la pile des tiroirs disques en connectant tous les câbles aux ports des tiroirs disques de remplacement exactement comme ils ont été configurés sur le tiroir disque que vous avez retiré.
+. Mettez le tiroir disque de remplacement sous tension et attendez que les disques démarrent.
+. Définissez l'ID de tiroir disque sur un ID unique compris entre 0 et 98.
+. Activez tous les ports SAS que vous avez précédemment désactivés .
++
+.. Attendez que ONTAP reconnaisse que les disques sont insérés.
+.. Vérifiez que les disques sont insérés :
++
+`sysconfig -a` ou `sysconfig -r`
+
+
+
+. Si vous remplacez le tiroir disque complet (châssis de tiroir disque, disques, IOM), effectuez la procédure suivante :
++
+
+NOTE: Si vous remplacez uniquement le châssis de tiroir disque et aucun autre composant, passez à l'étape 19.
+
++
+.. Déterminez si l'assignation automatique des disques est activée (on).
++
+`storage disk option modify -autoassign`
+
++
+L'assignation des disques se fera automatiquement.
+
+.. Si l'assignation automatique des disques n'est pas activée, attribuez-leur la propriété manuellement.
+
+
+. Redéplacer les plexes en ligne :
++
+`aggregate online _plex name_`
+
+. Recréez les plexes qui ont été supprimés en mettant en miroir l'agrégat.
+. Surveillez les plexes au fur et à mesure qu'ils commencent à resynchroniser :
++
+`aggregate status -r <aggregate name>`
+
+. Vérifiez que le système de stockage fonctionne comme prévu :
++
+`system health alert show`
+
+

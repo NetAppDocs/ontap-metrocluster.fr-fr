@@ -1,0 +1,68 @@
+---
+permalink: manage/task_heal_the_configuration_in_a_mcc_ip_configuration_ontap_9_4_and_earlier.html 
+sidebar: sidebar 
+keywords: heal, aggregate, preparation, switchback, operation, configuration, metrocluster, ip, ontap 
+summary: 'Vous devez corriger les agrégats avant de réaliser l"opération de rétablissement.' 
+---
+= Correction de la configuration dans une configuration MetroCluster IP (ONTAP 9.4 et versions antérieures)
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous devez corriger les agrégats avant de réaliser l'opération de rétablissement.
+
+
+NOTE: Sur les systèmes MetroCluster IP exécutant ONTAP 9.5, la correction est effectuée automatiquement et vous pouvez ignorer ces tâches.
+
+Les conditions suivantes doivent exister avant d'effectuer la procédure de correction :
+
+* Le basculement doit avoir été effectué et le site survivant doit servir de données.
+* Les tiroirs de stockage du site de secours doivent être mis sous tension, fonctionnels et accessibles.
+* Les liens ISL doivent être opérationnels.
+* Les nœuds du site survivant ne doivent pas être en état de basculement haute disponibilité (les deux nœuds doivent être opérationnels).
+
+
+Cette tâche s'applique aux configurations IP MetroCluster exécutant des versions ONTAP antérieures à la version 9.5 uniquement.
+
+Cette procédure diffère de la procédure de résolution pour les configurations FC MetroCluster.
+
+.Étapes
+. Mettez chaque module de contrôleur sur le site qui a été commuté et laissez-le démarrer entièrement.
++
+Si le système affiche l'invite DU CHARGEUR, exécutez le `boot_ontap` commande.
+
+. Réaliser la phase de guérison de l'agrégat racine : `metrocluster heal root-aggregates`
++
+[listing]
+----
+cluster_A::> metrocluster heal root-aggregates
+[Job 137] Job succeeded: Heal Root-Aggregates is successful
+----
++
+Si le réajustement est vetoé, vous avez la possibilité de réémission de la commande MetroCluster Heal root-Aggregates avec le paramètre --override-vetoes. Si vous utilisez ce paramètre facultatif, le système remplace tout veto logiciel qui empêche l'opération de correction.
+
+. Resynchroniser les agrégats : `metrocluster heal aggregates`
++
+[listing]
+----
+cluster_A::> metrocluster heal aggregates
+[Job 137] Job succeeded: Heal Aggregates is successful
+----
++
+Si la correction est vetotée, vous avez la possibilité de réémission de la commande MetroCluster Heal avec le paramètre --override-vetos. Si vous utilisez ce paramètre facultatif, le système remplace tout veto logiciel qui empêche l'opération de correction.
+
+. Vérifiez que l'opération d'autorétablissement est terminée en exécutant la commande MetroCluster opération show sur le cluster sain :
++
+[listing]
+----
+
+cluster_A::> metrocluster operation show
+  Operation: heal-aggregates
+      State: successful
+ Start Time: 7/29/2017 20:54:41
+   End Time: 7/29/2017 20:54:42
+     Errors: -
+----
+

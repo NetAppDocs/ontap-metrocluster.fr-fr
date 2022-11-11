@@ -1,0 +1,36 @@
+---
+permalink: disaster-recovery/task_recover_from_a_multi_controller_and_or_storage_failure.html 
+sidebar: sidebar 
+keywords: controller, failure, extend, module, side, dr, group, metrocluster, configuration, single, controller, two-node, replace, equipment, reassign, equipment, ownership, drive, disaster, recover, multi-controller, storage 
+summary: 'Si la panne du contrôleur s"étend à tous les modules de contrôleur du côté d"un groupe de reprise sur incident dans une configuration MetroCluster \(y compris un contrôleur unique dans une configuration MetroCluster à deux nœuds\), ou si le stockage a été remplacé, vous devez remplacer l"équipement et réaffecter la propriété des disques pour restaurer les données suite à un incident.' 
+---
+= La restauration après une défaillance de plusieurs contrôleurs ou de stockage
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Si la panne du contrôleur s'étend à tous les modules de contrôleur du côté d'un groupe de reprise sur incident dans une configuration MetroCluster (comprenant un contrôleur unique dans une configuration MetroCluster à deux nœuds), ou si le stockage a été remplacé, vous devez remplacer l'équipement et réaffecter la propriété des disques pour restaurer la solution après incident.
+
+* Vous devez passer en revue les procédures de récupération disponibles avant de décider d'utiliser cette procédure.
++
+link:concept_choosing_the_correct_recovery_procedure_parent_concept.html["Choix de la procédure de récupération correcte"]
+
+* Le site de catastrophe doit être clôturé.
++
+link:task_perform_a_forced_switchover_after_a_disaster.html#fencing-off-the-disaster-site["Escrime hors site de la catastrophe"].
+
+* Le basculement doit avoir été effectué.
++
+link:task_perform_a_forced_switchover_after_a_disaster.html#performing-a-forced-switchover["Effectuer un basculement forcé"].
+
+* Les disques de remplacement et les modules de contrôleurs doivent être nouveaux et n'ont pas été attribués précédemment.
+* Les exemples de cette procédure illustrent des configurations à deux ou quatre nœuds. Si vous disposez d'une configuration à huit nœuds (deux groupes de reprise après incident), vous devez prendre en compte toute défaillance et effectuer la tâche de restauration requise sur les modules de contrôleur supplémentaires.
+
+
+Cette procédure utilise le workflow suivant :
+
+image::../media/workflow_smoking_crater_recovery.png[récupération de cratère de fumeur de flux de travail]
+
+Cette procédure peut être utilisée lors de l'exécution de la restauration sur un système en période de transition intermédiaire lorsque la défaillance s'est produite. Dans ce cas, vous devez effectuer les étapes appropriées pour préparer le rétablissement, comme indiqué dans la procédure.

@@ -1,0 +1,734 @@
+---
+permalink: transition/concept_requirements_for_fc_to_ip_transition_2n_mcc_transition.html 
+sidebar: sidebar 
+keywords: start, transition, process, configuration, requirement, meet, preparing, prepare, disruptive, fc-to-ip, transition, general, workflow, disruptive, map, port, fc, node, ip 
+summary: Avant de lancer le processus de transition, vous devez vérifier que la configuration répond aux exigences. 
+---
+= Préparation aux perturbations de la transition FC-à-IP
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+
+
+== Exigences générales pour une transition sans interruption de FC-à-IP
+
+[role="lead"]
+Avant de lancer le processus de transition, vous devez vérifier que la configuration répond aux exigences.
+
+La configuration FC MetroCluster existante doit répondre aux exigences suivantes :
+
+* Il doit s'agir d'une configuration à deux nœuds et tous les nœuds doivent exécuter ONTAP 9.8 ou une version ultérieure.
++
+Il peut s'agir d'un MetroCluster attaché à deux nœuds ou étendu.
+
+* Il doit répondre à toutes les exigences et à tous les câbles, comme décrit dans les procédures _MetroCluster installation and Configuration_.
++
+link:../install-fc/index.html["Installation et configuration de la solution Fabric-Attached MetroCluster"]
+
++
+link:../install-stretch/concept_considerations_differences.html["Installation et configuration d'Stretch MetroCluster"]
+
+* Elle ne peut pas être configurée avec NetApp Storage Encryption (NSE).
+* Les volumes MDV ne peuvent pas être cryptés.
+
+
+Vous devez disposer d'un accès à distance à la console pour les six nœuds depuis le site MetroCluster ou prévoir un déplacement entre les sites, selon la procédure à suivre.
+
+
+
+== Réutilisation des tiroirs disques et des exigences des disques pour une transition FC vers IP sans interruption
+
+Vous devez vous assurer que les tiroirs de stockage contiennent des disques de spare et bien l'espace racine au niveau des agrégats.
+
+
+
+=== Réutilisation des tiroirs de stockage existants
+
+Lors de l'utilisation de cette procédure, les tiroirs de stockage existants sont conservés et utilisés par la nouvelle configuration. Lorsque node_A_1-FC et node_B_1-FC sont supprimés, les tiroirs disques existants sont connectés au nœud_A_1-IP et au nœud_A_2-IP sur cluster_A et au nœud_B_1-IP et au nœud_B_2-IP sur cluster_B.
+
+* Les tiroirs de stockage existants (ceux reliés au nœud_A_1-FC et au nœud_B_1-FC) doivent être pris en charge par les nouveaux modèles de plateforme.
++
+Si les tiroirs existants ne sont pas pris en charge par les nouveaux modèles de plate-forme, voir link:task_disruptively_transition_when_exist_shelves_are_not_supported_on_new_controllers.html["Transition sans interruption lorsque les tiroirs existants ne sont pas pris en charge sur les nouveaux contrôleurs (ONTAP 9.8 et versions ultérieures)"].
+
+* Vous devez vous assurer de ne pas dépasser les limites de la plate-forme pour les entraînements, etc
++
+https://hwu.netapp.com["NetApp Hardware Universe"^]
+
+
+
+
+
+=== Exigences de stockage pour les contrôleurs supplémentaires
+
+Il faut ajouter du stockage supplémentaire, si nécessaire, pour prendre en charge les deux contrôleurs supplémentaires (node_A_2-IP et node_B_2-ip), car la configuration passe d'un arrangement à deux nœuds à quatre nœuds.
+
+* En fonction des disques de spare disponibles dans les tiroirs existants, des disques supplémentaires doivent être ajoutés pour prendre en charge les contrôleurs supplémentaires de la configuration.
++
+Cela peut nécessiter des tiroirs de stockage supplémentaires, comme illustré ci-dessous.
+
++
+image::../media/transition_2n_4_new_ip_nodes_on_the_shelves.png[faites la transition de 2n 4 nouveaux nœuds ip dans les tiroirs]
+
++
+Vous devez disposer de 14 à 18 disques supplémentaires chacun pour les troisième et quatrième contrôleurs (node_A_2-IP et node_B_2-IP) :
+
++
+** Trois disques dans un pool
+** Trois disques dans un pool 1
+** Deux disques de secours
+** Six à dix lecteurs pour le volume système
+
+
+* Vous devez vous assurer que la configuration, y compris les nouveaux nœuds, ne dépasse pas les limites de plateforme pour la configuration, y compris le nombre de disques, la capacité de la taille de l'agrégat racine, etc
++
+Ces informations sont disponibles pour chaque modèle de plateforme auprès de _NetApp Hardware Universe_.
+
++
+https://hwu.netapp.com["NetApp Hardware Universe"^]
+
+
+
+
+
+== Flux de production pour une transition sans interruption
+
+Vous devez suivre le flux de travail spécifique pour assurer une transition réussie.
+
+Pendant que vous préparez la transition, planifiez les déplacements entre les sites. Notez qu'une fois les nœuds distants mis en rack et câblés, vous devez accéder aux nœuds à partir d'un terminal série. L'accès au processeur de service n'est pas disponible tant que les nœuds ne sont pas configurés.
+
+image::../media/workflow_2n_transition_bsaic.png[flux de travail 2n transition bsaïque]
+
+
+
+== Mappage des ports des nœuds FC MetroCluster sur les nœuds IP MetroCluster
+
+Vous devez ajuster la configuration des ports et LIF du nœud MetroCluster FC, afin qu'il soit compatible avec celle du nœud IP MetroCluster qui le remplace.
+
+Une fois les nouveaux nœuds démarrés pendant la mise à niveau, chaque nœud utilise la configuration la plus récente du nœud qu'il remplace. Lorsque vous démarrez le nœud_A_1-IP, ONTAP tente d'héberger les LIF sur les mêmes ports qui ont été utilisés sur le nœud_A_1-FC.
+
+Durant la procédure de transition, vous effectuez les étapes des anciens et nouveaux nœuds afin d'assurer une configuration correcte du cluster, de la gestion et de la LIF de données.
+
+.Étapes
+. Identifiez les conflits entre l'utilisation existante du port FC MetroCluster et l'utilisation des ports des interfaces IP MetroCluster sur les nouveaux nœuds.
++
+Vous devez identifier les ports IP MetroCluster sur les nouveaux contrôleurs IP MetroCluster à l'aide du tableau ci-dessous. Vérifier et enregistrer si des LIFs de données ou de cluster existent sur ces ports des nœuds FC MetroCluster.
+
++
+Ces LIF de données ou de cluster LIFs sur les nœuds FC MetroCluster seront déplacées à l'étape appropriée de la procédure de transition.
+
++
+Le tableau suivant montre les ports IP MetroCluster par modèle de plate-forme. Vous pouvez ignorer la colonne ID VLAN.
+
++
+|===
+
+
+| Modèle de plateforme | Port IP MetroCluster | ID VLAN |  
+
+
+.2+| AFF A800  a| 
+e0b
+.8+| Non utilisé  a| 
+
+
+
+ a| 
+e1b
+ a| 
+
+
+
+.2+| AFF A700 ET FAS9000  a| 
+e5a
+ a| 
+
+
+
+ a| 
+e5b
+ a| 
+
+
+
+.2+| AFF A320  a| 
+e0g
+ a| 
+
+
+
+ a| 
+e0h
+ a| 
+
+
+
+.2+| AFF A300 ET FAS8200  a| 
+e1a
+ a| 
+
+
+
+ a| 
+e1b
+ a| 
+
+
+
+.2+| FAS8300/A400/FAS8700  a| 
+e1a
+ a| 
+10
+ a| 
+
+
+
+ a| 
+e1b
+ a| 
+20
+ a| 
+
+
+
+.2+| AFF A250 et FAS500f  a| 
+e0c
+ a| 
+10
+ a| 
+
+
+
+ a| 
+e0b
+ a| 
+20
+ a| 
+
+|===
++
+Vous pouvez remplir le tableau suivant et le consulter ultérieurement dans la procédure de transition.
+
++
+|===
+
+
+| Ports | Ports d'interface IP MetroCluster correspondants (depuis le tableau ci-dessus) | Des LIF en conflit sur ces ports sur les nœuds FC MetroCluster 
+
+
+ a| 
+Premier port IP MetroCluster sur le nœud_A_1-FC
+ a| 
+ a| 
+
+
+
+ a| 
+Second port IP MetroCluster sur le nœud_A_1-FC
+ a| 
+ a| 
+
+
+
+ a| 
+Premier port IP MetroCluster sur le nœud_B_1-FC
+ a| 
+ a| 
+
+
+
+ a| 
+Second port IP MetroCluster sur le nœud_B_1-FC
+ a| 
+ a| 
+
+|===
+. Identifiez les ports physiques disponibles sur les nouveaux contrôleurs et les LIFs peuvent être hébergées sur les ports.
++
+L'utilisation des ports du contrôleur dépend du modèle de plate-forme et du modèle de commutateur IP que vous utiliserez dans la configuration IP de MetroCluster. Vous pouvez également collecter l'utilisation des ports de ces nouvelles plateformes à partir du _NetApp Hardware Universe_.
+
++
+https://hwu.netapp.com["NetApp Hardware Universe"^]
+
+. Si vous le souhaitez, enregistrez les informations de port pour le noeud_A_1-FC et le noeud_A_1-IP.
++
+Vous vous référez au tableau lors de la procédure de transition.
+
++
+Dans les colonnes de node_A_1-IP, ajoutez les ports physiques du nouveau module de contrôleur et planifiez les IPspaces et les domaines de diffusion pour le nouveau nœud.
+
++
+|===
+
+
+|  3+| Nœud_A_1-FC 3+| Node_A_1-IP 
+
+
+| LIF | Ports | Les IPspaces | Les domaines de diffusion | Ports | Les IPspaces | Les domaines de diffusion 
+
+
+ a| 
+Cluster 1
+ a| 
+ a| 
+ a| 
+ a| 
+ a| 
+ a| 
+
+
+
+ a| 
+Cluster 2
+ a| 
+ a| 
+ a| 
+ a| 
+ a| 
+ a| 
+
+
+
+ a| 
+Cluster 3
+ a| 
+ a| 
+ a| 
+ a| 
+ a| 
+ a| 
+
+
+
+ a| 
+Cluster 4
+ a| 
+ a| 
+ a| 
+ a| 
+ a| 
+ a| 
+
+
+
+ a| 
+Gestion de nœuds
+ a| 
+ a| 
+ a| 
+ a| 
+ a| 
+ a| 
+
+
+
+ a| 
+Gestion du cluster
+ a| 
+ a| 
+ a| 
+ a| 
+ a| 
+ a| 
+
+
+
+ a| 
+Données 1
+ a| 
+ a| 
+ a| 
+ a| 
+ a| 
+ a| 
+
+
+
+ a| 
+Données 2
+ a| 
+ a| 
+ a| 
+ a| 
+ a| 
+ a| 
+
+
+
+ a| 
+Données 3
+ a| 
+ a| 
+ a| 
+ a| 
+ a| 
+ a| 
+
+
+
+ a| 
+Données 4
+ a| 
+ a| 
+ a| 
+ a| 
+ a| 
+ a| 
+
+
+
+ a| 
+SAN
+ a| 
+ a| 
+ a| 
+ a| 
+ a| 
+ a| 
+
+
+
+ a| 
+Port intercluster
+ a| 
+ a| 
+ a| 
+ a| 
+ a| 
+ a| 
+
+|===
+. Si vous le souhaitez, enregistrez toutes les informations relatives aux ports pour le nœud_B_1-FC.
++
+Vous vous référez au tableau lors de la procédure de mise à niveau.
+
++
+Dans les colonnes du nœud_B_1-IP, ajoutez les ports physiques du nouveau module de contrôleur et planifiez l'utilisation des ports LIF, les IPspaces et les domaines de diffusion pour le nouveau nœud.
+
++
+|===
+
+
+|  3+| Nœud_B_1-FC 3+| Node_B_1-IP 
+
+
+| LIF | Ports physiques | Les IPspaces | Les domaines de diffusion | Ports physiques | Les IPspaces | Les domaines de diffusion 
+
+
+ a| 
+Cluster 1
+ a| 
+ a| 
+ a| 
+ a| 
+ a| 
+ a| 
+
+
+
+ a| 
+Cluster 2
+ a| 
+ a| 
+ a| 
+ a| 
+ a| 
+ a| 
+
+
+
+ a| 
+Cluster 3
+ a| 
+ a| 
+ a| 
+ a| 
+ a| 
+ a| 
+
+
+
+ a| 
+Cluster 4
+ a| 
+ a| 
+ a| 
+ a| 
+ a| 
+ a| 
+
+
+
+ a| 
+Gestion de nœuds
+ a| 
+ a| 
+ a| 
+ a| 
+ a| 
+ a| 
+
+
+
+ a| 
+Gestion du cluster
+ a| 
+ a| 
+ a| 
+ a| 
+ a| 
+ a| 
+
+
+
+ a| 
+Données 1
+ a| 
+ a| 
+ a| 
+ a| 
+ a| 
+ a| 
+
+
+
+ a| 
+Données 2
+ a| 
+ a| 
+ a| 
+ a| 
+ a| 
+ a| 
+
+
+
+ a| 
+Données 3
+ a| 
+ a| 
+ a| 
+ a| 
+ a| 
+ a| 
+
+
+
+ a| 
+Données 4
+ a| 
+ a| 
+ a| 
+ a| 
+ a| 
+ a| 
+
+
+
+ a| 
+SAN
+ a| 
+ a| 
+ a| 
+ a| 
+ a| 
+ a| 
+
+
+
+ a| 
+Port intercluster
+ a| 
+ a| 
+ a| 
+ a| 
+ a| 
+ a| 
+
+|===
+
+
+
+
+== Préparation des contrôleurs IP MetroCluster
+
+Vous devez préparer les quatre nouveaux nœuds IP MetroCluster et installer la version ONTAP appropriée.
+
+Cette tâche doit être effectuée sur chacun des nouveaux nœuds :
+
+* Node_A_1-IP
+* Node_A_2-IP
+* Node_B_1-IP
+* Node_B_2-IP
+
+
+Les nœuds doivent être connectés à n'importe quel *nouveau* tiroir de stockage. Ils doivent *non* être connectés aux tiroirs de stockage existants contenant des données.
+
+Ces étapes peuvent être réalisées maintenant, ou plus tard, dans la procédure lorsque les contrôleurs et les tiroirs sont mis en rack. Dans tous les cas, veillez à effacer la configuration et à préparer les nœuds *before* en les connectant aux tiroirs de stockage existants et *before* en apportez les modifications de configuration aux nœuds FC MetroCluster.
+
+
+NOTE: N'effectuez pas ces étapes avec les contrôleurs IP MetroCluster connectés aux tiroirs de stockage existants connectés aux contrôleurs FC MetroCluster.
+
+Dans ces étapes, vous effacez la configuration sur les nœuds et désactivez la zone de la boîte aux lettres sur les nouveaux lecteurs.
+
+.Étapes
+. Connectez les modules de contrôleur aux nouveaux tiroirs de stockage.
+. En mode Maintenance, afficher l'état HA du module de contrôleur et du châssis :
++
+`ha-config show`
+
++
+L'état HA pour tous les composants devrait être "mccip".
+
+. Si l'état système affiché du contrôleur ou du châssis n'est pas correct, définissez l'état HA :
++
+`ha-config modify controller mccip``ha-config modify chassis mccip`
+
+. Quitter le mode Maintenance :
++
+`halt`
+
++
+Une fois que vous avez exécuté la commande, attendez que le nœud s'arrête à l'invite DU CHARGEUR.
+
+. Répétez les sous-étapes suivantes sur les quatre nœuds pour effacer la configuration :
++
+.. Définissez les variables d'environnement sur les valeurs par défaut :
++
+`set-defaults`
+
+.. Enregistrez l'environnement :
++
+`saveenv`
+
++
+`bye`
+
+
+
+. Répétez les sous-étapes suivantes pour démarrer les quatre nœuds à l'aide de l'option 9a du menu de démarrage.
++
+.. À l'invite DU CHARGEUR, lancez le menu de démarrage :
++
+`boot_ontap menu`
+
+.. Dans le menu de démarrage, sélectionnez l'option « 9a » pour redémarrer le contrôleur.
+
+
+. Démarrez chacun des quatre nœuds en mode Maintenance à l'aide de l'option « 5 » du menu d'amorçage.
+. Notez l'ID du système et depuis chacun des quatre nœuds :
++
+`sysconfig`
+
+. Répétez les étapes suivantes sur les nœuds_A_1-IP et Node_B_1-IP.
++
+.. Attribuez la propriété de tous les disques locaux à chaque site :
++
+`disk assign adapter.xx.*`
+
+.. Répétez l'étape précédente pour chaque HBA avec les tiroirs disques connectés du nœud_A_1-IP et du nœud_B_1-IP.
+
+
+. Répétez les étapes suivantes sur les nœuds_A_1-IP et Node_B_1-IP pour effacer la zone de la boîte aux lettres de chaque disque local.
++
+.. Détruire la zone de la boîte aux lettres sur chaque disque :
++
+`mailbox destroy local``mailbox destroy partner`
+
+
+
+. Arrêter les quatre contrôleurs :
++
+`halt`
+
+. Sur chaque contrôleur, afficher le menu de démarrage :
++
+`boot_ontap menu`
+
+. Effacez la configuration de chacun des quatre contrôleurs :
++
+`wipeconfig`
+
++
+Une fois l'opération wipconconfig terminée, le nœud revient automatiquement au menu de démarrage.
+
+. Répétez les sous-étapes suivantes pour redémarrer les quatre nœuds à l'aide de l'option 9a du menu de démarrage.
++
+.. À l'invite DU CHARGEUR, lancez le menu de démarrage :
++
+`boot_ontap menu`
+
+.. Dans le menu de démarrage, sélectionnez l'option « 9a » pour redémarrer le contrôleur.
+.. Laissez le module de contrôleur terminer le démarrage avant de passer au module de contrôleur suivant.
+
+
++
+Une fois que « 9a » est terminé, les nœuds retournent automatiquement au menu d'amorçage.
+
+. Mettez les contrôleurs hors tension.
+
+
+
+
+== Vérification de l'état de santé de la configuration MetroCluster FC
+
+Vous devez vérifier l'état et la connectivité de la configuration MetroCluster FC avant d'effectuer la transition
+
+Cette tâche est effectuée sur la configuration MetroCluster FC.
+
+. Vérifier le fonctionnement de la configuration MetroCluster dans ONTAP :
++
+.. Vérifier si le système est multipathed :
++
+`node run -node node-name sysconfig -a`
+
+.. Vérifier si des alertes d'intégrité sont disponibles sur les deux clusters :
++
+`system health alert show`
+
+.. Vérifier la configuration MetroCluster et que le mode opérationnel est normal :
++
+`metrocluster show`
+
+.. Effectuer une vérification MetroCluster :
++
+`metrocluster check run`
+
+.. Afficher les résultats de la vérification MetroCluster :
++
+`metrocluster check show`
+
+.. Vérifier la présence d'alertes d'intégrité sur les commutateurs (le cas échéant) :
++
+`storage switch show`
+
+.. Exécutez Config Advisor.
++
+https://mysupport.netapp.com/site/tools/tool-eula/activeiq-configadvisor["Téléchargement NetApp : Config Advisor"^]
+
+.. Une fois Config Advisor exécuté, vérifiez les résultats de l'outil et suivez les recommandations fournies dans la sortie pour résoudre tous les problèmes détectés.
+
+
+. Vérifiez que les nœuds sont en mode non HA :
++
+`storage failover show`
+
+
+
+
+
+== Suppression de la configuration existante du logiciel disjoncteur d'attache ou autre logiciel de surveillance
+
+Si la configuration existante est contrôlée avec la configuration MetroCluster Tiebreaker ou d'autres applications tierces (telles que ClusterLion) capables d'effectuer un basculement, vous devez supprimer la configuration MetroCluster du logiciel disjoncteur d'attache ou d'autres logiciels avant la transition.
+
+.Étapes
+. Supprimer la configuration MetroCluster existante du logiciel disjoncteur d'attache
++
+link:../tiebreaker/concept_configuring_the_tiebreaker_software.html#removing-metrocluster-configurations["Suppression des configurations MetroCluster"]
+
+. Supprimez la configuration MetroCluster existante de toute application tierce pouvant effectuer le basculement.
++
+Reportez-vous à la documentation de l'application.
+
+

@@ -1,0 +1,185 @@
+---
+permalink: upgrade/concept_removing_a_disaster_recovery_group.html 
+sidebar: sidebar 
+keywords:  
+summary: 'Depuis ONTAP 9.8, vous pouvez supprimer un groupe de reprise après incident d"une configuration MetroCluster à huit nœuds pour créer une configuration MetroCluster à quatre nœuds.' 
+---
+= Suppression d'un groupe de reprise après incident
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Depuis ONTAP 9.8, vous pouvez supprimer un groupe de reprise après incident d'une configuration MetroCluster à huit nœuds pour créer une configuration MetroCluster à quatre nœuds.
+
+Cette procédure est prise en charge sur ONTAP 9.8 et versions ultérieures. Pour les systèmes qui exécutent ONTAP 9.7 ou une version antérieure, consultez l'article de la base de connaissances
+
+link:https://kb.netapp.com/Advice_and_Troubleshooting/Data_Protection_and_Security/MetroCluster/How_to_remove_a_DR-Group_from_a_MetroCluster["Comment supprimer un groupe de reprise sur incident d'une configuration MetroCluster"]
+
+https://mysupport.netapp.com/site/global/dashboard["Support NetApp"]
+
+Une configuration à huit nœuds comprend huit nœuds organisés sous forme de deux groupes de reprise après incident à quatre nœuds.
+
+image::../media/mcc_dr_groups_8_node.gif[mcc dr groups, nœud 8]
+
+En supprimant un groupe de reprise sur incident, quatre nœuds restent dans la configuration.
+
+image::../media/mcc_dr_groups_4_node.gif[mcc dr groups, nœud 4]
+
+
+
+== Suppression des nœuds du groupe DR de chaque cluster
+
+* Vous devez effectuer cette étape sur les deux clusters.
+* Le `metrocluster remove-dr-group` La commande n'est prise en charge que sur ONTAP 9.8 et les versions ultérieures.
++
+.. Préparer la suppression du groupe de reprise après incident, si ce n'est pas déjà le cas.
++
+... Déplacez tous les volumes de données vers un autre groupe de reprise après incident.
+... Déplacez tous les volumes de métadonnées MDV_CRS vers un autre groupe DR. Suivez les étapes de la procédure suivante : https://docs.netapp.com/ontap-9/topic/com.netapp.doc.hw-metrocluster-service/task_move_a_metadata_volume_in_mcc_configurations.html["Déplacement d'un volume de métadonnées dans les configurations MetroCluster"]
+... Supprimez tous les volumes de métadonnées MDV_aud qui peuvent exister dans le groupe DR à supprimer.
+... Supprimez tous les agrégats de données du groupe de reprise sur incident à supprimer comme indiqué dans l'exemple suivant :
++
+[listing]
+----
+ClusterA::> storage aggregate show -node ClusterA-01, ClusterA-02 -fields aggregate ,node
+ClusterA::> aggr delete -aggregate aggregate_name
+ClusterB::> storage aggregate show -node ClusterB-01, ClusterB-02 -fields aggregate ,node
+ClusterB::> aggr delete -aggregate aggregate_name
+----
++
+
+NOTE: Les agrégats racine ne sont pas supprimés.
+
+... Migrez toutes les LIFs de données vers les nœuds d'un autre groupe de reprise après incident. +
+`network interface show -home-node _old_node_`
++
+`network interface modify -vserver _svm-name_ -lif _data-lif_ -home-port _port-id_`
+
+... Migrez la LIF de gestion de cluster vers un nœud de rattachement situé dans un autre groupe de reprise après incident.
++
+`network interface show -role cluster-mgmt`
+
++
+`network interface modify -vserver _svm-name_ -lif _data-lif_ -home-port _port-id_`
+
++
+La gestion des nœuds et les LIF inter-cluster ne sont pas migrées.
+
+... Transférer epsilon vers un nœud dans un autre groupe de reprise après incident si nécessaire.
++
+[listing]
+----
+ClusterA::> set advanced
+ClusterA::*> cluster show
+Move epsilon if needed
+ClusterA::*> cluster modify -node nodename -epsilon false
+ClusterA::*> cluster modify -node nodename -epsilon true
+
+ClusterB::> set advanced
+ClusterB::*> cluster show
+ClusterB::*> cluster modify -node nodename -epsilon false
+ClusterB::*> cluster modify -node nodename -epsilon true
+ClusterB::*> set admin
+----
+
+
+.. Identifier et supprimer le groupe de reprise sur incident.
++
+... Identifiez le groupe DR approprié pour la suppression :
++
+`metrocluster node show`
+
+... Supprimer les nœuds du groupe DR : +
+`metrocluster remove-dr-group -dr-group-id 1`
++
+L'exemple suivant montre la suppression de la configuration du groupe de reprise sur incident sur cluster_A.
+
++
+[listing]
+----
+cluster_A::*>
+
+Warning: Nodes in the DR group that are removed from the MetroCluster
+         configuration will lose their disaster recovery protection.
+
+         Local nodes "node_A_1-FC, node_A_2-FC"will be removed from the
+         MetroCluster configuration. You must repeat the operation on the
+         partner cluster "cluster_B"to remove the remote nodes in the DR group.
+Do you want to continue? {y|n}: y
+
+Info: The following preparation steps must be completed on the local and partner
+      clusters before removing a DR group.
+
+      1. Move all data volumes to another DR group.
+      2. Move all MDV_CRS metadata volumes to another DR group.
+      3. Delete all MDV_aud metadata volumes that may exist in the DR group to
+      be removed.
+      4. Delete all data aggregates in the DR group to be removed. Root
+      aggregates are not deleted.
+      5. Migrate all data LIFs to home nodes in another DR group.
+      6. Migrate the cluster management LIF to a home node in another DR group.
+      Node management and inter-cluster LIFs are not migrated.
+      7. Transfer epsilon to a node in another DR group.
+
+      The command is vetoed if the preparation steps are not completed on the
+      local and partner clusters.
+Do you want to continue? {y|n}: y
+[Job 513] Job succeeded: Remove DR Group is successful.
+
+cluster_A::*>
+----
+
+
+.. Répétez l'étape précédente sur le cluster partenaire.
+.. Si dans une configuration MetroCluster IP, supprimer les connexions MetroCluster sur les nœuds de l'ancien groupe DR.
++
+Ces commandes peuvent être émises depuis un cluster et s'appliquer à tout le groupe de reprise sur incident sur les deux clusters.
+
++
+... Débrancher les connexions :
++
+`metrocluster configuration-settings connection disconnect _dr-group-id_`
+
+... Supprimez les interfaces MetroCluster sur les nœuds de l'ancien groupe DR :
++
+`metrocluster configuration-settings interface delete`
+
+... Supprimez l'ancienne configuration du groupe DR. +
+`metrocluster configuration-settings dr-group delete`
+
+
+.. Dissocier les nœuds de l'ancien groupe DR.
++
+Vous devez effectuer cette étape sur chaque cluster.
+
++
+... Définissez le niveau de privilège avancé :
++
+`set -privilege advanced`
+
+... Désactiver le basculement du stockage :
++
+`storage failover modify -node _node-name_ -enable false`
+
+... Dissocier le nœud : +
+`cluster unjoin -node _node-name_`
++
+Répétez cette étape pour l'autre nœud local de l'ancien groupe DR.
+
+... Définissez le niveau de privilège admin : +
+`set -privilege admin`
+
+
+.. Réactiver la haute disponibilité du cluster dans le nouveau groupe de reprise après incident :
++
+`cluster ha modify -configured true`
+
++
+Vous devez effectuer cette étape sur chaque cluster.
+
+.. Arrêtez, mettez hors tension et retirez les anciens modules de contrôleur et tiroirs de stockage.
+
+
+

@@ -1,0 +1,42 @@
+---
+permalink: install-ip/using_rcf_generator.html 
+sidebar: sidebar 
+keywords: cabling, cable, component, link, site, management, network, hardware, component, switch, cluster, connection, management, data, configuring, configure, rcf, file, generator, RcfFileGenerator 
+summary: Vous devez comprendre comment utiliser les informations des tables de ports pour générer correctement vos fichiers RCF. 
+---
+= Utilisation des tables de ports avec l'outil RcfFileGenerator ou de plusieurs configurations MetroCluster
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous devez comprendre comment utiliser les informations des tables de ports pour générer correctement vos fichiers RCF.
+
+Vérifiez les points suivants avant d'utiliser les tableaux :
+
+* Les tableaux suivants indiquent l'utilisation des ports pour le site A. Le même câblage est utilisé pour le site B.
+* Les commutateurs ne peuvent pas être configurés avec des ports de différentes vitesses (par exemple, un mélange de ports 100 Gbit/s et de ports 40 Gbit/s).
+* Conservez une trace du groupe de ports MetroCluster (MetroCluster 1, MetroCluster 2, etc.). Vous aurez besoin de ces informations lorsque vous utilisez l'outil RcfFileGenerator comme décrit plus loin dans cette procédure de configuration.
+* Le https://mysupport.netapp.com/site/tools/tool-eula/rcffilegenerator["RcfFileGenerator pour MetroCluster IP"] fournit également un aperçu du câblage par port pour chaque commutateur. Utilisez cette présentation du câblage pour vérifier votre câblage.
+
+
+
+
+== Câblage des configurations MetroCluster à 8 nœuds
+
+Pour la configuration MetroCluster qui exécute ONTAP 9.8 et les versions antérieures, certaines procédures de transition vers la mise à niveau requièrent l'ajout d'un deuxième groupe de reprise après incident à quatre nœuds à la configuration afin de créer une configuration temporaire à huit nœuds. Depuis la version ONTAP 9.9.1, les configurations MetroCluster permanentes à 8 nœuds sont prises en charge.
+
+Pour ces configurations, vous utilisez la même méthode que celle décrite ci-dessus. Au lieu d'un deuxième MetroCluster, vous câbler un autre groupe de reprise après incident à quatre nœuds.
+
+Par exemple, votre configuration inclut les éléments suivants :
+
+* Commutateurs Cisco 3132Q-V
+* MetroCluster 1 : plateformes FAS2750
+* MetroCluster 2 : plateformes AFF A700 (ces plateformes sont ajoutées comme deuxième groupe de reprise après incident à quatre nœuds)
+
+
+.Étapes
+. Pour le MetroCluster 1, reliez les commutateurs Cisco 3132Q-V à l'aide du tableau correspondant à la plateforme FAS2750 et aux rangées pour les interfaces MetroCluster 1.
+. Pour MetroCluster 2 (deuxième groupe DR), reliez les commutateurs Cisco 3132Q-V à l'aide du tableau pour la plateforme AFF A700 et les lignes pour les interfaces MetroCluster 2.
+

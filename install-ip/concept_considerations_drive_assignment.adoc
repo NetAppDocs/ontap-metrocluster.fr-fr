@@ -1,0 +1,690 @@
+---
+permalink: install-ip/concept_considerations_drive_assignment.html 
+sidebar: sidebar 
+keywords: drive auto-assignment, drive, adp, advanced disk partitioning, root disk, unmirrored root, data partition, root partition, shelf-by-shelf, AFF A320, AFF A220, AFF A250, AFF A300, AFF A400, AFF A700, AFF A800, FAS2750, FAS8200, FAS500f, FAS9000 
+summary: 'Depuis ONTAP 9.4, les configurations MetroCluster IP prennent en charge les nouvelles installations avec les systèmes AFF à l"aide du partitionnement de disque avancé (ADP).' 
+---
+= Considérations relatives à l'affectation automatique des disques et aux systèmes ADP dans ONTAP 9.4 et versions ultérieures
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Depuis ONTAP 9.4, les configurations MetroCluster IP prennent en charge les nouvelles installations avec les systèmes AFF à l'aide du partitionnement de disque avancé (ADP). Dans la plupart des configurations, le partitionnement et l'affectation des disques sont effectués automatiquement lors de la configuration initiale des sites MetroCluster.
+
+Les versions ONTAP 9.4 et ultérieures incluent les modifications suivantes pour la prise en charge d'ADP :
+
+* Les affectations de disque du pool 0 sont effectuées en usine.
+* La racine non symétrisée est créée à l'usine.
+* L'affectation de la partition des données se fait sur le site du client pendant la procédure de configuration.
+* Dans la plupart des cas, l'affectation des disques et le partitionnement sont effectués automatiquement pendant les procédures de configuration.
+
+
+
+NOTE: Lors de la mise à niveau de ONTAP 9.4 vers 9.5, le système reconnaît les affectations de disques existantes.
+
+
+
+== Partitionnement automatique
+
+ADP est exécuté automatiquement lors de la configuration initiale de la plate-forme.
+
+
+NOTE: Depuis ONTAP 9.5, l'assignation automatique des disques doit être activée avec la commande `storage disk option modify -autoassign on`.
+
+Vous pouvez partitionner automatiquement un maximum de 96 disques lors de l'installation. Vous pouvez ajouter des lecteurs supplémentaires après l'installation initiale.
+
+
+
+== Fonctionnement de l'affectation automatique « tiroir par tiroir »
+
+Si chaque site est doté de quatre tiroirs externes, chaque tiroir est affecté à un nœud différent et à un pool différent, comme illustré ci-dessous :
+
+* Tous les disques du site_A-shelf_1 sont automatiquement affectés au pool 0 du nœud_A_1
+* Tous les disques du site_A-shelf_3 sont automatiquement affectés au pool 0 du nœud_A_2
+* Tous les disques du site_B-shelf_1 sont automatiquement affectés au pool 0 du nœud_B_1
+* Tous les disques du site_B-shelf_3 sont automatiquement affectés au pool 0 du nœud_B_2
+* Tous les disques du site_B-shelf_2 sont automatiquement affectés au pool 1 du nœud_A_1
+* Tous les disques du site_B-shelf_4 sont automatiquement affectés au pool 1 du nœud_A_2
+* Tous les disques du site_A-shelf_2 sont automatiquement affectés au pool 1 du nœud_B_1
+* Tous les disques du site_A-shelf_4 sont automatiquement affectés au pool 1 du nœud_B_2
+
+
+
+
+== Comment remplir les étagères partiellement pleines
+
+Si votre configuration utilise des tiroirs qui ne sont pas plein (possèdent des baies de disques vides), il faut distribuer les disques de façon homogène dans tout le tiroir, selon les règles d'affectation des disques. La règle d'affectation des disques dépend du nombre de tiroirs sur chaque site MetroCluster.
+
+Si vous utilisez un seul tiroir sur chaque site (ou uniquement le tiroir interne d'un système AFF A800), les disques sont attribués selon une politique de tiroir par trimestre. Si le tiroir n'est pas entièrement rempli, installez les disques de la même manière sur tous les trimestres.
+
+Le tableau suivant montre un exemple de placement de 24 disques dans un tiroir interne de 48 disques. La propriété des disques est également indiquée.
+
+|===
+
+
+| Les baies de 48 disques sont divisées en quatre trimestres : | Installez six disques sur les six premières baies de chaque trimestre... 
+
+
+ a| 
+Premier trimestre : baies 0-11
+ a| 
+Baies 0-5
+
+
+
+ a| 
+Deuxième trimestre : baies 12-23
+ a| 
+Baies 12-17
+
+
+
+ a| 
+Trimestre 3 : baies 24-35
+ a| 
+Baies 24-29
+
+
+
+ a| 
+Trimestre 4 : baies 36-48
+ a| 
+Baies 36-41
+
+|===
+Si vous utilisez deux tiroirs sur chaque site, des disques sont attribués en appliquant une politique de demi-tiroir. Si les tiroirs ne sont pas entièrement remplis, installez les disques de la même manière à partir de l'une des extrémités du tiroir.
+
+Par exemple, si vous installez 12 disques dans un tiroir de 24 disques, installez les disques dans les baies 0-5 et 18-23.
+
+
+
+== Affectation manuelle des lecteurs (ONTAP 9.5)
+
+Dans ONTAP 9.5, il est nécessaire d'effectuer manuellement l'affectation des disques sur les systèmes dotés des configurations de tiroirs suivantes :
+
+* Trois tiroirs externes par site.
++
+Deux tiroirs sont attribués automatiquement selon une règle d'affectation demi-tiroir, mais le troisième doit être attribué manuellement.
+
+* Plus de quatre tiroirs par site et le nombre total de tiroirs externes n'est pas un multiple de quatre.
++
+Les tiroirs supplémentaires au-dessus du multiple de quatre le plus proche ne sont pas attribués et les disques doivent être attribués manuellement. Par exemple, si le site comprend cinq tiroirs externes, vous devez attribuer manuellement le tiroir cinq.
+
+
+
+Vous n'avez qu'à attribuer manuellement un seul disque sur chaque tiroir non attribué. Les autres disques du tiroir sont ensuite attribués automatiquement.
+
+
+
+== Affectation manuelle des lecteurs (ONTAP 9.4)
+
+Dans ONTAP 9.4, il est nécessaire d'effectuer manuellement l'affectation des disques sur les systèmes dotés des configurations de tiroirs suivantes :
+
+* Moins de quatre tiroirs externes par site.
++
+Les disques doivent être affectés manuellement pour assurer une affectation symétrique des disques, chaque pool ayant un nombre égal de disques.
+
+* Plus de quatre tiroirs externes par site et le nombre total de tiroirs externes n'est pas un multiple de quatre.
++
+Les tiroirs supplémentaires au-dessus du multiple de quatre le plus proche ne sont pas attribués et les disques doivent être attribués manuellement.
+
+
+
+Lors de l'attribution manuelle de disques, vous devez affecter des disques de manière symétrique, avec un nombre égal de disques affectés à chaque pool. Par exemple, si la configuration compte deux tiroirs de stockage sur chaque site, un tiroir pour la paire haute disponibilité locale et un tiroir pour la paire haute disponibilité distante :
+
+* Assigner la moitié des disques du site_A-shelf_1 au pool 0 du noeud_A_1.
+* Assigner la moitié des disques du site_A-shelf_1 au pool 0 du noeud_A_2.
+* Assigner la moitié des disques du site_A-shelf_2 au pool 1 du nœud_B_1.
+* Assigner la moitié des disques du site_A-shelf_2 au pool 1 du nœud_B_2.
+* Affecter la moitié des disques du site_B-shelf_1 au pool 0 du nœud_B_1.
+* Affecter la moitié des disques du site_B-shelf_1 au pool 0 du nœud_B_2.
+* Assigner la moitié des disques du site_B-shelf_2 au pool 1 du nœud_A_1.
+* Assigner la moitié des disques du site_B-shelf_2 au pool 1 du nœud_A_2.
+
+
+
+
+== Ajout de tiroirs à une configuration existante
+
+L'assignation automatique des disques prend en charge l'ajout symétrique des tiroirs à une configuration existante.
+
+Lorsque de nouveaux tiroirs sont ajoutés, le système applique la même règle d'affectation aux nouveaux tiroirs. Par exemple, avec un seul tiroir par site, si un tiroir supplémentaire est ajouté, les systèmes appliquent les règles d'affectation de tiroir de trimestre au nouveau tiroir.
+
+link:concept_required_mcc_ip_components_and_naming_guidelines_mcc_ip.html["Composants IP MetroCluster et conventions de nom requis"]
+
+https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-psmg/home.html["Gestion des disques et des agrégats"^]
+
+
+
+== Les différences d'affectation des disques et des disques ADP par système dans les configurations IP MetroCluster
+
+Le fonctionnement du partitionnement de disque avancé et de l'affectation automatique des disques dans les configurations IP MetroCluster varie en fonction du modèle du système.
+
+
+NOTE: Dans les systèmes utilisant ADP, des agrégats sont créés à l'aide de partitions dans lesquelles chaque disque est partitionné en partitions P1, P2 et P3. L'agrégat racine est créé à l'aide de partitions P3.
+
+Vous devez respecter les limites MetroCluster pour le nombre maximal de disques pris en charge, entre autres.
+
+https://hwu.netapp.com["NetApp Hardware Universe"]
+
+
+
+=== Affectation d'un disque ou d'un disque ADP sur les systèmes AFF A320
+
+|===
+
+
+| Directive | Nombre de disques par site | Règles d'affectation de disques | Mise en page ADP pour la partition racine 
+
+
+ a| 
+Minimum de disques recommandés (par site)
+ a| 
+48 disques
+ a| 
+Les disques de chaque tiroir externe sont divisés en deux groupes égaux (moitiés). Chaque demi-tiroir est automatiquement attribué à un pool distinct.
+ a| 
+Un tiroir est utilisé par la paire haute disponibilité locale. Le second tiroir est utilisé par la paire haute disponibilité distante.
+
+Les partitions sur chaque tiroir sont utilisées pour créer l'agrégat racine. Chacun des deux plexes de l'agrégat racine inclut les partitions suivantes::
++
+--
+* Huit partitions pour les données
+* Deux partitions de parité
+* Deux partitions de rechange
+
+
+--
+
+
+
+
+ a| 
+Nombre minimal de disques pris en charge (par site)
+ a| 
+24 disques
+ a| 
+Les lecteurs sont répartis en quatre groupes égaux. Chaque tiroir est automatiquement attribué à un pool distinct.
+ a| 
+Chacun des deux plexes de l'agrégat racine inclut les partitions suivantes :
+
+* Trois partitions de données
+* Deux partitions de parité
+* Une partition de rechange
+
+
+|===
+
+
+=== ADP et affectation des disques sur les systèmes AFF A220
+
+|===
+
+
+| Directive | Nombre de disques par site | Règles d'affectation de disques | Mise en page ADP pour la partition racine 
+
+
+ a| 
+Minimum de disques recommandés (par site)
+ a| 
+Disques internes uniquement
+ a| 
+Les disques internes sont répartis en quatre groupes identiques. Chaque groupe est automatiquement affecté à un pool distinct et chaque pool est affecté à un contrôleur distinct dans la configuration.
+
+
+NOTE: La moitié des disques internes reste non affectés avant la configuration du MetroCluster.
+ a| 
+Deux trimestres sont utilisés par la paire haute disponibilité locale. Les deux autres trimestres sont utilisés par la paire haute disponibilité distante.
+
+L'agrégat racine inclut les partitions suivantes dans chaque plex :
+
+* Trois partitions de données
+* Deux partitions de parité
+* Une partition de rechange
+
+
+
+
+ a| 
+Nombre minimal de disques pris en charge (par site)
+ a| 
+16 disques internes
+ a| 
+Les lecteurs sont répartis en quatre groupes égaux. Chaque tiroir est automatiquement attribué à un pool distinct.
+
+Deux trimestres d'un shelf peuvent avoir le même pool. Le pool est choisi en fonction du nœud propriétaire du trimestre :
+
+* Si le noeud local est détenu par le noeud local, pool0 est utilisé.
+* Si le nœud distant est propriétaire, pool1 est utilisé.
+
+
+Par exemple : un tiroir de Q1 à Q4 peut avoir les attributions suivantes :
+
+* Q1 : pool0 nœud_A_1
+* Q2 : pool0 nœud_A_2
+* Q3 : node_B_1 pool1
+* Q4 :node_B_2 pool1
+
+
+
+NOTE: La moitié des disques internes reste non affectés avant la configuration du MetroCluster.
+ a| 
+Chacun des deux plexes de l'agrégat racine inclut les partitions suivantes :
+
+* Une partition pour les données
+* Deux partitions de parité
+* Une partition de rechange
+
+
+|===
+
+
+=== Affectation des disques et ADP sur les systèmes AFF A250
+
+|===
+
+
+| Directive | Nombre de disques par site | Règles d'affectation de disques | Mise en page ADP pour la partition racine 
+
+
+ a| 
+Minimum de disques recommandés (par site)
+ a| 
+48 disques
+ a| 
+Les disques de chaque tiroir externe sont divisés en deux groupes égaux (moitiés). Chaque demi-tiroir est automatiquement attribué à un pool distinct.
+ a| 
+Un tiroir est utilisé par la paire haute disponibilité locale. Le second tiroir est utilisé par la paire haute disponibilité distante.
+
+Les partitions sur chaque tiroir sont utilisées pour créer l'agrégat racine. L'agrégat racine inclut les partitions suivantes dans chaque plex :
+
+* Huit partitions pour les données
+* Deux partitions de parité
+* Deux partitions de rechange
+
+
+
+
+ a| 
+Nombre minimal de disques pris en charge (par site)
+ a| 
+16 disques internes uniquement
+ a| 
+Les lecteurs sont répartis en quatre groupes égaux. Chaque tiroir est automatiquement attribué à un pool distinct.
+ a| 
+Chacun des deux plexes de l'agrégat racine inclut les partitions suivantes :
+
+* Deux partitions de données
+* Deux partitions de parité
+* Pas de partitions de rechange
+
+
+|===
+
+
+=== Affectation des disques et ADP sur les systèmes AFF A300
+
+|===
+
+
+| Directive | Nombre de disques par site | Règles d'affectation de disques | Mise en page ADP pour la partition racine 
+
+
+ a| 
+Minimum de disques recommandés (par site)
+ a| 
+48 disques
+ a| 
+Les disques de chaque tiroir externe sont divisés en deux groupes égaux (moitiés). Chaque demi-tiroir est automatiquement attribué à un pool distinct.
+ a| 
+Un tiroir est utilisé par la paire haute disponibilité locale. Le second tiroir est utilisé par la paire haute disponibilité distante.
+
+Les partitions sur chaque tiroir sont utilisées pour créer l'agrégat racine. L'agrégat racine inclut les partitions suivantes dans chaque plex :
+
+* Huit partitions pour les données
+* Deux partitions de parité
+* Deux partitions de rechange
+
+
+
+
+ a| 
+Nombre minimal de disques pris en charge (par site)
+ a| 
+24 disques
+ a| 
+Les lecteurs sont répartis en quatre groupes égaux. Chaque tiroir est automatiquement attribué à un pool distinct.
+ a| 
+Chacun des deux plexes de l'agrégat racine inclut les partitions suivantes :
+
+* Trois partitions de données
+* Deux partitions de parité
+* Une partition de rechange
+
+
+|===
+
+
+=== Affectation d'un disque ou d'un ADP sur les systèmes AFF A400
+
+|===
+
+
+| Directive | Nombre de disques par site | Règles d'affectation de disques | Mise en page ADP pour la partition racine 
+
+
+ a| 
+Minimum de disques recommandés (par site)
+ a| 
+96 disques
+ a| 
+Les disques sont automatiquement affectés selon le type tiroir par tiroir.
+ a| 
+Chacun des deux plexes de l'agrégat racine inclut :
+
+* 20 partitions de données
+* Deux partitions de parité
+* Deux partitions de rechange
+
+
+
+
+ a| 
+Nombre minimal de disques pris en charge (par site)
+ a| 
+24 disques
+ a| 
+Les disques sont divisés en quatre groupes égaux (quarts). Chaque tiroir est automatiquement attribué à un pool distinct.
+ a| 
+Chacun des deux plexes de l'agrégat racine inclut :
+
+* Trois partitions de données
+* Deux partitions de parité
+* Une partition de rechange
+
+
+|===
+
+
+=== Affectation des disques et ADP sur les systèmes AFF A700
+
+|===
+
+
+| Directive | Nombre de disques par site | Règles d'affectation de disques | Mise en page ADP pour la partition racine 
+
+
+ a| 
+Minimum de disques recommandés (par site)
+ a| 
+96 disques
+ a| 
+Les disques sont automatiquement affectés selon le type tiroir par tiroir.
+ a| 
+Chacun des deux plexes de l'agrégat racine inclut :
+
+* 20 partitions de données
+* Deux partitions de parité
+* Deux partitions de rechange
+
+
+
+
+ a| 
+Nombre minimal de disques pris en charge (par site)
+ a| 
+24 disques
+ a| 
+Les disques sont divisés en quatre groupes égaux (quarts). Chaque tiroir est automatiquement attribué à un pool distinct.
+ a| 
+Chacun des deux plexes de l'agrégat racine inclut :
+
+* Trois partitions de données
+* Deux partitions de parité
+* Une partition de rechange
+
+
+|===
+
+
+=== ADP et affectation des disques sur les systèmes AFF A800
+
+|===
+
+
+| Directive | Nombre de disques par site | Règles d'affectation de disques | Disposition ADP pour l'agrégat racine 
+
+
+ a| 
+Minimum de disques recommandés (par site)
+ a| 
+Disques internes et 96 disques externes
+ a| 
+Les partitions internes sont divisées en quatre groupes égaux (quarts). Chaque trimestre est attribué automatiquement à un pool distinct. Les disques des tiroirs externes sont automatiquement affectés selon le tiroir par tiroir, tous les disques de chaque tiroir étant affectés à l'un des quatre nœuds de la configuration MetroCluster.
+ a| 
+L'agrégat root est créé avec 12 partitions root sur le tiroir interne.
+
+Chacun des deux plexes de l'agrégat racine inclut :
+
+* Huit partitions pour les données
+* Deux partitions de parité
+* Deux partitions de rechange
+
+
+
+
+ a| 
+Nombre minimal de disques pris en charge (par site)
+ a| 
+24 disques internes uniquement
+ a| 
+Les partitions internes sont divisées en quatre groupes égaux (quarts). Chaque trimestre est attribué automatiquement à un pool distinct.
+ a| 
+L'agrégat root est créé avec 12 partitions root sur le tiroir interne.
+
+Chacun des deux plexes de l'agrégat racine inclut :
+
+* Trois partitions de données
+* Deux partitions de parité
+* Une partition de rechange
+
+
+|===
+
+
+=== Affectation des disques et ADP sur les systèmes AFF A900
+
+|===
+
+
+| Directive | Tiroirs par site | Règles d'affectation de disques | Mise en page ADP pour la partition racine 
+
+
+ a| 
+Minimum de disques recommandés (par site)
+ a| 
+96 disques
+ a| 
+Les disques sont automatiquement affectés selon le type tiroir par tiroir.
+ a| 
+Chacun des deux plexes de l'agrégat racine inclut :
+
+* 20 partitions de données
+* Deux partitions de parité
+* Deux partitions de rechange
+
+
+
+
+ a| 
+Nombre minimal de disques pris en charge (par site)
+ a| 
+24 disques
+ a| 
+Les disques sont divisés en quatre groupes égaux (quarts). Chaque tiroir est automatiquement attribué à un pool distinct.
+ a| 
+Chacun des deux plexes de l'agrégat racine inclut :
+
+* Trois partitions de données
+* Deux partitions de parité
+* Une partition de rechange
+
+
+|===
+
+
+=== Affectation des disques sur les systèmes FAS2750
+
+|===
+
+
+| Directive | Nombre de disques par site | Règles d'affectation de disques | Mise en page ADP pour la partition racine 
+
+
+ a| 
+Minimum de disques recommandés (par site)
+ a| 
+24 disques internes et 24 disques externes
+ a| 
+Les étagères internes et externes sont divisées en deux moitiés égales. Chaque moitié est automatiquement attribuée à un autre pool
+ a| 
+Sans objet
+
+
+
+ a| 
+Minimum de disques pris en charge (par site) (configuration haute disponibilité active/passive)
+ a| 
+Disques internes uniquement
+ a| 
+Affectation manuelle requise
+ a| 
+Sans objet
+
+|===
+
+
+=== Affectation des disques sur les systèmes FAS8200
+
+|===
+
+
+| Directive | Nombre de disques par site | Règles d'affectation de disques | Mise en page ADP pour la partition racine 
+
+
+ a| 
+Minimum de disques recommandés (par site)
+ a| 
+48 disques
+ a| 
+Les disques des tiroirs externes sont divisés en deux groupes égaux (moitiés). Chaque demi-tiroir est automatiquement attribué à un pool distinct.
+ a| 
+Sans objet
+
+
+
+ a| 
+Minimum de disques pris en charge (par site) (configuration haute disponibilité active/passive)
+ a| 
+24 disques
+ a| 
+Affectation manuelle requise.
+ a| 
+Sans objet
+
+|===
+
+
+=== Affectation des disques sur les systèmes FAS500f
+
+|===
+
+
+| Directive | Nombre de disques par site | Règles d'affectation de disques | Mise en page ADP pour la partition racine 
+
+
+ a| 
+Minimum de disques recommandés (par site)
+ a| 
+96 disques
+ a| 
+Les disques sont automatiquement affectés selon le type tiroir par tiroir.
+ a| 
+Sans objet
+
+
+
+ a| 
+Nombre minimal de disques pris en charge (par site)
+ a| 
+24 disques
+ a| 
+Les lecteurs sont répartis en quatre groupes égaux. Chaque tiroir est automatiquement attribué à un pool distinct.
+ a| 
+Sans objet
+
+|===
+
+
+=== Affectation des disques sur les systèmes FAS9000
+
+|===
+
+
+| Directive | Nombre de disques par site | Règles d'affectation de disques | Mise en page ADP pour la partition racine 
+
+
+ a| 
+Minimum de disques recommandés (par site)
+ a| 
+96 disques
+ a| 
+Les disques sont automatiquement affectés selon le type tiroir par tiroir.
+ a| 
+Sans objet
+
+
+
+ a| 
+Nombre minimal de disques pris en charge (par site)
+ a| 
+48 disques
+ a| 
+Les disques des tiroirs sont divisés en deux groupes égaux (moitiés). Chaque demi-tiroir est automatiquement attribué à un pool distinct.
+ a| 
+Minimum de disques pris en charge (par site) (configuration haute disponibilité active/passive)
+
+|===
+
+
+=== Affectation des disques sur les systèmes FAS9500
+
+|===
+
+
+| Directive | Tiroirs par site | Règles d'affectation de disques | Mise en page ADP pour la partition racine 
+
+
+ a| 
+Minimum de disques recommandés (par site)
+ a| 
+96 disques
+ a| 
+Les disques sont automatiquement affectés selon le type tiroir par tiroir.
+ a| 
+Sans objet
+
+
+
+ a| 
+Nombre minimal de disques pris en charge (par site)
+ a| 
+24 disques
+ a| 
+Les disques sont divisés en quatre groupes égaux (quarts). Chaque tiroir est automatiquement attribué à un pool distinct.
+ a| 
+Minimum de disques pris en charge (par site) (configuration haute disponibilité active/passive)
+
+|===

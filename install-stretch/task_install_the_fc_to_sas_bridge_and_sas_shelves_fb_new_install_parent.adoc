@@ -1,0 +1,41 @@
+---
+permalink: install-stretch/task_install_the_fc_to_sas_bridge_and_sas_shelves_fb_new_install_parent.html 
+sidebar: sidebar 
+keywords: metrocluster, stretch, installation, install, fc, sas, bridge, shelves 
+summary: 'Après avoir vérifié que le système répond à toutes les exigences de la section « préparation de l"installation », vous pouvez installer votre nouveau système.' 
+---
+= Installation des ponts FC-SAS et des tiroirs SAS
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Après avoir vérifié que le système répond à toutes les exigences de la section « préparation de l'installation », vous pouvez installer votre nouveau système.
+
+* La configuration de tiroir et de disque au niveau des deux sites doit être identique.
++
+Si un agrégat non mis en miroir est utilisé, la configuration du disque et du tiroir sur chaque site peut être différente.
+
++
+
+NOTE: Tous les disques du groupe de reprise après incident doivent utiliser le même type de connexion et être visibles pour tous les nœuds du groupe de reprise après incident, que les disques soient utilisés pour l'agrégat en miroir ou non.
+
+* Les exigences de connectivité du système relatives aux distances maximales pour les tiroirs disques, les commutateurs FC et les dispositifs de sauvegarde sur bande à l'aide de câbles fibre optique multimode de 50 microns, s'appliquent également aux ponts FiberBridge.
++
+https://hwu.netapp.com["NetApp Hardware Universe"]
+
+* Une combinaison de modules IOM12 et de modules IOM3 n'est pas prise en charge au sein de la même pile de stockage. Si votre système exécute une version prise en charge de ONTAP, vous pouvez utiliser plusieurs modules IOM12 et IOM6 au sein de la même pile de stockage.
+
+
+[NOTE]
+====
+La technologie ACP intrabande est prise en charge sans câblage supplémentaire au niveau des tiroirs et des ponts FiberBridge 7500N ou 7600N :
+
+* IOM12 (DS460C) derrière un pont 7500N ou 7600N avec ONTAP 9.2 et versions ultérieures
+* IOM12 (DS212C et DS224C) derrière un pont 7500N ou 7600N avec ONTAP 9.1 et versions ultérieures
+
+
+====
+
+NOTE: Les tiroirs SAS des configurations MetroCluster ne prennent pas en charge le câblage ACP.

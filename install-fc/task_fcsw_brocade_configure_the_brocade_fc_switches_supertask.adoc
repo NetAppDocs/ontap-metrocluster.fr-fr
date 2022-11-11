@@ -1,0 +1,4588 @@
+---
+permalink: install-fc/task_fcsw_brocade_configure_the_brocade_fc_switches_supertask.html 
+sidebar: sidebar 
+keywords: MetroCluster configurations 
+summary: Vous devez configurer chacune des structures de commutateurs Brocade dans la configuration MetroCluster. 
+---
+= Configuration manuelle des commutateurs Brocade FC
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous devez configurer chacune des structures de commutateurs Brocade dans la configuration MetroCluster.
+
+.Avant de commencer
+* Vous devez disposer d'une station de travail PC ou UNIX avec un accès Telnet ou SSH (Secure Shell) aux commutateurs FC.
+* Vous devez utiliser quatre commutateurs Brocade du même modèle avec la même version et la même licence du système d'exploitation Brocade Fabric (FOS).
++
+https://mysupport.netapp.com/matrix["Matrice d'interopérabilité NetApp"]
+
++
+Dans le IMT, vous pouvez utiliser le champ solution de stockage pour sélectionner votre solution MetroCluster. Utilisez *Explorateur de composants* pour sélectionner les composants et la version ONTAP pour affiner votre recherche. Vous pouvez cliquer sur *Afficher les résultats* pour afficher la liste des configurations prises en charge qui correspondent aux critères.
+
+* Les quatre commutateurs Brocade pris en charge doivent être connectés à deux structures de deux commutateurs chacune, chaque structure couvrant les deux sites.
+* Chaque contrôleur de stockage doit disposer de quatre ports d'initiateur disponibles pour la connexion aux structures de commutateurs. Deux ports initiateurs doivent être connectés de chaque contrôleur de stockage à chaque structure.
++
+
+NOTE: Vous pouvez configurer les systèmes FAS8020, AFF8020, FAS8200 et AFF A300 avec deux ports initiateurs par contrôleur (un port d'initiateur unique vers chaque fabrique) si tous les critères suivants sont satisfaits :
+
++
+** Il y a moins de quatre ports FC initiator disponibles pour connecter le stockage sur disque et aucun port supplémentaire ne peut être configuré en tant qu'initiateurs FC.
+** Tous les connecteurs sont utilisés et aucune carte d'initiateur FC ne peut être ajoutée.
+
+
+
+
+.Description de la tâche
+* Vous devez activer l'agrégation ISL (Inter-Switch Link) lorsqu'elle est prise en charge par les liaisons.
++
+link:concept_tdm_wdm.html["Considérations relatives à l'utilisation d'un équipement TDM/WDM avec des configurations MetroCluster intégrées à la structure"]
+
+* Tous les liens ISL doivent être dans une structure unique avec la même longueur et la même vitesse.
++
+Différentes longueurs peuvent être utilisées dans les différents tissus. La même vitesse doit être utilisée dans tous les fabrics.
+
+* Metro-E et TDM (SONET/SDH) ne sont pas pris en charge, et tout encadrement ou signalisation non-FC natif n'est pas pris en charge.
++
+Metro-E signifie que le cadrage ou la signalisation Ethernet se produit soit de façon native sur une distance Metro, soit par le biais d'un multiplexage à division temporelle (TDM), d'une commutation multiprotocole d'étiquettes (MPLS) ou d'un multiplexage par répartition des longueurs d'onde (WDM).
+
+* Les extensions TDMS, FCR (native FC Routing) ou FCIP ne sont pas prises en charge pour la structure de commutation MetroCluster FC.
+* Certains commutateurs de la structure commutateur FC MetroCluster prennent en charge le chiffrement ou la compression, et prennent parfois en charge les deux.
++
+https://mysupport.netapp.com/matrix["Matrice d'interopérabilité NetApp (IMT)"]
+
++
+Dans le IMT, vous pouvez utiliser le champ solution de stockage pour sélectionner votre solution MetroCluster. Utilisez *Explorateur de composants* pour sélectionner les composants et la version ONTAP pour affiner votre recherche. Vous pouvez cliquer sur *Afficher les résultats* pour afficher la liste des configurations prises en charge qui correspondent aux critères.
+
+* La fonctionnalité Brocade Virtual Fabric (VF) n'est pas prise en charge.
+* La segmentation FC basée sur le port de domaine est prise en charge, mais la segmentation basée sur le nom mondial (WWN) n'est pas prise en charge.
+
+
+
+
+== Révision des besoins en licences Brocade
+
+Vous avez besoin de certaines licences pour les commutateurs dans une configuration MetroCluster. Vous devez installer ces licences sur les quatre commutateurs.
+
+La configuration MetroCluster a les exigences suivantes en matière de licence Brocade :
+
+* Licence d'agrégation pour les systèmes utilisant plusieurs liens ISL, comme recommandé.
+* Licence Extended Fabric (pour des distances ISL de plus de 6 km)
+* Licence Enterprise pour les sites avec plus d'un ISL et une distance ISL supérieure à 6 km
++
+La licence Enterprise inclut Brocade Network Advisor et toutes les licences à l'exception des licences de port supplémentaires.
+
+
+
+.Étape
+. Vérifiez que les licences sont installées :
++
+`licenseshow`
+
++
+Si vous ne disposez pas de ces licences, contactez votre représentant commercial avant de continuer.
+
+
+
+
+
+== Définition des valeurs par défaut du commutateur Brocade FC
+
+Vous devez définir les paramètres par défaut du commutateur pour garantir la réussite de la configuration. Vous devez également attribuer un nom unique à chaque commutateur.
+
+Dans les exemples de cette procédure, le tissu est constitué de BrocadeSwitchA et BrocadeSwitchB.
+
+.Étapes
+. Établir une connexion à la console et se connecter aux deux commutateurs dans une structure unique.
+. Désactiver le commutateur de manière persistante :
++
+`switchcfgpersistentdisable`
+
++
+Cela permet de s'assurer que le commutateur reste désactivé après un redémarrage ou un démarrage rapide. Si cette commande n'est pas disponible, utilisez le `switchdisable` commande.
+
++
+L'exemple suivant montre la commande sur BrocadeSwitchA :
+
++
+[listing]
+----
+BrocadeSwitchA:admin> switchcfgpersistentdisable
+----
++
+L'exemple suivant montre la commande sur BrocadeSwitchB :
+
++
+[listing]
+----
+BrocadeSwitchB:admin> switchcfgpersistentdisable
+----
+. Définissez le nom du commutateur :
++
+`switchname switch_name`
+
++
+Les commutateurs doivent chacun avoir un nom unique. Une fois le nom défini, l'invite change en conséquence.
+
++
+L'exemple suivant montre la commande sur BrocadeSwitchA :
+
++
+[listing]
+----
+BrocadeSwitchA:admin> switchname "FC_switch_A_1"
+FC_switch_A_1:admin>
+----
++
+L'exemple suivant montre la commande sur BrocadeSwitchB :
+
++
+[listing]
+----
+BrocadeSwitchB:admin> switchname "FC_Switch_B_1"
+FC_switch_B_1:admin>
+----
+. Définissez les valeurs par défaut de tous les ports :
++
+`portcfgdefault`
+
++
+Cela doit être fait pour tous les ports du commutateur.
+
++
+L'exemple suivant montre les commandes sur FC_Switch_A_1 :
+
++
+[listing]
+----
+FC_switch_A_1:admin> portcfgdefault 0
+FC_switch_A_1:admin> portcfgdefault 1
+...
+FC_switch_A_1:admin> portcfgdefault 39
+----
++
+L'exemple suivant montre les commandes sur FC_Switch_B_1 :
+
++
+[listing]
+----
+FC_switch_B_1:admin> portcfgdefault 0
+FC_switch_B_1:admin> portcfgdefault 1
+...
+FC_switch_B_1:admin> portcfgdefault 39
+----
+. Effacer les informations de zoning :
++
+`cfgdisable`
+
++
+`cfgclear`
+
++
+`cfgsave`
+
++
+L'exemple suivant montre les commandes sur FC_Switch_A_1 :
+
++
+[listing]
+----
+FC_switch_A_1:admin> cfgdisable
+FC_switch_A_1:admin> cfgclear
+FC_switch_A_1:admin> cfgsave
+----
++
+L'exemple suivant montre les commandes sur FC_Switch_B_1 :
+
++
+[listing]
+----
+FC_switch_B_1:admin> cfgdisable
+FC_switch_B_1:admin> cfgclear
+FC_switch_B_1:admin> cfgsave
+----
+. Définissez les paramètres généraux du commutateur sur par défaut :
++
+`configdefault`
+
++
+L'exemple suivant montre la commande sur FC_Switch_A_1 :
+
++
+[listing]
+----
+FC_switch_A_1:admin> configdefault
+----
++
+L'exemple suivant montre la commande sur FC_Switch_B_1 :
+
++
+[listing]
+----
+FC_switch_B_1:admin> configdefault
+----
+. Définissez tous les ports en mode non-ADF :
++
+`switchcfgtrunk 0`
+
++
+L'exemple suivant montre la commande sur FC_Switch_A_1 :
+
++
+[listing]
+----
+FC_switch_A_1:admin> switchcfgtrunk 0
+----
++
+L'exemple suivant montre la commande sur FC_Switch_B_1 :
+
++
+[listing]
+----
+FC_switch_B_1:admin> switchcfgtrunk 0
+----
+. Sur les commutateurs Brocade 6510, désactivez la fonction Brocade Virtual Fabrics (VF) :
++
+`fosconfig options`
+
++
+L'exemple suivant montre la commande sur FC_Switch_A_1 :
+
++
+[listing]
+----
+FC_switch_A_1:admin> fosconfig --disable vf
+----
++
+L'exemple suivant montre la commande sur FC_Switch_B_1 :
+
++
+[listing]
+----
+FC_switch_B_1:admin> fosconfig --disable vf
+----
+. Effacez la configuration du domaine administratif (AD) :
++
+`ad options`
+
++
+L'exemple suivant montre les commandes sur FC_Switch_A_1 :
+
++
+[listing]
+----
+FC_switch_A_1:admin> switch:admin> ad --select AD0
+FC_switch_A_1:> defzone --noaccess
+FC_switch_A_1:> cfgsave
+FC_switch_A_1:> exit
+FC_switch_A_1:admin> ad --clear -f
+FC_switch_A_1:admin> ad --apply
+FC_switch_A_1:admin> ad --save
+FC_switch_A_1:admin> exit
+----
++
+L'exemple suivant montre les commandes sur FC_Switch_B_1 :
+
++
+[listing]
+----
+FC_switch_B_1:admin> switch:admin> ad --select AD0
+FC_switch_A_1:> defzone --noaccess
+FC_switch_A_1:> cfgsave
+FC_switch_A_1:> exit
+FC_switch_B_1:admin> ad --clear -f
+FC_switch_B_1:admin> ad --apply
+FC_switch_B_1:admin> ad --save
+FC_switch_B_1:admin> exit
+----
+. Redémarrez le commutateur :
++
+`reboot`
+
++
+L'exemple suivant montre la commande sur FC_Switch_A_1 :
+
++
+[listing]
+----
+FC_switch_A_1:admin> reboot
+----
++
+L'exemple suivant montre la commande sur FC_Switch_B_1 :
+
++
+[listing]
+----
+FC_switch_B_1:admin> reboot
+----
+
+
+
+
+== Configuration des paramètres de base du commutateur
+
+Vous devez configurer les paramètres globaux de base, y compris l'ID de domaine, pour les commutateurs Brocade.
+
+Cette tâche contient les étapes à effectuer sur chaque switch des deux sites MetroCluster.
+
+Dans cette procédure, vous définissez l'ID de domaine unique pour chaque commutateur comme indiqué dans l'exemple suivant. Dans l'exemple, les ID de domaine 5 et 7 forment Fabric_1 et les ID de domaine 6 et 8 forment Fabric_2.
+
+* FC_Switch_A_1 est affecté à l'ID de domaine 5
+* FC_Switch_A_2 est affecté à l'ID de domaine 6
+* FC_Switch_B_1 est affecté à l'ID de domaine 7
+* FC_Switch_B_2 est affecté à l'ID de domaine 8
+
+
+.Étapes
+. Passer en mode configuration :
++
+`configure`
+
+. Suivez les invites :
++
+.. Définissez l'ID de domaine du commutateur.
+.. Appuyez sur *entrée* en réponse aux invites jusqu'à ce que « cycle d'interrogation RDP », puis définissez cette valeur sur `0` pour désactiver l'interrogation.
+.. Appuyez sur *entrée* jusqu'à ce que vous repariez à l'invite du commutateur.
++
+[listing]
+----
+FC_switch_A_1:admin> configure
+Fabric parameters = y
+Domain_id = 5
+.
+.
+
+RSCN Transmission Mode [yes, y, no, no: [no] y
+
+End-device RSCN Transmission Mode
+ (0 = RSCN with single PID, 1 = RSCN with multiple PIDs, 2 = Fabric RSCN): (0..2) [1]
+Domain RSCN To End-device for switch IP address or name change
+ (0 = disabled, 1 = enabled): (0..1) [0] 1
+
+.
+.
+RDP Polling Cycle(hours)[0 = Disable Polling]: (0..24) [1] 0
+----
+
+
+. Si vous utilisez plusieurs liens ISL par fabric, vous pouvez configurer la livraison d'images (IOD) ou la livraison de trames (OOD) en commande.
++
+
+NOTE: Les paramètres IOD standard sont recommandés. Vous devez configurer la fonction OOD uniquement si nécessaire.
+
++
+link:concept_prepare_for_the_mcc_installation.html["Considérations relatives à l'utilisation d'un équipement TDM/WDM avec des configurations MetroCluster intégrées à la structure"]
+
++
+.. Les étapes suivantes doivent être effectuées sur chaque structure de commutateur pour configurer IOD des trames :
++
+... Activer IOD :
++
+`iodset`
+
+... Définissez la stratégie d'optimisation avancée des performances (APT) sur 1 :
++
+`aptpolicy 1`
+
+... Désactiver le partage dynamique de charge (DLS) :
++
+`dlsreset`
+
+... Vérifiez les paramètres IOD à l'aide du `iodshow`, `aptpolicy`, et `dlsshow` commandes.
++
+Ainsi, lancer les commandes suivantes sur FC_switch_A_1 :
+
++
+[listing]
+----
+FC_switch_A_1:admin> iodshow
+    IOD is set
+
+    FC_switch_A_1:admin> aptpolicy
+    Current Policy: 1 0(ap)
+
+    3 0(ap) : Default Policy
+    1: Port Based Routing Policy
+    3: Exchange Based Routing Policy
+         0: AP Shared Link Policy
+         1: AP Dedicated Link Policy
+    command aptpolicy completed
+
+    FC_switch_A_1:admin> dlsshow
+    DLS is not set
+----
+... Répétez ces étapes sur la seconde structure de commutateur.
+
+
+.. Les étapes suivantes doivent être effectuées sur chaque fabrique de commutateurs pour configurer un OOD des trames :
++
+... Activer OOD :
++
+`iodreset`
+
+... Définissez la stratégie d'optimisation avancée des performances (APT) sur 3 :
++
+`aptpolicy 3`
+
+... Désactiver le partage dynamique de charge (DLS) :
++
+`dlsreset`
+
+... Vérifiez les paramètres du DOM :
++
+`iodshow`
+
++
+`aptpolicy`
+
++
+`dlsshow`
+
++
+Ainsi, lancer les commandes suivantes sur FC_switch_A_1 :
+
++
+[listing]
+----
+FC_switch_A_1:admin> iodshow
+    IOD is not set
+
+    FC_switch_A_1:admin> aptpolicy
+    Current Policy: 3 0(ap)
+    3 0(ap) : Default Policy
+    1: Port Based Routing Policy
+    3: Exchange Based Routing Policy
+    0: AP Shared Link Policy
+    1: AP Dedicated Link Policy
+    command aptpolicy completed
+
+
+    FC_switch_A_1:admin> dlsshow
+    DLS is set by default with current routing policy
+----
+... Répétez ces étapes sur la seconde structure de commutateur.
++
+
+NOTE: Lors de la configuration de ONTAP sur les modules de contrôleur, la commande de surmultipliée doit être explicitement configurée sur chaque module de contrôleur dans la configuration MetroCluster.
+
++
+https://docs.netapp.com/us-en/ontap-metrocluster/install-fc/concept_configure_the_mcc_software_in_ontap.html#configuring-in-order-delivery-or-out-of-order-delivery-of-frames-on-ontap-software["Configuration de la livraison en commande ou de la livraison hors commande des trames sur le logiciel ONTAP"]
+
+
+
+
+
+. Vérifiez que le commutateur utilise la méthode de licence de port dynamique.
++
+.. Exécutez la commande license :
++
+--
+`licensePort --show`
+
+[listing]
+----
+FC_switch_A_1:admin> licenseport -show
+24 ports are available in this switch
+Full POD license is installed
+Dynamic POD method is in use
+----
+
+NOTE: Brocade FabricOS avant 8.0, exécutez les commandes suivantes en tant qu'admin et versions 8.0 et ultérieures, afin de les exécuter en tant que root.
+
+--
+.. Activez l'utilisateur root.
++
+Si l'utilisateur root est déjà désactivé par Brocade, activez-le comme indiqué dans l'exemple suivant :
+
++
+[listing]
+----
+FC_switch_A_1:admin> userconfig --change root -e yes
+FC_switch_A_1:admin> rootaccess --set consoleonly
+----
+.. Exécutez la commande license :
++
+`licensePort --show`
+
++
+[listing]
+----
+FC_switch_A_1:root> licenseport -show
+24 ports are available in this switch
+Full POD license is installed
+Dynamic POD method is in use
+----
+.. Changer la méthode de licence en dynamique :
++
+`licenseport --method dynamic`
+
++
+
+NOTE: Si la méthode de licence dynamique n'est pas utilisée (si la méthode est statique), vous devez changer la méthode de licence en dynamique. Ignorez cette étape si la méthode de licence dynamique est utilisée.
+
++
+[listing]
+----
+FC_switch_A_1:admin> licenseport --method dynamic
+The POD method has been changed to dynamic.
+Please reboot the switch now for this change to take effect
+----
+
+
+. Activer le trap T11-FC-ZONE-SERVEUR-MIB pour assurer une surveillance réussie de l'état des commutateurs dans ONTAP :
++
+.. Activer le T11-FC-ZONE-SERVEUR-MIB :
++
+`snmpconfig --set mibCapability -mib_name T11-FC-ZONE-SERVER-MIB -bitmask 0x3f`
+
+.. Activer le trap T11-FC-ZONE-SERVEUR-MIB :
++
+`snmpconfig --enable mibcapability -mib_name SW-MIB -trap_name swZoneConfigChangeTrap`
+
+.. Répétez les étapes précédentes sur la seconde structure de commutateur.
+
+
+. *Facultatif* : si vous définissez la chaîne de communauté sur une valeur autre que « public », vous devez configurer les moniteurs de santé ONTAP à l'aide de la chaîne de communauté que vous spécifiez :
++
+.. Modifiez la chaîne de communauté existante :
++
+`snmpconfig --set snmpv1`
+
+.. Appuyez sur *entrée* jusqu'à ce que le texte « Communauté (ro) : [public] » s'affiche.
+.. Saisissez la chaîne de communauté souhaitée.
++
+Sur FC_Switch_A_1 :
+
++
+[listing]
+----
+FC_switch_A_1:admin> snmpconfig --set snmpv1
+SNMP community and trap recipient configuration:
+Community (rw): [Secret C0de]
+Trap Recipient's IP address : [0.0.0.0]
+Community (rw): [OrigEquipMfr]
+Trap Recipient's IP address : [0.0.0.0]
+Community (rw): [private]
+Trap Recipient's IP address : [0.0.0.0]
+Community (ro): [public] mcchm     <<<<<< change the community string to the desired value,
+Trap Recipient's IP address : [0.0.0.0]    in this example it is set to "mcchm"
+Community (ro): [common]
+Trap Recipient's IP address : [0.0.0.0]
+Community (ro): [FibreChannel]
+Trap Recipient's IP address : [0.0.0.0]
+Committing configuration.....done.
+FC_switch_A_1:admin>
+----
++
+Sur FC_Switch_B_1 :
+
++
+[listing]
+----
+FC_switch_B_1:admin> snmpconfig --set snmpv1
+SNMP community and trap recipient configuration:
+Community (rw): [Secret C0de]
+Trap Recipient's IP address : [0.0.0.0]
+Community (rw): [OrigEquipMfr]
+Trap Recipient's IP address : [0.0.0.0]
+Community (rw): [private]
+Trap Recipient's IP address : [0.0.0.0]
+Community (ro): [public] mcchm      <<<<<< change the community string to the desired value,
+Trap Recipient's IP address : [0.0.0.0]     in this example it is set to "mcchm"
+Community (ro): [common]
+Trap Recipient's IP address : [0.0.0.0]
+Community (ro): [FibreChannel]
+Trap Recipient's IP address : [0.0.0.0]
+Committing configuration.....done.
+FC_switch_B_1:admin>
+----
+
+
+. Redémarrez le commutateur :
++
+`reboot`
+
++
+Sur FC_Switch_A_1 :
+
++
+[listing]
+----
+FC_switch_A_1:admin> reboot
+----
++
+Sur FC_Switch_B_1 :
+
++
+[listing]
+----
+FC_switch_B_1:admin> reboot
+----
+. Activer le commutateur de manière persistante :
++
+`switchcfgpersistentenable`
+
++
+Sur FC_Switch_A_1 :
+
++
+[listing]
+----
+FC_switch_A_1:admin> switchcfgpersistentenable
+----
++
+Sur FC_Switch_B_1 :
+
++
+[listing]
+----
+FC_switch_B_1:admin> switchcfgpersistentenable
+----
+
+
+
+
+== Configuration des paramètres de commutateur de base sur un commutateur Brocade DCX 8510-8
+
+Vous devez configurer les paramètres globaux de base, y compris l'ID de domaine, pour les commutateurs Brocade.
+
+Vous devez effectuer les étapes de chaque commutateur sur les deux sites MetroCluster. Dans cette procédure, vous définissez l'ID de domaine pour chaque commutateur comme indiqué dans les exemples suivants :
+
+* FC_Switch_A_1 est affecté à l'ID de domaine 5
+* FC_Switch_A_2 est affecté à l'ID de domaine 6
+* FC_Switch_B_1 est affecté à l'ID de domaine 7
+* FC_Switch_B_2 est affecté à l'ID de domaine 8
+
+
+Dans l'exemple précédent, les ID de domaine 5 et 7 forment Fabric_1 et les ID de domaine 6 et 8 forment Fabric_2.
+
+
+NOTE: Vous pouvez également utiliser cette procédure pour configurer les commutateurs lorsque vous n'utilisez qu'un seul commutateur DCX 8510-8 par site.
+
+A l'aide de cette procédure, vous devez créer deux commutateurs logiques sur chaque commutateur Brocade DCX 8510-8. Les deux commutateurs logiques créés sur les deux commutateurs Brocade DCX8510-8 formeront deux structures logiques, comme le montre les exemples suivants :
+
+* STRUCTURE LOGIQUE 1 : commutateur 1/bla1 et commutateur 2 lame 1
+* STRUCTURE LOGIQUE 2 : Switch1/Blade2 et Switch 2 Blade 2
+
+
+.Étapes
+. Entrer en mode de commande :
++
+`configure`
+
+. Suivez les invites :
++
+.. Définissez l'ID de domaine du commutateur.
+.. Continuez à sélectionner *entrée* jusqu'à ce que vous obteniez « cycle d'interrogation RDP », puis définissez la valeur sur `0` pour désactiver l'interrogation.
+.. Sélectionnez *entrée* jusqu'à ce que vous repariez à l'invite du commutateur.
++
+[listing]
+----
+FC_switch_A_1:admin> configure
+Fabric parameters = y
+Domain_id = `5
+
+
+RDP Polling Cycle(hours)[0 = Disable Polling]: (0..24) [1] 0
+`
+----
+
+
+. Répétez ces étapes sur tous les commutateurs de Fabric_1 et Fabric_2.
+. Configurer les structures virtuelles.
++
+.. Activer les structures virtuelles sur le commutateur :
++
+`fosconfig --enablevf`
+
+.. Configurer le système pour qu'il utilise la même configuration de base sur tous les commutateurs logiques :
++
+`configurechassis`
+
++
+L'exemple suivant montre la sortie du `configurechassis` commande :
+
++
+[listing]
+----
+System (yes, y, no, n): [no] n
+cfgload attributes (yes, y, no, n): [no] n
+Custom attributes (yes, y, no, n): [no] y
+Config Index (0 to ignore): (0..1000) [3]:
+----
+
+
+. Création et configuration du switch logique :
++
+`scfg --create fabricID`
+
+. Ajout de tous les ports d'une lame à la structure virtuelle :
++
+`lscfg --config fabricID -slot slot -port lowest-port - highest-port`
+
++
+
+NOTE: Les lames formant un tissu logique (par exemple Les commutateurs 1 lame 1 et 3 lame 1) doivent avoir le même ID de structure.
+
++
+[listing]
+----
+setcontext fabricid
+switchdisable
+configure
+<configure the switch per the above settings>
+switchname unique switch name
+switchenable
+----
+
+
+link:concept_prepare_for_the_mcc_installation.html["Conditions requises pour l'utilisation d'un commutateur Brocade DCX 8510-8"]
+
+
+
+== Configuration des E-ports sur les commutateurs Brocade FC à l'aide des ports FC
+
+Pour les commutateurs Brocade sur lesquels les liaisons ISL (Inter-Switch Links) sont configurées à l'aide de ports FC, vous devez configurer les ports de switch sur chaque structure de switch reliant l'ISL. Ces ports ISL sont également appelés E-ports.
+
+.Avant de commencer
+* Tous les liens ISL d'une structure de commutation FC doivent être configurés avec la même vitesse et la même distance.
+* La combinaison du port de commutateur et du module SFP (Small form-factor pluggable) doit prendre en charge la vitesse.
+* La distance ISL prise en charge dépend du modèle de commutateur FC.
++
+https://mysupport.netapp.com/matrix["Matrice d'interopérabilité NetApp"]
+
++
+Dans le IMT, vous pouvez utiliser le champ solution de stockage pour sélectionner votre solution MetroCluster. Utilisez *Explorateur de composants* pour sélectionner les composants et la version ONTAP pour affiner votre recherche. Vous pouvez cliquer sur *Afficher les résultats* pour afficher la liste des configurations prises en charge qui correspondent aux critères.
+
+* La liaison ISL doit avoir une lambda dédiée et la liaison doit être prise en charge par Brocade pour la distance, le type de switch et le système d'exploitation Fabric (FOS).
+
+
+Vous ne devez pas utiliser le paramètre L0 lors de l'émission du `portCfgLongDistance` commande. Utilisez plutôt le paramètre LE ou LS pour configurer la distance sur les commutateurs Brocade avec un minimum de distance LE.
+
+Vous ne devez pas utiliser le paramètre LD lors de l'émission du `portCfgLongDistance` Commande en cas de travail avec des équipements xWDM/TDM. Utilisez plutôt le paramètre LE ou LS pour configurer la distance sur les commutateurs Brocade.
+
+Vous devez effectuer cette tâche pour chaque structure de commutateur FC.
+
+Les tableaux suivants montrent les ports ISL de différents commutateurs et un nombre différent de liens ISL dans une configuration exécutant ONTAP 9.1 ou 9.2. Les exemples présentés dans cette section concernent un commutateur Brocade 6505. Vous devez modifier les exemples pour utiliser des ports qui s'appliquent à votre type de commutateur.
+
+Si votre configuration exécute ONTAP 9.0 ou une version antérieure, reportez-vous à la link:concept_port_assignments_for_fc_switches_when_using_ontap_9_0.html["Affectation des ports pour les commutateurs FC lors de l'utilisation de ONTAP 9.0"].
+
+Vous devez utiliser le nombre requis de liens ISL pour votre configuration.
+
+|===
+
+
+| Changer de modèle | Port ISL | Port du commutateur 
+
+
+.4+| Brocade 6520 | Port ISL 1 | 23 
+
+
+| Port ISL 2 | 47 
+
+
+| Port ISL 3 | 71 
+
+
+| Port ISL 4 | 95 
+
+
+.4+| Brocade 6505 | Port ISL 1 | 20 
+
+
+| Port ISL 2 | 21 
+
+
+| Port ISL 3 | 22 
+
+
+| Port ISL 4 | 23 
+
+
+.8+| Brocade 6510 et Brocade DCX 8510-8 | Port ISL 1 | 40 
+
+
+| Port ISL 2 | 41 
+
+
+| Port ISL 3 | 42 
+
+
+| Port ISL 4 | 43 
+
+
+| Port ISL 5 | 44 
+
+
+| Port ISL 6 | 45 
+
+
+| Port ISL 7 | 46 
+
+
+| Port ISL 8 | 47 
+
+
+.6+| Brocade 7810  a| 
+Port ISL 1
+ a| 
+ge2 (10 Gbit/s)
+
+
+
+ a| 
+Port ISL 2
+ a| 
+Ge3 (10 Gbits/s)
+
+
+
+ a| 
+Port ISL 3
+ a| 
+ge4 (10 Gbit/s)
+
+
+
+ a| 
+Port ISL 4
+ a| 
+ge5 (10 Gbit/s)
+
+
+
+ a| 
+Port ISL 5
+ a| 
+Ge6 (10 Gbit/s)
+
+
+
+ a| 
+Port ISL 6
+ a| 
+Ge7 (10 Gbit/s)
+
+
+
+.4+| Brocade 7840 *Remarque :* le commutateur Brocade 7840 prend en charge soit deux ports VE-40 Gbit/s, soit quatre ports VE-ports VE 10 Gbit/s par commutateur pour la création de liens ISL FCIP.  a| 
+Port ISL 1
+ a| 
+Ge0 (40 Gbits/s) ou ge2 (10 Gbits/s)
+
+
+
+ a| 
+Port ISL 2
+ a| 
+ge1 (40 Gbits/s) ou ge3 (10 Gbits/s)
+
+
+
+ a| 
+Port ISL 3
+ a| 
+ge10 (10 Gbit/s)
+
+
+
+ a| 
+Port ISL 4
+ a| 
+Ge11 (10 Gbit/s)
+
+
+
+.4+| Brocade G610  a| 
+Port ISL 1
+ a| 
+20
+
+
+
+ a| 
+Port ISL 2
+ a| 
+21
+
+
+
+ a| 
+Port ISL 3
+ a| 
+22
+
+
+
+ a| 
+Port ISL 4
+ a| 
+23
+
+
+
+.7+| BROCADE G620, G620-1, G630, G630-1, G720  a| 
+Port ISL 1
+ a| 
+40
+
+
+
+ a| 
+Port ISL 2
+ a| 
+41
+
+
+
+ a| 
+Port ISL 3
+ a| 
+42
+
+
+
+ a| 
+Port ISL 4
+ a| 
+43
+
+
+
+ a| 
+Port ISL 5
+ a| 
+44
+
+
+
+ a| 
+Port ISL 6
+ a| 
+45
+
+
+
+ a| 
+Port ISL 7
+ a| 
+46
+
+|===
+.Étapes
+. [[step1_brocade_config]] configurez la vitesse du port :
++
+`portcfgspeed port-numberspeed`
+
++
+Vous devez utiliser la vitesse la plus élevée qui est prise en charge par les composants du chemin.
+
++
+Dans l'exemple suivant, deux liens ISL sont dédiés à chaque structure :
+
++
+[listing]
+----
+FC_switch_A_1:admin> portcfgspeed 20 16
+FC_switch_A_1:admin> portcfgspeed 21 16
+
+FC_switch_B_1:admin> portcfgspeed 20 16
+FC_switch_B_1:admin> portcfgspeed 21 16
+----
+. Configurer le mode d'agrégation pour chaque ISL :
++
+`portcfgtrunkport port-number`
+
++
+** Si vous configurez les liens ISL pour l'agrégation (IOD), définissez le numéro-port-port-portcfgtrunk sur 1 comme indiqué dans l'exemple suivant :
++
+[listing]
+----
+FC_switch_A_1:admin> portcfgtrunkport 20 1
+FC_switch_A_1:admin> portcfgtrunkport 21 1
+FC_switch_B_1:admin> portcfgtrunkport 20 1
+FC_switch_B_1:admin> portcfgtrunkport 21 1
+----
+** Si vous ne souhaitez pas configurer l'ISL pour l'agrégation (OOD), définissez le numéro-port cfgporttrunkport sur 0 comme indiqué dans l'exemple suivant :
++
+[listing]
+----
+FC_switch_A_1:admin> portcfgtrunkport 20 0
+FC_switch_A_1:admin> portcfgtrunkport 21 0
+FC_switch_B_1:admin> portcfgtrunkport 20 0
+FC_switch_B_1:admin> portcfgtrunkport 21 0
+----
+
+
+. Activez le trafic QoS pour chacun des ports ISL :
++
+`portcfgqos --enable port-number`
+
++
+Dans l'exemple suivant, il existe deux liens ISL par une structure de commutation :
+
++
+[listing]
+----
+FC_switch_A_1:admin> portcfgqos --enable 20
+FC_switch_A_1:admin> portcfgqos --enable 21
+
+FC_switch_B_1:admin> portcfgqos --enable 20
+FC_switch_B_1:admin> portcfgqos --enable 21
+----
+. Vérifiez les paramètres :
++
+`portCfgShow command`
+
++
+L'exemple suivant montre la sortie d'une configuration utilisant deux liens ISL câblés vers le port 20 et le port 21. Le paramètre Port réseau doit être ACTIVÉ pour IOD et désactivé pour OOD :
+
++
+[listing]
+----
+
+Ports of Slot 0   12  13   14 15    16  17  18  19   20  21 22  23    24  25  26  27
+----------------+---+---+---+---+-----+---+---+---+----+---+---+---+-----+---+---+---
+Speed             AN  AN  AN  AN    AN  AN  8G  AN   AN  AN  16G  16G    AN  AN  AN  AN
+Fill Word         0   0   0   0     0   0   3   0    0   0   3   3     3   0   0   0
+AL_PA Offset 13   ..  ..  ..  ..    ..  ..  ..  ..   ..  ..  ..  ..    ..  ..  ..  ..
+Trunk Port        ..  ..  ..  ..    ..  ..  ..  ..   ON  ON  ..  ..    ..  ..  ..  ..
+Long Distance     ..  ..  ..  ..    ..  ..  ..  ..   ..  ..  ..  ..    ..  ..  ..  ..
+VC Link Init      ..  ..  ..  ..    ..  ..  ..  ..   ..  ..  ..  ..    ..  ..  ..  ..
+Locked L_Port     ..  ..  ..  ..    ..  ..  ..  ..   ..  ..  ..  ..    ..  ..  ..  ..
+Locked G_Port     ..  ..  ..  ..    ..  ..  ..  ..   ..  ..  ..  ..    ..  ..  ..  ..
+Disabled E_Port   ..  ..  ..  ..    ..  ..  ..  ..   ..  ..  ..  ..    ..  ..  ..  ..
+Locked E_Port     ..  ..  ..  ..    ..  ..  ..  ..   ..  ..  ..  ..    ..  ..  ..  ..
+ISL R_RDY Mode    ..  ..  ..  ..    ..  ..  ..  ..   ..  ..  ..  ..    ..  ..  ..  ..
+RSCN Suppressed   ..  ..  ..  ..    ..  ..  ..  ..   ..  ..  ..  ..    ..  ..  ..  ..
+Persistent Disable..  ..  ..  ..    ..  ..  ..  ..   ..  ..  ..  ..    ..  ..  ..  ..
+LOS TOV enable    ..  ..  ..  ..    ..  ..  ..  ..   ..  ..  ..  ..    ..  ..  ..  ..
+NPIV capability   ON  ON  ON  ON    ON  ON  ON  ON   ON  ON  ON  ON    ON  ON  ON  ON
+NPIV PP Limit    126 126 126 126   126 126 126 126  126 126 126 126   126 126 126 126
+QOS E_Port        AE  AE  AE  AE    AE  AE  AE  AE   AE  AE  AE  AE    AE  AE  AE  AE
+Mirror Port       ..  ..  ..  ..    ..  ..  ..  ..   ..  ..  ..  ..    ..  ..  ..  ..
+Rate Limit        ..  ..  ..  ..    ..  ..  ..  ..   ..  ..  ..  ..    ..  ..  ..  ..
+Credit Recovery   ON  ON  ON  ON    ON  ON  ON  ON   ON  ON  ON  ON    ON  ON  ON  ON
+Fport Buffers     ..  ..  ..  ..    ..  ..  ..  ..   ..  ..  ..  ..    ..  ..  ..  ..
+Port Auto Disable ..  ..  ..  ..    ..  ..  ..  ..   ..  ..  ..  ..    ..  ..  ..  ..
+CSCTL mode        ..  ..  ..  ..    ..  ..  ..  ..   ..  ..  ..  ..    ..  ..  ..  ..
+
+Fault Delay       0  0  0  0    0  0  0  0   0  0  0  0    0  0  0  0
+----
+. Calculer la distance ISL.
++
+En raison du comportement du FC-VI, la distance doit être réglée à 1.5 fois la distance réelle avec une distance minimale de 10 km (en utilisant le niveau DE distance LE).
+
++
+La distance pour l'ISL est calculée comme suit, arrondie au kilomètre entier suivant :
+
++
+1.5 × distance_réelle = distance
+
++
+Si la distance est de 3 km, alors 1.5 × 3 km = 4.5 km Cette valeur est inférieure à 10 km, de sorte que l'ISL doit être réglé sur LE niveau DE distance LE.
+
++
+Si la distance est de 20 km, alors 1.5 × 20 km = 30 km L'ISL doit être réglé sur 30 km et doit utiliser le niveau de distance LS.
+
+. Définissez la distance sur chaque port ISL :
++
+`portcfglongdistance _portdistance-level_ vc_link_init _distance_`
+
++
+A `vc_link_init` valeur de `1` Utilise le mot de remplissage ARB (par défaut). Valeur de `0` Utilise LE MODE INACTIF. La valeur requise peut dépendre du lien utilisé. Les commandes doivent être répétées pour chaque port ISL.
+
++
+Pour une distance ISL de 3 km, comme indiqué dans l'exemple de l'étape précédente, le réglage est de 4.5 km avec la valeur par défaut `vc_link_init` valeur de `1`. Comme un réglage de 4.5 km est inférieur à 10 km, le port doit être réglé sur LE niveau DE distance LE :
+
++
+[listing]
+----
+FC_switch_A_1:admin> portcfglongdistance 20 LE 1
+
+FC_switch_B_1:admin> portcfglongdistance 20 LE 1
+----
++
+Pour une distance ISL de 20 km, comme indiqué dans l'exemple de l'étape précédente, le paramètre est de 30 km avec la valeur par défaut vc_link_init de `1`:
+
++
+[listing]
+----
+FC_switch_A_1:admin> portcfglongdistance 20 LS 1 -distance 30
+
+FC_switch_B_1:admin> portcfglongdistance 20 LS 1 -distance 30
+----
+. Vérifiez le réglage de distance :
++
+`portbuffershow`
+
++
+Un niveau de distance de LE apparaît à 10 km
+
++
+L'exemple suivant montre la sortie d'une configuration utilisant des liens ISL sur le port 20 et le port 21 :
+
++
+[listing]
+----
+FC_switch_A_1:admin> portbuffershow
+
+User  Port     Lx      Max/Resv    Buffer Needed    Link      Remaining
+Port  Type    Mode     Buffers     Usage  Buffers   Distance  Buffers
+----  ----    ----     -------     ------ -------   --------- ---------
+...
+ 20     E      -          8         67      67       30km
+ 21     E      -          8         67      67       30km
+...
+ 23            -          8          0      -        -        466
+----
+. Vérifier que les deux commutateurs forment une structure unique :
++
+`switchshow`
+
++
+L'exemple suivant montre la sortie d'une configuration utilisant des liens ISL sur le port 20 et le port 21 :
+
++
+[listing]
+----
+FC_switch_A_1:admin> switchshow
+switchName: FC_switch_A_1
+switchType: 109.1
+switchState:Online
+switchMode: Native
+switchRole: Subordinate
+switchDomain:       5
+switchId:   fffc01
+switchWwn:  10:00:00:05:33:86:89:cb
+zoning:             OFF
+switchBeacon:       OFF
+
+Index Port Address Media Speed State  Proto
+===========================================
+...
+20   20  010C00   id    16G  Online FC  LE E-Port  10:00:00:05:33:8c:2e:9a "FC_switch_B_1" (downstream)(trunk master)
+21   21  010D00   id    16G  Online FC  LE E-Port  (Trunk port, master is Port 20)
+...
+
+FC_switch_B_1:admin> switchshow
+switchName: FC_switch_B_1
+switchType: 109.1
+switchState:Online
+switchMode: Native
+switchRole: Principal
+switchDomain:       7
+switchId:   fffc03
+switchWwn:  10:00:00:05:33:8c:2e:9a
+zoning:             OFF
+switchBeacon:       OFF
+
+Index Port Address Media Speed State Proto
+==============================================
+...
+20   20  030C00   id    16G  Online  FC  LE E-Port  10:00:00:05:33:86:89:cb "FC_switch_A_1" (downstream)(Trunk master)
+21   21  030D00   id    16G  Online  FC  LE E-Port  (Trunk port, master is Port 20)
+...
+----
+. Confirmer la configuration des structures :
++
+`fabricshow`
+
++
+[listing]
+----
+FC_switch_A_1:admin> fabricshow
+   Switch ID   Worldwide Name      Enet IP Addr FC IP Addr Name
+-----------------------------------------------------------------
+1: fffc01 10:00:00:05:33:86:89:cb 10.10.10.55  0.0.0.0    "FC_switch_A_1"
+3: fffc03 10:00:00:05:33:8c:2e:9a 10.10.10.65  0.0.0.0   >"FC_switch_B_1"
+----
++
+[listing]
+----
+FC_switch_B_1:admin> fabricshow
+   Switch ID   Worldwide Name     Enet IP Addr FC IP Addr   Name
+----------------------------------------------------------------
+1: fffc01 10:00:00:05:33:86:89:cb 10.10.10.55  0.0.0.0     "FC_switch_A_1"
+
+3: fffc03 10:00:00:05:33:8c:2e:9a 10.10.10.65  0.0.0.0    >"FC_switch_B_1
+----
+. [[step10_brcade_config]]Confirmez la mise en circuit des liens ISL :
++
+`trunkshow`
+
++
+** Si vous configurez les liens ISL pour la mise en circuit (IOD), vous devez voir les valeurs de sortie similaires à ce qui suit :
++
+[listing]
+----
+FC_switch_A_1:admin> trunkshow
+ 1: 20-> 20 10:00:00:05:33:ac:2b:13 3 deskew 15 MASTER
+    21-> 21 10:00:00:05:33:8c:2e:9a 3 deskew 16
+ FC_switch_B_1:admin> trunkshow
+ 1: 20-> 20 10:00:00:05:33:86:89:cb 3 deskew 15 MASTER
+    21-> 21 10:00:00:05:33:86:89:cb 3 deskew 16
+----
+** Si vous n'configurez pas les liens ISL pour la mise en circuit (OOD), vous devez voir les valeurs de sortie similaires à celles ci-dessous :
++
+[listing]
+----
+FC_switch_A_1:admin> trunkshow
+ 1: 20-> 20 10:00:00:05:33:ac:2b:13 3 deskew 15 MASTER
+ 2: 21-> 21 10:00:00:05:33:8c:2e:9a 3 deskew 16 MASTER
+FC_switch_B_1:admin> trunkshow
+ 1: 20-> 20 10:00:00:05:33:86:89:cb 3 deskew 15 MASTER
+ 2: 21-> 21 10:00:00:05:33:86:89:cb 3 deskew 16 MASTER
+----
+
+
+. Recommencez ,Étape 1 à ,Étape 10 Pour la deuxième structure de commutateurs FC.
+
+
+link:concept_port_assignments_for_fc_switches_when_using_ontap_9_1_and_later.html["Affectation de ports pour les commutateurs FC lors de l'utilisation de ONTAP 9.1 et versions ultérieures"]
+
+
+
+== Configuration de ports VE 10 Gbit/s sur les commutateurs Brocade FC 7840
+
+Lorsque vous utilisez les ports VE 10 Gbit/s (qui utilisent le FCIP) pour les liens ISL, vous devez créer des interfaces IP sur chaque port et configurer des tunnels FCIP et des circuits dans chaque tunnel.
+
+Cette procédure doit être effectuée sur chaque structure de commutateurs de la configuration MetroCluster.
+
+Les exemples de cette procédure supposent que les deux commutateurs Brocade 7840 possèdent les adresses IP suivantes :
+
+* FC_Switch_A_1 est local.
+* FC_Switch_B_1 est distant.
+
+
+.Étapes
+. Créer des adresses d'interface IP (ipif) pour les ports 10 Gbit/s sur les deux commutateurs de la structure :
++
+`portcfg ipif FC_switch1_namefirst_port_name create FC_switch1_IP_address netmask netmask_number vlan 2 mtu auto`
+
++
+La commande suivante crée des adresses ipif sur les ports ge2.dp0 et ge3.dp0 de FC_Switch_A_1 :
+
++
+[listing]
+----
+portcfg ipif  ge2.dp0 create  10.10.20.71 netmask 255.255.0.0 vlan 2 mtu auto
+portcfg ipif  ge3.dp0 create  10.10.21.71 netmask 255.255.0.0 vlan 2 mtu auto
+----
++
+La commande suivante crée des adresses ipif sur les ports ge2.dp0 et ge3.dp0 de FC_Switch_B_1 :
+
++
+[listing]
+----
+portcfg ipif  ge2.dp0 create  10.10.20.72 netmask 255.255.0.0 vlan 2 mtu auto
+portcfg ipif  ge3.dp0 create  10.10.21.72 netmask 255.255.0.0 vlan 2 mtu auto
+----
+. Vérifiez que les adresses ipif ont été créées avec succès sur les deux commutateurs :
++
+`portshow ipif all`
+
++
+La commande suivante affiche les adresses ipif sur le commutateur FC_Switch_A_1 :
+
++
+[listing]
+----
+FC_switch_A_1:root> portshow ipif all
+
+ Port         IP Address                     / Pfx  MTU   VLAN  Flags
+--------------------------------------------------------------------------------
+ ge2.dp0      10.10.20.71                    / 24   AUTO  2     U R M I
+ ge3.dp0      10.10.21.71                    / 20   AUTO  2     U R M I
+--------------------------------------------------------------------------------
+Flags: U=Up B=Broadcast D=Debug L=Loopback P=Point2Point R=Running I=InUse
+       N=NoArp PR=Promisc M=Multicast S=StaticArp LU=LinkUp X=Crossport
+----
++
+La commande suivante affiche les adresses ipif sur le commutateur FC_Switch_B_1 :
+
++
+[listing]
+----
+FC_switch_B_1:root> portshow ipif all
+
+ Port         IP Address                     / Pfx  MTU   VLAN  Flags
+--------------------------------------------------------------------------------
+ ge2.dp0      10.10.20.72                    / 24   AUTO  2     U R M I
+ ge3.dp0      10.10.21.72                    / 20   AUTO  2     U R M I
+--------------------------------------------------------------------------------
+Flags: U=Up B=Broadcast D=Debug L=Loopback P=Point2Point R=Running I=InUse
+       N=NoArp PR=Promisc M=Multicast S=StaticArp LU=LinkUp X=Crossport
+----
+. Créer le premier des deux tunnels FCIP en utilisant les ports sur dp0 :
++
+`portcfg fciptunnel`
+
++
+Cette commande crée un tunnel avec un seul circuit.
+
++
+La commande suivante crée le tunnel sur le commutateur FC_switch_A_1 :
+
++
+[listing]
+----
+portcfg fciptunnel 24 create -S 10.10.20.71  -D 10.10.20.72 -b 10000000 -B 10000000
+----
++
+La commande suivante crée le tunnel sur le commutateur FC_Switch_B_1 :
+
++
+[listing]
+----
+portcfg fciptunnel 24 create -S 10.10.20.72  -D 10.10.20.71 -b 10000000 -B 10000000
+----
+. Vérifiez que les tunnels FCIP ont été créés avec succès :
++
+`portshow fciptunnel all`
+
++
+L'exemple suivant montre que les tunnels ont été créés et que les circuits sont en service :
+
++
+[listing]
+----
+FC_switch_B_1:root>
+
+ Tunnel Circuit  OpStatus  Flags    Uptime  TxMBps  RxMBps ConnCnt CommRt Met/G
+--------------------------------------------------------------------------------
+ 24    -         Up      ---------     2d8m    0.05    0.41   3      -       -
+--------------------------------------------------------------------------------
+ Flags (tunnel): i=IPSec f=Fastwrite T=TapePipelining F=FICON r=ReservedBW
+                 a=FastDeflate d=Deflate D=AggrDeflate P=Protocol
+                 I=IP-Ext
+----
+. Créer un circuit supplémentaire pour dp0.
++
+La commande suivante crée un circuit sur le commutateur FC_Switch_A_1 pour dp0 :
+
++
+[listing]
+----
+portcfg fcipcircuit 24 create 1 -S 10.10.21.71 -D 10.10.21.72  --min-comm-rate 5000000 --max-comm-rate 5000000
+----
++
+La commande suivante crée un circuit sur le commutateur FC_Switch_B_1 pour dp0 :
+
++
+[listing]
+----
+portcfg fcipcircuit 24 create 1 -S 10.10.21.72 -D 10.10.21.71  --min-comm-rate 5000000 --max-comm-rate 5000000
+----
+. Vérifier que tous les circuits ont été créés avec succès :
++
+`portshow fcipcircuit all`
+
++
+La commande suivante montre les circuits et leur état :
+
++
+[listing]
+----
+FC_switch_A_1:root> portshow fcipcircuit all
+
+ Tunnel Circuit  OpStatus  Flags    Uptime  TxMBps  RxMBps ConnCnt CommRt Met/G
+--------------------------------------------------------------------------------
+ 24    0 ge2     Up      ---va---4    2d12m    0.02    0.03   3 10000/10000 0/-
+ 24    1 ge3     Up      ---va---4    2d12m    0.02    0.04   3 10000/10000 0/-
+--------------------------------------------------------------------------------
+ Flags (circuit): h=HA-Configured v=VLAN-Tagged p=PMTU i=IPSec 4=IPv4 6=IPv6
+                 ARL a=Auto r=Reset s=StepDown t=TimedStepDown  S=SLA
+----
+
+
+
+
+== Configuration de ports VE 40 Gbit/s sur les commutateurs Brocade 7810 et 7840 FC
+
+Lorsque vous utilisez les deux ports VE 40 GbE (qui utilisent le FCIP) pour ISL, vous devez créer des interfaces IP sur chaque port et configurer des tunnels FCIP et des circuits dans chaque tunnel.
+
+Cette procédure doit être effectuée sur chaque structure de commutateurs de la configuration MetroCluster.
+
+Les exemples de cette procédure utilisent deux commutateurs :
+
+* FC_Switch_A_1 est local.
+* FC_Switch_B_1 est distant.
+
+
+.Étapes
+. Créer des adresses d'interface IP (ipif) pour les ports 40 Gbit/s sur les deux commutateurs de la structure :
++
+`portcfg ipif FC_switch_namefirst_port_name create FC_switch_IP_address netmask netmask_number vlan 2 mtu auto`
+
++
+La commande suivante crée des adresses ipif sur les ports ge0.dp0 et ge1.dp0 de FC_Switch_A_1 :
+
++
+[listing]
+----
+portcfg ipif  ge0.dp0 create  10.10.82.10 netmask 255.255.0.0 vlan 2 mtu auto
+portcfg ipif  ge1.dp0 create  10.10.82.11 netmask 255.255.0.0 vlan 2 mtu auto
+----
++
+La commande suivante crée des adresses ipif sur les ports ge0.dp0 et ge1.dp0 de FC_Switch_B_1 :
+
++
+[listing]
+----
+portcfg ipif  ge0.dp0 create  10.10.83.10 netmask 255.255.0.0 vlan 2 mtu auto
+portcfg ipif  ge1.dp0 create  10.10.83.11 netmask 255.255.0.0 vlan 2 mtu auto
+----
+. Vérifiez que les adresses ipif ont été créées avec succès sur les deux commutateurs :
++
+`portshow ipif all`
+
++
+L'exemple suivant montre les interfaces IP sur FC_switch_A_1 :
+
++
+[listing]
+----
+Port         IP Address                     / Pfx  MTU   VLAN  Flags
+---------------------------------------------------------------------------
+-----
+ ge0.dp0      10.10.82.10                    / 16   AUTO  2     U R M
+ ge1.dp0      10.10.82.11                    / 16   AUTO  2     U R M
+--------------------------------------------------------------------------------
+Flags: U=Up B=Broadcast D=Debug L=Loopback P=Point2Point R=Running I=InUse
+       N=NoArp PR=Promisc M=Multicast S=StaticArp LU=LinkUp X=Crossport
+----
++
+L'exemple suivant montre les interfaces IP sur FC_Switch_B_1 :
+
++
+[listing]
+----
+Port         IP Address                     / Pfx  MTU   VLAN  Flags
+--------------------------------------------------------------------------------
+ ge0.dp0      10.10.83.10                    / 16   AUTO  2     U R M
+ ge1.dp0      10.10.83.11                    / 16   AUTO  2     U R M
+--------------------------------------------------------------------------------
+Flags: U=Up B=Broadcast D=Debug L=Loopback P=Point2Point R=Running I=InUse
+       N=NoArp PR=Promisc M=Multicast S=StaticArp LU=LinkUp X=Crossport
+----
+. Créer le tunnel FCIP sur les deux commutateurs :
++
+`portcfig fciptunnel`
+
++
+La commande suivante crée le tunnel sur FC_switch_A_1 :
+
++
+[listing]
+----
+portcfg fciptunnel 24 create -S 10.10.82.10  -D 10.10.83.10 -b 10000000 -B 10000000
+----
++
+La commande suivante crée le tunnel sur FC_Switch_B_1 :
+
++
+[listing]
+----
+portcfg fciptunnel 24 create -S 10.10.83.10  -D 10.10.82.10 -b 10000000 -B 10000000
+----
+. Vérifier que le tunnel FCIP a bien été créé :
++
+`portshow fciptunnel all`
+
++
+L'exemple suivant montre que le tunnel a été créé et que les circuits sont en service :
+
++
+[listing]
+----
+FC_switch_A_1:root>
+
+ Tunnel Circuit  OpStatus  Flags    Uptime  TxMBps  RxMBps ConnCnt CommRt Met/G
+--------------------------------------------------------------------------------
+ 24    -         Up      ---------     2d8m    0.05    0.41   3      -       -
+ --------------------------------------------------------------------------------
+ Flags (tunnel): i=IPSec f=Fastwrite T=TapePipelining F=FICON r=ReservedBW
+                 a=FastDeflate d=Deflate D=AggrDeflate P=Protocol
+                 I=IP-Ext
+----
+. Créer un circuit supplémentaire sur chaque commutateur :
++
+`portcfg fcipcircuit 24 create 1 -S source-IP-address -D destination-IP-address --min-comm-rate 10000000 --max-comm-rate 10000000`
+
++
+La commande suivante crée un circuit sur le commutateur FC_Switch_A_1 pour dp0 :
+
++
+[listing]
+----
+portcfg fcipcircuit 24  create 1 -S 10.10.82.11 -D 10.10.83.11  --min-comm-rate 10000000 --max-comm-rate 10000000
+----
++
+La commande suivante crée un circuit sur le commutateur FC_Switch_B_1 pour dp1 :
+
++
+[listing]
+----
+portcfg fcipcircuit 24 create 1  -S 10.10.83.11 -D 10.10.82.11  --min-comm-rate 10000000 --max-comm-rate 10000000
+----
+. Vérifier que tous les circuits ont été créés avec succès :
++
+`portshow fcipcircuit all`
+
++
+L'exemple suivant répertorie les circuits et indique que leur OpStatus est en service :
+
++
+[listing]
+----
+FC_switch_A_1:root> portshow fcipcircuit all
+
+ Tunnel Circuit  OpStatus  Flags    Uptime  TxMBps  RxMBps ConnCnt CommRt Met/G
+--------------------------------------------------------------------------------
+ 24    0 ge0     Up      ---va---4    2d12m    0.02    0.03   3 10000/10000 0/-
+ 24    1 ge1     Up      ---va---4    2d12m    0.02    0.04   3 10000/10000 0/-
+ --------------------------------------------------------------------------------
+ Flags (circuit): h=HA-Configured v=VLAN-Tagged p=PMTU i=IPSec 4=IPv4 6=IPv6
+                 ARL a=Auto r=Reset s=StepDown t=TimedStepDown  S=SLA
+----
+
+
+
+
+== Configuration des ports non-E sur le commutateur Brocade
+
+Vous devez configurer les non-E-ports sur le commutateur FC. Dans une configuration MetroCluster, il s'agit des ports qui connectent le commutateur aux initiateurs HBA, aux interconnexions FC-VI et aux ponts FC-SAS. Ces étapes doivent être effectuées pour chaque port.
+
+Dans l'exemple suivant, les ports connectent un pont FC-to-SAS :
+
+--
+* Port 6 sur FC_FC_switch_A_1 sur site_A
+* Port 6 sur FC_FC_switch_B_1 sur site_B.
+
+
+--
+.Étapes
+. Configurez la vitesse du port pour chaque port non E :
++
+`portcfgspeed portspeed`
+
++
+Vous devez utiliser la vitesse commune la plus élevée, qui est la vitesse la plus élevée prise en charge par tous les composants du chemin d'accès aux données : le SFP, le port de commutation sur lequel le SFP est installé, et le périphérique connecté (HBA, pont, etc.).
+
++
+Par exemple, les vitesses prises en charge par les composants peuvent être les suivantes :
+
++
+** Le SFP peut être de 4, 8 ou 16 Gbit.
+** Le port du commutateur peut prendre en charge 4, 8 ou 16 Go.
+** La vitesse maximale de l'adaptateur HBA connecté est de 16 Go. La vitesse la plus élevée dans ce cas est de 16 Go, le port doit donc être configuré pour une vitesse de 16 Go.
++
+[listing]
+----
+FC_switch_A_1:admin> portcfgspeed 6 16
+
+FC_switch_B_1:admin> portcfgspeed 6 16
+----
+
+
+. Vérifiez les paramètres :
++
+`portcfgshow`
+
++
+[listing]
+----
+FC_switch_A_1:admin> portcfgshow
+
+FC_switch_B_1:admin> portcfgshow
+----
++
+Dans l'exemple de sortie, le port 6 possède les paramètres suivants ; la vitesse est définie sur 16G :
+
++
+[listing]
+----
+Ports of Slot 0                     0   1   2   3   4   5   6   7   8
+-------------------------------------+---+---+---+--+---+---+---+---+--
+Speed                               16G 16G 16G 16G 16G 16G 16G 16G 16G
+AL_PA Offset 13                     ..  ..  ..  ..  ..  ..  ..  ..  ..
+Trunk Port                          ..  ..  ..  ..  ..  ..  ..  ..  ..
+Long Distance                       ..  ..  ..  ..  ..  ..  ..  ..  ..
+VC Link Init                        ..  ..  ..  ..  ..  ..  ..  ..  ..
+Locked L_Port                       -   -   -   -   -  -   -   -   -
+Locked G_Port                       ..  ..  ..  ..  ..  ..  ..  ..  ..
+Disabled E_Port                     ..  ..  ..  ..  ..  ..  ..  ..  ..
+Locked E_Port                       ..  ..  ..  ..  ..  ..  ..  ..  ..
+ISL R_RDY Mode                      ..  ..  ..  ..  ..  ..  ..  .. ..
+RSCN Suppressed                     ..  ..  ..  ..  ..  ..  ..  .. ..
+Persistent Disable                  ..  ..  ..  ..  ..  ..  ..  .. ..
+LOS TOV enable                      ..  ..  ..  ..  ..  ..  ..  .. ..
+NPIV capability                     ON  ON  ON  ON  ON  ON  ON  ON  ON
+NPIV PP Limit                       126 126 126 126 126 126 126 126 126
+QOS Port                            AE  AE  AE  AE  AE  AE  AE  AE  ON
+EX Port                             ..  ..  ..  ..  ..  ..  ..  ..  ..
+Mirror Port                         ..  ..  ..  ..  ..  ..  ..  ..  ..
+Rate Limit                          ..  ..  ..  ..  ..  ..  ..  ..  ..
+Credit Recovery                     ON  ON  ON  ON  ON  ON  ON  ON  ON
+Fport Buffers                       ..  ..  ..  ..  ..  ..  ..  ..  ..
+Eport Credits                       ..  ..  ..  ..  ..  ..  ..  ..  ..
+Port Auto Disable                   ..  ..  ..  ..  ..  ..  ..  ..  ..
+CSCTL mode                          ..  ..  ..  ..  ..  ..  ..  ..  ..
+D-Port mode                         ..  ..  ..  ..  ..  ..  ..  ..  ..
+D-Port over DWDM                    ..  ..  ..  ..  ..  ..  ..  ..  ..
+FEC                                 ON  ON  ON  ON  ON  ON  ON  ON  ON
+Fault Delay                         0   0   0   0   0   0   0   0   0
+Non-DFE                             ..  ..  ..  ..  ..  ..  ..  ..  ..
+----
+
+
+
+
+== Configuration de la compression sur les ports ISL sur un commutateur Brocade G620
+
+Si vous utilisez des commutateurs Brocade G620 et que vous activez la compression sur les liens ISL, vous devez la configurer sur chaque port E-Port des commutateurs.
+
+Cette tâche doit être effectuée sur les ports ISL des deux commutateurs à l'aide de ISL.
+
+.Étapes
+. Désactivez le port sur lequel vous souhaitez configurer la compression :
++
+`portdisable port-id`
+
+. Activer la compression sur le port :
++
+`portCfgCompress --enable port-id`
+
+. Activer le port pour activer la configuration avec la compression :
++
+`portenable port-id`
+
+. Vérifiez que le paramètre a été modifié :
++
+`portcfgshow port-id`
+
+
+
+L'exemple suivant active la compression sur le port 0.
+
+[listing]
+----
+FC_switch_A_1:admin> portdisable 0
+FC_switch_A_1:admin> portcfgcompress --enable 0
+FC_switch_A_1:admin> portenable 0
+FC_switch_A_1:admin> portcfgshow 0
+Area Number: 0
+Octet Speed Combo: 3(16G,10G)
+(output truncated)
+D-Port mode: OFF
+D-Port over DWDM ..
+Compression: ON
+Encryption: ON
+----
+Vous pouvez utiliser la commande islShow pour vérifier que le port E_port est connecté avec le chiffrement ou la compression configuré et actif.
+
+[listing]
+----
+FC_switch_A_1:admin> islshow
+  1: 0-> 0 10:00:c4:f5:7c:8b:29:86   5 FC_switch_B_1
+sp: 16.000G bw: 16.000G TRUNK QOS CR_RECOV ENCRYPTION COMPRESSION
+----
+Vous pouvez utiliser la commande portEncCompShow pour voir quels ports sont actifs. Dans cet exemple, vous pouvez voir que le chiffrement et la compression sont configurés et actifs sur le port 0.
+
+[listing]
+----
+FC_switch_A_1:admin> portenccompshow
+User	  Encryption		           Compression	         Config
+Port   Configured    Active   Configured   Active  Speed
+----   ----------    -------  ----------   ------  -----
+  0	   Yes	          Yes	     Yes	         Yes	    16G
+----
+
+
+== Configuration de la segmentation sur les commutateurs Brocade FC
+
+Vous devez attribuer les ports de commutateur à des zones distinctes pour séparer le trafic de contrôleur et de stockage. La procédure diffère selon que vous utilisez un pont FibreBridge 7500N ou FibreBridge 6500N.
+
+
+
+=== Segmentation des ports FC-VI
+
+Pour chaque groupe de reprise après incident dans l'MetroCluster, vous devez configurer deux zones pour les connexions FC-VI permettant le trafic contrôleur à contrôleur. Ces zones contiennent les ports de commutateur FC connectés aux ports FC-VI du module de contrôleur. Ces zones sont des zones de qualité de service (QoS).
+
+Un nom de zone QoS commence par le préfixe QOSID_, suivi d'une chaîne définie par l'utilisateur pour la différencier d'une zone normale. Ces zones de QoS sont les mêmes, quel que soit le modèle de Bridge utilisé.
+
+Chaque zone contient tous les ports FC-VI, un pour chaque câble FC-VI provenant de chaque contrôleur. Ces zones sont configurées pour une priorité élevée.
+
+Les tableaux suivants montrent les zones FC-VI pour deux groupes DR.
+
+*DR groupe 1 : zone QOSH1 FC-VI pour port FC-VI a / c*
+
+|===
+| Commutateur FC | Le site | Domaine des commutateurs | port 6505 / 6510 | 6520 orifice | Port G620 | Se connecte à... 
+
+
+| FC_Switch_A_1 | A | 5 | 0 | 0 | 0 | Port FC-VI a du Controller_A_1 
+
+
+| FC_Switch_A_1 | A | 5 | 1 | 1 | 1 | Port FC-VI c du Controller_A_1 
+
+
+| FC_Switch_A_1 | A | 5 | 4 | 4 | 4 | Port FC-VI a du contrôleur_A_2 
+
+
+| FC_Switch_A_1 | A | 5 | 5 | 5 | 5 | Port FC-VI c du contrôleur_A_2 
+
+
+| FC_Switch_B_1 | B | 7 | 0 | 0 | 0 | Port FC-VI a du contrôleur_B_1 
+
+
+| FC_Switch_B_1 | B | 7 | 1 | 1 | 1 | Port FC-VI c du contrôleur_B_1 
+
+
+| FC_Switch_B_1 | B | 7 | 4 | 4 | 4 | Port FC-VI a du contrôleur_B_2 
+
+
+| FC_Switch_B_1 | B | 7 | 5 | 5 | 5 | Port FC-VI c du contrôleur_B_2 
+|===
+|===
+
+
+| Zone dans Fabric_1 | Ports membres 
+
+
+| QOSH1_MC1_FAB_1_FCVI | 5,0;5,1;5,4;5,5;7,0;7,1;7,4;7,5 
+|===
+*DR groupe 1 : zone QOSH1 FC-VI pour port FC-VI b / d*
+
+|===
+| Commutateur FC | Le site | Domaine des commutateurs | port 6505 / 6510 | 6520 orifice | Port G620 | Se connecte à... 
+
+
+| FC_Switch_A_2 | A | 6 | 0 | 0 | 0 | Port FC-VI b du contrôleur_A_1 
+
+
+|  |  |  | 1 | 1 | 1 | Port FC-VI d du contrôleur_A_1 
+
+
+|  |  |  | 4 | 4 | 4 | Port FC-VI b du contrôleur_A_2 
+
+
+|  |  |  | 5 | 5 | 5 | Port FC-VI d du contrôleur_A_2 
+
+
+| FC_Switch_B_2 | B | 8 | 0 | 0 | 0 | Port FC-VI b du contrôleur_B_1 
+
+
+|  |  |  | 1 | 1 | 1 | Port FC-VI d du contrôleur_B_1 
+
+
+|  |  |  | 4 | 4 | 4 | Port FC-VI b du contrôleur_B_2 
+
+
+|  |  |  | 5 | 5 | 5 | Port FC-VI d du contrôleur_B_2 
+|===
+|===
+
+
+| Zone dans Fabric_1 | Ports membres 
+
+
+| QOSH1_MC1_FAB_2_FCVI | 6,0;6,1;6,4;6,5;8,0;8,1;8,4;8,5 
+|===
+*DR groupe 2 : zone QOSH2 FC-VI pour le port a / c* FC-VI
+
+|===
+| Commutateur FC | Le site | Domaine des commutateurs | Port du commutateur |  |  | Se connecte à... 
+
+
+|  |  |  | 6510 | 6520 | G620 |  
+
+
+| FC_Switch_A_1 | A | 5 | 24 | 48 | 18 | Port FC-VI a du contrôleur_A_3 
+
+
+|  |  |  | 25 | 49 | 19 | Port FC-VI c du contrôleur_A_3 
+
+
+|  |  |  | 28 | 52 | 22 | Port FC-VI a du contrôleur_A_4 
+
+
+|  |  |  | 29 | 53 | 23 | Port FC-VI c du contrôleur_A_4 
+
+
+| FC_Switch_B_1 | B | 7 | 24 | 48 | 18 | Contrôleur_B_3 port FC-VI a 
+
+
+|  |  |  | 25 | 49 | 19 | Contrôleur_B_3 port FC-VI c 
+
+
+|  |  |  | 28 | 52 | 22 | Contrôleur_B_4 port FC-VI a 
+
+
+|  |  |  | 29 | 53 | 23 | Contrôleur_B_4 port FC-VI c 
+|===
+|===
+
+
+| Zone dans Fabric_1 | Ports membres 
+
+
+| QOSH2_MC2_FAB_1_FCVI (6510) | 5,24;5,25;5,28;5,29;7,24;7,25;7,28;7,29 
+
+
+| QOSH2_MC2_FAB_1_FCVI (6520) | 5,48;5,49;5,52;5,53;7,48;7,49;7,52;7,53 
+|===
+*Groupe DR 2 : zone QOSH2 FC-VI pour port FC-VI b / d*
+
+|===
+| Commutateur FC | Le site | Domaine des commutateurs | 6510 orifice | 6520 orifice | Port G620 | Se connecte à... 
+
+
+| FC_Switch_A_2 | A | 6 | 24 | 48 | 18 | Port FC-VI b du contrôleur_A_3 
+
+
+| FC_Switch_A_2 | A | 6 | 25 | 49 | 19 | Port FC-VI d du contrôleur_A_3 
+
+
+| FC_Switch_A_2 | A | 6 | 28 | 52 | 22 | Port FC-VI b du contrôleur_A_4 
+
+
+| FC_Switch_A_2 | A | 6 | 29 | 53 | 23 | Port FC-VI d du contrôleur_A_4 
+
+
+| FC_Switch_B_2 | B | 8 | 24 | 48 | 18 | Contrôleur_B_3 port FC-VI b 
+
+
+| FC_Switch_B_2 | B | 8 | 25 | 49 | 19 | Port FC-VI d du contrôleur_B_3 
+
+
+| FC_Switch_B_2 | B | 8 | 28 | 52 | 22 | Contrôleur_B_4 port FC-VI b 
+
+
+| FC_Switch_B_2 | B | 8 | 29 | 53 | 23 | Port FC-VI d du contrôleur_B_4 
+|===
+|===
+
+
+| Zone dans Fabric_2 | Ports membres 
+
+
+| QOSH2_MC2_FAB_2_FCVI (6510) | 6,24;6,25;6,28;6,29;8,24;8,25;8,28;8,29 
+
+
+| QOSH2_MC2_FAB_2_FCVI (6520) | 6,48;6,49;6,52;6,53;8,48;8,49;8,52;8,53 
+|===
+Le tableau suivant présente un récapitulatif des zones FC-VI :
+
+|===
+
+
+| Structure | Nom de la zone | Ports membres 
+
+
+.3+| FC_Switch_A_1 et FC_Switch_B_1  a| 
+QOSH1_MC1_FAB_1_FCVI
+ a| 
+5,0;5,1;5,4;5,5;7,0;7,1;7,4;7,5
+
+
+
+ a| 
+QOSH2_MC1_FAB_1_FCVI ( 6510)
+ a| 
+5,24;5,25;5,28;5,29;7,24;7,25;7,28;7,29
+
+
+
+ a| 
+QOSH2_MC1_FAB_1_FCVI (6520)
+ a| 
+5,48;5,49;5,52;5,53;7,48;7,49;7,52;7,53
+
+
+
+.3+| FC_Switch_A_2 et FC_Switch_B_2  a| 
+QOSH1_MC1_FAB_2_FCVI
+ a| 
+6,0;6,1;6,4;6,5;8,0;8,1;8,4;8,5
+
+
+
+ a| 
+QOSH2_MC1_FAB_2_FCVI (6510)
+ a| 
+6,24;6,25;6,28;6,29;8,24;8,25;8,28;8,29
+
+
+
+ a| 
+QOSH2_MC1_FAB_2_FCVI (6520)
+ a| 
+6,48;6,49;6,52;6,53;8,48;8,49;8,52;8,53
+
+|===
+
+
+=== Segmentation pour les ponts FiberBridge 6500N ou les ponts FiberBridge 7500N ou 7600N utilisant un seul port FC
+
+Si vous utilisez des ponts FibreBridge 6500N ou des ponts FibreBridge 7500N ou 7600N en utilisant un seul des deux ports FC, vous devez créer des zones de stockage pour les ports de pont. Avant de configurer les zones, vous devez connaître les zones et les ports associés.
+
+Les exemples montrent uniquement la segmentation pour le groupe DR 1. Si votre configuration inclut un second groupe de reprise sur incident, configurez le zoning pour le second groupe DR de la même manière, en utilisant les ports correspondants des contrôleurs et ponts.
+
+
+
+==== Zones requises
+
+Vous devez configurer une zone pour chacun des ports FC-to-SAS Bridge qui permet le trafic entre les initiateurs de chaque module de contrôleur et ce pont FC-to-SAS.
+
+Chaque zone de stockage contient neuf ports :
+
+* Huit ports initiateurs HBA (deux connexions pour chaque contrôleur)
+* Un port de connexion à un port FC-à-SAS Bridge
+
+
+Les zones de stockage utilisent le zoning standard.
+
+Les exemples montrent deux paires de ponts reliant deux groupes de piles à chaque site. Comme chaque pont utilise un port FC, il y a au total quatre zones de stockage par structure (huit au total).
+
+
+
+==== Dénomination des ponts
+
+Les ponts utilisent l'exemple de dénomination suivant : Bridge_site_stack grouplinvocation en paire
+
+|===
+
+
+| Cette partie du nom... | Identifie... | Valeurs possibles... 
+
+
+ a| 
+le site
+ a| 
+Site sur lequel la paire de ponts réside physiquement.
+ a| 
+A ou B
+
+
+
+ a| 
+groupe de piles
+ a| 
+Numéro du groupe de piles auquel la paire de ponts se connecte.
+
+* Les ponts FiberBridge 7600N ou 7500N prennent en charge jusqu'à quatre piles dans le groupe de piles.
++
+Le groupe de piles ne peut pas contenir plus de 10 tiroirs de stockage.
+
+* Les ponts FiberBridge 6500N ne prennent en charge qu'une seule pile dans le groupe de piles.
+
+ a| 
+1, 2, etc
+
+
+
+ a| 
+emplacement en paire
+ a| 
+Pont au sein de la paire de ponts.Une paire de ponts se connecte à un groupe de piles spécifique.
+ a| 
+a ou b
+
+|===
+Exemples de noms de pont pour un groupe de piles sur chaque site :
+
+* Bridge_A_1a
+* Bridge_A_1b
+* Bridge_B_1a
+* Bridge_B_1b
+
+
+
+
+==== Groupe DR 1 - pile 1 sur site_A
+
+*DRGROUP 1 : MC1_INIT_GRP_1_SITE_A_STK_GRP_1_TOP_FC1:*
+
+|===
+| Commutateur FC | Le site | Domaine des commutateurs | Port de commutation Brocade 6505, 6510, 6520, G620 ou G610 | Se connecte à... 
+
+
+| FC_Switch_A_1 | A | 5 | 2 | Port 0A Controller_A_1 
+
+
+| FC_Switch_A_1 | A | 5 | 3 | Port 0C_A_1 
+
+
+| FC_Switch_A_1 | A | 5 | 6 | Port 0a_a_2 du contrôleur 
+
+
+| FC_Switch_A_1 | A | 5 | 7 | Port 0C_A_2 
+
+
+| FC_Switch_A_1 | A | 5 | 8 | Bridge_A_1a FC1 
+
+
+| FC_Switch_B_1 | B | 7 | 2 | Port 0a_B_1 du contrôleur 
+
+
+| FC_Switch_B_1 | B | 7 | 3 | Contrôleur_B_1 port 0C 
+
+
+| FC_Switch_B_1 | B | 7 | 6 | Port 0a_B_2 du contrôleur 
+
+
+| FC_Switch_B_1 | B | 7 | 7 | Contrôleur_B_2 port 0C 
+|===
+|===
+
+
+| Zone dans Fabric_1 | Ports membres 
+
+
+| MC1_INIT_GRP_1_SITE_A_STK_GRP_1_TOP_FC1 | 5,2;5,3;5,6;5,7;7,2;7,3;7,6;7,7;5,8 
+|===
+*DRGROUP 1 : MC1_INIT_GRP_1_SITE_A_STK_GRP_1_BOT_FC1:*
+
+|===
+| Commutateur FC | Le site | Domaine des commutateurs | Port de commutation Brocade 6505, 6510, 6520, G620 ou G610 | Se connecte à... 
+
+
+| FC_Switch_A_1 | A | 6 | 2 | Port 0b_a_1 du contrôleur 
+
+
+| FC_Switch_A_1 | A | 6 | 3 | Port 0d contrôleur_A_1 
+
+
+| FC_Switch_A_1 | A | 6 | 6 | Port 0b_a_2 du contrôleur 
+
+
+| FC_Switch_A_1 | A | 6 | 7 | Port 0d contrôleur_A_2 
+
+
+| FC_Switch_A_1 | A | 6 | 8 | Bridge_A_1b FC1 
+
+
+| FC_Switch_B_1 | B | 8 | 2 | Contrôleur_B_1 port 0b 
+
+
+| FC_Switch_B_1 | B | 8 | 3 | Port 0d_B_1 du contrôleur 
+
+
+| FC_Switch_B_1 | B | 8 | 6 | Contrôleur_B_2 port 0b 
+
+
+| FC_Switch_B_1 | B | 8 | 7 | Port 0d_B_2 du contrôleur 
+|===
+|===
+
+
+| Zone dans Fabric_2 | Ports membres 
+
+
+| MC1_INIT_GRP_1_SITE_A_STK_GRP_1_BOT_FC1 | 6,2;6,3;6,6;6,7;8,2;8,3;8,6;8,7;6,8 
+|===
+
+
+==== Groupe DR 1 - pile 2 sur site_A
+
+*DRGROUP 1 : MC1_INIT_GRP_1_SITE_A_STK_GRP_2_TOP_FC1:*
+
+|===
+| Commutateur FC | Le site | Domaine des commutateurs | Port de commutation Brocade 6505, 6510, 6520, G620 ou G610 | Se connecte à... 
+
+
+| FC_Switch_A_1 | A | 5 | 2 | Port 0A Controller_A_1 
+
+
+| FC_Switch_A_1 | A | 5 | 3 | Port 0C_A_1 
+
+
+| FC_Switch_A_1 | A | 5 | 6 | Port 0a_a_2 du contrôleur 
+
+
+| FC_Switch_A_1 | A | 5 | 7 | Port 0C_A_2 
+
+
+| FC_Switch_A_1 | A | 5 | 9 | Bridge_A_2a FC1 
+
+
+| FC_Switch_B_1 | B | 7 | 2 | Port 0a_B_1 du contrôleur 
+
+
+| FC_Switch_B_1 | B | 7 | 3 | Contrôleur_B_1 port 0C 
+
+
+| FC_Switch_B_1 | B | 7 | 6 | Port 0a_B_2 du contrôleur 
+
+
+| FC_Switch_B_1 | B | 7 | 7 | Contrôleur_B_2 port 0C 
+|===
+|===
+
+
+| Zone dans Fabric_1 | Ports membres 
+
+
+| MC1_INIT_GRP_1_SITE_A_STK_GRP_2_TOP_FC1 | 5,2;5,3;5,6;5,7;7,2;7,3;7,6;7,7;5,9 
+|===
+*DRGROUP 1 : MC1_INIT_GRP_1_SITE_A_STK_GRP_2_BOT_FC1:*
+
+|===
+| Commutateur FC | Le site | Domaine des commutateurs | Port de commutation Brocade 6505, 6510, 6520, G620 ou G610 | Se connecte à... 
+
+
+| FC_Switch_A_1 | A | 6 | 2 | Port 0b_a_1 du contrôleur 
+
+
+| FC_Switch_A_1 | A | 6 | 3 | Port 0d contrôleur_A_1 
+
+
+| FC_Switch_A_1 | A | 6 | 6 | Port 0b_a_2 du contrôleur 
+
+
+| FC_Switch_A_1 | A | 6 | 7 | Port 0d contrôleur_A_2 
+
+
+| FC_Switch_A_1 | A | 6 | 9 | Bridge_A_2b FC1 
+
+
+| FC_Switch_B_1 | B | 8 | 2 | Contrôleur_B_1 port 0b 
+
+
+| FC_Switch_B_1 | B | 8 | 3 | Port 0d_B_1 du contrôleur 
+
+
+| FC_Switch_B_1 | B | 8 | 6 | Contrôleur_B_2 port 0b 
+
+
+| FC_Switch_B_1 | B | 8 | 7 | Port 0d_B_2 du contrôleur 
+|===
+|===
+
+
+| Zone dans Fabric_2 | Ports membres 
+
+
+| MC1_INIT_GRP_1_SITE_A_STK_GRP_2_BOT_FC1 | 6,2;6,3;6,6;6,7;8,2;8,3;8,6;8,7;6,9 
+|===
+
+
+==== Groupe DR 1 - pile 1 sur site_B
+
+*MC1_INIT_GRP_1_SITE_B_STK_GRP_1_TOP_FC1:*
+
+|===
+| Commutateur FC | Le site | Domaine des commutateurs | Commutateur Brocade 6505, 6510, 6520, G620 ou G610 | Se connecte à... 
+
+
+| FC_Switch_A_1 | A | 5 | 2 | Port 0A Controller_A_1 
+
+
+| FC_Switch_A_1 | A | 5 | 3 | Port 0C_A_1 
+
+
+| FC_Switch_A_1 | A | 5 | 6 | Port 0a_a_2 du contrôleur 
+
+
+| FC_Switch_A_1 | A | 5 | 7 | Port 0C_A_2 
+
+
+| FC_Switch_B_1 | B | 7 | 2 | Port 0a_B_1 du contrôleur 
+
+
+| FC_Switch_B_1 | B | 7 | 3 | Contrôleur_B_1 port 0C 
+
+
+| FC_Switch_B_1 | B | 7 | 6 | Port 0a_B_2 du contrôleur 
+
+
+| FC_Switch_B_1 | B | 7 | 7 | Contrôleur_B_2 port 0C 
+
+
+| FC_Switch_B_1 | B | 7 | 8 | Bridge_B_1a FC1 
+|===
+|===
+
+
+| Zone dans Fabric_1 | Ports membres 
+
+
+| MC1_INIT_GRP_1_SITE_B_STK_GRP_1_TOP_FC1 | 5,2;5,3;5,6;5,7;7,2;7,3;7,6;7,7;7,8 
+|===
+*DRGROUP 1 : MC1_INIT_GRP_1_SITE_B_STK_GRP_1_BOT_FC1:*
+
+|===
+| Commutateur FC | Le site | Domaine des commutateurs | Commutateur Brocade 6505, 6510, 6520, G620 ou G610 | Se connecte à... 
+
+
+| FC_Switch_A_1 | A | 6 | 2 | Port 0b_a_1 du contrôleur 
+
+
+| FC_Switch_A_1 | A | 6 | 3 | Port 0d contrôleur_A_1 
+
+
+| FC_Switch_A_1 | A | 6 | 6 | Port 0b_a_2 du contrôleur 
+
+
+| FC_Switch_A_1 | A | 6 | 7 | Port 0d contrôleur_A_2 
+
+
+| FC_Switch_B_1 | B | 8 | 2 | Contrôleur_B_1 port 0b 
+
+
+| FC_Switch_B_1 | B | 8 | 3 | Port 0d_B_1 du contrôleur 
+
+
+| FC_Switch_B_1 | B | 8 | 6 | Contrôleur_B_2 port 0b 
+
+
+| FC_Switch_B_1 | B | 8 | 7 | Port 0d_B_2 du contrôleur 
+
+
+| FC_Switch_B_1 | B | 8 | 8 | Bridge_B_1b FC1 
+|===
+|===
+
+
+| Zone dans Fabric_2 | Ports membres 
+
+
+| MC1_INIT_GRP_1_SITE_B_STK_GRP_1_BOT_FC1 | 5,2;5,3;5,6;5,7;7,2;7,3;7,6;7,7;8,8 
+|===
+
+
+==== Groupe DR 1 - pile 2 sur site_B
+
+*DRGROUP 1 : MC1_INIT_GRP_1_SITE_B_STK_GRP_2_TOP_FC1:*
+
+|===
+| Commutateur FC | Le site | Domaine des commutateurs | Port de commutation Brocade 6505, 6510, 6520, G620 ou G610 | Se connecte à... 
+
+
+| FC_Switch_A_1 | A | 5 | 2 | Port 0A Controller_A_1 
+
+
+| FC_Switch_A_1 | A | 5 | 3 | Port 0C_A_1 
+
+
+| FC_Switch_A_1 | A | 5 | 6 | Port 0a_a_2 du contrôleur 
+
+
+| FC_Switch_A_1 | A | 5 | 7 | Port 0C_A_2 
+
+
+| FC_Switch_B_1 | B | 7 | 2 | Port 0a_B_1 du contrôleur 
+
+
+| FC_Switch_B_1 | B | 7 | 3 | Contrôleur_B_1 port 0C 
+
+
+| FC_Switch_B_1 | B | 7 | 6 | Port 0a_B_2 du contrôleur 
+
+
+| FC_Switch_B_1 | B | 7 | 7 | Contrôleur_B_2 port 0C 
+
+
+| FC_Switch_B_1 | B | 7 | 9 | Bridge_b_2a FC1 
+|===
+|===
+
+
+| Zone dans Fabric_1 | Ports membres 
+
+
+| MC1_INIT_GRP_1_SITE_B_STK_GRP_2_TOP_FC1 | 5,2;5,3;5,6;5,7;7,2;7,3;7,6;7,7;7,9 
+|===
+*DRGROUP 1 : MC1_INIT_GRP_1_SITE_B_STK_GRP_2_BOT_FC1:*
+
+|===
+| Commutateur FC | Le site | Domaine des commutateurs | Port de commutation Brocade 6505, 6510, 6520, G620 ou G610 | Se connecte à... 
+
+
+| FC_Switch_A_1 | A | 6 | 2 | Port 0b_a_1 du contrôleur 
+
+
+| FC_Switch_A_1 | A | 6 | 3 | Port 0d contrôleur_A_1 
+
+
+| FC_Switch_A_1 | A | 6 | 6 | Port 0b_a_2 du contrôleur 
+
+
+| FC_Switch_A_1 | A | 6 | 7 | Port 0d contrôleur_A_2 
+
+
+| FC_Switch_B_1 | B | 8 | 2 | Contrôleur_B_1 port 0b 
+
+
+| FC_Switch_B_1 | B | 8 | 3 | Port 0d_B_1 du contrôleur 
+
+
+| FC_Switch_B_1 | B | 8 | 6 | Contrôleur_B_2 port 0b 
+
+
+| FC_Switch_B_1 | B | 8 | 7 | Port 0d_B_2 du contrôleur 
+
+
+| FC_Switch_B_1 | B | 8 | 9 | Bridge_B_1b FC1 
+|===
+|===
+
+
+| Zone dans Fabric_2 | Ports membres 
+
+
+| MC1_INIT_GRP_1_SITE_B_STK_GRP_2_BOT_FC1 | 6,2;6,3;6,6;6,7;8,2;8,3;8,6;8,7;8,9 
+|===
+
+
+==== Récapitulatif des zones de stockage
+
+|===
+
+
+| Structure | Nom de la zone | Ports membres 
+
+
+.4+| FC_Switch_A_1 et FC_Switch_B_1 | MC1_INIT_GRP_1_SITE_A_STK_GRP_1_TOP_FC1 | 5,2;5,3;5,6;5,7;7,2;7,3;7,6;7,7;5,8 
+
+
+| MC1_INIT_GRP_1_SITE_A_STK_GRP_2_TOP_FC1 | 5,2;5,3;5,6;5,7;7,2;7,3;7,6;7,7;5,9 
+
+
+| MC1_INIT_GRP_1_SITE_B_STK_GRP_1_TOP_FC1 | 5,2;5,3;5,6;5,7;7,2;7,3;7,6;7,7;7,8 
+
+
+| MC1_INIT_GRP_1_SITE_B_STK_GRP_2_TOP_FC1 | 5,2;5,3;5,6;5,7;7,2;7,3;7,6;7,7;7,9 
+
+
+.4+| FC_Switch_A_2 et FC_Switch_B_2 | MC1_INIT_GRP_1_SITE_A_STK_GRP_1_BOT_FC1 | 6,2;6,3;6,6;6,7;8,2;8,3;8,6;8,7;6,8 
+
+
+| MC1_INIT_GRP_1_SITE_A_STK_GRP_2_BOT_FC1 | 6,2;6,3;6,6;6,7;8,2;8,3;8,6;8,7;6,9 
+
+
+| MC1_INIT_GRP_1_SITE_B_STK_GRP_1_BOT_FC1 | 6,2;6,3;6,6;6,7;8,2;8,3;8,6;8,7;8,8 
+
+
+| MC1_INIT_GRP_1_SITE_B_STK_GRP_2_BOT_FC1 | 6,2;6,3;6,6;6,7;8,2;8,3;8,6;8,7;8,9 
+|===
+
+
+=== Segmentation pour les ponts FiberBridge 7500N utilisant les deux ports FC
+
+Si vous utilisez des ponts FibreBridge 7500N avec les deux ports FC, vous devez créer des zones de stockage pour les ports de pont. Avant de configurer les zones, vous devez connaître les zones et les ports associés.
+
+
+
+==== Zones requises
+
+Vous devez configurer une zone pour chacun des ports FC-to-SAS Bridge qui permet le trafic entre les initiateurs de chaque module de contrôleur et ce pont FC-to-SAS.
+
+Chaque zone de stockage contient cinq ports :
+
+* Quatre ports initiateurs HBA (une connexion pour chaque contrôleur)
+* Un port de connexion à un port FC-à-SAS Bridge
+
+
+Les zones de stockage utilisent le zoning standard.
+
+Les exemples montrent deux paires de ponts reliant deux groupes de piles à chaque site. Comme chaque pont utilise un port FC, il existe un total de huit zones de stockage par fabric (seize au total).
+
+
+
+==== Dénomination des ponts
+
+Les ponts utilisent l'exemple de dénomination suivant : Bridge_site_stack grouplinvocation en paire
+
+|===
+
+
+| Cette partie du nom... | Identifie... | Valeurs possibles... 
+
+
+ a| 
+le site
+ a| 
+Site sur lequel la paire de ponts réside physiquement.
+ a| 
+A ou B
+
+
+
+ a| 
+groupe de piles
+ a| 
+Numéro du groupe de piles auquel la paire de ponts se connecte.
+
+* Les ponts FiberBridge 7600N ou 7500N prennent en charge jusqu'à quatre piles dans le groupe de piles.
++
+Le groupe de piles ne peut pas contenir plus de 10 tiroirs de stockage.
+
+* Les ponts FiberBridge 6500N ne prennent en charge qu'une seule pile dans le groupe de piles.
+
+ a| 
+1, 2, etc
+
+
+
+ a| 
+emplacement en paire
+ a| 
+Pont dans la paire de ponts. Une paire de ponts se connecte à un groupe de piles spécifique.
+ a| 
+a ou b
+
+|===
+Exemples de noms de pont pour un groupe de piles sur chaque site :
+
+* Bridge_A_1a
+* Bridge_A_1b
+* Bridge_B_1a
+* Bridge_B_1b
+
+
+
+
+==== Groupe DR 1 - pile 1 sur site_A
+
+*DRGROUP 1 : MC1_INIT_GRP_1_SITE_A_STK_GRP_1_TOP_FC1:*
+
+|===
+
+
+| Commutateur FC | Le site | Domaine des commutateurs | Port 6505 / 6510 / G610 / G620 | 6520 orifice | Se connecte à... 
+
+
+ a| 
+FC_Switch_A_1
+ a| 
+A
+ a| 
+5
+ a| 
+2
+ a| 
+2
+ a| 
+Port 0A Controller_A_1
+
+
+
+ a| 
+FC_Switch_A_1
+ a| 
+A
+ a| 
+5
+ a| 
+6
+ a| 
+6
+ a| 
+Port 0a_a_2 du contrôleur
+
+
+
+ a| 
+FC_Switch_A_1
+ a| 
+A
+ a| 
+5
+ a| 
+8
+ a| 
+8
+ a| 
+Bridge_A_1a FC1
+
+
+
+ a| 
+FC_Switch_B_1
+ a| 
+B
+ a| 
+7
+ a| 
+2
+ a| 
+2
+ a| 
+Port 0a_B_1 du contrôleur
+
+
+
+ a| 
+FC_Switch_B_1
+ a| 
+B
+ a| 
+7
+ a| 
+6
+ a| 
+6
+ a| 
+Port 0a_B_2 du contrôleur
+
+|===
+|===
+
+
+| Zone dans Fabric_1 | Ports membres 
+
+
+ a| 
+MC1_INIT_GRP_1_SITE_A_STK_GRP_1_TOP_FC1
+ a| 
+5,2;5,6;7,2;7,6;5,8
+
+|===
+*DRGROUP 1 : MC1_INIT_GRP_2_SITE_A_STK_GRP_1_TOP_FC1:*
+
+|===
+
+
+| Commutateur FC | Le site | Domaine des commutateurs | Port 6505 / 6510 / G610 | 6520 orifice | Port G620 | Se connecte à... 
+
+
+ a| 
+FC_Switch_A_1
+ a| 
+A
+ a| 
+5
+ a| 
+3
+ a| 
+3
+ a| 
+3
+ a| 
+Port 0C_A_1
+
+
+
+ a| 
+FC_Switch_A_1
+ a| 
+A
+ a| 
+5
+ a| 
+7
+ a| 
+7
+ a| 
+7
+ a| 
+Port 0C_A_2
+
+
+
+ a| 
+FC_Switch_A_1
+ a| 
+A
+ a| 
+5
+ a| 
+9
+ a| 
+9
+ a| 
+9
+ a| 
+Bridge_A_1b FC1
+
+
+
+ a| 
+FC_Switch_B_1
+ a| 
+B
+ a| 
+7
+ a| 
+3
+ a| 
+3
+ a| 
+3
+ a| 
+Contrôleur_B_1 port 0C
+
+
+
+ a| 
+FC_Switch_B_1
+ a| 
+B
+ a| 
+7
+ a| 
+7
+ a| 
+7
+ a| 
+7
+ a| 
+Contrôleur_B_2 port 0C
+
+|===
+|===
+
+
+| Zone dans Fabric_2 | Ports membres 
+
+
+ a| 
+MC1_INIT_GRP_2_SITE_A_STK_GRP_1_BOT_FC1
+ a| 
+5,3;5,7;7,3;7,7;5,9
+
+|===
+*DRGROUP 1 : MC1_INIT_GRP_1_SITE_A_STK_GRP_1_BOT_FC1:*
+
+|===
+
+
+| Commutateur FC | Le site | Domaine des commutateurs | 6505 / 6510 / G610 | 6520 | G620 | Se connecte à... 
+
+
+ a| 
+FC_Switch_A_2
+ a| 
+A
+ a| 
+6
+ a| 
+2
+ a| 
+2
+ a| 
+2
+ a| 
+Port 0d contrôleur_A_1
+
+
+
+ a| 
+FC_Switch_A_2
+ a| 
+A
+ a| 
+6
+ a| 
+6
+ a| 
+6
+ a| 
+6
+ a| 
+Port 0d contrôleur_A_2
+
+
+
+ a| 
+FC_Switch_A_2
+ a| 
+A
+ a| 
+6
+ a| 
+8
+ a| 
+8
+ a| 
+8
+ a| 
+Bridge_A_1a FC2
+
+
+
+ a| 
+FC_Switch_B_2
+ a| 
+B
+ a| 
+8
+ a| 
+2
+ a| 
+2
+ a| 
+2
+ a| 
+Contrôleur_B_1 port 0b
+
+
+
+ a| 
+FC_Switch_B_2
+ a| 
+B
+ a| 
+8
+ a| 
+6
+ a| 
+6
+ a| 
+6
+ a| 
+Contrôleur_B_2 port 0b
+
+|===
+|===
+
+
+| Zone dans Fabric_1 | Ports membres 
+
+
+ a| 
+MC1_INIT_GRP_1_SITE_A_STK_GRP_1_TOP_FC2
+ a| 
+6,2;6,6;8,2;8,6;6,8
+
+|===
+*DRGROUP 1 : MC1_INIT_GRP_2_SITE_A_STK_GRP_1_BOT_FC2:*
+
+|===
+
+
+| Commutateur FC | Le site | Domaine des commutateurs | 6505 / 6510 / G610 | 6520 | G620 | Se connecte à... 
+
+
+ a| 
+FC_Switch_A_2
+ a| 
+A
+ a| 
+6
+ a| 
+3
+ a| 
+3
+ a| 
+3
+ a| 
+Port 0d contrôleur_A_1
+
+
+
+ a| 
+FC_Switch_A_2
+ a| 
+A
+ a| 
+6
+ a| 
+7
+ a| 
+7
+ a| 
+7
+ a| 
+Port 0d contrôleur_A_2
+
+
+
+ a| 
+FC_Switch_A_2
+ a| 
+A
+ a| 
+6
+ a| 
+9
+ a| 
+9
+ a| 
+9
+ a| 
+Bridge_A_1b FC2
+
+
+
+ a| 
+FC_Switch_B_2
+ a| 
+B
+ a| 
+8
+ a| 
+3
+ a| 
+3
+ a| 
+3
+ a| 
+Contrôleur_B_1 port 0b
+
+
+
+ a| 
+FC_Switch_B_2
+ a| 
+B
+ a| 
+8
+ a| 
+7
+ a| 
+7
+ a| 
+7
+ a| 
+Contrôleur_B_2 port 0b
+
+|===
+|===
+
+
+| Zone dans Fabric_2 | Ports membres 
+
+
+ a| 
+MC1_INIT_GRP_2_SITE_A_STK_GRP_1_BOT_FC2
+ a| 
+6,3;6,7;8,3;8,7;6,9
+
+|===
+
+
+==== Groupe DR 1 - pile 2 sur site_A
+
+*DRGROUP 1 : MC1_INIT_GRP_1_SITE_A_STK_GRP_2_TOP_FC1:*
+
+|===
+
+
+| Commutateur FC | Le site | Domaine des commutateurs | Port 6505 / 6510 / G610 | 6520 orifice | Port G620 | Se connecte à... 
+
+
+ a| 
+FC_Switch_A_1
+ a| 
+A
+ a| 
+5
+ a| 
+2
+ a| 
+2
+ a| 
+2
+ a| 
+Port 0A Controller_A_1
+
+
+
+ a| 
+FC_Switch_A_1
+ a| 
+A
+ a| 
+5
+ a| 
+6
+ a| 
+6
+ a| 
+6
+ a| 
+Port 0a_a_2 du contrôleur
+
+
+
+ a| 
+FC_Switch_A_1
+ a| 
+A
+ a| 
+5
+ a| 
+10
+ a| 
+10
+ a| 
+10
+ a| 
+Bridge_A_2a FC1
+
+
+
+ a| 
+FC_Switch_B_1
+ a| 
+B
+ a| 
+7
+ a| 
+2
+ a| 
+2
+ a| 
+2
+ a| 
+Port 0a_B_1 du contrôleur
+
+
+
+ a| 
+FC_Switch_B_1
+ a| 
+B
+ a| 
+7
+ a| 
+6
+ a| 
+6
+ a| 
+6
+ a| 
+Port 0a_B_2 du contrôleur
+
+|===
+|===
+
+
+| Zone dans Fabric_1 hh | Ports membres 
+
+
+ a| 
+MC1_INIT_GRP_1_SITE_A_STK_GRP_2_TOP_FC1
+ a| 
+5,2;5,6;7,2;7,6;5,10
+
+|===
+*DRGROUP 1 : MC1_INIT_GRP_2_SITE_A_STK_GRP_2_TOP_FC1:*
+
+|===
+
+
+| Commutateur FC | Le site | Domaine des commutateurs | Port 6505 / 6510 / G610 | 6520 orifice | Port G620 | Se connecte à... 
+
+
+ a| 
+FC_Switch_A_1
+ a| 
+A
+ a| 
+5
+ a| 
+3
+ a| 
+3
+ a| 
+3
+ a| 
+Port 0C_A_1
+
+
+
+| FC_Switch_A_1  a| 
+A
+ a| 
+5
+ a| 
+7
+ a| 
+7
+ a| 
+7
+ a| 
+Port 0C_A_2
+
+
+
+| FC_Switch_A_1  a| 
+A
+ a| 
+5
+ a| 
+11
+ a| 
+11
+ a| 
+11
+ a| 
+Bridge_A_2b FC1
+
+
+
+ a| 
+FC_Switch_B_1
+ a| 
+B
+ a| 
+7
+ a| 
+3
+ a| 
+3
+ a| 
+3
+ a| 
+Contrôleur_B_1 port 0C
+
+
+
+ a| 
+FC_Switch_B_1
+ a| 
+B
+ a| 
+7
+ a| 
+7
+ a| 
+7
+ a| 
+7
+ a| 
+Contrôleur_B_2 port 0C
+
+|===
+|===
+
+
+| Zone dans Fabric_2 | Ports membres 
+
+
+ a| 
+MC1_INIT_GRP_2_SITE_A_STK_GRP_2_BOT_FC1
+ a| 
+5,3;5,7;7,3;7,7;5,11
+
+|===
+*DRGROUP 1 : MC1_INIT_GRP_1_SITE_A_STK_GRP_2_BOT_FC2:*
+
+|===
+
+
+| Commutateur FC | Le site | Domaine des commutateurs | Port 6505 / 6510 / G610 | 6520 orifice | Port G620 | Se connecte à... 
+
+
+ a| 
+FC_Switch_A_2
+ a| 
+A
+ a| 
+6
+ a| 
+2
+ a| 
+0
+ a| 
+0
+ a| 
+Port 0d contrôleur_A_1
+
+
+
+ a| 
+FC_Switch_A_2
+ a| 
+A
+ a| 
+6
+ a| 
+6
+ a| 
+4
+ a| 
+4
+ a| 
+Port 0b_a_2 du contrôleur
+
+
+
+ a| 
+FC_Switch_A_2
+ a| 
+A
+ a| 
+6
+ a| 
+10
+ a| 
+10
+ a| 
+10
+ a| 
+Bridge_A_2a FC2
+
+
+
+ a| 
+FC_Switch_B_2
+ a| 
+B
+ a| 
+8
+ a| 
+2
+ a| 
+2
+ a| 
+2
+ a| 
+Contrôleur_B_1 port 0b
+
+
+
+ a| 
+FC_Switch_B_2
+ a| 
+B
+ a| 
+8
+ a| 
+6
+ a| 
+6
+ a| 
+6
+ a| 
+Contrôleur_B_2 port 0b
+
+|===
+|===
+
+
+| Zone dans Fabric_1 | Ports membres 
+
+
+ a| 
+MC1_INIT_GRP_1_SITE_A_STK_GRP_2_TOP_FC2
+ a| 
+6,2;6,6;8,2;8,6;6,10
+
+|===
+*DRGROUP 1 : MC1_INIT_GRP_2_SITE_A_STK_GRP_2_BOT_FC2:*
+
+|===
+
+
+| Commutateur FC | Le site | Domaine des commutateurs | Port 6505 / 6510 / G610 | 6520 orifice | Port G620 | Se connecte à... 
+
+
+ a| 
+FC_Switch_A_2
+ a| 
+A
+ a| 
+6
+ a| 
+3
+ a| 
+3
+ a| 
+3
+ a| 
+Port 0d contrôleur_A_1
+
+
+
+ a| 
+FC_Switch_A_2
+ a| 
+A
+ a| 
+6
+ a| 
+7
+ a| 
+7
+ a| 
+7
+ a| 
+Port 0b_a_2 du contrôleur
+
+
+
+ a| 
+FC_Switch_A_2
+ a| 
+A
+ a| 
+6
+ a| 
+11
+ a| 
+11
+ a| 
+11
+ a| 
+Bridge_A_2b FC2
+
+
+
+ a| 
+FC_Switch_B_2
+ a| 
+B
+ a| 
+8
+ a| 
+3
+ a| 
+3
+ a| 
+3
+ a| 
+Contrôleur_B_1 port 0b\
+
+
+
+ a| 
+FC_Switch_B_2
+ a| 
+B
+ a| 
+8
+ a| 
+7
+ a| 
+7
+ a| 
+7
+ a| 
+Contrôleur_B_2 port 0b
+
+|===
+|===
+
+
+| Zone dans Fabric_2 | Ports membres 
+
+
+ a| 
+MC1_INIT_GRP_2_SITE_A_STK_GRP_2_BOT_FC2
+ a| 
+6,3;6,7;8,3;8,7;6,11
+
+|===
+
+
+==== Groupe DR 1 - pile 1 sur site_B
+
+*DRGROUP 1 : MC1_INIT_GRP_1_SITE_B_STK_GRP_1_TOP_FC1:*
+
+|===
+
+
+| Commutateur FC | Le site | Domaine des commutateurs | Port 6505 / 6510 / G610 | 6520 orifice | Port G620 | Se connecte à... 
+
+
+ a| 
+FC_Switch_A_1
+ a| 
+A
+ a| 
+5
+ a| 
+2
+ a| 
+2
+ a| 
+2
+ a| 
+Port 0A Controller_A_1
+
+
+
+ a| 
+FC_Switch_A_1
+ a| 
+A
+ a| 
+5
+ a| 
+6
+ a| 
+6
+ a| 
+6
+ a| 
+Port 0a_a_2 du contrôleur
+
+
+
+ a| 
+FC_Switch_B_1
+ a| 
+B
+ a| 
+7
+ a| 
+2
+ a| 
+2
+ a| 
+8
+ a| 
+Port 0a_B_1 du contrôleur
+
+
+
+ a| 
+FC_Switch_B_1
+ a| 
+B
+ a| 
+7
+ a| 
+6
+ a| 
+6
+ a| 
+2
+ a| 
+Port 0a_B_2 du contrôleur
+
+
+
+ a| 
+FC_Switch_B_1
+ a| 
+B
+ a| 
+7
+ a| 
+8
+ a| 
+8
+ a| 
+6
+ a| 
+Bridge_B_1a FC1
+
+|===
+|===
+
+
+| Zone dans Fabric_1 | Ports membres 
+
+
+ a| 
+MC1_INIT_GRP_1_SITE_B_STK_GRP_1_TOP_FC1
+ a| 
+5,2;5,6;7,2;7,6;7,8
+
+|===
+*DRGROUP 1 : MC1_INIT_GRP_2_SITE_B_STK_GRP_1_TOP_FC1:*
+
+|===
+
+
+| Commutateur FC | Le site | Domaine des commutateurs | Port 6505 / 6510 / G610 | 6520 orifice | Port G620 | Se connecte à... 
+
+
+ a| 
+FC_Switch_A_1
+ a| 
+A
+ a| 
+5
+ a| 
+3
+ a| 
+3
+ a| 
+3
+ a| 
+Port 0C_A_1
+
+
+
+ a| 
+FC_Switch_A_1
+ a| 
+A
+ a| 
+5
+ a| 
+7
+ a| 
+7
+ a| 
+7
+ a| 
+Port 0C_A_2
+
+
+
+ a| 
+FC_Switch_B_1
+ a| 
+B
+ a| 
+7
+ a| 
+3
+ a| 
+3
+ a| 
+9
+ a| 
+Contrôleur_B_1 port 0C
+
+
+
+ a| 
+FC_Switch_B_1
+ a| 
+B
+ a| 
+7
+ a| 
+7
+ a| 
+7
+ a| 
+3
+ a| 
+Contrôleur_B_2 port 0C
+
+
+
+ a| 
+FC_Switch_B_1
+ a| 
+B
+ a| 
+7
+ a| 
+9
+ a| 
+9
+ a| 
+7
+ a| 
+Bridge_B_1b FC1
+
+|===
+|===
+
+
+| Zone dans Fabric_2 | Ports membres 
+
+
+ a| 
+MC1_INIT_GRP_2_SITE_B_STK_GRP_1_BOT_FC1
+ a| 
+5,3;5,7;7,3;7,7;7,9
+
+|===
+*DRGROUP 1 : MC1_INIT_GRP_1_SITE_B_STK_GRP_1_BOT_FC2:*
+
+|===
+
+
+| Commutateur FC | Le site | Domaine des commutateurs | Port 6505 / 6510 / G610 | 6520 orifice | Port G620 | Se connecte à... 
+
+
+ a| 
+FC_Switch_A_2
+ a| 
+A
+ a| 
+6
+ a| 
+2
+ a| 
+2
+ a| 
+2
+ a| 
+Port 0d contrôleur_A_1
+
+
+
+ a| 
+FC_Switch_A_2
+ a| 
+A
+ a| 
+6
+ a| 
+6
+ a| 
+6
+ a| 
+6
+ a| 
+Port 0b_a_2 du contrôleur
+
+
+
+ a| 
+FC_Switch_B_2
+ a| 
+B
+ a| 
+8
+ a| 
+2
+ a| 
+2
+ a| 
+2
+ a| 
+Contrôleur_B_1 port 0b
+
+
+
+ a| 
+FC_Switch_B_2
+ a| 
+B
+ a| 
+8
+ a| 
+6
+ a| 
+6
+ a| 
+6
+ a| 
+Contrôleur_B_2 port 0b
+
+
+
+ a| 
+FC_Switch_B_2
+ a| 
+B
+ a| 
+8
+ a| 
+8
+ a| 
+8
+ a| 
+8
+ a| 
+Bridge_B_1a FC2
+
+|===
+|===
+| Zone dans Fabric_1 | Ports membres 
+
+
+ a| 
+MC1_INIT_GRP_1_SITE_B_STK_GRP_1_TOP_FC2
+ a| 
+6,2;6,6;8,2;8,6;8,8
+
+|===
+*DRGROUP 1 : MC1_INIT_GRP_2_SITE_B_STK_GRP_1_BOT_FC2:*
+
+|===
+
+
+| Commutateur FC | Le site | Domaine des commutateurs | Port 6505 / 6510 / G610 | 6520 orifice | Port G620 | Se connecte à... 
+
+
+ a| 
+FC_Switch_A_2
+ a| 
+A
+ a| 
+6
+ a| 
+3
+ a| 
+3
+ a| 
+3
+ a| 
+Port 0d contrôleur_A_1
+
+
+
+ a| 
+FC_Switch_A_2
+ a| 
+A
+ a| 
+6
+ a| 
+7
+ a| 
+7
+ a| 
+7
+ a| 
+Port 0b_a_2 du contrôleur
+
+
+
+ a| 
+FC_Switch_B_2
+ a| 
+B
+ a| 
+8
+ a| 
+3
+ a| 
+3
+ a| 
+3
+ a| 
+Contrôleur_B_1 port 0b
+
+
+
+ a| 
+FC_Switch_B_2
+ a| 
+B
+ a| 
+8
+ a| 
+7
+ a| 
+7
+ a| 
+7
+ a| 
+Contrôleur_B_2 port 0b
+
+
+
+ a| 
+FC_Switch_B_2
+ a| 
+B
+ a| 
+8
+ a| 
+9
+ a| 
+9
+ a| 
+9
+ a| 
+Bridge_A_1b FC2
+
+|===
+|===
+
+
+| Zone dans Fabric_2 | Ports membres 
+
+
+ a| 
+MC1_INIT_GRP_2_SITE_B_STK_GRP_1_BOT_FC2
+ a| 
+6,3;6,7;8,3;8,7;8,9
+
+|===
+
+
+==== Groupe DR 1 - pile 2 sur site_B
+
+*DRGROUP 1 : MC1_INIT_GRP_1_SITE_B_STK_GRP_2_TOP_FC1:*
+
+|===
+
+
+| Commutateur FC | Le site | Domaine des commutateurs | Port 6505 / 6510 / G610 | 6520 orifice | Port G620 | Se connecte à... 
+
+
+ a| 
+FC_Switch_A_1
+ a| 
+A
+ a| 
+5
+ a| 
+2
+ a| 
+2
+ a| 
+2
+ a| 
+Port 0A Controller_A_1
+
+
+
+ a| 
+FC_Switch_A_1
+ a| 
+A
+ a| 
+5
+ a| 
+6
+ a| 
+6
+ a| 
+6
+ a| 
+Port 0a_a_2 du contrôleur
+
+
+
+ a| 
+FC_Switch_B_1
+ a| 
+B
+ a| 
+7
+ a| 
+2
+ a| 
+2
+ a| 
+2
+ a| 
+Port 0a_B_1 du contrôleur
+
+
+
+ a| 
+FC_Switch_B_1
+ a| 
+B
+ a| 
+7
+ a| 
+6
+ a| 
+6
+ a| 
+6
+ a| 
+Port 0a_B_2 du contrôleur
+
+
+
+ a| 
+FC_Switch_B_1
+ a| 
+B
+ a| 
+7
+ a| 
+10
+ a| 
+10
+ a| 
+10
+ a| 
+Bridge_B_2a FC1
+
+|===
+|===
+
+
+| Zone dans Fabric_1 | Ports membres 
+
+
+ a| 
+MC1_INIT_GRP_1_SITE_B_STK_GRP_2_TOP_FC1
+ a| 
+5,2;5,6;7,2;7,6;7,10
+
+|===
+*DRGROUP 1 : MC1_INIT_GRP_2_SITE_B_STK_GRP_2_TOP_FC1:*
+
+|===
+
+
+| Commutateur FC | Le site | Domaine des commutateurs | Port 6505 / 6510 / G610 | 6520 orifice | Port G620 | Se connecte à... 
+
+
+ a| 
+FC_Switch_A_1
+ a| 
+A
+ a| 
+5
+ a| 
+3
+ a| 
+3
+ a| 
+3
+ a| 
+Port 0C_A_1
+
+
+
+ a| 
+FC_Switch_A_1
+ a| 
+A
+ a| 
+5
+ a| 
+7
+ a| 
+7
+ a| 
+7
+ a| 
+Port 0C_A_2
+
+
+
+ a| 
+FC_Switch_B_1
+ a| 
+B
+ a| 
+7
+ a| 
+3
+ a| 
+3
+ a| 
+3
+ a| 
+Contrôleur_B_1 port 0C
+
+
+
+ a| 
+FC_Switch_B_1
+ a| 
+B
+ a| 
+7
+ a| 
+7
+ a| 
+7
+ a| 
+7
+ a| 
+Contrôleur_B_2 port 0C
+
+
+
+ a| 
+FC_Switch_B_1
+ a| 
+B
+ a| 
+7
+ a| 
+11
+ a| 
+11
+ a| 
+11
+ a| 
+Bridge_B_2b FC1
+
+|===
+|===
+
+
+| Zone dans Fabric_2 hh | Ports membres 
+
+
+ a| 
+MC1_INIT_GRP_2_SITE_B_STK_GRP_2_BOT_FC1
+ a| 
+5,3;5,7;7,3;7,7;7,11
+
+|===
+*DRGROUP 1 : MC1_INIT_GRP_1_SITE_B_STK_GRP_2_BOT_FC2:*
+
+|===
+
+
+| Commutateur FC | Le site | Domaine des commutateurs | Port 6505 / 6510 / G610 | 6520 orifice | Port G620 | Se connecte à... 
+
+
+ a| 
+FC_Switch_A_2
+ a| 
+A
+ a| 
+6
+ a| 
+2
+ a| 
+2
+ a| 
+2
+ a| 
+Port d du Controller_A_1
+
+
+
+ a| 
+FC_Switch_A_2
+ a| 
+A
+ a| 
+6
+ a| 
+6
+ a| 
+6
+ a| 
+6
+ a| 
+Port 0b_a_2 du contrôleur
+
+
+
+ a| 
+FC_Switch_B_2
+ a| 
+B
+ a| 
+8
+ a| 
+2
+ a| 
+2
+ a| 
+2
+ a| 
+Contrôleur_B_1 port 0b
+
+
+
+ a| 
+FC_Switch_B_2
+ a| 
+B
+ a| 
+8
+ a| 
+6
+ a| 
+6
+ a| 
+6
+ a| 
+Contrôleur_B_2 port 0b
+
+
+
+ a| 
+FC_Switch_B_2
+ a| 
+B
+ a| 
+8
+ a| 
+10
+ a| 
+10
+ a| 
+10
+ a| 
+Bridge_B_2a FC2
+
+|===
+|===
+
+
+| Zone dans Fabric_1 | Ports membres 
+
+
+ a| 
+MC1_INIT_GRP_1_SITE_B_STK_GRP_2_TOP_FC2
+ a| 
+6,2;6,6;8,2;8,6;8,10
+
+|===
+*DRGROUP 1 : MC1_INIT_GRP_2_SITE_B_STK_GRP_2_BOT_FC2:*
+
+|===
+
+
+| Commutateur FC | Le site | Domaine des commutateurs | Port 6505 / 6510 / G610 | 6520 orifice | Port G620 | Se connecte à... 
+
+
+ a| 
+FC_Switch_A_2
+ a| 
+A
+ a| 
+6
+ a| 
+3
+ a| 
+3
+ a| 
+3
+ a| 
+Port 0d contrôleur_A_1
+
+
+
+ a| 
+FC_Switch_A_2
+ a| 
+A
+ a| 
+6
+ a| 
+7
+ a| 
+7
+ a| 
+7
+ a| 
+Port 0b_a_2 du contrôleur
+
+
+
+ a| 
+FC_Switch_B_2
+ a| 
+B
+ a| 
+8
+ a| 
+3
+ a| 
+3
+ a| 
+3
+ a| 
+Contrôleur_B_1 port 0b
+
+
+
+ a| 
+FC_Switch_B_2
+ a| 
+B
+ a| 
+8
+ a| 
+7
+ a| 
+7
+ a| 
+7
+ a| 
+Contrôleur_B_2 port 0b
+
+
+
+ a| 
+FC_Switch_B_2
+ a| 
+B
+ a| 
+8
+ a| 
+11
+ a| 
+11
+ a| 
+11
+ a| 
+Bridge_B_2b FC2
+
+|===
+|===
+
+
+| Zone dans Fabric_2 | Ports membres 
+
+
+ a| 
+MC1_INIT_GRP_2_SITE_B_STK_GRP_2_BOT_FC2
+ a| 
+6,3;6,7;8,3;8,7;8,11
+
+|===
+
+
+==== Récapitulatif des zones de stockage
+
+|===
+
+
+| Structure | Nom de la zone | Ports membres 
+
+
+ a| 
+FC_Switch_A_1 et FC_Switch_B_1
+ a| 
+MC1_INIT_GRP_1_SITE_A_STK_GRP_1_TOP_FC1
+ a| 
+5,2;5,6;7,2;7,6;5,8
+
+
+
+ a| 
+FC_Switch_A_1 et FC_Switch_B_1
+ a| 
+MC1_INIT_GRP_2_SITE_A_STK_GRP_1_BOT_FC1
+ a| 
+5,3;5,7;7,3;7,7;5,9
+
+
+
+ a| 
+FC_Switch_A_1 et FC_Switch_B_1
+ a| 
+MC1_INIT_GRP_1_SITE_A_STK_GRP_2_TOP_FC1
+ a| 
+5,2;5,6;7,2;7,6;5,10
+
+
+
+ a| 
+FC_Switch_A_1 et FC_Switch_B_1
+ a| 
+MC1_INIT_GRP_2_SITE_A_STK_GRP_2_BOT_FC1
+ a| 
+5,3;5,7;7,3;7,7;5,11
+
+
+
+ a| 
+FC_Switch_A_1 et FC_Switch_B_1
+ a| 
+MC1_INIT_GRP_1_SITE_B_STK_GRP_1_TOP_FC1
+ a| 
+5,2;5,6;7,2;7,6;7,8
+
+
+
+ a| 
+FC_Switch_A_1 et FC_Switch_B_1
+ a| 
+MC1_INIT_GRP_2_SITE_B_STK_GRP_1_BOT_FC1
+ a| 
+5,3;5,7;7,3;7,7;7,9
+
+
+
+ a| 
+FC_Switch_A_1 et FC_Switch_B_1
+ a| 
+MC1_INIT_GRP_1_SITE_B_STK_GRP_2_TOP_FC1
+ a| 
+5,2;5,6;7,2;7,6;7,10
+
+
+
+ a| 
+FC_Switch_A_1 et FC_Switch_B_1
+ a| 
+MC1_INIT_GRP_2_SITE_B_STK_GRP_2_BOT_FC1
+ a| 
+5,3;5,7;7,3;7,7;7,11
+
+
+
+ a| 
+FC_Switch_A_2 et FC_Switch_B_2
+ a| 
+MC1_INIT_GRP_1_SITE_A_STK_GRP_1_TOP_FC2
+ a| 
+6,2;6,6;8,2;8,6;6,8
+
+
+
+ a| 
+FC_Switch_A_2 et FC_Switch_B_2
+ a| 
+MC1_INIT_GRP_2_SITE_A_STK_GRP_1_BOT_FC2
+ a| 
+6,3;6,7;8,3;8,7;6,9
+
+
+
+ a| 
+FC_Switch_A_2 et FC_Switch_B_2
+ a| 
+MC1_INIT_GRP_1_SITE_A_STK_GRP_2_TOP_FC2
+ a| 
+6,2;6,6;8,2;8,6;6,10
+
+
+
+ a| 
+FC_Switch_A_2 et FC_Switch_B_2
+ a| 
+MC1_INIT_GRP_2_SITE_A_STK_GRP_2_BOT_FC2
+ a| 
+6,3;6,7;8,3;8,7;6,11
+
+
+
+ a| 
+FC_Switch_A_2 et FC_Switch_B_2
+ a| 
+MC1_INIT_GRP_1_SITE_B_STK_GRP_1_TOP_FC2
+ a| 
+6,2;6,6;8,2;8,6;8,8
+
+
+
+ a| 
+FC_Switch_A_2 et FC_Switch_B_2
+ a| 
+MC1_INIT_GRP_2_SITE_B_STK_GRP_1_BOT_FC2
+ a| 
+6,3;6,7;8,3;8,7;8,9
+
+
+
+ a| 
+FC_Switch_A_2 et FC_Switch_B_2
+ a| 
+MC1_INIT_GRP_1_SITE_B_STK_GRP_2_TOP_FC2
+ a| 
+6,2;6,6;8,2;8,6;8,10
+
+
+
+ a| 
+FC_Switch_A_2 et FC_Switch_B_2
+ a| 
+MC1_INIT_GRP_2_SITE_B_STK_GRP_2_BOT_FC2
+ a| 
+6,3;6,7;8,3;8,7;8,11
+
+|===
+
+
+=== Configuration de la segmentation sur les commutateurs Brocade FC
+
+Vous devez attribuer les ports de commutateur à des zones distinctes pour le trafic du contrôleur et du stockage, avec des zones pour les ports et zones FC-VI pour les ports de stockage.
+
+Les étapes suivantes utilisent le zoning standard pour la configuration MetroCluster.
+
+link:task_fcsw_brocade_configure_the_brocade_fc_switches_supertask.html["Segmentation des ports FC-VI"]
+
+link:task_fcsw_brocade_configure_the_brocade_fc_switches_supertask.html["Segmentation pour les ponts FiberBridge 6500N ou les ponts FiberBridge 7500N ou 7600N utilisant un seul port FC"]
+
+link:task_fcsw_brocade_configure_the_brocade_fc_switches_supertask.html["Segmentation pour les ponts FiberBridge 7500N utilisant les deux ports FC"]
+
+.Étapes
+. Créer les zones FC-VI sur chaque commutateur :
++
+`zonecreate "QOSH1_FCVI_1", member;member ...`
+
++
+Dans cet exemple, une zone QoS FCVI est créée avec les ports 5,0;5,1;5,4;5,5;7,0;7,1;7,4;7,5:
+
++
+[listing]
+----
+Switch_A_1:admin> zonecreate "QOSH1_FCVI_1", "5,0;5,1;5,4;5,5;7,0;7,1;7,4;7,5"
+----
+. Configurer les zones de stockage sur chaque commutateur.
++
+Vous pouvez configurer le zoning pour la structure à partir d'un commutateur dans la structure. Dans l'exemple qui suit, la segmentation est configurée sur Switch_A_1.
+
++
+.. Création de la zone de stockage pour chaque domaine de commutateur dans la structure du commutateur :
++
+`zonecreate name, member;member ...`
+
++
+Dans cet exemple, une zone de stockage pour un FibreBridge 7500N utilisant les deux ports FC est en cours de création. Les zones contiennent les ports 5,2;5,6;7,2;7,6;5,16:
+
++
+[listing]
+----
+Switch_A_1:admin> zonecreate "MC1_INIT_GRP_1_SITE_A_STK_GRP_1_TOP_FC1", "5,2;5,6;7,2;7,6;5,16"
+----
+.. Création de la configuration dans la première structure de commutateur :
++
+`cfgcreate config_name, zone;zone...`
+
++
+Dans cet exemple, une configuration portant le nom CFG_1 et les deux zones QOSH1_MC1_FAB_1_FCVI et MC1_INIT_GRP_1_SITE_A_STK_GRP_1_TOP_FC1 est créée
+
++
+[listing]
+----
+Switch_A_1:admin> cfgcreate "CFG_1", "QOSH1_MC1_FAB_1_FCVI; MC1_INIT_GRP_1_SITE_A_STK_GRP_1_TOP_FC1"
+----
+.. Ajoutez des zones à la configuration, si vous le souhaitez :
++
+`cfgadd config_namezone;zone...`
+
+.. Activez la configuration :
++
+`cfgenable config_name`
+
++
+[listing]
+----
+Switch_A_1:admin> cfgenable "CFG_1"
+----
+.. Enregistrez la configuration :
++
+`cfgsave`
+
++
+[listing]
+----
+Switch_A_1:admin> cfgsave
+----
+.. Valider la configuration de la segmentation :
++
+`zone --validate`
+
++
+[listing]
+----
+Switch_A_1:admin> zone --validate
+Defined configuration:
+cfg: CFG_1 QOSH1_MC1_FAB_1_FCVI ; MC1_INIT_GRP_1_SITE_A_STK_GRP_1_TOP_FC1
+zone: QOSH1_MC1_FAB_1_FCVI
+5,0;5,1;5,4;5,5;7,0;7,1;7,4;7,5
+zone: MC1_INIT_GRP_1_SITE_A_STK_GRP_1_TOP_FC1
+5,2;5,6;7,2;7,6;5,16
+Effective configuration:
+cfg: CFG_1
+zone: QOSH1_MC1_FAB_1_FCVI
+5,0
+5,1
+5,4
+5,5
+7,0
+7,1
+7,4
+7,5
+zone: MC1_INIT_GRP_1_SITE_A_STK_GRP_1_TOP_FC1
+5,2
+5,6
+7,2
+7,6
+5,16
+------------------------------------
+~ - Invalid configuration
+* - Member does not exist
+# - Invalid usage of broadcast zone
+----
+
+
+
+
+
+
+== Configuration du cryptage ISL sur les commutateurs Brocade 6510 ou G620
+
+Sur les commutateurs Brocade 6510 ou G620, vous pouvez utiliser la fonctionnalité de cryptage Brocade sur les connexions ISL. Si vous souhaitez utiliser la fonction de cryptage, vous devez effectuer des étapes de configuration supplémentaires sur chaque commutateur de la configuration MetroCluster.
+
+.Avant de commencer
+* Vous devez disposer de commutateurs Brocade 6510 ou G620.
++
+
+NOTE: La prise en charge du cryptage ISL sur les commutateurs Brocade G620 est prise en charge uniquement sur ONTAP 9.4 et versions ultérieures.
+
+* Vous devez avoir sélectionné deux commutateurs de la même structure.
+* Vous devez avoir consulté la documentation Brocade relative à votre commutateur et à la version du système d'exploitation Fabric pour confirmer la bande passante et les limites de ports.
+
+
+Les étapes doivent être effectuées sur les deux commutateurs de la même structure.
+
+
+
+=== Désactivation de la structure virtuelle
+
+Pour définir le cryptage ISL, vous devez désactiver la structure virtuelle sur les quatre commutateurs utilisés dans une configuration MetroCluster.
+
+.Étapes
+. Désactivez la structure virtuelle en entrant la commande suivante sur la console du commutateur :
++
+`fosconfig --disable vf`
+
+. Redémarrez le commutateur.
+
+
+
+
+=== Réglage de la charge utile
+
+Après la désactivation de la structure virtuelle, vous devez définir la charge utile ou la taille du champ de données sur les deux commutateurs de la structure.
+
+La taille du champ de données ne doit pas dépasser 2048.
+
+.Étapes
+. Désactiver le commutateur :
++
+`switchdisable`
+
+. Configurer et régler la charge utile :
++
+`configure`
+
+. Définissez les paramètres de commutation suivants :
++
+.. Définissez le paramètre Fabric comme suit : `y`
+.. Définissez les autres paramètres, tels que domaine, PID persistant basé sur WWN, etc.
+.. Définissez la taille du champ de données : `2048`
+
+
+
+
+
+
+=== Définition de la stratégie d'authentification
+
+Vous devez définir la stratégie d'authentification et les paramètres associés.
+
+Les commandes doivent être exécutées au niveau de la console des commutateurs.
+
+.Étapes
+. Définissez le secret d'authentification :
++
+.. Lancez le processus de configuration :
++
+`secAuthSecret --set`
+
++
+Cette commande lance une série d'invites auxquelles vous répondez dans les étapes suivantes :
+
+.. Indiquez le nom universel (WWN) de l'autre commutateur de la structure pour le paramètre « Entrez le WWN de l'homologue, le domaine ou le nom du commutateur ».
+.. Indiquez le secret homologue pour le paramètre « entrer le secret homologue ».
+.. Indiquez le secret local pour le paramètre "entrer le secret local".
+.. Entrez `Y` Pour le paramètre « êtes-vous terminé ».
++
+--
+Voici un exemple de définition du secret d'authentification :
+
+[listing]
+----
+brcd> secAuthSecret --set
+
+This command is used to set up secret keys for the DH-CHAP authentication.
+The minimum length of a secret key is 8 characters and maximum 40
+characters. Setting up secret keys does not initiate DH-CHAP
+authentication. If switch is configured to do DH-CHAP, it is performed
+whenever a port or a switch is enabled.
+
+Warning: Please use a secure channel for setting secrets. Using
+an insecure channel is not safe and may compromise secrets.
+
+Following inputs should be specified for each entry.
+
+1. WWN for which secret is being set up.
+2. Peer secret: The secret of the peer that authenticates to peer.
+3. Local secret: The local secret that authenticates peer.
+
+Press enter to start setting up secrets > <cr>
+
+Enter peer WWN, Domain, or switch name (Leave blank when done): 10:00:00:05:33:76:2e:99
+Enter peer secret: <hidden>
+Re-enter peer secret: <hidden>
+Enter local secret: <hidden>
+Re-enter local secret: <hidden>
+
+Enter peer WWN, Domain, or switch name (Leave blank when done):
+Are you done? (yes, y, no, n): [no] yes
+Saving data to key store... Done.
+----
+--
+
+
+. Définissez le groupe d'authentification sur 4 :
++
+`authUtil --set -g 4`
+
+. Définissez le type d'authentification sur « dhchap » :
++
+`authUtil --set -a dhchap`
+
++
+Le système affiche les valeurs de sortie suivantes :
+
++
+[listing]
+----
+Authentication is set to dhchap.
+----
+. Définissez la stratégie d'authentification sur On :
++
+`authUtil --policy -sw on`
+
++
+Le système affiche les valeurs de sortie suivantes :
+
++
+[listing]
+----
+Warning: Activating the authentication policy requires either DH-CHAP secrets or PKI certificates depending on the protocol selected. Otherwise, ISLs will be segmented during next E-port bring-up.
+ARE YOU SURE  (yes, y, no, n): [no] yes
+Auth Policy is set to ON
+----
+
+
+
+
+=== Activation du cryptage ISL sur les commutateurs Brocade
+
+Après avoir défini la règle d'authentification et le secret d'authentification, vous devez activer le cryptage ISL sur les ports pour qu'il prenne effet.
+
+.Description de la tâche
+* Ces étapes doivent être réalisées sur une structure de commutateur à la fois.
+* Les commandes doivent être exécutées au niveau de la console des commutateurs.
+
+
+.Étapes
+. Activer le chiffrement sur tous les ports ISL :
++
+`portCfgEncrypt --enable port_number`
+
++
+Dans l'exemple suivant, le cryptage est activé sur les ports 8 et 12 :
+
++
+`portCfgEncrypt --enable 8`
+
++
+`portCfgEncrypt --enable 12`
+
+. Activer le commutateur :
++
+`switchenable`
+
+. Vérifiez que l'ISL est fonctionnel :
++
+`islshow`
+
+. Vérifiez que le chiffrement est activé :
++
+`portenccompshow`
+
++
+L'exemple suivant montre que le cryptage est activé sur les ports 8 et 12 :
+
++
+[listing]
+----
+
+User Encryption
+Port  configured     Active
+----   ----------    ------
+ 8      yes          yes
+ 9      No           No
+ 10     No           No
+ 11     No           No
+ 12     yes          yes
+----
+
+
+Effectuez toutes les étapes sur les commutateurs de l'autre structure dans une configuration MetroCluster.

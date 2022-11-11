@@ -1,0 +1,26 @@
+---
+permalink: tiebreaker/concept_risks_and_limitation_of_using_mcc_tiebreaker_in_active_mode.html 
+sidebar: sidebar 
+keywords: switchover, upon, detection, site, failure, automatic, metrocluster, tiebreaker, active, mode, supplement, ontap, fas, capability, risk, limitation 
+summary: 'Le basculement après détection d"une défaillance de site se produit automatiquement avec le logiciel MetroCluster Tiebreaker en mode actif. Ce mode peut être utilisé pour compléter la fonctionnalité de basculement automatique d"ONTAP/FAS.' 
+---
+= Risques et limitations liés à l'utilisation de MetroCluster Tiebreaker en mode actif
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Le basculement après détection d'une défaillance de site se produit automatiquement avec le logiciel MetroCluster Tiebreaker en mode actif. Ce mode peut être utilisé pour compléter la fonctionnalité de basculement automatique d'ONTAP/FAS.
+
+Si vous implémentez MetroCluster Tiebreaker en mode actif, les problèmes connus peuvent entraîner la perte de données :
+
+* Lorsque la liaison inter-site tombe en panne, les contrôleurs de chaque site continuent de servir les clients. Toutefois, les contrôleurs ne seront pas mis en miroir. Toute défaillance d'un contrôleur sur un site est identifiée comme une défaillance sur site et le logiciel disjoncteur d'attache MetroCluster effectue le basculement. Les données qui ne sont pas mises en miroir après la défaillance de la liaison inter-site avec le site distant seront perdues.
+* Un basculement se produit lorsque les agrégats du site distant sont en état dégradé. Les données ne seront pas répliquées si le basculement s'est produit avant la resynchronisation des agrégats.
+* Une défaillance du stockage distant se produit lors du basculement.
+* La mémoire non volatile (NVRAM ou NVMEM, selon le modèle de plateforme) des contrôleurs de stockage n'est pas mise en miroir sur le partenaire de reprise sur incident à distance sur le site partenaire.
+* Les métadonnées sont perdues si le réseau de peering de cluster est hors ligne pendant une période étendue et que les volumes de métadonnées ne sont pas en ligne après un basculement.
+
+
+
+NOTE: Vous pouvez rencontrer des scénarios qui ne sont pas mentionnés. NetApp n'est pas tenu de dommages et intérêts susceptibles d'apparaître lors de l'utilisation du logiciel MetroCluster Tiebreaker en mode actif. N'utilisez pas MetroCluster ce logiciel en mode actif si vous ne pouvez pas vous présenter les risques et les limitations.

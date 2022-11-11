@@ -1,0 +1,315 @@
+---
+permalink: maintain/task_replace_a_shelf_nondisruptively_in_a_mcc_fc_configuration.html 
+sidebar: sidebar 
+keywords: metrocluster, maintain, service, replace, shelf, nondisruptively, fabric, attached, configuration 
+summary: Vous devrez peut-être savoir comment remplacer un tiroir sans interruption dans une configuration MetroCluster Fabric-Attached. 
+---
+= Remplacement d'un tiroir sans interruption dans une configuration MetroCluster FAS
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous devrez peut-être savoir comment remplacer un tiroir sans interruption dans une configuration MetroCluster Fabric-Attached.
+
+
+NOTE: Cette procédure ne doit être utilisée que dans une configuration Fabric-Attached MetroCluster.
+
+
+
+== Désactivation de l'accès au tiroir
+
+Vous devez désactiver l'accès au tiroir avant de remplacer les modules de tiroirs.
+
+Vérifier l'état de santé général de la configuration. Si le système ne semble pas en bon état, commencez par résoudre le problème avant de continuer.
+
+.Étapes
+. Depuis les deux clusters, offline de tous les plexes avec disques sur la pile de tiroirs affectée :
++
+`aggr offline _plex_name_`
+
++
+L'exemple montre les commandes pour les plexes en ligne pour un contrôleur exécutant clustered OTNAP.
+
++
+[listing]
+----
+
+cluster_A_1::> storage aggregate plex offline -aggr aggrA_1_0 -plex plex0
+cluster_A_1::> storage aggregate plex offline -aggr dataA_1_data -plex plex0
+cluster_A_2::> storage aggregate plex offline -aggr aggrA_2_0 -plex plex0
+cluster_A_2::> storage aggregate plex offline -aggr dataA_2_data -plex plex0
+----
+. Vérifiez que les plexes sont hors ligne :
++
+`aggr status _-raggr_name_`
+
++
+L'exemple montre les commandes permettant de vérifier que les agrégats sont hors ligne pour un contrôleur exécutant Cmode.
+
++
+[listing]
+----
+
+Cluster_A_1::> storage aggregate show -aggr aggrA_1_0
+Cluster_A_1::> storage aggregate show -aggr dataA_1_data
+Cluster_A_2::> storage aggregate show -aggr aggrA_2_0
+Cluster_A_2::> storage aggregate show -aggr dataA_2_data
+----
+. Désactiver les ports SAS ou les ports switch selon que les ponts qui connectent le tiroir cible connectent une seule pile SAS ou deux piles SAS ou plus :
++
+** Si les ponts connectent une seule pile SAS, désactivez les ports de commutateur auxquels les ponts sont connectés à l'aide de la commande appropriée pour votre commutateur.
++
+L'exemple suivant montre une paire de ponts qui connectent une seule pile SAS, qui contient le tiroir cible :
+
++
+image::../media/mcc_shelf_replacement_bridges_with_a_single_stack.gif[ponts de remplacement de la tablette mcc avec une seule pile]
+
++
+Les ports de commutateur 8 et 9 de chaque commutateur connectent les ponts au réseau.
+
++
+L'exemple suivant montre que les ports 8 et 9 sont désactivés sur un commutateur Brocade.
+
++
+[listing]
+----
+FC_switch_A_1:admin> portDisable 8
+FC_switch_A_1:admin> portDisable 9
+
+FC_switch_A_2:admin> portDisable 8
+FC_switch_A_2:admin> portDisable 9
+----
++
+L'exemple suivant montre que les ports 8 et 9 sont désactivés sur un commutateur Cisco.
+
++
+[listing]
+----
+FC_switch_A_1# conf t
+FC_switch_A_1(config)# int fc1/8
+FC_switch_A_1(config)# shut
+FC_switch_A_1(config)# int fc1/9
+FC_switch_A_1(config)# shut
+FC_switch_A_1(config)# end
+
+FC_switch_A_2# conf t
+FC_switch_A_2(config)# int fc1/8
+FC_switch_A_2(config)# shut
+FC_switch_A_2(config)# int fc1/9
+FC_switch_A_2(config)# shut
+FC_switch_A_2(config)# end
+----
+** Si les ponts connectent deux piles SAS ou plus, désactivez les ports SAS connectant les ponts au tiroir cible : +
+`SASportDisable _port number_`
++
+
+NOTE: Ceci n'est pas applicable aux ponts FiberBridge 6500.
+
++
+L'exemple suivant montre une paire de ponts qui connectent quatre piles SAS. La pile SAS 2 contient le tiroir cible :
+
++
+image::../media/mcc_shelf_replacement_bridges_with_four_stacks.gif[ponts de remplacement de la tablette mcc avec quatre piles]
+
++
+Le port SAS B connecte les ponts au shelf cible. En désactivant uniquement le port SAS B sur les deux tiroirs, les autres piles SAS continuent à transmettre des données pendant la procédure de remplacement.
+
++
+Dans ce cas, désactiver le port SAS connexion du pont au tiroir cible :
+
++
+`SASportDisable _port number_`
+
++
+L'exemple suivant montre que le port SAS B est désactivé à partir du pont et vérifie également qu'il est désactivé. Vous devez répéter la commande sur les deux ponts.
+
++
+[listing]
+----
+Ready. *
+SASPortDisable B
+
+SAS Port B has been disabled.
+----
+
+
+. Si vous avez précédemment désactivé les ports de commutateur, vérifiez qu'ils sont désactivés :
++
+`switchShow`
+
++
+L'exemple montre que les ports de commutateur sont désactivés sur un commutateur Brocade.
+
++
+[listing]
+----
+
+FC_switch_A_1:admin> switchShow
+FC_switch_A_2:admin> switchShow
+----
++
+L'exemple montre que les ports de commutateur sont désactivés sur un commutateur Cisco.
+
++
+[listing]
+----
+
+FC_switch_A_1# show interface fc1/6
+FC_switch_A_2# show interface fc1/6
+----
+. Attendez que ONTAP réalise que le disque est manquant.
+. Mettez le shelf que vous souhaitez remplacer.
+
+
+
+
+== Remise en place du shelf
+
+Vous devez retirer physiquement tous les câbles et le shelf avant d'insérer et de câbler les nouveaux modules shelf et shelf.
+
+.Étapes
+. Retirer tous les disques et déconnecter tous les câbles du shelf qui est en cours de remplacement.
+. Retirez les modules de shelf.
+. Insérer la nouvelle tablette.
+. Insérer les nouveaux disques dans le nouveau shelf.
+. Insérer les modules de tiroirs.
+. Branchez les câbles du tiroir (SAS ou alimentation).
+. Mettez le tiroir sous tension.
+
+
+
+
+== Réactivation de l'accès et vérification du fonctionnement
+
+Une fois le shelf remplacé, vous devez activer à nouveau l'accès et vérifier que le nouveau shelf fonctionne correctement.
+
+.Étapes
+. Vérifiez que le tiroir est correctement mis sous tension et que les liaisons sur les modules IOM sont présentes.
+. Activez les ports de switch ou le port SAS selon les scénarios suivants :
++
+[cols="1,3"]
+|===
+
+
+| Option | Étape 
+
+
+ a| 
+*Si vous avez précédemment désactivé les ports de commutateur*
+ a| 
+.. Activer les ports des commutateurs :
++
+`portEnable _port number_`
+
++
+L'exemple montre que le port du commutateur est activé sur un commutateur Brocade.
+
++
+[listing]
+----
+
+Switch_A_1:admin> portEnable 6
+Switch_A_2:admin> portEnable 6
+----
++
+L'exemple illustre l'activation du port de commutateur sur un commutateur Cisco.
+
++
+[listing]
+----
+
+Switch_A_1# conf t
+Switch_A_1(config)# int fc1/6
+Switch_A_1(config)# no shut
+Switch_A_1(config)# end
+
+Switch_A_2# conf t
+Switch_A_2(config)# int fc1/6
+Switch_A_2(config)# no shut
+Switch_A_2(config)# end
+----
+
+
+
+
+ a| 
+*Si vous avez précédemment désactivé un port SAS*
+ a| 
+.. Activer le port SAS connectant la pile à l'emplacement du tiroir :
++
+`SASportEnable _port number_`
+
++
+L'exemple montre que le port SAS A est activé à partir du pont et vérifie également qu'il est activé.
+
++
+[listing]
+----
+Ready. *
+SASPortEnable A
+
+SAS Port A has been enabled.
+----
+
+
+
+NOTE: Ceci ne s'applique pas aux FibreBridges ATTO 6500.
+
+|===
+. Si vous avez précédemment désactivé les ports du commutateur, vérifiez qu'ils sont activés et en ligne et que tous les périphériques sont correctement connectés :
++
+`switchShow`
+
++
+L'exemple montre le `switchShow` Commande permettant de vérifier que le commutateur Brocade est en ligne.
+
++
+[listing]
+----
+
+Switch_A_1:admin> SwitchShow
+Switch_A_2:admin> SwitchShow
+----
++
+L'exemple montre le `switchShow` Commande permettant de vérifier qu'un commutateur Cisco est en ligne.
+
++
+[listing]
+----
+
+Switch_A_1# show interface fc1/6
+Switch_A_2# show interface fc1/6
+----
++
+
+NOTE: Après plusieurs minutes, ONTAP détecte que de nouveaux disques ont été insérés et affiche un message pour chaque nouveau disque.
+
+. Vérifier que les disques ont été détectés par ONTAP :
++
+`sysconfig -a`
+
+. En ligne les plexes qui étaient hors ligne avant :
++
+`aggr online__plex_name__`
+
++
+L'exemple représente les commandes pour placer des plexes sur un contrôleur qui exécute de nouveau en ligne le mode Cmode.
+
++
+[listing]
+----
+
+Cluster_A_1::> storage aggregate plex online -aggr aggr1 -plex plex2
+Cluster_A_1::> storage aggregate plex online -aggr aggr2 -plex plex6
+Cluster_A_1::> storage aggregate plex online -aggr aggr3 -plex plex1
+----
++
+Les plexes commencent à resynchroniser.
+
++
+
+NOTE: Vous pouvez surveiller la progression de la resynchronisation à l'aide de `aggr status _-raggr_name_` commande.
+
+

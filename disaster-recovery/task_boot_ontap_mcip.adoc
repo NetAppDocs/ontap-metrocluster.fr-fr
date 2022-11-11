@@ -1,0 +1,225 @@
+---
+permalink: disaster-recovery/task_boot_ontap_mcip.html 
+sidebar: sidebar 
+keywords: metrocluster, ip, configuration, replacement, controller, module, disaster, site, boot 
+summary: 'Vous devez démarrer les nœuds de remplacement sur le site de reprise sur incident vers le système d"exploitation ONTAP.' 
+---
+= Démarrage vers ONTAP sur les modules de contrôleur de remplacement dans les configurations IP MetroCluster
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous devez démarrer les nœuds de remplacement sur le site de reprise sur incident vers le système d'exploitation ONTAP.
+
+Cette tâche commence par les nœuds du site de secours en mode maintenance.
+
+.Étapes
+. Sur l'un des nœuds de remplacement, quittez pour quitter l'invite DU CHARGEUR : `halt`
+. Afficher le menu de démarrage : `boot_ontap menu`
+. Dans le menu de démarrage, sélectionnez l'option 6, *mettre à jour la mémoire flash à partir de la configuration de sauvegarde*.
++
+Le système démarre deux fois. Vous devez répondre `yes` lorsque vous êtes invité à continuer. Après le second démarrage, vous devriez répondre `y` Lorsque vous êtes invité à indiquer que l'ID système ne correspond pas.
+
++
+
+NOTE: Si vous n'avez pas dégagé le contenu de la mémoire NVRAM d'un module de contrôleur de remplacement utilisé, le message de panique suivant s'affiche : `PANIC: NVRAM contents are invalid....` Dans ce cas, redémarrez le système à l'invite ONTAP (`boot_ontap menu`). Vous devez ensuite ,Réinitialisez boot_Recovery et rdb_corrompu bootargs
+
++
+** Invite de confirmation pour continuer :
++
+[listing]
+----
+Selection (1-9)? 6
+
+This will replace all flash-based configuration with the last backup to
+disks. Are you sure you want to continue?: yes
+----
+** Invite de non-concordance d'ID système :
++
+[listing]
+----
+WARNING: System ID mismatch. This usually occurs when replacing a boot device or NVRAM cards!
+Override system ID? {y|n} y
+----
+
+
+. Depuis le site survivant, vérifiez que les ID système partenaire corrects ont été appliqués aux nœuds :
++
+`metrocluster node show -fields node-systemid,ha-partner-systemid,dr-partner-systemid,dr-auxiliary-systemid`
+
++
+--
+Dans cet exemple, les nouveaux ID système suivants doivent apparaître dans la sortie :
+
+** Node_A_1 : 1574774970
+** Node_A_2 : 1574774991
+
+
+La colonne « ha-Partner-systemID » doit afficher les nouveaux ID système.
+
+[listing]
+----
+metrocluster node show -fields node-systemid,ha-partner-systemid,dr-partner-systemid,dr-auxiliary-systemid
+
+dr-group-id cluster    node      node-systemid ha-partner-systemid dr-partner-systemid dr-auxiliary-systemid
+----------- ---------- --------  ------------- ------ ------------ ------ ------------ ------ --------------
+1           Cluster_A  Node_A_1  1574774970    1574774991          4068741254          4068741256
+1           Cluster_A  Node_A_2  1574774991    1574774970          4068741256          4068741254
+1           Cluster_B  Node_B_1  -             -                   -                   -
+1           Cluster_B  Node_B_2  -             -                   -                   -
+4 entries were displayed.
+----
+--
+. Si les ID du système partenaire n'ont pas été correctement définis, vous devez définir manuellement la valeur correcte :
++
+.. Arrêtez et affichez l'invite DU CHARGEUR sur le nœud.
+.. Vérifiez la valeur actuelle de Partner-sysid bootarg :
++
+`printenv`
+
+.. Définissez la valeur sur l'ID de système partenaire approprié :
++
+`setenv partner-sysid partner-sysID`
+
+.. Démarrez le nœud :
++
+`boot_ontap`
+
+.. Répétez ces sous-étapes sur l'autre nœud, si nécessaire.
+
+
+. Vérifiez que les nœuds de remplacement sur le site d'incident sont prêts pour le rétablissement :
++
+`metrocluster node show`
+
++
+Les nœuds de remplacement doivent être en attente du mode de restauration rétablissement. Si elles sont en mode normal, vous pouvez redémarrer les nœuds de remplacement. Une fois ce démarrage terminé, les nœuds doivent être en attente du mode de restauration rétablissement automatique.
+
++
+L'exemple suivant montre que les nœuds de remplacement sont prêts pour le rétablissement :
+
++
+[listing]
+----
+cluster_B::> metrocluster node show
+DR                               Configuration  DR
+Group Cluster Node               State          Mirroring Mode
+----- ------- ------------------ -------------- --------- --------------------
+1     cluster_B
+              node_B_1           configured     enabled   switchover completed
+              node_B_2           configured     enabled   switchover completed
+      cluster_A
+              node_A_1           configured     enabled   waiting for switchback recovery
+              node_A_2           configured     enabled   waiting for switchback recovery
+4 entries were displayed.
+
+cluster_B::>
+----
+. Vérifiez les paramètres de configuration de la connexion MetroCluster :
++
+`metrocluster configuration-settings connection show`
+
++
+L'état de configuration doit indiquer terminé.
+
++
+[listing]
+----
+cluster_B::*> metrocluster configuration-settings connection show
+DR                    Source          Destination
+Group Cluster Node    Network Address Network Address Partner Type Config State
+----- ------- ------- --------------- --------------- ------------ ------------
+1     cluster_B
+              node_B_2
+                 Home Port: e5a
+                      172.17.26.13    172.17.26.12    HA Partner   completed
+                 Home Port: e5a
+                      172.17.26.13    172.17.26.10    DR Partner   completed
+                 Home Port: e5a
+                      172.17.26.13    172.17.26.11    DR Auxiliary completed
+                 Home Port: e5b
+                      172.17.27.13    172.17.27.12    HA Partner   completed
+                 Home Port: e5b
+                      172.17.27.13    172.17.27.10    DR Partner   completed
+                 Home Port: e5b
+                      172.17.27.13    172.17.27.11    DR Auxiliary completed
+              node_B_1
+                 Home Port: e5a
+                      172.17.26.12    172.17.26.13    HA Partner   completed
+                 Home Port: e5a
+                      172.17.26.12    172.17.26.11    DR Partner   completed
+                 Home Port: e5a
+                      172.17.26.12    172.17.26.10    DR Auxiliary completed
+                 Home Port: e5b
+                      172.17.27.12    172.17.27.13    HA Partner   completed
+                 Home Port: e5b
+                      172.17.27.12    172.17.27.11    DR Partner   completed
+                 Home Port: e5b
+                      172.17.27.12    172.17.27.10    DR Auxiliary completed
+      cluster_A
+              node_A_2
+                 Home Port: e5a
+                      172.17.26.11    172.17.26.10    HA Partner   completed
+                 Home Port: e5a
+                      172.17.26.11    172.17.26.12    DR Partner   completed
+                 Home Port: e5a
+                      172.17.26.11    172.17.26.13    DR Auxiliary completed
+                 Home Port: e5b
+                      172.17.27.11    172.17.27.10    HA Partner   completed
+                 Home Port: e5b
+                      172.17.27.11    172.17.27.12    DR Partner   completed
+                 Home Port: e5b
+                      172.17.27.11    172.17.27.13    DR Auxiliary completed
+              node_A_1
+                 Home Port: e5a
+                      172.17.26.10    172.17.26.11    HA Partner   completed
+                 Home Port: e5a
+                      172.17.26.10    172.17.26.13    DR Partner   completed
+                 Home Port: e5a
+                      172.17.26.10    172.17.26.12    DR Auxiliary completed
+                 Home Port: e5b
+                      172.17.27.10    172.17.27.11    HA Partner   completed
+                 Home Port: e5b
+                      172.17.27.10    172.17.27.13    DR Partner   completed
+                 Home Port: e5b
+                      172.17.27.10    172.17.27.12    DR Auxiliary completed
+24 entries were displayed.
+
+cluster_B::*>
+----
+. Répétez les étapes précédentes sur l'autre nœud du site de secours.
+
+
+
+
+=== Réinitialisez boot_Recovery et rdb_corrompu bootargs
+
+[role="lead"]
+Si nécessaire, vous pouvez réinitialiser boot_Recovery et rdb_corrompu_bootargs
+
+.Étapes
+. Arrêtez le nœud en arrière à l'invite DU CHARGEUR :
++
+[listing]
+----
+node_A_1::*> halt -node _node-name_
+----
+. Vérifiez si les bootargs suivants ont été définis :
++
+[listing]
+----
+LOADER> printenv bootarg.init.boot_recovery
+LOADER> printenv bootarg.rdb_corrupt
+----
+. Si bootarg a été défini sur une valeur, désactivez-la et démarrez ONTAP :
++
+[listing]
+----
+LOADER> unsetenv bootarg.init.boot_recovery
+LOADER> unsetenv bootarg.rdb_corrupt
+LOADER> saveenv
+LOADER> bye
+----
+

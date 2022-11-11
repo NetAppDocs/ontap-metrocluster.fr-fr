@@ -1,0 +1,65 @@
+---
+permalink: maintain/reference_requirements_for_using_other_interfaces_to_configure_and_manage_fibrebridge_bridges.html 
+sidebar: sidebar 
+keywords: metrocluster, maintain, service, requirements, interfaces, fibrebridge, bridges, manage, configures 
+summary: 'Vous pouvez utiliser la combinaison d"un port série, Telnet et FTP pour gérer les ponts FiberBridge au lieu des interfaces de gestion recommandées. Avant d"installer les ponts, votre système doit répondre aux exigences de l"interface concernée.' 
+---
+= Configuration requise pour l'utilisation d'autres interfaces pour configurer et gérer les ponts FiberBridge
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous pouvez utiliser la combinaison d'un port série, Telnet et FTP pour gérer les ponts FiberBridge au lieu des interfaces de gestion recommandées. Avant d'installer les ponts, votre système doit répondre aux exigences de l'interface concernée.
+
+Vous pouvez utiliser un port série ou Telnet pour configurer le pont et le port de gestion Ethernet 1, ainsi que pour gérer le pont. Vous pouvez utiliser FTP pour mettre à jour le micrologiciel du pont.
+
+
+NOTE: Le Manuel d'installation et d'utilisation _ATTO FibreBridge_ pour votre pont modèle contient plus d'informations sur les interfaces de gestion.
+
+Pour accéder à ce document sur le site Web ATTO, cliquez sur le lien fourni sur la page ATTO Fibrebridge Description.
+
+
+
+== Port série
+
+Lorsque vous utilisez le port série pour configurer et gérer un pont et pour configurer le port Ethernet Management 1, votre système doit satisfaire aux exigences suivantes :
+
+* Un câble série (qui relie le port série pont à un port série (COM) de l'ordinateur que vous utilisez pour la configuration)
++
+Le port série du pont est RJ-45 et possède le même brochage que les contrôleurs.
+
+* Un programme d'émulation de terminal comme Hyperterminal, TeraTerm ou PuTTY pour accéder à la console
++
+Le programme terminal doit pouvoir enregistrer les sorties d'écran dans un fichier.
+
+
+
+
+
+== Telnet
+
+Lorsque vous utilisez Telnet pour configurer et gérer un pont, votre système doit répondre aux exigences suivantes :
+
+* Un câble série (qui relie le port série pont à un port série (COM) de l'ordinateur que vous utilisez pour la configuration)
++
+Le port série du pont est RJ-45 et possède le même brochage que les contrôleurs.
+
+* (Recommandé) Un nom d'utilisateur et un mot de passe non par défaut (pour accéder au pont)
+* Un programme d'émulation de terminal comme Hyperterminal, TeraTerm ou PuTTY pour accéder à la console
++
+Le programme terminal doit pouvoir enregistrer les sorties d'écran dans un fichier.
+
+* Une adresse IP, un masque de sous-réseau et des informations de passerelle pour le port de gestion Ethernet 1 de chaque pont
+
+
+
+
+== FTP
+
+Lorsque vous utilisez FTP pour mettre à jour le micrologiciel du pont, votre système doit répondre aux exigences suivantes :
+
+* Un câble Ethernet standard (qui se connecte du port de gestion Ethernet du pont 1 à votre réseau)
+* (Recommandé) Un nom d'utilisateur et un mot de passe non par défaut (pour accéder au pont)
+

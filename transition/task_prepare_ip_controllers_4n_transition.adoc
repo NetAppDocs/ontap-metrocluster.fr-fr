@@ -1,0 +1,44 @@
+---
+permalink: transition/task_prepare_ip_controllers_4n_transition.html 
+sidebar: sidebar 
+keywords: Transitioning from MetroCluster FC to MetroCluster IP configurations, review, requirement, preparing, prepare, transition, perform, procedure, order, completing, complete, step, task, moving, move, controller, storage, shelves, shelf, exist, configuration, direct, metrocluster, fc, ip, verify, health, removing, remove, tiebreaker, monitor, software, generating, generate, apply, rcf, switch, controller, configure, prepare, preparing 
+summary: Vous devez préparer les quatre nouveaux nœuds IP MetroCluster et installer la version ONTAP appropriée. 
+---
+= Préparation des contrôleurs IP MetroCluster
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous devez préparer les quatre nouveaux nœuds IP MetroCluster et installer la version ONTAP appropriée.
+
+Cette tâche doit être effectuée sur chacun des nouveaux nœuds :
+
+* Node_A_1-IP
+* Node_A_2-IP
+* Node_B_1-IP
+* Node_B_2-IP
+
+
+Dans ces étapes, vous effacez la configuration sur les nœuds et désactivez la zone de la boîte aux lettres sur les nouveaux lecteurs.
+
+. Installez les nouveaux contrôleurs pour la configuration MetroCluster IP.
++
+Les nœuds FC MetroCluster (node_A_x-FC et node_B_x-FC) restent câblés à ce moment-là.
+
+. Reliez les nœuds IP MetroCluster aux commutateurs IP, comme indiqué dans la link:../install-ip/using_rcf_generator.html["Câblage des commutateurs IP"].
+. Configurez les nœuds IP MetroCluster à l'aide des sections suivantes :
++
+.. link:../install-ip/task_sw_config_gather_info.html["Collecte des informations requises"]
+.. link:../install-ip/task_sw_config_restore_defaults.html["Effacement de la configuration sur un module de contrôleur"]
+.. link:../install-ip/task_sw_config_verify_haconfig.html["Vérification de l'état ha-config des composants"]
+.. link:../install-ip/task_sw_config_assign_pool0.html["Affectation manuelle de lecteurs pour le pool 0 (ONTAP 9.4 et versions ultérieures)"]
+
+
+. Depuis le mode maintenance, lancer la commande halt pour quitter le mode Maintenance, puis lancer la commande boot_ontap pour démarrer le système et obtenir le setup du cluster.
++
+Ne terminez pas encore l'assistant de cluster ou l'assistant de nœud pour le moment.
+
+. Répétez cette procédure sur les autres nœuds IP MetroCluster.
+

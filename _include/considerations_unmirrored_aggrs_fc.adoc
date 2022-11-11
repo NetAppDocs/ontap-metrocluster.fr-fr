@@ -1,0 +1,41 @@
+= Considérations relatives à l'utilisation d'agrégats non mis en miroir
+:allow-uri-read: 
+
+
+
+
+== Considérations relatives à l'utilisation d'agrégats non mis en miroir
+
+Si votre configuration inclut des agrégats sans mise en miroir, vous devez connaître les problèmes d'accès potentiels qui suivent les opérations de basculement.
+
+
+
+== Considérations relatives aux agrégats non mis en miroir lors de tâches de maintenance nécessitant l'arrêt d'alimentation
+
+Si vous effectuez un basculement négocié pour des raisons de maintenance requérant un arrêt de l'alimentation à l'échelle du site, vous devez d'abord mettre manuellement hors ligne les agrégats non mis en miroir qui appartiennent au site de reprise sur incident.
+
+Si vous ne mettez pas d'agrégats non mis en miroir hors ligne, les nœuds du site survivant peuvent tomber en panne en raison de la présence de incohérences de plusieurs disques. Cela peut se produire lorsqu'un basculement sur des agrégats non mis en miroir est hors ligne ou lorsqu'ils sont manquants en raison de la perte de connectivité au stockage sur le site de secours. Cela est le résultat d'un arrêt de courant ou d'une perte de liens ISL.
+
+
+
+== Considérations relatives aux agrégats non mis en miroir et aux espaces de noms hiérarchiques
+
+Si vous utilisez des espaces de noms hiérarchiques, vous devez configurer le chemin de jonction de sorte que tous les volumes de ce chemin soient sur des agrégats en miroir uniquement ou sur des agrégats non mis en miroir uniquement. La configuration d'agrégats non mis en miroir et en miroir dans le chemin de jonction peut empêcher l'accès aux agrégats non mis en miroir après le basculement.
+
+
+
+== Considérations relatives aux agrégats non mis en miroir et aux volumes de métadonnées CRS et aux volumes racines des SVM de données
+
+Le volume des métadonnées du service de réplication de la configuration (CRS) et les volumes root du SVM de données doivent se trouver sur un agrégat en miroir. Vous ne pouvez pas déplacer ces volumes vers un agrégat non mis en miroir. S'ils se trouvent sur un agrégat non mis en miroir, les opérations négociées de basculement et de rétablissement sont vetotées. La commande MetroCluster check fournit un avertissement si c'est le cas.
+
+
+
+== Considérations relatives aux SVM et aux agrégats sans miroir
+
+Les SVM doivent être configurés sur des agrégats en miroir uniquement ou sur des agrégats sans miroir uniquement. La configuration d'une combinaison d'agrégats non mis en miroir et en miroir peut entraîner un basculement supérieur à 120 secondes et entraîner une panne des données en cas d'indisponibilité des agrégats non mis en miroir.
+
+
+
+== Considérations relatives aux agrégats sans miroir et à SAN
+
+Dans les versions ONTAP antérieures à 9.9.1, un LUN ne doit pas être situé sur un agrégat sans miroir. La configuration d'une LUN sur un agrégat non mis en miroir peut entraîner un basculement supérieur à 120 secondes et une panne de données.

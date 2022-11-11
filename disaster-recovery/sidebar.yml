@@ -1,0 +1,84 @@
+---
+section: disaster-recovery
+title: Restaurez vos données après un incident
+entries:
+- title: Flux de travail pour la reprise après incident
+  url: "/disaster-recovery/concept_dr_workflow.html"
+- title: Effectuer un basculement forcé après un incident
+  url: "/disaster-recovery/task_perform_a_forced_switchover_after_a_disaster.html"
+- title: Choix de la procédure de récupération correcte
+  url: "/disaster-recovery/concept_choosing_the_correct_recovery_procedure_parent_concept.html"
+- title: Effectuer une restauration en cas de défaillance de plusieurs contrôleurs
+    ou du stockage
+  entries:
+  - title: Avant de commencer
+    url: "/disaster-recovery/task_recover_from_a_multi_controller_and_or_storage_failure.html"
+  - title: Remplacement du matériel et démarrage des nouveaux contrôleurs
+    url: "/disaster-recovery/task_replace_hardware_and_boot_new_controllers.html"
+  - title: Préparez le rétablissement en configuration IP MetroCluster
+    entries:
+    - title: Présentation
+      url: "/disaster-recovery/task_prepare_for_switchback_in_a_mcc_ip_configuration_supertask.html"
+    - title: Définissez les variables d'environnement requises dans les configurations
+        MetroCluster IP
+      url: "/disaster-recovery/task_set_env_mcip.html"
+    - title: Mettez l'équipement sous tension sur le site de reprise (configurations
+        MetroCluster IP)
+      url: "/disaster-recovery/task_power_on_mcip.html"
+    - title: Configuration des commutateurs IP (configurations MetroCluster IP)
+      url: "/disaster-recovery/task_config_switches_mcip.html"
+    - title: Vérifier la connectivité du stockage au site distant (configurations
+        MetroCluster IP)
+      url: "/disaster-recovery/task_verify_connectivity_mcip.html"
+    - title: Réallouer la propriété des disques pour les disques du pool 1 sur le
+        site de reprise sur incident (configurations MetroCluster IP)
+      url: "/disaster-recovery/task_reassign_pool1_disastersite_mcip.html"
+    - title: Démarrez sur ONTAP pour les modules de contrôleur de remplacement dans
+        les configurations IP MetroCluster
+      url: "/disaster-recovery/task_boot_ontap_mcip.html"
+    - title: Rétablir la connectivité entre les nœuds survivants et le site sur incident
+        (configurations MetroCluster IP)
+      url: "/disaster-recovery/task_restore_connectivity_mcip.html"
+    - title: Vérifiez l'affectation automatique ou affectez manuellement les disques
+        du pool 0
+      url: "/disaster-recovery/task_verify_assignment_mcip.html"
+    - title: Attribuez des disques au pool 1 sur le site survivant (configurations
+        MetroCluster IP)
+      url: "/disaster-recovery/task_assign_pool1_survivingsite_mcip.html"
+    - title: Supprimez les plexes qui appartiennent au site survivant (configurations
+        MetroCluster IP)
+      url: "/disaster-recovery/task_delete_plexes_mcip.html"
+    - title: Réparation et restauration des agrégats (configurations MetroCluster
+        IP)
+      url: "/disaster-recovery/task_heal_restore_mcip.html"
+  - title: Préparation du rétablissement en configuration MetroCluster FC
+    entries:
+    - title: Vérification de la configuration des ports (configurations MetroCluster
+        FC uniquement)
+      url: "/disaster-recovery/task_verify_port_mcfc.html"
+    - title: Configuration des ponts FC-SAS (configurations MetroCluster FC uniquement)
+      url: "/disaster-recovery/task_cfg_bridges_mcfc.html"
+    - title: Configuration des commutateurs FC (configurations MetroCluster FC uniquement)
+      url: "/disaster-recovery/task_cfg_switches_mcfc.html"
+    - title: Vérification de la configuration du stockage
+      url: "/disaster-recovery/task_verify_storage_mcfc.html"
+    - title: Mettez l'équipement sur le site de secours sous tension
+      url: "/disaster-recovery/task_power_on_mcfc.html"
+    - title: Attribuez la propriété aux disques remplacés
+      url: "/disaster-recovery/task_assign_ownership_mcfc.html"
+    - title: Réaliser des opérations de réparation et de restauration d'agrégats (configurations
+        MetroCluster FC)
+      url: "/disaster-recovery/task_heal_restore_mcfc.html"
+    - title: Réallouer la propriété des disques pour les agrégats racine vers des
+        modules de contrôleur de remplacement (configurations MetroCluster FC)
+      url: "/disaster-recovery/task_reassign_roots_mcfc.html"
+    - title: Démarrer les nouveaux modules de contrôleur (configurations MetroCluster
+        FC)
+      url: "/disaster-recovery/task_boot_new_mcfc.html"
+  - title: Préparation des nœuds pour le rétablissement dans une configuration mixte
+      (restauration lors de la transition)
+    url: "/disaster-recovery/task_prepare_the_nodes_for_switchback_in_a_mixed_configuration.html"
+  - title: Restauration complète
+    url: "/disaster-recovery/task_complete_recovery.html"
+- title: Restaurez les données en cas de panne sans contrôleur
+  url: "/disaster-recovery/task_recover_from_a_non_controller_failure_mcc_dr.html"

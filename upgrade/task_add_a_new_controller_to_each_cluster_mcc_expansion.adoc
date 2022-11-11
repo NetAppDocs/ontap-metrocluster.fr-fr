@@ -1,0 +1,44 @@
+---
+permalink: upgrade/task_add_a_new_controller_to_each_cluster_mcc_expansion.html 
+sidebar: sidebar 
+keywords: metrocluster, upgrade, add, new, controller, module, cluster 
+summary: 'Vous devez ajouter un module de contrôleur à chaque site, créant ainsi une paire haute disponibilité sur chaque site. Il s"agit d"un processus en plusieurs étapes impliquant à la fois des modifications matérielles et logicielles qui doivent être effectuées dans l"ordre approprié sur chaque site.' 
+---
+= Ajout d'un nouveau module de contrôleur à chaque cluster
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous devez ajouter un module de contrôleur à chaque site, créant ainsi une paire haute disponibilité sur chaque site. Il s'agit d'un processus en plusieurs étapes impliquant à la fois des modifications matérielles et logicielles qui doivent être effectuées dans l'ordre approprié sur chaque site.
+
+.Description de la tâche
+* NetApp doit recevoir le nouveau module de contrôleur dans le cadre du kit de mise à niveau.
++
+Vérifiez que les cartes PCIe du nouveau module de contrôleur sont compatibles et prises en charge par le nouveau module de contrôleur.
+
++
+https://hwu.netapp.com["NetApp Hardware Universe"]
+
+* Votre système doit disposer d'un slot vide disponible pour le nouveau module de contrôleur lors de la mise à niveau vers une paire haute disponibilité à châssis unique (paire haute disponibilité dans laquelle les deux modules de contrôleur résident sur le même châssis).
++
+
+NOTE: Cette configuration n'est pas prise en charge sur tous les systèmes. Les plateformes AFF A300, FAS8200, FAS8300, AFF A400, AFF80xx sont des plateformes avec des configurations de châssis uniques prises en charge dans ONTAP 9. FAS8020, FAS8060, FAS8080 ET FAS9000.
+
+* Vous devez disposer d'espace rack et de câbles pour le nouveau module de contrôleur lors de la mise à niveau vers une paire haute disponibilité à châssis double (paire haute disponibilité dans laquelle les modules de contrôleur résident dans un châssis distinct).
++
+
+NOTE: Cette configuration n'est pas prise en charge sur tous les systèmes.
+
+* Vous devez connecter chaque module de contrôleur au réseau de gestion via son port e0a ou si le système en possède un, vous pouvez vous connecter au port e0M comme port de gestion.
+* Ces tâches doivent être répétées sur chaque site.
+* Les modules de contrôleur préexistants sont appelés modules de contrôleur _existing_.
++
+Dans les exemples de cette procédure, l'invite de console est utilisée `existing_ctlr>`.
+
+* Les modules de contrôleur qui sont ajoutés sont appelés _New_ Controller modules ; les exemples de cette procédure sont indiqués par l'invite de la console `new_ctlr>`.
+* Cette tâche utilise le workflow suivant :
+
+
+image::../media/workflow_mcc_2_to_4_node_expansion_adding_nodes.gif[workflow mcc extension de 2 à 4 nœuds ajout de nœuds]

@@ -1,0 +1,115 @@
+---
+permalink: maintain/task_rename_a_cisco_ip_switch.html 
+sidebar: sidebar 
+keywords: metrocluster, maintain, service, rename, cisco, ip, switch 
+summary: Vous devrez peut-être renommer un commutateur IP Cisco pour fournir une dénomination cohérente dans toute votre configuration. 
+---
+= Modification du nom d'un commutateur IP Cisco
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous devrez peut-être renommer un commutateur IP Cisco pour fournir une dénomination cohérente dans toute votre configuration.
+
+Dans les exemples de cette tâche, le nom du commutateur est modifié de `myswitch` à `IP_switch_A_1`.
+
+. Passer en mode de configuration globale :
++
+`*configure terminal*`
+
++
+L'exemple suivant montre l'invite du mode de configuration. Les deux invites indiquent le nom du commutateur de `myswitch`.
+
++
+[listing]
+----
+myswitch# configure terminal
+myswitch(config)#
+----
+. Renommez le commutateur :
++
+`*switchname new-switch-name*`
+
++
+Si vous renommez les deux commutateurs dans la structure, utilisez la même commande sur chaque switch.
+
++
+L'invite de l'interface de ligne de commandes prend en compte le nouveau nom :
+
++
+[listing]
+----
+myswitch(config)# switchname IP_switch_A_1
+IP_switch_A_1(config)#
+----
+. Quitter le mode de configuration :
++
+`*exit*`
+
++
+L'invite du commutateur de niveau supérieur s'affiche :
+
++
+[listing]
+----
+IP_switch_A_1(config)# exit
+IP_switch_A_1#
+----
+. Copier la configuration en cours d'exécution dans le fichier de configuration de démarrage :
++
+`*copy running-config startup-config*`
+
+. Vérifiez que la modification du nom du commutateur est visible depuis l'invite du cluster ONTAP.
++
+Notez que le nouveau nom du commutateur est affiché et que l'ancien nom du commutateur (`myswitch`) n'apparaît pas.
+
++
+.. Passez en mode privilège avancé, puis appuyez sur `*y*` lorsque vous y êtes invité : +
+`*set -privilege advanced*`
+.. Afficher les périphériques connectés : +
+`*network device-discovery show*`
+.. Revenir en mode de privilège admin: +
+`*set -privilege admin*`
++
+L'exemple suivant montre que le commutateur apparaît avec le nouveau nom, `IP_switch_A_1`:
+
++
+[listing]
+----
+cluster_A::storage show> set advanced
+
+Warning: These advanced commands are potentially dangerous; use them only when directed to do so by NetApp personnel.
+Do you want to continue? {y|n}: y
+
+cluster_A::storage show*> network device-discovery show
+Node/       Local  Discovered
+Protocol    Port   Device                    Interface         Platform
+----------- ------ ------------------------- ----------------  ----------------
+node_A_2/cdp
+            e0M    LF01-410J53.mycompany.com(SAL18516DZY)
+                                             Ethernet125/1/28  N9K-C9372PX
+            e1a    IP_switch_A_1(FOC21211RBU)
+                                             Ethernet1/2       N3K-C3232C
+            e1b    IP_switch_A_1(FOC21211RBU)
+                                             Ethernet1/10      N3K-C3232C
+.
+.
+.                                             Ethernet1/18      N9K-C9372PX
+node_A_1/cdp
+            e0M    LF01-410J53.mycompany.com(SAL18516DZY)
+                                             Ethernet125/1/26  N9K-C9372PX
+            e0a    IP_switch_A_2(FOC21211RB5)
+                                             Ethernet1/1       N3K-C3232C
+            e0b    IP_switch_A_2(FOC21211RB5)
+                                             Ethernet1/9       N3K-C3232C
+            e1a    IP_switch_A_1(FOC21211RBU)
+.
+.
+.
+16 entries were displayed.
+----
+
+
+

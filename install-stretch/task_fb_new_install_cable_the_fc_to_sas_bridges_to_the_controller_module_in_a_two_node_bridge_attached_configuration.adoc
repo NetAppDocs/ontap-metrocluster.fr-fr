@@ -1,0 +1,119 @@
+---
+permalink: install-stretch/task_fb_new_install_cable_the_fc_to_sas_bridges_to_the_controller_module_in_a_two_node_bridge_attached_configuration.html 
+sidebar: sidebar 
+keywords: metrocluster, stretch, installation, cable, fc, sas, bridge, controller, module, two, node, configuration 
+summary: Vous devez raccorder les ponts au module de contrôleur dans une configuration MetroCluster à connexion pont à deux nœuds. 
+---
+= Le câblage des ponts FC-SAS au module de contrôleur dans une configuration MetroCluster à deux nœuds Bridge-Attached
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous devez raccorder les ponts au module de contrôleur dans une configuration MetroCluster à connexion pont à deux nœuds.
+
+.Étapes
+. [[stepon1-verify-Detect]]Vérifiez que chaque pont peut détecter tous les disques durs et les tiroirs disques auxquels le pont est connecté.
++
+|===
+
+
+| Si vous utilisez... | Alors... 
+
+
+ a| 
+Interface graphique ATTO ExpressNAV
+ a| 
+.. Dans un navigateur Web pris en charge, entrez l'adresse IP d'un pont dans la zone de navigation.
++
+Vous serez conduit vers la page d'accueil ATTO FibreBridge du lien Bridge pour l'adresse IP saisie.
+
+.. Cliquez sur le lien, puis entrez votre nom d'utilisateur et le mot de passe que vous avez désignés lors de la configuration du pont.
++
+La page d'état ATTO FibreBridge du pont s'affiche avec un menu à gauche.
+
+.. Cliquez sur *Avancé* dans le menu.
+.. Exécutez la commande suivante, puis cliquez sur *Submit*: +
+`sastargets`
+
+
+
+
+ a| 
+Connexion du port série
+ a| 
+Exécutez la commande suivante :
+
+`sastargets`
+
+|===
++
+Le `sastargets` le résultat de la commande affiche les périphériques (disques et tiroirs disques) connectés au pont. Les lignes de sortie sont numérotées de façon séquentielle afin que vous puissiez rapidement compter les périphériques.
+
++
+
+NOTE: Si « réponse texte tronquée » apparaît au début de la sortie, vous pouvez utiliser Telnet pour vous connecter au pont et exécuter la même commande pour afficher toutes les sorties.
+
++
+Le résultat suivant indique que 10 disques sont connectés :
+
++
+[listing]
+----
+Tgt VendorID ProductID        Type        SerialNumber
+  0 NETAPP   X410_S15K6288A15 DISK        3QP1CLE300009940UHJV
+  1 NETAPP   X410_S15K6288A15 DISK        3QP1ELF600009940V1BV
+  2 NETAPP   X410_S15K6288A15 DISK        3QP1G3EW00009940U2M0
+  3 NETAPP   X410_S15K6288A15 DISK        3QP1EWMP00009940U1X5
+  4 NETAPP   X410_S15K6288A15 DISK        3QP1FZLE00009940G8YU
+  5 NETAPP   X410_S15K6288A15 DISK        3QP1FZLF00009940TZKZ
+  6 NETAPP   X410_S15K6288A15 DISK        3QP1CEB400009939MGXL
+  7 NETAPP   X410_S15K6288A15 DISK        3QP1G7A900009939FNTT
+  8 NETAPP   X410_S15K6288A15 DISK        3QP1FY0T00009940G8PA
+  9 NETAPP   X410_S15K6288A15 DISK        3QP1FXW600009940VERQ
+----
+. Vérifiez que le résultat de la commande indique que le pont est connecté à l'ensemble des disques et des tiroirs disques de la pile qu'il est supposé être connecté.
++
+[cols="30,70"]
+|===
+
+
+| Si la sortie est... | Alors... 
+
+
+ a| 
+Exact
+ a| 
+Recommencez ,Étape 1 pour chaque pont restant.
+
+
+
+ a| 
+Incorrect
+ a| 
+.. Vérifiez que les câbles SAS ne sont pas correctement branchés ou corrigez le câblage SAS en réétiquetage des tiroirs disques aux ponts.
++
+link:task_fb_new_install_cabl.html["Câblage des tiroirs disques aux ponts"]
+
+.. Recommencez ,Étape 1 pour chaque pont restant.
+
+
+|===
+. [[step3-CABLE-Each-Bridge]]Connectez chaque pont aux modules de contrôleur :
++
+.. Reliez le port FC 1 du pont à un port FC du module de contrôleur dans cluster_A.
+.. Reliez le port FC 2 du pont à un port FC du module de contrôleur dans cluster_B.
++
+Si le module de contrôleur est configuré avec un adaptateur FC à quatre ports, assurez-vous que les piles de stockage sont connectées à deux ports FC sur le même ASIC. Les ports a et b partagent le même ASIC, et les ports c et d partagent le même ASIC. Ne connectez pas une pile d'étagères aux ports a et b. Utilisez plutôt le port a et le port c, ou utilisez les ports b et d pour éviter un point de défaillance unique en cas de défaillance d'un ASIC.
+
++
+Si le module de contrôleur est configuré avec plusieurs adaptateurs FC, ne connectez pas les deux ports de pont à la même carte. Vous devez distribuer le port FC 1 à l'adaptateur A et le port FC 2 à l'adaptateur B pour éviter un point faible.
+
++
+image::../media/cluster_peering_network.gif[réseau de peering de cluster]
+
+
+
+. Recommencez ,Étape 3 sur les autres ponts jusqu'à ce que tous les ponts aient été câblés.
+

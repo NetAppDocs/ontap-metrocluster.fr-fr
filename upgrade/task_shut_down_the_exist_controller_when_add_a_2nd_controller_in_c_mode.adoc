@@ -1,0 +1,58 @@
+---
+permalink: upgrade/task_shut_down_the_exist_controller_when_add_a_2nd_controller_in_c_mode.html 
+sidebar: sidebar 
+keywords: metrocluster, upgrade, shut, down, existing, controller, module 
+summary: Vous devez effectuer un arrêt correct du module de contrôleur existant pour vérifier que toutes les données ont été écrites sur le disque. Vous devez également débrancher les alimentations. 
+---
+= Arrêt du module de contrôleur existant
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous devez effectuer un arrêt correct du module de contrôleur existant pour vérifier que toutes les données ont été écrites sur le disque. Vous devez également débrancher les alimentations.
+
+.Description de la tâche
+--
+
+IMPORTANT: Vous devez effectuer un arrêt correct du système avant de remplacer les composants du système pour éviter de perdre des données non écrites dans la mémoire NVRAM ou la mémoire NVMEM.
+
+--
+.Étapes
+. Arrêtez le nœud depuis l'invite du module de contrôleur existant :
++
+`halt local -inhibit-takeover true`
+
++
+Si vous êtes invité à continuer la procédure d'arrêt, entrez `y` Lorsque vous y êtes invité, puis attendez que le système s'arrête à l'invite DU CHARGEUR.
+
++
+Dans un système 80xx, le voyant NVRAM se trouve sur le module de contrôleur à droite des ports réseau, marqué d'un symbole de batterie.
+
++
+Cette LED clignote si des données non écrites sont présentes dans la mémoire NVRAM. Si ce voyant clignote en orange après avoir entré la commande halt, vous devez redémarrer votre système et essayer de l'arrêter à nouveau.
+
+. Si vous n'êtes pas déjà mis à la terre, mettez-vous à la terre correctement.
+. Mettez les blocs d'alimentation hors tension et débranchez-les, en utilisant la méthode appropriée pour votre système et le type d'alimentation :
++
+|===
+
+
+| Si votre système utilise... | Alors... 
+
+
+ a| 
+Blocs d'alimentation CA
+ a| 
+Débranchez les câbles d'alimentation de la source d'alimentation, puis retirez les câbles d'alimentation.
+
+
+
+ a| 
+Alimentations CC
+ a| 
+Débranchez l'alimentation de la source CC, puis retirez les fils CC, si nécessaire.
+
+|===
+

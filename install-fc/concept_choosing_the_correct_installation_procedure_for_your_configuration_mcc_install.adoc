@@ -1,0 +1,43 @@
+---
+permalink: install-fc/concept_choosing_the_correct_installation_procedure_for_your_configuration_mcc_install.html 
+sidebar: sidebar 
+keywords: metrocluster, fabric, installation, correct, procedure, configuration 
+summary: 'Vous devez choisir la procédure d"installation appropriée selon que vous utilisez des LUN FlexArray, le nombre de nœuds de la configuration MetroCluster et si vous partagez une structure de commutateur FC existante utilisée par une structure 7-mode MetroCluster.' 
+---
+= Choix de la procédure d'installation adaptée à votre configuration
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous devez choisir la procédure d'installation appropriée selon que vous utilisez des LUN FlexArray, le nombre de nœuds de la configuration MetroCluster et si vous partagez une structure de commutateur FC existante utilisée par une structure 7-mode MetroCluster.
+
+image::../media/workflow_select_your_metrocluster_configuration_fabric.gif[workflow sélectionnez votre structure de configuration MetroCluster]
+
+|===
+
+
+| Pour ce type d'installation... | Utilisez ces procédures... 
+
+
+ a| 
+Configuration FAS avec disques NetApp (natifs)
+ a| 
+. link:task_configure_the_mcc_hardware_components_fabric.html["Câblage d'une configuration MetroCluster Fabric-Attached"]
+. link:concept_configure_the_mcc_software_in_ontap.html["Configuration du logiciel MetroCluster dans ONTAP"]
+
+
+
+
+ a| 
+Configuration FAS lorsqu'elle est partagée avec une structure de commutateurs FC existante
+
+Cette configuration est uniquement prise en charge en tant que configuration temporaire avec une configuration 7-mode Fabric MetroCluster utilisant des commutateurs Brocade 6510.
+ a| 
+. link:task_configure_the_mcc_hardware_components_fabric.html["Câblage d'une configuration MetroCluster Fabric-Attached"]
+. link:task_fmc_mcc_transition_configure_the_mcc_hardware_for_share_a_7_mode_brocade_6510_fc_fabric_dure_transition.html["Configuration du matériel MetroCluster pour partager une structure FC Brocade 6510 7-mode lors de la transition"]
+. link:concept_configure_the_mcc_software_in_ontap.html["Configuration du logiciel MetroCluster dans ONTAP"]
+
+
+|===

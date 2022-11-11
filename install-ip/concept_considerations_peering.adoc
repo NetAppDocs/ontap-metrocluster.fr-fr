@@ -1,0 +1,111 @@
+---
+permalink: install-ip/concept_considerations_peering.html 
+sidebar: sidebar 
+keywords: considertaions, cluster peering, shared peering ports, dedicated peering ports 
+summary: Chaque site MetroCluster est configuré comme homologue de son site partenaire. 
+---
+= Peering de clusters
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Chaque site MetroCluster est configuré comme homologue de son site partenaire. Vous devez connaître les conditions préalables et les instructions de configuration des relations de peering. C'est important lorsque vous décidez d'utiliser des ports partagés ou dédiés pour ces relations.
+
+http://docs.netapp.com/ontap-9/topic/com.netapp.doc.exp-clus-peer/home.html["Configuration cluster et SVM peering express"]
+
+
+
+== Conditions préalables au peering de clusters
+
+Avant de configurer le peering de cluster, vous devez vérifier que la connectivité entre le port, l'adresse IP, le sous-réseau, le pare-feu et les exigences de nommage des clusters sont respectées.
+
+
+
+=== Les besoins en connectivité
+
+Chaque LIF intercluster du cluster local doit pouvoir communiquer avec chaque LIF intercluster sur le cluster distant.
+
+Bien qu'il ne soit pas nécessaire, il est généralement plus simple de configurer les adresses IP utilisées pour les LIF intercluster dans le même sous-réseau. Les adresses IP peuvent résider dans le même sous-réseau que les LIF de données ou dans un autre sous-réseau. Le sous-réseau utilisé dans chaque cluster doit respecter les exigences suivantes :
+
+* Le sous-réseau doit disposer de suffisamment d'adresses IP disponibles pour allouer à une LIF intercluster par nœud.
++
+Par exemple, dans un cluster à quatre nœuds, le sous-réseau utilisé pour la communication intercluster doit disposer de quatre adresses IP disponibles.
+
+
+
+Chaque nœud doit disposer d'un LIF intercluster avec une adresse IP sur le réseau intercluster.
+
+Les LIF intercluster peuvent disposer d'une adresse IPv4 ou IPv6.
+
+
+NOTE: ONTAP 9 vous permet de migrer vos réseaux de peering d'IPv4 vers IPv6 en autorisant, éventuellement, la présence simultanée des deux protocoles sur les LIF intercluster. Dans les versions précédentes, toutes les relations intercluster pour un cluster entier étaient au format IPv4 ou IPv6. Cela signifiait que le changement de protocole était potentiellement source de perturbation.
+
+
+
+=== Configuration requise pour les ports
+
+Vous pouvez utiliser des ports dédiés pour la communication intercluster ou partager les ports utilisés par le réseau de données. Les ports doivent répondre aux exigences suivantes :
+
+* Tous les ports utilisés pour communiquer avec un cluster distant donné doivent se trouver dans le même IPspace.
++
+Vous pouvez utiliser plusieurs IPspaces pour gérer plusieurs clusters dans un même cluster. Une connectivité à maillage complet par paire est requise uniquement au sein d'un IPspace.
+
+* Le broadcast domain utilisé pour les communications intercluster doit inclure au moins deux ports par nœud afin que la communication intercluster puisse basculer d'un port vers un autre.
++
+Les ports ajoutés à un domaine de diffusion peuvent être des ports réseau physiques, des VLAN ou des groupes d'interfaces (ifgrps).
+
+* Tous les ports doivent être câblés.
+* Tous les ports doivent être en état de santé.
+* Les paramètres MTU des ports doivent être cohérents.
+
+
+
+
+=== Exigences relatives au pare-feu
+
+Les pare-feu et la politique de pare-feu intercluster doivent autoriser les protocoles suivants :
+
+* Service ICMP
+* TCP aux adresses IP de toutes les LIFs intercluster sur les ports 10000, 11104 et 11105
+* HTTPS bidirectionnel entre les LIFs intercluster
+
+
+La politique de pare-feu intercluster par défaut permet l'accès via le protocole HTTPS et à partir de toutes les adresses IP (0.0.0.0/0). Vous pouvez modifier ou remplacer la stratégie si nécessaire.
+
+
+
+== Considérations relatives à l'utilisation de ports dédiés
+
+Pour déterminer si l'utilisation d'un port dédié pour la réplication intercluster est la bonne solution réseau intercluster, vous devez tenir compte des configurations et des exigences telles que le type de LAN, la bande passante WAN disponible, l'intervalle de réplication, le taux de changement et le nombre de ports.
+
+Pour déterminer si l'utilisation d'un port dédié est la meilleure solution réseau intercluster, prenez en compte les aspects suivants de votre réseau :
+
+* Si la quantité de bande passante WAN disponible est similaire à celle des ports LAN et que l'intervalle de réplication est tel que la réplication se produit pendant que l'activité client est régulière, alors vous devez dédier des ports Ethernet à la réplication intercluster pour éviter les conflits entre la réplication et les protocoles de données.
+* Si l'utilisation du réseau générée par les protocoles de données (CIFS, NFS et iSCSI) est telle que l'utilisation du réseau dépasse 50 %, alors dédier des ports à la réplication pour permettre des performances non dégradées en cas de basculement sur un nœud.
+* Lorsque des ports physiques 10 GbE ou plus rapides sont utilisés pour les données et la réplication, vous pouvez créer des ports VLAN pour la réplication et dédier les ports logiques à la réplication intercluster.
++
+La bande passante du port est partagée entre tous les VLAN et le port de base.
+
+* Tenez compte du taux de modification des données et de l'intervalle de réplication et de l'espace requis pour déterminer si la quantité de données qui doit être répliquée sur chaque intervalle nécessite suffisamment de bande passante. Cela peut générer des conflits avec les protocoles de données en cas de partage de ports de données.
+
+
+
+
+== Points à prendre en compte lors du partage de ports de données
+
+Lors de la détermination du partage d'un port de données pour la réplication intercluster est la bonne solution réseau intercluster, vous devez tenir compte des configurations et des exigences telles que le type de LAN, la bande passante WAN disponible, l'intervalle de réplication, le taux de changement et le nombre de ports.
+
+Prenez en compte les aspects suivants de votre réseau pour déterminer si le partage de ports de données est la meilleure solution de connectivité intercluster :
+
+* Pour un réseau haut débit, tel qu'un réseau 40 Gigabit Ethernet (40-GbE), une quantité suffisante de bande passante LAN locale peut être disponible pour effectuer la réplication sur les mêmes ports 40 GbE utilisés pour l'accès aux données.
++
+Dans la plupart des cas, la bande passante WAN disponible est bien inférieure à celle du réseau LAN 10 GbE.
+
+* Le partage des ports de données peut être dû à tous les nœuds du cluster pour répliquer des données et partager la bande passante WAN disponible.
+* Le partage de ports pour les données et la réplication élimine le nombre de ports supplémentaires requis pour dédier des ports à la réplication.
+* La taille maximale de l'unité de transmission (MTU) du réseau de réplication sera la même que celle utilisée sur le réseau de données.
+* Tenez compte du taux de modification des données et de l'intervalle de réplication et de l'espace requis pour déterminer si la quantité de données qui doit être répliquée sur chaque intervalle nécessite suffisamment de bande passante. Cela peut générer des conflits avec les protocoles de données en cas de partage de ports de données.
+* Lorsque les ports de données pour la réplication intercluster sont partagés, les LIFs intercluster peuvent être migrés vers n'importe quel autre port intercluster du même nœud afin de contrôler le port de données spécifique utilisé pour la réplication.
+

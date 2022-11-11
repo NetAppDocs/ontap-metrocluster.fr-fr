@@ -1,0 +1,96 @@
+---
+permalink: upgrade/task_install_and_cable_the_new_controller.html 
+sidebar: sidebar 
+keywords: metrocluster, upgrade, install, cable, new, controller, module 
+summary: Vous devez installer physiquement le nouveau module de contrôleur dans le châssis, puis le brancher. 
+---
+= Installation et câblage du nouveau module de contrôleur
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous devez installer physiquement le nouveau module de contrôleur dans le châssis, puis le brancher.
+
+.Étapes
+. Si votre système est équipé d'un module d'extension d'E/S (IOXM) et que vous créez une paire haute disponibilité avec châssis unique, vous devez déconnecter et retirer le module IOXM.
++
+Vous pouvez ensuite utiliser la baie vide pour le nouveau module de contrôleur. Toutefois, la nouvelle configuration ne sera pas équipée des E/S supplémentaires fournies par le module IOXM.
+
+. Installez physiquement le nouveau module de contrôleur et, si nécessaire, installez des ventilateurs supplémentaires :
++
+|===
+
+
+| Si vous ajoutez un module de contrôleur... | Ensuite, procédez comme suit... 
+
+
+ a| 
+Sur une baie vide pour créer une paire haute disponibilité à châssis unique et le système appartient à l'une des plates-formes suivantes :
+ a| 
+.. Retirez la plaque vierge située à l'arrière du châssis, qui recouvre la baie vide contenant le nouveau module de contrôleur.
+.. Poussez doucement le module de contrôleur à mi-chemin dans le châssis.
++
+Pour éviter que le module de contrôleur ne démarre automatiquement, ne le asseyez pas complètement dans le châssis avant que cette procédure ne soit effectuée plus tard.
+
+
+
+
+
+ a| 
+Dans un châssis distinct de son partenaire haute disponibilité, pour créer une paire haute disponibilité à double châssis lorsque la configuration existante se trouve dans une configuration de module contrôleur-IOX.
+
+** FAS8200
+** 80xx
+
+ a| 
+Installez le nouveau système sur le rack ou l'armoire système.
+
+|===
+. Câconnectez les connexions du réseau du cluster, si nécessaire :
++
+.. Identifier les ports du module de contrôleur pour les connexions du cluster
++
+https://docs.netapp.com/platstor/topic/com.netapp.doc.hw-a320-install-setup/home.html["Systèmes AFF A320 : installation et configuration"^]
+
++
+https://library.netapp.com/ecm/ecm_download_file/ECMLP2842666["Instructions d'installation et de configuration des systèmes AFF A220/FAS2700"^]
+
++
+https://library.netapp.com/ecm/ecm_download_file/ECMLP2842668["Instructions d'installation et de configuration des systèmes AFF A800"^]
+
++
+https://library.netapp.com/ecm/ecm_download_file/ECMLP2469722["Instructions d'installation et de configuration des systèmes AFF A300"^]
+
++
+https://library.netapp.com/ecm/ecm_download_file/ECMLP2316769["Instructions d'installation et de configuration du système FAS8200"^]
+
+.. Si vous configurez un cluster commuté, identifiez les ports que vous utiliserez sur les commutateurs du réseau de cluster.
++
+Reportez-vous au _Guide de configuration des commutateurs clustered Data ONTAP pour les commutateurs Cisco_, _Guide d'installation des commutateurs NetApp 10G Cluster-mode_ ou _Guide d'installation des commutateurs NetApp 1G Cluster-mode_, selon les commutateurs que vous utilisez.
+
+.. Connectez les câbles aux ports du cluster :
+
+
++
+|===
+
+
+| Si le cluster est... | Alors... 
+
+
+ a| 
+Un cluster à 2 nœuds sans commutateur
+ a| 
+Connectez directement les ports de cluster sur le module de contrôleur existant aux ports de cluster correspondants sur le nouveau module de contrôleur.
+
+
+
+ a| 
+Un cluster commuté
+ a| 
+Connectez les ports de cluster de chaque contrôleur aux ports des commutateurs de réseau de cluster identifiés à la sous-étape b.
+
+|===
+

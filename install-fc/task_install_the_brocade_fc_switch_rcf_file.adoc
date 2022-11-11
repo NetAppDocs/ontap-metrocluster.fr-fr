@@ -1,0 +1,302 @@
+---
+permalink: install-fc/task_install_the_brocade_fc_switch_rcf_file.html 
+sidebar: sidebar 
+keywords: metrocluster, fabric, installation, brocade, fc, switch, rcf, file 
+summary: Lorsque vous configurez un commutateur FC Brocade, vous pouvez installer les fichiers de configuration des commutateurs qui fournissent les paramètres de commutation complets pour certaines configurations. 
+---
+= Installation du fichier RCF de commutateur FC Brocade
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Lorsque vous configurez un commutateur FC Brocade, vous pouvez installer les fichiers de configuration des commutateurs qui fournissent les paramètres de commutation complets pour certaines configurations.
+
+Ces étapes doivent être répétées sur chacun des commutateurs FC Brocade dans la configuration de la structure MetroCluster.
+
+.Étapes
+. Lancez le processus de téléchargement et de configuration :
++
+`configDownload`
+
++
+Répondez aux invites comme indiqué dans l'exemple suivant.
+
++
+[listing]
+----
+FC_switch_A_1:admin> configDownload
+Protocol (scp, ftp, sftp, local) [ftp]:
+Server Name or IP Address [host]: <user input>
+User Name [user]:<user input>
+Path/Filename [<home dir>/config.txt]:path to configuration file
+Section (all|chassis|switch [all]): all
+.
+.
+.
+Do you want to continue [y/n]: y
+Password: <user input>
+----
++
+Après avoir saisi votre mot de passe, le commutateur télécharge et exécute le fichier de configuration.
+
+. Activer le commutateur de manière persistante :
++
+`switchcfgpersistentenable`
+
++
+L'exemple montre comment activer de manière persistante le commutateur FC_A_1.
+
++
+[listing]
+----
+FC_switch_A_1:admin> switchcfgpersistentenable
+----
+. Vérifiez que le fichier de configuration a défini le domaine du commutateur :
++
+`switchShow`
+
++
+Un numéro de domaine différent est attribué à chaque commutateur en fonction du fichier de configuration utilisé par le commutateur.
+
++
+[listing]
+----
+FC_switch_A_1:admin> switchShow
+switchName: FC_switch_A_1
+switchType: 109.1
+switchState: Online
+switchMode: Native
+switchRole: Subordinate
+switchDomain: 5
+----
+. Vérifiez que la valeur de domaine correcte est attribuée à votre commutateur, comme indiqué dans le tableau suivant.
++
+|===
+
+
+| Structure | Commutateur | Domaine des commutateurs 
+
+
+ a| 
+1
+ a| 
+A_1
+ a| 
+5
+
+
+
+ a| 
+B_1
+ a| 
+7
+
+
+
+ a| 
+2
+ a| 
+A_2
+ a| 
+6
+
+
+
+ a| 
+B_2
+ a| 
+8
+
+|===
+. Modifier la vitesse du port :
++
+`portcfgspeed`
+
++
+[listing]
+----
+FC_switch_A_1:admin> portcfgspeed port number port speed
+----
++
+Par défaut, tous les ports sont configurés pour fonctionner à 16 Gbits/s. Vous pouvez modifier la vitesse du port pour les raisons suivantes :
+
++
+** La vitesse des ports du commutateur d'interconnexion doit être modifiée lorsqu'un adaptateur FC-VI 8 Gbit/s est utilisé et que la vitesse du port du commutateur doit être définie sur 8 Gbit/s.
+** La vitesse des ports du commutateur doit être modifiée lorsqu'un adaptateur HBA 8 Gbit/s est utilisé pour ATTO FibreBridge 6500N.
+** La vitesse des ports ISL doit être modifiée lorsque le ISL ne peut pas être exécuté à 16 Gbits/s.
+
+
+. Calculer la distance ISL.
++
+En raison du comportement du FC-VI, vous devez régler la distance à 1.5 fois la distance réelle avec un minimum de 10 (LE). La distance pour l'ISL est calculée comme suit, arrondie au kilomètre entier suivant : 1.5 × distance réelle = distance.
+
++
+Si la distance est de 3 km, alors 1.5 × 3 km = 4.5. Ceci est inférieur à 10 ; par conséquent, vous devez régler l'ISL sur le niveau DE distance LE.
+
++
+La distance est de 20 km, puis de 1.5 × 20 km = 30. Vous devez définir l'ISL sur le niveau de distance LS.
+
+. Définissez la distance pour chaque port ISL :
++
+`portcfglongdistance _port level vc_link_init_ -distance _distance_value_`
+
++
+La valeur vc_link_init de 1 utilise par défaut le terme « ARB ». Une valeur de 0 utilise le mot de remplissage "INACTIF". La valeur requise peut varier en fonction du lien que vous utilisez. Dans cet exemple, la valeur par défaut est définie et la distance est supposée être de 20 km Par conséquent, le paramètre est "30" avec une valeur vc_LINK_init de "1" et le port ISL est "21".
+
++
+Exemple : LS
+
++
+[listing]
+----
+FC_switch_A_1:admin> portcfglongdistance 21 LS 1 -distance 30
+----
++
+Exemple : LE
+
++
+[listing]
+----
+FC_switch_A_1:admin> portcfglongdistance 21 LE 1
+----
+. Vérifiez si l'adresse IP est correctement définie :
++
+`ipAddrshow`
+
++
+[listing]
+----
+FC_switch_A_1:admin> ipAddrshow
+----
++
+Vous pouvez définir l'adresse IP, si nécessaire :
+
++
+`ipAddrSet`
+
+. Définissez le fuseau horaire dans l'invite du commutateur :
++
+`tstimezone --interactive`
+
++
+Vous devez répondre aux invites si nécessaire.
+
++
+[listing]
+----
+FC_switch_A_1:admin>  tstimezone --interactive
+----
+. Redémarrez le commutateur :
++
+`reboot`
+
++
+L'exemple montre comment redémarrer le commutateur FC _A_1.
+
++
+[listing]
+----
+FC_switch_A_1:admin> reboot
+----
+. Vérifiez le réglage de distance :
++
+`portbuffershow`
+
++
+Un réglage de distance de LE apparaît à 10 km
+
++
+[listing]
+----
+FC_Switch_A_1:admin> portbuffershow
+User Port Lx   Max/Resv Buffer Needed  Link     Remaining
+Port Type Mode Buffers  Usage  Buffers Distance Buffers
+---- ---- ---- ------- ------ ------- --------- ----------
+...
+21    E    -      8      67     67      30 km
+22    E    -      8      67     67      30 km
+...
+23    -    8      0       -      -      466
+----
+. Reconnectez les câbles ISL aux ports des commutateurs où ils ont été retirés.
++
+Les câbles ISL ont été déconnectés lorsque les paramètres d'usine ont été réinitialisés sur les paramètres par défaut.
+
++
+link:task_reset_the_brocade_fc_switch_to_factory_defaults.html["Réinitialisation des paramètres d'usine du commutateur Brocade FC"]
+
+. Validation de la configuration
++
+.. Vérifier que les commutateurs forment une structure unique :
++
+`switchshow`
+
++
+L'exemple suivant montre la sortie d'une configuration utilisant des liens ISL sur les ports 20 et 21.
+
++
+[listing]
+----
+FC_switch_A_1:admin> switchshow
+switchName: FC_switch_A_1
+switchType: 109.1
+switchState:Online
+switchMode: Native
+switchRole: Subordinate
+switchDomain:       5
+switchId:   fffc01
+switchWwn:  10:00:00:05:33:86:89:cb
+zoning:             OFF
+switchBeacon:       OFF
+
+Index Port Address Media Speed State  Proto
+===========================================
+...
+20   20  010C00   id    16G  Online FC  LE E-Port  10:00:00:05:33:8c:2e:9a "FC_switch_B_1" (downstream)(trunk master)
+21   21  010D00   id    16G  Online FC  LE E-Port  (Trunk port, master is Port 20)
+...
+----
+.. Confirmer la configuration des structures :
++
+`fabricshow`
+
++
+[listing]
+----
+FC_switch_A_1:admin> fabricshow
+   Switch ID   Worldwide Name      Enet IP Addr FC IP Addr Name
+-----------------------------------------------------------------
+1: fffc01 10:00:00:05:33:86:89:cb 10.10.10.55  0.0.0.0    "FC_switch_A_1"
+3: fffc03 10:00:00:05:33:8c:2e:9a 10.10.10.65  0.0.0.0   >"FC_switch_B_1"
+----
+.. Vérifiez que les liens ISL fonctionnent :
++
+`islshow`
+
++
+[listing]
+----
+FC_switch_A_1:admin> islshow
+----
+.. Vérifier que le zoning est correctement répliqué :
++
+`cfgshow`+
+`zoneshow`
+
++
+Les deux sorties doivent afficher les mêmes informations de configuration et de segmentation pour les deux commutateurs.
+
+.. Si la mise en circuit est utilisée, confirmez la mise en circuit :
++
+`trunkShow`
+
++
+[listing]
+----
+FC_switch_A_1:admin> trunkshow
+----
+
+
+

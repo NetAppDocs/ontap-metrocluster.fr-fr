@@ -1,0 +1,73 @@
+---
+permalink: upgrade/task_configure_the_fc_to_sas_bridges_for_health_monitor.html 
+sidebar: sidebar 
+keywords: metrocluster, upgrade, configure, fc, sas, bridges, health, monitoring 
+summary: 'Les outils de surveillance SNMP tiers ne sont pas pris en charge pour les ponts FiberBridge. Depuis la version ONTAP 9.8, les ponts FC-SAS sont surveillés par défaut via des connexions intrabande, ce qui n"est pas nécessaire.' 
+---
+= Configuration de ponts FC-SAS pour le contrôle de l'état du système
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+.Description de la tâche
+* Les outils de surveillance SNMP tiers ne sont pas pris en charge pour les ponts FiberBridge.
+* Depuis la version ONTAP 9.8, les ponts FC-SAS sont surveillés par défaut via des connexions intrabande, ce qui n'est pas nécessaire.
+
+
+
+NOTE: Avec ONTAP 9.8, le `storage bridge` la commande est remplacée par `system bridge`. Les étapes suivantes présentent le `storage bridge` Mais si vous exécutez ONTAP 9.8 ou version ultérieure, le `system bridge` commande recommandée.
+
+.Étape
+. Dans l'invite de cluster ONTAP, ajoutez le pont au contrôle de l'état de santé :
++
+.. Ajoutez le pont à l'aide de la commande pour votre version de ONTAP :
++
+|===
+
+
+| Version ONTAP | Commande 
+
+
+ a| 
+9.5 et versions ultérieures
+ a| 
+`storage bridge add -address 0.0.0.0 -managed-by in-band -name _bridge-name_`
+
+
+
+ a| 
+9.4 et versions antérieures
+ a| 
+`storage bridge add -address _bridge-ip-address_ -name _bridge-name_`
+
+|===
+.. Vérifiez que le pont a été ajouté et est correctement configuré :
++
+`storage bridge show`
+
++
+La prise en compte de toutes les données peut prendre jusqu'à 15 minutes en raison de l'intervalle d'interrogation. Le contrôle de l'état du système ONTAP peut contacter et surveiller le pont si la valeur de la colonne « État » est « ok » et si d'autres informations, telles que le nom universel (WWN), sont affichées.
+
++
+L'exemple suivant montre que les ponts FC-SAS sont configurés :
+
++
+[listing]
+----
+controller_A_1::> storage bridge show
+
+Bridge              Symbolic Name Is Monitored  Monitor Status  Vendor Model                Bridge WWN
+------------------  ------------- ------------  --------------  ------ -----------------    ----------
+ATTO_10.10.20.10  atto01        true          ok              Atto   FibreBridge 7500N   	20000010867038c0
+ATTO_10.10.20.11  atto02        true          ok              Atto   FibreBridge 7500N   	20000010867033c0
+ATTO_10.10.20.12  atto03        true          ok              Atto   FibreBridge 7500N   	20000010867030c0
+ATTO_10.10.20.13  atto04        true          ok              Atto   FibreBridge 7500N   	2000001086703b80
+
+4 entries were displayed
+
+ controller_A_1::>
+----
+
+
+

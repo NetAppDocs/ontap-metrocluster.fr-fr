@@ -1,0 +1,24 @@
+---
+permalink: install-fc/concept_implementing_a_mcc_configuration_with_both_disks_and_array_luns.html 
+sidebar: sidebar 
+keywords: metrocluster, fabric, installation, implement, configuration, disks, array, luns 
+summary: Pour implémenter une configuration MetroCluster avec des disques natifs et des LUN de baie, vous devez vous assurer que les systèmes ONTAP utilisés dans la configuration peuvent être connectés aux baies de stockage. 
+---
+= Mise en œuvre d'une configuration MetroCluster avec des disques et des LUN de baie
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Pour implémenter une configuration MetroCluster avec des disques natifs et des LUN de baie, vous devez vous assurer que les systèmes ONTAP utilisés dans la configuration peuvent être connectés aux baies de stockage.
+
+Une configuration MetroCluster avec disques et LUN de baie peut avoir deux ou quatre nœuds. Bien que la configuration MetroCluster à quatre nœuds doive être Fabric-Attached, la configuration à deux nœuds peut être extensible ou Fabric-Attached.
+
+Dans le https://mysupport.netapp.com/matrix["Matrice d'interopérabilité NetApp (IMT)"], Vous pouvez utiliser le champ solution de stockage pour sélectionner votre solution MetroCluster. Utilisez *Explorateur de composants* pour sélectionner les composants et la version ONTAP pour affiner votre recherche. Vous pouvez cliquer sur *Afficher les résultats* pour afficher la liste des configurations prises en charge qui correspondent aux critères.
+
+Pour configurer une configuration MetroCluster à deux nœuds ou une configuration MetroCluster à quatre nœuds avec des disques natifs et des LUN de baie, vous devez utiliser des ponts FC-SAS pour connecter les systèmes ONTAP aux tiroirs disques via les commutateurs FC. Vous pouvez connecter les LUN de baies via les commutateurs FC aux systèmes ONTAP.
+
+link:reference_example_of_a_two_node_fabric_attached_mcc_configuration_with_disks_and_array_luns.html["Exemple de configuration MetroCluster à deux nœuds avec des disques et des LUN de baies"]
+
+link:concept_example_of_a_four_node_mcc_configuration_with_disks_and_array_luns.html["Exemple de configuration MetroCluster à quatre nœuds avec disques et LUN de baie"]

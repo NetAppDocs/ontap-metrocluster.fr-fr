@@ -1,0 +1,39 @@
+= 
+:allow-uri-read: 
+
+
+[role="lead"]
+Avant d'utiliser un nouveau module de contrôleur dans la configuration MetroCluster, il faut effacer la configuration existante.
+
+.Étapes
+. Si nécessaire, arrêtez le nœud pour afficher l'invite DU CHARGEUR :
++
+`halt`
+
+. Dans l'invite DU CHARGEUR, définissez les variables environnementales sur les valeurs par défaut :
++
+`set-defaults`
+
+. Enregistrez l'environnement :
++
+`saveenv`
+
+. À l'invite DU CHARGEUR, lancez le menu de démarrage :
++
+`boot_ontap menu`
+
+. À l'invite du menu de démarrage, effacez la configuration :
++
+`wipeconfig`
+
++
+Répondez `yes` à l'invite de confirmation.
+
++
+Le nœud redémarre et le menu de démarrage s'affiche de nouveau.
+
+. Dans le menu de démarrage, sélectionnez l'option *5* pour démarrer le système en mode Maintenance.
++
+Répondez `yes` à l'invite de confirmation.
+
+

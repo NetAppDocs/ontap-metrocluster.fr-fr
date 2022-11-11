@@ -1,0 +1,132 @@
+---
+section: install-ip
+title: Installez une configuration MetroCluster IP
+entries:
+- title: Présentation
+  url: "/install-ip/index.html"
+- title: La préparation de l'installation de MetroCluster
+  entries:
+  - title: Différences entre les configurations ONTAP MetroCluster
+    url: "/install-ip/concept_considerations_differences.html"
+  - title: Choix du médiateur ONTAP et du disjoncteur d'attache MetroCluster
+    url: "/install-ip/concept_considerations_mediator.html"
+  - title: Considérations relatives aux configurations MetroCluster IP
+    url: "/install-ip/concept_considerations_mcip.html"
+  - title: Affectation automatique des disques et systèmes ADP dans ONTAP 9.4 et versions
+      ultérieures
+    url: "/install-ip/concept_considerations_drive_assignment.html"
+  - title: Peering de clusters
+    url: "/install-ip/concept_considerations_peering.html"
+  - title: Exigences ISL
+    url: "/install-ip/concept_considerations_isls.html"
+  - title: Comment utiliser des réseaux étendus de couche 3
+    url: "/install-ip/concept_considerations_layer_3.html"
+    entries:
+    - title: Modification de l'adresse, du masque de réseau et de la passerelle dans
+        une adresse IP MetroCluster
+      url: "/install-ip/task_modify_ip_netmask_gateway_properties.html"
+  - title: Partage de réseaux privés de couche 2
+    url: "/install-ip/concept_considerations_layer_2.html"
+  - title: Comment utiliser des switchs compatibles MetroCluster
+    url: "/install-ip/concept_considerations_mc_compliant_switches.html"
+  - title: Comment utiliser TDM/xWDM et les équipements de cryptage avec les configurations
+      IP de MetroCluster
+    url: "/install-ip/concept_considerations_tdm_encryption.html"
+  - title: Agrégats non mis en miroir dans une configuration MetroCluster IP
+    url: "/install-ip/concept_considerations_unmirrored_aggrs.html"
+  - title: Utilisation du pare-feu sur les sites MetroCluster
+    url: "/install-ip/concept_considerations_firewalls.html"
+  - title: Considérations relatives à l'utilisation du protocole IP virtuel et de
+      passerelle de frontières avec une configuration MetroCluster
+    url: "/install-ip/concept_considerations_for_using_virtual_ip_and_border_gateway_protocol_with_a_mcc_configuration.html"
+- title: Configurer les composants matériels de MetroCluster
+  entries:
+  - title: Composants d'une configuration MetroCluster IP
+    url: "/install-ip/concept_parts_of_an_ip_mcc_configuration_mcc_ip.html"
+  - title: Composants IP MetroCluster et conventions de nom requis
+    url: "/install-ip/concept_required_mcc_ip_components_and_naming_guidelines_mcc_ip.html"
+  - title: Installez les composants matériels dans un rack
+    url: "/install-ip/task_rack_hw_components.html"
+  - title: Branchez les câbles des commutateurs IP MetroCluster
+    entries:
+    - title: Comment utiliser les tables de ports avec l'outil RcfFileGenerator ou
+        plusieurs configurations MetroCluster
+      url: "/install-ip/using_rcf_generator.html"
+    - title: Affectation des ports de plateforme pour les commutateurs Cisco 3132Q-V.
+      url: "/install-ip/port_usage_3132q.html"
+    - title: Affectation des ports de plateforme pour les switchs Cisco 3232C ou Cisco
+        9336C
+      url: "/install-ip/port_usage_3232c_9336c.html"
+    - title: Affectation de ports de plate-forme pour les commutateurs IP BES-53248
+        pris en charge par Broadcom
+      url: "/install-ip/port_usage_bes53248.html"
+    - title: Affectations des ports de plateforme pour les switchs IP SN2100 pris
+        en charge par NVIDIA
+      url: "/install-ip/port_usage_sn2100.html"
+  - title: Reliez les ports de données et de gestion des contrôleurs
+    url: "/install-ip/task_cable_other_connections.html"
+  - title: Configuration des commutateurs IP MetroCluster
+    entries:
+    - title: Configurez les commutateurs IP Broadcom
+      url: "/install-ip/task_switch_config_broadcom.html"
+    - title: Configuration des commutateurs IP Cisco
+      entries:
+      - title: Configurer les paramètres de base
+        url: "/install-ip/task_switch_config_cisco.html"
+      - title: Configurez le cryptage MACsec sur les commutateurs Cisco 9336C
+        url: "/install-ip/task_switch_config_cisco_macsec.html"
+    - title: Configurez les commutateurs IP NVIDIA
+      url: "/install-ip/task_switch_config_nvidia.html"
+- title: Configurez le logiciel MetroCluster dans ONTAP
+  entries:
+  - title: Présentation
+    url: "/install-ip/concept_configure_the_mcc_software_in_ontap.html"
+  - title: Configuration de configurations à 8 nœuds
+    url: "/install-ip/task_sw_config_8n.html"
+  - title: Collectez les informations requises
+    url: "/install-ip/task_sw_config_gather_info.html"
+  - title: Similarités et différences entre les configurations cluster standard et
+      MetroCluster
+    url: "/install-ip/task_sw_config_differences.html"
+  - title: Vérifiez l'état des composants HA-config
+    url: "/install-ip/task_sw_config_verify_haconfig.html"
+  - title: Restauration des valeurs par défaut du système sur un module de contrôleur
+    url: "/install-ip/task_sw_config_restore_defaults.html"
+  - title: Affectation manuelle de lecteurs au pool 0
+    url: "/install-ip/task_sw_config_assign_pool0.html"
+  - title: Configuration de ONTAP
+    url: "/install-ip/task_sw_config_setup_ontap.html"
+  - title: Configurer les clusters dans une configuration MetroCluster
+    url: "/install-ip/task_sw_config_configure_clusters.html"
+  - title: Vérification du basculement, de la résolution et du rétablissement
+    url: "/install-ip/task_sw_config_verify_switchover.html"
+  - title: Configurez le logiciel MetroCluster Tiebreaker ou ONTAP Mediator
+    url: "/install-ip/task_sw_config_configure_mediator.html"
+  - title: Protéger les fichiers de sauvegarde de configuration
+    url: "/install-ip/task_sw_config_protect_backup.html"
+- title: Configurez le service médiateur ONTAP pour un basculement automatique non
+    planifié
+  entries:
+  - title: Préparez-vous à installer le service ONTAP Mediator
+    url: "/install-ip/concept_mediator_requirements.html"
+  - title: Configuration du service médiateur ONTAP à partir d'une configuration IP
+      MetroCluster
+    url: "/install-ip/task_configuring_the_ontap_mediator_service_from_a_metrocluster_ip_configuration.html"
+  - title: Déconfigurez le service Mediator ONTAP à partir de la configuration IP
+      de MetroCluster
+    url: "/install-ip/task_remove_unconfigure_mediator.html"
+  - title: Connectez une configuration MetroCluster à une instance de médiateur ONTAP
+      différente
+    url: "/install-ip/task_connecting_mcc_to_different_mediator_instance.html"
+  - title: Risques et limitations liés à l'utilisation du basculement automatique
+      forcé de MetroCluster
+    url: "/install-ip/concept-risks-limitations-automatic-switchover.html"
+- title: Test de la configuration MetroCluster
+  url: "/install-ip/task_test_the_mcc_configuration.html"
+- title: Considérations relatives à la suppression des configurations MetroCluster
+  url: "/install-ip/concept_considerations_when_removing_mcc_configurations.html"
+- title: Considérations relatives à l'utilisation de ONTAP dans une configuration
+    MetroCluster
+  url: "/install-ip/concept_considerations_when_using_ontap_in_a_mcc_configuration.html"
+- title: Où trouver des informations complémentaires
+  url: "/install-ip/reference_where_to_find_additional_information_mccip_icg.html"

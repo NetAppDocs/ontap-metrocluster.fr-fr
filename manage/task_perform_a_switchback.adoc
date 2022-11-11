@@ -1,0 +1,122 @@
+---
+permalink: manage/task_perform_a_switchback.html 
+sidebar: sidebar 
+keywords: metrocluster, configuration, switchback, operation, return, operating, operate, state, sync-source, storage, virtual, machine, svm, disaster, site, active, serving, local, disk, pool, perform 
+summary: 'Après avoir rétablissement la configuration MetroCluster, vous pouvez exécuter l"opération de rétablissement MetroCluster. L"opération de rétablissement MetroCluster renvoie la configuration à son état de fonctionnement normal, avec des serveurs virtuels de stockage source synchrone \(SVM\) sur le site de secours et servant les données depuis les pools de disques locaux.' 
+---
+= Exécution d'un rétablissement
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Après avoir rétablissement la configuration MetroCluster, vous pouvez exécuter l'opération de rétablissement MetroCluster. L'opération de rétablissement MetroCluster renvoie la configuration à son état de fonctionnement normal, avec les SVM (Storage Virtual machines) source synchrone sur le site de reprise après incident et permettant l'accès aux données depuis les pools de disques locaux.
+
+* Le cluster de secours doit avoir basculé avec succès vers le cluster survivant.
+* La réparation doit avoir été effectuée sur les agrégats racine et de données.
+* Les autres nœuds du cluster ne doivent pas être en état de basculement haute disponibilité (tous les nœuds doivent être opérationnels pour chaque paire haute disponibilité).
+* Les modules du contrôleur du site de secours doivent être complètement démarrés et non en mode basculement HA.
+* L'agrégat racine doit être mis en miroir.
+* Les liens ISL doivent être en ligne.
+* Toutes les licences requises doivent être installées sur le système.
++
+.. Vérifiez que tous les nœuds sont en état activé : `metrocluster node show`
++
+L'exemple suivant présente les nœuds qui sont actuellement à l'état activé :
+
++
+[listing]
+----
+cluster_B::>  metrocluster node show
+
+DR                        Configuration  DR
+Group Cluster Node        State          Mirroring Mode
+----- ------- ----------- -------------- --------- --------------------
+1     cluster_A
+              node_A_1    configured     enabled   heal roots completed
+              node_A_2    configured     enabled   heal roots completed
+      cluster_B
+              node_B_1    configured     enabled   waiting for switchback recovery
+              node_B_2    configured     enabled   waiting for switchback recovery
+4 entries were displayed.
+----
+.. Confirmer que la resynchronisation est terminée sur tous les SVM : `metrocluster vserver show`
+.. Vérifier que toute migration LIF automatique effectuée par les opérations de correction a été réalisée avec succès : `metrocluster check lif show`
+.. Effectuez un rétablissement simulé pour vérifier que le système est prêt : `metrocluster switchback -simulate`
+.. Vérifiez la configuration :
++
+`metrocluster check run`
+
++
+La commande s'exécute en arrière-plan et peut ne pas être terminée immédiatement.
+
++
+[listing]
+----
+cluster_A::> metrocluster check run
+The operation has been started and is running in the background. Wait for
+it to complete and run "metrocluster check show" to view the results. To
+check the status of the running metrocluster check operation, use the command,
+"metrocluster operation history show -job-id 2245"
+----
++
+[listing]
+----
+cluster_A::> metrocluster check show
+Last Checked On: 9/13/2018 20:41:37
+
+Component           Result
+------------------- ---------
+nodes               ok
+lifs                ok
+config-replication  ok
+aggregates          ok
+clusters            ok
+connections         ok
+6 entries were displayed.
+----
+.. Exécutez le rétablissement en exécutant la commande MetroCluster alternative depuis n'importe quel nœud du cluster survivant : `metrocluster switchback`
+.. Vérifier la progression de l'opération de rétablissement : `metrocluster show`
++
+L'opération de rétablissement est toujours en cours lorsque la sortie affiche attente-rétablissement :
+
++
+[listing]
+----
+cluster_B::> metrocluster show
+Cluster                   Entry Name          State
+------------------------- ------------------- -----------
+ Local: cluster_B         Configuration state configured
+                          Mode                switchover
+                          AUSO Failure Domain -
+Remote: cluster_A         Configuration state configured
+                          Mode                waiting-for-switchback
+                          AUSO Failure Domain -
+----
++
+L'opération de rétablissement est terminée lorsque la sortie affiche normal :
+
++
+[listing]
+----
+cluster_B::> metrocluster show
+Cluster                   Entry Name          State
+------------------------- ------------------- -----------
+ Local: cluster_B         Configuration state configured
+                          Mode                normal
+                          AUSO Failure Domain -
+Remote: cluster_A         Configuration state configured
+                          Mode                normal
+                          AUSO Failure Domain -
+----
++
+Si un rétablissement prend beaucoup de temps, vous pouvez vérifier l'état des lignes de base en cours en utilisant le `metrocluster config-replication resync-status show` commande. Cette commande est au niveau de privilège avancé.
+
+.. Rétablir toutes les configurations SnapMirror ou SnapVault.
++
+Dans ONTAP 8.3, vous devez rétablir manuellement une configuration SnapMirror perdue après une opération de rétablissement MetroCluster. Dans ONTAP 9.0 et versions ultérieures, la relation est rétablie automatiquement.
+
+
+
+

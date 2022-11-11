@@ -1,0 +1,69 @@
+---
+permalink: transition/concept_choosing_your_transition_procedure_mcc_transition.html 
+sidebar: sidebar 
+keywords: select, transition, procedure, depend, exist, metrocluster, fc, configuration, choosing, choose 
+summary: Vous devez sélectionner une procédure de transition selon votre configuration MetroCluster FC existante. 
+---
+= Choix de la procédure de transition
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous devez sélectionner une procédure de transition selon votre configuration MetroCluster FC existante.
+
+Une procédure de transition remplace la structure du commutateur FC interne ou la connexion FC-VI par un réseau de commutateurs IP. La procédure exacte dépend de votre configuration de départ.
+
+Les plateformes d'origine et les commutateurs FC (le cas échéant) sont retirés à la fin de la procédure de transition.
+
+[cols="20,20,20,40"]
+|===
+
+
+| Démarrage de la configuration | Perturbation ou continuité de l'activité | De formation | Procédure 
+
+
+ a| 
+Quatre nœuds
+ a| 
+Continuité de l'activité
+ a| 
+Les nouveaux tiroirs de stockage sont pris en charge sur les nouvelles plateformes.
+ a| 
+link:concept_requirements_for_fc_to_ip_transition_mcc.html["Transition sans interruption d'une configuration MetroCluster FC vers une configuration MetroCluster IP (ONTAP 9.8 et versions ultérieures)"]
+
+
+
+ a| 
+Deux nœuds
+ a| 
+Perturbation
+ a| 
+Les nouveaux tiroirs de stockage sont pris en charge sur les plateformes d'origine comme sur les nouvelles.
+ a| 
+link:task_disruptively_transition_from_a_two_node_mcc_fc_to_a_four_node_mcc_ip_configuration.html["Transition sans interruption d'un FC MetroCluster à deux nœuds vers une configuration IP MetroCluster à quatre nœuds (ONTAP 9.8 et versions ultérieures)"]
+
+
+
+ a| 
+Deux nœuds
+ a| 
+Perturbation
+ a| 
+Les nouveaux tiroirs de stockage sont pris en charge sur les plateformes d'origine comme sur les nouvelles. Les anciens tiroirs de stockage doivent être retirés.
+ a| 
+link:task_disruptively_transition_while_move_volumes_from_old_shelves_to_new_shelves.html["Transition sans interruption de la FC MetroCluster vers l'IP MetroCluster lors de la désactivation des tiroirs de stockage (ONTAP 9.8 et versions ultérieures)"]
+
+
+
+ a| 
+Deux nœuds
+ a| 
+Perturbation
+ a| 
+Les anciens tiroirs de stockage ne sont pas pris en charge sur les nouvelles plateformes. Les anciens tiroirs de stockage doivent être retirés.
+ a| 
+link:task_disruptively_transition_when_exist_shelves_are_not_supported_on_new_controllers.html["Transition sans interruption lorsque les tiroirs existants ne sont pas pris en charge sur les nouveaux contrôleurs (ONTAP 9.8 et versions ultérieures)"]
+
+|===

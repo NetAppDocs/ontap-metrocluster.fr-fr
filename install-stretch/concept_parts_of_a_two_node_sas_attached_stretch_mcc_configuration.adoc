@@ -1,0 +1,44 @@
+---
+permalink: install-stretch/concept_parts_of_a_two_node_sas_attached_stretch_mcc_configuration.html 
+sidebar: sidebar 
+keywords: metrocluster, stretch, installation, parts, two, node, sas, attached, configuration 
+summary: La configuration MetroCluster à deux nœuds avec connexion SAS nécessite plusieurs composants, notamment deux clusters à un seul nœud dans lesquels les contrôleurs de stockage sont directement connectés au stockage par le biais de câbles SAS. 
+---
+= Composants d'une configuration Stretch MetroCluster à deux nœuds avec disques SAS
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+La configuration MetroCluster à deux nœuds avec connexion SAS nécessite plusieurs composants, notamment deux clusters à un seul nœud dans lesquels les contrôleurs de stockage sont directement connectés au stockage par le biais de câbles SAS.
+
+La configuration MetroCluster inclut les éléments matériels clés suivants :
+
+* Contrôleurs de stockage
++
+Les contrôleurs de stockage se connectent directement au stockage à l'aide de câbles SAS.
+
++
+Chaque contrôleur de stockage est configuré comme partenaire de reprise après incident sur un contrôleur de stockage du site partenaire.
+
++
+** Des câbles SAS en cuivre peuvent être utilisés pour des distances plus courtes.
+** Vous pouvez utiliser des câbles SAS optiques sur de longues distances.
++
+
+NOTE: Dans les systèmes qui utilisent des LUN de baies E-Series, les contrôleurs de stockage peuvent être directement connectés aux baies de stockage E-Series. Pour les autres LUN de baies, des connexions via des commutateurs FC sont requises.
+
++
+https://mysupport.netapp.com/matrix["Matrice d'interopérabilité NetApp"]
+
++
+Dans le IMT, vous pouvez utiliser le champ solution de stockage pour sélectionner votre solution MetroCluster. Utilisez *Explorateur de composants* pour sélectionner les composants et la version ONTAP pour affiner votre recherche. Vous pouvez cliquer sur *Afficher les résultats* pour afficher la liste des configurations prises en charge qui correspondent aux critères.
+
+
+
+* Réseau de peering de cluster
++
+Le réseau de peering de cluster assure la connectivité en miroir de la configuration de la machine virtuelle de stockage (SVM). La configuration de tous les SVM sur un cluster est mise en miroir sur le cluster partenaire.
+
+

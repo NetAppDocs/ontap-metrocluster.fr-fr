@@ -1,0 +1,474 @@
+---
+permalink: disaster-recovery/task_recover_from_a_non_controller_failure_mcc_dr.html 
+sidebar: sidebar 
+keywords: equipment, disaster, site, undergone, require, maintenance, replacement, controller, replace, process, metrocluster, configuration, data, aggregate, switchback, operation, recover, non-controller, failure, heal, configuration, metrocluster, fc, data, aggregate, root, disaster, verify, system, switchback, verification, result, perform, successful, delete, deleting, stale, listing 
+summary: 'Une fois l"équipement sur le site de secours soumis à toute opération de maintenance ou de remplacement requise, mais aucun contrôleur n"a été remplacé, vous pouvez commencer à rétablir la redondance complète de la configuration MetroCluster. Cela inclut la fonctionnalité de rétablissement de la configuration (d"abord les agrégats de données, puis les agrégats racine) et l"exécution de l"opération de rétablissement.' 
+---
+= Restauration en cas de défaillance sans contrôleur
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Une fois l'équipement sur le site de secours soumis à toute opération de maintenance ou de remplacement requise, mais aucun contrôleur n'a été remplacé, vous pouvez commencer à rétablir la redondance complète de la configuration MetroCluster. Cela inclut la fonctionnalité de rétablissement de la configuration (d'abord les agrégats de données, puis les agrégats racine) et l'exécution de l'opération de rétablissement.
+
+.Avant de commencer
+* Tout le matériel MetroCluster du cluster de reprise doit être fonctionnel.
+* La configuration globale MetroCluster doit être en basculement.
+* Dans une configuration MetroCluster Fabric-Attached, l'ISL doit être opérationnel et fonctionner entre les sites MetroCluster.
+
+
+
+
+== Corrigez la configuration dans une configuration MetroCluster FC
+
+Après un basculement, vous devez effectuer les opérations de correction spécifiques afin de restaurer la fonctionnalité MetroCluster.
+
+.Avant de commencer
+* Le basculement doit avoir été effectué et le site survivant doit servir de données.
+* Les nœuds du site d'incident doivent être suspendus ou éteints.
++
+Ils ne doivent pas être complètement démarrés pendant le processus de guérison.
+
+* Le stockage du site d'incident doit être accessible (les tiroirs sont mis sous tension, fonctionnels et accessibles).
+* Dans les configurations Fabric-Attached MetroCluster, les liaisons intercommutateurs (ISL) doivent être opérationnelles.
+* Dans les configurations MetroCluster à quatre nœuds, les nœuds du site survivant ne doivent pas être en état de basculement haute disponibilité (tous les nœuds doivent être opérationnels pour chaque paire haute disponibilité).
+
+
+L'opération de réparation doit d'abord être effectuée sur les agrégats de données, puis sur les agrégats racine.
+
+
+
+=== Corrigez les agrégats de données
+
+Vous devez réparer et remplacer tout matériel sur le site de reprise après incident. Ce processus resynchronise les agrégats de données et prépare le site de reprise sur incident (maintenant réparé) pour un fonctionnement normal. Vous devez corriger les agrégats de données avant d'entreprendre le traitement des agrégats racine.
+
+L'exemple suivant montre un basculement forcé, dans lequel l'agrégat de basculement est mis en ligne. Toutes les mises à jour de configuration du cluster distant sont correctement répliquées vers le cluster local. Dans le cadre de cette procédure, vous mettez le stockage sous tension, mais vous ne devez pas et ne devez pas mettre les modules de contrôleur sous tension sur le site de secours.
+
+.Étapes
+. Vérifier que le basculement est terminé :
++
+`metrocluster operation show`
+
++
+[listing]
+----
+controller_A_1::> metrocluster operation show
+  Operation: switchover
+      State: successful
+ Start Time: 7/25/2014 20:01:48
+   End Time: 7/25/2014 20:02:14
+     Errors: -
+----
+. Resynchroniser les agrégats de données en exécutant la commande suivante depuis le cluster survivant :
++
+`metrocluster heal -phase aggregates`
+
++
+[listing]
+----
+controller_A_1::> metrocluster heal -phase aggregates
+[Job 130] Job succeeded: Heal Aggregates is successful.
+----
++
+Si la guérison est vetotée, vous avez la possibilité de réémettre le `metrocluster heal` commande avec `--override-vetoes` paramètre. Si vous utilisez ce paramètre facultatif, le système remplace tout veto logiciel qui empêche l'opération de correction.
+
+. Vérifier que l'opération est terminée :
++
+`metrocluster operation show`
+
++
+[listing]
+----
+controller_A_1::> metrocluster operation show
+    Operation: heal-aggregates
+      State: successful
+Start Time: 7/25/2014 18:45:55
+   End Time: 7/25/2014 18:45:56
+     Errors: -
+----
+. Vérifier l'état des agrégats :
++
+`storage aggregate show` commande.
+
++
+[listing]
+----
+controller_A_1::> storage aggregate show
+Aggregate Size     Available Used% State   #Vols  Nodes        RAID Status
+--------- -------- --------- ----- ------- ------ ------------ ------------
+...
+aggr_b2   227.1GB  227.1GB   0%    online  0      mcc1-a2      raid_dp, mirrored, normal...
+----
+. Si le stockage a été remplacé sur le site de reprise sur incident, il se peut que vous deviez redéfinir la mise en miroir des agrégats.
+
+
+
+
+=== Corrigez les agrégats racine après un incident
+
+Une fois les agrégats de données résolus, vous devez corriger les agrégats racine en vue de l'opération de rétablissement.
+
+La phase d'agrégats de données du processus de correction MetroCluster doit avoir été réalisée avec succès.
+
+.Étapes
+. Retournez les agrégats en miroir :
++
+`metrocluster heal -phase root-aggregates`
+
++
+[listing]
+----
+mcc1A::> metrocluster heal -phase root-aggregates
+[Job 137] Job succeeded: Heal Root Aggregates is successful
+----
++
+Si la guérison est vetotée, vous avez la possibilité de réémettre le `metrocluster heal` commande avec `--override-vetoes` paramètre. Si vous utilisez ce paramètre facultatif, le système remplace tout veto logiciel qui empêche l'opération de correction.
+
+. Assurez-vous que l'opération d'autorétablissement via la commande suivante sur le cluster de destination :
++
+`metrocluster operation show`
+
++
+[listing]
+----
+
+mcc1A::> metrocluster operation show
+  Operation: heal-root-aggregates
+      State: successful
+ Start Time: 7/29/2014 20:54:41
+   End Time: 7/29/2014 20:54:42
+     Errors: -
+----
+. Mettez chaque module de contrôleur sous tension sur le site de reprise après incident.
+. Une fois les nœuds démarrés, vérifiez que les agrégats racine sont en miroir.
++
+Si les deux plexes s'effectuent automatiquement, toute resynchronisation s'exécute. Si un plex a échoué, ce plex doit être détruit et le miroir recréé à l'aide de la commande suivante pour rétablir la relation miroir.
+
++
+`storage aggregate mirror -aggregate <aggregate-name>`
+
+
+
+
+
+== Vérifier que votre système est prêt pour le rétablissement
+
+Si votre système est déjà dans l'état de basculement, vous pouvez utiliser le `-simulate` option permettant d'afficher un aperçu des résultats d'une opération de rétablissement.
+
+.Étapes
+. Simuler l'opération de rétablissement :
++
+.. Depuis l'invite du nœud survivant, passez au niveau de privilège avancé :
++
+`set -privilege advanced`
+
++
+Vous devez répondre avec `y` lorsque vous êtes invité à passer en mode avancé et à afficher l'invite du mode avancé (*).
+
+.. Effectuez l'opération de rétablissement avec le `-simulate` paramètre :
++
+`metrocluster switchback -simulate`
+
+.. Retour au niveau de privilège admin :
++
+`set -privilege admin`
+
+
+
+. Vérifiez le résultat renvoyé.
++
+Le résultat indique si l'opération de rétablissement s'exécuterait en erreurs.
+
+
+
+
+
+=== Exemple de résultats de vérification
+
+L'exemple suivant illustre la vérification réussie d'une opération de rétablissement :
+
+[listing]
+----
+cluster4::*> metrocluster switchback -simulate
+  (metrocluster switchback)
+[Job 130] Setting up the nodes and cluster components for the switchback operation...DBG:backup_api.c:327:backup_nso_sb_vetocheck : MetroCluster Switch Back
+[Job 130] Job succeeded: Switchback simulation is successful.
+
+cluster4::*> metrocluster op show
+  (metrocluster operation show)
+  Operation: switchback-simulate
+      State: successful
+ Start Time: 5/15/2014 16:14:34
+   End Time: 5/15/2014 16:15:04
+     Errors: -
+
+cluster4::*> job show -name Me*
+                            Owning
+Job ID Name                 Vserver    Node           State
+------ -------------------- ---------- -------------- ----------
+130    MetroCluster Switchback
+                            cluster4
+                                       cluster4-01
+                                                      Success
+       Description: MetroCluster Switchback Job - Simulation
+----
+
+
+== Exécution d'un rétablissement
+
+Après avoir rétablissement la configuration MetroCluster, vous pouvez exécuter l'opération de rétablissement MetroCluster. L'opération de rétablissement MetroCluster renvoie la configuration à son état de fonctionnement normal, avec les SVM (Storage Virtual machines) source synchrone sur le site de reprise après incident et permettant l'accès aux données depuis les pools de disques locaux.
+
+.Avant de commencer
+* Le cluster de secours doit avoir basculé avec succès vers le cluster survivant.
+* La réparation doit avoir été effectuée sur les agrégats racine et de données.
+* Les autres nœuds du cluster ne doivent pas être en état de basculement haute disponibilité (tous les nœuds doivent être opérationnels pour chaque paire haute disponibilité).
+* Les modules du contrôleur du site de secours doivent être complètement démarrés et non en mode basculement HA.
+* L'agrégat racine doit être mis en miroir.
+* Les liens ISL doivent être en ligne.
+* Toutes les licences requises doivent être installées sur le système.
+
+
+.Étapes
+. Vérifiez que tous les nœuds sont en état activé :
++
+`metrocluster node show`
+
++
+L'exemple suivant affiche les nœuds qui sont à l'état « activé » :
+
++
+[listing]
+----
+cluster_B::>  metrocluster node show
+
+DR                        Configuration  DR
+Group Cluster Node        State          Mirroring Mode
+----- ------- ----------- -------------- --------- --------------------
+1     cluster_A
+              node_A_1    configured     enabled   heal roots completed
+              node_A_2    configured     enabled   heal roots completed
+      cluster_B
+              node_B_1    configured     enabled   waiting for switchback recovery
+              node_B_2    configured     enabled   waiting for switchback recovery
+4 entries were displayed.
+----
+. Confirmer que la resynchronisation est terminée sur tous les SVM :
++
+`metrocluster vserver show`
+
+. Vérifier que toute migration LIF automatique effectuée par les opérations de correction a été réalisée avec succès :
++
+`metrocluster check lif show`
+
+. Exécutez le rétablissement en exécutant la commande suivante à partir de n'importe quel nœud du cluster survivant.
++
+`metrocluster switchback`
+
+. Vérifier la progression de l'opération de rétablissement :
++
+`metrocluster show`
+
++
+L'opération de rétablissement est toujours en cours lorsque la sortie affiche « en attente de rétablissement » :
+
++
+[listing]
+----
+cluster_B::> metrocluster show
+Cluster                   Entry Name          State
+------------------------- ------------------- -----------
+ Local: cluster_B         Configuration state configured
+                          Mode                switchover
+                          AUSO Failure Domain -
+Remote: cluster_A         Configuration state configured
+                          Mode                waiting-for-switchback
+                          AUSO Failure Domain -
+----
++
+L'opération de rétablissement est terminée lorsque la sortie affiche « normal » :
+
++
+[listing]
+----
+cluster_B::> metrocluster show
+Cluster                   Entry Name          State
+------------------------- ------------------- -----------
+ Local: cluster_B         Configuration state configured
+                          Mode                normal
+                          AUSO Failure Domain -
+Remote: cluster_A         Configuration state configured
+                          Mode                normal
+                          AUSO Failure Domain -
+----
++
+Si un rétablissement prend un certain temps, vous pouvez vérifier l'état des lignes de base en cours en utilisant la commande suivante au niveau des privilèges avancés.
+
++
+`metrocluster config-replication resync-status show`
+
+. Rétablir toutes les configurations SnapMirror ou SnapVault.
++
+Dans ONTAP 8.3, vous devez rétablir manuellement une configuration SnapMirror perdue après une opération de rétablissement MetroCluster. Dans ONTAP 9.0 et versions ultérieures, la relation est rétablie automatiquement.
+
+
+
+
+
+== Vérification du rétablissement réussi
+
+Après le rétablissement, il vous faut vérifier que tous les agrégats et les serveurs virtuels de stockage sont basculés et en ligne.
+
+.Étapes
+. Vérifier que les agrégats de données basculée sont basculée :
++
+`storage aggregate show`
+
++
+Dans l'exemple suivant, aggr_b2 sur le nœud B2 a été remis :
+
++
+[listing]
+----
+node_B_1::> storage aggregate show
+Aggregate     Size Available Used% State   #Vols  Nodes            RAID Status
+--------- -------- --------- ----- ------- ------ ---------------- ------------
+...
+aggr_b2    227.1GB   227.1GB    0% online       0 node_B_2   raid_dp,
+                                                                   mirrored,
+                                                                   normal
+
+node_A_1::> aggr show
+Aggregate     Size Available Used% State   #Vols  Nodes            RAID Status
+--------- -------- --------- ----- ------- ------ ---------------- ------------
+...
+aggr_b2          -         -     - unknown      - node_A_1
+----
++
+Si le site de secours contenait des agrégats non mis en miroir et que les agrégats sans miroir ne sont plus présents, l'agrégat peut afficher un état « inconnu » dans la sortie du `storage aggregate show` commande. Contactez le support technique pour supprimer les entrées obsolètes des agrégats non mis en miroir et consultez l'article de la base de connaissances link:https://kb.netapp.com/Advice_and_Troubleshooting/Data_Protection_and_Security/MetroCluster/How_to_remove_stale_unmirrored_aggregate_entries_in_a_MetroCluster_following_disaster_where_storage_was_lost["Comment supprimer des entrées d'agrégats non mis en miroir obsolètes dans un MetroCluster après un incident où le stockage a été perdu."^]
+
+. Vérifier que tous les SVM de destination synchrone du cluster survivant sont inactifs (et affichent l'état d'administration « stopped ») et que les SVM source synchrone sur le cluster de reprise après incident sont en cours d'exécution :
++
+`vserver show -subtype sync-source`
+
++
+[listing]
+----
+node_B_1::> vserver show -subtype sync-source
+                               Admin      Root                       Name    Name
+Vserver     Type    Subtype    State      Volume     Aggregate       Service Mapping
+----------- ------- ---------- ---------- ---------- ----------      ------- -------
+...
+vs1a        data    sync-source
+                               running    vs1a_vol   node_B_2        file    file
+                                                                     aggr_b2
+
+node_A_1::> vserver show -subtype sync-destination
+                               Admin      Root                         Name    Name
+Vserver            Type    Subtype    State      Volume     Aggregate  Service Mapping
+-----------        ------- ---------- ---------- ---------- ---------- ------- -------
+...
+cluster_A-vs1a-mc  data    sync-destination
+                                      stopped    vs1a_vol   sosb_      file    file
+                                                                       aggr_b2
+----
++
+Les agrégats de destination de synchronisation dans la configuration MetroCluster ont automatiquement ajouté le suffixe « -mc » à leur nom pour les identifier.
+
+. Vérifiez que les opérations de rétablissement ont abouti :
++
+`metrocluster operation show`
+
+
+
+|===
+
+
+| Si la sortie de la commande affiche... | Alors... 
+
+
+ a| 
+L'état de l'opération de rétablissement a réussi.
+ a| 
+Le processus de rétablissement est terminé et vous pouvez poursuivre le fonctionnement du système.
+
+
+
+ a| 
+Que l'opération de rétablissement ou `switchback-continuation-agent` l'opération a partiellement réussi.
+ a| 
+Effectuez la correction suggérée fournie dans la sortie du `metrocluster operation show` commande.
+
+|===
+Vous devez répéter les sections précédentes pour effectuer le rétablissement dans la direction opposée. Si site_A a effectué un basculement du site_B, demandez à site_B de basculer du site_A.
+
+
+
+== Suppression des listes d'agrégats obsolètes après le rétablissement
+
+Dans certains cas, après le rétablissement, vous remarquerez peut-être la présence d'agrégats _obsolètes_. Les agrégats obsolètes sont des agrégats qui ont été supprimés du ONTAP, mais dont les informations restent enregistrées sur le disque. Les agrégats obsolètes s'affichent avec le `nodeshell aggr status -r` mais pas avec le `storage aggregate show` commande. Vous pouvez supprimer ces enregistrements afin qu'ils ne s'affichent plus.
+
+Les agrégats obsolètes peuvent se produire si vous avez déplacé des agrégats alors que la configuration MetroCluster était en basculement. Par exemple :
+
+. Le site A bascule sur le site B.
+. Vous supprimez la mise en miroir d'un agrégat et déplacez l'agrégat du nœud_B_1 vers le nœud_B_2 à des fins d'équilibrage de la charge.
+. Vous procédez à la correction d'agrégats.
+
+
+À ce stade, un agrégat obsolète apparaît sur le nœud_B_1, même si l'agrégat réel a été supprimé de ce nœud. Cet agrégat apparaît dans la sortie de `nodeshell aggr status -r` commande. Elle n'apparaît pas dans la sortie du `storage aggregate show` commande.
+
+. Comparer le résultat des commandes suivantes :
++
+`storage aggregate show`
+
++
+`run local aggr status -r`
+
++
+Les agrégats obsolètes apparaissent dans le `run local aggr status -r` sortie mais pas dans `storage aggregate show` sortie. Par exemple, l'agrégat suivant peut apparaître dans le `run local aggr status -r` résultat :
+
++
+[listing]
+----
+
+Aggregate aggr05 (failed, raid_dp, partial) (block checksums)
+Plex /aggr05/plex0 (offline, failed, inactive)
+  RAID group /myaggr/plex0/rg0 (partial, block checksums)
+
+ RAID Disk Device  HA  SHELF BAY CHAN Pool Type  RPM  Used (MB/blks)  Phys (MB/blks)
+ --------- ------  ------------- ---- ---- ----  ----- --------------  --------------
+ dparity   FAILED          N/A                        82/ -
+ parity    0b.5    0b    -   -   SA:A   0 VMDISK  N/A 82/169472      88/182040
+ data      FAILED          N/A                        82/ -
+ data      FAILED          N/A                        82/ -
+ data      FAILED          N/A                        82/ -
+ data      FAILED          N/A                        82/ -
+ data      FAILED          N/A                        82/ -
+ data      FAILED          N/A                        82/ -
+ Raid group is missing 7 disks.
+----
+. Supprimer l'agrégat obsolète :
++
+.. Depuis l'invite de l'un des nœuds, passez au niveau de privilège avancé :
++
+`set -privilege advanced`
+
++
+Vous devez répondre avec `y` lorsque vous êtes invité à passer en mode avancé et à afficher l'invite du mode avancé (*).
+
+.. Supprimer l'agrégat obsolète :
++
+`aggregate remove-stale-record -aggregate aggregate_name`
+
+.. Retour au niveau de privilège admin :
++
+`set -privilege admin`
+
+
+
+. Confirmer que l'enregistrement d'agrégat obsolète a été supprimé :
++
+`run local aggr status -r`
+
+

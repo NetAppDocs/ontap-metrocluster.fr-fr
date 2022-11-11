@@ -1,0 +1,38 @@
+---
+permalink: install-ip/task_sw_config_configure_mediator.html 
+sidebar: sidebar 
+keywords: metrocluster ip, ontap, mediator, tiebreaker 
+summary: Vous pouvez télécharger et installer sur un troisième site le logiciel MetroCluster Tiebreaker ou, à partir de ONTAP 9.7, le médiateur ONTAP. 
+---
+= Configuration du logiciel MetroCluster Tiebreaker ou ONTAP Mediator
+:allow-uri-read: 
+
+
+[role="lead"]
+Vous pouvez télécharger et installer sur un troisième site le logiciel MetroCluster Tiebreaker ou, à partir de ONTAP 9.7, le médiateur ONTAP.
+
+Vous devez disposer d'un hôte Linux disponible qui dispose d'une connectivité réseau aux deux clusters de la configuration MetroCluster. Les exigences spécifiques sont décrites dans la documentation du logiciel MetroCluster Tiebreaker ou du programme ONTAP Mediator.
+
+Si vous vous connectez à une instance existante du logiciel disjoncteur d'attache ou du médiateur ONTAP, vous avez besoin du nom d'utilisateur, du mot de passe et de l'adresse IP du service de ce logiciel.
+
+Si vous devez installer une nouvelle instance du médiateur ONTAP, suivez les instructions pour installer et configurer le logiciel.
+
+link:concept_mediator_requirements.html["Configuration du service médiateur ONTAP pour un basculement automatique non planifié"]
+
+Si vous devez installer une nouvelle instance du logiciel disjoncteur d'attache, suivez le link:../tiebreaker/concept_overview_of_the_tiebreaker_software.html["instructions d'installation et de configuration du logiciel"].
+
+Vous ne pouvez pas utiliser à la fois le logiciel MetroCluster Tiebreaker et le Mediator ONTAP avec la même configuration MetroCluster.
+
+link:../install-ip/concept_considerations_mediator.html["Considérations relatives à l'utilisation du médiateur ONTAP ou d'un logiciel MetroCluster Tiebreaker"]
+
+.Étape
+. Configurez le service médiateur ONTAP ou le logiciel Tiebreaker :
++
+** Si vous utilisez une instance existante du médiateur ONTAP, ajoutez le service médiateur ONTAP à ONTAP :
++
+`metrocluster configuration-settings mediator add -mediator-address ip-address-of-mediator-host`
+
+** Si vous utilisez le logiciel disjoncteur d'attache, reportez-vous au link:../tiebreaker/concept_overview_of_the_tiebreaker_software.html["Documentation Tiebreaker"].
+
+
+

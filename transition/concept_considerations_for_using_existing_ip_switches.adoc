@@ -1,0 +1,36 @@
+---
+permalink: transition/concept_considerations_for_using_existing_ip_switches.html 
+sidebar: sidebar 
+keywords: ensure, ip, switch, support, exist, model, metrocluster, fc, configuration, ip, consideration, support 
+summary: 'Vous devez vous assurer que les commutateurs IP sont pris en charge. Si le modèle de commutateur existant est pris en charge à la fois par la configuration FC MetroCluster d"origine et par la nouvelle configuration IP MetroCluster, vous pouvez réutiliser les commutateurs existants.' 
+---
+= Considérations relatives aux commutateurs IP
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous devez vous assurer que les commutateurs IP sont pris en charge. Si le modèle de commutateur existant est pris en charge à la fois par la configuration FC MetroCluster d'origine et par la nouvelle configuration IP MetroCluster, vous pouvez réutiliser les commutateurs existants.
+
+
+
+== Commutateurs pris en charge
+
+Vous devez utiliser les commutateurs fournis par NetApp.
+
+* L'utilisation de commutateurs conformes à la configuration MetroCluster (commutateurs qui ne sont pas validés et fournis par NetApp) n'est pas prise en charge pour la transition.
+* Les commutateurs IP doivent être pris en charge en tant que commutateur de cluster par la configuration FC MetroCluster et par la configuration IP MetroCluster.
+* Les commutateurs IP peuvent être réutilisés dans la nouvelle configuration MetroCluster IP si le FC MetroCluster est un cluster commuté et que les commutateurs de cluster IP sont pris en charge par la configuration MetroCluster IP.
+* Les nouveaux commutateurs IP sont généralement utilisés dans les cas suivants :
++
+** La carte MetroCluster FC est un cluster sans commutateur ; de nouveaux commutateurs sont donc nécessaires.
+** Le FC MetroCluster est un cluster commuté, mais les commutateurs IP existants ne sont pas pris en charge par la configuration IP MetroCluster.
+** Vous voulez utiliser des commutateurs différents pour la configuration MetroCluster IP.
+
+
+
+
+Consultez le document _NetApp Hardware Universe_ pour plus d'informations sur le modèle de plateforme et la prise en charge des commutateurs.
+
+https://hwu.netapp.com["NetApp Hardware Universe"]

@@ -1,0 +1,169 @@
+---
+permalink: disaster-recovery/task_heal_restore_mcfc.html 
+sidebar: sidebar 
+keywords: configure, fc, switches, metrocluster, configuration 
+summary: 'Après le remplacement du matériel et l"affectation des disques, vous pouvez effectuer les opérations de correction MetroCluster.' 
+---
+= Effectuer l'ajustement des agrégats et la restauration des miroirs (configurations MetroCluster FC)
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Après le remplacement du matériel et l'affectation des disques, vous pouvez effectuer les opérations de correction MetroCluster. Vous devez ensuite confirmer que les agrégats sont en miroir et, si nécessaire, redémarrer la mise en miroir.
+
+.Étapes
+. Réalisez les deux phases de guérison (réparation d'agrégats et réparation racine) sur le site de DR :
++
+[listing]
+----
+cluster_B::> metrocluster heal -phase aggregates
+
+cluster_B::> metrocluster heal -phase root aggregates
+----
+. Surveillez la fonctionnalité de rétablissement et vérifiez que les agrégats sont en état de resynchronisation ou de miroir :
++
+`storage aggregate show -node local`
+
++
+|===
+
+
+| Si l'agrégat montre cet état... | Alors... 
+
+
+ a| 
+resynchronisation
+ a| 
+Aucune action n'est requise. Laisser l'agrégat terminer la resynchronisation.
+
+
+
+ a| 
+miroir dégradé
+ a| 
+Passez à la section ,Si un ou plusieurs plexes restent hors ligne, des étapes supplémentaires sont requises pour la reconstruction du miroir.
+
+
+
+ a| 
+symétrisé, normal
+ a| 
+Aucune action n'est requise.
+
+
+
+ a| 
+inconnu, hors ligne
+ a| 
+L'agrégat root indique cet état si tous les disques des sites de secours ont été remplacés.
+
+|===
++
+[listing]
+----
+cluster_B::> storage aggregate show -node local
+
+ Aggregate     Size Available Used% State   #Vols  Nodes      RAID Status
+ --------- -------- --------- ----- ------- ------ ---------- ------------
+ node_B_1_aggr1
+            227.1GB   11.00GB   95% online       1 node_B_1   raid_dp,
+                                                              resyncing
+ NodeA_1_aggr2
+            430.3GB   28.02GB   93% online       2 node_B_1   raid_dp,
+                                                              mirror
+                                                              degraded
+ node_B_1_aggr3
+            812.8GB   85.37GB   89% online       5 node_B_1   raid_dp,
+                                                              mirrored,
+                                                              normal
+ 3 entries were displayed.
+
+cluster_B::>
+----
++
+Dans les exemples suivants, les trois agrégats sont chacun dans un état différent :
+
++
+|===
+
+
+| Nœud | État 
+
+
+ a| 
+Node_B_1_aggr1
+ a| 
+resynchronisation
+
+
+
+ a| 
+Node_B_1_aggr2
+ a| 
+miroir dégradé
+
+
+
+ a| 
+Node_B_1_aggr3
+ a| 
+symétrisé, normal
+
+|===
+. [[step3_fc_aggr_curatif]]] si un ou plusieurs plexes restent hors ligne, des étapes supplémentaires sont requises pour la reconstruction du miroir.
++
+Dans le tableau précédent, le miroir du noeud_B_1_aggr2 doit être reconstruit.
+
++
+.. Afficher les détails des agrégats pour identifier les plexes défaillants :
++
+`storage aggregate show -r -aggregate node_B_1_aggr2`
+
++
+Dans l'exemple suivant, le plex /node_B_1_aggr2/plex0 est en état d'échec :
+
++
+[listing]
+----
+cluster_B::> storage aggregate show -r -aggregate node_B_1_aggr2
+
+ Owner Node: node_B_1
+  Aggregate: node_B_1_aggr2 (online, raid_dp, mirror degraded) (block checksums)
+   Plex: /node_B_1_aggr2/plex0 (offline, failed, inactive, pool0)
+    RAID Group /node_B_1_aggr2/plex0/rg0 (partial)
+                                                               Usable Physical
+      Position Disk                     Pool Type     RPM     Size     Size Status
+      -------- ------------------------ ---- ----- ------ -------- -------- ----------
+
+   Plex: /node_B_1_aggr2/plex1 (online, normal, active, pool1)
+    RAID Group /node_B_1_aggr2/plex1/rg0 (normal, block checksums)
+                                                               Usable Physical
+      Position Disk                     Pool Type     RPM     Size     Size Status
+      -------- ------------------------ ---- ----- ------ -------- -------- ----------
+      dparity  1.44.8                    1   SAS    15000  265.6GB  273.5GB (normal)
+      parity   1.41.11                   1   SAS    15000  265.6GB  273.5GB (normal)
+      data     1.42.8                    1   SAS    15000  265.6GB  273.5GB (normal)
+      data     1.43.11                   1   SAS    15000  265.6GB  273.5GB (normal)
+      data     1.44.9                    1   SAS    15000  265.6GB  273.5GB (normal)
+      data     1.43.18                   1   SAS    15000  265.6GB  273.5GB (normal)
+ 6 entries were displayed.
+
+ cluster_B::>
+----
+.. Supprimer le plex en échec :
++
+`storage aggregate plex delete -aggregate aggregate-name -plex plex`
+
+.. Rétablir le miroir :
++
+`storage aggregate mirror -aggregate aggregate-name`
+
+.. Surveiller l'état de resynchronisation et de mise en miroir du plex jusqu'à ce que tous les miroirs soient réétablis et que tous les agrégats affichent un état normal en miroir :
++
+`storage aggregate show`
+
+
+
+

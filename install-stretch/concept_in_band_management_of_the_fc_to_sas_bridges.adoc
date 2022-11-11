@@ -1,0 +1,31 @@
+---
+permalink: install-stretch/concept_in_band_management_of_the_fc_to_sas_bridges.html 
+sidebar: sidebar 
+keywords: metrocluster, stretch, installation, in, band, management, fc, sas, bridges 
+summary: Depuis ONTAP 9.5 avec ponts FiberBridge 7500N ou 7600N, la gestion intrabande des ponts est prise en charge comme alternative à la gestion IP des ponts. Depuis la version ONTAP 9.8, la gestion hors bande est obsolète. 
+---
+= Gestion intrabande des ponts FC-SAS
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Depuis ONTAP 9.5 avec des ponts FiberBridge 7500N ou 7600N, _gestion intrabande_ des ponts est pris en charge comme alternative à la gestion IP des ponts. Depuis la version ONTAP 9.8, la gestion hors bande est obsolète.
+
+
+NOTE: Avec ONTAP 9.8, le `*storage bridge*` la commande est remplacée par le `*system bridge*` commande. Les étapes suivantes présentent le `*storage bridge*` Mais si vous exécutez ONTAP 9.8 ou version ultérieure, le `*system bridge*` commande recommandée.
+
+Lorsque vous utilisez la gestion intrabande, vous pouvez gérer et contrôler les ponts depuis la CLI de ONTAP via la connexion FC au pont. L'accès physique au pont via les ports Ethernet du pont n'est pas nécessaire, ce qui réduit la vulnérabilité de sécurité du pont.
+
+La disponibilité de la gestion intrabande des ponts dépend de la version de ONTAP :
+
+* Depuis ONTAP 9.8, les ponts sont gérés via des connexions intrabande par défaut et la gestion hors bande des ponts via SNMP est déconseillée.
+* ONTAP 9.5 à 9.7 : la gestion intrabande ou la gestion SNMP hors bande est prise en charge.
+* Avant ONTAP 9.5, seule la gestion SNMP hors bande est prise en charge.
+
+
+Les commandes CLI Bridge peuvent être émises à partir de l'interface ONTAP `storage bridge run-cli -name _bridge-name_ -command _bridge-command-name_` Commande au niveau de l'interface ONTAP.
+
+
+NOTE: Il est recommandé d'utiliser la gestion intrabande avec l'accès IP désactivé pour améliorer la sécurité en limitant la connectivité physique du pont.

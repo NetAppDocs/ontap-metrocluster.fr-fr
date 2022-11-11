@@ -1,0 +1,70 @@
+---
+permalink: maintain/task_secur_or_unsecur_a_fibrebridge_bridge.html 
+sidebar: sidebar 
+keywords: metrocluster, maintain, service, secure, unsecure, fibrebridge, bridge 
+summary: 'Pour désactiver facilement les protocoles Ethernet potentiellement non sécurisés sur un pont, à partir de ONTAP 9.5, vous pouvez sécuriser le pont. Ceci désactive les ports Ethernet du pont. Vous pouvez également réactiver l"accès Ethernet.' 
+---
+= Fixation ou désarrimage du pont FibreBridge
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Pour désactiver facilement les protocoles Ethernet potentiellement non sécurisés sur un pont, à partir de ONTAP 9.5, vous pouvez sécuriser le pont. Ceci désactive les ports Ethernet du pont. Vous pouvez également réactiver l'accès Ethernet.
+
+* La sécurisation du pont désactive les protocoles et services Telnet et d’autres ports IP (FTP, ExpressNAV, ICMP ou Quickmenu) sur le pont.
+* Cette procédure utilise la gestion hors bande à l'aide de l'invite ONTAP, disponible à partir de ONTAP 9.5.
++
+Vous pouvez lancer les commandes à partir de la CLI de pont si vous n'utilisez pas la gestion hors bande.
+
+* Le `*unsecurebridge*` La commande peut être utilisée pour réactiver les ports Ethernet.
+* Dans ONTAP 9.7 et versions antérieures, exécutant le `*securebridge*` Il se peut que la commande ATTO FibreBridge ne mette pas à jour correctement l'état du pont sur le cluster partenaire. Dans ce cas, exécutez le `*securebridge*` commande provenant du cluster partenaire.
+
+
+
+NOTE: Avec ONTAP 9.8, le `*storage bridge*` la commande est remplacée par `*system bridge*`. Les étapes suivantes présentent le `*storage bridge*` Mais si vous exécutez ONTAP 9.8 ou version ultérieure, le `*system bridge*` commande recommandée.
+
+.Étapes
+. Dans l'invite ONTAP du cluster contenant le pont, sécuriser ou désécuriser le pont.
++
+La commande suivante sécurise Bridge_A_1 :
+
++
+[listing]
+----
+cluster_A> storage bridge run-cli -bridge bridge_A_1 -command securebridge
+----
++
+La commande suivante désécurise Bridge_A_1 :
+
++
+[listing]
+----
+cluster_A> storage bridge run-cli -bridge bridge_A_1 -command unsecurebridge
+----
+. Dans l'invite ONTAP du cluster contenant le pont, enregistrez la configuration du pont :
++
+`*storage bridge run-cli -bridge _bridge-name_ -command saveconfiguration*`
+
++
+La commande suivante sécurise Bridge_A_1 :
+
++
+[listing]
+----
+cluster_A> storage bridge run-cli -bridge bridge_A_1 -command saveconfiguration
+----
+. Dans l'invite ONTAP du cluster contenant le pont, redémarrez le firmware du pont :
++
+`*storage bridge run-cli -bridge _bridge-name_ -command firmwarerestart*`
+
++
+La commande suivante sécurise Bridge_A_1 :
+
++
+[listing]
+----
+cluster_A> storage bridge run-cli -bridge bridge_A_1 -command firmwarerestart
+----
+

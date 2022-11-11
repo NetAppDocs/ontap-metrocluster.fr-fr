@@ -1,0 +1,221 @@
+---
+permalink: install-fc/concept_required_mcc_components_and_naming_conventions_fabric_mcc.html 
+sidebar: sidebar 
+keywords: metrocluster, fabric, installation, required, fc, components, naming, conventions 
+summary: 'Lors de la planification de votre configuration MetroCluster FC, vous devez connaître les composants matériels et logiciels requis et pris en charge. Pour plus de commodité et de clarté, vous devez également comprendre les conventions de dénomination utilisées pour les composants dans les exemples de la documentation. Par exemple, un site est appelé site A et l"autre site est appelé site B.' 
+---
+= Composants FC MetroCluster et conventions de nom requis
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Lors de la planification de votre configuration MetroCluster FC, vous devez connaître les composants matériels et logiciels requis et pris en charge. Pour plus de commodité et de clarté, vous devez également comprendre les conventions de dénomination utilisées pour les composants dans les exemples de la documentation. Par exemple, un site est appelé site A et l'autre site est appelé site B.
+
+
+
+== Logiciels et matériel pris en charge
+
+Le matériel et le logiciel doivent être pris en charge pour la configuration MetroCluster FC.
+
+https://hwu.netapp.com["NetApp Hardware Universe"]
+
+Lorsque vous utilisez des systèmes AFF, tous les modules de contrôleur de la configuration MetroCluster doivent être configurés en tant que systèmes AFF.
+
+
+NOTE: Les SFP longue durée ne sont pas pris en charge par les commutateurs de stockage MetroCluster. Pour un tableau des systèmes de fichiers SPFS pris en charge, consultez le rapport technique MetroCluster.
+
+
+
+== Redondance matérielle dans la configuration MetroCluster FC
+
+Du fait de la redondance matérielle dans la configuration FC MetroCluster, chaque composant se trouve sur chaque site. Les lettres A et B sont attribuées arbitrairement aux sites et les chiffres 1 et 2 sont attribués de façon arbitraire aux composants individuels.
+
+
+
+== Configuration requise pour deux clusters ONTAP
+
+La configuration FC MetroCluster FAS-Attached requiert deux clusters ONTAP, un sur chaque site MetroCluster.
+
+Le nom doit être unique dans la configuration MetroCluster.
+
+Exemples de noms :
+
+* Site A : cluster_A
+* Site B : cluster_B
+
+
+
+
+== Configuration requise pour quatre commutateurs FC
+
+La configuration FC MetroCluster connectée au fabric nécessite quatre commutateurs FC (modèles Brocade ou Cisco pris en charge).
+
+Les quatre commutateurs forment deux fabrics de stockage de commutation qui fournissent l'ISL entre chacun des clusters dans la configuration MetroCluster FC.
+
+Le nom doit être unique dans la configuration MetroCluster.
+
+
+
+== Configuration requise pour deux, quatre ou huit modules de contrôleur
+
+La configuration MetroCluster FC dans une structure nécessite deux, quatre ou huit modules de contrôleur.
+
+Dans une configuration MetroCluster à quatre ou huit nœuds, les modules de contrôleur de chaque site forment une ou deux paires haute disponibilité. Chaque module de contrôleur dispose d'un partenaire de reprise sur incident sur l'autre site.
+
+Les modules de contrôleur doivent répondre aux exigences suivantes :
+
+* Le nom doit être unique dans la configuration MetroCluster.
+* Tous les modules de contrôleur de la configuration MetroCluster doivent exécuter la même version de ONTAP.
+* Tous les modules de contrôleur d'un groupe DR doivent être du même modèle.
++
+Toutefois, dans des configurations avec deux groupes de reprise après incident, chaque groupe de reprise après incident peut se composer de différents modèles de module de contrôleur.
+
+* Tous les modules de contrôleur d'un groupe de reprise sur incident doivent utiliser la même configuration FC-VI.
++
+Certains modules de contrôleur prennent en charge deux options pour la connectivité FC-VI :
+
++
+** Ports FC-VI intégrés
+** Une carte FC-VI dans l'emplacement 1 On ne prend pas en charge une combinaison d'un module de contrôleur utilisant des ports FC-VI intégrés et d'une autre utilisant une carte FC-VI d'extension. Par exemple, si un nœud utilise la configuration FC-VI intégrée, tous les autres nœuds du groupe de reprise sur incident doivent également utiliser la configuration FC-VI intégrée.
+
+
+
+
+Exemples de noms :
+
+* Site A : Controller_A_1
+* Site B : Controller_B_1
+
+
+
+
+== Quatre commutateurs d'interconnexion de cluster sont nécessaires
+
+La configuration FC MetroCluster FAS requiert quatre commutateurs d'interconnexion de cluster (si vous n'utilisez pas de clusters à deux nœuds sans commutateur)
+
+Ces commutateurs assurent la communication de cluster entre les modules de contrôleur de chaque cluster. Les commutateurs ne sont pas requis si les modules de contrôleur de chaque site sont configurés en tant que cluster à 2 nœuds sans commutateur.
+
+
+
+== Conditions requises pour les ponts FC-SAS
+
+La configuration FC MetroCluster FAS requiert une paire de ponts FC-SAS pour chaque groupe de piles de tiroirs SAS.
+
+
+NOTE: Les ponts FiberBridge 6500N ne sont pas pris en charge dans les configurations exécutant ONTAP 9.8 et versions ultérieures.
+
+* Les ponts FiberBridge 7600N ou 7500N prennent en charge jusqu'à quatre piles SAS.
+* Les ponts FibreBridge 6500N ne prennent en charge qu'une seule pile SAS.
+* Chaque pile peut utiliser différents modèles d'IOM.
++
+Une combinaison de modules IOM12 et de modules IOM3 n'est pas prise en charge au sein de la même pile de stockage. Si votre système exécute une version prise en charge de ONTAP, vous pouvez utiliser plusieurs modules IOM12 et IOM6 au sein de la même pile de stockage.
+
++
+Les modules de module d'E/S pris en charge dépendent de la version d'ONTAP que vous exécutez.
+
+* Le nom doit être unique dans la configuration MetroCluster.
+
+
+Les noms suggérés utilisés comme exemples dans ce guide identifient le module de contrôleur et la pile auxquels le pont se connecte, comme illustré ci-dessous.
+
+
+
+== Exigences relatives au pool et au disque (minimum pris en charge)
+
+Il est recommandé d'utiliser huit tiroirs disques SAS (quatre tiroirs sur chaque site) pour autoriser la propriété des disques par tiroir.
+
+La configuration MetroCluster requiert une configuration minimale sur chaque site :
+
+* Chaque nœud possède au moins un pool local et un pool distant au niveau du site.
++
+Par exemple, dans une configuration MetroCluster à quatre nœuds avec deux nœuds sur chaque site, quatre pools sont requis sur chaque site.
+
+* Au moins sept disques dans chaque pool.
++
+Dans une configuration MetroCluster à quatre nœuds avec un seul agrégat de données en miroir par nœud, la configuration minimale requiert 24 disques sur le site.
+
+
+
+Dans une configuration minimale prise en charge, chaque pool dispose de la disposition de disque suivante :
+
+* Trois disques racine
+* Trois disques de données
+* Un disque de rechange
+
+
+Dans une configuration minimale prise en charge, au moins un tiroir est requis par site.
+
+Les configurations MetroCluster prennent en charge RAID-DP et RAID4
+
+
+
+== Considérations relatives à l'emplacement des disques pour les tiroirs partiellement remplis
+
+Pour l'affectation automatique correcte des disques lorsque des tiroirs sont à moitié remplis (12 disques dans un tiroir de 24 disques), les disques doivent être situés dans les emplacements 0-5 et 18-23.
+
+Dans une configuration avec un tiroir partiellement rempli, les disques doivent être répartis de manière égale dans les quatre quadrants du shelf.
+
+
+
+== Association de modules IOM12 et IOM 6 dans une pile
+
+Votre version de ONTAP doit prendre en charge le mélange des tiroirs. Consultez la matrice d'interopérabilité (IMT) pour savoir si votre version de ONTAP prend en charge la combinaison de tiroirs. https://mysupport.netapp.com/NOW/products/interoperability["Interopérabilité NetApp"]
+
+Pour plus de détails sur le mélange des étagères, voir : https://docs.netapp.com/platstor/topic/com.netapp.doc.hw-ds-mix-hotadd/home.html["Ajout de tiroirs à chaud avec modules IOM12 à une pile de tiroirs avec modules IOM6"]
+
+
+
+== Conventions de nommage des ponts
+
+Les ponts utilisent l'exemple de dénomination suivant :
+
+`bridge_site_stack grouplocation in pair`
+
+|===
+
+
+| Cette partie du nom... | Identifie... | Valeurs possibles... 
+
+
+ a| 
+le site
+ a| 
+Site sur lequel la paire de ponts réside physiquement.
+ a| 
+A ou B
+
+
+
+ a| 
+groupe de piles
+ a| 
+Numéro du groupe de piles auquel la paire de ponts se connecte.
+
+* Les ponts FiberBridge 7600N ou 7500N prennent en charge jusqu'à quatre piles dans le groupe de piles.
++
+Le groupe de piles ne peut pas contenir plus de 10 tiroirs de stockage.
+
+* Les ponts FiberBridge 6500N ne prennent en charge qu'une seule pile dans le groupe de piles.
+
+ a| 
+1, 2, etc
+
+
+
+ a| 
+emplacement en paire
+ a| 
+Pont au sein de la paire de ponts.Une paire de ponts se connecte à un groupe de piles spécifique.
+ a| 
+a ou b
+
+|===
+Exemples de noms de pont pour un groupe de piles sur chaque site :
+
+* Bridge_A_1a
+* Bridge_A_1b
+* Bridge_B_1a
+* Bridge_B_1b
+

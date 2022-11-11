@@ -1,0 +1,46 @@
+---
+permalink: install-stretch/task_cable_a_fibrebridge_7600n_or_7500n_bridge_fb_new_install_cable_7500_pangolin.html 
+sidebar: sidebar 
+keywords: metrocluster, stretch, installation, cable, fibrebridge, iom3, iom6, modules, shelves, bridge 
+summary: Après avoir configuré le pont, vous pouvez commencer à câbler le système. Le pont FiberBridge 7600N ou 7500N utilise des connecteurs mini-SAS et prend en charge les tiroirs qui utilisent des modules IOM6 ou IOM3. 
+---
+= Câblage d'un pont FibreBridge 7600N ou 7500N avec des tiroirs utilisant des modules IOM6 ou IOM3
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Après avoir configuré le pont, vous pouvez commencer à câbler le système. Le pont FiberBridge 7600N ou 7500N utilise des connecteurs mini-SAS et prend en charge les tiroirs qui utilisent des modules IOM6 ou IOM3.
+
+Les modules IOM3 ne sont pas pris en charge avec les ponts FiberBridge 7600N.
+
+Pour les tiroirs disques, vous insérez un connecteur de câble SAS avec la languette de retrait orientée vers le bas (sous le connecteur).
+
+.Étapes
+. Connectez les tiroirs en série de chaque pile.
++
+.. Pour la première pile de tiroirs, reliez le module d'E/S À un port carré du premier shelf au port SAS A du FibreBridge A.
+.. Pour la première pile de tiroirs, reliez le port Circle IOM B du dernier tiroir au port SAS A du FibreBridge B.
++
+Le _Guide d'installation et de maintenance_ de votre modèle de tiroir fournit des informations détaillées sur la configuration des tiroirs en série.
+
++
+https://library.netapp.com/ecm/ecm_download_file/ECMP1119629["Guide d'installation et de maintenance des tiroirs disques SAS pour DS4243, DS2246, DS4486 et DS4246"^]
+
++
+L'illustration suivante présente un ensemble de ponts câblés à une pile de tiroirs :
+
++
+image::../media/mcc_cabling_bridge_and_sas_stack_with_7500n_and_single_stack.gif[passerelle de câblage mcc et pile sas avec 7500n et pile unique]
+
+
+
+. Pour les autres piles de tiroirs, répétez les étapes précédentes en utilisant le prochain port SAS disponible sur les ponts FiberBridge. Utilisez le port B pour une deuxième pile, le port C pour une troisième pile et le port D pour une quatrième pile.
++
+L'illustration suivante montre quatre piles connectées à une paire de ponts FiberBridge 7600N ou 7500N.
+
++
+image::../media/mcc_cabling_bridge_and_sas_stack_with_7500n_four_stacks.gif[pont de câblage mcc et pile sas avec 7500n quatre piles]
+
+

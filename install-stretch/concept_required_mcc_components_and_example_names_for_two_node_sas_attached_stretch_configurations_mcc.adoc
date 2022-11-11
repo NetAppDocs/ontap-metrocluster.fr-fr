@@ -1,0 +1,105 @@
+---
+permalink: install-stretch/concept_required_mcc_components_and_example_names_for_two_node_sas_attached_stretch_configurations_mcc.html 
+sidebar: sidebar 
+keywords: metrocluster, stretch, installation, required, hardware, components, naming, guidelines, two, node, sas, configuration 
+summary: 'La configuration MetroCluster nécessite divers composants matériels. Pour plus de clarté et de commodité, des noms standard de composants sont utilisés dans la documentation MetroCluster. Un site est appelé site A et l"autre site est appelé site B.' 
+---
+= Composants matériels MetroCluster requis et instructions de nommage pour les configurations Stretch SAS-Attached à deux nœuds
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+La configuration MetroCluster nécessite divers composants matériels. Pour plus de clarté et de commodité, des noms standard de composants sont utilisés dans la documentation MetroCluster. Un site est appelé site A et l'autre site est appelé site B.
+
+
+
+== Logiciels et matériel pris en charge
+
+Le matériel et le logiciel doivent être pris en charge pour la configuration MetroCluster FC.
+
+https://hwu.netapp.com["NetApp Hardware Universe"]
+
+Lorsque vous utilisez des systèmes AFF, tous les modules de contrôleur de la configuration MetroCluster doivent être configurés en tant que systèmes AFF.
+
+
+
+== Redondance matérielle dans la configuration MetroCluster
+
+En raison de la redondance matérielle dans la configuration MetroCluster, chaque site compte deux composants. Les lettres A et B sont attribuées arbitrairement aux sites et les chiffres 1 et 2 sont attribués de façon arbitraire aux composants individuels.
+
+
+
+== Deux clusters ONTAP à un seul nœud
+
+La configuration Stretch MetroCluster basée sur SAS requiert deux clusters ONTAP à un seul nœud.
+
+Le nom doit être unique dans la configuration MetroCluster.
+
+Exemples de noms :
+
+* Site A : cluster_A
+* Site B : cluster_B
+
+
+
+
+== Deux modules de contrôleur de stockage
+
+La configuration Stretch MetroCluster basée sur SAS requiert deux modules de contrôleur de stockage.
+
+* Le nom doit être unique dans la configuration MetroCluster.
+* Tous les modules de contrôleur de la configuration MetroCluster doivent exécuter la même version de ONTAP.
+* Tous les modules de contrôleur d'un groupe DR doivent être du même modèle.
+* Tous les modules de contrôleur d'un groupe de reprise sur incident doivent utiliser la même configuration FC-VI.
++
+Certains modules de contrôleur prennent en charge deux options pour la connectivité FC-VI :
+
++
+** Ports FC-VI intégrés
+** Une carte FC-VI dans le logement 1
++
+Les configurations utilisant un module de contrôleur utilisant des ports FC-VI intégrés et une autre utilisant une carte FC-VI add-on ne sont pas prises en charge. Par exemple, si un nœud utilise la configuration FC-VI intégrée, tous les autres nœuds du groupe de reprise sur incident doivent également utiliser la configuration FC-VI intégrée.
+
+
+
+
+
+Exemples de noms :
+
+* Site A : Controller_A_1
+* Site B : Controller_B_1
+
+
+
+
+== Au moins quatre tiroirs disques SAS (recommandé)
+
+La configuration Stretch MetroCluster (SAS-Attached) requiert au moins deux tiroirs disques SAS. Quatre tiroirs disques SAS sont recommandés.
+
+Deux tiroirs sont recommandés sur chaque site pour permettre la propriété du disque par tiroir. Au moins un tiroir est pris en charge sur chaque site.
+
+Exemples de noms :
+
+* Site A :
++
+** Shelf_A_1_1
+** Shelf_A_1_2
+
+
+* Site B :
++
+** Shelf_B_1_1
+** Shelf_B_1_2
+
+
+
+
+
+
+== Association de modules IOM12 et IOM 6 dans une pile
+
+Votre version de ONTAP doit prendre en charge le mélange des tiroirs. Consultez la matrice d'interopérabilité (IMT) pour savoir si votre version de ONTAP prend en charge la combinaison de tiroirs. https://mysupport.netapp.com/NOW/products/interoperability["Interopérabilité NetApp"]
+
+Pour plus de détails sur le mélange des étagères, voir : https://docs.netapp.com/platstor/topic/com.netapp.doc.hw-ds-mix-hotadd/home.html["Ajout de tiroirs à chaud avec modules IOM12 à une pile de tiroirs avec modules IOM6"]

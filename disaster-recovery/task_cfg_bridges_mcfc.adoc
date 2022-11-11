@@ -1,0 +1,158 @@
+---
+permalink: disaster-recovery/task_cfg_bridges_mcfc.html 
+sidebar: sidebar 
+keywords: fc, sas, bridge, configure, metrocluster, configuration 
+summary: Si vous avez remplacé les ponts FC-SAS, vous devez les configurer lors de la restauration de la configuration MetroCluster. 
+---
+= Configuration des ponts FC-SAS (configurations MetroCluster FC uniquement)
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Si vous avez remplacé les ponts FC-SAS, vous devez les configurer lors de la restauration de la configuration MetroCluster. La procédure est identique à la configuration initiale d'un pont FC-to-SAS.
+
+.Étapes
+. Mettez les ponts FC-SAS sous tension.
+. Définissez l'adresse IP sur les ports Ethernet à l'aide de `set IPAddress port ipaddress` commande.
++
+** `port` Peut être "MP1" ou "MP2".
+** `ipaddress` Peut être une adresse IP au format xxx.xxx.xxx.
++
+Dans l'exemple suivant, l'adresse IP est 10.10.10.55 sur le port Ethernet 1 :
+
++
+[listing]
+----
+
+Ready.
+set IPAddress MP1 10.10.10.55
+
+Ready. *
+----
+
+
+. Définissez le masque de sous-réseau IP sur les ports Ethernet à l'aide de l' `set IPSubnetMask port mask` commande.
++
+** `port` Peut être « MP1 » ou « MP2 ».
+** `mask` peut être un masque de sous-réseau au format xxx.xxx.xxx.
++
+Dans l'exemple suivant, le masque de sous-réseau IP est 255.255.255.0 sur le port Ethernet 1 :
+
++
+[listing]
+----
+
+Ready.
+set IPSubnetMask MP1 255.255.255.0
+
+Ready. *
+----
+
+
+. Réglez la vitesse sur les ports Ethernet à l'aide de la `set EthernetSpeed port speed` commande.
++
+** `port` Peut être « MP1 » ou « MP2 ».
+** `speed` peut être « 100 » ou « 1000 ».
++
+Dans l'exemple suivant, la vitesse Ethernet est définie sur 1000 sur le port Ethernet 1.
+
++
+[listing]
+----
+
+Ready.
+set EthernetSpeed MP1 1000
+
+Ready. *
+----
+
+
+. Enregistrez la configuration à l'aide du `saveConfiguration` et redémarrez le pont lorsque vous y êtes invité.
++
+L'enregistrement de la configuration après la configuration des ports Ethernet vous permet de poursuivre la configuration du pont à l'aide de Telnet et vous permet d'accéder au pont à l'aide du protocole FTP pour effectuer les mises à jour du micrologiciel.
+
++
+L'exemple suivant montre le `saveConfiguration` commande et invite de redémarrage du pont.
+
++
+[listing]
+----
+
+Ready.
+SaveConfiguration
+  Restart is necessary....
+  Do you wish to restart (y/n) ?
+Confirm with 'y'. The bridge will save and restart with the new settings.
+----
+. Une fois le pont FC-to-SAS redémarré, connectez-vous à nouveau.
+. Définir la vitesse sur les ports FC à l'aide de `set fcdatarate port speed` commande.
++
+** `port` peut être « 1 » ou « 2 ».
+** `speed` Peut être "2 Go", "4 Go", "8 Go" ou "16 Go", selon le pont de votre modèle.
++
+Dans l'exemple suivant, la vitesse du port FC1 est définie sur « 8 Go ».
+
++
+[listing]
+----
+
+Ready.
+set fcdatarate 1 8Gb
+
+Ready. *
+----
+
+
+. Définissez la topologie sur les ports FC en utilisant le `set FCConnMode port mode` commande.
++
+** `port` peut être « 1 » ou « 2 ».
+** `mode` peut être « ptp », « boucle », « boucle ptp » ou « automatique ».
++
+Dans l'exemple suivant, la topologie du port FC1 est définie sur « ptp ».
+
++
+[listing]
+----
+
+Ready.
+set FCConnMode 1 ptp
+
+Ready. *
+----
+
+
+. Enregistrez la configuration à l'aide du `saveConfiguration` et redémarrez le pont lorsque vous y êtes invité.
++
+L'exemple suivant montre le `saveConfiguration` commande et invite de redémarrage du pont.
+
++
+[listing]
+----
+
+ Ready.
+ SaveConfiguration
+    Restart is necessary....
+    Do you wish to restart (y/n) ?
+ Confirm with 'y'. The bridge will save and restart with the new settings.
+----
+. Une fois le pont FC-to-SAS redémarré, connectez-vous à nouveau.
+. Si le pont FC-to-SAS exécute le micrologiciel 1.60 ou version ultérieure, activez le protocole SNMP.
++
+[listing]
+----
+
+Ready.
+set snmp enabled
+
+Ready. *
+saveconfiguration
+
+Restart is necessary....
+Do you wish to restart (y/n) ?
+
+Verify with 'y' to restart the FibreBridge.
+----
+. Mettez les ponts FC-SAS hors tension.
+

@@ -1,0 +1,30 @@
+---
+permalink: install-fc/task_download_the_brocade_fc_rcf_switch_software.html 
+sidebar: sidebar 
+keywords: metrocluster, fabric, installation, download, brocade, fc, switch, rcf, file 
+summary: 'Vous devez télécharger le fichier de configuration de référence \(RCF\) sur chaque commutateur de la configuration MetroCluster Fabric.' 
+---
+= Téléchargement du fichier RCF de commutateur FC Brocade
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous devez télécharger le fichier RCF (Reference Configuration) sur chaque commutateur de la configuration MetroCluster Fabric.
+
+Pour utiliser ces fichiers RCF, le système doit exécuter ONTAP 9.1 ou version ultérieure et vous devez utiliser l'organisation des ports pour ONTAP 9.1 ou version ultérieure.
+
+Si vous prévoyez d'utiliser un seul port FC sur les ponts FibreBridge, configurez manuellement les commutateurs Fibre Channel back-end en suivant les instructions de la section, link:concept_port_assignments_for_fc_switches_when_using_ontap_9_1_and_later.html["Affectation de ports pour les commutateurs FC lors de l'utilisation de ONTAP 9.1 et versions ultérieures"].
+
+.Étapes
+. Consultez la table des fichiers RCF sur la page de téléchargement Brocade RCF et identifiez le fichier RCF approprié pour chaque commutateur de votre configuration.
++
+Les fichiers RCF doivent être appliqués aux commutateurs corrects.
+
+. Téléchargez les fichiers RCF des commutateurs sur https://mysupport.netapp.com/site/products/all/details/metrocluster-rcf/downloads-tab["Téléchargement de MetroCluster RCF"] page.
++
+Les fichiers doivent être placés dans un emplacement où ils peuvent être transférés vers le commutateur. Il existe un fichier distinct pour chacun des quatre commutateurs qui constituent la structure à deux commutateurs.
+
+. Répétez ces étapes sur chaque commutateur de la configuration.
+

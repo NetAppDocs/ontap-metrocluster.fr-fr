@@ -1,0 +1,39 @@
+---
+permalink: maintain/concept_migrating_root_volumes_to_a_new_destination.html 
+sidebar: sidebar 
+keywords: metrocluster, maintain, service, migrate, root, volumes, new, destination 
+summary: Il peut être nécessaire de déplacer des volumes root vers un autre agrégat root dans une configuration MetroCluster à deux ou quatre nœuds. 
+---
+= Quand migrer des volumes root vers une nouvelle destination
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Il peut être nécessaire de déplacer des volumes root vers un autre agrégat root dans une configuration MetroCluster à deux ou quatre nœuds.
+
+
+
+== Migration des volumes root dans une configuration MetroCluster à deux nœuds
+
+Pour migrer des volumes root vers un nouvel agrégat racine dans une configuration MetroCluster à deux nœuds, consultez la https://kb.netapp.com/Advice_and_Troubleshooting/Data_Protection_and_Security/MetroCluster/How_to_move_mroot_to_a_new_root_aggregate_in_a_2-node_Clustered_MetroCluster_with_Switchover["Comment déplacer mroot vers un nouvel agrégat root dans un clustered MetroCluster à 2 nœuds avec basculement"]. Cette procédure explique comment migrer les volumes root sans interruption lors d'une opération de basculement MetroCluster. Cette procédure est légèrement différente de la procédure utilisée sur une configuration à quatre nœuds.
+
+
+
+== Migration des volumes root dans une configuration MetroCluster à quatre nœuds
+
+Pour migrer des volumes root vers un nouvel agrégat root dans une configuration MetroCluster à quatre nœuds, vous pouvez utiliser le http://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-cmpr-930/system%5F%5Fnode%5F%5Fmigrate-root.html["nœud système migrate-root"] tout en répondant aux exigences suivantes.
+
+* Vous pouvez utiliser la migration-racine des nœuds système pour déplacer les agrégats racine dans une configuration MetroCluster à quatre nœuds.
+* Tous les agrégats racine doivent être mis en miroir.
+* Vous pouvez ajouter de nouveaux tiroirs sur les deux sites avec des disques plus petits pour héberger l'agrégat racine.
+* Vous devez vérifier les limites d'entraînement prises en charge par la plate-forme avant de fixer de nouveaux lecteurs.
++
+https://hwu.netapp.com["NetApp Hardware Universe"]
+
+* Si vous déplacez l'agrégat racine vers des disques de plus petite taille, vous devez adapter la taille minimale du volume racine de la plate-forme pour vous assurer que tous les fichiers core sont enregistrés.
+
+
+
+NOTE: La procédure à quatre nœuds peut également être appliquée à une configuration à huit nœuds.

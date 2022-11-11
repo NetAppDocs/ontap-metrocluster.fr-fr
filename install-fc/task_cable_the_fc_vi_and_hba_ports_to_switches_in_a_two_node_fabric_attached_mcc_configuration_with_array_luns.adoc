@@ -1,0 +1,83 @@
+---
+permalink: install-fc/task_cable_the_fc_vi_and_hba_ports_to_switches_in_a_two_node_fabric_attached_mcc_configuration_with_array_luns.html 
+sidebar: sidebar 
+keywords: metrocluster, fabric, installation, cable, fc, vi, hba, ports, two, node, array, luns 
+summary: 'Si vous configurez une configuration MetroCluster à deux nœuds (Fabric-Attached) avec des LUN de baie, vous devez câbler les ports FC-VI et les ports HBA aux ports des commutateurs.' 
+---
+= Câblage des ports FC-VI et HBA dans une configuration MetroCluster à deux nœuds (Fabric-Attached) avec des LUN de baie
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Si vous configurez une configuration MetroCluster à deux nœuds (Fabric-Attached) avec des LUN de baie, vous devez câbler les ports FC-VI et les ports HBA aux ports des commutateurs.
+
+.Description de la tâche
+* Vous devez répéter cette tâche pour chaque contrôleur des deux sites MetroCluster.
+* Si vous prévoyez d'utiliser des disques en plus des LUN de matrice dans votre configuration MetroCluster, vous devez utiliser les ports HBA et les ports de commutation spécifiés pour la configuration avec des disques.
++
+** link:concept_port_assignments_for_fc_switches_when_using_ontap_9_1_and_later.html["Affectation de ports pour les commutateurs FC lors de l'utilisation de ONTAP 9.1 et versions ultérieures"]
+** link:concept_port_assignments_for_fc_switches_when_using_ontap_9_0.html["Affectation des ports pour les commutateurs FC lors de l'utilisation de ONTAP 9.0"]
+
+
+
+
+.Étapes
+. Reliez les ports FC-VI du contrôleur aux ports de commutateurs secondaires.
+. Effectuez le câblage contrôleur-commutateur sur les deux sites MetroCluster.
++
+Vous devez assurer la redondance des connexions entre le contrôleur et les commutateurs. Par conséquent, pour chaque contrôleur d'un site, vous devez vous assurer que les deux ports HBA de la même paire de ports sont connectés à d'autres commutateurs FC.
+
++
+L'exemple suivant montre les connexions entre les ports HBA du contrôleur A et les ports FC_switch_A_1 et FC_switch_A_2 :
+
++
+image::../media/two_node_mcc_hba_connections.gif[deux connexions hba mcc à nœud]
+
++
+Le tableau suivant répertorie les connexions entre les ports HBA et les ports commutés FC dans l'illustration :
+
++
+|===
+
+
+| Ports HBA | Commutateurs 
+
+
+2+| *Paire de ports* 
+
+
+ a| 
+Orifice a
+ a| 
+FC_Switch_A_1, port 2
+
+
+
+ a| 
+Port d
+ a| 
+FC_Switch_A_2, port 3
+
+
+
+2+| *Paire de ports* 
+
+
+ a| 
+Orifice b
+ a| 
+FC_Switch_A_2, port 2
+
+
+
+ a| 
+Port c
+ a| 
+FC_Switch_A_1, port 3
+
+|===
+
+
+Vous devez relier les câbles ISL entre les commutateurs FC sur les sites MetroCluster.

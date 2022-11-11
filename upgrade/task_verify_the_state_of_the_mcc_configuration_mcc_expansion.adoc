@@ -1,0 +1,82 @@
+---
+permalink: upgrade/task_verify_the_state_of_the_mcc_configuration_mcc_expansion.html 
+sidebar: sidebar 
+keywords: metrocluster, upgrade, verify, state, configuration 
+summary: 'Vous devez identifier les contrôleurs existants et confirmer les relations \(DR\) de reprise après incident entre eux, que les contrôleurs sont en mode normal et que les agrégats sont en miroir.' 
+---
+= Vérification de l'état de la configuration du MetroCluster
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous devez identifier les contrôleurs existants et confirmer les relations de reprise sur incident entre eux, que les contrôleurs sont en mode normal et que les agrégats sont mis en miroir.
+
+.Étapes
+. Afficher le détail des nœuds dans la configuration MetroCluster depuis n'importe quel nœud de la configuration :
++
+`metrocluster node show -fields node,dr-partner,dr-partner-systemid`
+
++
+Le résultat suivant indique que cette configuration MetroCluster dispose d'un seul groupe de reprise sur incident et d'un seul nœud dans chaque cluster.
+
++
+[listing]
+----
+cluster_A::> metrocluster node show -fields node,dr-partner,dr-partner-systemid
+
+dr-group-id  cluster         node            dr-partner      dr-partner-systemid
+-----------  -------------   -------         ----------      -------------------
+1            cluster_A       controller_A_1  controller_B_1  536946192
+1            cluster_B       controller_B_1  controller_A_1  536946165
+2 entries were displayed.
+----
+. Afficher l'état de la configuration MetroCluster :
++
+`metrocluster show`
+
++
+Le résultat suivant indique que les nœuds existants dans la configuration MetroCluster sont en mode normal :
+
++
+[listing]
+----
+
+cluster_A::> metrocluster show
+
+Configuration: two-node-fabric
+
+Cluster                        Entry Name             State
+------------------------------ ---------------------- ---------------------
+Local: cluster_A               Configuration State    configured
+                               Mode                   normal
+                               AUSO Failure Domain    auso-on-cluster-disaster
+Remote: controller_B_1_siteB
+                               Configuration State    configured
+                               Mode                   normal
+                               AUSO Failure Domain    auso-on-cluster-disaster
+----
+. Vérifier l'état des agrégats de chaque nœud de la configuration MetroCluster :
++
+`storage aggregate show`
+
++
+Le résultat suivant indique que les agrégats du cluster_A sont en ligne et en miroir :
+
++
+[listing]
+----
+cluster_A::> storage aggregate show
+
+
+Aggregate                Size     Available Used%  State   #Vols  Nodes            RAID Status
+---------                -------- --------- -----  ------- ------ ---------------- ------------
+aggr0_controller_A_1_0   1.38TB   68.63GB   95%    online    1    controller_A_1   raid_dp,mirrored
+controller_A_1_aggr1     4.15TB   4.14TB    0%     online    2    controller_A_1   raid_dp,mirrored
+controller_A_1_aggr2     4.15TB   4.14TB    0%     online    1    controller_A_1   raid_dp,mirrored
+3 entries were displayed.
+
+cluster_A::>
+----
+

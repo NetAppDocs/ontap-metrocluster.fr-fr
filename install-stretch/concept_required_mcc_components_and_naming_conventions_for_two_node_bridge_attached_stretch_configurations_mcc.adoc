@@ -1,0 +1,145 @@
+---
+permalink: install-stretch/concept_required_mcc_components_and_naming_conventions_for_two_node_bridge_attached_stretch_configurations_mcc.html 
+sidebar: sidebar 
+keywords: metrocluster, stretch, installation, required, hardware, components, naming, conventions, two, node, stretch, bridge 
+summary: 'Lorsque vous planifiez votre configuration MetroCluster, vous devez comprendre les composants matériels et logiciels requis et pris en charge. Pour plus de commodité et de clarté, vous devez également comprendre les conventions de dénomination utilisées pour les composants dans les exemples de la documentation. Par exemple, un site est appelé site A et l"autre site est appelé site B.' 
+---
+= Composants matériels MetroCluster requis et conventions de nommage pour les configurations extensibles à deux nœuds
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Lorsque vous planifiez votre configuration MetroCluster, vous devez comprendre les composants matériels et logiciels requis et pris en charge. Pour plus de commodité et de clarté, vous devez également comprendre les conventions de dénomination utilisées pour les composants dans les exemples de la documentation. Par exemple, un site est appelé site A et l'autre site est appelé site B.
+
+
+
+== Logiciels et matériel pris en charge
+
+Le matériel et le logiciel doivent être pris en charge pour la configuration MetroCluster FC.
+
+https://hwu.netapp.com["NetApp Hardware Universe"]
+
+Lorsque vous utilisez des systèmes AFF, tous les modules de contrôleur de la configuration MetroCluster doivent être configurés en tant que systèmes AFF.
+
+
+
+== Redondance matérielle dans la configuration MetroCluster
+
+En raison de la redondance matérielle dans la configuration MetroCluster, chaque site compte deux composants. Les lettres A et B sont attribuées arbitrairement aux sites et les chiffres 1 et 2 sont attribués de façon arbitraire aux composants individuels.
+
+
+
+== Condition requise pour deux clusters ONTAP à un nœud
+
+La configuration Stretch MetroCluster à connexion Bridge-Attached requiert deux clusters ONTAP à un seul nœud.
+
+Le nom doit être unique dans la configuration MetroCluster.
+
+Exemples de noms :
+
+* Site A : cluster_A
+* Site B : cluster_B
+
+
+
+
+== Configuration requise pour deux modules de contrôleur de stockage
+
+La configuration Stretch MetroCluster à connexion Bridge-Attached requiert deux modules de contrôleur de stockage.
+
+Les contrôleurs doivent répondre aux exigences suivantes :
+
+* Le nom doit être unique dans la configuration MetroCluster.
+* Tous les modules de contrôleur de la configuration MetroCluster doivent exécuter la même version de ONTAP.
+* Tous les modules de contrôleur d'un groupe DR doivent être du même modèle.
+* Tous les modules de contrôleur d'un groupe de reprise sur incident doivent utiliser la même configuration FC-VI.
++
+Certains modules de contrôleur prennent en charge deux options pour la connectivité FC-VI :
+
++
+** Ports FC-VI intégrés
+** Une carte FC-VI dans le logement 1
++
+Les configurations utilisant un module de contrôleur utilisant des ports FC-VI intégrés et une autre utilisant une carte FC-VI add-on ne sont pas prises en charge. Par exemple, si un nœud utilise la configuration FC-VI intégrée, tous les autres nœuds du groupe de reprise sur incident doivent également utiliser la configuration FC-VI intégrée.
+
+
+
+
+
+Exemples de noms :
+
+* Site A : Controller_A_1
+* Site B : Controller_B_1
+
+
+
+
+== Conditions requises pour les ponts FC-SAS
+
+La configuration Stretch MetroCluster à connexion Bridge-Attached nécessite au moins deux ponts FC-SAS à chaque site.
+
+Ces ponts connectent les tiroirs disques SAS aux modules de contrôleur.
+
+
+NOTE: Les ponts FiberBridge 6500N ne sont pas pris en charge dans les configurations exécutant ONTAP 9.8 et versions ultérieures.
+
+* Les ponts FiberBridge 7600N et 7500N prennent en charge jusqu'à quatre piles SAS.
+* Les ponts FibreBridge 6500N ne prennent en charge qu'une seule pile SAS.
+* Chaque pile peut utiliser différents modèles d'E/S, mais tous les tiroirs d'une pile doivent utiliser le même modèle.
++
+Les modèles de module d'E/S pris en charge dépendent de la version ONTAP que vous exécutez.
+
+* Le nom doit être unique dans la configuration MetroCluster.
+
+
+Les noms suggérés sont utilisés comme exemples dans cette procédure pour identifier le module de contrôleur auquel le pont se connecte et le port.
+
+Exemples de noms :
+
+* Site A :
++
+** Bridge_A_1_``__port-number__``
+** Pont_A_2_``__port-number__``
+
+
+* Site B :
++
+** Pont_B_1_``__port-number__``
+** Pont_B_2_``__port-number__``
+
+
+
+
+
+
+== Configuration requise pour au moins quatre tiroirs SAS (recommandé)
+
+La configuration Stretch MetroCluster (Bridge-Attached) requiert au moins deux tiroirs SAS. Cependant, deux tiroirs sont recommandés sur chaque site pour permettre la propriété des disques par tiroir, pour un total de quatre tiroirs SAS.
+
+Au moins un tiroir est pris en charge sur chaque site.
+
+Exemples de noms :
+
+* Site A :
++
+** Shelf_A_1_1
+** Shelf_A_1_2
+
+
+* Site B :
++
+** Shelf_B_1_1
+** Shelf_B_1_2
+
+
+
+
+
+
+== Association de modules IOM12 et IOM 6 dans une pile
+
+Votre version de ONTAP doit prendre en charge le mélange des tiroirs. Consultez la matrice d'interopérabilité (IMT) pour savoir si votre version de ONTAP prend en charge la combinaison de tiroirs. https://mysupport.netapp.com/NOW/products/interoperability["Interopérabilité NetApp"^]
+
+Pour plus de détails sur le mélange des étagères, voir : https://docs.netapp.com/platstor/topic/com.netapp.doc.hw-ds-mix-hotadd/home.html["Ajout de tiroirs à chaud avec modules IOM12 à une pile de tiroirs avec modules IOM6"^]

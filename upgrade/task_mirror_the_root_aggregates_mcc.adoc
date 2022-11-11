@@ -1,0 +1,42 @@
+---
+permalink: upgrade/task_mirror_the_root_aggregates_mcc.html 
+sidebar: sidebar 
+keywords: metrocluster, upgrade, mirror, root, aggregate 
+summary: Pour assurer la protection des données, vous devez mettre en miroir les agrégats racine. 
+---
+= Mise en miroir des agrégats racine
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Pour assurer la protection des données, vous devez mettre en miroir les agrégats racine.
+
+Par défaut, l'agrégat root est créé comme un agrégat de type RAID-DP. Vous pouvez changer l'agrégat racine de RAID-DP à l'agrégat de type RAID4 La commande suivante modifie l'agrégat racine pour l'agrégat de type RAID4 :
+
+[listing]
+----
+storage aggregate modify –aggregate aggr_name -raidtype raid4
+----
+
+NOTE: Sur les systèmes non ADP, le type RAID de l'agrégat peut être modifié depuis le RAID-DP par défaut vers le RAID4 avant ou après la mise en miroir de l'agrégat.
+
+.Étapes
+. Mettre en miroir l'agrégat racine :
++
+`storage aggregate mirror _aggr_name_`
+
++
+La commande suivante met en miroir l'agrégat root pour Controller_A_1 :
+
++
+[listing]
+----
+controller_A_1::> storage aggregate mirror aggr0_controller_A_1
+----
++
+Cela met en miroir l'agrégat, il se compose d'un plex local et d'un plex distant situé sur le site MetroCluster distant.
+
+. Répétez l'étape précédente pour chaque nœud de la configuration MetroCluster.
+

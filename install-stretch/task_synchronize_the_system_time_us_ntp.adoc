@@ -1,0 +1,37 @@
+---
+permalink: install-stretch/task_synchronize_the_system_time_us_ntp.html 
+sidebar: sidebar 
+keywords: metrocluster, stretch, installation, synchronize, system, time, ntp 
+summary: 'Chaque cluster doit disposer de son propre serveur Network Time Protocol \(NTP\) afin de synchroniser le temps entre les nœuds et leurs clients. Vous pouvez utiliser la boîte de dialogue Modifier date/heure dans System Manager pour configurer le serveur NTP.' 
+---
+= Synchronisation de l'heure du système à l'aide du protocole NTP
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Chaque cluster a besoin de son propre serveur NTP (Network Time Protocol) pour synchroniser l'heure entre les nœuds et leurs clients. Vous pouvez utiliser la boîte de dialogue Modifier date/heure dans System Manager pour configurer le serveur NTP.
+
+Vérifiez que vous avez téléchargé et installé System Manager. System Manager est disponible sur le site du support NetApp.
+
+* Vous ne pouvez pas modifier les paramètres du fuseau horaire d'un nœud défaillant ou du nœud partenaire après le basculement.
+* Chaque cluster de la configuration MetroCluster FC doit disposer de son propre serveur NTP ou serveurs utilisés par les nœuds et (le cas échéant) de ponts FC-SAS sur ce site MetroCluster.
++
+Si vous utilisez le logiciel MetroCluster Tiebreaker, il doit également disposer de son propre serveur NTP.
+
+
+
+.Étapes
+. Dans la page d'accueil, double-cliquez sur le système de stockage approprié.
+. Développez la hiérarchie *Cluster* dans le volet de navigation de gauche.
+. Dans le volet de navigation, cliquez sur *Configuration* > *Outils système* > *DateTime*.
+. Cliquez sur *Modifier*.
+. Sélectionnez le fuseau horaire.
+. Spécifiez les adresses IP des serveurs de temps, puis cliquez sur *Ajouter*.
++
+Vous devez ajouter un serveur NTP à la liste de serveurs de temps. Le contrôleur de domaine peut être un serveur faisant autorité.
+
+. Cliquez sur *OK*.
+. Vérifiez les modifications apportées aux paramètres de date et d'heure dans la fenêtre Date et heure.
+
