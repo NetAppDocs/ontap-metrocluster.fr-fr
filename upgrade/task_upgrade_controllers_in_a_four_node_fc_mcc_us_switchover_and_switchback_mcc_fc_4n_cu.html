@@ -6155,7 +6155,7 @@
 <p class="page-details">
   
     
-    <time datetime="2022-11-15 12:12:06 +0000">11/15/2022</time>
+    <time datetime="2022-11-21 18:31:46 +0000">11/21/2022</time>
     
   
 
@@ -6980,18 +6980,31 @@ dr-group-id cluster    node      node-systemid dr-partner-systemid
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
-<p>Exécutez la commande suivante sur cluster_A :</p>
+<p>Sélectionnez l&#8217;option qui correspond à votre configuration et exécutez la commande appropriée sur cluster_A :</p>
+<div class="exampleblock tabbed-block">
+<div class="content">
+<div class="openblock">
+<div class="title">Option 1 : configuration FC à quatre ou huit nœuds exécutant ONTAP 9.8 ou une version ultérieure</div>
+<div class="content">
 <div class="paragraph">
-<p><code>metrocluster switchover -controller-replacement true</code></p>
+<p>Lancer la commande : <code>metrocluster switchover -controller-replacement true</code></p>
 </div>
-</li>
-</ol>
+</div>
+</div>
+<div class="openblock">
+<div class="title">Option 2 : configuration FC à deux nœuds exécutant ONTAP 9.3 et versions ultérieures</div>
+<div class="content">
+<div class="paragraph">
+<p>Lancer la commande : <code>metrocluster switchover</code></p>
+</div>
+</div>
+</div>
+</div>
 </div>
 <div class="paragraph">
 <p>L&#8217;opération peut prendre plusieurs minutes.</p>
 </div>
-<div class="olist loweralpha">
-<ol class="loweralpha" type="a">
+</li>
 <li>
 <p>Surveiller le fonctionnement du basculement :</p>
 <div class="paragraph">

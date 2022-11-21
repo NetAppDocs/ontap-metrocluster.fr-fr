@@ -6155,7 +6155,7 @@
 <p class="page-details">
   
     
-    <time datetime="2022-11-15 12:12:06 +0000">11/15/2022</time>
+    <time datetime="2022-11-21 18:31:46 +0000">11/21/2022</time>
     
   
 
@@ -6249,7 +6249,7 @@ Les agrégats racine ne sont pas supprimés.
 <p>Migrez toutes les LIFs de données vers les nœuds d&#8217;un autre groupe de reprise après incident.<br>
 <code>network interface show -home-node <em>old_node</em></code></p>
 <div class="paragraph">
-<p><code>network interface modify -vserver <em>svm-name</em> -lif <em>data-lif</em> -home-port <em>port-id</em></code></p>
+<p><code>network interface modify -vserver svm-name -lif data-lif -home-node new_node -home-port port-id</code></p>
 </div>
 </li>
 <li>
@@ -6258,7 +6258,7 @@ Les agrégats racine ne sont pas supprimés.
 <p><code>network interface show -role cluster-mgmt</code></p>
 </div>
 <div class="paragraph">
-<p><code>network interface modify -vserver <em>svm-name</em> -lif <em>data-lif</em> -home-port <em>port-id</em></code></p>
+<p><code>network interface modify -vserver svm-name -lif cluster_mgmt -home-node new_node -home-port port-id</code></p>
 </div>
 </li>
 </ol>
