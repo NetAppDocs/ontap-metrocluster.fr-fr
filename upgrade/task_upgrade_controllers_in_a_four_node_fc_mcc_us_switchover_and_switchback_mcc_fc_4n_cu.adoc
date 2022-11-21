@@ -561,10 +561,21 @@ image::../media/mcc_upgrade_cluster_a_in_switchover.png[mcc mise à niveau du cl
 .Étapes
 . Basculer la configuration MetroCluster sur site_A afin de mettre à niveau les nœuds site_B :
 +
-.. Exécutez la commande suivante sur cluster_A :
+.. Sélectionnez l'option qui correspond à votre configuration et exécutez la commande appropriée sur cluster_A :
 +
-`metrocluster switchover -controller-replacement true`
+[role="tabbed-block"]
+====
+.Option 1 : configuration FC à quatre ou huit nœuds exécutant ONTAP 9.8 ou une version ultérieure
+--
+Lancer la commande : `metrocluster switchover -controller-replacement true`
 
+--
+.Option 2 : configuration FC à deux nœuds exécutant ONTAP 9.3 et versions ultérieures
+--
+Lancer la commande : `metrocluster switchover`
+
+--
+====
 +
 L'opération peut prendre plusieurs minutes.
 
