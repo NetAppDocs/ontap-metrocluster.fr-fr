@@ -6155,7 +6155,7 @@
 <p class="page-details">
   
     
-    <time datetime="2022-11-15 12:12:06 +0000">11/15/2022</time>
+    <time datetime="2022-12-01 16:17:17 +0000">12/01/2022</time>
     
   
 
@@ -6230,7 +6230,7 @@
 </div>
 </li>
 <li>
-<p>Sélectionnez l&#8217;option 9a.</p>
+<p>Sélectionnez l&#8217;option 9a et répondez <code>no</code> lorsque vous y êtes invité.</p>
 <div class="paragraph">
 <p>L&#8217;écran suivant affiche l&#8217;invite du menu de démarrage :</p>
 </div>
@@ -6238,29 +6238,36 @@
 <div class="content">
 <pre>Please choose one of the following:
 
-    (1) Normal Boot.
-    (2) Boot without /etc/rc.
-    (3) Change password.
-    (4) Clean configuration and initialize all disks.
-    (5) Maintenance mode boot.
-    (6) Update flash from backup config.
-    (7) Install new software first.
-    (8) Reboot node.
-    (9) Configure Advanced Drive Partitioning.
-    Selection (1-9)?  9a
-########## WARNING ##########
+(1) Normal Boot.
+(2) Boot without /etc/rc.
+(3) Change password.
+(4) Clean configuration and initialize all disks.
+(5) Maintenance mode boot.
+(6) Update flash from backup config.
+(7) Install new software first.
+(8) Reboot node.
+(9) Configure Advanced Drive Partitioning.
+(10) Set Onboard Key Manager recovery secrets.
+(11) Configure node for external key management.
+Selection (1-11)? 9a
 
-    This is a disruptive operation and will result in the
-    loss of all filesystem data. Before proceeding further,
-    make sure that:
-    1) This option (9a) has been executed or will be executed
-    on the HA partner node (and DR/DR-AUX partner nodes if
-    applicable), prior to reinitializing any system in the
-    HA-pair (or MetroCluster setup).
-    2) The HA partner node (and DR/DR-AUX partner nodes if
-    applicable) is currently waiting at the boot menu.
+...
 
-    Do you still want to continue (yes/no)? yes</pre>
+########## WARNING: AGGREGATES WILL BE DESTROYED ##########
+This is a disruptive operation that applies to all the disks
+that are attached and visible to this node.
+
+Before proceeding further, make sure that:
+
+The aggregates visible from this node do not contain
+data that needs to be preserved.
+This option (9a) has been executed or will be executed
+on the HA partner node (and DR/DR-AUX partner nodes if
+applicable), prior to reinitializing any system in the
+HA-pair or MetroCluster configuration.
+The HA partner node (and DR/DR-AUX partner nodes if
+applicable) is currently waiting at the boot menu.
+Do you want to abort this operation (yes/no)? no</pre>
 </div>
 </div>
 </li>
@@ -6305,10 +6312,10 @@
 </div>
 </li>
 <li>
-<p>Sélectionnez l&#8217;option "4" dans le menu de démarrage et laissez le système démarrer.</p>
+<p>Répétez cette procédure sur les autres nœuds de la configuration MetroCluster IP.</p>
 </li>
 <li>
-<p>Répétez cette procédure sur les autres nœuds de la configuration MetroCluster IP.</p>
+<p>Sélectionnez l&#8217;option <strong>4</strong> dans le menu d&#8217;amorçage sur les deux nœuds et laissez le système démarrer.</p>
 </li>
 <li>
 <p>Passez à la section <a href="task_sw_config_setup_ontap.html">"Configuration de ONTAP"</a>.</p>

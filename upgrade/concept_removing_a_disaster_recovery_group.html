@@ -6155,7 +6155,7 @@
 <p class="page-details">
   
     
-    <time datetime="2022-11-21 18:31:46 +0000">11/21/2022</time>
+    <time datetime="2022-12-01 16:17:17 +0000">12/01/2022</time>
     
   
 
@@ -6246,11 +6246,19 @@ Les agrégats racine ne sont pas supprimés.
 </div>
 </li>
 <li>
+<p>Déplacez les LIF de données hors ligne.<br>
+<code>network interface modify -vserver <em>svm-name</em> -lif <em>data-lif</em> -status-admin down</code></p>
+</li>
+<li>
 <p>Migrez toutes les LIFs de données vers les nœuds d&#8217;un autre groupe de reprise après incident.<br>
 <code>network interface show -home-node <em>old_node</em></code></p>
 <div class="paragraph">
-<p><code>network interface modify -vserver svm-name -lif data-lif -home-node new_node -home-port port-id</code></p>
+<p><code>network interface modify -vserver <em>svm-name</em> -lif <em>data-lif</em> -home-node <em>new_node</em> -home-port <em>port-id</em></code></p>
 </div>
+</li>
+<li>
+<p>Remettez en ligne les LIF de données.
+<code>network interface modify -vserver <em>svm-name</em> -lif <em>data-lif</em> -status-admin up</code></p>
 </li>
 <li>
 <p>Migrez la LIF de gestion de cluster vers un nœud de rattachement situé dans un autre groupe de reprise après incident.</p>
@@ -6258,7 +6266,7 @@ Les agrégats racine ne sont pas supprimés.
 <p><code>network interface show -role cluster-mgmt</code></p>
 </div>
 <div class="paragraph">
-<p><code>network interface modify -vserver svm-name -lif cluster_mgmt -home-node new_node -home-port port-id</code></p>
+<p><code>network interface modify -vserver <em>svm-name</em> -lif <em>cluster_mgmt</em> -home-node <em>new_node</em> -home-port <em>port-id</em></code></p>
 </div>
 </li>
 </ol>
