@@ -2064,7 +2064,6 @@
   <block id="22bfd0bc1ef7b5ec6b0c3d09a25173dd" category="list-text">Les étapes permettant de réinitialiser les paramètres d'usine du commutateur ont été suivies avant d'appliquer le fichier RCF actuel.</block>
   <block id="bdda45d6734a620758197fdb8292141f" category="list-text">Aucune modification n'a été apportée à la configuration du switch(port) après l'application de la FCR.</block>
   <block id="7db0739314c77bc294505bdbb23e67b7" category="paragraph">Si vous ne répondez pas à ces exigences, vous ne pouvez pas utiliser les fichiers CleanUpFiles créés lors de la génération des fichiers RCF. Cependant, vous pouvez utiliser la fonction pour créer des CleanUpFiles génériques -- le nettoyage à l'aide de cette méthode est dérivé de la sortie de<block ref="d064a73c32d00bf384204782a696a298" prefix=" " category="inline-code"></block> et il s'agit des meilleures pratiques.</block>
-  <block id="88d8da08ee7e7170ae3a43278a025761" category="admonition">Vous devez mettre à jour les commutateurs dans l'ordre suivant : switch_A_1, Switch_B_1, Switch_A_2, Switch_B_2. Vous pouvez également mettre à jour les commutateurs Switch_A_1 et Switch_A_2 en même temps, puis les commutateurs Switch_B_1 et Switch_B_2.</block>
   <block id="0e0fe23e527e37b417182290ff6ed374" category="list-text">Déterminez la version actuelle du fichier RCF, ainsi que les ports et les VLAN utilisés :<block ref="9b0b071cbeedb9bb40e134702701197f" prefix=" " category="inline-code"></block></block>
   <block id="e020d7382ce2a21b56ea6460a45b49c2" category="admonition">Vous devez obtenir ces informations à partir des quatre commutateurs et remplir le tableau d'information suivant.</block>
   <block id="2b6ad2a040294d5c6d9cd85338614383" category="paragraph">À partir de cette sortie, vous devez collecter les informations présentées dans les deux tableaux suivants.</block>
@@ -2813,7 +2812,6 @@
   <block id="c2b2988e42872fbbf4eff058f98ecdb3" category="list-text">Défaillances séquentielles multiples</block>
   <block id="8bda26ec15d7a55dcc4af3d09db73eb6" category="paragraph">Plusieurs composants échouent dans une séquence. Par exemple, un module de contrôleur, une structure de commutateur et un tiroir tombent en panne en séquence. Résultat : un basculement du stockage, une redondance de la structure et des SyncMirror protègent de façon séquentielle contre les temps d'indisponibilité et les pertes de données.</block>
   <block id="9ed60e8ae7b59768be2e8ff8e49e0aaf" category="paragraph">Le tableau ci-dessous présente les types de défaillance, ainsi que le mécanisme de reprise d'activité et la méthode de restauration correspondants :</block>
-  <block id="33dbd84fe8a89808f645b461285d67c4" category="admonition">L'AUSO (basculement automatique non planifié) n'est pas pris en charge sur les configurations IP MetroCluster.</block>
   <block id="286b093812b48d02d5bfa7dc2e6ad646" category="cell">Type de panne</block>
   <block id="3834f1439a798cb231c757c26bc43fe1" category="cell">Mécanisme de reprise après incident</block>
   <block id="3173632519dbe423e6f3bb42d6703d70" category="cell">Résumé de la méthode de récupération</block>
@@ -3743,8 +3741,6 @@
   <block id="a14dc0dfb776471bcbc1e3c1239e4bb1" category="paragraph">Nous vous recommandons de lire ces sections afin de calculer correctement la capacité de bout en bout requise des liens ISL. Le cache non volatile continu et la réplication du stockage avec faible latence sont des opérations stratégiques dans les configurations MetroCluster. La latence du réseau interne affecte la latence et le débit observés par les E/S client.</block>
   <block id="449a2bdc6a969f884c1d33fb66eecea7" category="section-title">Limites de latence et de perte de paquets sur les liens ISL</block>
   <block id="e96606e3ebee8eeb5bb85d4955c381cb" category="paragraph">Les exigences suivantes doivent être remplies pour le trafic aller-retour entre les commutateurs IP MetroCluster du site_A et du site_B, avec la configuration MetroCluster en état de fonctionnement stable :</block>
-  <block id="53207176b7e0da899c3b41dd3e31f0e7" category="list-text">La latence du aller-retour doit être inférieure ou égale à 7 ms.</block>
-  <block id="bc0948c79fe270cb100d796564e0fb2c" category="paragraph">La distance maximale est de 700 km, de sorte que la distance entre les sites est limitée par la latence ou la distance maximale, selon la première atteinte.</block>
   <block id="c9bc211a49ab07521cd90557ecdd0cbb" category="paragraph">Comme la distance entre deux sites MetroCluster augmente, la latence augmente, généralement dans la plage de 1 ms temps de retard aller-retour par 100 km (62 miles). Cette latence dépend également de l'accord de niveau de service du réseau (SLA) en termes de bande passante des liaisons ISL, de débit de transmission des paquets et de gigue sur le réseau. Des pertes de bande passante, de gigue élevée et de paquets aléatoires conduisent à différents mécanismes de récupération par les commutateurs ou le moteur TCP sur les modules de contrôleur pour une livraison réussie des paquets. Ces mécanismes de restauration peuvent augmenter la latence globale.</block>
   <block id="5b39512a68b8704473f81b0e6ba1272e" category="paragraph">Tout périphérique qui contribue à la latence doit être pris en compte.</block>
   <block id="48826ffed53f55da6bc21c81ca1b5e8f" category="list-text">La perte de paquets doit être inférieure ou égale à 0.01 %.</block>
@@ -4032,7 +4028,6 @@
   <block id="bf12adc163db611b54b1d064ba31ce27" category="list-text">Site_A-shelf_2 (à distance)</block>
   <block id="825dcccec9fe8d386a6e1fe932104cdc" category="list-text">Afficher le menu de démarrage :</block>
   <block id="a94e69437db24dee798bbd90bce4ee0a" category="paragraph"><block ref="d20d8416248acf69156e4b7875cc4868" prefix="" category="inline-code"></block></block>
-  <block id="b824b6c6758ea18eb50dcbcc628e8f4e" category="list-text">Sélectionnez l'option 9a.</block>
   <block id="af247723d3e5855980c90c146b7390f5" category="paragraph">L'écran suivant affiche l'invite du menu de démarrage :</block>
   <block id="b909e72d13e8da91fcea9c40534ed958" category="list-text">Lorsque le nœud redémarre, appuyez sur Ctrl-C lorsque vous êtes invité à afficher le menu de démarrage, puis sélectionnez l'option *Maintenance mode boot*.</block>
   <block id="f04ccee1003dbd5f1c9c6351af3f0b4e" category="list-text">En mode Maintenance, attribuez manuellement des disques aux agrégats locaux sur le nœud :</block>
@@ -4044,7 +4039,6 @@
   <block id="9efc38e83933c4f2c9fb07cee9596997" category="list-text">Lors de la configuration de node_B_2, affectez manuellement les lecteurs de l'emplacement 12 à 23 dans la pool0 du nœud B2 à partir de site_B-shelf_1.</block>
   <block id="97c16f2bd68041ac79ef06049407d0c7" category="list-text">Quitter le mode Maintenance :</block>
   <block id="819817945fea31f0c3596c841e685904" category="paragraph"><block ref="4a1bde0ea8bcda2a591f42646813c477" prefix="" category="inline-code"></block></block>
-  <block id="b9ddc3ef83ffe8e2847e207d39a98687" category="list-text">Sélectionnez l'option "4" dans le menu de démarrage et laissez le système démarrer.</block>
   <block id="b0c89cef6e3289ee320cc161037d6135" category="list-text">Répétez cette procédure sur les autres nœuds de la configuration MetroCluster IP.</block>
   <block id="1a731b6b2711f5533b67a659f8e5e7c3" category="list-text">Passez à la section <block ref="5b0b3430fd5af0e5a4020af54ce263e7" category="inline-link-macro-rx"></block>.</block>
   <block id="6d8f1fb9b5a06280cf307486db8cfe99" category="section-title">Attribution manuelle de disques pour le pool 0 (ONTAP 9.3)</block>
@@ -4930,7 +4924,6 @@
   <block id="ee576c01fd9d6961677d0a6255745ad9" category="list-text">Démarrez le nœud sur le menu de démarrage :<block ref="d20d8416248acf69156e4b7875cc4868" prefix=" " category="inline-code"></block></block>
   <block id="78735ed2469903b39a49e93e0f0bda5d" category="paragraph">Une fois que vous avez exécuté cette commande, attendez que le menu de démarrage s'affiche.</block>
   <block id="d1bfdd1ce3b6b225b5bd39959c1b640e" category="list-text">Effacez la configuration des nœuds :</block>
-  <block id="4051be1a3983dca295d33b07d3d4aeb9" category="list-text">Si vous utilisez des systèmes configurés pour ADP, sélectionnez option<block ref="3de20f8f6d054d551e879fef0f0fc83c" prefix=" " category="inline-code"></block> dans le menu de démarrage, puis répondez<block ref="a6105c0a611b41b08f1209506350279e" prefix=" " category="inline-code"></block> lorsque vous y êtes invité.</block>
   <block id="4e7b785e4493cbe0b79242ce203ac879" category="admonition">Ce processus est perturbateur.</block>
   <block id="b2fa559c6e143e4ed29141eade0a1a3e" category="list-text">Si votre système n'est pas configuré pour ADP, tapez<block ref="b433b76417b4f08166eb90cef3aa2a31" prefix=" " category="inline-code"></block> À l'invite du menu de démarrage, puis appuyez sur entrée.</block>
   <block id="e03959092a5c4014e786cb1caa8e7067" category="summary">Depuis ONTAP 9.5, ONTAP prend en charge la connectivité de couche 3 via l'adresse IP virtuelle \(VIP\) et le protocole BGP (Border Gateway Protocol\). L'association des protocoles VIP et BGP pour la redondance dans le réseau frontal avec la redondance MetroCluster interne offre une solution de reprise après incident de couche 3.</block>
@@ -8212,10 +8205,8 @@
   <block id="09dfcbc0cceee8247717360bd0733f1c" category="section-title">Choix d'une procédure qui n'utilise pas le transfert d'agrégats</block>
   <block id="9f7143c3ebe35a24d494d7e347dc4f89" category="cell">Type de mise à niveau ou d'actualisation</block>
   <block id="75f7d2bcde6cf0fe3c3db259a2547dbc" category="cell">Type de MetroCluster</block>
-  <block id="d11c86a74db1b7830a8684cc5563ece4" category="cell">Prise en charge de la première version de ONTAP</block>
   <block id="f56ee108e3b47664e82456fbf68b6cda" category="list-text">Périmètre : plateforme (modules de contrôleur) uniquement</block>
   <block id="344a350961d4b3279a1bf51e3f2def2a" category="list-text">Méthode : basculement/rétablissement automatisé</block>
-  <block id="ea2aca94e5b174a1b84f2c3891379526" category="paragraph">9.10.1</block>
   <block id="f49f60b6304797900db897e855566402" category="inline-link-macro">Mise à niveau des contrôleurs en une configuration FC MetroCluster à quatre nœuds via le basculement et le rétablissement avec des commandes « system contrôleur replace » (ONTAP 9.10.1 et versions ultérieures)</block>
   <block id="966e34443f418eb2dc544779908833ab" category="paragraph"><block ref="966e34443f418eb2dc544779908833ab" category="inline-link-macro-rx"></block></block>
   <block id="fc295d422c1cefba3de763612fefa26b" category="inline-link-macro">Mise à niveau des contrôleurs de AFF A700 vers AFF A900 dans une configuration IP MetroCluster via le basculement et le rétablissement (ONTAP 9.10.1 et versions ultérieures)</block>
@@ -12785,8 +12776,6 @@
   <block id="33bc2208a49f224c5922ce3b2b42fb21" category="paragraph">Lancer la commande :<block ref="71b269d201dc030c963a1b0b33ee014f" prefix=" " category="inline-code"></block></block>
   <block id="322ed43657dad6df7189e69bbea9fe57" category="open-title">Option 2 : configuration FC à deux nœuds exécutant ONTAP 9.3 et versions ultérieures</block>
   <block id="ad714f1a11f3ed1c3d1a9c5c0a9c185b" category="paragraph">Lancer la commande :<block ref="803740ddd57a4d0c8a51c6ede10e3096" prefix=" " category="inline-code"></block></block>
-  <block id="dda9fac268f3774282dbdcee2b98e206" category="paragraph"><block ref="c823de4f8bc2e5e070e3f2a6b83c709f" prefix="" category="inline-code"></block></block>
-  <block id="9a63e80a7a324f409930e8d454b5e538" category="paragraph"><block ref="cb485a0e6e52cf58d8ed72bd00e074ec" prefix="" category="inline-code"></block></block>
   <block id="4ee3c0b4cfc3305a195d42ce617dcc41" category="paragraph"><block ref="854a4be4b1fce65bf3a90ee74692188e" prefix="" category="inline-code"></block> Est l'adresse IP du système de stockage.</block>
   <block id="db90801e232a1746aec7c835ee93e932" category="paragraph"><block ref="220b0a4790e2c047ae96a881e506e1fe" prefix="" category="inline-code"></block> est le masque de réseau du système de stockage.</block>
   <block id="2341e6b2fbc3a695ee3dd2358295392c" category="paragraph"><block ref="14fb245f7140583707d1cda241eeeff2" prefix="" category="inline-code"></block> est la passerelle du système de stockage.</block>
@@ -12803,4 +12792,19 @@
   <block id="a417bfe3b0e85c20658fe71357feb3ef" category="paragraph">Pour connaître la syntaxe complète de la commande, reportez-vous à la page man. L'exemple suivant illustre la création des LIFs intercluster cluster01_icl01 et cluster01_icl02 :</block>
   <block id="0074a60c2f111fa09e324bfc6f086bfd" category="paragraph">Lancer la commande :<block ref="08fd4296d1145ee217b3ba481add0899" prefix=" " category="inline-code"></block></block>
   <block id="bb084c29063404b6611bde28d4ed57d3" category="paragraph">Lancer la commande :<block ref="4686e63f75ecbb5593b9aac27ab89dd7" prefix=" " category="inline-code"></block></block>
+  <block id="52fef25c133f347af6547e0d7325285d" category="list-text">Déplacez les LIF de données hors ligne. +<block ref="58d060d8bc95409e743c7b8e95e72710" prefix=" " category="inline-code"></block></block>
+  <block id="3c01c02ef0bb0d39aaf5f9cbc5c8ea4b" category="paragraph"><block ref="6b5ac3bb2bcffd222567cf972f8a2548" prefix="" category="inline-code"></block></block>
+  <block id="f7967c2b46538ede39d7960526ce1fa4" category="list-text">Remettez en ligne les LIF de données.<block ref="c5b63f9c60f25a11e5c1cde65fb540f1" prefix=" " category="inline-code"></block></block>
+  <block id="f677111a20e676139c4a865021fafa0d" category="paragraph"><block ref="850d7b5cf3d569632a8982fc791023b0" prefix="" category="inline-code"></block></block>
+  <block id="00b7088169fa7f91ce7c54fd96b41d7b" category="list-text">Ajoutez le port physique qui hébergera les LIFs intercluster sur le broadcast domain correspondant.</block>
+  <block id="e64aaeac172dbd7d324ded015d3b620f" category="list-text">Vérifier que le cluster partenaire est accessible et que la configuration a été resynchronisée sur le cluster partenaire :</block>
+  <block id="e3c9aa07778be11d3bb374e3a6486e23" category="paragraph"><block ref="982b6fd5e36acd031c5af800a9951ed1" prefix="" category="inline-code"></block></block>
+  <block id="d8181c8a06e26fd37aba60f3ff3a08ed" category="admonition">L'option AUSO (basculement automatique non planifié) n'est pas prise en charge sur les configurations IP MetroCluster.</block>
+  <block id="cfe5a553856e4e9131ebeda8844ee3c2" category="list-text">Sélectionnez l'option 9a et répondez<block ref="7fa3b767c460b54a2be4d49030b349c7" prefix=" " category="inline-code"></block> lorsque vous y êtes invité.</block>
+  <block id="bc3cbfae3cfe082620539cbe61e53bb4" category="list-text">Sélectionnez l'option *4* dans le menu d'amorçage sur les deux nœuds et laissez le système démarrer.</block>
+  <block id="5bb182767225fa9e1ca2133f4aa4f1df" category="inline-link-macro">Hardware Universe :</block>
+  <block id="e04f67144663da34a17311a720ccf0a1" category="list-text">Pour plus d'informations sur la latence de trajet aller-retour et les exigences de distance maximale pour votre configuration, reportez-vous au <block ref="44be38b301d3bfae89cdec57afffd9be" category="inline-link-macro-rx"></block></block>
+  <block id="5dae04759c79459bcbe855ce6759cc39" category="list-text">Si vous utilisez des systèmes configurés pour ADP, sélectionnez option<block ref="3de20f8f6d054d551e879fef0f0fc83c" prefix=" " category="inline-code"></block> dans le menu de démarrage, puis répondez<block ref="7fa3b767c460b54a2be4d49030b349c7" prefix=" " category="inline-code"></block> lorsque vous y êtes invité.</block>
+  <block id="0bab44e07fec8808eebb4c9baedcc312" category="admonition">Vous devez mettre à jour les commutateurs dans l'ordre suivant : switch_A_1, Switch_B_1, Switch_A_2, Switch_B_2. Vous pouvez également mettre à jour les commutateurs Switch_A_1 et Switch_B_1 en même temps, puis les commutateurs Switch_A_2 et Switch_B_2.</block>
+  <block id="70743d1dc2a6fb8238c19b7d315abc9f" category="admonition">Vous êtes invité à spécifier le routage et le transfert virtuels (VRF).</block>
 </blocks>

@@ -49,10 +49,7 @@ Nous vous recommandons de lire ces sections afin de calculer correctement la cap
 
 Les exigences suivantes doivent être remplies pour le trafic aller-retour entre les commutateurs IP MetroCluster du site_A et du site_B, avec la configuration MetroCluster en état de fonctionnement stable :
 
-* La latence du aller-retour doit être inférieure ou égale à 7 ms.
-+
-La distance maximale est de 700 km, de sorte que la distance entre les sites est limitée par la latence ou la distance maximale, selon la première atteinte.
-
+* Pour plus d'informations sur la latence de trajet aller-retour et les exigences de distance maximale pour votre configuration, reportez-vous au link:https://hwu.netapp.com/["Hardware Universe :"^]
 +
 Comme la distance entre deux sites MetroCluster augmente, la latence augmente, généralement dans la plage de 1 ms temps de retard aller-retour par 100 km (62 miles). Cette latence dépend également de l'accord de niveau de service du réseau (SLA) en termes de bande passante des liaisons ISL, de débit de transmission des paquets et de gigue sur le réseau. Des pertes de bande passante, de gigue élevée et de paquets aléatoires conduisent à différents mécanismes de récupération par les commutateurs ou le moteur TCP sur les modules de contrôleur pour une livraison réussie des paquets. Ces mécanismes de restauration peuvent augmenter la latence globale.
 
