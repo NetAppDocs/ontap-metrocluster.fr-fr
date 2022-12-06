@@ -6155,7 +6155,7 @@
 <p class="page-details">
   
     
-    <time datetime="2022-11-15 12:12:06 +0000">11/15/2022</time>
+    <time datetime="2022-12-06 10:32:39 +0000">12/06/2022</time>
     
   
 
@@ -6216,6 +6216,7 @@
 </ul>
 </div>
 <div class="paragraph">
+<div class="title">Description de la tâche</div>
 <p>L&#8217;opération de réparation doit d&#8217;abord être effectuée sur les agrégats de données, puis sur les agrégats racine.</p>
 </div>
 <div class="sect2">
@@ -6224,6 +6225,7 @@
 <p>Vous devez réparer et remplacer tout matériel sur le site de reprise après incident. Ce processus resynchronise les agrégats de données et prépare le site de reprise sur incident (maintenant réparé) pour un fonctionnement normal. Vous devez corriger les agrégats de données avant d&#8217;entreprendre le traitement des agrégats racine.</p>
 </div>
 <div class="paragraph">
+<div class="title">Description de la tâche</div>
 <p>L&#8217;exemple suivant montre un basculement forcé, dans lequel l&#8217;agrégat de basculement est mis en ligne. Toutes les mises à jour de configuration du cluster distant sont correctement répliquées vers le cluster local. Dans le cadre de cette procédure, vous mettez le stockage sous tension, mais vous ne devez pas et ne devez pas mettre les modules de contrôleur sous tension sur le site de secours.</p>
 </div>
 <div class="olist arabic">
@@ -6303,6 +6305,7 @@ aggr_b2   227.1GB  227.1GB   0%    online  0      mcc1-a2      raid_dp, mirrored
 <p>Une fois les agrégats de données résolus, vous devez corriger les agrégats racine en vue de l&#8217;opération de rétablissement.</p>
 </div>
 <div class="paragraph">
+<div class="title">Avant de commencer</div>
 <p>La phase d&#8217;agrégats de données du processus de correction MetroCluster doit avoir été réalisée avec succès.</p>
 </div>
 <div class="olist arabic">
@@ -6676,6 +6679,7 @@ cluster_A-vs1a-mc  data    sync-destination
 </tbody>
 </table>
 <div class="paragraph">
+<div class="title">Une fois que vous avez terminé</div>
 <p>Vous devez répéter les sections précédentes pour effectuer le rétablissement dans la direction opposée. Si site_A a effectué un basculement du site_B, demandez à site_B de basculer du site_A.</p>
 </div>
 </div>
@@ -6687,6 +6691,7 @@ cluster_A-vs1a-mc  data    sync-destination
 <p>Dans certains cas, après le rétablissement, vous remarquerez peut-être la présence d&#8217;agrégats <em>obsolètes</em>. Les agrégats obsolètes sont des agrégats qui ont été supprimés du ONTAP, mais dont les informations restent enregistrées sur le disque. Les agrégats obsolètes s&#8217;affichent avec le <code>nodeshell aggr status -r</code> mais pas avec le <code>storage aggregate show</code> commande. Vous pouvez supprimer ces enregistrements afin qu&#8217;ils ne s&#8217;affichent plus.</p>
 </div>
 <div class="paragraph">
+<div class="title">Description de la tâche</div>
 <p>Les agrégats obsolètes peuvent se produire si vous avez déplacé des agrégats alors que la configuration MetroCluster était en basculement. Par exemple :</p>
 </div>
 <div class="olist arabic">

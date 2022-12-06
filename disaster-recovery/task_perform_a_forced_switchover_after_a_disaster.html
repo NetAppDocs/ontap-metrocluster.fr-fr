@@ -6155,7 +6155,7 @@
 <p class="page-details">
   
     
-    <time datetime="2022-11-15 12:12:06 +0000">11/15/2022</time>
+    <time datetime="2022-12-06 10:32:39 +0000">12/06/2022</time>
     
   
 
@@ -6243,6 +6243,7 @@ Les configurations SnapMirror et SnapVault sont supprimées automatiquement.
 </table>
 </div>
 <div class="paragraph">
+<div class="title">Description de la tâche</div>
 <p>Le <code>metrocluster switchover</code> La commande bascule les nœuds dans tous les groupes DR dans la configuration MetroCluster. Par exemple, dans une configuration MetroCluster à 8 nœuds, il bascule les nœuds sur les deux groupes de reprise après incident.</p>
 </div>
 <div class="olist arabic">
@@ -6286,6 +6287,7 @@ mcc1A::&gt; metrocluster operation show
 </ol>
 </div>
 <div class="paragraph">
+<div class="title">Une fois que vous avez terminé</div>
 <p>Les relations SnapMirror doivent être réétablies après le basculement.</p>
 </div>
 </div>
@@ -6305,9 +6307,11 @@ mcc1A::&gt; metrocluster operation show
 <p>Après un basculement, vous devez effacer l&#8217;état NVFAIL en réinitialisant le <code>-in-nvfailed-state</code> paramètre du <code>volume modify</code> commande de suppression de la restriction d&#8217;accès des clients aux données.</p>
 </div>
 <div class="paragraph">
+<div class="title">Avant de commencer</div>
 <p>La base de données ou le système de fichiers ne doit pas être en cours d&#8217;exécution ni tenter d&#8217;accéder au volume affecté.</p>
 </div>
 <div class="paragraph">
+<div class="title">Description de la tâche</div>
 <p>Réglage du <code>-in-nvfailed-state</code> le paramètre nécessite un privilège de niveau avancé.</p>
 </div>
 <div class="olist arabic">
@@ -6319,12 +6323,14 @@ mcc1A::&gt; metrocluster operation show
 </ol>
 </div>
 <div class="paragraph">
+<div class="title">Une fois que vous avez terminé</div>
 <p>Pour obtenir des instructions sur l&#8217;examen de la validité des fichiers de base de données, reportez-vous à la documentation de votre logiciel de base de données spécifique.</p>
 </div>
 <div class="paragraph">
 <p>Si votre base de données utilise des LUN, suivez les étapes pour rendre les LUN accessibles à l&#8217;hôte après une panne de mémoire NVRAM.</p>
 </div>
 <div class="paragraph">
+<div class="title">Informations associées</div>
 <p><a href="../manage/concept_monitoring_and_protecting_database_validity_by_using_nvfail.html">"Surveillance et protection de la validité de la base de données à l&#8217;aide de NVFAIL"</a></p>
 </div>
 </div>

@@ -6155,7 +6155,7 @@
 <p class="page-details">
   
     
-    <time datetime="2022-11-15 12:12:06 +0000">11/15/2022</time>
+    <time datetime="2022-12-06 10:32:39 +0000">12/06/2022</time>
     
   
 
@@ -6173,7 +6173,7 @@
 </div>
 </div>
 <div class="sect1">
-<h2 id="réinitialisez-les-paramètres-par-défaut-du-commutateur-nvidia-ip-sn2100">Réinitialisez les paramètres par défaut du commutateur NVIDIA IP SN2100</h2>
+<h2 id="réinitialiser-les-valeurs-par-défaut-du-commutateur-nvidia-ip-sn2100"><a id="Reset-the-switch"></a> Réinitialiser les valeurs par défaut du commutateur NVIDIA IP SN2100</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Vous pouvez choisir parmi les méthodes suivantes pour réinitialiser un commutateur sur les paramètres par défaut.</p>
@@ -6181,19 +6181,20 @@
 <div class="ulist">
 <ul>
 <li>
-<p>,Réinitialisez le commutateur à l&#8217;aide de l&#8217;option de fichier RCF</p>
+<p><a href="#RCF-file-option">Réinitialisez le commutateur à l&#8217;aide de l&#8217;option de fichier RCF</a></p>
 </li>
 <li>
-<p>,Réinitialiser le contacteur à l&#8217;aide de l&#8217;option d&#8217;installation du Cumulus</p>
+<p><a href="#Cumulus-install-option">Réinitialiser le contacteur à l&#8217;aide de l&#8217;option d&#8217;installation du Cumulus</a></p>
 </li>
 </ul>
 </div>
 <div class="sect2">
-<h3 id="réinitialisez-le-commutateur-à-laide-de-loption-de-fichier-rcf">Réinitialisez le commutateur à l&#8217;aide de l&#8217;option de fichier RCF</h3>
+<h3 id="réinitialiser-le-commutateur-à-laide-de-loption-de-fichier-rcf"><a id="RCF-fichier-option"></a>Réinitialiser le commutateur à l&#8217;aide de l&#8217;option de fichier RCF</h3>
 <div class="paragraph">
 <p>Avant d&#8217;installer une nouvelle configuration RCF, vous devez rétablir les paramètres du commutateur NVIDIA.</p>
 </div>
 <div class="paragraph">
+<div class="title">Description de la tâche</div>
 <p>Pour restaurer les paramètres par défaut du commutateur, exécutez le fichier RCF avec le <code>restoreDefaults</code> option. Cette option copie les fichiers d&#8217;origine sauvegardés à leur emplacement d&#8217;origine, puis redémarre le commutateur. Après le redémarrage, le switch est en ligne avec la configuration d&#8217;origine qui existait au moment d&#8217;avoir exécuté le fichier RCF pour configurer le switch.</p>
 </div>
 <div class="paragraph">
@@ -6225,7 +6226,7 @@ Toutes les autres modifications de configuration qui se produisent pendant l&#82
 <div class="title">Avant de commencer</div>
 <ul>
 <li>
-<p>Vous devez configurer le commutateur conformément à ,Téléchargez et installez le fichier RCF NVIDIA. Si vous n&#8217;avez pas configuré cette méthode ou si des fonctionnalités supplémentaires ont été configurées avant d&#8217;exécuter le fichier RCF, vous ne pouvez pas suivre cette procédure.</p>
+<p>Vous devez configurer le commutateur conformément à <a href="#Download-and-install">Téléchargez et installez le fichier RCF NVIDIA</a>. Si vous n&#8217;avez pas configuré cette méthode ou si des fonctionnalités supplémentaires ont été configurées avant d&#8217;exécuter le fichier RCF, vous ne pouvez pas suivre cette procédure.</p>
 </li>
 <li>
 <p>Vous devez répéter ces étapes sur chacun des commutateurs IP de la configuration MetroCluster IP.</p>
@@ -6319,8 +6320,9 @@ Enter yes or no: yes</pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="réinitialiser-le-contacteur-à-laide-de-loption-dinstallation-du-cumulus">Réinitialiser le contacteur à l&#8217;aide de l&#8217;option d&#8217;installation du Cumulus</h3>
+<h3 id="réinitialiser-le-commutateur-à-laide-de-loption-dinstallation-de-cumulus"><a id="Cumulus-install-option"></a>Réinitialiser le commutateur à l&#8217;aide de l&#8217;option d&#8217;installation de Cumulus</h3>
 <div class="paragraph">
+<div class="title">Description de la tâche</div>
 <p>Suivez ces étapes pour réinitialiser complètement le commutateur en appliquant l&#8217;image Cumulus.</p>
 </div>
 <div class="ulist">
@@ -6513,7 +6515,7 @@ cumulus@cumulus:mgmt:~$</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Lorsque le commutateur redémarre, vous pouvez appliquer une nouvelle configuration en suivant les étapes de la section ,Téléchargez et installez le fichier RCF NVIDIA.</p>
+<p>Lorsque le commutateur redémarre, vous pouvez appliquer une nouvelle configuration en suivant les étapes de la section <a href="#Download-and-install">Téléchargez et installez le fichier RCF NVIDIA</a>.</p>
 </div>
 </li>
 </ol>
@@ -6522,7 +6524,7 @@ cumulus@cumulus:mgmt:~$</pre>
 </div>
 </div>
 <div class="sect1">
-<h2 id="téléchargez-et-installez-les-fichiers-nvidia-rcf">Téléchargez et installez les fichiers NVIDIA RCF</h2>
+<h2 id="télécharger-et-installer-les-fichiers-rcf-nvidia"><a id="Download-and-install"></a>Télécharger et installer les fichiers RCF NVIDIA</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Vous devez télécharger et installer le fichier RCF de commutateur sur chaque commutateur de la configuration IP de MetroCluster.</p>
@@ -6557,6 +6559,7 @@ Si vous effectuez une autre configuration après la réinitialisation du commuta
 </ul>
 </div>
 <div class="paragraph">
+<div class="title">Description de la tâche</div>
 <p>Vous devez répéter ces étapes sur chacun des commutateurs IP de la configuration IP MetroCluster (nouvelle installation) ou sur le commutateur de remplacement (remplacement du commutateur).</p>
 </div>
 <div class="olist arabic">

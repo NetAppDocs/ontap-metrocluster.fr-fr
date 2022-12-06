@@ -6155,7 +6155,7 @@
 <p class="page-details">
   
     
-    <time datetime="2022-11-15 12:12:06 +0000">11/15/2022</time>
+    <time datetime="2022-12-06 10:32:39 +0000">12/06/2022</time>
     
   
 
@@ -6773,6 +6773,7 @@ dr-group-id cluster     node     node-systemid ha-partner-systemid dr-partner-sy
 <p>Avant d&#8217;effectuer la maintenance, vous devez envoyer un message AutoSupport pour informer le support technique que la maintenance est en cours. Informer le support technique que la maintenance est en cours empêche l&#8217;ouverture d&#8217;un dossier en supposant une interruption de l&#8217;activité.</p>
 </div>
 <div class="paragraph">
+<div class="title">Description de la tâche</div>
 <p>Cette tâche doit être effectuée sur chaque site MetroCluster.</p>
 </div>
 <div class="olist arabic">
@@ -6808,6 +6809,7 @@ dr-group-id cluster     node     node-systemid ha-partner-systemid dr-partner-sy
 <p>Vous devez basculer la configuration vers site_A afin de pouvoir mettre à niveau les plateformes du site_B.</p>
 </div>
 <div class="paragraph">
+<div class="title">Description de la tâche</div>
 <p>Cette tâche doit être effectuée sur site_A.</p>
 </div>
 <div class="paragraph">
@@ -6866,6 +6868,7 @@ dr-group-id cluster     node     node-systemid ha-partner-systemid dr-partner-sy
 <h2 id="retirez-le-module-de-contrôleur-de-la-plateforme-aff-a700-ou-fas9000-et-le-nvs">Retirez le module de contrôleur de la plateforme AFF A700 ou FAS9000 et le NVS</h2>
 <div class="sectionbody">
 <div class="paragraph">
+<div class="title">Description de la tâche</div>
 <p>Si vous n&#8217;êtes pas déjà mis à la terre, mettez-vous à la terre correctement.</p>
 </div>
 <div class="olist arabic">
@@ -6994,6 +6997,7 @@ dr-group-id cluster     node     node-systemid ha-partner-systemid dr-partner-sy
 <p>Vous devez installer les NVS et le module de contrôleur AFF A900 ou FAS9500 que vous avez reçus dans le kit de mise à niveau sur les deux nœuds du site_B. Ne déplacez pas le dispositif de coredump du module NVS AFF A700 ou FAS9000 vers le module NVS AFF A900 ou FAS9500.</p>
 </div>
 <div class="paragraph">
+<div class="title">Description de la tâche</div>
 <p>Si vous n&#8217;êtes pas déjà mis à la terre, mettez-vous à la terre correctement.</p>
 </div>
 <div class="sect2">
@@ -7088,7 +7092,7 @@ dr-group-id cluster     node     node-systemid ha-partner-systemid dr-partner-sy
 <img src="/us-en/ontap-metrocluster/images/note.svg" alt="Note">
 </td>
 <td class="content">
-Le slot 7 sur tous les nœuds du cluster doit être vide comme indiqué dans  ports from the old nodes to the new nodes section.
+Le slot 7 sur tous les nœuds du cluster doit être vide comme indiqué dans <a href="#mappage-des-ports-des-anciens-nœuds-sur-les-nouveaux-nœuds">Mappage des ports des anciens nœuds sur les nouveaux nœuds</a> section.
 </td>
 </tr>
 </table>
@@ -7133,6 +7137,7 @@ Le slot 7 sur tous les nœuds du cluster doit être vide comme indiqué dans  po
 </ul>
 </div>
 <div class="paragraph">
+<div class="title">Description de la tâche</div>
 <p>Vous devez netboot les nouveaux contrôleurs, si la version de ONTAP installée n&#8217;est pas identique à la version installée sur les contrôleurs d&#8217;origine. Après avoir installé chaque nouveau contrôleur, vous démarrez le système à partir de l&#8217;image ONTAP 9 stockée sur le serveur Web. Vous pouvez ensuite télécharger les fichiers corrects sur le périphérique de démarrage pour les démarrages suivants du système.</p>
 </div>
 <div class="olist arabic">
@@ -7205,7 +7210,7 @@ Vous devez utiliser le port de gestion et l&#8217;IP comme connexion netboot. N&
 <p>Démarrage sur le nœud_B_1 :
 <code>netboot</code> <code><a href="http://&lt;web_server_ip/path_to_web_accessible_directory&gt;/netboot/kernel" class="bare">http://&lt;web_server_ip/path_to_web_accessible_directory&gt;/netboot/kernel</a></code></p>
 <div class="paragraph">
-<p>Le <code>&lt;path_to_the_web-accessible_directory&gt;</code> vous devez indiquer où vous avez téléchargé le <code>&lt;ontap_version&gt;\_image.tgz</code> dans ,Étape 2.</p>
+<p>Le <code>&lt;path_to_the_web-accessible_directory&gt;</code> vous devez indiquer où vous avez téléchargé le <code>&lt;ontap_version&gt;\_image.tgz</code> dans <a href="#step2-download-software">Étape 2</a>.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -7470,6 +7475,7 @@ Are you sure you want to continue?:</code></p>
 <p>Vous devez mettre à jour les commutateurs vers une configuration prenant en charge les nouveaux modèles de plate-forme.</p>
 </div>
 <div class="paragraph">
+<div class="title">Description de la tâche</div>
 <p>Vous pouvez effectuer cette tâche sur le site contenant les contrôleurs en cours de mise à niveau. Dans les exemples présentés dans cette procédure, nous mettons d&#8217;abord à niveau site_B.</p>
 </div>
 <div class="paragraph">
@@ -7529,6 +7535,7 @@ Are you sure you want to continue?:</code></p>
 <p>Certaines valeurs d&#8217;amorçage MetroCluster IP doivent être configurées sur les nouveaux modules de contrôleur. Les valeurs doivent correspondre à celles configurées sur les anciens modules de contrôleur.</p>
 </div>
 <div class="paragraph">
+<div class="title">Description de la tâche</div>
 <p>Dans cette tâche, vous utiliserez les UUID et les ID système identifiés précédemment dans la procédure de mise à niveau de <a href="task_upgrade_controllers_in_a_four_node_ip_mcc_us_switchover_and_switchback_mcc_ip.html#gathering-information-before-the-upgrade">"Collecte des informations avant la mise à niveau"</a>.</p>
 </div>
 <div class="olist arabic">
@@ -7692,6 +7699,7 @@ setenv bootarg.mcc.dr_partner 537403323</pre>
 <p>Réaffectez les disques de l&#8217;agrégat racine au nouveau module de contrôleur, en utilisant les sysids réunis précédemment.</p>
 </div>
 <div class="paragraph">
+<div class="title">Description de la tâche</div>
 <p>Ces étapes sont réalisées en mode Maintenance.</p>
 </div>
 <div class="olist arabic">
@@ -8221,6 +8229,7 @@ Remote: cluster_A         Configuration state configured
 <p>Après la mise à niveau des modules de contrôleur, vous devez vérifier l&#8217;état de santé de la configuration MetroCluster.</p>
 </div>
 <div class="paragraph">
+<div class="title">Description de la tâche</div>
 <p>Cette tâche peut être effectuée sur n&#8217;importe quel nœud de la configuration MetroCluster.</p>
 </div>
 <div class="olist arabic">

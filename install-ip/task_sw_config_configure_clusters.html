@@ -6155,7 +6155,7 @@
 <p class="page-details">
   
     
-    <time datetime="2022-11-15 12:12:06 +0000">11/15/2022</time>
+    <time datetime="2022-12-06 10:32:39 +0000">12/06/2022</time>
     
   
 
@@ -6179,6 +6179,7 @@
 <p>Dans ONTAP 9.4, si votre configuration MetroCluster IP comporte moins de quatre tiroirs de stockage externes par site, vous devez désactiver l&#8217;affectation automatique des disques sur tous les nœuds et attribuer manuellement des disques.</p>
 </div>
 <div class="paragraph">
+<div class="title">Description de la tâche</div>
 <p>Cette tâche n&#8217;est pas requise dans ONTAP 9.5 et versions ultérieures.</p>
 </div>
 <div class="paragraph">
@@ -6210,6 +6211,7 @@
 <p>Vous devez vérifier que les lecteurs distants sont visibles par les nœuds et ont été correctement affectés.</p>
 </div>
 <div class="paragraph">
+<div class="title">Description de la tâche</div>
 <p>L&#8217;assignation automatique dépend du modèle de plateforme de stockage et de l&#8217;organisation des tiroirs disques.</p>
 </div>
 <div class="paragraph">
@@ -6331,6 +6333,7 @@ cluster_B::&gt;</pre>
 <p>Les clusters de la configuration MetroCluster doivent être dans une relation de pairs, de sorte qu&#8217;ils puissent communiquer entre eux et exécuter la mise en miroir des données essentielle à la reprise sur incident de MetroCluster.</p>
 </div>
 <div class="paragraph">
+<div class="title">Informations associées</div>
 <p><a href="http://docs.netapp.com/ontap-9/topic/com.netapp.doc.exp-clus-peer/home.html">"Configuration cluster et SVM peering express"</a></p>
 </div>
 <div class="paragraph">
@@ -6604,6 +6607,7 @@ cluster01
 </ol>
 </div>
 <div class="paragraph">
+<div class="title">Informations associées</div>
 <p><a href="concept_considerations_peering.html#considerations-when-using-dedicated-ports">"Considérations relatives à l&#8217;utilisation de ports dédiés"</a></p>
 </div>
 </div>
@@ -6780,6 +6784,7 @@ cluster01
 </ol>
 </div>
 <div class="paragraph">
+<div class="title">Informations associées</div>
 <p><a href="concept_considerations_peering.html#considerations-when-sharing-data-ports">"Points à prendre en compte lors du partage de ports de données"</a></p>
 </div>
 </div>
@@ -6923,6 +6928,7 @@ cluster01-02
 <p>Vous devez créer les relations de groupe de reprise après incident entre les clusters.</p>
 </div>
 <div class="paragraph">
+<div class="title">Description de la tâche</div>
 <p>Cette procédure est effectuée sur l&#8217;un des clusters de la configuration MetroCluster afin de créer les relations de DR entre les nœuds des deux clusters.</p>
 </div>
 <div class="admonitionblock note">
@@ -7955,40 +7961,32 @@ cluster_B::&gt;</pre>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>Les systèmes répondent aux exigences d&#8217;affectation automatique des disques ou, s&#8217;ils exécutent ONTAP 9.3, ont été reçus en usine.</p>
 </div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="literalblock">
-<div class="content">
-<pre>disk assignment for pool 1 disks</pre>
-</div>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a href="Vérification de l&.html#8217;affectation des disques du pool 1">Vérification de l&.html</a></p>
 </div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>La configuration inclut trois tiroirs ou, si elle contient plus de quatre tiroirs, présente un nombre irrégulier de quatre tiroirs (par exemple, sept tiroirs) et exécute ONTAP 9.5.</p>
 </div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="literalblock">
-<div class="content">
-<pre>assigning drives for pool 1 (ONTAP 9.4 or later)</pre>
-</div>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a href="#affectation-manuelle-de-lecteurs-pour-le-pool-1-ontap-9-4-ou-version-ultérieure">Affectation manuelle de lecteurs pour le pool 1 (ONTAP 9.4 ou version ultérieure)</a></p>
 </div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>La configuration n&#8217;inclut pas quatre tiroirs de stockage par site et exécute ONTAP 9.4</p>
 </div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="literalblock">
-<div class="content">
-<pre>assigning drives for pool 1 (ONTAP 9.4 or later)</pre>
-</div>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a href="#affectation-manuelle-de-lecteurs-pour-le-pool-1-ontap-9-4-ou-version-ultérieure">Affectation manuelle de lecteurs pour le pool 1 (ONTAP 9.4 ou version ultérieure)</a></p>
 </div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>Les systèmes n&#8217;ont pas été reçus en usine et exécutent ONTAP 9.3les systèmes reçus en usine sont préconfigurés avec les disques affectés.</p>
 </div></div></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="literalblock">
-<div class="content">
-<pre>assigning disks for pool 1 (ONTAP 9.3)</pre>
-</div>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a href="#assignation-manuelle-de-disques-pour-le-pool-1-ontap-9-3">Assignation manuelle de disques pour le pool 1 (ONTAP 9.3)</a></p>
 </div></div></td>
 </tr>
 </tbody>
@@ -7999,6 +7997,7 @@ cluster_B::&gt;</pre>
 <p>Vous devez vérifier que les disques distants sont visibles pour les nœuds et qu&#8217;ils ont été correctement affectés.</p>
 </div>
 <div class="paragraph">
+<div class="title">Avant de commencer</div>
 <p>Vous devez patienter au moins dix minutes que l&#8217;affectation automatique du disque se termine après la création des interfaces IP MetroCluster et des connexions avec le <code>metrocluster configuration-settings connection connect</code> commande.</p>
 </div>
 <div class="paragraph">
@@ -8207,6 +8206,7 @@ cluster_A::&gt;</pre>
 <p>Si le système n&#8217;a pas été préconfiguré en usine et ne répond pas aux exigences relatives à l&#8217;affectation automatique des lecteurs, vous devez affecter manuellement les lecteurs du pool distant 1.</p>
 </div>
 <div class="paragraph">
+<div class="title">Description de la tâche</div>
 <p>Cette procédure s&#8217;applique aux configurations exécutant ONTAP 9.4 ou version ultérieure.</p>
 </div>
 <div class="paragraph">
@@ -8332,9 +8332,11 @@ cluster_A::&gt;</pre>
 <p>Si vous avez au moins deux tiroirs disques pour chaque nœud, vous utilisez la fonctionnalité d&#8217;affectation automatique d&#8217;ONTAP pour attribuer automatiquement des disques distants (pool1).</p>
 </div>
 <div class="paragraph">
+<div class="title">Avant de commencer</div>
 <p>Vous devez d&#8217;abord affecter un disque du tiroir au pool 1. ONTAP attribue ensuite automatiquement le reste des disques du tiroir au même pool.</p>
 </div>
 <div class="paragraph">
+<div class="title">Description de la tâche</div>
 <p>Cette procédure s&#8217;applique aux configurations exécutant ONTAP 9.3.</p>
 </div>
 <div class="paragraph">
@@ -8493,6 +8495,7 @@ cluster_A::&gt;</pre>
 <h2 id="activation-de-laffectation-automatique-des-disques-dans-ontap-9-4">Activation de l&#8217;affectation automatique des disques dans ONTAP 9.4</h2>
 <div class="sectionbody">
 <div class="paragraph">
+<div class="title">Description de la tâche</div>
 <p>Dans ONTAP 9.4, si vous avez désactivé l&#8217;affectation automatique des disques comme indiqué précédemment dans cette procédure, vous devez la réactiver sur tous les nœuds.</p>
 </div>
 <div class="paragraph">
@@ -8521,6 +8524,7 @@ cluster_A::&gt;</pre>
 <p>Pour assurer la protection des données, vous devez mettre en miroir les agrégats racine.</p>
 </div>
 <div class="paragraph">
+<div class="title">Description de la tâche</div>
 <p>Par défaut, l&#8217;agrégat root est créé comme un agrégat de type RAID-DP. Vous pouvez changer l&#8217;agrégat racine de RAID-DP à l&#8217;agrégat de type RAID4 La commande suivante modifie l&#8217;agrégat racine pour l&#8217;agrégat de type RAID4 :</p>
 </div>
 <div class="paragraph">
@@ -8564,6 +8568,7 @@ Sur les systèmes non ADP, le type RAID de l&#8217;agrégat peut être modifié 
 </ol>
 </div>
 <div class="paragraph">
+<div class="title">Informations associées</div>
 <p><a href="https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-vsmg/home.html">"Gestion du stockage logique"</a></p>
 </div>
 </div>
@@ -8706,7 +8711,7 @@ Dans la configuration minimale prise en charge, dans laquelle un nombre limité 
 <img src="/us-en/ontap-metrocluster/images/note.svg" alt="Note">
 </td>
 <td class="content">
-Si vous souhaitez utiliser un seul agrégat de données en miroir, reportez-vous à la section ,Étape 1 pour obtenir des instructions.
+Si vous souhaitez utiliser un seul agrégat de données en miroir, reportez-vous à la section <a href="#step1_single_mirror">Étape 1</a> pour obtenir des instructions.
 </td>
 </tr>
 </table>
@@ -9091,6 +9096,7 @@ true</code></p>
 </ol>
 </div>
 <div class="paragraph">
+<div class="title">Informations associées</div>
 <p><a href="https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-psmg/home.html">"Gestion des disques et des agrégats"</a></p>
 </div>
 </div>
@@ -9102,6 +9108,7 @@ true</code></p>
 <p>Vous pouvez vérifier que les composants et les relations de la configuration MetroCluster fonctionnent correctement.</p>
 </div>
 <div class="paragraph">
+<div class="title">Description de la tâche</div>
 <p>Vous devez effectuer un contrôle après la configuration initiale et après avoir apporté des modifications à la configuration MetroCluster.</p>
 </div>
 <div class="paragraph">
@@ -9249,6 +9256,7 @@ mccint-fas9000-0304
 </ol>
 </div>
 <div class="paragraph">
+<div class="title">Informations associées</div>
 <p><a href="https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-psmg/home.html">"Gestion des disques et des agrégats"</a></p>
 </div>
 <div class="paragraph">

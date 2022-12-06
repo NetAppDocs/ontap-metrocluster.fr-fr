@@ -6155,7 +6155,7 @@
 <p class="page-details">
   
     
-    <time datetime="2022-11-15 12:12:06 +0000">11/15/2022</time>
+    <time datetime="2022-12-06 10:32:39 +0000">12/06/2022</time>
     
   
 
@@ -6545,7 +6545,7 @@ La mise à jour du fichier RCF pour prendre en charge la configuration AFF A900 
 </div>
 </li>
 <li>
-<p>Mettre à jour les commutateurs de la structure B (commutateurs 2 et 4) en répétant ,Étape 2 à ,Étape 5.</p>
+<p>Mettre à jour les commutateurs de la structure B (commutateurs 2 et 4) en répétant <a href="#Update-RCF">Étape 2</a> à <a href="#verify-healthy">Étape 5</a>.</p>
 </li>
 </ol>
 </div>
@@ -6691,6 +6691,7 @@ La mise à jour du fichier RCF pour prendre en charge la configuration AFF A900 
 <p>Avant la mise à niveau, vous devez collecter les informations de chacun des nœuds et, si nécessaire, ajuster les domaines de diffusion réseau, supprimer tous les VLAN et groupes d&#8217;interfaces et collecter des informations de cryptage.</p>
 </div>
 <div class="paragraph">
+<div class="title">Description de la tâche</div>
 <p>Cette tâche s&#8217;effectue sur la configuration FC MetroCluster existante.</p>
 </div>
 <div class="olist arabic">
@@ -6865,6 +6866,7 @@ dr-group-id cluster    node           node-systemid ha-partner-systemid dr-partn
 <p>Avant d&#8217;effectuer la maintenance, vous devez envoyer un message AutoSupport pour informer le support technique de NetApp que la maintenance est en cours. Informer le support technique que la maintenance est en cours empêche l&#8217;ouverture d&#8217;un dossier en supposant une interruption de l&#8217;activité.</p>
 </div>
 <div class="paragraph">
+<div class="title">Description de la tâche</div>
 <p>Cette tâche doit être effectuée sur chaque site MetroCluster.</p>
 </div>
 <div class="olist arabic">
@@ -6908,6 +6910,7 @@ dr-group-id cluster    node           node-systemid ha-partner-systemid dr-partn
 <p>Vous devez basculer la configuration vers site_A afin de pouvoir mettre à niveau les plateformes du site_B.</p>
 </div>
 <div class="paragraph">
+<div class="title">Description de la tâche</div>
 <p>Cette tâche doit être effectuée sur site_A.</p>
 </div>
 <div class="paragraph">
@@ -7025,6 +7028,7 @@ dr-group-id cluster    node           node-systemid ha-partner-systemid dr-partn
 <p>Cette tâche est effectuée sur site_B.</p>
 </div>
 <div class="paragraph">
+<div class="title">Avant de commencer</div>
 <p>Si vous n&#8217;êtes pas déjà mis à la terre, mettez-vous à la terre correctement.</p>
 </div>
 <div class="olist arabic">
@@ -7174,6 +7178,7 @@ Si des modules d&#8217;extension sont utilisés comme dispositifs de vidage de m
 <p>Vous devez installer les NVS et le module de contrôleur AFF A900 ou FAS9500 à partir du kit de mise à niveau sur les deux nœuds du site_B. Ne déplacez pas le dispositif de coredump du module NVS AFF A700 ou FAS9000 vers le module NVS AFF A900 ou FAS9500.</p>
 </div>
 <div class="paragraph">
+<div class="title">Avant de commencer</div>
 <p>Si vous n&#8217;êtes pas déjà mis à la terre, mettez-vous à la terre correctement.</p>
 </div>
 <div class="sect2">
@@ -7351,7 +7356,7 @@ Ne forcez pas trop lorsque vous faites glisser le module de contrôleur dans le 
 </li>
 <li>
 <p>Optimisation <code>netboot</code> sur le nœud 1 :
-<code>netboot <a href="http://&lt;web_server_ip/path_to_web_accessible_directory&gt;/netboot/kernel`Le" class="bare">http://&lt;web_server_ip/path_to_web_accessible_directory&gt;/netboot/kernel`Le</a> `&lt;path_to_the_web-accessible_directory&gt;</code> vous devez indiquer où vous avez téléchargé le <code>&lt;ontap_version&gt;_image.tgz</code> dans ,Étape 2.</p>
+<code>netboot <a href="http://&lt;web_server_ip/path_to_web_accessible_directory&gt;/netboot/kernel`Le" class="bare">http://&lt;web_server_ip/path_to_web_accessible_directory&gt;/netboot/kernel`Le</a> `&lt;path_to_the_web-accessible_directory&gt;</code> vous devez indiquer où vous avez téléchargé le <code>&lt;ontap_version&gt;_image.tgz</code> dans <a href="#step2-download-software">Étape 2</a>.</p>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -7705,6 +7710,7 @@ Controller HA configuration: mcc</pre>
 <p>Réaffectez les disques de l&#8217;agrégat racine au nouveau module de contrôleur, en utilisant les sysids réunis précédemment</p>
 </div>
 <div class="paragraph">
+<div class="title">Description de la tâche</div>
 <p>Cette tâche est effectuée en mode Maintenance.</p>
 </div>
 <div class="paragraph">
@@ -7843,6 +7849,7 @@ aggr0_node_b_1-root    online      raid_dp, aggr    root, nosnap=on,
 <p>Vous devez redémarrer les contrôleurs à partir du menu de démarrage pour mettre à jour l&#8217;image flash du contrôleur. Des étapes supplémentaires sont nécessaires si le chiffrement est configuré.</p>
 </div>
 <div class="paragraph">
+<div class="title">Description de la tâche</div>
 <p>Cette tâche doit être effectuée sur tous les nouveaux contrôleurs.</p>
 </div>
 <div class="olist arabic">
@@ -8066,6 +8073,7 @@ Rebooting to load the restored env file...</pre>
 <p>Vérifiez que les LIF sont hébergées sur le nœud/port approprié avant le rétablissement. Les étapes suivantes doivent être effectuées</p>
 </div>
 <div class="paragraph">
+<div class="title">Description de la tâche</div>
 <p>Cette tâche s&#8217;effectue sur site_B, où les nœuds ont été démarrés avec des agrégats racine.</p>
 </div>
 <div class="olist arabic">
@@ -8122,6 +8130,7 @@ Rebooting to load the restored env file...</pre>
 <p>Une fois les nouveaux contrôleurs configurés, il suffit de revenir à la configuration MetroCluster pour rétablir le fonctionnement normal.</p>
 </div>
 <div class="paragraph">
+<div class="title">Description de la tâche</div>
 <p>Cette tâche vous permet d&#8217;effectuer le rétablissement et de rétablir le fonctionnement normal de la configuration MetroCluster. Les nœuds du site_A sont toujours en attente de mise à niveau, comme illustré ci-dessous. (Cette illustration s&#8217;applique également à la mise à niveau d&#8217;un système FAS9000 vers un contrôleur FAS9500).</p>
 </div>
 <div class="imageblock">
@@ -8203,6 +8212,7 @@ Remote: cluster_A         Configuration state configured
 <p>Après la mise à niveau des modules de contrôleur, vous devez vérifier l&#8217;état de santé de la configuration MetroCluster.</p>
 </div>
 <div class="paragraph">
+<div class="title">Description de la tâche</div>
 <p>Cette tâche peut être effectuée sur n&#8217;importe quel nœud de la configuration MetroCluster.</p>
 </div>
 <div class="olist arabic">

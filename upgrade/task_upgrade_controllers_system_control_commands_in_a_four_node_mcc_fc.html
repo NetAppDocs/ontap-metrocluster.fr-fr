@@ -6155,7 +6155,7 @@
 <p class="page-details">
   
     
-    <time datetime="2022-12-01 16:17:17 +0000">12/01/2022</time>
+    <time datetime="2022-12-06 10:32:39 +0000">12/06/2022</time>
     
   
 
@@ -6379,6 +6379,7 @@ Node-A-1    Failed         MetroCluster check failed. Reason : MCC check showed 
 <p>Avant de procéder à la mise à niveau, si le volume racine est chiffré, vous devez vous fournir la clé de sauvegarde ainsi que d&#8217;autres informations permettant de démarrer les nouveaux contrôleurs avec les anciens volumes root chiffrés.</p>
 </div>
 <div class="paragraph">
+<div class="title">Description de la tâche</div>
 <p>Cette tâche s&#8217;effectue sur la configuration FC MetroCluster existante.</p>
 </div>
 <div class="olist arabic">
@@ -6598,9 +6599,11 @@ dr-group-id cluster    node          node-systemid dr-partner-systemid
 <p>Une fois que vous avez recueilli des informations et que vous reprenez l&#8217;opération, l&#8217;automatisation procède à l&#8217;opération de basculement.</p>
 </div>
 <div class="paragraph">
+<div class="title">Description de la tâche</div>
 <p>L&#8217;opération d&#8217;automatisation entraîne le basculement, <code>heal-aggregates</code>, et <code>heal root-aggregates</code> exploitation. Une fois ces opérations terminées, l&#8217;opération s&#8217;interrompt à <strong>interrompu pour l&#8217;intervention de l&#8217;utilisateur</strong>. Vous pouvez donc monter en rack et installer les contrôleurs, démarrer les contrôleurs partenaires et réaffecter les disques de l&#8217;agrégat racine au nouveau module de contrôleur à partir de la sauvegarde Flash, à l&#8217;aide de <code>sysids</code> rassemblés plus tôt.</p>
 </div>
 <div class="paragraph">
+<div class="title">Avant de commencer</div>
 <p>Avant de lancer le basculement, l&#8217;automatisation s&#8217;interrompt pour que vous puissiez vérifier manuellement que toutes les LIF sont « en service » sur le site B. Si nécessaire, apportez toutes les LIF « propres » à « UP » et reprenez l&#8217;opération d&#8217;automatisation à l&#8217;aide du <code>system controller replace resume</code> commande.</p>
 </div>
 <div class="sect2">
@@ -6615,7 +6618,7 @@ dr-group-id cluster    node          node-systemid dr-partner-systemid
 <p>Cette tâche doit être effectuée sur chacun des anciens nœuds.</p>
 </li>
 <li>
-<p>Vous utiliserez les informations recueillies dans  for the upgrade.</p>
+<p>Vous utiliserez les informations recueillies dans <a href="#préparation-de-la-mise-à-niveau">Préparation de la mise à niveau</a>.</p>
 </li>
 </ul>
 </div>
@@ -7070,6 +7073,7 @@ dr-group-id cluster    node          node-systemid dr-partner-systemid
 <p>Réallouer les disques de l&#8217;agrégat racine vers le nouveau module de contrôleur, à l&#8217;aide du <code>sysids</code> rassemblés plus tôt</p>
 </div>
 <div class="paragraph">
+<div class="title">Description de la tâche</div>
 <p>Cette tâche est effectuée en mode Maintenance.</p>
 </div>
 <div class="paragraph">
@@ -7217,6 +7221,7 @@ aggr0_node_b_1-root        online      raid_dp, aggr    root, nosnap=on,
 <p>Vous pouvez reconfigurer les VLAN et les groupes d&#8217;interface. Si nécessaire, modifier manuellement les ports des LIFs de cluster et des détails de broadcast domain avant de reprendre l&#8217;opération en utilisant le <code>system controller replace resume</code> commande.</p>
 </div>
 <div class="paragraph">
+<div class="title">Description de la tâche</div>
 <p>Cette tâche doit être effectuée sur tous les nouveaux contrôleurs.</p>
 </div>
 <div class="olist arabic">

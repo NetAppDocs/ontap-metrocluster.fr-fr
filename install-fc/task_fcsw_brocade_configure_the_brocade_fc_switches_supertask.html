@@ -6155,7 +6155,7 @@
 <p class="page-details">
   
     
-    <time datetime="2022-11-15 12:12:06 +0000">11/15/2022</time>
+    <time datetime="2022-12-06 10:32:39 +0000">12/06/2022</time>
     
   
 
@@ -6265,6 +6265,7 @@ Vous pouvez configurer les systèmes FAS8020, AFF8020, FAS8200 et AFF A300 avec 
 <p>Vous avez besoin de certaines licences pour les commutateurs dans une configuration MetroCluster. Vous devez installer ces licences sur les quatre commutateurs.</p>
 </div>
 <div class="paragraph">
+<div class="title">Description de la tâche</div>
 <p>La configuration MetroCluster a les exigences suivantes en matière de licence Brocade :</p>
 </div>
 <div class="ulist">
@@ -6306,6 +6307,7 @@ Vous pouvez configurer les systèmes FAS8020, AFF8020, FAS8200 et AFF A300 avec 
 <p>Vous devez définir les paramètres par défaut du commutateur pour garantir la réussite de la configuration. Vous devez également attribuer un nom unique à chaque commutateur.</p>
 </div>
 <div class="paragraph">
+<div class="title">Description de la tâche</div>
 <p>Dans les exemples de cette procédure, le tissu est constitué de BrocadeSwitchA et BrocadeSwitchB.</p>
 </div>
 <div class="olist arabic">
@@ -6564,6 +6566,7 @@ FC_switch_B_1:admin&gt; exit</pre>
 <p>Vous devez configurer les paramètres globaux de base, y compris l&#8217;ID de domaine, pour les commutateurs Brocade.</p>
 </div>
 <div class="paragraph">
+<div class="title">Description de la tâche</div>
 <p>Cette tâche contient les étapes à effectuer sur chaque switch des deux sites MetroCluster.</p>
 </div>
 <div class="paragraph">
@@ -7020,6 +7023,7 @@ FC_switch_B_1:admin&gt;</pre>
 <p>Vous devez configurer les paramètres globaux de base, y compris l&#8217;ID de domaine, pour les commutateurs Brocade.</p>
 </div>
 <div class="paragraph">
+<div class="title">Description de la tâche</div>
 <p>Vous devez effectuer les étapes de chaque commutateur sur les deux sites MetroCluster. Dans cette procédure, vous définissez l&#8217;ID de domaine pour chaque commutateur comme indiqué dans les exemples suivants :</p>
 </div>
 <div class="ulist">
@@ -7172,6 +7176,7 @@ switchenable</pre>
 </ol>
 </div>
 <div class="paragraph">
+<div class="title">Informations associées</div>
 <p><a href="concept_prepare_for_the_mcc_installation.html">"Conditions requises pour l&#8217;utilisation d&#8217;un commutateur Brocade DCX 8510-8"</a></p>
 </div>
 </div>
@@ -7206,6 +7211,7 @@ switchenable</pre>
 </ul>
 </div>
 <div class="paragraph">
+<div class="title">Description de la tâche</div>
 <p>Vous ne devez pas utiliser le paramètre L0 lors de l&#8217;émission du <code>portCfgLongDistance</code> commande. Utilisez plutôt le paramètre LE ou LS pour configurer la distance sur les commutateurs Brocade avec un minimum de distance LE.</p>
 </div>
 <div class="paragraph">
@@ -7775,11 +7781,12 @@ FC_switch_B_1:admin&gt; trunkshow
 </div>
 </li>
 <li>
-<p>Recommencez ,Étape 1 à ,Étape 10 Pour la deuxième structure de commutateurs FC.</p>
+<p>Recommencez <a href="#step1_brocade_config">Étape 1</a> à <a href="#step10_brocade_config">Étape 10</a> Pour la deuxième structure de commutateurs FC.</p>
 </li>
 </ol>
 </div>
 <div class="paragraph">
+<div class="title">Informations associées</div>
 <p><a href="concept_port_assignments_for_fc_switches_when_using_ontap_9_1_and_later.html">"Affectation de ports pour les commutateurs FC lors de l&#8217;utilisation de ONTAP 9.1 et versions ultérieures"</a></p>
 </div>
 </div>
@@ -7791,6 +7798,7 @@ FC_switch_B_1:admin&gt; trunkshow
 <p>Lorsque vous utilisez les ports VE 10 Gbit/s (qui utilisent le FCIP) pour les liens ISL, vous devez créer des interfaces IP sur chaque port et configurer des tunnels FCIP et des circuits dans chaque tunnel.</p>
 </div>
 <div class="paragraph">
+<div class="title">Description de la tâche</div>
 <p>Cette procédure doit être effectuée sur chaque structure de commutateurs de la configuration MetroCluster.</p>
 </div>
 <div class="paragraph">
@@ -7970,6 +7978,7 @@ Flags: U=Up B=Broadcast D=Debug L=Loopback P=Point2Point R=Running I=InUse
 <p>Lorsque vous utilisez les deux ports VE 40 GbE (qui utilisent le FCIP) pour ISL, vous devez créer des interfaces IP sur chaque port et configurer des tunnels FCIP et des circuits dans chaque tunnel.</p>
 </div>
 <div class="paragraph">
+<div class="title">Description de la tâche</div>
 <p>Cette procédure doit être effectuée sur chaque structure de commutateurs de la configuration MetroCluster.</p>
 </div>
 <div class="paragraph">
@@ -8146,6 +8155,7 @@ Flags: U=Up B=Broadcast D=Debug L=Loopback P=Point2Point R=Running I=InUse
 <p>Vous devez configurer les non-E-ports sur le commutateur FC. Dans une configuration MetroCluster, il s&#8217;agit des ports qui connectent le commutateur aux initiateurs HBA, aux interconnexions FC-VI et aux ponts FC-SAS. Ces étapes doivent être effectuées pour chaque port.</p>
 </div>
 <div class="paragraph">
+<div class="title">Description de la tâche</div>
 <p>Dans l&#8217;exemple suivant, les ports connectent un pont FC-to-SAS :</p>
 </div>
 <div class="openblock">
@@ -8259,6 +8269,7 @@ Non-DFE                             ..  ..  ..  ..  ..  ..  ..  ..  ..</pre>
 <p>Si vous utilisez des commutateurs Brocade G620 et que vous activez la compression sur les liens ISL, vous devez la configurer sur chaque port E-Port des commutateurs.</p>
 </div>
 <div class="paragraph">
+<div class="title">Description de la tâche</div>
 <p>Cette tâche doit être effectuée sur les ports ISL des deux commutateurs à l&#8217;aide de ISL.</p>
 </div>
 <div class="olist arabic">
@@ -12763,6 +12774,7 @@ Port   Configured    Active   Configured   Active  Speed
 <p>Vous devez attribuer les ports de commutateur à des zones distinctes pour le trafic du contrôleur et du stockage, avec des zones pour les ports et zones FC-VI pour les ports de stockage.</p>
 </div>
 <div class="paragraph">
+<div class="title">Description de la tâche</div>
 <p>Les étapes suivantes utilisent le zoning standard pour la configuration MetroCluster.</p>
 </div>
 <div class="paragraph">
@@ -12933,6 +12945,7 @@ La prise en charge du cryptage ISL sur les commutateurs Brocade G620 est prise e
 </ul>
 </div>
 <div class="paragraph">
+<div class="title">Description de la tâche</div>
 <p>Les étapes doivent être effectuées sur les deux commutateurs de la même structure.</p>
 </div>
 <div class="sect2">
@@ -12961,6 +12974,7 @@ La prise en charge du cryptage ISL sur les commutateurs Brocade G620 est prise e
 <p>Après la désactivation de la structure virtuelle, vous devez définir la charge utile ou la taille du champ de données sur les deux commutateurs de la structure.</p>
 </div>
 <div class="paragraph">
+<div class="title">Description de la tâche</div>
 <p>La taille du champ de données ne doit pas dépasser 2048.</p>
 </div>
 <div class="olist arabic">
@@ -13003,6 +13017,7 @@ La prise en charge du cryptage ISL sur les commutateurs Brocade G620 est prise e
 <p>Vous devez définir la stratégie d&#8217;authentification et les paramètres associés.</p>
 </div>
 <div class="paragraph">
+<div class="title">Description de la tâche</div>
 <p>Les commandes doivent être exécutées au niveau de la console des commutateurs.</p>
 </div>
 <div class="olist arabic">
@@ -13188,6 +13203,7 @@ Port  configured     Active
 </ol>
 </div>
 <div class="paragraph">
+<div class="title">Que faire ensuite</div>
 <p>Effectuez toutes les étapes sur les commutateurs de l&#8217;autre structure dans une configuration MetroCluster.</p>
 </div>
 </div>

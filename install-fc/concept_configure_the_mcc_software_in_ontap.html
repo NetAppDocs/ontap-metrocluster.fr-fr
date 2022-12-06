@@ -6155,7 +6155,7 @@
 <p class="page-details">
   
     
-    <time datetime="2022-11-15 12:12:06 +0000">11/15/2022</time>
+    <time datetime="2022-12-06 10:32:39 +0000">12/06/2022</time>
     
   
 
@@ -6456,7 +6456,7 @@
 </table>
 </div>
 <div class="sect3">
-<h4 id="site-a-informations-autosupport">Site A informations AutoSupport</h4>
+<h4 id="site-a-nbspinformations-autosupport">Site A nbsp;informations AutoSupport</h4>
 <div class="paragraph">
 <p>Vous devez configurer le AutoSupport sur chaque nœud, qui nécessite les informations suivantes :</p>
 </div>
@@ -6518,7 +6518,7 @@
 </table>
 </div>
 <div class="sect3">
-<h4 id="site-a-informations-sur-le-processeur-de-service">Site A informations sur le processeur de service</h4>
+<h4 id="site-a-nbspinformations-sp">Site A nbsp;informations SP</h4>
 <div class="paragraph">
 <p>Vous devez activer l&#8217;accès au processeur de service de chaque nœud pour le dépannage et la maintenance. Pour ce faire, vous devez disposer des informations réseau suivantes pour chaque nœud :</p>
 </div>
@@ -6835,7 +6835,7 @@
 </table>
 </div>
 <div class="sect3">
-<h4 id="site-b-informations-autosupport">Site B informations AutoSupport</h4>
+<h4 id="site-b-nbspinformations-autosupport">Site B nbsp;informations AutoSupport</h4>
 <div class="paragraph">
 <p>Vous devez configurer le AutoSupport sur chaque nœud, qui nécessite les informations suivantes :</p>
 </div>
@@ -6897,7 +6897,7 @@
 </table>
 </div>
 <div class="sect3">
-<h4 id="informations-relatives-au-processeur-de-service-du-site-b">Informations relatives au processeur de service du site B</h4>
+<h4 id="site-b-nbspinformations-sp">Site B nbsp;informations SP</h4>
 <div class="paragraph">
 <p>Vous devez activer l&#8217;accès au processeur de service de chaque nœud pour le dépannage et la maintenance. Pour ce faire, vous devez disposer des informations réseau suivantes pour chaque nœud :</p>
 </div>
@@ -7038,6 +7038,7 @@
 <p>Pour garantir la réussite de l&#8217;installation de MetroCluster, réinitialisez et restaurez les valeurs par défaut sur les modules de contrôleur.</p>
 </div>
 <div class="paragraph">
+<div class="title">Important</div>
 <p>Cette tâche n&#8217;est requise que pour les configurations étendues utilisant des ponts FC-SAS.</p>
 </div>
 <div class="olist arabic">
@@ -7220,6 +7221,7 @@
 <p>Si vous utilisez la carte X1132A-R6 à quatre ports sur un système FAS8020, vous pouvez passer en mode de maintenance pour configurer les ports 1a et 1b pour FC-VI et pour l&#8217;utilisation d&#8217;un initiateur. Cela n&#8217;est pas nécessaire pour les systèmes MetroCluster reçus en usine, dans lesquels les ports sont configurés de façon appropriée pour votre configuration.</p>
 </div>
 <div class="paragraph">
+<div class="title">Description de la tâche</div>
 <p>Cette tâche doit être effectuée en mode Maintenance.</p>
 </div>
 <div class="admonitionblock note">
@@ -7349,6 +7351,7 @@ controller_B_1
 <p>Avant de démarrer entièrement le système sur ONTAP, vous pouvez également démarrer en mode maintenance et vérifier l&#8217;affectation des disques sur les nœuds. Les disques doivent être affectés pour créer une configuration active-active entièrement symétrique, où chaque pool a le même nombre de disques qui leur sont affectés.</p>
 </div>
 <div class="paragraph">
+<div class="title">Description de la tâche</div>
 <p>Les nouveaux systèmes MetroCluster ont une affectation des disques réalisée avant leur expédition.</p>
 </div>
 <div class="paragraph">
@@ -7617,6 +7620,7 @@ controller_B_1
 <p>Si les nœuds MetroCluster ne sont pas affectés correctement, ou si vous utilisez des tiroirs disques DS460C dans votre configuration, il est nécessaire d&#8217;attribuer des disques à chacun des nœuds de la configuration MetroCluster selon le tiroir par tiroir. Vous allez créer une configuration dans laquelle chaque nœud a le même nombre de disques dans ses pools de disques locaux et distants.</p>
 </div>
 <div class="paragraph">
+<div class="title">Description de la tâche</div>
 <p>Les contrôleurs de stockage doivent être en mode maintenance.</p>
 </div>
 <div class="paragraph">
@@ -7821,6 +7825,7 @@ Le pool 0 contient toujours les disques qui se trouvent sur le même site que le
 <p>Si vous utilisez des systèmes AFF dans une configuration avec des agrégats en miroir et que les nœuds ne disposent pas des disques (SSD) correctement affectés, vous devez attribuer la moitié des disques de chaque tiroir à un nœud local et l&#8217;autre moitié des disques à son nœud partenaire haute disponibilité. Vous devez créer une configuration dans laquelle chaque nœud a le même nombre de disques dans ses pools de disques locaux et distants.</p>
 </div>
 <div class="paragraph">
+<div class="title">Description de la tâche</div>
 <p>Les contrôleurs de stockage doivent être en mode maintenance.</p>
 </div>
 <div class="paragraph">
@@ -7970,9 +7975,11 @@ Le pool 0 contient toujours les disques qui se trouvent sur le même site que le
 <p>Avant de démarrer entièrement le système sur ONTAP, vous pouvez également démarrer le système en mode maintenance et vérifier l&#8217;affectation des disques sur les nœuds. Il convient d&#8217;attribuer aux disques pour créer une configuration entièrement symétrique avec les deux sites possédant leurs propres tiroirs disques et servant les données, où chaque nœud et chaque pool disposent d&#8217;un nombre égal de disques en miroir qui leur sont affectés.</p>
 </div>
 <div class="paragraph">
+<div class="title">Avant de commencer</div>
 <p>Le système doit être en mode Maintenance.</p>
 </div>
 <div class="paragraph">
+<div class="title">Description de la tâche</div>
 <p>Les nouveaux systèmes MetroCluster ont une affectation des disques réalisée avant leur expédition.</p>
 </div>
 <div class="paragraph">
@@ -8163,9 +8170,11 @@ Le pool 0 contient toujours les disques qui se trouvent sur le même site que le
 <p>Lors de la configuration d&#8217;un système de stockage dans une configuration MetroCluster, assurez-vous que l&#8217;état haute disponibilité (HA) du module de contrôleur et des composants du châssis est mcc ou mcc-2n afin que ces composants démarrent correctement.</p>
 </div>
 <div class="paragraph">
+<div class="title">Avant de commencer</div>
 <p>Le système doit être en mode Maintenance.</p>
 </div>
 <div class="paragraph">
+<div class="title">Description de la tâche</div>
 <p>Cette tâche n&#8217;est pas requise sur les systèmes reçus de l&#8217;usine.</p>
 </div>
 <div class="olist arabic">
@@ -8327,9 +8336,11 @@ Le pool 0 contient toujours les disques qui se trouvent sur le même site que le
 <p>Dans une configuration MetroCluster à deux nœuds, sur chaque cluster, vous devez démarrer le nœud, quitter l&#8217;assistant de configuration des clusters et utiliser la commande cluster setup pour configurer le nœud en tant que cluster à un seul nœud.</p>
 </div>
 <div class="paragraph">
+<div class="title">Avant de commencer</div>
 <p>Vous ne devez pas avoir configuré le processeur de service.</p>
 </div>
 <div class="paragraph">
+<div class="title">Description de la tâche</div>
 <p>Cette tâche est destinée aux configurations MetroCluster à deux nœuds qui utilisent un stockage NetApp natif.</p>
 </div>
 <div class="paragraph">
@@ -8453,9 +8464,11 @@ cluster1-01           true    true</pre>
 <p>Après le démarrage de chaque nœud, vous êtes invité à exécuter l&#8217;outil System Setup afin d&#8217;effectuer une configuration de nœud et de cluster de base. Une fois le cluster configuré, vous revenez à l&#8217;interface de ligne de commandes de ONTAP pour créer des agrégats et créer la configuration MetroCluster.</p>
 </div>
 <div class="paragraph">
+<div class="title">Avant de commencer</div>
 <p>Vous devez avoir câblé la configuration MetroCluster.</p>
 </div>
 <div class="paragraph">
+<div class="title">Description de la tâche</div>
 <p>Cette tâche est destinée aux configurations MetroCluster à 8 ou 4 nœuds qui utilisent un stockage NetApp natif.</p>
 </div>
 <div class="paragraph">
@@ -8628,6 +8641,7 @@ Vous créez des agrégats en miroir dans des tâches ultérieures.
 <p>Les clusters de la configuration MetroCluster doivent être dans une relation de pairs, de sorte qu&#8217;ils puissent communiquer entre eux et exécuter la mise en miroir des données essentielle à la reprise sur incident de MetroCluster.</p>
 </div>
 <div class="paragraph">
+<div class="title">Informations associées</div>
 <p><a href="http://docs.netapp.com/ontap-9/topic/com.netapp.doc.exp-clus-peer/home.html">"Configuration cluster et SVM peering express"</a></p>
 </div>
 <div class="paragraph">
@@ -8901,6 +8915,7 @@ cluster01
 </div>
 </div>
 <div class="paragraph">
+<div class="title">Informations associées</div>
 <p><a href="concept_prepare_for_the_mcc_installation.html">"Considérations relatives à l&#8217;utilisation de ports dédiés"</a></p>
 </div>
 </div>
@@ -9077,6 +9092,7 @@ cluster01
 </ol>
 </div>
 <div class="paragraph">
+<div class="title">Informations associées</div>
 <p><a href="concept_prepare_for_the_mcc_installation.html">"Points à prendre en compte lors du partage de ports de données"</a></p>
 </div>
 </div>
@@ -9337,6 +9353,7 @@ cluster01-02
 <p>Pour assurer la protection des données, vous devez mettre en miroir les agrégats racine.</p>
 </div>
 <div class="paragraph">
+<div class="title">Description de la tâche</div>
 <p>Par défaut, l&#8217;agrégat root est créé comme un agrégat de type RAID-DP. Vous pouvez changer l&#8217;agrégat racine de RAID-DP à l&#8217;agrégat de type RAID4 La commande suivante modifie l&#8217;agrégat racine pour l&#8217;agrégat de type RAID4 :</p>
 </div>
 <div class="paragraph">
@@ -9380,6 +9397,7 @@ Sur les systèmes non ADP, le type RAID de l&#8217;agrégat peut être modifié 
 </ol>
 </div>
 <div class="paragraph">
+<div class="title">Informations associées</div>
 <p><a href="https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-vsmg/home.html" target="_blank" rel="noopener">"Gestion du stockage logique"</a></p>
 </div>
 </div>
@@ -9629,6 +9647,7 @@ Les agrégats non mis en miroir doivent être locaux au nœud qu&#8217;ils poss�
 </ol>
 </div>
 <div class="paragraph">
+<div class="title">Informations associées</div>
 <p><a href="https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-psmg/home.html" target="_blank" rel="noopener">"Gestion des disques et des agrégats"</a></p>
 </div>
 </div>
@@ -9638,9 +9657,11 @@ Les agrégats non mis en miroir doivent être locaux au nœud qu&#8217;ils poss�
 <p>Vous devez exécuter le <code>metrocluster configure</code> Commande pour démarrer la protection des données en configuration MetroCluster.</p>
 </div>
 <div class="paragraph">
+<div class="title">Avant de commencer</div>
 <p>Chaque cluster doit contenir au moins deux agrégats de données en miroir non racines.</p>
 </div>
 <div class="paragraph">
+<div class="title">Description de la tâche</div>
 <p>Les agrégats de données supplémentaires peuvent être mis en miroir ou non.</p>
 </div>
 <div class="paragraph">
@@ -9972,6 +9993,7 @@ mcc4-b2      mlx4_0          IB      Up     false     192.0.2.10  	ib2b
 <p>Les protocoles d&#8217;authentification et de confidentialité sur les switches et sur le système ONTAP doivent être identiques.</p>
 </div>
 <div class="paragraph">
+<div class="title">Description de la tâche</div>
 <p>ONTAP prend actuellement en charge le chiffrement AES-128 et AES-256.</p>
 </div>
 <div class="olist arabic">
@@ -10095,6 +10117,7 @@ Priv Protocol [DES(1)/noPriv(2)/AES128(3)/AES256(4)]): (2..2) [3]</pre>
 <p>Vous devez effectuer certaines étapes de configuration spéciales avant de surveiller les composants dans une configuration MetroCluster.</p>
 </div>
 <div class="paragraph">
+<div class="title">Description de la tâche</div>
 <p>Ces tâches s&#8217;appliquent uniquement aux systèmes avec des ponts FC-SAS.</p>
 </div>
 <div class="admonitionblock note">
@@ -10199,6 +10222,7 @@ controller_A_1::&gt;</pre>
 </ol>
 </div>
 <div class="paragraph">
+<div class="title">Informations associées</div>
 <p><a href="https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-sag/home.html" target="_blank" rel="noopener">"Administration du système"</a></p>
 </div>
 </div>
@@ -10309,6 +10333,7 @@ ATTO_10.10.20.13  atto04        true          ok              Atto   FibreBridge
 <p>Vous pouvez vérifier que les composants et les relations de la configuration MetroCluster fonctionnent correctement. Vous devez effectuer un contrôle après la configuration initiale et après avoir apporté des modifications à la configuration MetroCluster. Vous devez également effectuer une vérification avant le basculement (prévu) ou le rétablissement.</p>
 </div>
 <div class="paragraph">
+<div class="title">Description de la tâche</div>
 <p>Si le <code>metrocluster check run</code> la commande est émise deux fois en peu de temps sur l&#8217;un des clusters ou les deux clusters. un conflit peut se produire et la commande risque de ne pas collecter toutes les données. Ensuite <code>metrocluster check show</code> les commandes n&#8217;affichent pas la sortie attendue.</p>
 </div>
 <div class="olist arabic">
@@ -10435,6 +10460,7 @@ mccint-fas9000-0304
 </ol>
 </div>
 <div class="paragraph">
+<div class="title">Informations associées</div>
 <p><a href="https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-psmg/home.html" target="_blank" rel="noopener">"Gestion des disques et des agrégats"</a></p>
 </div>
 <div class="paragraph">
@@ -10450,6 +10476,7 @@ mccint-fas9000-0304
 <p>Vous pouvez accéder au site de support NetApp et télécharger l&#8217;outil Config Advisor pour vérifier les erreurs de configuration courantes.</p>
 </div>
 <div class="paragraph">
+<div class="title">Description de la tâche</div>
 <p>Config Advisor est un outil de validation de la configuration et de vérification de l&#8217;état de santé. Vous pouvez le déployer sur des sites sécurisés et sur des sites non sécurisés à des fins de collecte des données et d&#8217;analyse du système.</p>
 </div>
 <div class="admonitionblock note">
@@ -10487,6 +10514,7 @@ Le support pour Config Advisor est limité et n&#8217;est disponible qu&#8217;en
 <p>Si vous disposez d&#8217;une configuration MetroCluster à quatre nœuds, vérifiez le fonctionnement des paires haute disponibilité locales dans la configuration MetroCluster. Cette opération n&#8217;est pas requise dans les configurations à deux nœuds.</p>
 </div>
 <div class="paragraph">
+<div class="title">Description de la tâche</div>
 <p>Les configurations MetroCluster à deux nœuds ne se composent pas de paires haute disponibilité locales, mais cette tâche ne s&#8217;applique pas.</p>
 </div>
 <div class="paragraph">
@@ -10626,6 +10654,7 @@ controller_A_2 controller_A_1 true     Connected to controller_A_1
 </ol>
 </div>
 <div class="paragraph">
+<div class="title">Informations associées</div>
 <p><a href="https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-hacg/home.html" target="_blank" rel="noopener">"Configuration haute disponibilité"</a></p>
 </div>
 </div>
@@ -10667,6 +10696,7 @@ controller_A_2 controller_A_1 true     Connected to controller_A_1
 </ol>
 </div>
 <div class="paragraph">
+<div class="title">Informations associées</div>
 <p><a href="https://docs.netapp.com/us-en/ontap/cluster-admin/index.html" target="_blank" rel="noopener">"Administration du cluster"</a></p>
 </div>
 </div>

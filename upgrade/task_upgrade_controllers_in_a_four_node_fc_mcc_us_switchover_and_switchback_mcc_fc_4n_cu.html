@@ -6155,7 +6155,7 @@
 <p class="page-details">
   
     
-    <time datetime="2022-11-21 18:31:46 +0000">11/21/2022</time>
+    <time datetime="2022-12-06 10:32:39 +0000">12/06/2022</time>
     
   
 
@@ -6493,6 +6493,7 @@ Si les plateformes d&#8217;origine ou nouvelles sont des systèmes FAS8020 ou AF
 <p>Vous devez planifier le mappage des LIFs sur les ports physiques des anciens nœuds sur les ports physiques des nouveaux nœuds.</p>
 </div>
 <div class="paragraph">
+<div class="title">Description de la tâche</div>
 <p>Une fois le nouveau nœud démarré au cours du processus de mise à niveau, la configuration la plus récente de l&#8217;ancien nœud qu&#8217;il remplace est retraitée. Lorsque vous démarrez node_A_1-New, ONTAP tente d&#8217;héberger les LIFs sur les mêmes ports qui ont été utilisés sur node_A_1-Old. Par conséquent, dans le cadre de la mise à niveau, vous devez ajuster la configuration du port et de la LIF afin qu&#8217;elle soit compatible avec celle de l&#8217;ancien nœud. Durant la procédure de mise à niveau, vous effectuez les étapes des anciens et nouveaux nœuds afin d&#8217;assurer une configuration correcte du cluster, de la gestion et de la LIF de données.</p>
 </div>
 <div class="paragraph">
@@ -6723,6 +6724,7 @@ Si les plateformes d&#8217;origine ou nouvelles sont des systèmes FAS8020 ou AF
 <p>Avant la mise à niveau, vous devez collecter les informations de chacun des nœuds et, si nécessaire, ajuster les domaines de diffusion réseau, supprimer tous les VLAN et groupes d&#8217;interfaces et collecter des informations de cryptage.</p>
 </div>
 <div class="paragraph">
+<div class="title">Description de la tâche</div>
 <p>Cette tâche s&#8217;effectue sur la configuration FC MetroCluster existante.</p>
 </div>
 <div class="olist arabic">
@@ -6919,6 +6921,7 @@ dr-group-id cluster    node      node-systemid dr-partner-systemid
 <p>Avant d&#8217;effectuer la maintenance, vous devez envoyer un message AutoSupport pour informer le support technique de NetApp que la maintenance est en cours. Informer le support technique que la maintenance est en cours empêche l&#8217;ouverture d&#8217;un dossier en supposant une interruption de l&#8217;activité.</p>
 </div>
 <div class="paragraph">
+<div class="title">Description de la tâche</div>
 <p>Cette tâche doit être effectuée sur chaque site MetroCluster.</p>
 </div>
 <div class="olist arabic">
@@ -6962,6 +6965,7 @@ dr-group-id cluster    node      node-systemid dr-partner-systemid
 <p>Vous devez basculer la configuration vers site_A afin de pouvoir mettre à niveau les plateformes du site_B.</p>
 </div>
 <div class="paragraph">
+<div class="title">Description de la tâche</div>
 <p>Cette tâche doit être effectuée sur site_A.</p>
 </div>
 <div class="paragraph">
@@ -7230,6 +7234,7 @@ dr-group-id cluster    node      node-systemid dr-partner-systemid
 <p>Les anciens contrôleurs doivent être supprimés de la configuration.</p>
 </div>
 <div class="paragraph">
+<div class="title">Description de la tâche</div>
 <p>Cette tâche est effectuée sur site_B.</p>
 </div>
 <div class="olist arabic">
@@ -7670,6 +7675,7 @@ dr-group-id cluster    node      node-systemid dr-partner-systemid
 <p>Réaffectez les disques de l&#8217;agrégat racine au nouveau module de contrôleur, en utilisant les sysids réunis précédemment</p>
 </div>
 <div class="paragraph">
+<div class="title">Description de la tâche</div>
 <p>Cette tâche est effectuée en mode Maintenance.</p>
 </div>
 <div class="paragraph">
@@ -7814,6 +7820,7 @@ aggr0_node_b_1-root    online      raid_dp, aggr    root, nosnap=on,
 <p>Vous devez redémarrer les contrôleurs à partir du menu de démarrage pour mettre à jour l&#8217;image flash du contrôleur. Des étapes supplémentaires sont nécessaires si le chiffrement est configuré.</p>
 </div>
 <div class="paragraph">
+<div class="title">Description de la tâche</div>
 <p>Cette tâche doit être effectuée sur tous les nouveaux contrôleurs.</p>
 </div>
 <div class="olist arabic">
@@ -8146,6 +8153,7 @@ Rebooting to load the restored env file...</pre>
 <p>Vérifiez que les LIF sont hébergées sur le nœud/port approprié avant le rétablissement. Les étapes suivantes doivent être effectuées</p>
 </div>
 <div class="paragraph">
+<div class="title">Description de la tâche</div>
 <p>Cette tâche s&#8217;effectue sur site_B, où les nœuds ont été démarrés avec des agrégats racine.</p>
 </div>
 <div class="olist arabic">
@@ -8216,6 +8224,7 @@ Rebooting to load the restored env file...</pre>
 <p>Une fois les nouveaux contrôleurs configurés, il suffit de revenir à la configuration MetroCluster pour rétablir le fonctionnement normal.</p>
 </div>
 <div class="paragraph">
+<div class="title">Description de la tâche</div>
 <p>Cette tâche vous permet d&#8217;effectuer le rétablissement et de rétablir le fonctionnement normal de la configuration MetroCluster. Les nœuds du site_A sont toujours en attente de mise à niveau.</p>
 </div>
 <div class="imageblock">
@@ -8297,6 +8306,7 @@ Remote: cluster_A         Configuration state configured
 <p>Après la mise à niveau des modules de contrôleur, vous devez vérifier l&#8217;état de santé de la configuration MetroCluster.</p>
 </div>
 <div class="paragraph">
+<div class="title">Description de la tâche</div>
 <p>Cette tâche peut être effectuée sur n&#8217;importe quel nœud de la configuration MetroCluster.</p>
 </div>
 <div class="olist arabic">

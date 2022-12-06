@@ -6155,7 +6155,7 @@
 <p class="page-details">
   
     
-    <time datetime="2022-11-15 12:12:06 +0000">11/15/2022</time>
+    <time datetime="2022-12-06 10:32:39 +0000">12/06/2022</time>
     
   
 
@@ -6360,6 +6360,7 @@
 <p>Selon les anciens modèles de plateforme, ou si la configuration des commutateurs ne repose pas sur la version minimale, ou si vous souhaitez modifier les ID VLAN utilisés par les connexions MetroCluster internes, vous devez mettre à jour les fichiers RCF de commutateur avant de lancer la procédure de mise à niveau de la plateforme.</p>
 </div>
 <div class="paragraph">
+<div class="title">Description de la tâche</div>
 <p>Vous devez mettre à jour le fichier RCF dans les scénarios suivants :</p>
 </div>
 <div class="ulist">
@@ -6507,6 +6508,7 @@ Les connexions locales du cluster peuvent utiliser n&#8217;importe quel VLAN, el
 <p>Vous devez vérifier que les ports physiques du node_A_1-Old sont correctement associés aux ports physiques du node_A_1-New, qui permettront à node_A_1-New de communiquer avec d&#8217;autres nœuds du cluster et avec le réseau après la mise à niveau.</p>
 </div>
 <div class="paragraph">
+<div class="title">Description de la tâche</div>
 <p>Une fois le nouveau nœud démarré au cours du processus de mise à niveau, la configuration la plus récente de l&#8217;ancien nœud qu&#8217;il remplace est retraitée. Lorsque vous démarrez node_A_1-New, ONTAP tente d&#8217;héberger les LIFs sur les mêmes ports qui ont été utilisés sur node_A_1-Old. Par conséquent, dans le cadre de la mise à niveau, vous devez ajuster la configuration du port et de la LIF afin qu&#8217;elle soit compatible avec celle de l&#8217;ancien nœud. Durant la procédure de mise à niveau, vous effectuez les étapes des anciens et nouveaux nœuds afin d&#8217;assurer une configuration correcte du cluster, de la gestion et de la LIF de données.</p>
 </div>
 <div class="paragraph">
@@ -7377,6 +7379,7 @@ dr-group-id cluster     node     node-systemid ha-partner-systemid dr-partner-sy
 <p>Avant d&#8217;effectuer la maintenance, vous devez envoyer un message AutoSupport pour informer le support technique de NetApp que la maintenance est en cours. Informer le support technique que la maintenance est en cours empêche l&#8217;ouverture d&#8217;un dossier en supposant une interruption de l&#8217;activité.</p>
 </div>
 <div class="paragraph">
+<div class="title">Description de la tâche</div>
 <p>Cette tâche doit être effectuée sur chaque site MetroCluster.</p>
 </div>
 <div class="olist arabic">
@@ -7412,6 +7415,7 @@ dr-group-id cluster     node     node-systemid ha-partner-systemid dr-partner-sy
 <p>Vous devez basculer la configuration vers site_A afin de pouvoir mettre à niveau les plateformes du site_B.</p>
 </div>
 <div class="paragraph">
+<div class="title">Description de la tâche</div>
 <p>Cette tâche doit être effectuée sur site_A.</p>
 </div>
 <div class="paragraph">
@@ -7616,6 +7620,7 @@ dr-group-id cluster     node     node-systemid ha-partner-systemid dr-partner-sy
 <p>Vous devez mettre à jour les commutateurs vers une configuration prenant en charge les nouveaux modèles de plate-forme.</p>
 </div>
 <div class="paragraph">
+<div class="title">Description de la tâche</div>
 <p>Vous pouvez effectuer cette tâche sur le site contenant les contrôleurs en cours de mise à niveau. Dans les exemples présentés dans cette procédure, nous mettons d&#8217;abord à niveau site_B.</p>
 </div>
 <div class="paragraph">
@@ -7860,6 +7865,7 @@ dr-group-id cluster     node     node-systemid ha-partner-systemid dr-partner-sy
 <p>Certaines valeurs d&#8217;amorçage MetroCluster IP doivent être configurées sur les nouveaux modules de contrôleur. Les valeurs doivent correspondre à celles configurées sur les anciens modules de contrôleur.</p>
 </div>
 <div class="paragraph">
+<div class="title">Description de la tâche</div>
 <p>Dans cette tâche, vous utiliserez les UUID et les ID système identifiés précédemment dans la procédure de mise à niveau de <a href="task_upgrade_controllers_in_a_four_node_ip_mcc_us_switchover_and_switchback_mcc_ip.html">"Collecte des informations avant la mise à niveau"</a>.</p>
 </div>
 <div class="olist arabic">
@@ -8080,6 +8086,7 @@ setenv bootarg.mcc.dr_partner 537403323</pre>
 <p>Réaffectez les disques de l&#8217;agrégat racine au nouveau module de contrôleur, en utilisant les sysids réunis précédemment.</p>
 </div>
 <div class="paragraph">
+<div class="title">Description de la tâche</div>
 <p>Ces étapes sont réalisées en mode Maintenance.</p>
 </div>
 <div class="olist arabic">
@@ -8612,6 +8619,7 @@ Remote: cluster_A         Configuration state configured
 <p>Après la mise à niveau des modules de contrôleur, vous devez vérifier l&#8217;état de santé de la configuration MetroCluster.</p>
 </div>
 <div class="paragraph">
+<div class="title">Description de la tâche</div>
 <p>Cette tâche peut être effectuée sur n&#8217;importe quel nœud de la configuration MetroCluster.</p>
 </div>
 <div class="olist arabic">
