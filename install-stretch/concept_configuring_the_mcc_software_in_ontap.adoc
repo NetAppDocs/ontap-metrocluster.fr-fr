@@ -158,7 +158,7 @@ Serveur NTP 2
 |===
 
 
-=== Site A informations AutoSupport
+=== Site A nbsp; informations AutoSupport
 
 Vous devez configurer le AutoSupport sur chaque nœud, qui nécessite les informations suivantes :
 
@@ -372,7 +372,7 @@ Serveur NTP 2
 |===
 
 
-=== Site B informations AutoSupport
+=== Site B nbsp; informations AutoSupport
 
 Vous devez configurer le AutoSupport sur chaque nœud, qui nécessite les informations suivantes :
 
@@ -431,7 +431,7 @@ Partenaires
 |===
 
 
-=== Informations relatives au processeur de service du site B
+=== Site B nbsp; informations SP
 
 Vous devez activer l'accès au processeur de service de chaque nœud pour le dépannage et la maintenance. Pour ce faire, vous devez disposer des informations réseau suivantes pour chaque nœud :
 
@@ -522,6 +522,7 @@ Obligatoire
 
 Pour garantir la réussite de l'installation de MetroCluster, réinitialisez et restaurez les valeurs par défaut sur les modules de contrôleur.
 
+.Important
 Cette tâche n'est requise que pour les configurations étendues utilisant des ponts FC-SAS.
 
 .Étapes
@@ -655,6 +656,7 @@ Please choose one of the following:
 
 Si vous utilisez la carte X1132A-R6 à quatre ports sur un système FAS8020, vous pouvez passer en mode de maintenance pour configurer les ports 1a et 1b pour FC-VI et pour l'utilisation d'un initiateur. Cela n'est pas nécessaire pour les systèmes MetroCluster reçus en usine, dans lesquels les ports sont configurés de façon appropriée pour votre configuration.
 
+.Description de la tâche
 Cette tâche doit être effectuée en mode Maintenance.
 
 
@@ -760,8 +762,10 @@ controller_B_1
 
 Avant de démarrer entièrement le système sur ONTAP, vous pouvez également démarrer le système en mode maintenance et vérifier l'affectation des disques sur les nœuds. Il convient d'attribuer aux disques pour créer une configuration entièrement symétrique avec les deux sites possédant leurs propres tiroirs disques et servant les données, où chaque nœud et chaque pool disposent d'un nombre égal de disques en miroir qui leur sont affectés.
 
+.Avant de commencer
 Le système doit être en mode Maintenance.
 
+.Description de la tâche
 Les attributions de disques des nouveaux systèmes MetroCluster sont réalisées avant l'expédition.
 
 Le tableau suivant présente des exemples d'affectations de pools pour une configuration MetroCluster. Les disques sont affectés à des pools par tiroir.
@@ -912,6 +916,7 @@ Si le contrôleur de stockage node_B_1 dispose de quatre tiroirs, vous exécutez
 
 Dans une configuration MetroCluster étendue qui n'est pas préconfigurée en usine, vous devez vérifier que l'état HA du contrôleur et du composant de châssis est défini sur « `mcc-2n` pour qu'ils s'démarrent correctement. Pour les systèmes reçus en usine, cette valeur est préconfigurée et vous n'avez pas besoin de la vérifier.
 
+.Avant de commencer
 Le système doit être en mode Maintenance.
 
 .Étapes
@@ -945,8 +950,10 @@ Attendez que le nœud soit de nouveau à l'invite DU CHARGEUR.
 
 Dans une configuration MetroCluster à deux nœuds, sur chaque cluster, vous devez démarrer le nœud, quitter l'assistant de configuration du cluster et utiliser `cluster setup` commande permettant de configurer le nœud dans un cluster à un seul nœud.
 
+.Avant de commencer
 Vous ne devez pas avoir configuré le processeur de service.
 
+.Description de la tâche
 Cette tâche est destinée aux configurations MetroCluster à deux nœuds qui utilisent un stockage NetApp natif.
 
 Les nouveaux systèmes MetroCluster sont préconfigurés, mais il n'est pas nécessaire d'effectuer ces étapes. Toutefois, vous devez configurer AutoSupport.
@@ -1047,6 +1054,7 @@ Vous devez peer-to-peer les clusters, mettre en miroir les agrégats racine, cr�
 
 Les clusters de la configuration MetroCluster doivent être dans une relation de pairs, de sorte qu'ils puissent communiquer entre eux et exécuter la mise en miroir des données essentielle à la reprise sur incident de MetroCluster.
 
+.Informations associées
 http://docs.netapp.com/ontap-9/topic/com.netapp.doc.exp-clus-peer/home.html["Configuration cluster et SVM peering express"^]
 
 link:concept_considerations_peering.html#considerations-when-using-dedicated-ports["Considérations relatives à l'utilisation de ports dédiés"]
@@ -1291,6 +1299,7 @@ cluster01
 ----
 
 
+.Informations associées
 link:concept_considerations_peering.html#considerations-when-using-dedicated-ports["Considérations relatives à l'utilisation de ports dédiés"]
 
 
@@ -1452,6 +1461,7 @@ cluster01
 ----
 
 
+.Informations associées
 link:concept_considerations_peering.html#considerations-when-sharing-data-ports["Points à prendre en compte lors du partage de ports de données"]
 
 
@@ -1680,6 +1690,7 @@ cluster01-02
 
 Pour assurer la protection des données, vous devez mettre en miroir les agrégats racine.
 
+.Description de la tâche
 Par défaut, l'agrégat root est créé comme un agrégat de type RAID-DP. Vous pouvez changer l'agrégat racine de RAID-DP à l'agrégat de type RAID4 La commande suivante modifie l'agrégat racine pour l'agrégat de type RAID4 :
 
 `storage aggregate modify –aggregate _aggr_name_ -raidtype raid4`
@@ -1706,6 +1717,7 @@ Cela met en miroir l'agrégat, il se compose d'un plex local et d'un plex distan
 . Répétez l'étape précédente pour chaque nœud de la configuration MetroCluster.
 
 
+.Informations associées
 https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-vsmg/home.html["Gestion du stockage logique"^]
 
 https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-concepts/home.html["Concepts relatifs à ONTAP"^]
@@ -1872,6 +1884,7 @@ NOTE: Si vous souhaitez utiliser un seul agrégat de données en miroir, reporte
 * L'état ha-config des contrôleurs et du châssis doit être "`mcc-2n`".
 
 
+.Description de la tâche
 Vous pouvez lancer le `metrocluster configure` Commande unique, sur l'un des nœuds, pour activer la configuration MetroCluster. Vous n'avez pas besoin d'exécuter la commande sur chacun des sites ou nœuds, et ce n'est pas quel nœud ou site vous choisissez d'exécuter la commande.
 
 .Étapes
@@ -2184,6 +2197,7 @@ mccint-fas9000-0304
 ----
 
 
+.Informations associées
 https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-psmg/home.html["Gestion des disques et des agrégats"^]
 
 https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-nmg/home.html["Gestion du réseau et des LIF"^]

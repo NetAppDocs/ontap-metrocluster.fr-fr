@@ -130,6 +130,7 @@ Vérifiez si cette erreur s'est produite parce que vous avez des agrégats non m
 
 Avant de procéder à la mise à niveau, si le volume racine est chiffré, vous devez vous fournir la clé de sauvegarde ainsi que d'autres informations permettant de démarrer les nouveaux contrôleurs avec les anciens volumes root chiffrés.
 
+.Description de la tâche
 Cette tâche s'effectue sur la configuration FC MetroCluster existante.
 
 .Étapes
@@ -263,8 +264,10 @@ Reportez-vous à la documentation de l'application.
 
 Une fois que vous avez recueilli des informations et que vous reprenez l'opération, l'automatisation procède à l'opération de basculement.
 
+.Description de la tâche
 L'opération d'automatisation entraîne le basculement, `heal-aggregates`, et `heal root-aggregates` exploitation. Une fois ces opérations terminées, l'opération s'interrompt à *interrompu pour l'intervention de l'utilisateur*. Vous pouvez donc monter en rack et installer les contrôleurs, démarrer les contrôleurs partenaires et réaffecter les disques de l'agrégat racine au nouveau module de contrôleur à partir de la sauvegarde Flash, à l'aide de `sysids` rassemblés plus tôt.
 
+.Avant de commencer
 Avant de lancer le basculement, l'automatisation s'interrompt pour que vous puissiez vérifier manuellement que toutes les LIF sont « en service » sur le site B. Si nécessaire, apportez toutes les LIF « propres » à « UP » et reprenez l'opération d'automatisation à l'aide du `system controller replace resume` commande.
 
 
@@ -275,7 +278,7 @@ Pour assurer la reprise du réseau correctement sur les nouveaux contrôleurs, v
 
 .Description de la tâche
 * Cette tâche doit être effectuée sur chacun des anciens nœuds.
-* Vous utiliserez les informations recueillies dans  for the upgrade.
+* Vous utiliserez les informations recueillies dans <<Préparation de la mise à niveau>>.
 
 
 .Étapes
@@ -593,6 +596,7 @@ FC
 
 Réallouer les disques de l'agrégat racine vers le nouveau module de contrôleur, à l'aide du `sysids` rassemblés plus tôt
 
+.Description de la tâche
 Cette tâche est effectuée en mode Maintenance.
 
 Les anciens ID système ont été identifiés dans link:task_upgrade_controllers_system_control_commands_in_a_four_node_mcc_fc.html#gathering-information-before-the-upgrade["Collecte des informations avant la mise à niveau"].
@@ -709,6 +713,7 @@ Vous devez redémarrer les contrôleurs à partir du menu de démarrage pour met
 
 Vous pouvez reconfigurer les VLAN et les groupes d'interface. Si nécessaire, modifier manuellement les ports des LIFs de cluster et des détails de broadcast domain avant de reprendre l'opération en utilisant le `system controller replace resume` commande.
 
+.Description de la tâche
 Cette tâche doit être effectuée sur tous les nouveaux contrôleurs.
 
 .Étapes

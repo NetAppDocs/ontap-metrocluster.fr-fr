@@ -13,6 +13,7 @@ summary: 'Vous devez effectuer certaines tâches afin de préparer la configurat
 [role="lead"]
 Vous devez effectuer certaines tâches afin de préparer la configuration IP et FC MetroCluster mixte pour l'opération de rétablissement. Cette procédure s'applique uniquement aux configurations ayant rencontré une défaillance au cours du processus de transition MetroCluster FC vers IP.
 
+.Description de la tâche
 Cette procédure ne doit être utilisée que lors de l'exécution de la récupération sur un système en phase de transition intermédiaire lorsque la défaillance s'est produite.
 
 Dans ce scénario, la baie MetroCluster est une configuration mixte :
@@ -27,6 +28,7 @@ Vous devez effectuer la procédure de restauration IP MetroCluster sur ces nœud
 
 
 
+.Étapes
 Effectuer les étapes dans l'ordre suivant.
 
 . Préparez les nœuds FC en vue du rétablissement en effectuant les tâches suivantes dans l'ordre :
@@ -64,7 +66,7 @@ Le système démarre deux fois, la seconde fois pour charger la nouvelle configu
 
 +
 
-NOTE: Si vous n'avez pas dégagé le contenu de la mémoire NVRAM d'un contrôleur de remplacement utilisé, le message suivant peut s'afficher de manière incohérente : `PANIC: NVRAM contents are invalid...` Dans ce cas, répétez ces sous-étapes pour démarrer le système à l'invite ONTAP. Vous devez ensuite ,Réinitialisez Boot Recovery et rdb_corrompu bootargs
+NOTE: Si vous n'avez pas dégagé le contenu de la mémoire NVRAM d'un contrôleur de remplacement utilisé, le message suivant peut s'afficher de manière incohérente : `PANIC: NVRAM contents are invalid...` Dans ce cas, répétez ces sous-étapes pour démarrer le système à l'invite ONTAP. Vous devez ensuite <<Reset-the-boot-recovery,Réinitialisez Boot Recovery et rdb_corrompu bootargs>>
 
 
 
@@ -137,7 +139,7 @@ Group Cluster Node               State          Mirroring Mode
 
 
 
-=== Réinitialisez boot_Recovery et rdb_corrompu bootargs
+=== [[Reset-the-boot-Recovery]]Réinitialiser Boot_Recovery et rdb_corrompu bootargs
 
 [role="lead"]
 Si nécessaire, vous pouvez réinitialiser boot_Recovery et rdb_corrompu_bootargs

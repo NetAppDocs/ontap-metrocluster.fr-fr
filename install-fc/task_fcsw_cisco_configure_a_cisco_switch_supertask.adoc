@@ -13,6 +13,7 @@ summary: Chaque switch Cisco de la configuration MetroCluster doit être configu
 [role="lead"]
 Chaque switch Cisco de la configuration MetroCluster doit être configuré de manière appropriée pour les connexions ISL et de stockage.
 
+.Avant de commencer
 Les exigences suivantes s'appliquent aux commutateurs FC Cisco :
 
 * Vous devez utiliser quatre commutateurs Cisco pris en charge du même modèle avec la même version NX-OS et la même licence.
@@ -26,6 +27,7 @@ Les quatre commutateurs doivent être connectés en deux structures de deux comm
 
 Dans le https://mysupport.netapp.com/matrix["Matrice d'interopérabilité NetApp (IMT)"], Vous pouvez utiliser le champ solution de stockage pour sélectionner votre solution MetroCluster. Utilisez *Explorateur de composants* pour sélectionner les composants et la version ONTAP pour affiner votre recherche. Vous pouvez cliquer sur *Afficher les résultats* pour afficher la liste des configurations prises en charge qui correspondent aux critères.
 
+.Description de la tâche
 La condition suivante s'applique aux connexions ISL (Inter-Switch Link) :
 
 * Tous les liens ISL doivent être dans une structure unique avec la même longueur et la même vitesse.
@@ -52,6 +54,7 @@ Vous pouvez configurer les systèmes FAS8020, AFF8020, FAS8200 et AFF A300 avec 
 ====
 
 
+.Informations associées
 https://mysupport.netapp.com/matrix["Matrice d'interopérabilité NetApp"]
 
 
@@ -90,6 +93,7 @@ NOTE: Les commutateurs Cisco MDS 9250i disposent de deux ports de services de st
 
 Pour garantir la réussite de la configuration, vous devez définir les paramètres par défaut du commutateur. Cela permet de s'assurer que le commutateur commence à partir d'une configuration propre.
 
+.Description de la tâche
 Cette tâche doit être effectuée sur tous les commutateurs de la configuration MetroCluster.
 
 .Étapes
@@ -114,6 +118,7 @@ Après avoir émis le `reload` commande, le commutateur redémarre, puis vous in
 
 
 
+.Exemple
 L'exemple suivant montre le processus sur une structure constituée de FC_switch_A_1 et FC_switch_B_1.
 
 [listing]
@@ -184,6 +189,7 @@ FC_switch_B_1# setup
 
 Vous n'avez pas besoin d'utiliser des licences de commutateurs Cisco sur une plage continue de ports ; vous pouvez acquérir des licences pour des ports spécifiques utilisés et supprimer les licences des ports inutilisés.
 
+.Avant de commencer
 Vous devez vérifier le nombre de ports sous licence dans la configuration du commutateur et, si nécessaire, déplacer les licences d'un port à un autre selon les besoins.
 
 .Étapes
@@ -340,6 +346,7 @@ switch(config-if)# end
 
 Vous devez configurer les ports F sur le commutateur FC.
 
+.Description de la tâche
 Dans une configuration MetroCluster, les ports F-ports sont les ports qui connectent le commutateur aux initiateurs HBA, aux interconnexions FC-VI et aux ponts FC-SAS.
 
 Chaque port doit être configuré individuellement.
@@ -390,6 +397,7 @@ Cette tâche doit être effectuée sur chaque commutateur de la configuration Me
 
 
 
+.Exemple
 L'exemple suivant montre les commandes sur les deux commutateurs :
 
 [listing]
@@ -419,6 +427,7 @@ FC_switch_B_1# copy running-config startup-config
 
 Vous devez attribuer les crédits tampon à tampon aux ports F s'ils se trouvent dans le même groupe de ports que l'ISL. Si les ports ne disposent pas des crédits tampon à tampon requis, l'ISL risque de ne pas fonctionner.
 
+.Description de la tâche
 Cette tâche n'est pas requise si les ports F-port ne se trouvent pas dans le même groupe de ports que le port ISL.
 
 Si les F-ports se trouvent dans un groupe de ports qui contient l'ISL, cette tâche doit être effectuée sur chaque commutateur FC dans la configuration MetroCluster.
@@ -471,6 +480,7 @@ Si les F-ports se trouvent dans un groupe de ports qui contient l'ISL, cette tâ
 
 
 
+.Exemple
 Dans cet exemple, le port fc1/40 est l'ISL. Les ports fc1/37, fc1/38 et fc1/39 se trouvent dans le même groupe de ports et doivent être configurés.
 
 Les commandes suivantes montrent la plage de ports configurée pour fc1/37 à fc1/39 :
@@ -535,6 +545,7 @@ fc1/39                                      1        8.0 dedicated
 
 Vous devez créer un VSAN pour les ports FC-VI et un VSAN pour les ports de stockage sur chaque switch FC dans la configuration MetroCluster.
 
+.Description de la tâche
 Les VSAN doivent avoir un numéro et un nom uniques. Vous devez procéder à une configuration supplémentaire si vous utilisez deux liens ISL avec une livraison de trames dans l'ordre.
 
 Les exemples de cette tâche utilisent les conventions de dénomination suivantes :
@@ -929,11 +940,12 @@ FC_switch_B_1# copy running-config startup-config
 
 Vous devez configurer les ports de switch qui connectent l'ISL (il s'agit des ports E-).
 
+.Description de la tâche
 La procédure que vous utilisez dépend de l'interrupteur que vous utilisez :
 
-* ,Configuration des E-ports sur le commutateur Cisco FC
-* ,Configuration des ports FCIP pour un seul ISL sur des commutateurs Cisco 9250i FC
-* ,Configuration des ports FCIP pour un double ISL sur des commutateurs Cisco 9250i FC
+* <<config-e-ports-cisco-fc,Configuration des E-ports sur le commutateur Cisco FC>>
+* <<config-fcip-ports-single-isl-cisco-9250i,Configuration des ports FCIP pour un seul ISL sur des commutateurs Cisco 9250i FC>>
+* <<config-fcip-ports-dual-isl-cisco-9250i,Configuration des ports FCIP pour un double ISL sur des commutateurs Cisco 9250i FC>>
 
 
 
@@ -942,6 +954,7 @@ La procédure que vous utilisez dépend de l'interrupteur que vous utilisez :
 
 Vous devez configurer les ports de commutation FC qui connectent la liaison interswitch (ISL).
 
+.Description de la tâche
 Il s'agit des ports E-port et la configuration doit être effectuée pour chaque port. Pour ce faire, vous devez calculer le nombre correct de crédits tampon à tampon (BBC).
 
 Tous les liens ISL de la structure doivent être configurés avec les mêmes paramètres de vitesse et de distance.
@@ -1171,6 +1184,7 @@ FC_switch_B_1# copy running-config startup-config
 
 
 
+.Informations associées
 Vous devez vérifier que vous utilisez les affectations de ports spécifiées lors du câblage des commutateurs FC lors de l'utilisation de ONTAP 9.1 et versions ultérieures. Reportez-vous à la section link:concept_port_assignments_for_fc_switches_when_using_ontap_9_1_and_later.html["Affectation de ports pour les commutateurs FC lors de l'utilisation de ONTAP 9.1 et versions ultérieures"]
 
 
@@ -1179,6 +1193,7 @@ Vous devez vérifier que vous utilisez les affectations de ports spécifiées lo
 
 Vous devez configurer les ports de commutateur FCIP qui connectent les ports ISL (E-ports) en créant des profils et des interfaces FCIP, puis en les affectant à l'interface IPStorage1/1 GbE.
 
+.Description de la tâche
 Cette tâche n'est effectuée que pour les configurations utilisant un seul ISL par switch, en utilisant l'interface IPStorage1/1 sur chaque switch.
 
 Cette tâche doit être effectuée sur chaque commutateur FC.
@@ -1587,6 +1602,7 @@ FC_switch_B_1# copy running-config startup-config
 
 Vous devez configurer les ports de commutateur FCIP qui connectent les ports ISL (E-ports) en créant des profils et des interfaces FCIP, puis en les affectant aux interfaces IPStorage1/1 et IPStorage1/2 GbE.
 
+.Description de la tâche
 Cette tâche s'applique uniquement aux configurations qui utilisent un lien ISL double par structure de commutation, en utilisant les interfaces IPStorage1/1 et IPStorage1/2 GbE sur chaque commutateur.
 
 Cette tâche doit être effectuée sur chaque commutateur FC.
@@ -1595,8 +1611,8 @@ image::../media/fcip_ports_dual_isl.gif[fcip : deux ports isl]
 
 La tâche et les exemples utilisent les tables de configuration de profil suivantes :
 
-* 
-* 
+* <<fabric1_table>>
+* <<fabric2_table>>
 
 
 *Tableau de configuration des profils Fabric 1*
@@ -1935,7 +1951,7 @@ NOTE: Sur chaque commutateur, les interfaces IPStorage « IPStorage1/1 » et « 
 +
 `exit`
 
-.. Recommencez  à  Pour configurer l'interface IPStorage1/2 GbE avec une autre adresse IP.
+.. Recommencez <<substep_a>> à <<substep_f>> Pour configurer l'interface IPStorage1/2 GbE avec une autre adresse IP.
 
 
 . Configurez les profils FCIP pour FC-VI et le trafic de stockage avec les noms de profil indiqués dans le tableau de configuration des profils :
@@ -2400,6 +2416,7 @@ exit
 
 Vous devez attribuer les ports de commutateur à des zones distinctes pour isoler le trafic de stockage (HBA) et de contrôleur (FC-VI).
 
+.Description de la tâche
 Ces étapes doivent être réalisées sur les deux structures de commutateurs FC.
 
 Les étapes suivantes utilisent le zoning décrit dans la section zonage d'un FibreBridge 7500N dans une configuration MetroCluster à quatre nœuds. Reportez-vous à la section link:task_fcsw_cisco_configure_a_cisco_switch_supertask.html#configuring-fcip-ports-for-a-dual-isl-on-cisco-9250i-fc-switches["Segmentation des ports FC-VI"].
@@ -2677,6 +2694,7 @@ FC_switch_A_1# copy running-config startup-config
 
 Vous devez vous assurer que la configuration du commutateur FC est enregistrée dans la configuration de démarrage sur tous les commutateurs.
 
+.Étape
 Lancer la commande suivante sur les deux fabriques FC :
 
 `copy running-config startup-config`

@@ -13,14 +13,17 @@ summary: Vous pouvez remplacer un pont sans interruption par un pont de même mo
 [role="lead"]
 Vous pouvez remplacer un pont sans interruption par un pont de même modèle ou par un nouveau pont de modèle.
 
+.Avant de commencer
 Vous avez besoin du mot de passe d'administration et de l'accès à un serveur FTP ou SCP.
 
+.Description de la tâche
 Cette procédure ne génère aucune interruption et ne prend que 60 minutes environ.
 
 Cette procédure utilise la CLI du pont pour configurer et gérer un pont, et pour mettre à jour le firmware du pont et l'utilitaire ATTO Quickmenu pour configurer le port de gestion Ethernet du pont 1. Vous pouvez utiliser d'autres interfaces si elles répondent aux exigences.
 
 link:reference_requirements_for_using_other_interfaces_to_configure_and_manage_fibrebridge_bridges.html["Configuration requise pour l'utilisation d'autres interfaces pour configurer et gérer les ponts FiberBridge"]
 
+.Informations associées
 link:task_fb_consolidate_replace_a_pair_of_fibrebridge_6500n_bridges_with_7500n_bridges.html["Remplacement d'une paire de ponts FiberBridge 6500N par des ponts 7600N ou 7500N"]
 
 
@@ -29,6 +32,7 @@ link:task_fb_consolidate_replace_a_pair_of_fibrebridge_6500n_bridges_with_7500n_
 
 Avant de remplacer les ponts, vérifiez la connectivité du pont et du stockage. Vous vous familiarisation avec la sortie de commande vous permet de confirmer ultérieurement la connectivité après avoir effectué des modifications de configuration.
 
+.Description de la tâche
 Vous pouvez lancer ces commandes depuis l'invite d'administration de n'importe lequel des modules de contrôleur dans la configuration MetroCluster sur le site en cours de maintenance.
 
 .Étapes
@@ -95,6 +99,7 @@ slot 0: FC Host Adapter 0g (QLogic 8324 rev. 2, N-port, <UP>)**<=== Initiator po
 
 Vous pouvez remplacer à chaud un pont défaillant par un autre pont du même modèle.
 
+.Description de la tâche
 Si vous utilisez la gestion intrabande du pont plutôt que la gestion IP, les étapes de configuration du port Ethernet et des paramètres IP peuvent être ignorées, comme indiqué dans les étapes correspondantes.
 
 
@@ -513,15 +518,15 @@ Tgt VendorID ProductID        Type SerialNumber
  a| 
 Exact
  a| 
-Recommencez ,Étape 18 pour chaque pont restant.
+Recommencez <<step18-verify-each-bridge,Étape 18>> pour chaque pont restant.
 
 
 
  a| 
 Incorrect
  a| 
-.. Vérifiez que les câbles SAS ne sont pas correctement branchés ou corrigez le câblage SAS en répétant ,Étape 17.
-.. Recommencez ,Étape 18.
+.. Vérifiez que les câbles SAS ne sont pas correctement branchés ou corrigez le câblage SAS en répétant <<step17-reconnect-newbridge,Étape 17>>.
+.. Recommencez <<step18-verify-each-bridge,Étape 18>>.
 
 
 |===
@@ -641,6 +646,7 @@ https://mysupport.netapp.com/site/tools/tool-eula/activeiq-configadvisor["Télé
 
 
 
+.Informations associées
 link:concept_in_band_management_of_the_fc_to_sas_bridges.html["Gestion intrabande des ponts FC-SAS"]
 
 
@@ -649,6 +655,7 @@ link:concept_in_band_management_of_the_fc_to_sas_bridges.html["Gestion intraband
 
 Vous pouvez échanger à chaud un pont FiberBridge 7500N avec un pont 7600N.
 
+.Description de la tâche
 Si vous utilisez la gestion intrabande du pont plutôt que la gestion IP, les étapes de configuration du port Ethernet et des paramètres IP peuvent être ignorées, comme indiqué dans les étapes correspondantes.
 
 
@@ -910,7 +917,7 @@ Répéter l'étape précédente pour chaque pont restant.
  a| 
 Incorrect
  a| 
-.. Vérifiez que les câbles SAS ne sont pas correctement branchés ou corrigez le câblage SAS en répétant ,Étape 17.
+.. Vérifiez que les câbles SAS ne sont pas correctement branchés ou corrigez le câblage SAS en répétant <<step17-reconnect-cables,Étape 17>>.
 .. Répétez l'étape précédente.
 
 
@@ -1031,6 +1038,7 @@ https://mysupport.netapp.com/site/tools/tool-eula/activeiq-configadvisor["Télé
 
 
 
+.Informations associées
 link:concept_in_band_management_of_the_fc_to_sas_bridges.html["Gestion intrabande des ponts FC-SAS"]
 
 
@@ -1351,7 +1359,7 @@ Répéter l'étape précédente pour chaque pont restant.
  a| 
 Incorrect
  a| 
-.. Vérifiez que les câbles SAS ne sont pas correctement branchés ou corrigez le câblage SAS en répétant ,Étape 17.
+.. Vérifiez que les câbles SAS ne sont pas correctement branchés ou corrigez le câblage SAS en répétant <<step17-recable,Étape 17>>.
 .. Répéter l'étape précédente pour chaque pont restant.
 
 
@@ -1469,4 +1477,5 @@ https://mysupport.netapp.com/site/tools/tool-eula/activeiq-configadvisor["Télé
 . Après le remplacement de la pièce, renvoyez la pièce défectueuse à NetApp, en suivant les instructions RMA (retour de matériel) livrées avec le kit. Voir la link:https://mysupport.netapp.com/site/info/rma["Retour de pièce et amp ; remplacements"] pour plus d'informations.
 
 
+.Informations associées
 link:concept_in_band_management_of_the_fc_to_sas_bridges.html["Gestion intrabande des ponts FC-SAS"]

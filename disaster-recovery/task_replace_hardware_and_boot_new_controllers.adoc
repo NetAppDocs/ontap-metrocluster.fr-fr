@@ -16,6 +16,7 @@ summary: 'Si des composants matériels doivent être remplacés, vous devez les 
 
 Si des composants matériels doivent être remplacés, vous devez les remplacer à l'aide de leurs guides individuels de remplacement et d'installation de matériel.
 
+.Avant de commencer
 Les contrôleurs de stockage doivent être mis hors tension ou restent suspendus (affichage de l'invite DU CHARGEUR).
 
 .Étapes
@@ -136,8 +137,10 @@ link:http://docs.netapp.com/platstor/index.jsp["Centre de documentation AFF et F
 
 Après avoir remplacé tout le matériel sur le site de secours, vous devez déterminer les ID système des modules de contrôleur remplacés. Vous avez besoin des anciens identifiants système lorsque vous réaffectez des disques aux nouveaux modules de contrôleur. Si les systèmes sont AFF A220, AFF A250, AFF A400, AFF A800, FAS2750, Modèles FAS500f, FAS8300 ou FAS8700, vous devez également déterminer les ID VLAN utilisés par les interfaces IP MetroCluster.
 
+.Avant de commencer
 Tous les équipements du site de secours doivent être hors tension.
 
+.Description de la tâche
 Cette discussion présente des exemples de configurations à deux et quatre nœuds. Dans le cas de configurations à 8 nœuds, il faut tenir compte des éventuelles défaillances au niveau des nœuds supplémentaires sur le second groupe de reprise après incident.
 
 Dans le cas d'une configuration MetroCluster à deux nœuds, vous pouvez ignorer les références au deuxième module de contrôleur de chaque site.
@@ -328,6 +331,7 @@ Node_A_2 Node_A_1 HA      enabled  online
 
 Vous devez isoler des disques de remplacement en mettant hors service les connexions des initiateurs iSCSI MetroCluster des autres nœuds.
 
+.Description de la tâche
 Cette procédure n'est requise que sur les configurations IP de MetroCluster.
 
 .Étapes
@@ -482,6 +486,7 @@ The node must be rebooted to start using the newly installed software. Do you wa
 
 Après avoir remplacé tout le matériel sur le site de secours, vous devez déterminer l'ID système du ou des modules du contrôleur de stockage nouvellement installé.
 
+.Description de la tâche
 Vous devez effectuer cette procédure avec les modules de remplacement du contrôleur en mode Maintenance.
 
 Cette section présente des exemples de configurations à deux et quatre nœuds. Pour les configurations à deux nœuds, vous pouvez ignorer les références au second nœud de chaque site. Dans le cas de configurations à 8 nœuds, il faut tenir compte des nœuds supplémentaires sur le second groupe DR. Les exemples illustrent les hypothèses suivantes :
@@ -621,8 +626,10 @@ Dans l'exemple suivant, le nouvel ID système local est 1574774991 :
 
 Dans une configuration MetroCluster, l'état ha-config du module de contrôleur et des composants du châssis doit être défini sur « mcc » ou « mcc-2n » afin qu'ils s'démarrent correctement.
 
+.Avant de commencer
 Le système doit être en mode Maintenance.
 
+.Description de la tâche
 Cette tâche doit être effectuée sur chaque nouveau module de contrôleur.
 
 .Étapes

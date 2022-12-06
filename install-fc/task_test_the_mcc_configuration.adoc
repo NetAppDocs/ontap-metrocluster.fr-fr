@@ -19,6 +19,7 @@ Vous pouvez tester les scénarios d'échec pour vérifier le bon fonctionnement 
 
 Vous pouvez tester le basculement négocié (planifié) pour confirmer la disponibilité ininterrompue des données.
 
+.Description de la tâche
 Ce test vérifie que la disponibilité des données n'est pas affectée (à l'exception des protocoles Microsoft Server message Block (SMB) et Solaris Fibre Channel) en commutant le cluster sur le second data Center.
 
 Ce test devrait prendre environ 30 minutes.
@@ -117,6 +118,7 @@ cluster_A::> metrocluster operation show
 
 Vous pouvez tester les opérations de rétablissement et de rétablissement manuel pour vérifier que la disponibilité des données n'est pas affectée (sauf dans le cas des configurations FC SMB et Solaris) en repassant le cluster au data Center d'origine après un basculement négocié.
 
+.Description de la tâche
 Ce test devrait prendre environ 30 minutes.
 
 Cette procédure devrait permettre de revenir aux nœuds de départ des services.
@@ -245,6 +247,7 @@ cluster_A::> metrocluster operation show
 
 Vous pouvez tester la défaillance d'un seul pont FC-to-SAS pour vous assurer qu'il n'y a pas de point de défaillance unique.
 
+.Description de la tâche
 Ce test devrait prendre environ 15 minutes.
 
 Cette procédure présente les résultats attendus suivants :
@@ -299,6 +302,7 @@ Disk             Error Type        Error Text
 
 Vous pouvez tester la réponse de la configuration MetroCluster à la défaillance d'une PDU.
 
+.Description de la tâche
 Il est recommandé de connecter un composant à des blocs d'alimentation distincts. Si les deux blocs d'alimentation sont connectés à la même unité de distribution électrique et qu'une interruption électrique se produit, le site peut être en panne ou si un tiroir complet risque de ne plus être disponible. La défaillance d'une ligne d'alimentation est testée pour vérifier qu'il n'y a pas de défaut de câblage susceptible d'entraîner une interruption du service.
 
 Ce test devrait prendre environ 15 minutes.
@@ -359,6 +363,7 @@ Power               Critical condition is detected in storage shelf power supply
 
 Vous pouvez désactiver une structure de commutation pour afficher que la disponibilité des données n'est pas affectée par la perte.
 
+.Description de la tâche
 Ce test devrait prendre environ 15 minutes.
 
 Le résultat escompté est la désactivation d'une structure qui entraîne l'interconnexion de cluster et le trafic sur disque qui circule vers l'autre structure.
@@ -435,6 +440,7 @@ FC_switch_B_1::> switchenable
 
 Vous pouvez tester la panne d'un tiroir de stockage pour vérifier qu'il n'y a pas de point de défaillance unique.
 
+.Description de la tâche
 Cette procédure présente les résultats attendus suivants :
 
 * Un message d'erreur doit être signalé par le logiciel de surveillance.

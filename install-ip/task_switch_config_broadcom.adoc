@@ -271,6 +271,7 @@ Configuration Saved!
 
 Vous devez télécharger le fichier du système d'exploitation du switch et le fichier RCF sur chaque commutateur de la configuration IP de MetroCluster.
 
+.Description de la tâche
 Cette tâche doit être répétée sur chaque commutateur de la configuration IP de MetroCluster.
 
 []
@@ -378,8 +379,8 @@ Non conforme à la norme FIPS
 
 |===
 +
-** Méthode 1 :  to upgrade EFOS with downloading the software image to the backup boot partition
-** Méthode 2 :  to upgrade EFOS using the ONIE OS installation
+** Méthode 1 : <<Procédure de mise à niveau de EFOS en téléchargeant l'image logicielle dans la partition de démarrage de sauvegarde>>
+** Méthode 2 : <<Procédure de mise à niveau de EFOS à l'aide de l'installation ONIE OS>>
 
 
 
@@ -492,12 +493,12 @@ Are you sure you would like to reset the system? (y/n) y
 . Attendez que le commutateur redémarre.
 +
 
-NOTE: Dans de rares cas, le commutateur peut ne pas démarrer. Suivez le  to upgrade EFOS using the ONIE OS installation pour installer la nouvelle image.
+NOTE: Dans de rares cas, le commutateur peut ne pas démarrer. Suivez le <<Procédure de mise à niveau de EFOS à l'aide de l'installation ONIE OS>> pour installer la nouvelle image.
 
 . Si vous passez de EFOS 3.4.x.x à EFOS 3.7.x.x ou vice versa, suivez les deux procédures suivantes pour appliquer la configuration correcte (RCF) :
 +
-..  the Broadcom IP switch to factory defaults
-..  and installing the Broadcom RCF files
+.. <<Réinitialisation des paramètres d'usine du commutateur IP Broadcom>>
+.. <<Téléchargement et installation des fichiers RCF Broadcom>>
 
 
 . Répétez ces étapes sur les trois commutateurs IP restants de la configuration IP MetroCluster.
@@ -645,8 +646,8 @@ unit 	active 	   backup   current-active  next-active
 Le commutateur redémarre sans configuration appliquée et rétablit les paramètres par défaut. Suivez les deux procédures pour configurer les paramètres de base du commutateur et appliquer le fichier RCF comme indiqué dans les deux documents suivants :
 
 +
-.. Configurer les paramètres de base du commutateur. Suivez l'étape 4 et les versions ultérieures :  the Broadcom IP switch to factory defaults
-.. Créez et appliquez le fichier RCF comme indiqué dans  and installing the Broadcom RCF files
+.. Configurer les paramètres de base du commutateur. Suivez l'étape 4 et les versions ultérieures : <<Réinitialisation des paramètres d'usine du commutateur IP Broadcom>>
+.. Créez et appliquez le fichier RCF comme indiqué dans <<Téléchargement et installation des fichiers RCF Broadcom>>
 
 
 
@@ -657,8 +658,10 @@ Le commutateur redémarre sans configuration appliquée et rétablit les paramè
 
 Vous devez télécharger et installer le fichier RCF de commutateur sur chaque commutateur de la configuration IP de MetroCluster.
 
+.Avant de commencer
 Cette tâche nécessite un logiciel de transfert de fichiers, tel que FTP, TFTP, SFTP ou SCP, pour copier les fichiers sur les commutateurs.
 
+.Description de la tâche
 Ces étapes doivent être répétées sur chacun des commutateurs IP de la configuration MetroCluster IP.
 
 Il existe quatre fichiers RCF, un par pour chacun des quatre commutateurs de la configuration MetroCluster IP. Vous devez utiliser les fichiers RCF appropriés pour le modèle de commutateur que vous utilisez.

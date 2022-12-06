@@ -13,8 +13,10 @@ summary: 'Pour profiter du port FC2 supplémentaire sur les ponts FiberBridge 76
 [role="lead"]
 Pour profiter du port FC2 supplémentaire sur les ponts FiberBridge 7600N ou 7500N et réduire l'utilisation du rack, vous pouvez remplacer sans interruption des ponts 6500N et consolider jusqu'à quatre piles de stockage derrière une seule paire de ponts FiberBridge 7600N ou 7500N.
 
+.Avant de commencer
 Vous avez besoin du mot de passe d'administration et de l'accès à un serveur FTP ou SCP.
 
+.Description de la tâche
 Cette procédure doit être utilisée dans les cas suivants :
 
 * Vous remplacez une paire de ponts FiberBridge 6500N par des ponts FiberBridge 7600N ou 7500N.
@@ -27,6 +29,7 @@ Après le remplacement, les deux ponts de la paire doivent être du même modèl
 
 Cette procédure ne génère aucune interruption et peut être effectuée en deux heures environ.
 
+.Informations associées
 link:task_replace_a_sle_fc_to_sas_bridge.html["Remplacement d'un pont FC-SAS unique"]
 
 
@@ -100,6 +103,7 @@ slot 0: FC Host Adapter 0g (QLogic 8324 rev. 2, N-port, <UP>)**<=== Initiator po
 
 Pour remplacer à chaud un ou deux ponts FibreBridge 6500N afin de créer une configuration avec une paire de ponts FiberBridge 7600N ou 7500N, vous devez remplacer les ponts un par un et suivre la procédure de câblage correcte. Le nouveau câblage est différent du câblage d'origine.
 
+.Description de la tâche
 Vous pouvez également utiliser cette procédure si les conditions suivantes sont vraies :
 
 * Vous remplacez une paire de ponts FibreBridge 6500N reliés à la même pile de stockage SAS.
@@ -248,6 +252,7 @@ slot 0: FC Host Adapter 0g (QLogic 8324 rev. 2, N-port, <UP>)**<=== Initiator po
 
 Si vous consolidez plusieurs piles de stockage SAS derrière une seule paire de ponts FiberBridge 7600N ou 7500N avec les ports SAS disponibles, vous devez déplacer les câbles SAS supérieur et inférieur vers les nouveaux ponts.
 
+.Description de la tâche
 Les ports SAS du pont FibreBridge 6500N utilisent des connecteurs QSFP. Les ports SAS du pont FiberBridge 7600N ou 7500N utilisent des connecteurs mini-SAS.
 
 
@@ -362,6 +367,7 @@ La segmentation doit être modifiée lors du remplacement des ponts FiberBridge 
 
 Le zoning doit être changé lors du remplacement des ponts FibreBridge 6500N par des ponts FiberBridge 7500N et de l'utilisation des deux ports FC sur les ponts FiberBridge 7500N. Chaque zone ne peut posséder pas plus de quatre ports initiateurs. La segmentation que vous utilisez dépend du type d'exécution de ONTAP antérieure à la version 9.1 ou 9.1 et ultérieure
 
+.Description de la tâche
 La segmentation spécifique dans cette tâche concerne les versions de ONTAP antérieures à la version 9.1.
 
 Les modifications de zoning sont requises pour éviter les problèmes avec ONTAP, qui nécessite qu'au plus quatre ports FC initiator ne puissent pas disposer d'un chemin d'accès à un disque. Après avoir été rebute pour consolider les tiroirs, le zoning existant entraînerait l'accessibilité de chaque disque par huit ports FC. Vous devez modifier le zoning pour réduire les ports initiateurs de chaque zone à quatre.
@@ -507,6 +513,7 @@ Reportez-vous à la section commutateur FC du link:../install-fc/index.html["Ins
 
 Pour fournir plusieurs chemins vers les piles de stockage, vous pouvez connecter le second port FC à chaque pont FiberBridge 7600N ou 7500N lorsque vous avez ajouté le pont FiberBridge 7600N ou 7500N à votre configuration.
 
+.Avant de commencer
 La segmentation doit avoir été ajustée afin de fournir des zones pour le second port FC.
 
 .Étapes

@@ -15,20 +15,21 @@ Vous devez configurer les switchs IP NVIDIA SN2100 pour une utilisation en tant 
 
 
 
-== Réinitialisez les paramètres par défaut du commutateur NVIDIA IP SN2100
+== [[Reset-the-switch]] Réinitialiser les valeurs par défaut du commutateur NVIDIA IP SN2100
 
 Vous pouvez choisir parmi les méthodes suivantes pour réinitialiser un commutateur sur les paramètres par défaut.
 
-* ,Réinitialisez le commutateur à l'aide de l'option de fichier RCF
-* ,Réinitialiser le contacteur à l'aide de l'option d'installation du Cumulus
+* <<RCF-file-option,Réinitialisez le commutateur à l'aide de l'option de fichier RCF>>
+* <<Cumulus-install-option,Réinitialiser le contacteur à l'aide de l'option d'installation du Cumulus>>
 
 
 
 
-=== Réinitialisez le commutateur à l'aide de l'option de fichier RCF
+=== [[RCF-fichier-option]]Réinitialiser le commutateur à l'aide de l'option de fichier RCF
 
 Avant d'installer une nouvelle configuration RCF, vous devez rétablir les paramètres du commutateur NVIDIA.
 
+.Description de la tâche
 Pour restaurer les paramètres par défaut du commutateur, exécutez le fichier RCF avec le `restoreDefaults` option. Cette option copie les fichiers d'origine sauvegardés à leur emplacement d'origine, puis redémarre le commutateur. Après le redémarrage, le switch est en ligne avec la configuration d'origine qui existait au moment d'avoir exécuté le fichier RCF pour configurer le switch.
 
 Les détails de configuration suivants ne sont pas réinitialisés :
@@ -41,7 +42,7 @@ Les détails de configuration suivants ne sont pas réinitialisés :
 NOTE: Toutes les autres modifications de configuration qui se produisent pendant l'application du fichier RCF sont rétablies à la configuration d'origine.
 
 .Avant de commencer
-* Vous devez configurer le commutateur conformément à ,Téléchargez et installez le fichier RCF NVIDIA. Si vous n'avez pas configuré cette méthode ou si des fonctionnalités supplémentaires ont été configurées avant d'exécuter le fichier RCF, vous ne pouvez pas suivre cette procédure.
+* Vous devez configurer le commutateur conformément à <<Download-and-install,Téléchargez et installez le fichier RCF NVIDIA>>. Si vous n'avez pas configuré cette méthode ou si des fonctionnalités supplémentaires ont été configurées avant d'exécuter le fichier RCF, vous ne pouvez pas suivre cette procédure.
 * Vous devez répéter ces étapes sur chacun des commutateurs IP de la configuration MetroCluster IP.
 * Vous devez être connecté au commutateur par une connexion de console série.
 * Cette tâche réinitialise la configuration du réseau de gestion.
@@ -111,8 +112,9 @@ Le commutateur est réinitialisé et conserve la configuration initiale, telle q
 
 
 
-=== Réinitialiser le contacteur à l'aide de l'option d'installation du Cumulus
+=== [[Cumulus-install-option]]Réinitialiser le commutateur à l'aide de l'option d'installation de Cumulus
 
+.Description de la tâche
 Suivez ces étapes pour réinitialiser complètement le commutateur en appliquant l'image Cumulus.
 
 .Avant de commencer
@@ -258,13 +260,13 @@ cumulus@cumulus:mgmt:~$
 cumulus@cumulus:~$ sudo reboot
 ----
 +
-Lorsque le commutateur redémarre, vous pouvez appliquer une nouvelle configuration en suivant les étapes de la section ,Téléchargez et installez le fichier RCF NVIDIA.
+Lorsque le commutateur redémarre, vous pouvez appliquer une nouvelle configuration en suivant les étapes de la section <<Download-and-install,Téléchargez et installez le fichier RCF NVIDIA>>.
 
 
 
 
 
-== Téléchargez et installez les fichiers NVIDIA RCF
+== [[Download-and-install]]Télécharger et installer les fichiers RCF NVIDIA
 
 Vous devez télécharger et installer le fichier RCF de commutateur sur chaque commutateur de la configuration IP de MetroCluster.
 
@@ -279,6 +281,7 @@ NOTE: Si vous effectuez une autre configuration après la réinitialisation du c
 
 
 
+.Description de la tâche
 Vous devez répéter ces étapes sur chacun des commutateurs IP de la configuration IP MetroCluster (nouvelle installation) ou sur le commutateur de remplacement (remplacement du commutateur).
 
 .Étapes

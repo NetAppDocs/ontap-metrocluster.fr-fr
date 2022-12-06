@@ -396,6 +396,7 @@ Reportez-vous à la documentation du produit.
 
 Avant d'effectuer la maintenance, vous devez envoyer un message AutoSupport pour informer le support technique que la maintenance est en cours. Informer le support technique que la maintenance est en cours empêche l'ouverture d'un dossier en supposant une interruption de l'activité.
 
+.Description de la tâche
 Cette tâche doit être effectuée sur chaque site MetroCluster.
 
 .Étapes
@@ -419,6 +420,7 @@ Le `maintenance-window-in-hours` le paramètre spécifie la longueur de la fenê
 
 Vous devez basculer la configuration vers site_A afin de pouvoir mettre à niveau les plateformes du site_B.
 
+.Description de la tâche
 Cette tâche doit être effectuée sur site_A.
 
 Une fois cette tâche effectuée, site_A est actif et transmet les données aux deux sites. Site_B est inactif et prêt à commencer le processus de mise à niveau.
@@ -458,6 +460,7 @@ La fonctionnalité de correction automatique des agrégats après le basculement
 
 == Retirez le module de contrôleur de la plateforme AFF A700 ou FAS9000 et le NVS
 
+.Description de la tâche
 Si vous n'êtes pas déjà mis à la terre, mettez-vous à la terre correctement.
 
 .Étapes
@@ -530,6 +533,7 @@ image::../media/drw_a900_move-remove_NVRAM_module.png[déposer le module]
 
 Vous devez installer les NVS et le module de contrôleur AFF A900 ou FAS9500 que vous avez reçus dans le kit de mise à niveau sur les deux nœuds du site_B. Ne déplacez pas le dispositif de coredump du module NVS AFF A700 ou FAS9000 vers le module NVS AFF A900 ou FAS9500.
 
+.Description de la tâche
 Si vous n'êtes pas déjà mis à la terre, mettez-vous à la terre correctement.
 
 
@@ -583,7 +587,7 @@ image::../media/drw_9500_remove_PCM.png[module de contrôleur]
 .. Placer la connexion e5a sur e5b.
 +
 
-NOTE: Le slot 7 sur tous les nœuds du cluster doit être vide comme indiqué dans  ports from the old nodes to the new nodes section.
+NOTE: Le slot 7 sur tous les nœuds du cluster doit être vide comme indiqué dans <<Mappage des ports des anciens nœuds sur les nouveaux nœuds>> section.
 
 
 
@@ -606,6 +610,7 @@ Après avoir remplacé le module de contrôleur AFF A900 ou FAS9500 par un syst�
 * Vous devez télécharger les fichiers système nécessaires pour votre système et la version correcte de ONTAP sur le site de support NetApp.
 
 
+.Description de la tâche
 Vous devez netboot les nouveaux contrôleurs, si la version de ONTAP installée n'est pas identique à la version installée sur les contrôleurs d'origine. Après avoir installé chaque nouveau contrôleur, vous démarrez le système à partir de l'image ONTAP 9 stockée sur le serveur Web. Vous pouvez ensuite télécharger les fichiers corrects sur le périphérique de démarrage pour les démarrages suivants du système.
 
 .Étapes
@@ -648,7 +653,7 @@ Configurez manuellement la connexion à l'aide de la commande suivante à l'invi
 . Démarrage sur le nœud_B_1 :
 `netboot` `http://<web_server_ip/path_to_web_accessible_directory>/netboot/kernel`
 +
-Le `<path_to_the_web-accessible_directory>` vous devez indiquer où vous avez téléchargé le `<ontap_version>\_image.tgz` dans ,Étape 2.
+Le `<path_to_the_web-accessible_directory>` vous devez indiquer où vous avez téléchargé le `<ontap_version>\_image.tgz` dans <<step2-download-software,Étape 2>>.
 
 +
 
@@ -823,6 +828,7 @@ Le nœud doit s'arrêter au niveau du `LOADER>` à l'invite.
 
 Vous devez mettre à jour les commutateurs vers une configuration prenant en charge les nouveaux modèles de plate-forme.
 
+.Description de la tâche
 Vous pouvez effectuer cette tâche sur le site contenant les contrôleurs en cours de mise à niveau. Dans les exemples présentés dans cette procédure, nous mettons d'abord à niveau site_B.
 
 Les commutateurs du site_A seront mis à niveau lorsque les contrôleurs du site_A sont mis à niveau.
@@ -863,6 +869,7 @@ Les nouveaux contrôleurs doivent être prêts et câblés à ce stade.
 
 Certaines valeurs d'amorçage MetroCluster IP doivent être configurées sur les nouveaux modules de contrôleur. Les valeurs doivent correspondre à celles configurées sur les anciens modules de contrôleur.
 
+.Description de la tâche
 Dans cette tâche, vous utiliserez les UUID et les ID système identifiés précédemment dans la procédure de mise à niveau de link:task_upgrade_controllers_in_a_four_node_ip_mcc_us_switchover_and_switchback_mcc_ip.html#gathering-information-before-the-upgrade["Collecte des informations avant la mise à niveau"].
 
 .Étapes
@@ -995,6 +1002,7 @@ setenv bootarg.mcc.dr_partner 537403323
 
 Réaffectez les disques de l'agrégat racine au nouveau module de contrôleur, en utilisant les sysids réunis précédemment.
 
+.Description de la tâche
 Ces étapes sont réalisées en mode Maintenance.
 
 .Étapes
@@ -1381,6 +1389,7 @@ Si un rétablissement prend beaucoup de temps, vous pouvez vérifier l'état des
 
 Après la mise à niveau des modules de contrôleur, vous devez vérifier l'état de santé de la configuration MetroCluster.
 
+.Description de la tâche
 Cette tâche peut être effectuée sur n'importe quel nœud de la configuration MetroCluster.
 
 .Étapes

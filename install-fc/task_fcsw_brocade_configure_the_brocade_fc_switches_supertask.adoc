@@ -66,6 +66,7 @@ Dans le IMT, vous pouvez utiliser le champ solution de stockage pour sélectionn
 
 Vous avez besoin de certaines licences pour les commutateurs dans une configuration MetroCluster. Vous devez installer ces licences sur les quatre commutateurs.
 
+.Description de la tâche
 La configuration MetroCluster a les exigences suivantes en matière de licence Brocade :
 
 * Licence d'agrégation pour les systèmes utilisant plusieurs liens ISL, comme recommandé.
@@ -92,6 +93,7 @@ Si vous ne disposez pas de ces licences, contactez votre représentant commercia
 
 Vous devez définir les paramètres par défaut du commutateur pour garantir la réussite de la configuration. Vous devez également attribuer un nom unique à chaque commutateur.
 
+.Description de la tâche
 Dans les exemples de cette procédure, le tissu est constitué de BrocadeSwitchA et BrocadeSwitchB.
 
 .Étapes
@@ -325,6 +327,7 @@ FC_switch_B_1:admin> reboot
 
 Vous devez configurer les paramètres globaux de base, y compris l'ID de domaine, pour les commutateurs Brocade.
 
+.Description de la tâche
 Cette tâche contient les étapes à effectuer sur chaque switch des deux sites MetroCluster.
 
 Dans cette procédure, vous définissez l'ID de domaine unique pour chaque commutateur comme indiqué dans l'exemple suivant. Dans l'exemple, les ID de domaine 5 et 7 forment Fabric_1 et les ID de domaine 6 et 8 forment Fabric_2.
@@ -648,6 +651,7 @@ FC_switch_B_1:admin> switchcfgpersistentenable
 
 Vous devez configurer les paramètres globaux de base, y compris l'ID de domaine, pour les commutateurs Brocade.
 
+.Description de la tâche
 Vous devez effectuer les étapes de chaque commutateur sur les deux sites MetroCluster. Dans cette procédure, vous définissez l'ID de domaine pour chaque commutateur comme indiqué dans les exemples suivants :
 
 * FC_Switch_A_1 est affecté à l'ID de domaine 5
@@ -738,6 +742,7 @@ switchenable
 ----
 
 
+.Informations associées
 link:concept_prepare_for_the_mcc_installation.html["Conditions requises pour l'utilisation d'un commutateur Brocade DCX 8510-8"]
 
 
@@ -759,6 +764,7 @@ Dans le IMT, vous pouvez utiliser le champ solution de stockage pour sélectionn
 * La liaison ISL doit avoir une lambda dédiée et la liaison doit être prise en charge par Brocade pour la distance, le type de switch et le système d'exploitation Fabric (FOS).
 
 
+.Description de la tâche
 Vous ne devez pas utiliser le paramètre L0 lors de l'émission du `portCfgLongDistance` commande. Utilisez plutôt le paramètre LE ou LS pour configurer la distance sur les commutateurs Brocade avec un minimum de distance LE.
 
 Vous ne devez pas utiliser le paramètre LD lors de l'émission du `portCfgLongDistance` Commande en cas de travail avec des équipements xWDM/TDM. Utilisez plutôt le paramètre LE ou LS pour configurer la distance sur les commutateurs Brocade.
@@ -1238,9 +1244,10 @@ FC_switch_B_1:admin> trunkshow
 ----
 
 
-. Recommencez ,Étape 1 à ,Étape 10 Pour la deuxième structure de commutateurs FC.
+. Recommencez <<step1_brocade_config,Étape 1>> à <<step10_brocade_config,Étape 10>> Pour la deuxième structure de commutateurs FC.
 
 
+.Informations associées
 link:concept_port_assignments_for_fc_switches_when_using_ontap_9_1_and_later.html["Affectation de ports pour les commutateurs FC lors de l'utilisation de ONTAP 9.1 et versions ultérieures"]
 
 
@@ -1249,6 +1256,7 @@ link:concept_port_assignments_for_fc_switches_when_using_ontap_9_1_and_later.htm
 
 Lorsque vous utilisez les ports VE 10 Gbit/s (qui utilisent le FCIP) pour les liens ISL, vous devez créer des interfaces IP sur chaque port et configurer des tunnels FCIP et des circuits dans chaque tunnel.
 
+.Description de la tâche
 Cette procédure doit être effectuée sur chaque structure de commutateurs de la configuration MetroCluster.
 
 Les exemples de cette procédure supposent que les deux commutateurs Brocade 7840 possèdent les adresses IP suivantes :
@@ -1404,6 +1412,7 @@ FC_switch_A_1:root> portshow fcipcircuit all
 
 Lorsque vous utilisez les deux ports VE 40 GbE (qui utilisent le FCIP) pour ISL, vous devez créer des interfaces IP sur chaque port et configurer des tunnels FCIP et des circuits dans chaque tunnel.
 
+.Description de la tâche
 Cette procédure doit être effectuée sur chaque structure de commutateurs de la configuration MetroCluster.
 
 Les exemples de cette procédure utilisent deux commutateurs :
@@ -1556,6 +1565,7 @@ FC_switch_A_1:root> portshow fcipcircuit all
 
 Vous devez configurer les non-E-ports sur le commutateur FC. Dans une configuration MetroCluster, il s'agit des ports qui connectent le commutateur aux initiateurs HBA, aux interconnexions FC-VI et aux ponts FC-SAS. Ces étapes doivent être effectuées pour chaque port.
 
+.Description de la tâche
 Dans l'exemple suivant, les ports connectent un pont FC-to-SAS :
 
 --
@@ -1645,6 +1655,7 @@ Non-DFE                             ..  ..  ..  ..  ..  ..  ..  ..  ..
 
 Si vous utilisez des commutateurs Brocade G620 et que vous activez la compression sur les liens ISL, vous devez la configurer sur chaque port E-Port des commutateurs.
 
+.Description de la tâche
 Cette tâche doit être effectuée sur les ports ISL des deux commutateurs à l'aide de ISL.
 
 .Étapes
@@ -4268,6 +4279,7 @@ MC1_INIT_GRP_2_SITE_B_STK_GRP_2_BOT_FC2
 
 Vous devez attribuer les ports de commutateur à des zones distinctes pour le trafic du contrôleur et du stockage, avec des zones pour les ports et zones FC-VI pour les ports de stockage.
 
+.Description de la tâche
 Les étapes suivantes utilisent le zoning standard pour la configuration MetroCluster.
 
 link:task_fcsw_brocade_configure_the_brocade_fc_switches_supertask.html["Segmentation des ports FC-VI"]
@@ -4396,6 +4408,7 @@ NOTE: La prise en charge du cryptage ISL sur les commutateurs Brocade G620 est p
 * Vous devez avoir consulté la documentation Brocade relative à votre commutateur et à la version du système d'exploitation Fabric pour confirmer la bande passante et les limites de ports.
 
 
+.Description de la tâche
 Les étapes doivent être effectuées sur les deux commutateurs de la même structure.
 
 
@@ -4418,6 +4431,7 @@ Pour définir le cryptage ISL, vous devez désactiver la structure virtuelle sur
 
 Après la désactivation de la structure virtuelle, vous devez définir la charge utile ou la taille du champ de données sur les deux commutateurs de la structure.
 
+.Description de la tâche
 La taille du champ de données ne doit pas dépasser 2048.
 
 .Étapes
@@ -4444,6 +4458,7 @@ La taille du champ de données ne doit pas dépasser 2048.
 
 Vous devez définir la stratégie d'authentification et les paramètres associés.
 
+.Description de la tâche
 Les commandes doivent être exécutées au niveau de la console des commutateurs.
 
 .Étapes
@@ -4585,4 +4600,5 @@ Port  configured     Active
 ----
 
 
+.Que faire ensuite
 Effectuez toutes les étapes sur les commutateurs de l'autre structure dans une configuration MetroCluster.

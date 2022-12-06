@@ -53,6 +53,7 @@ Cette approche permet d'éviter la concurrence avec l'opération de basculement 
 
 NOTE: Les configurations SnapMirror et SnapVault sont supprimées automatiquement.
 
+.Description de la tâche
 Le `metrocluster switchover` La commande bascule les nœuds dans tous les groupes DR dans la configuration MetroCluster. Par exemple, dans une configuration MetroCluster à 8 nœuds, il bascule les nœuds sur les deux groupes de reprise après incident.
 
 .Étapes
@@ -86,6 +87,7 @@ Si le basculement est vetoté, vous avez la possibilité de réémettre le `metr
 
 
 
+.Une fois que vous avez terminé
 Les relations SnapMirror doivent être réétablies après le basculement.
 
 
@@ -100,16 +102,20 @@ Lorsque vous exécutez le `storage aggregate plex show` Commande après un bascu
 
 Après un basculement, vous devez effacer l'état NVFAIL en réinitialisant le `-in-nvfailed-state` paramètre du `volume modify` commande de suppression de la restriction d'accès des clients aux données.
 
+.Avant de commencer
 La base de données ou le système de fichiers ne doit pas être en cours d'exécution ni tenter d'accéder au volume affecté.
 
+.Description de la tâche
 Réglage du `-in-nvfailed-state` le paramètre nécessite un privilège de niveau avancé.
 
 .Étape
 . Récupérer le volume à l'aide de `volume modify` commande avec `-in-nvfailed-state` paramètre défini sur faux.
 
 
+.Une fois que vous avez terminé
 Pour obtenir des instructions sur l'examen de la validité des fichiers de base de données, reportez-vous à la documentation de votre logiciel de base de données spécifique.
 
 Si votre base de données utilise des LUN, suivez les étapes pour rendre les LUN accessibles à l'hôte après une panne de mémoire NVRAM.
 
+.Informations associées
 link:../manage/concept_monitoring_and_protecting_database_validity_by_using_nvfail.html["Surveillance et protection de la validité de la base de données à l'aide de NVFAIL"]

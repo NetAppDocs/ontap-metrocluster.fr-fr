@@ -113,6 +113,7 @@ Avant d'apporter des modifications à la configuration MetroCluster existante, v
 
 Selon les anciens modèles de plateforme, ou si la configuration des commutateurs ne repose pas sur la version minimale, ou si vous souhaitez modifier les ID VLAN utilisés par les connexions MetroCluster internes, vous devez mettre à jour les fichiers RCF de commutateur avant de lancer la procédure de mise à niveau de la plateforme.
 
+.Description de la tâche
 Vous devez mettre à jour le fichier RCF dans les scénarios suivants :
 
 * Pour certains modèles de plate-forme, les commutateurs doivent utiliser un ID VLAN pris en charge pour les connexions IP MetroCluster internes. Si l'ancien ou le nouveau modèle de plate-forme sont dans le tableau suivant, *et non* utilisant un ID VLAN pris en charge, vous devez mettre à jour les fichiers RCF de commutateur.
@@ -200,6 +201,7 @@ Suivez les étapes de la section link:../install-ip/concept_considerations_diffe
 
 Vous devez vérifier que les ports physiques du node_A_1-Old sont correctement associés aux ports physiques du node_A_1-New, qui permettront à node_A_1-New de communiquer avec d'autres nœuds du cluster et avec le réseau après la mise à niveau.
 
+.Description de la tâche
 Une fois le nouveau nœud démarré au cours du processus de mise à niveau, la configuration la plus récente de l'ancien nœud qu'il remplace est retraitée. Lorsque vous démarrez node_A_1-New, ONTAP tente d'héberger les LIFs sur les mêmes ports qui ont été utilisés sur node_A_1-Old. Par conséquent, dans le cadre de la mise à niveau, vous devez ajuster la configuration du port et de la LIF afin qu'elle soit compatible avec celle de l'ancien nœud. Durant la procédure de mise à niveau, vous effectuez les étapes des anciens et nouveaux nœuds afin d'assurer une configuration correcte du cluster, de la gestion et de la LIF de données.
 
 Le tableau suivant présente des exemples de modifications de configuration liées aux exigences de port des nouveaux nœuds.
@@ -826,6 +828,7 @@ Reportez-vous à la documentation du produit.
 
 Avant d'effectuer la maintenance, vous devez envoyer un message AutoSupport pour informer le support technique de NetApp que la maintenance est en cours. Informer le support technique que la maintenance est en cours empêche l'ouverture d'un dossier en supposant une interruption de l'activité.
 
+.Description de la tâche
 Cette tâche doit être effectuée sur chaque site MetroCluster.
 
 .Étapes
@@ -849,6 +852,7 @@ Le `maintenance-window-in-hours` le paramètre spécifie la longueur de la fenê
 
 Vous devez basculer la configuration vers site_A afin de pouvoir mettre à niveau les plateformes du site_B.
 
+.Description de la tâche
 Cette tâche doit être effectuée sur site_A.
 
 Une fois cette tâche terminée, cluster_A est actif et assure le service des données des deux sites. Cluster_B est inactif et prêt à démarrer le processus de mise à niveau.
@@ -985,6 +989,7 @@ network port ifgrp remove-port -node node1 -ifgrp a1a -port e0d
 
 Vous devez mettre à jour les commutateurs vers une configuration prenant en charge les nouveaux modèles de plate-forme.
 
+.Description de la tâche
 Vous pouvez effectuer cette tâche sur le site contenant les contrôleurs en cours de mise à niveau. Dans les exemples présentés dans cette procédure, nous mettons d'abord à niveau site_B.
 
 Les commutateurs du site_A seront mis à niveau lorsque les contrôleurs du site_A sont mis à niveau.
@@ -1156,6 +1161,7 @@ L'état HA pour tous les composants devrait être "mccip".
 
 Certaines valeurs d'amorçage MetroCluster IP doivent être configurées sur les nouveaux modules de contrôleur. Les valeurs doivent correspondre à celles configurées sur les anciens modules de contrôleur.
 
+.Description de la tâche
 Dans cette tâche, vous utiliserez les UUID et les ID système identifiés précédemment dans la procédure de mise à niveau de link:task_upgrade_controllers_in_a_four_node_ip_mcc_us_switchover_and_switchback_mcc_ip.html["Collecte des informations avant la mise à niveau"].
 
 .Étapes
@@ -1335,6 +1341,7 @@ setenv bootarg.mcc.dr_partner 537403323
 
 Réaffectez les disques de l'agrégat racine au nouveau module de contrôleur, en utilisant les sysids réunis précédemment.
 
+.Description de la tâche
 Ces étapes sont réalisées en mode Maintenance.
 
 .Étapes
@@ -1728,6 +1735,7 @@ Si un rétablissement prend beaucoup de temps, vous pouvez vérifier l'état des
 
 Après la mise à niveau des modules de contrôleur, vous devez vérifier l'état de santé de la configuration MetroCluster.
 
+.Description de la tâche
 Cette tâche peut être effectuée sur n'importe quel nœud de la configuration MetroCluster.
 
 .Étapes

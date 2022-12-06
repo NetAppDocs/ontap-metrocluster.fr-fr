@@ -112,6 +112,7 @@ Indique si NVFAIL est actuellement activé pour un volume spécifié
 *Remarque :* vous définissez le `-fields` Paramètre à « nvfail » pour afficher l'attribut NVFAIL pour un volume spécifié.
 
 |===
+.Informations associées
 Consultez la page man pour chaque commande pour plus d'informations.
 
 
@@ -120,18 +121,22 @@ Consultez la page man pour chaque commande pour plus d'informations.
 
 Après un basculement, vous devez effacer l'état NVFAIL en réinitialisant le `-in-nvfailed-state` paramètre du `volume modify` commande de suppression de la restriction d'accès des clients aux données.
 
+.Avant de commencer
 La base de données ou le système de fichiers ne doit pas être en cours d'exécution ni tenter d'accéder au volume affecté.
 
+.Description de la tâche
 Réglage `-in-nvfailed-state` le paramètre nécessite un privilège de niveau avancé.
 
 .Étape
 . Récupérez le volume en utilisant la commande volume modify avec le paramètre -in-nvFAILED-state défini sur false.
 
 
+.Une fois que vous avez terminé
 Pour obtenir des instructions sur l'examen de la validité des fichiers de base de données, reportez-vous à la documentation de votre logiciel de base de données spécifique.
 
 Si votre base de données utilise des LUN, suivez les étapes pour rendre les LUN accessibles à l'hôte après une panne de mémoire NVRAM.
 
+.Informations associées
 link:../manage/concept_monitoring_and_protecting_database_validity_by_using_nvfail.html["Surveillance et protection de la cohérence du système de fichiers à l'aide de NVFAIL"]
 
 
@@ -140,6 +145,7 @@ link:../manage/concept_monitoring_and_protecting_database_validity_by_using_nvfa
 
 Après un basculement, l'hôte n'a plus accès aux données des LUN qui sont dans les États NVFAIL. Vous devez effectuer plusieurs actions avant que la base de données n'ait accès aux LUN.
 
+.Avant de commencer
 La base de données ne doit pas être en cours d'exécution.
 
 .Étapes

@@ -67,6 +67,7 @@ Lorsque le basculement est déclenché et si les sites_A et site_C ne sont pas c
 
 Lorsque le rétablissement s'effectue, vous devez à nouveau abroger les SVM du site_A (le cluster d'origine) et du site_C.
 
+.Informations associées
 http://docs.netapp.com/ontap-9/topic/com.netapp.doc.pow-fc-mgmt/home.html["Gestion des volumes FlexCache"^]
 
 
@@ -96,6 +97,7 @@ Il peut s'agir de l'IPspace par défaut, ou bien d'un IPspace créé par un admi
 
 NOTE: Avant de configurer l'agrégat, vous devez configurer des magasins d'objets comme décrit dans la section « Configuration des magasins d'objets pour FabricPool dans une configuration MetroCluster » duhttps://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-psmg/home.html["Gestion des disques et des agrégats"]
 
+.Étapes
 Pour configurer un agrégat afin de l'utiliser dans une FabricPool :
 
 . Création de l'agrégat ou sélection d'un agrégat existant.
@@ -159,15 +161,15 @@ Il est important de savoir comment les LIF sont créées et répliquées dans un
 * https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-nmg/home.html["Gestion du réseau et des LIF"]
 * Il est important de connaître les exigences relatives à la réplication d'objets IPspace vers le cluster partenaire et à la configuration des sous-réseaux et IPv6 dans une configuration MetroCluster.
 +
-,Exigences de configuration de sous-réseau et de réplication d'objets IPspace
+<<ipspace_obj_rep,Exigences de configuration de sous-réseau et de réplication d'objets IPspace>>
 
 * Lors de la configuration du réseau dans une configuration MetroCluster, il est important de connaître les conditions requises pour la création des LIFs.
 +
-,Conditions requises pour la création de LIF dans une configuration MetroCluster
+<<reqs_lif_create,Conditions requises pour la création de LIF dans une configuration MetroCluster>>
 
 * Il est important de connaître les exigences de réplication de la LIF dans une configuration MetroCluster. Vous devez également savoir comment placer une LIF répliquée sur un cluster partenaire, et vous devez connaître les problèmes qui se produisent en cas de défaillance de la réplication LIF ou du placement de LIF.
 +
-,Exigences et problèmes de réplication et de placement de LIF
+<<lif_rep_place,Exigences et problèmes de réplication et de placement de LIF>>
 
 
 
@@ -230,11 +232,11 @@ Si IPv6 est configuré sur un site, IPv6 doit également être configuré sur l'
 .Informations associées
 * Lors de la configuration du réseau dans une configuration MetroCluster, il est important de connaître les conditions requises pour la création des LIFs.
 +
-,Conditions requises pour la création de LIF dans une configuration MetroCluster
+<<reqs_lif_create,Conditions requises pour la création de LIF dans une configuration MetroCluster>>
 
 * Il est important de connaître les exigences de réplication de la LIF dans une configuration MetroCluster. Vous devez également savoir comment placer une LIF répliquée sur un cluster partenaire, et vous devez connaître les problèmes qui se produisent en cas de défaillance de la réplication LIF ou du placement de LIF.
 +
-,Exigences et problèmes de réplication et de placement de LIF
+<<lif_rep_place,Exigences et problèmes de réplication et de placement de LIF>>
 
 
 
@@ -262,11 +264,11 @@ Vous pouvez confirmer le succès de la création d'une LIF dans une configuratio
 .Informations associées
 * Il est important de connaître les exigences relatives à la réplication d'objets IPspace vers le cluster partenaire et à la configuration des sous-réseaux et IPv6 dans une configuration MetroCluster.
 +
-,Exigences de configuration de sous-réseau et de réplication d'objets IPspace
+<<ipspace_obj_rep,Exigences de configuration de sous-réseau et de réplication d'objets IPspace>>
 
 * Il est important de connaître les exigences de réplication de la LIF dans une configuration MetroCluster. Vous devez également savoir comment placer une LIF répliquée sur un cluster partenaire, et vous devez connaître les problèmes qui se produisent en cas de défaillance de la réplication LIF ou du placement de LIF.
 +
-,Exigences et problèmes de réplication et de placement de LIF
+<<lif_rep_place,Exigences et problèmes de réplication et de placement de LIF>>
 
 
 
@@ -388,11 +390,11 @@ Vous devez exécuter le `metrocluster check lif repair-placement` Une commande s
 .Informations associées
 * Il est important de connaître les exigences relatives à la réplication d'objets IPspace vers le cluster partenaire et à la configuration des sous-réseaux et IPv6 dans une configuration MetroCluster.
 +
-,Exigences de configuration de sous-réseau et de réplication d'objets IPspace
+<<ipspace_obj_rep,Exigences de configuration de sous-réseau et de réplication d'objets IPspace>>
 
 * Lors de la configuration du réseau dans une configuration MetroCluster, il est important de connaître les conditions requises pour la création des LIFs.
 +
-,Conditions requises pour la création de LIF dans une configuration MetroCluster
+<<reqs_lif_create,Conditions requises pour la création de LIF dans une configuration MetroCluster>>
 
 
 

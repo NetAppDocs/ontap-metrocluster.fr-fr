@@ -13,8 +13,10 @@ summary: 'La mise à niveau d"un fichier RCF peut être nécessaire sur un commu
 [role="lead"]
 La mise à niveau d'un fichier RCF peut être nécessaire sur un commutateur IP Cisco. Par exemple, une mise à niveau de ONTAP ou une mise à niveau du firmware du switch nécessite tous deux un nouveau fichier RCF.
 
+.Description de la tâche
 À partir de la version 1.4a de RcfFileGenerator, il existe une nouvelle option permettant de modifier (mise à niveau, rétrogradation ou remplacement) la configuration du commutateur sur les commutateurs IP Cisco sans avoir à effectuer de « effacement d'écriture ».
 
+.Avant de commencer
 Vous pouvez utiliser cette méthode si votre configuration répond aux exigences suivantes :
 
 * La configuration FCR standard est appliquée.
@@ -178,7 +180,7 @@ Une fois cette étape terminée, vous devez avoir deux jeux de fichiers RCF, cha
 
 . Téléchargez les fichiers sur le bootflash.
 +
-.. Téléchargez les CleanUpFiles que vous avez créés dans ,Créez les fichiers RCF et les fichiers CleanUpFiles ou créez des fichiers CleanUpFiles génériques pour la configuration actuelle
+.. Téléchargez les CleanUpFiles que vous avez créés dans <<Create-RCF-files-and-CleanUpFiles-or-create-generic-CleanUpFiles,Créez les fichiers RCF et les fichiers CleanUpFiles ou créez des fichiers CleanUpFiles génériques pour la configuration actuelle>>
 +
 
 NOTE: Ce fichier CleanUpFile est destiné au fichier FCR en cours qui est appliqué et *NON* pour la nouvelle FCR vers laquelle vous souhaitez effectuer la mise à niveau.
@@ -186,11 +188,11 @@ NOTE: Ce fichier CleanUpFile est destiné au fichier FCR en cours qui est appliq
 +
 Exemple de fichier CleanUpFile pour Switch-A1 : `Cleanup_NX9336_v1.81_Switch-A1.txt`
 
-.. Téléchargez les « nouveaux » fichiers RCF que vous avez créés dans ,Créez les fichiers RCF « nouveaux » pour la nouvelle configuration.
+.. Téléchargez les « nouveaux » fichiers RCF que vous avez créés dans <<Create-the-new-RCF-files-for-the-new-configuration,Créez les fichiers RCF « nouveaux » pour la nouvelle configuration.>>
 +
 Exemple de fichier RCF pour Switch-A1 : `NX9336_v1.90_Switch-A1.txt`
 
-.. Téléchargez les CleanUpFiles que vous avez créés dans ,Créez les fichiers RCF « nouveaux » pour la nouvelle configuration. Cette étape est facultative -- vous pouvez utiliser le fichier ultérieurement pour mettre à jour la configuration du commutateur. Elle correspond à la configuration actuellement appliquée.
+.. Téléchargez les CleanUpFiles que vous avez créés dans <<Create-the-new-RCF-files-for-the-new-configuration,Créez les fichiers RCF « nouveaux » pour la nouvelle configuration.>> Cette étape est facultative -- vous pouvez utiliser le fichier ultérieurement pour mettre à jour la configuration du commutateur. Elle correspond à la configuration actuellement appliquée.
 +
 Exemple de fichier CleanUpFile pour Switch-A1 : `Cleanup_NX9336_v1.90_Switch-A1.txt`
 

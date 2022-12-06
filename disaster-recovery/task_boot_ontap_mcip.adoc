@@ -13,6 +13,7 @@ summary: 'Vous devez démarrer les nœuds de remplacement sur le site de reprise
 [role="lead"]
 Vous devez démarrer les nœuds de remplacement sur le site de reprise sur incident vers le système d'exploitation ONTAP.
 
+.Description de la tâche
 Cette tâche commence par les nœuds du site de secours en mode maintenance.
 
 .Étapes
@@ -24,7 +25,7 @@ Le système démarre deux fois. Vous devez répondre `yes` lorsque vous êtes in
 
 +
 
-NOTE: Si vous n'avez pas dégagé le contenu de la mémoire NVRAM d'un module de contrôleur de remplacement utilisé, le message de panique suivant s'affiche : `PANIC: NVRAM contents are invalid....` Dans ce cas, redémarrez le système à l'invite ONTAP (`boot_ontap menu`). Vous devez ensuite ,Réinitialisez boot_Recovery et rdb_corrompu bootargs
+NOTE: Si vous n'avez pas dégagé le contenu de la mémoire NVRAM d'un module de contrôleur de remplacement utilisé, le message de panique suivant s'affiche : `PANIC: NVRAM contents are invalid....` Dans ce cas, redémarrez le système à l'invite ONTAP (`boot_ontap menu`). Vous devez ensuite <<Reset-the-boot-recovery,Réinitialisez boot_Recovery et rdb_corrompu bootargs>>
 
 +
 ** Invite de confirmation pour continuer :
@@ -194,7 +195,7 @@ cluster_B::*>
 
 
 
-=== Réinitialisez boot_Recovery et rdb_corrompu bootargs
+=== [[Reset-the-boot-Recovery]]Réinitialiser Boot_Recovery et rdb_corrompu bootargs
 
 [role="lead"]
 Si nécessaire, vous pouvez réinitialiser boot_Recovery et rdb_corrompu_bootargs

@@ -232,7 +232,7 @@ NOTE: La mise à jour du fichier RCF pour prendre en charge la configuration AFF
 `metrocluster check show`
 
 
-. Mettre à jour les commutateurs de la structure B (commutateurs 2 et 4) en répétant ,Étape 2 à ,Étape 5.
+. Mettre à jour les commutateurs de la structure B (commutateurs 2 et 4) en répétant <<Update-RCF,Étape 2>> à <<verify-healthy,Étape 5>>.
 
 
 
@@ -338,6 +338,7 @@ Si le connecteur 7 des contrôleurs AFF A700 ou FAS9000 est associé à une cart
 
 Avant la mise à niveau, vous devez collecter les informations de chacun des nœuds et, si nécessaire, ajuster les domaines de diffusion réseau, supprimer tous les VLAN et groupes d'interfaces et collecter des informations de cryptage.
 
+.Description de la tâche
 Cette tâche s'effectue sur la configuration FC MetroCluster existante.
 
 .Étapes
@@ -449,6 +450,7 @@ Reportez-vous à la documentation de l'application.
 
 Avant d'effectuer la maintenance, vous devez envoyer un message AutoSupport pour informer le support technique de NetApp que la maintenance est en cours. Informer le support technique que la maintenance est en cours empêche l'ouverture d'un dossier en supposant une interruption de l'activité.
 
+.Description de la tâche
 Cette tâche doit être effectuée sur chaque site MetroCluster.
 
 .Étapes
@@ -475,6 +477,7 @@ Cette tâche doit être effectuée sur chaque site MetroCluster.
 
 Vous devez basculer la configuration vers site_A afin de pouvoir mettre à niveau les plateformes du site_B.
 
+.Description de la tâche
 Cette tâche doit être effectuée sur site_A.
 
 Une fois cette tâche effectuée, site_A est actif et transmet les données aux deux sites. Site_B est inactif et prêt à commencer le processus de mise à niveau, comme indiqué dans l'illustration suivante. (Cette illustration s'applique également à la mise à niveau d'un système FAS9000 vers un contrôleur FAS9500.)
@@ -555,6 +558,7 @@ Vous devez supprimer les anciens contrôleurs de la configuration.
 
 Cette tâche est effectuée sur site_B.
 
+.Avant de commencer
 Si vous n'êtes pas déjà mis à la terre, mettez-vous à la terre correctement.
 
 .Étapes
@@ -634,6 +638,7 @@ NOTE: Si des modules d'extension sont utilisés comme dispositifs de vidage de m
 
 Vous devez installer les NVS et le module de contrôleur AFF A900 ou FAS9500 à partir du kit de mise à niveau sur les deux nœuds du site_B. Ne déplacez pas le dispositif de coredump du module NVS AFF A700 ou FAS9000 vers le module NVS AFF A900 ou FAS9500.
 
+.Avant de commencer
 Si vous n'êtes pas déjà mis à la terre, mettez-vous à la terre correctement.
 
 
@@ -736,7 +741,7 @@ Il n'est pas possible de vérifier la version de ONTAP installée sur le support
 `<dns_domain>` Est le nom de domaine DNS (Domain Name Service). Ce paramètre est facultatif. REMARQUE : d'autres paramètres peuvent être nécessaires pour votre interface. Entrez help ifconfig à l'invite du micrologiciel pour plus de détails. 
 |===
 . Optimisation `netboot` sur le nœud 1 :
-`netboot http://<web_server_ip/path_to_web_accessible_directory>/netboot/kernel`Le `<path_to_the_web-accessible_directory>` vous devez indiquer où vous avez téléchargé le `<ontap_version>_image.tgz` dans ,Étape 2.
+`netboot http://<web_server_ip/path_to_web_accessible_directory>/netboot/kernel`Le `<path_to_the_web-accessible_directory>` vous devez indiquer où vous avez téléchargé le `<ontap_version>_image.tgz` dans <<step2-download-software,Étape 2>>.
 +
 
 NOTE: N'interrompez pas l'amorçage.
@@ -970,6 +975,7 @@ mcc
 
 Réaffectez les disques de l'agrégat racine au nouveau module de contrôleur, en utilisant les sysids réunis précédemment
 
+.Description de la tâche
 Cette tâche est effectuée en mode Maintenance.
 
 Les anciens ID système ont été identifiés dans link:task_upgrade_controllers_in_a_four_node_fc_mcc_us_switchover_and_switchback_mcc_fc_4n_cu.html["Collecte des informations avant la mise à niveau"].
@@ -1078,6 +1084,7 @@ aggr0_node_b_1-root    online      raid_dp, aggr    root, nosnap=on,
 
 Vous devez redémarrer les contrôleurs à partir du menu de démarrage pour mettre à jour l'image flash du contrôleur. Des étapes supplémentaires sont nécessaires si le chiffrement est configuré.
 
+.Description de la tâche
 Cette tâche doit être effectuée sur tous les nouveaux contrôleurs.
 
 .Étapes
@@ -1230,6 +1237,7 @@ Pour plus d'informations, voir link:https://docs.netapp.com/us-en/ontap/encrypti
 
 Vérifiez que les LIF sont hébergées sur le nœud/port approprié avant le rétablissement. Les étapes suivantes doivent être effectuées
 
+.Description de la tâche
 Cette tâche s'effectue sur site_B, où les nœuds ont été démarrés avec des agrégats racine.
 
 .Étapes
@@ -1265,6 +1273,7 @@ Suivez cette étape sur tous les SVM, si nécessaire.
 
 Une fois les nouveaux contrôleurs configurés, il suffit de revenir à la configuration MetroCluster pour rétablir le fonctionnement normal.
 
+.Description de la tâche
 Cette tâche vous permet d'effectuer le rétablissement et de rétablir le fonctionnement normal de la configuration MetroCluster. Les nœuds du site_A sont toujours en attente de mise à niveau, comme illustré ci-dessous. (Cette illustration s'applique également à la mise à niveau d'un système FAS9000 vers un contrôleur FAS9500).
 
 image::../media/mcc_upgrade_cluster_a_switchback_A900.png[MetroCluster à quatre nœuds]
@@ -1327,6 +1336,7 @@ Si un rétablissement prend beaucoup de temps, vous pouvez vérifier l'état des
 
 Après la mise à niveau des modules de contrôleur, vous devez vérifier l'état de santé de la configuration MetroCluster.
 
+.Description de la tâche
 Cette tâche peut être effectuée sur n'importe quel nœud de la configuration MetroCluster.
 
 .Étapes
