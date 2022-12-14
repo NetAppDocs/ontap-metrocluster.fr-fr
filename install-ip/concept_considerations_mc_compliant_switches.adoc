@@ -2,7 +2,7 @@
 permalink: install-ip/concept_considerations_mc_compliant_switches.html 
 sidebar: sidebar 
 keywords: metrocluster ip, metrocluster-compliant switches, metrocluster-compliant, requirements, compliant 
-summary: 'Depuis ONTAP 9.7, les configurations IP MetroCluster peuvent prendre en charge les commutateurs qui ne sont pas validés par NetApp, à condition qu"ils soient conformes aux spécifications NetApp.' 
+summary: 'Commutateurs IP MetroCluster répertoriés en tant que commutateurs pris en charge dans le link:https://hwu.netapp.com/["NetApp Hardware Universe"^] Et fournis par NetApp sont validés par NetApp. Depuis ONTAP 9.7, les configurations IP MetroCluster peuvent utiliser des commutateurs compatibles avec MetroCluster. Il s"agit de commutateurs non validés par NetApp, mais conformes aux spécifications NetApp. Toutefois, NetApp ne fournit pas de services de support, de dépannage et/ou de configuration pour tout switch non validé.' 
 ---
 = Considérations relatives à l'utilisation de commutateurs conformes à MetroCluster
 :allow-uri-read: 
@@ -11,24 +11,47 @@ summary: 'Depuis ONTAP 9.7, les configurations IP MetroCluster peuvent prendre e
 
 
 [role="lead"]
-Les commutateurs IP MetroCluster fournis par NetApp sont validés par NetApp. Depuis ONTAP 9.7, les configurations IP MetroCluster peuvent prendre en charge les commutateurs qui ne sont pas validés par NetApp, à condition qu'ils soient conformes aux spécifications NetApp.
+Commutateurs IP MetroCluster répertoriés en tant que commutateurs pris en charge dans le link:https://hwu.netapp.com/["NetApp Hardware Universe"^] Et fournis par NetApp sont validés par NetApp. Depuis ONTAP 9.7, les configurations IP MetroCluster peuvent utiliser des commutateurs compatibles avec MetroCluster. Il s'agit de commutateurs non validés par NetApp, mais conformes aux spécifications NetApp. Toutefois, NetApp ne fournit pas de services de support, de dépannage et/ou de configuration pour tout switch non validé.
 
 
 
-== Exigences générales
+== Commutateurs validés NetApp
+
+Un switch est validé par NetApp s'il répond à tous les critères suivants :
+
+* Le switch est fourni par NetApp dans le cadre de la configuration IP MetroCluster
+* Le commutateur est répertorié dans link:https://hwu.netapp.com/["NetApp Hardware Universe"^] Comme commutateur pris en charge sous « MetroCluster-sur-IP-connections »
+* Le commutateur n'est utilisé que pour connecter des contrôleurs IP MetroCluster et, dans certaines configurations, des tiroirs disques NS224
+* Le commutateur est configuré en utilisant le FCR fourni par NetApp (fichier de configuration de référence)
+
+
+Tout switch qui ne répond pas à ces critères est *pas* un switch validé par NetApp.
+
+
+
+== Commutateurs compatibles MetroCluster
+
+Un switch conforme à MetroCluster n'est pas validé par NetApp, mais peut être utilisé dans une configuration IP MetroCluster s'il répond aux exigences et aux recommandations de configuration ci-dessous.
+
+
+NOTE: NetApp ne fournit pas de services de support, de dépannage et/ou de configuration pour tout commutateur non validé compatible MetroCluster.
+
+
+
+== Exigences générales pour les commutateurs compatibles MetroCluster
 
 Les exigences montrent comment configurer les switchs conformes à MetroCluster sans utiliser les fichiers RCF (Reference Configuration).
 
 * Les commutateurs qui se connectent aux nœuds MetroCluster peuvent supporter un trafic non MetroCluster.
-* Seules les plateformes qui fournissent des ports dédiés pour les interconnexions de cluster sans commutateur sont prises en charge. Les plateformes telles que FAS2750 et AFF A220 ne sont pas prises en charge, car le trafic MetroCluster et le trafic d'interconnexion MetroCluster partagent les mêmes ports réseau.
+* Seules les plateformes offrant des ports dédiés pour des interconnexions de cluster sans commutateur peuvent être utilisées avec un commutateur conforme à MetroCluster. Les plateformes telles que FAS2750 et AFF A220 ne peuvent pas être utilisées, car le trafic MetroCluster et le trafic d'interconnexion MetroCluster partagent les mêmes ports réseau.
 +
-La connexion des connexions locales de cluster à un commutateur conforme à MetroCluster n'est pas prise en charge.
+Le commutateur conforme à MetroCluster ne doit pas être utilisé pour les connexions locales du cluster.
 
 * L'interface IP MetroCluster peut être connectée à n'importe quel port de commutateur pouvant être configuré pour répondre aux exigences.
 * La vitesse des ports de switch doit être de 25 Gbit/s pour les plateformes FAS8200 et AFF A300, et d'au moins 40 Gbit/s pour toutes les autres plateformes (40 Gbit/s ou 100 Gbit/s).
 * Quatre commutateurs IP sont requis, deux pour chaque structure de commutateur.
 * Les liens ISL doivent être d'au moins 10 Gbits/s et doivent être dimensionnés de manière appropriée pour la charge sur la configuration MetroCluster.
-* La configuration MetroCluster doit être connectée à deux réseaux. La connexion des deux interfaces MetroCluster au même réseau ou commutateur n'est pas prise en charge. Chaque nœud MetroCluster doit être connecté à deux commutateurs réseau.
+* La configuration MetroCluster doit être connectée à deux réseaux. Les interfaces MetroCluster ne peuvent pas être connectées au même réseau ou au même commutateur. Chaque nœud MetroCluster doit être connecté à deux commutateurs réseau.
 * Le réseau doit répondre aux exigences suivantes :
 +
 ** link:../install-ip/concept_considerations_isls.html#basic-metrocluster-isl-requirements["Exigences de base en matière de liaison ISL MetroCluster"]
@@ -42,7 +65,7 @@ La connexion des connexions locales de cluster à un commutateur conforme à Met
 
 
 
-== Exigences en matière de commutateurs et de câblage
+== Les exigences de switch et de câblage pour les commutateurs compatibles avec MetroCluster
 
 * Les switchs doivent prendre en charge la QoS/classification du trafic.
 * Les commutateurs doivent prendre en charge la notification explicite de congestion (ECN).
@@ -53,9 +76,9 @@ La connexion des connexions locales de cluster à un commutateur conforme à Met
 
 
 
-== Limites
+== Limites des commutateurs compatibles MetroCluster
 
-Toute configuration ou fonctionnalité qui nécessite la connexion du cluster local à un commutateur n'est pas prise en charge. Par exemple, les configurations et procédures suivantes ne sont pas prises en charge :
+Toute configuration ou fonctionnalité qui nécessite que les connexions locales du cluster soient connectées à un commutateur ne peut pas être utilisée. Par exemple, les configurations et procédures suivantes ne peuvent pas être utilisées avec un commutateur conforme à MetroCluster :
 
 * Configurations MetroCluster à 8 nœuds
 * Passez des configurations FC MetroCluster aux configurations IP MetroCluster
@@ -69,7 +92,7 @@ Toute configuration ou fonctionnalité qui nécessite la connexion du cluster lo
 Le tableau suivant fournit les vitesses réseau propres à la plateforme et les modes de port des commutateurs pour les commutateurs compatibles MetroCluster. Vous devez configurer le mode de port du commutateur comme indiqué dans le tableau.
 
 
-NOTE: Des valeurs manquantes indiquent que la plate-forme n'est pas prise en charge.
+NOTE: Des valeurs manquantes indiquent que la plateforme ne peut pas être utilisée avec un switch compatible MetroCluster.
 
 |===
 
@@ -309,7 +332,7 @@ class type queuing c-out-8q-q-default
   bandwidth remaining percent 100
   random-detect threshold burst-optimized ecn
 ----
-Vous devez configurer un switch qui possède un trafic MetroCluster sur un ISL, mais ne se connecte pas à une interface MetroCluster. Dans ce cas, le trafic est déjà classé et ne doit être mappé qu'à la file d'attente appropriée. Dans l'exemple suivant, tout le trafic COS5 est mappé à la classe RDMA, et tout le trafic COS4 est mappé à la classe iSCSI. Notez que cela affectera *tout* du trafic COS5 et COS4, pas seulement le trafic MetroCluster. Si vous ne souhaitez mapper le trafic MetroCluster que, vous devez utiliser les cartes de classes ci-dessus pour identifier le trafic à l'aide des groupes d'accès.
+Vous devrez peut-être configurer un commutateur qui possède un trafic MetroCluster sur un ISL, mais qui ne se connecte pas à une interface MetroCluster. Dans ce cas, le trafic est déjà classé et ne doit être mappé qu'à la file d'attente appropriée. Dans l'exemple suivant, tout le trafic COS5 est mappé à la classe RDMA, et tout le trafic COS4 est mappé à la classe iSCSI. Notez que cela affectera *tout* du trafic COS5 et COS4, pas seulement le trafic MetroCluster. Si vous ne souhaitez mapper le trafic MetroCluster que, vous devez utiliser les cartes de classes ci-dessus pour identifier le trafic à l'aide des groupes d'accès.
 
 Exemple :
 
