@@ -9,14 +9,14 @@
   <meta property="og:title" content="Considérations relatives à l&#8217;utilisation de commutateurs conformes à MetroCluster" />
 	<meta property="og:type" content="website" />
 	<meta property="og:url" content="https://docs.netapp.com/fr-fr/ontap-metrocluster/install-ip/concept_considerations_mc_compliant_switches.html" />
-	<meta property="og:description" content="Depuis ONTAP 9.7, les configurations IP MetroCluster peuvent prendre en charge les commutateurs qui ne sont pas validés par NetApp, à condition qu"ils soient..." />
+	<meta property="og:description" content="Commutateurs IP MetroCluster répertoriés en tant que commutateurs pris en charge dans le link:https://hwu.netapp.com/["NetApp Hardware Universe"^] Et fournis..." />
   <meta property="og:image" content="https://docs.netapp.com/fr-fr/ontap-metrocluster/images/logo-tophat-social.png" />
   <meta property="og:image:alt" content="NetApp Logo" />
   <meta name="format-detection" content="telephone=no">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <meta http-equiv="encoding" content="utf-8">
   <meta http-equiv="nss-type" content="Product Documentation"/>
-  <meta http-equiv="nss-subtype" content="User Guide"/><meta name="description" content="Depuis ONTAP 9.7, les configurations IP MetroCluster peuvent prendre en charge les commutateurs qui ne sont pas validés par NetApp, à condition qu"ils soient...">
+  <meta http-equiv="nss-subtype" content="User Guide"/><meta name="description" content="Commutateurs IP MetroCluster répertoriés en tant que commutateurs pris en charge dans le link:https://hwu.netapp.com/["NetApp Hardware Universe"^] Et fournis...">
   <meta name="keywords" content=" metrocluster ip, metrocluster-compliant switches, metrocluster-compliant, requirements, compliant"><!-- Icons -->
   <link rel="icon" href="/fr-fr/ontap-metrocluster/images/favicon.ico" type="image/x-icon">
 
@@ -6155,7 +6155,7 @@
 <p class="page-details">
   
     
-    <time datetime="2022-11-15 12:12:06 +0000">11/15/2022</time>
+    <time datetime="2022-12-14 20:57:59 +0000">12/14/2022</time>
     
   
 
@@ -6168,12 +6168,59 @@
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph lead">
-<p>Les commutateurs IP MetroCluster fournis par NetApp sont validés par NetApp. Depuis ONTAP 9.7, les configurations IP MetroCluster peuvent prendre en charge les commutateurs qui ne sont pas validés par NetApp, à condition qu&#8217;ils soient conformes aux spécifications NetApp.</p>
+<p>Commutateurs IP MetroCluster répertoriés en tant que commutateurs pris en charge dans le <a href="https://hwu.netapp.com/" target="_blank" rel="noopener">"NetApp Hardware Universe"</a> Et fournis par NetApp sont validés par NetApp. Depuis ONTAP 9.7, les configurations IP MetroCluster peuvent utiliser des commutateurs compatibles avec MetroCluster. Il s&#8217;agit de commutateurs non validés par NetApp, mais conformes aux spécifications NetApp. Toutefois, NetApp ne fournit pas de services de support, de dépannage et/ou de configuration pour tout switch non validé.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="exigences-générales">Exigences générales</h2>
+<h2 id="commutateurs-validés-netapp">Commutateurs validés NetApp</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Un switch est validé par NetApp s&#8217;il répond à tous les critères suivants :</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Le switch est fourni par NetApp dans le cadre de la configuration IP MetroCluster</p>
+</li>
+<li>
+<p>Le commutateur est répertorié dans <a href="https://hwu.netapp.com/" target="_blank" rel="noopener">"NetApp Hardware Universe"</a> Comme commutateur pris en charge sous « MetroCluster-sur-IP-connections »</p>
+</li>
+<li>
+<p>Le commutateur n&#8217;est utilisé que pour connecter des contrôleurs IP MetroCluster et, dans certaines configurations, des tiroirs disques NS224</p>
+</li>
+<li>
+<p>Le commutateur est configuré en utilisant le FCR fourni par NetApp (fichier de configuration de référence)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Tout switch qui ne répond pas à ces critères est <strong>pas</strong> un switch validé par NetApp.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="commutateurs-compatibles-metrocluster">Commutateurs compatibles MetroCluster</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Un switch conforme à MetroCluster n&#8217;est pas validé par NetApp, mais peut être utilisé dans une configuration IP MetroCluster s&#8217;il répond aux exigences et aux recommandations de configuration ci-dessous.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<img src="/us-en/ontap-metrocluster/images/note.svg" alt="Note">
+</td>
+<td class="content">
+NetApp ne fournit pas de services de support, de dépannage et/ou de configuration pour tout commutateur non validé compatible MetroCluster.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="exigences-générales-pour-les-commutateurs-compatibles-metrocluster">Exigences générales pour les commutateurs compatibles MetroCluster</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Les exigences montrent comment configurer les switchs conformes à MetroCluster sans utiliser les fichiers RCF (Reference Configuration).</p>
@@ -6184,9 +6231,9 @@
 <p>Les commutateurs qui se connectent aux nœuds MetroCluster peuvent supporter un trafic non MetroCluster.</p>
 </li>
 <li>
-<p>Seules les plateformes qui fournissent des ports dédiés pour les interconnexions de cluster sans commutateur sont prises en charge. Les plateformes telles que FAS2750 et AFF A220 ne sont pas prises en charge, car le trafic MetroCluster et le trafic d&#8217;interconnexion MetroCluster partagent les mêmes ports réseau.</p>
+<p>Seules les plateformes offrant des ports dédiés pour des interconnexions de cluster sans commutateur peuvent être utilisées avec un commutateur conforme à MetroCluster. Les plateformes telles que FAS2750 et AFF A220 ne peuvent pas être utilisées, car le trafic MetroCluster et le trafic d&#8217;interconnexion MetroCluster partagent les mêmes ports réseau.</p>
 <div class="paragraph">
-<p>La connexion des connexions locales de cluster à un commutateur conforme à MetroCluster n&#8217;est pas prise en charge.</p>
+<p>Le commutateur conforme à MetroCluster ne doit pas être utilisé pour les connexions locales du cluster.</p>
 </div>
 </li>
 <li>
@@ -6202,7 +6249,7 @@
 <p>Les liens ISL doivent être d&#8217;au moins 10 Gbits/s et doivent être dimensionnés de manière appropriée pour la charge sur la configuration MetroCluster.</p>
 </li>
 <li>
-<p>La configuration MetroCluster doit être connectée à deux réseaux. La connexion des deux interfaces MetroCluster au même réseau ou commutateur n&#8217;est pas prise en charge. Chaque nœud MetroCluster doit être connecté à deux commutateurs réseau.</p>
+<p>La configuration MetroCluster doit être connectée à deux réseaux. Les interfaces MetroCluster ne peuvent pas être connectées au même réseau ou au même commutateur. Chaque nœud MetroCluster doit être connecté à deux commutateurs réseau.</p>
 </li>
 <li>
 <p>Le réseau doit répondre aux exigences suivantes :</p>
@@ -6231,7 +6278,7 @@
 </div>
 </div>
 <div class="sect1">
-<h2 id="exigences-en-matière-de-commutateurs-et-de-câblage">Exigences en matière de commutateurs et de câblage</h2>
+<h2 id="les-exigences-de-switch-et-de-câblage-pour-les-commutateurs-compatibles-avec-metrocluster">Les exigences de switch et de câblage pour les commutateurs compatibles avec MetroCluster</h2>
 <div class="sectionbody">
 <div class="ulist">
 <ul>
@@ -6255,10 +6302,10 @@
 </div>
 </div>
 <div class="sect1">
-<h2 id="limites">Limites</h2>
+<h2 id="limites-des-commutateurs-compatibles-metrocluster">Limites des commutateurs compatibles MetroCluster</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Toute configuration ou fonctionnalité qui nécessite la connexion du cluster local à un commutateur n&#8217;est pas prise en charge. Par exemple, les configurations et procédures suivantes ne sont pas prises en charge :</p>
+<p>Toute configuration ou fonctionnalité qui nécessite que les connexions locales du cluster soient connectées à un commutateur ne peut pas être utilisée. Par exemple, les configurations et procédures suivantes ne peuvent pas être utilisées avec un commutateur conforme à MetroCluster :</p>
 </div>
 <div class="ulist">
 <ul>
@@ -6288,7 +6335,7 @@
 <img src="/us-en/ontap-metrocluster/images/note.svg" alt="Note">
 </td>
 <td class="content">
-Des valeurs manquantes indiquent que la plate-forme n&#8217;est pas prise en charge.
+Des valeurs manquantes indiquent que la plateforme ne peut pas être utilisée avec un switch compatible MetroCluster.
 </td>
 </tr>
 </table>
@@ -6597,7 +6644,7 @@ class type queuing c-out-8q-q-default
 </div>
 </div>
 <div class="paragraph">
-<p>Vous devez configurer un switch qui possède un trafic MetroCluster sur un ISL, mais ne se connecte pas à une interface MetroCluster. Dans ce cas, le trafic est déjà classé et ne doit être mappé qu&#8217;à la file d&#8217;attente appropriée. Dans l&#8217;exemple suivant, tout le trafic COS5 est mappé à la classe RDMA, et tout le trafic COS4 est mappé à la classe iSCSI. Notez que cela affectera <strong>tout</strong> du trafic COS5 et COS4, pas seulement le trafic MetroCluster. Si vous ne souhaitez mapper le trafic MetroCluster que, vous devez utiliser les cartes de classes ci-dessus pour identifier le trafic à l&#8217;aide des groupes d&#8217;accès.</p>
+<p>Vous devrez peut-être configurer un commutateur qui possède un trafic MetroCluster sur un ISL, mais qui ne se connecte pas à une interface MetroCluster. Dans ce cas, le trafic est déjà classé et ne doit être mappé qu&#8217;à la file d&#8217;attente appropriée. Dans l&#8217;exemple suivant, tout le trafic COS5 est mappé à la classe RDMA, et tout le trafic COS4 est mappé à la classe iSCSI. Notez que cela affectera <strong>tout</strong> du trafic COS5 et COS4, pas seulement le trafic MetroCluster. Si vous ne souhaitez mapper le trafic MetroCluster que, vous devez utiliser les cartes de classes ci-dessus pour identifier le trafic à l&#8217;aide des groupes d&#8217;accès.</p>
 </div>
 <div class="paragraph">
 <p>Exemple :</p>
