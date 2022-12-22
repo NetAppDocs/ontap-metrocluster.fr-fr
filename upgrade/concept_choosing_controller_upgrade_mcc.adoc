@@ -4,136 +4,169 @@ sidebar: sidebar
 keywords: metrocluster, upgrade, choose, upgrade, refresh, method 
 summary: La procédure de mise à niveau que vous utilisez dépend du modèle de plate-forme. 
 ---
-= Choix d'une procédure de mise à niveau des contrôleurs
+= Choisir la procédure de mise à niveau du contrôleur
 :allow-uri-read: 
 :icons: font
 :imagesdir: ../media/
 
 
 [role="lead"]
-La procédure de mise à niveau du contrôleur que vous utilisez dépend du modèle de plateforme, de l'étendue de la mise à niveau et du type de configuration MetroCluster.
+La procédure de mise à niveau du contrôleur que vous utilisez dépend du modèle de plate-forme et du type de configuration MetroCluster.
+
+Dans le cadre d'une procédure de mise à niveau, les contrôleurs sont remplacés par un nouveau modèle de contrôleur. Les modèles de tiroirs de stockage ne sont pas mis à niveau.
+
+* Dans le cadre des procédures de basculement et de rétablissement, le basculement MetroCluster est utilisé pour fournir aux clients un service sans interruption pendant la mise à niveau des modules de contrôleur sur le cluster partenaire.
+* Dans le cadre d'une procédure de mise à niveau du contrôleur basée sur le transfert d'agrégats, les opérations de transfert d'agrégats servent à déplacer des données de l'ancienne configuration vers la nouvelle configuration mise à niveau, et ce sans interruption.
 
 
 
-== Choix d'une procédure qui n'utilise pas le transfert d'agrégats
+
+== Sélection de la procédure utilisant le processus de basculement et de rétablissement
+
+Sélectionnez votre plateforme actuelle dans le tableau FC ou IP ci-dessous. Si l'intersection de la ligne de plateforme actuelle et de la colonne de plateforme cible est vide, la mise à niveau n'est pas prise en charge.
+
+
+
+=== Mises à niveau du contrôleur IP MetroCluster prises en charge
+
+image::../media/metrocluster_ip_upgrade_table.PNG[tableau de mise à niveau ip de MetroCluster]
+
+* Remarque 1 : pour cette mise à niveau, utilisez la procédure link:task_upgrade_A700_to_A900_in_a_four_node_mcc_ip_us_switchover_and_switchback.html["Mise à niveau des contrôleurs AFF A700/FAS9000 vers AFF A900/FAS9500 dans une configuration IP MetroCluster avec basculement et rétablissement (ONTAP 9.10.1 ou version ultérieure)"]
+
+
+
+
+=== Mises à niveau prises en charge du contrôleur MetroCluster FC
+
+image::../media/metrocluster_fc_upgrade_table.PNG[tableau de mise à niveau MetroCluster fc]
+
+* Remarque 1 : pour mettre à niveau les contrôleurs lorsque des connexions FCVI sur les nœuds FAS8020 ou AFF8020 existants utilisent les ports 1c et 1D, voir ci-dessoushttps://kb.netapp.com/Advice_and_Troubleshooting/Data_Protection_and_Security/MetroCluster/Upgrading_controllers_when_FCVI_connections_on_existing_FAS8020_or_AFF8020_nodes_use_ports_1c_and_1d["Article de la base de connaissances"^].
+* Remarque 2 : les mises à niveau du contrôleur depuis les plateformes AFF A300 ou FAS8200 via les ports intégrés 0e et 0f comme connexions FC-VI sont prises en charge uniquement sur les systèmes exécutant ONTAP 9.9.1. ou plus tôt. Pour plus d'informations, consultez la link:https://mysupport.netapp.com/site/bugs-online/product/ONTAP/BURT/1507088["Rapport public"^].
+* Remarque 3 : pour cette mise à niveau, voir link:task_upgrade_A700_to_A900_in_a_four_node_mcc_fc_us_switchover_and_switchback.html["Mise à niveau des contrôleurs AFF A700/FAS9000 vers AFF A900/FAS9500 en configuration FC MetroCluster avec basculement et rétablissement (ONTAP 9.10.1 ou version ultérieure)"]
+
 
 [cols="2,1,1,2"]
 |===
 
 
-| Type de mise à niveau ou d'actualisation | Type de MetroCluster | Version ONTAP | Procédure 
+| Type de MetroCluster | Méthode de mise à niveau | Version ONTAP | Procédure 
 
-
- a| 
-* Périmètre : plateforme (modules de contrôleur) uniquement
-* Méthode : basculement/rétablissement automatisé
 
  a| 
 FC
  a| 
-9.10.1 et versions ultérieures
- a| 
-link:task_upgrade_controllers_system_control_commands_in_a_four_node_mcc_fc.html["Mise à niveau des contrôleurs en une configuration FC MetroCluster à quatre nœuds via le basculement et le rétablissement avec des commandes « system contrôleur replace » (ONTAP 9.10.1 et versions ultérieures)"]
-
-
-
- a| 
-* Périmètre : plateforme (modules de contrôleur) uniquement
-* Méthode : basculement/rétablissement automatisé
-
- a| 
-IP
+Mise à niveau par les commandes « System Controller replace »
  a| 
 9.10.1 et versions ultérieures
  a| 
-link:task_upgrade_A700_to_A900_in_a_four_node_mcc_ip_us_switchover_and_switchback.html["Mise à niveau des contrôleurs de AFF A700 vers AFF A900 dans une configuration IP MetroCluster via le basculement et le rétablissement (ONTAP 9.10.1 et versions ultérieures)"]
+link:task_upgrade_controllers_system_control_commands_in_a_four_node_mcc_fc.html["Lien vers la procédure"]
 
 
-
- a| 
-* Périmètre : plateforme (modules de contrôleur) uniquement
-* Méthode : basculement/rétablissement
 
  a| 
 FC
  a| 
-9.8 et versions ultérieures
+Mise à niveau manuelle avec les commandes de l'interface de ligne de commande (AFF A700/FAS9000 vers AFF A900/FAS9500 uniquement)
  a| 
-link:task_upgrade_controllers_in_a_four_node_fc_mcc_us_switchover_and_switchback_mcc_fc_4n_cu.html["Mise à niveau des contrôleurs en une configuration MetroCluster FC à l'aide du basculement et du rétablissement"]
-
-
-
+9.10.1 et versions ultérieures
  a| 
-* Périmètre : plateforme (modules de contrôleur) uniquement
-* Méthode : basculement/rétablissement
+link:task_upgrade_A700_to_A900_in_a_four_node_mcc_fc_us_switchover_and_switchback.html["Lien vers la procédure"]
+
+
 
  a| 
 IP
  a| 
+Mise à niveau manuelle avec les commandes de l'interface de ligne de commande (AFF A700/FAS9000 vers AFF A900/FAS9500 uniquement)
+ a| 
+9.10.1 et versions ultérieures
+ a| 
+link:task_upgrade_A700_to_A900_in_a_four_node_mcc_ip_us_switchover_and_switchback.html["Lien vers la procédure"]
+
+
+
+ a| 
+FC
+ a| 
+Mise à niveau manuelle avec les commandes CLI
+ a| 
 9.8 et versions ultérieures
  a| 
-link:task_upgrade_controllers_in_a_four_node_ip_mcc_us_switchover_and_switchback_mcc_ip.html["Mise à niveau des contrôleurs dans une configuration MetroCluster IP à l'aide du basculement et du rétablissement (ONTAP 9.8 et versions ultérieures)"]
+link:task_upgrade_controllers_in_a_four_node_fc_mcc_us_switchover_and_switchback_mcc_fc_4n_cu.html["Lien vers la procédure"]
+
+
+
+ a| 
+IP
+ a| 
+Mise à niveau manuelle avec les commandes CLI
+ a| 
+9.8 et versions ultérieures
+ a| 
+link:task_upgrade_controllers_in_a_four_node_ip_mcc_us_switchover_and_switchback_mcc_ip.html["Lien vers la procédure"]
 
 |===
 
 
 == Choix d'une procédure à l'aide du transfert d'agrégats
 
+Dans le cadre d'une procédure de mise à niveau du contrôleur basée sur le transfert d'agrégats, les opérations de transfert d'agrégats servent à déplacer des données de l'ancienne configuration vers la nouvelle configuration mise à niveau, et ce sans interruption.
+
 |===
-| Procédure de transfert d'agrégats | Type de MetroCluster | Version ONTAP | Procédure 
+| Type de MetroCluster | Transfert d'agrégats | Version ONTAP | Procédure 
 
 
- a| 
-À l'aide de `system controller replace` Commande et échange du module de contrôleur et de la NVM
  a| 
 FC
+ a| 
+À l'aide de `system controller replace` Commandes et permutation du module de contrôleur et de la NVM (mise à niveau de AFF A700 vers AFF A900 uniquement)
  a| 
 9.10.1 et versions ultérieures
  a| 
-https://docs.netapp.com/us-en/ontap-systems-upgrade/upgrade-arl-auto-affa900/index.html["Utilisez les commandes « system Controller replace » pour mettre à niveau AFF A700 vers AFF A900 exécutant ONTAP 9.10.1 RC2 ou version ultérieure"^]
+https://docs.netapp.com/us-en/ontap-systems-upgrade/upgrade-arl-auto-affa900/index.html["Lien vers la procédure"^]
 
 
 
- a| 
-À l'aide de `system controller replace` commandes
  a| 
 FC
+ a| 
+À l'aide de `system controller replace` commandes
  a| 
 9.8 et versions ultérieures
  a| 
-https://docs.netapp.com/us-en/ontap-systems-upgrade/upgrade-arl-auto-app/index.html["À l'aide des commandes « System Controller replace » pour mettre à niveau le matériel du contrôleur exécutant ONTAP 9.8 et versions ultérieures"^]
+https://docs.netapp.com/us-en/ontap-systems-upgrade/upgrade-arl-auto-app/index.html["Lien vers la procédure"^]
 
 
 
+ a| 
+FC
  a| 
 À l'aide de `system controller replace` commandes
  a| 
-FC
- a| 
 9.5 à 9.7
  a| 
-https://docs.netapp.com/us-en/ontap-systems-upgrade/upgrade-arl-auto/index.html["À l'aide des commandes « contrôleur système replace » pour mettre à niveau le matériel du contrôleur exécutant ONTAP 9.5 vers ONTAP 9.7"^]
+https://docs.netapp.com/us-en/ontap-systems-upgrade/upgrade-arl-auto/index.html["Lien vers la procédure"^]
 
 
 
- a| 
-À l'aide des commandes ARL manuelles
  a| 
 FC
+ a| 
+À l'aide des commandes ARL manuelles
  a| 
 9.8
  a| 
-https://docs.netapp.com/us-en/ontap-systems-upgrade/upgrade-arl-manual-app/index.html["Mettez manuellement à niveau le matériel du contrôleur exécutant ONTAP 9.8 et les versions ultérieures"^]
+https://docs.netapp.com/us-en/ontap-systems-upgrade/upgrade-arl-manual-app/index.html["Lien vers la procédure"^]
 
 
 
- a| 
-À l'aide des commandes ARL manuelles
  a| 
 FC
  a| 
+À l'aide des commandes ARL manuelles
+ a| 
 9.7 et versions antérieures
  a| 
-https://docs.netapp.com/us-en/ontap-systems-upgrade/upgrade-arl-manual/index.html["Mettez à niveau manuellement le matériel du contrôleur en exécutant ONTAP 9.7 et les versions antérieures"^]
+https://docs.netapp.com/us-en/ontap-systems-upgrade/upgrade-arl-manual/index.html["Lien vers la procédure"^]
 
 |===

@@ -11,6 +11,22 @@ summary: Vous devez sélectionner une procédure de transition selon votre confi
 
 
 [role="lead"]
+Lors de votre transition vers une configuration MetroCluster IP, vous devez avoir une combinaison de modèles de plateforme pris en charge. Vous devez également vous assurer que la plateforme IP MetroCluster est une taille appropriée pour la charge que vous passez de la configuration FC MetroCluster à la configuration IP MetroCluster.
+
+Le tableau suivant présente les combinaisons de plates-formes prises en charge. Vous pouvez passer des plates-formes de la colonne de gauche à des plates-formes répertoriées comme pris en charge dans les colonnes de droite, comme indiqué par les cellules de tableau colorées.
+
+Par exemple, le passage d'une configuration FC MetroCluster composée de modules de contrôleur AFF8060 à une configuration IP composée de modules de contrôleur AFF A400 est pris en charge.
+
+image::../media/metrocluster_fc_ip_transition_matrix.png[matrice de transition ip fc de MetroCluster]
+
+* Remarque 1 : cette combinaison de plateformes nécessite ONTAP 9.11.1 ou une version ultérieure.
+* Remarque 2 : vous devez disposer d'une interface 40 GbE pour les interfaces de cluster locales sur les nœuds FC.
+* Remarque 3 : une interface de 100 GbE est nécessaire pour les interfaces de cluster locales sur les nœuds FC.
+
+
+
+NOTE: Ne dépassez pas les limites d'objet du « bas » des plates-formes de la combinaison. Appliquez la limite inférieure des objets des deux plates-formes. Reportez-vous à la link:https://hwu.netapp.html["Hardware Universe"^] pour les limites de plateforme.
+
 Vous devez sélectionner une procédure de transition selon votre configuration MetroCluster FC existante.
 
 Une procédure de transition remplace la structure du commutateur FC interne ou la connexion FC-VI par un réseau de commutateurs IP. La procédure exacte dépend de votre configuration de départ.
@@ -31,7 +47,7 @@ Continuité de l'activité
  a| 
 Les nouveaux tiroirs de stockage sont pris en charge sur les nouvelles plateformes.
  a| 
-link:concept_requirements_for_fc_to_ip_transition_mcc.html["Transition sans interruption d'une configuration MetroCluster FC vers une configuration MetroCluster IP (ONTAP 9.8 et versions ultérieures)"]
+link:concept_requirements_for_fc_to_ip_transition_mcc.html["Lien vers la procédure"]
 
 
 
@@ -42,7 +58,7 @@ Perturbation
  a| 
 Les nouveaux tiroirs de stockage sont pris en charge sur les plateformes d'origine comme sur les nouvelles.
  a| 
-link:task_disruptively_transition_from_a_two_node_mcc_fc_to_a_four_node_mcc_ip_configuration.html["Transition sans interruption d'un FC MetroCluster à deux nœuds vers une configuration IP MetroCluster à quatre nœuds (ONTAP 9.8 et versions ultérieures)"]
+link:task_disruptively_transition_from_a_two_node_mcc_fc_to_a_four_node_mcc_ip_configuration.html["Lien vers la procédure"]
 
 
 
@@ -53,7 +69,7 @@ Perturbation
  a| 
 Les nouveaux tiroirs de stockage sont pris en charge sur les plateformes d'origine comme sur les nouvelles. Les anciens tiroirs de stockage doivent être retirés.
  a| 
-link:task_disruptively_transition_while_move_volumes_from_old_shelves_to_new_shelves.html["Transition sans interruption de la FC MetroCluster vers l'IP MetroCluster lors de la désactivation des tiroirs de stockage (ONTAP 9.8 et versions ultérieures)"]
+link:task_disruptively_transition_while_move_volumes_from_old_shelves_to_new_shelves.html["Lien vers la procédure"]
 
 
 
@@ -64,6 +80,13 @@ Perturbation
  a| 
 Les anciens tiroirs de stockage ne sont pas pris en charge sur les nouvelles plateformes. Les anciens tiroirs de stockage doivent être retirés.
  a| 
-link:task_disruptively_transition_when_exist_shelves_are_not_supported_on_new_controllers.html["Transition sans interruption lorsque les tiroirs existants ne sont pas pris en charge sur les nouveaux contrôleurs (ONTAP 9.8 et versions ultérieures)"]
+link:task_disruptively_transition_when_exist_shelves_are_not_supported_on_new_controllers.html["Lien vers la procédure"]
 
 |===
+
+
+=== Transition vers une configuration de commutateur partagé Cisco 9336C-FX2
+
+La transition vers une configuration de commutateur partagé Cisco 9336C-FX2 n'est pas prise en charge. Une _configuration de commutateur partagée_ est une configuration où les commutateurs fournissent à la fois des connexions MetroCluster et des connexions du tiroir de stockage.
+
+Les configurations dans lesquelles le commutateur Cisco 9336C-FX2 fournit uniquement les connexions MetroCluster sont prises en charge.

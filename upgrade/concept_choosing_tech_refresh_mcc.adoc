@@ -11,35 +11,57 @@ summary: 'La procédure de mise à jour que vous utilisez dépend du modèle de 
 
 
 [role="lead"]
-La procédure de mise à jour du système que vous utilisez dépend du modèle de plateforme, de l'étendue de la mise à niveau et du type de configuration MetroCluster.
+La procédure de mise à jour du système que vous utilisez dépend du modèle de plate-forme et du type de configuration MetroCluster. Les procédures de mise à jour s'appliquent aux contrôleurs et aux tiroirs de stockage. Dans les procédures de mise à jour, de nouveaux contrôleurs et tiroirs sont ajoutés à la configuration MetroCluster, créant un deuxième groupe de reprise sur incident. Ensuite, les données sont migrées sans interruption vers les nouveaux nœuds. Les contrôleurs d'origine sont ensuite retirés du cluster.
+
+
+
+=== Combinaisons de mise à jour technologique MetroCluster FC prises en charge
+
+image::../media/metrocluster_fc_tech_refresh.png[mise à jour technologique MetroCluster fc]
+
+* Assurez-vous de terminer la procédure de mise à jour technologique avant d'ajouter une nouvelle charge.
+
+
+
+NOTE: Ne dépassez pas les limites d'objet du « bas » des plates-formes de la combinaison. Appliquez la limite inférieure des objets des deux plates-formes. Reportez-vous à la link:https://hwu.netapp.html["Hardware Universe"^] pour les limites de plateforme.
+
+
+
+=== Combinaisons de mise à jour technologique MetroCluster IP prises en charge
+
+image::../media/metrocluster_ip_tech_refresh.png[mise à jour technologique de MetroCluster ip]
+
+* Assurez-vous de terminer la procédure de mise à jour technologique avant d'ajouter une nouvelle charge.
+
+
+
+NOTE: Ne dépassez pas les limites d'objet du « bas » des plates-formes de la combinaison. Appliquez la limite inférieure des objets des deux plates-formes. Reportez-vous à la link:https://hwu.netapp.html["Hardware Universe"^] pour les limites de plateforme.
 
 [cols="2,1,1,2"]
 |===
-| Portée | Type de configuration | Prise en charge de ONTAP | Aller à... 
+| Méthode de rafraîchissement | Type de configuration | Version ONTAP | Procédure 
 
 
  a| 
-* Périmètre : plateforme (modules de contrôleurs) et tiroirs de stockage
 * Méthode : développez la configuration MetroCluster, puis supprimez les anciens nœuds
 
  a| 
-FC
+FC à quatre nœuds
  a| 
 9.6 et versions ultérieures
  a| 
-link:task_refresh_4n_mcc_fc.html["Mise à jour d'une configuration FC MetroCluster à quatre nœuds"]
+link:task_refresh_4n_mcc_fc.html["Lien vers la procédure"]
 
 
 
  a| 
-* Périmètre : plateforme (modules de contrôleurs) et tiroirs de stockage
 * Méthode : développez la configuration MetroCluster, puis supprimez les anciens nœuds
 
  a| 
-IP
+IP à quatre nœuds
  a| 
-9.8
+9.8 et versions ultérieures
  a| 
-link:task_refresh_4n_mcc_ip.html["Mise à jour d'une configuration IP MetroCluster à quatre nœuds (ONTAP 9.8 et versions ultérieures)"]
+link:task_refresh_4n_mcc_ip.html["Lien vers la procédure"]
 
 |===

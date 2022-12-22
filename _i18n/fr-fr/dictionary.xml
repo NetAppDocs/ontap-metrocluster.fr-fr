@@ -6377,15 +6377,10 @@
   <block id="36588e2aa5ad4fcf60167b3daa06db5a" category="list-text">Utilisez la procédure appropriée pour votre configuration.</block>
   <block id="7efa6fc838c006d396e42638b4ff25d1" category="paragraph"><block ref="7efa6fc838c006d396e42638b4ff25d1" category="inline-link-macro-rx"></block></block>
   <block id="fe45fe811f6f58baafc88df1114b43df" category="paragraph">Lien :../install-ip/concept_mediator_requirements.html #configure-the-ontap-médiateur-service-from-a-metrocluster-ip-configuration[Configuration du service ONTAP Mediator à partir d'une configuration IP MetroCluster]</block>
-  <block id="9dbbc592d23a777892a7b326fdecb27a" category="summary">Ensuite, vous devez passer à une configuration MetroCluster IP, à une combinaison de modèles de plate-forme pris en charge.</block>
   <block id="c5ca83d0e723113560fb2c95b33b532b" category="doc">Plateformes prises en charge pour une transition sans interruption</block>
   <block id="2687b88898e3642fcc69aaef6be8e73c" category="paragraph">Lors de votre transition vers une configuration MetroCluster IP, vous devez avoir une combinaison de modèles de plateforme pris en charge. Vous devez également vous assurer que la plateforme IP MetroCluster est une taille appropriée pour la charge que vous passez de la configuration FC MetroCluster à la configuration IP MetroCluster.</block>
   <block id="d9599a6265b31306f6c79d760a47a9aa" category="paragraph">Le tableau suivant présente les combinaisons de plates-formes prises en charge. Vous pouvez passer des plates-formes de la colonne de gauche à des plates-formes répertoriées comme pris en charge dans les colonnes de droite, comme indiqué par les cellules de tableau colorées.</block>
-  <block id="e9f061fb2bc125b997083e48a3442510" category="list-text">Une cellule verte indique que la combinaison est prise en charge.</block>
-  <block id="7bf7e1a6cec96a843176b66291c50547" category="list-text">Une cellule blanche (vide) indique que la combinaison n'est pas prise en charge.</block>
-  <block id="fb6814303d896b70f8e88a7a5fa288c1" category="list-text">Une cellule bleue indique que la combinaison est prise en charge à partir de ONTAP 9.11.1.</block>
   <block id="1799408ec992ed3e5561f7b04ccef0fe" category="paragraph">Par exemple, le passage d'une configuration FC MetroCluster composée de modules de contrôleur AFF8060 à une configuration IP composée de modules de contrôleur AFF A400 est pris en charge.</block>
-  <block id="bc85eece93965de5b37264d01e4e5eeb" category="image-alt">transition ip fc métropolitaine et ultérieure</block>
   <block id="2abcc8e487f56251cd49b5a74738c4c4" category="section-title">Transition vers une configuration de commutateur partagé Cisco 9336C-FX2</block>
   <block id="f8e0758b3af85da8f282b95e41204586" category="paragraph">La transition vers une configuration de commutateur partagé Cisco 9336C-FX2 n'est pas prise en charge. Une _configuration de commutateur partagée_ est une configuration où les commutateurs fournissent à la fois des connexions MetroCluster et des connexions du tiroir de stockage.</block>
   <block id="1a0ece25400c2d4c0b3a063a4d9d1aad" category="paragraph">Les configurations dans lesquelles le commutateur Cisco 9336C-FX2 fournit uniquement les connexions MetroCluster sont prises en charge.</block>
@@ -7058,16 +7053,12 @@
   <block id="ae4bcbe3a4d8a4dd251ebc90c0689dc3" category="paragraph">Quatre nœuds</block>
   <block id="b8910962b1d031cc1eb8e8ad588c4c48" category="paragraph">Continuité de l'activité</block>
   <block id="b1967383562a98a66ed0eff3ea640595" category="paragraph">Les nouveaux tiroirs de stockage sont pris en charge sur les nouvelles plateformes.</block>
-  <block id="1f59c4cc50146ab19215fd6b4be7ee5e" category="paragraph"><block ref="1f59c4cc50146ab19215fd6b4be7ee5e" category="inline-link-macro-rx"></block></block>
   <block id="5c85f685c62c106f7c5565f5f9efa724" category="paragraph">Deux nœuds</block>
   <block id="fb36a3d5cdf2e3b5ecef9b3c9fbab504" category="paragraph">Perturbation</block>
   <block id="8377dec7f2f76b3e412145b87daa08da" category="paragraph">Les nouveaux tiroirs de stockage sont pris en charge sur les plateformes d'origine comme sur les nouvelles.</block>
-  <block id="fb41234c74201660fa7a3a1063d04365" category="paragraph"><block ref="fb41234c74201660fa7a3a1063d04365" category="inline-link-macro-rx"></block></block>
   <block id="048526ef7c67ac433dc4a1d99ed45b9a" category="paragraph">Les nouveaux tiroirs de stockage sont pris en charge sur les plateformes d'origine comme sur les nouvelles. Les anciens tiroirs de stockage doivent être retirés.</block>
   <block id="2a6475632e67cf207fa8a870dfc547e5" category="inline-link-macro">Transition sans interruption de la FC MetroCluster vers l'IP MetroCluster lors de la désactivation des tiroirs de stockage (ONTAP 9.8 et versions ultérieures)</block>
-  <block id="70e8c86cc71d382ac668bb68bb33223a" category="paragraph"><block ref="70e8c86cc71d382ac668bb68bb33223a" category="inline-link-macro-rx"></block></block>
   <block id="4bc2f58697bbe4a9e2718e615c7c46b8" category="paragraph">Les anciens tiroirs de stockage ne sont pas pris en charge sur les nouvelles plateformes. Les anciens tiroirs de stockage doivent être retirés.</block>
-  <block id="85bb194a69db1254e3990cfd7e6324af" category="paragraph"><block ref="85bb194a69db1254e3990cfd7e6324af" category="inline-link-macro-rx"></block></block>
   <block id="7e309551053b69f5958f1afe31e831e8" category="paragraph">Vous devez vérifier l'état et la connectivité de la configuration MetroCluster avant d'effectuer la transition</block>
   <block id="11b9c119bd9d8bcd5f6ea9fdf493f3cb" category="list-text">Vérifier si le système est multipathed :<block ref="186162657961c9fecba1f65b046ed19b" prefix="" category="inline-code"></block></block>
   <block id="d1361b9796acdd1261847f585a96d8c2" category="list-text">Vérifier si des alertes d'intégrité sont disponibles sur les deux clusters :<block ref="79c86ac639c7742d6046026cf6726bce" prefix=" " category="inline-code"></block></block>
@@ -7921,7 +7912,6 @@
   <block id="4d351c058255d9e92bee9f8e2a84a787" category="list-text">Si l'état système affiché du contrôleur n'est pas correct, définissez l'état HA pour le module de contrôleur :</block>
   <block id="cb35018d5cef7c3ad9e89b5330f139ef" category="list-text">Si l'état du système affiché du châssis n'est pas correct, définissez l'état de haute disponibilité du châssis :</block>
   <block id="91815ef3813bb758babf1c11a5114e45" category="list-text">Répétez ces étapes sur l'autre nœud de remplacement.</block>
-  <block id="e1e9fa3d9d4f90362f074f019c90eb3a" category="summary">Informations sur les marques commerciales pour le guide de mise à niveau, de transition et d'extension de MetroCluster.</block>
   <block id="3a3fe29bce41cc439cab768ef6c51ea0" category="summary">Vous devez utiliser la commande Storage failover modify pour définir le mode sur le module de contrôleur existant. La valeur du mode est activée ultérieurement, après le redémarrage du module de contrôleur.</block>
   <block id="b6982e2513cfb04d6a59fdcd3b023101" category="doc">Configuration du mode HA sur le module de contrôleur existant</block>
   <block id="63913131852a8828687463e2ffb0a661" category="list-text">Définissez le mode sur HA :</block>
@@ -8131,7 +8121,6 @@
   <block id="6d212900b72ecc3ea28faeef719a987e" category="summary">Vous devez installer l'équipement pour les nouveaux nœuds.</block>
   <block id="448b6a1ae7f7f1277a02fda9c0f9fd58" category="doc">Mise en rack du nouvel équipement</block>
   <block id="7965e118387157e57593becb6ae60117" category="list-text">Suivre la procédure décrite dans <block ref="a9f150ef34b7953b6119f5ac779097fe" category="inline-link-macro-rx"></block> Pour installer les nouveaux systèmes de stockage, les tiroirs disques et les ponts FC-SAS.</block>
-  <block id="f3a293b5084b9afc68a047d6efd28523" category="summary">Informations sur les droits d'auteur pour le guide de mise à niveau, de transition et d'extension de MetroCluster.</block>
   <block id="437238e14c493f4cd7340eb1bdcdd921" category="summary">Les outils de surveillance SNMP tiers ne sont pas pris en charge pour les ponts FiberBridge. Depuis la version ONTAP 9.8, les ponts FC-SAS sont surveillés par défaut via des connexions intrabande, ce qui n'est pas nécessaire.</block>
   <block id="9aa100213ac06e4996c83aafb9f55bca" category="paragraph">La prise en compte de toutes les données peut prendre jusqu'à 15 minutes en raison de l'intervalle d'interrogation. Le contrôle de l'état du système ONTAP peut contacter et surveiller le pont si la valeur de la colonne « État » est « ok » et si d'autres informations, telles que le nom universel (WWN), sont affichées.</block>
   <block id="993ee07ce81369a525c01b07d1c3022c" category="summary">Vous devez actualiser la configuration MetroCluster lors de son extension d'une configuration à deux nœuds à une configuration à quatre nœuds.</block>
@@ -8184,42 +8173,18 @@
   <block id="f1671ac439417f75927f98ad97323bf7" category="paragraph">La segmentation des commutateurs FC doit s'adapter aux nouvelles connexions du contrôleur. Si vous avez utilisé les fichiers RCF (Reference Configuration File) fournis par NetApp pour configurer vos commutateurs, le zoning est préconfiguré et vous n'avez pas besoin d'apporter de modifications.</block>
   <block id="56bf84e32d22ab8fb694fbc5332432dc" category="paragraph">Si vous avez configuré manuellement vos commutateurs FC, vous devez vérifier que la segmentation est correcte pour les connexions initiateurs des nouveaux modules de contrôleur. Voir les sections sur la segmentation dans <block ref="a9f150ef34b7953b6119f5ac779097fe" category="inline-link-macro-rx"></block>.</block>
   <block id="ebc2ca8d2c7ef918abcfff80809d9aab" category="summary">La procédure de mise à niveau que vous utilisez dépend du modèle de plate-forme.</block>
-  <block id="1c9a0818e732ba5a475e7e19b4991adf" category="doc">Choix d'une procédure de mise à niveau des contrôleurs</block>
-  <block id="895bf4a1ca3e66ce2801d409eb6daf37" category="paragraph">La procédure de mise à niveau du contrôleur que vous utilisez dépend du modèle de plateforme, de l'étendue de la mise à niveau et du type de configuration MetroCluster.</block>
-  <block id="09dfcbc0cceee8247717360bd0733f1c" category="section-title">Choix d'une procédure qui n'utilise pas le transfert d'agrégats</block>
-  <block id="9f7143c3ebe35a24d494d7e347dc4f89" category="cell">Type de mise à niveau ou d'actualisation</block>
   <block id="75f7d2bcde6cf0fe3c3db259a2547dbc" category="cell">Type de MetroCluster</block>
-  <block id="f56ee108e3b47664e82456fbf68b6cda" category="list-text">Périmètre : plateforme (modules de contrôleur) uniquement</block>
-  <block id="344a350961d4b3279a1bf51e3f2def2a" category="list-text">Méthode : basculement/rétablissement automatisé</block>
   <block id="f49f60b6304797900db897e855566402" category="inline-link-macro">Mise à niveau des contrôleurs en une configuration FC MetroCluster à quatre nœuds via le basculement et le rétablissement avec des commandes « system contrôleur replace » (ONTAP 9.10.1 et versions ultérieures)</block>
-  <block id="966e34443f418eb2dc544779908833ab" category="paragraph"><block ref="966e34443f418eb2dc544779908833ab" category="inline-link-macro-rx"></block></block>
-  <block id="fc295d422c1cefba3de763612fefa26b" category="inline-link-macro">Mise à niveau des contrôleurs de AFF A700 vers AFF A900 dans une configuration IP MetroCluster via le basculement et le rétablissement (ONTAP 9.10.1 et versions ultérieures)</block>
-  <block id="8fb424fc470de611a2a62971976c4206" category="paragraph"><block ref="8fb424fc470de611a2a62971976c4206" category="inline-link-macro-rx"></block></block>
-  <block id="776bc492f3a4f2cc9ec5ac519b3c8522" category="list-text">Méthode : basculement/rétablissement</block>
   <block id="4f7dd0fe0940df4a5fda327a4ee4ddbd" category="paragraph">9.8</block>
   <block id="3f28886cbb43f1c7c0c4f4d35ecafdde" category="inline-link-macro">Mise à niveau des contrôleurs en une configuration MetroCluster FC à l'aide du basculement et du rétablissement</block>
-  <block id="31d76b92692867470330ad7bbde7af60" category="paragraph"><block ref="31d76b92692867470330ad7bbde7af60" category="inline-link-macro-rx"></block></block>
   <block id="48f1cbfd98903541f8e454a15e0879c3" category="inline-link-macro">Mise à niveau des contrôleurs dans une configuration MetroCluster IP à l'aide du basculement et du rétablissement (ONTAP 9.8 et versions ultérieures)</block>
-  <block id="6a2eaf8340b529aad0413700b417f836" category="paragraph"><block ref="6a2eaf8340b529aad0413700b417f836" category="inline-link-macro-rx"></block></block>
   <block id="da72e287071989d880a84bc9f714faf6" category="section-title">Choix d'une procédure à l'aide du transfert d'agrégats</block>
-  <block id="fc220fa1e514a0098ff6b9739a86bcdb" category="cell">Procédure de transfert d'agrégats</block>
-  <block id="d2a672acb2ab8b5e74822778c1141a70" category="paragraph">À l'aide de<block ref="616743bfa4fd61d558c556fe614cb2e9" prefix=" " category="inline-code"></block> Commande et échange du module de contrôleur et de la NVM</block>
   <block id="04c19f5eb2ebdc099239a7074f8d6534" category="paragraph">9.10.1 et versions ultérieures</block>
-  <block id="1bcbe4bd68c550a7ed28f4bdd586bc74" category="inline-link">Utilisez les commandes « system Controller replace » pour mettre à niveau AFF A700 vers AFF A900 exécutant ONTAP 9.10.1 RC2 ou version ultérieure</block>
-  <block id="5ddb9938498e31a4b1c392ab5953e15b" category="paragraph"><block ref="5ddb9938498e31a4b1c392ab5953e15b" category="inline-link-rx"></block></block>
   <block id="b9e53a247da3982cb706e33287d2a8fd" category="paragraph">À l'aide de<block ref="616743bfa4fd61d558c556fe614cb2e9" prefix=" " category="inline-code"></block> commandes</block>
   <block id="5b34d65f91f37ddae80b6389b69e56f6" category="paragraph">9.8 et versions ultérieures</block>
-  <block id="c6d4a9d3f7628712dae7a41ab974439d" category="inline-link">À l'aide des commandes « System Controller replace » pour mettre à niveau le matériel du contrôleur exécutant ONTAP 9.8 et versions ultérieures</block>
-  <block id="6c8dc70fbcb473ab96451fff57f7f3a0" category="paragraph"><block ref="6c8dc70fbcb473ab96451fff57f7f3a0" category="inline-link-rx"></block></block>
   <block id="f8f096d15253e4546e8e8ff39fa22723" category="paragraph">9.5 à 9.7</block>
-  <block id="e513aa5cfbbd2f249692cdb0e9b36322" category="inline-link">À l'aide des commandes « contrôleur système replace » pour mettre à niveau le matériel du contrôleur exécutant ONTAP 9.5 vers ONTAP 9.7</block>
-  <block id="48735ed0c36ec6507e28385a92f9c1c3" category="paragraph"><block ref="48735ed0c36ec6507e28385a92f9c1c3" category="inline-link-rx"></block></block>
   <block id="570e0e3e350318c0e6af015d23a5b749" category="paragraph">À l'aide des commandes ARL manuelles</block>
-  <block id="8e672eb6f0591d6c3be625fb96c708d9" category="inline-link">Mettez manuellement à niveau le matériel du contrôleur exécutant ONTAP 9.8 et les versions ultérieures</block>
-  <block id="ffa4858ba15ab995b35a6841f7fde299" category="paragraph"><block ref="ffa4858ba15ab995b35a6841f7fde299" category="inline-link-rx"></block></block>
   <block id="4b8a576fb64d5b6a41905d5d9b5d1568" category="paragraph">9.7 et versions antérieures</block>
-  <block id="a9143ce30f02be342b3ac1761b894447" category="inline-link">Mettez à niveau manuellement le matériel du contrôleur en exécutant ONTAP 9.7 et les versions antérieures</block>
-  <block id="c3e6669930ba273936fc70ff1592ca3d" category="paragraph"><block ref="c3e6669930ba273936fc70ff1592ca3d" category="inline-link-rx"></block></block>
   <block id="df48f09d2bf110a410011a8de35fb788" category="paragraph">La commande suivante met en miroir l'agrégat root pour Controller_A_1 :</block>
   <block id="79de9fa3497efd5f7c2e2f6a6682e5cd" category="summary">Vous devez émettre un message de AutoSupport pour informer le support technique de NetApp que la maintenance est terminée.</block>
   <block id="195ffc9776ee62387ded9a109c150447" category="doc">Envoi d'un message AutoSupport personnalisé après l'ajout de nœuds à la configuration MetroCluster</block>
@@ -8264,14 +8229,8 @@
   <block id="314a33d74f4f0a6e853b23a18224e122" category="list-text"><block ref="314a33d74f4f0a6e853b23a18224e122" category="inline-link-macro-rx"></block></block>
   <block id="2f311d11b06ed91a28142e5c25bbdfb5" category="list-text"><block ref="2f311d11b06ed91a28142e5c25bbdfb5" category="inline-link-macro-rx"></block></block>
   <block id="344184862169747549deee4b87dc1cf2" category="section-title">Combinaisons de plateformes prises en charge</block>
-  <block id="a3e36fda70f465bc183d8a10d4112db7" category="paragraph">Vous pouvez mettre à niveau certaines plateformes en utilisant l'opération de basculement et de rétablissement dans une configuration MetroCluster FC. Le tableau suivant indique les combinaisons de mise à niveau du contrôleur prises en charge.</block>
-  <block id="c847f7b69bc5bbe9de608a708803dafc" category="paragraph">Si l'intersection de la ligne *Current Platform* et de la colonne *Target Platform* n'est pas verte, cette procédure ne peut pas être utilisée.</block>
   <block id="96235e4cabe659a051590175116c1e60" category="paragraph">Reportez-vous à la section<block ref="2c4f45f6db308a425e052afade2ba656" category="inline-link-rx"></block> pour les procédures supplémentaires.</block>
-  <block id="8c97e6473cb544145de6aa0144fc60b6" category="inline-link-macro">Procédure de basculement/rétablissement du AFF A700/FAS9500</block>
-  <block id="ddbd6ef13caff567c99b6c907c4fee1c" category="list-text">La mise à niveau des contrôleurs AFF A700/FAS9000 vers les contrôleurs AFF A900/FAS9500 n'est pas présentée dans ce tableau. Cette combinaison est prise en charge à l'aide du <block ref="246d2420012a9cc76fe218ed0d95c813" category="inline-link-macro-rx"></block>.</block>
   <block id="80a030e3352fb989821aa7c6d15bcfad" category="inline-link-macro">Rapport public</block>
-  <block id="9f65944593edc840cbe5ddb177ae6b75" category="list-text">Les mises à niveau du contrôleur à partir des plateformes AFF A300 ou FAS8200 via les ports intégrés 0e et 0f comme connexions FC-VI sont prises en charge uniquement sur les systèmes exécutant des versions ONTAP antérieures à la version 9.9.1. Pour plus d'informations, consultez la <block ref="845e64151c0738e7120f5a63234759b0" category="inline-link-macro-rx"></block>.</block>
-  <block id="2a9c49e8bc60cebb402b316352750e02" category="image-alt">Combinaisons de mise à niveau de contrôleur prises en charge dans les configurations FC</block>
   <block id="9b7868adf853e7eebe0da1408c6ccd24" category="paragraph">Les autres composants de la configuration, tels que les tiroirs de stockage ou les commutateurs, ne peuvent pas être mis à niveau simultanément.</block>
   <block id="a5820aab646669a3b5a9ad826ceaf514" category="list-text">Vous pouvez utiliser cette procédure avec certaines versions de ONTAP :</block>
   <block id="0658afd7b63854a03c773da7890b79c4" category="list-text">Les configurations à deux nœuds sont prises en charge par ONTAP 9.3 et versions ultérieures.</block>
@@ -8463,10 +8422,6 @@
   <block id="3af8c4bc8c1236580221c8d8a69ebe0a" category="list-text">La plateforme cible (nouvelle) doit être un modèle différent de celui de la plateforme d'origine.</block>
   <block id="b93f37f9b29ffcc5ed4a451ba3da2f03" category="list-text">Les modèles de plateforme avec tiroirs internes ne sont pas pris en charge.</block>
   <block id="1105b1e9f2d843b22143dc8f0c9ab49c" category="list-text">Vous pouvez uniquement mettre à niveau des modèles de plate-forme spécifiques en suivant cette procédure dans une configuration MetroCluster IP.</block>
-  <block id="c66499ab9700410fb3d8b3a64e9e291c" category="list-text">Le tableau suivant présente les combinaisons de modèles de plate-forme prises en charge.</block>
-  <block id="986d1720aef5da8bb727fdc9d630f18b" category="list-text">Les modèles de plateforme AFF A320 ne sont pas pris en charge pour la mise à niveau avec des commutateurs IP BES-53248.</block>
-  <block id="4eef8f838c31b644dbfa5638ac4dae43" category="list-text">Les mises à niveau des contrôleurs AFF A700/FAS9000 vers les contrôleurs AFF A900/FAS9500 ne sont pas répertoriées dans ce tableau. Cette combinaison est prise en charge à l'aide du <block ref="246d2420012a9cc76fe218ed0d95c813" category="inline-link-macro-rx"></block>.</block>
-  <block id="dd3dcc697b8eff7c7acdca7e5bb2b62a" category="image-alt">mises à niveau de contrôleur prises en charge mcclip sosb</block>
   <block id="5606659eb62f79273b91080445f7165a" category="list-text">Cette procédure s'applique aux modules de contrôleur dans une configuration MetroCluster IP.</block>
   <block id="4eef4343ca82afa388103a13e5acd0be" category="paragraph">L'exploitation de la configuration MetroCluster avec différents types de contrôleurs n'est pas prise en charge en dehors de cette activité de maintenance.</block>
   <block id="85a877eb6731bf16cfd35e46ab6896fb" category="paragraph">Pour plus d'informations, reportez-vous à la section<block ref="bf137fbaca3418d969a7cbbc6acb278c" category="inline-link-rx"></block>.</block>
@@ -8603,7 +8558,6 @@
   <block id="1a19a64f583970049a90e38276e4d459" category="list-text">Vérifier la configuration MetroCluster depuis les deux sites en configuration MetroCluster :</block>
   <block id="dc2d97a05f4493a33fe850c759870e80" category="summary">La procédure de mise à niveau ou de mise à jour que vous utilisez dépend du modèle de plateforme, de l'étendue de la mise à niveau et du type de configuration MetroCluster.</block>
   <block id="339aff0aa186e93b68d974842b334cfa" category="doc">Commencez ici : vous avez le choix entre une mise à niveau du contrôleur, une mise à jour du système ou une extension</block>
-  <block id="d9072960df90d32fffa3f4db1496457e" category="paragraph">En fonction du périmètre de la mise à niveau de l'équipement, vous avez choisi une procédure de mise à niveau du contrôleur, de mise à jour du système ou d'extension.</block>
   <block id="0fa722347ab16c39e7070989619c6d3a" category="list-text">Les procédures de mise à niveau du contrôleur s'appliquent uniquement aux modules de contrôleur. Les contrôleurs sont remplacés par un nouveau modèle de contrôleur.</block>
   <block id="e9cc835f575fa0eefab2ba42acde2667" category="paragraph">Les modèles de tiroirs de stockage ne sont pas mis à niveau.</block>
   <block id="383a0cf8106e046d5c9ded7717bf77af" category="list-text">Dans le cadre des procédures de basculement et de rétablissement, le basculement MetroCluster est utilisé pour fournir aux clients un service sans interruption pendant la mise à niveau des modules de contrôleur sur le cluster partenaire.</block>
@@ -8687,15 +8641,8 @@
   <block id="42f4edc2efb2c786550a905c38a8416c" category="admonition">S'il n'y a pas d'invite DU CHARGEUR, enregistrez le message d'erreur. Si le système affiche le menu de démarrage, redémarrez et essayez à nouveau d'interrompre le processus de démarrage.</block>
   <block id="af90c7c33f97cc152b46f35af11f2720" category="summary">La procédure de mise à jour que vous utilisez dépend du modèle de plateforme, de l'étendue de la mise à niveau et du type de configuration MetroCluster.</block>
   <block id="c3845446d08fee33d16bfdbbedffdc88" category="doc">Choix d'une méthode de renouvellement du système</block>
-  <block id="67d9ea64d4d1f19a6fa9178bcb2a126b" category="paragraph">La procédure de mise à jour du système que vous utilisez dépend du modèle de plateforme, de l'étendue de la mise à niveau et du type de configuration MetroCluster.</block>
-  <block id="5d113f2038d289f391614c39043629e8" category="cell">Portée</block>
-  <block id="fc392b1e7219ffdf49fa895aa4900b36" category="cell">Type de configuration</block>
-  <block id="013647ab1eb017c353f89f46ca2c0d85" category="cell">Prise en charge de ONTAP</block>
-  <block id="52e51613975499674a3274607c3b2b19" category="list-text">Périmètre : plateforme (modules de contrôleurs) et tiroirs de stockage</block>
   <block id="398ab86a6e7a78acb117ab7d140d06d6" category="list-text">Méthode : développez la configuration MetroCluster, puis supprimez les anciens nœuds</block>
   <block id="76f5c0ad19e3d42c56b6ba3174176fe1" category="inline-link-macro">Mise à jour d'une configuration FC MetroCluster à quatre nœuds</block>
-  <block id="3fc1a5f7c0561e78aaeef2b4231bca4f" category="paragraph"><block ref="3fc1a5f7c0561e78aaeef2b4231bca4f" category="inline-link-macro-rx"></block></block>
-  <block id="25101db8425d5c0bc04e6d109223fd02" category="paragraph"><block ref="25101db8425d5c0bc04e6d109223fd02" category="inline-link-macro-rx"></block></block>
   <block id="92cd5d9ebac9fdf7caa166577c77bc29" category="summary">L'extension d'une configuration FC MetroCluster à deux nœuds à une configuration FC MetroCluster à quatre nœuds implique d'ajouter un contrôleur à chaque cluster pour former une paire haute disponibilité sur chaque site MetroCluster, puis d'actualiser la configuration FC MetroCluster.</block>
   <block id="676c8bf504860fd59331b48d36dee409" category="list-text">Les nœuds doivent exécuter ONTAP 9 ou version ultérieure dans une configuration FC MetroCluster.</block>
   <block id="c92e9742dae3434e2a97b92c653feb47" category="list-text">Si les plateformes de votre configuration à deux nœuds ne sont pas prises en charge dans ONTAP 9.2 et que vous envisagez une mise à niveau vers des plateformes prises en charge dans ONTAP 9.2 _et_ étendre vers un cluster à quatre nœuds, vous devez mettre à niveau les plateformes de la configuration à deux nœuds _avant_ d'étendre la configuration MetroCluster FC.</block>
@@ -8823,11 +8770,8 @@
   <block id="5a3351d0775d8d61b04de20cd87c7191" category="paragraph"><block ref="03934095bd27f1b42b336dffb38d392f" prefix="" category="inline-code"></block></block>
   <block id="0086e860c9e46f6ab31793ca6d565c3b" category="list-text">Une fois l'assistant *Cluster Setup* terminé et qu'il quitte, vérifiez que le cluster est actif et que le nœud fonctionne correctement :</block>
   <block id="fae6bfcb094f1b66307d8fb8df61d369" category="paragraph">S'il est nécessaire de modifier les paramètres que vous avez saisis pour le SVM admin ou le SVM node, vous pouvez accéder à l'assistant *Cluster Setup* en utilisant le<block ref="e7b4220f08514c4b215d35c3f6967167" prefix=" " category="inline-code"></block>.</block>
-  <block id="cb7debfd6008e33f68615f75d3145513" category="summary">Informations sur les droits d'auteur, les marques commerciales et les machines, les traductions du Guide de mise à niveau, de transition et d'extension MetroCluster.</block>
   <block id="c305ce21377f146200c5e9ef13536599" category="summary">Vous pouvez utiliser ce basculement automatisé MetroCluster dans nos guides pour effectuer une mise à niveau du contrôleur sans interruption dans le cas d'une configuration MetroCluster FC à quatre nœuds.</block>
   <block id="66c25daffc009801ab74d25814bedafb" category="paragraph">Vous pouvez utiliser ce basculement automatisé MetroCluster dans nos guides pour effectuer une mise à niveau du contrôleur sans interruption sur une configuration MetroCluster FC à quatre nœuds. Dans le cadre de cette procédure, d'autres composants (tels que des tiroirs de stockage ou des commutateurs) ne peuvent pas être mis à niveau.</block>
-  <block id="362eddecd5ba3f79183ea3b743c4526c" category="paragraph">Le tableau suivant indique les combinaisons de modèles de contrôleur prises en charge.</block>
-  <block id="bf65ff1f2c88ec7d1999086f6c8ba8ea" category="list-text">Les mises à niveau à partir des plateformes AFF A300 ou FAS8200 via les ports intégrés 0e et 0f comme connexions FC-VI sont prises en charge uniquement sur les systèmes exécutant des versions ONTAP antérieures à la version 9.9.1. Pour plus d'informations, consultez la <block ref="845e64151c0738e7120f5a63234759b0" category="inline-link-macro-rx"></block>.</block>
   <block id="6cd89c0a24f678f7acedd8c76ccac487" category="list-text">Cette procédure s'applique aux modules de contrôleur dans une configuration FC MetroCluster à quatre nœuds.</block>
   <block id="09a0c3b49fdf8f3d3d97fd599ba851dc" category="list-text">Ces plateformes doivent exécuter ONTAP 9.10.1 ou une version ultérieure.</block>
   <block id="0e490704226a6f678e043e59eee46210" category="inline-link">Utilisez les commandes « system contrôleur replace » pour mettre à niveau le matériel du contrôleur exécutant ONTAP 9.8 ou une version ultérieure</block>
@@ -8983,8 +8927,6 @@
   <block id="dedcc0638aa1bf3276ae388ea4613c81" category="summary">Depuis ONTAP 9.8, vous pouvez mettre à niveau les contrôleurs et le stockage dans une configuration IP MetroCluster à quatre nœuds en étendant la configuration pour devenir une configuration temporaire à huit nœuds, puis en supprimant l'ancien groupe de reprise après incident.</block>
   <block id="147cf28bb435c696edc54db7c4d19273" category="list-text">Si vous mettez à niveau les commutateurs IP, ils doivent être mis à niveau avant d'effectuer cette procédure de mise à jour.</block>
   <block id="97544c597d5047c89f8d806033395de8" category="list-text">Les références aux « anciens nœuds » désignent les nœuds que vous souhaitez remplacer.</block>
-  <block id="1f97a710da6fbb3cde26846701fd10e0" category="list-text">Cette procédure n'est pas prise en charge sur les systèmes AFF A320 configurés avec des commutateurs Broadcom BES-53248.</block>
-  <block id="d7cccafb4df9b0ac0b83e89d61285a81" category="list-text">Cette procédure n'est pas prise en charge par les systèmes FAS2750, AFF A220, FAS500f et A250.</block>
   <block id="c07217a12145454189c265ecf5f40173" category="list-text">Collecte des informations des anciens nœuds.</block>
   <block id="220023d80ca24d69e962de981075e392" category="paragraph">À ce stade, la configuration à quatre nœuds apparaît comme illustré sur l'image suivante :</block>
   <block id="bcf9f8bb6be3a3d38d87e026dd4cfe95" category="image-alt">mcc dr groupe a</block>
@@ -9046,9 +8988,6 @@
   <block id="3e8fdd40da1578fb2a4b45209a4f63c5" category="list-text">Effectuez toutes les étapes de la section<block ref="fe6e57ca921017b547e49e0f385e2ca7" category="inline-link-rx"></block>.</block>
   <block id="77ea2d02d900614e0cd0117f920d3510" category="inline-link">Suppression des LIFs SAN des nœuds d'origine</block>
   <block id="d40cb1d255ffbf920b82077655761954" category="list-text">Effectuez toutes les étapes de la section<block ref="de6e057f7eef868ca5fb52c843a52d68" category="inline-link-rx"></block>.</block>
-  <block id="4d3c695f9939143bace5ffd58dc7d269" category="summary">Informations de traduction automatique pour le Guide de mise à niveau, de transition et d'extension MetroCluster.</block>
-  <block id="d0adaf602e73b54e5ed4fca02915a8c2" category="inline-link">Avis de non-responsabilité concernant la traduction automatique</block>
-  <block id="9d5c01825c136f7f2d4457afa4f41770" category="paragraph">Voir les informations importantes concernant le contenu localisé à l'adresse<block ref="f07125fb97264bd7aeb45160d145d34f" category="inline-link-rx"></block></block>
   <block id="b330eebf161ca27c703eccf6e8e36d29" category="summary">Vous pouvez ajouter quatre nouveaux nœuds à la configuration IP MetroCluster en tant que second groupe DR. Cela crée une configuration MetroCluster à huit nœuds.</block>
   <block id="a8307b4c5fa271005a1338d5b405ca1f" category="paragraph">Depuis ONTAP 9.9.1, vous pouvez ajouter quatre nouveaux nœuds à la configuration IP de MetroCluster en tant que second groupe de reprise après incident. Cela crée une configuration MetroCluster à huit nœuds.</block>
   <block id="44e7e75e628cd7549a2dac175d45b418" category="list-text">L'ancien et le nouveau nœud doivent exécuter la même version de ONTAP.</block>
@@ -11776,10 +11715,6 @@
   <block id="7d327c8684dadf853cfb8ee6a8c362c8" category="summary">La création d'un plan détaillé de votre configuration MetroCluster vous aide à comprendre les exigences uniques d'une configuration MetroCluster qui utilise des LUN sur des baies de stockage. L'installation d'une configuration MetroCluster implique la connexion et la configuration d'un certain nombre de périphériques, qui peuvent être effectués par des personnes différentes. Par conséquent, ce plan vous aide également à communiquer avec d'autres personnes impliquées dans l'installation.</block>
   <block id="a3d19320c14020f923dda13e7501b231" category="doc">Planification d'une configuration MetroCluster avec des LUN de baies</block>
   <block id="da677daf9723918166ed931256a804a8" category="image-alt">installation et configuration du matériel dans le flux de travail fabric à 4 nœuds ou 2 nœuds</block>
-  <block id="44736a1d7cbc47ca3c352d26f21c493a" category="summary">Ce guide explique comment installer et configurer les composants matériels et logiciels de MetroCluster dans une configuration Fabric.</block>
-  <block id="0d258df3b9e4e8a2039306e0ce7265cf" category="paragraph">Vous devez utiliser ce guide pour planifier, installer et configurer une configuration MetroCluster Fabric-Attached dans les cas suivants :</block>
-  <block id="1011922596834fad03cbfa79b8eea6de" category="list-text">Vous souhaitez connaître l'architecture d'une configuration MetroCluster FAS.</block>
-  <block id="3871b5c010a2e068a625e5d358ef749a" category="list-text">Vous souhaitez connaître les exigences et les bonnes pratiques pour configurer une configuration MetroCluster Fabric-Attached.</block>
   <block id="81f0867bac9efadacfd599f0fb66c839" category="summary">La configuration MetroCluster prend en charge les installations avec des tiroirs disques natifs (NetApp) uniquement, des LUN de baies ou une combinaison des deux.</block>
   <block id="8e98ddf5c7184de31606d8ca05864c67" category="doc">Considérations relatives aux configurations MetroCluster avec tiroirs disques natifs ou LUN de baies</block>
   <block id="b75a46fc53502d73a9aba497366b09e6" category="paragraph">Les systèmes AFF ne prennent pas en charge les LUN de baies.</block>
@@ -12625,15 +12560,12 @@
   <block id="5a69fa1449aae2c79c9f8761cf5479f0" category="sidebar">Transition sans interruption lorsque les tiroirs existants ne sont pas pris en charge sur les nouveaux contrôleurs (ONTAP 9.8 et versions ultérieures)</block>
   <block id="8b14ac67ef74cc428a5084bf0fc422b5" category="sidebar">Déplacez une charge de travail SAN FC des nœuds FC MetroCluster vers les nœuds IP MetroCluster</block>
   <block id="7dc9e3aa635e299178bab6d9a48bf453" category="sidebar">Déplacez les hôtes iSCSI Linux des nœuds FC MetroCluster vers les nœuds IP MetroCluster</block>
-  <block id="e4005417f8696e4a4da8df0b2f48d4fd" category="sidebar">Mettez à niveau ou développez la configuration MetroCluster</block>
   <block id="cc4c5c397558976c3fb0387232297737" category="sidebar">Commencez ici : choisissez votre procédure</block>
   <block id="db267dea88bedafa5679df8ad5247270" category="sidebar">Choix entre la mise à niveau du contrôleur, l'actualisation du système ou l'extension</block>
   <block id="676a1a7f93fd600585d02e62f2d0a51b" category="sidebar">Choisissez la procédure de mise à niveau du contrôleur</block>
   <block id="62cbee147331935911956f9a0173e5dc" category="sidebar">Choisissez la procédure d'actualisation du système</block>
   <block id="3cf7b8011f891632a5de191822ee417b" category="sidebar">Mise à niveau des contrôleurs dans le système MetroCluster FC à l'aide du basculement et du rétablissement</block>
-  <block id="00dc868cd4449d840bca045060dbf7cb" category="sidebar">Mise à niveau des contrôleurs (AFF A700/FAS9000 vers AFF A900/FAS9500) dans le système FC MetroCluster au sein d'un système FC MetroCluster via le basculement et le rétablissement (ONTAP 9.10.1 ou version ultérieure)</block>
   <block id="ebd157c1e8defc9bf33ac98105172329" category="sidebar">Mise à niveau des contrôleurs sur le FC MetroCluster à quatre nœuds via le basculement et le rétablissement avec des commandes « remplacement du contrôleur système » (ONTAP 9.10.1 et versions ultérieures)</block>
-  <block id="31214012750b888cbecfe6100ea9a335" category="sidebar">Mise à niveau des contrôleurs dans MetroCluster IP à l'aide du basculement et du rétablissement (ONTAP 9.8 et versions ultérieures)</block>
   <block id="0f0bf8d23aa860be830e25b6f1b90c86" category="sidebar">Mise à niveau des contrôleurs (AFF A700/FAS9000 vers AFF A900/FAS9500) dans MetroCluster IP avec basculement et rétablissement (ONTAP 9.10.1 ou version ultérieure)</block>
   <block id="34e0a85e8dfaaeca6dadc1260cdef2ae" category="sidebar">Actualisez une configuration FC MetroCluster à quatre nœuds</block>
   <block id="30836d6051134105cf07f488afe11425" category="sidebar">Actualiser une configuration IP MetroCluster à quatre nœuds (ONTAP 9.8 et versions ultérieures)</block>
@@ -12834,4 +12766,83 @@
   <block id="68d8047cbf72a612dd739f574baa912c" category="paragraph">Toute configuration ou fonctionnalité qui nécessite que les connexions locales du cluster soient connectées à un commutateur ne peut pas être utilisée. Par exemple, les configurations et procédures suivantes ne peuvent pas être utilisées avec un commutateur conforme à MetroCluster :</block>
   <block id="999a0234ad26235f40e860b0131203f6" category="admonition">Des valeurs manquantes indiquent que la plateforme ne peut pas être utilisée avec un switch compatible MetroCluster.</block>
   <block id="e6e94fa732001e55f7fcf67c01c5f249" category="paragraph">Vous devrez peut-être configurer un commutateur qui possède un trafic MetroCluster sur un ISL, mais qui ne se connecte pas à une interface MetroCluster. Dans ce cas, le trafic est déjà classé et ne doit être mappé qu'à la file d'attente appropriée. Dans l'exemple suivant, tout le trafic COS5 est mappé à la classe RDMA, et tout le trafic COS4 est mappé à la classe iSCSI. Notez que cela affectera *tout* du trafic COS5 et COS4, pas seulement le trafic MetroCluster. Si vous ne souhaitez mapper le trafic MetroCluster que, vous devez utiliser les cartes de classes ci-dessus pour identifier le trafic à l'aide des groupes d'accès.</block>
+  <block id="09d852286694a04fbe67a38fda6ca956" category="image-alt">matrice de transition ip fc de MetroCluster</block>
+  <block id="421c8863e1f7223f216aacf99393b7dd" category="list-text">Remarque 1 : cette combinaison de plateformes nécessite ONTAP 9.11.1 ou une version ultérieure.</block>
+  <block id="234207cc1f3002485022da1892b4559b" category="list-text">Remarque 2 : vous devez disposer d'une interface 40 GbE pour les interfaces de cluster locales sur les nœuds FC.</block>
+  <block id="6ae32e231af4316f91162f3b9a761e43" category="list-text">Remarque 3 : une interface de 100 GbE est nécessaire pour les interfaces de cluster locales sur les nœuds FC.</block>
+  <block id="60ddbd1babdd945c26fbc431202fea6c" category="inline-link-macro">Hardware Universe</block>
+  <block id="f90dfbd0dbb63ace6227bf8f3e75efb6" category="admonition">Ne dépassez pas les limites d'objet du « bas » des plates-formes de la combinaison. Appliquez la limite inférieure des objets des deux plates-formes. Reportez-vous à la <block ref="62911b0739c1772914819ee9e7282ee4" category="inline-link-macro-rx"></block> pour les limites de plateforme.</block>
+  <block id="6e2ee39d0f9ccdad593782674a048e67" category="inline-link-macro">Lien vers la procédure</block>
+  <block id="7fcdce91feb430306391667c0a012cd7" category="paragraph"><block ref="7fcdce91feb430306391667c0a012cd7" category="inline-link-macro-rx"></block></block>
+  <block id="0a623e8d3b5ae84e14f2fe4f454a3abb" category="paragraph"><block ref="0a623e8d3b5ae84e14f2fe4f454a3abb" category="inline-link-macro-rx"></block></block>
+  <block id="8435af9be97e0c50b0d730d64b42f198" category="paragraph"><block ref="8435af9be97e0c50b0d730d64b42f198" category="inline-link-macro-rx"></block></block>
+  <block id="f7080628c8d078c209fb6b6b18f03a3a" category="paragraph"><block ref="f7080628c8d078c209fb6b6b18f03a3a" category="inline-link-macro-rx"></block></block>
+  <block id="4975610bd246038bf0371f5dff472f85" category="list-text">Vous pouvez uniquement actualiser des modèles de plateforme spécifiques en suivant cette procédure dans une configuration MetroCluster FC.</block>
+  <block id="837991be7d2221d6599e3d88efd529fd" category="list-text">Pour en savoir plus sur les combinaisons de mise à niveau de plateforme prises en charge, consultez le tableau de mise à jour FC MetroCluster dans <block ref="098d9a9640b5298b40bdef0da63bc459" category="inline-link-macro-rx"></block>.</block>
+  <block id="0defe01fed70ecdf301ed45ee130f658" category="list-text">Pour en savoir plus sur les combinaisons de mise à niveau de plateforme prises en charge, consultez le tableau des mises à niveau FC MetroCluster dans <block ref="5e51ded3128b8f60bc0b91c41dccbb25" category="inline-link-macro-rx"></block>.</block>
+  <block id="7aeedda5f35486a7239b2a68ae68fb9a" category="paragraph">En fonction du périmètre de la mise à niveau de l'équipement, le client choisit une procédure de mise à niveau du contrôleur, de mise à jour du système ou d'extension.</block>
+  <block id="959c17d1eadff13225c68a5578c6da93" category="paragraph">La procédure de mise à niveau du contrôleur que vous utilisez dépend du modèle de plate-forme et du type de configuration MetroCluster.</block>
+  <block id="822ff8bdadd23c839b2a13dbdf0af776" category="paragraph">Dans le cadre d'une procédure de mise à niveau, les contrôleurs sont remplacés par un nouveau modèle de contrôleur. Les modèles de tiroirs de stockage ne sont pas mis à niveau.</block>
+  <block id="8ddc003a58eb9422a54e43b4cfe03f2e" category="list-text">Dans le cadre des procédures de basculement et de rétablissement, le basculement MetroCluster est utilisé pour fournir aux clients un service sans interruption pendant la mise à niveau des modules de contrôleur sur le cluster partenaire.</block>
+  <block id="789c52582d523f3977d636da81e92dc0" category="list-text">Dans le cadre d'une procédure de mise à niveau du contrôleur basée sur le transfert d'agrégats, les opérations de transfert d'agrégats servent à déplacer des données de l'ancienne configuration vers la nouvelle configuration mise à niveau, et ce sans interruption.</block>
+  <block id="316cc41a2ded57b927048db5915a847f" category="section-title">Sélection de la procédure utilisant le processus de basculement et de rétablissement</block>
+  <block id="310848f15048cc78b3cbee9c61235054" category="paragraph">Sélectionnez votre plateforme actuelle dans le tableau FC ou IP ci-dessous. Si l'intersection de la ligne de plateforme actuelle et de la colonne de plateforme cible est vide, la mise à niveau n'est pas prise en charge.</block>
+  <block id="569cf9bf2c0f655af1cc3b1657f11706" category="section-title">Mises à niveau du contrôleur IP MetroCluster prises en charge</block>
+  <block id="540ce52d50e838f18565d459be99ad07" category="image-alt">tableau de mise à niveau ip de MetroCluster</block>
+  <block id="871aaccc4c0a59b618736750595955e7" category="list-text">Remarque 1 : pour cette mise à niveau, utilisez la procédure <block ref="f668bd1de55e6e087edcf0e6120e96e3" category="inline-link-macro-rx"></block></block>
+  <block id="59710baa552439a5c3866c2907720be7" category="section-title">Mises à niveau prises en charge du contrôleur MetroCluster FC</block>
+  <block id="4c3f5a4336bfad25061595eaff859835" category="image-alt">tableau de mise à niveau MetroCluster fc</block>
+  <block id="9ae1fbeadb6e0efc4e024384fb8a4f8d" category="inline-link">Article de la base de connaissances</block>
+  <block id="6bd20d1a4e5bd1d6bed1627ed32e934c" category="list-text">Remarque 1 : pour mettre à niveau les contrôleurs lorsque des connexions FCVI sur les nœuds FAS8020 ou AFF8020 existants utilisent les ports 1c et 1D, voir ci-dessous<block ref="058c6692589b3956d6bd485ac9c6cea6" category="inline-link-rx"></block>.</block>
+  <block id="67be5a03851a4b6d9deae18ad49f328e" category="list-text">Remarque 2 : les mises à niveau du contrôleur depuis les plateformes AFF A300 ou FAS8200 via les ports intégrés 0e et 0f comme connexions FC-VI sont prises en charge uniquement sur les systèmes exécutant ONTAP 9.9.1. ou plus tôt. Pour plus d'informations, consultez la <block ref="54dac02f94a6488bb50eb2223b2531dc" category="inline-link-macro-rx"></block>.</block>
+  <block id="24e0de0a456339a0645a68e87b1bd30e" category="list-text">Remarque 3 : pour cette mise à niveau, voir <block ref="d4055a630aa0f5dfe07651f60a376ff8" category="inline-link-macro-rx"></block></block>
+  <block id="2a4d011a1daa1baf70a0642eaa186c4b" category="cell">Méthode de mise à niveau</block>
+  <block id="5fad8e8329f6ac022801d63699f46933" category="paragraph">Mise à niveau par les commandes « System Controller replace »</block>
+  <block id="6987ada6ea28beb46126004956a5b490" category="paragraph"><block ref="6987ada6ea28beb46126004956a5b490" category="inline-link-macro-rx"></block></block>
+  <block id="38300c3bac1d8ea373eab8d253e6145a" category="paragraph">Mise à niveau manuelle avec les commandes de l'interface de ligne de commande (AFF A700/FAS9000 vers AFF A900/FAS9500 uniquement)</block>
+  <block id="728a0a50f7a8d4bbdbdba3c233f966ba" category="paragraph"><block ref="728a0a50f7a8d4bbdbdba3c233f966ba" category="inline-link-macro-rx"></block></block>
+  <block id="0eed08e9bdf744019f74d44b9f20dfb9" category="paragraph"><block ref="0eed08e9bdf744019f74d44b9f20dfb9" category="inline-link-macro-rx"></block></block>
+  <block id="cfe38c12e0e54947d3f0085a1ddb68cc" category="paragraph">Mise à niveau manuelle avec les commandes CLI</block>
+  <block id="5f290ae29562085cc0cef01e0f484b1d" category="paragraph"><block ref="5f290ae29562085cc0cef01e0f484b1d" category="inline-link-macro-rx"></block></block>
+  <block id="28d9d9e03b64356e498c630e744a9cdf" category="paragraph"><block ref="28d9d9e03b64356e498c630e744a9cdf" category="inline-link-macro-rx"></block></block>
+  <block id="0feef50dfeaf08303a2284d2c2ff6eb4" category="cell">Transfert d'agrégats</block>
+  <block id="5c6fc64fa41aef579f27097f378325cb" category="paragraph">À l'aide de<block ref="616743bfa4fd61d558c556fe614cb2e9" prefix=" " category="inline-code"></block> Commandes et permutation du module de contrôleur et de la NVM (mise à niveau de AFF A700 vers AFF A900 uniquement)</block>
+  <block id="38a031e8dad2eab70ea05c570be3935e" category="paragraph"><block ref="38a031e8dad2eab70ea05c570be3935e" category="inline-link-rx"></block></block>
+  <block id="b80a36d83825959bd2fd92ffd36709e2" category="paragraph"><block ref="b80a36d83825959bd2fd92ffd36709e2" category="inline-link-rx"></block></block>
+  <block id="ddf68ce76cf70c3d2061e221edeb7ae1" category="paragraph"><block ref="ddf68ce76cf70c3d2061e221edeb7ae1" category="inline-link-rx"></block></block>
+  <block id="c5785d86411f0791086e0d729d92ea59" category="paragraph"><block ref="c5785d86411f0791086e0d729d92ea59" category="inline-link-rx"></block></block>
+  <block id="549e0180633c51bff766e9cab2aff418" category="paragraph"><block ref="549e0180633c51bff766e9cab2aff418" category="inline-link-rx"></block></block>
+  <block id="64902df2f40b54af9303ee162076af7e" category="summary">La procédure d'extension que vous utilisez dépend du type de configuration MetroCluster et de la version de ONTAP.</block>
+  <block id="1183f26be758aca1cf3787bcad5b2010" category="doc">Choisissez une procédure d'extension</block>
+  <block id="81d18a4a40082c66f7427c3072b68b70" category="paragraph">Une procédure d'extension implique l'ajout de nouveaux contrôleurs et de nouveaux espaces de stockage à la configuration MetroCluster. L'extension doit maintenir un nombre pair de contrôleurs sur chaque site et la procédure que vous utilisez dépend du nombre de nœuds de la configuration MetroCluster d'origine.</block>
+  <block id="191defc94e935558055aed94783f83cd" category="cell">Méthode d'expansion</block>
+  <block id="1524ad20c3fd28d8be25c8ad8d2fc9d2" category="paragraph">Méthode : développez un MetroCluster FC à deux nœuds sur quatre</block>
+  <block id="cb1f599e33d405f2e405bf5dcc417b42" category="paragraph">FC à deux nœuds</block>
+  <block id="181f531f788750976228c482da035402" category="paragraph">ONTAP 9 et versions ultérieures (les plateformes doivent être prises en charge dans ONTAP 9.2 et versions ultérieures)</block>
+  <block id="c8fb72f7499472fd24b7dac46ac4853e" category="paragraph"><block ref="c8fb72f7499472fd24b7dac46ac4853e" category="inline-link-macro-rx"></block></block>
+  <block id="b83dcb0f1eec7f7e3a880861759b8457" category="paragraph">Méthode : développez un MetroCluster FC à quatre nœuds sur huit</block>
+  <block id="433017d17528a810ab08685208c4e37d" category="paragraph">FC à quatre nœuds</block>
+  <block id="8e7028c1d5cca9b6e9570057bb3dde62" category="paragraph">ONTAP 9 ou version ultérieure</block>
+  <block id="1d129a73cb0ea5574fdfc1bd5db8aacf" category="paragraph"><block ref="1d129a73cb0ea5574fdfc1bd5db8aacf" category="inline-link-macro-rx"></block></block>
+  <block id="860f46e358c27f8c3e11d77767b6e377" category="paragraph">Méthode : développez une adresse IP MetroCluster à quatre nœuds sur huit</block>
+  <block id="f75b229104808ecf96fca33d4778f2a8" category="paragraph">IP à quatre nœuds</block>
+  <block id="1ff96f961a0386158191fbc0f4fb218b" category="paragraph">ONTAP 9.9.1 et versions ultérieures</block>
+  <block id="f775e4c4edc895975c9cd478e2a512c1" category="paragraph"><block ref="f775e4c4edc895975c9cd478e2a512c1" category="inline-link-macro-rx"></block></block>
+  <block id="cc6f5bdcaa380f5a02b85aa487423648" category="list-text">Pour plus d'informations sur les combinaisons de mise à niveau de plate-forme prises en charge, consultez le tableau de mise à niveau IP MetroCluster dans <block ref="a934c7831e4c0e5d9741460d2b55f4b9" category="inline-link-macro-rx"></block>.</block>
+  <block id="5f565b56a7ba868b460ab51ab73790d6" category="paragraph">Reportez-vous à la section<block ref="6ddc20d2276dd2fc9d58822a83f46769" category="inline-link-rx"></block> pour les procédures supplémentaires.</block>
+  <block id="3cdc2ade26b9bc4adc9df14235e19c7e" category="paragraph">La procédure de mise à jour du système que vous utilisez dépend du modèle de plate-forme et du type de configuration MetroCluster. Les procédures de mise à jour s'appliquent aux contrôleurs et aux tiroirs de stockage. Dans les procédures de mise à jour, de nouveaux contrôleurs et tiroirs sont ajoutés à la configuration MetroCluster, créant un deuxième groupe de reprise sur incident. Ensuite, les données sont migrées sans interruption vers les nouveaux nœuds. Les contrôleurs d'origine sont ensuite retirés du cluster.</block>
+  <block id="d0b28fd083b63a9e12330f486ca47625" category="section-title">Combinaisons de mise à jour technologique MetroCluster FC prises en charge</block>
+  <block id="88ea8505ba0420be98c64dcb7f91e23c" category="image-alt">mise à jour technologique MetroCluster fc</block>
+  <block id="094d92c3e06727b6e6ff0d7a8d541bef" category="list-text">Assurez-vous de terminer la procédure de mise à jour technologique avant d'ajouter une nouvelle charge.</block>
+  <block id="cfd1300cd3db131e8f69dc38177b5658" category="section-title">Combinaisons de mise à jour technologique MetroCluster IP prises en charge</block>
+  <block id="5a19a72f15dc5e9ad6e2a4e964365ace" category="image-alt">mise à jour technologique de MetroCluster ip</block>
+  <block id="ad06b1bad80df72d4f2fa24312c0a9bf" category="cell">Méthode de rafraîchissement</block>
+  <block id="56ad29882b1f5aa7a765e42a0bd3ca97" category="paragraph"><block ref="56ad29882b1f5aa7a765e42a0bd3ca97" category="inline-link-macro-rx"></block></block>
+  <block id="65fc2b3acec6ee29de6484f084e9ad51" category="paragraph">Vous pouvez mettre à niveau certaines plateformes en utilisant l'opération de basculement et de rétablissement dans une configuration MetroCluster FC.</block>
+  <block id="7c5f3ae5aa1416c77224608ca167ed4c" category="paragraph">Pour en savoir plus sur les combinaisons de mise à niveau de plateforme prises en charge, consultez le tableau des mises à niveau FC MetroCluster dans <block ref="5e51ded3128b8f60bc0b91c41dccbb25" category="inline-link-macro-rx"></block>.</block>
+  <block id="453e7486fdad67f2f92e437e6af495ee" category="list-text">Pour plus d'informations sur les combinaisons de mise à niveau de plate-forme prises en charge, consultez la table de mise à jour IP MetroCluster dans <block ref="9900dd3b59a39c700581c58c1a5bd91b" category="inline-link-macro-rx"></block>.</block>
+  <block id="524f05419622851f7f6289320cc91a6e" category="sidebar">Mettez à niveau, actualisez ou développez la configuration MetroCluster</block>
+  <block id="81cce2035bed6113b6ccecaeb9cf25a9" category="sidebar">Choisissez la procédure d'extension</block>
+  <block id="6ff6555fd4c104df84532572f5435476" category="sidebar">Mise à niveau des contrôleurs (AFF A700/FAS9000 vers AFF A900/FAS9500) dans le système FC MetroCluster au sein d'un système FC MetroCluster via le basculement et le rétablissement (ONTAP 9.10.1 ou version ultérieure)</block>
+  <block id="87663f3a8212644181733b0573eae80d" category="sidebar">Mise à niveau des contrôleurs dans MetroCluster IP à l'aide du basculement et du rétablissement (ONTAP 9.8 et versions ultérieures)</block>
 </blocks>
