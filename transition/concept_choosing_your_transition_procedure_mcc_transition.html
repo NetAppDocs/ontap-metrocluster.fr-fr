@@ -2031,8 +2031,6 @@
 
 
 
-
-
     
       <ul class="subfolders" style="display:none;">
         <li class="pdf-ux-container">
@@ -2202,11 +2200,11 @@
           
           <a target="_blank" 
             
-              href="/fr-fr/ontap-metrocluster/pdfs/sidebar/Mettez_à_niveau_ou_développez_la_configuration_MetroCluster.pdf" 
+              href="/fr-fr/ontap-metrocluster/pdfs/sidebar/Mettez_à_niveau__actualisez_ou_développez_la_configuration_MetroCluster.pdf" 
             
           >
             <img src="/fr-fr/ontap-metrocluster/images/pdf.png" alt="" width="16" height="16"/>
-            Mettez à niveau ou développez la configuration MetroCluster
+            Mettez à niveau, actualisez ou développez la configuration MetroCluster
           </a>
           
 
@@ -2225,6 +2223,8 @@
             Commencez ici : choisissez votre procédure
           </a>
           
+
+
 
 
 
@@ -5016,13 +5016,6 @@
         Choisissez la procédure de transition
       </a></li><li 
       data-pdf-exists="true" 
-      data-pdf-filename="Plateformes prises en charge pour une transition sans interruption"
-      data-li-level="2#" 
-      class=" "
-    ><a class="na-navbar-padding" href="/fr-fr/ontap-metrocluster/transition/concept_supported_platforms_for_transition.html">
-        Plateformes prises en charge pour une transition sans interruption
-      </a></li><li 
-      data-pdf-exists="true" 
       data-pdf-filename="Transition sans interruption d'une configuration MetroCluster FC vers une configuration MetroCluster IP (ONTAP 9.8 et versions ultérieures)"
       data-li-level="2" 
       class="subfolders "
@@ -5276,11 +5269,11 @@
         Où trouver des informations complémentaires
       </a></li></ul></li><li 
       data-pdf-exists="true" 
-      data-pdf-filename="Mettez à niveau ou développez la configuration MetroCluster"
+      data-pdf-filename="Mettez à niveau, actualisez ou développez la configuration MetroCluster"
       data-li-level="1" 
       class="subfolders "
     ><a href="#">
-        <div class="na-navbar-padding"> Mettez à niveau ou développez la configuration MetroCluster</div>
+        <div class="na-navbar-padding"> Mettez à niveau, actualisez ou développez la configuration MetroCluster</div>
       </a>
       <ul style="display: none;">
         <li 
@@ -5313,6 +5306,13 @@
       class=" "
     ><a class="na-navbar-padding" href="/fr-fr/ontap-metrocluster/upgrade/concept_choosing_tech_refresh_mcc.html">
         Choisissez la procédure d'actualisation du système
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Choisissez la procédure d'extension"
+      data-li-level="3#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/fr-fr/ontap-metrocluster/upgrade/concept_choosing_expansion_method_mcc.html">
+        Choisissez la procédure d'extension
       </a></li></ul></li><li 
       data-pdf-exists="true" 
       data-pdf-filename="Mise à niveau des contrôleurs dans le système MetroCluster FC à l'aide du basculement et du rétablissement"
@@ -6155,7 +6155,7 @@
 <p class="page-details">
   
     
-    <time datetime="2022-11-15 12:12:06 +0000">11/15/2022</time>
+    <time datetime="2022-12-22 17:39:55 +0000">12/22/2022</time>
     
   
 
@@ -6165,7 +6165,48 @@
 
 </p>
 
+<div id="preamble">
+<div class="sectionbody">
 <div class="paragraph lead">
+<p>Lors de votre transition vers une configuration MetroCluster IP, vous devez avoir une combinaison de modèles de plateforme pris en charge. Vous devez également vous assurer que la plateforme IP MetroCluster est une taille appropriée pour la charge que vous passez de la configuration FC MetroCluster à la configuration IP MetroCluster.</p>
+</div>
+<div class="paragraph">
+<p>Le tableau suivant présente les combinaisons de plates-formes prises en charge. Vous pouvez passer des plates-formes de la colonne de gauche à des plates-formes répertoriées comme pris en charge dans les colonnes de droite, comme indiqué par les cellules de tableau colorées.</p>
+</div>
+<div class="paragraph">
+<p>Par exemple, le passage d&#8217;une configuration FC MetroCluster composée de modules de contrôleur AFF8060 à une configuration IP composée de modules de contrôleur AFF A400 est pris en charge.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../media/metrocluster_fc_ip_transition_matrix.png" alt="matrice de transition ip fc de MetroCluster">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Remarque 1 : cette combinaison de plateformes nécessite ONTAP 9.11.1 ou une version ultérieure.</p>
+</li>
+<li>
+<p>Remarque 2 : vous devez disposer d&#8217;une interface 40 GbE pour les interfaces de cluster locales sur les nœuds FC.</p>
+</li>
+<li>
+<p>Remarque 3 : une interface de 100 GbE est nécessaire pour les interfaces de cluster locales sur les nœuds FC.</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<img src="/us-en/ontap-metrocluster/images/note.svg" alt="Note">
+</td>
+<td class="content">
+Ne dépassez pas les limites d&#8217;objet du « bas » des plates-formes de la combinaison. Appliquez la limite inférieure des objets des deux plates-formes. Reportez-vous à la <a href="https://hwu.netapp.html" target="_blank" rel="noopener">"Hardware Universe"</a> pour les limites de plateforme.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
 <p>Vous devez sélectionner une procédure de transition selon votre configuration MetroCluster FC existante.</p>
 </div>
 <div class="paragraph">
@@ -6199,7 +6240,7 @@
 <p>Les nouveaux tiroirs de stockage sont pris en charge sur les nouvelles plateformes.</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a href="concept_requirements_for_fc_to_ip_transition_mcc.html">"Transition sans interruption d&#8217;une configuration MetroCluster FC vers une configuration MetroCluster IP (ONTAP 9.8 et versions ultérieures)"</a></p>
+<p><a href="concept_requirements_for_fc_to_ip_transition_mcc.html">"Lien vers la procédure"</a></p>
 </div></div></td>
 </tr>
 <tr>
@@ -6213,7 +6254,7 @@
 <p>Les nouveaux tiroirs de stockage sont pris en charge sur les plateformes d&#8217;origine comme sur les nouvelles.</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a href="task_disruptively_transition_from_a_two_node_mcc_fc_to_a_four_node_mcc_ip_configuration.html">"Transition sans interruption d&#8217;un FC MetroCluster à deux nœuds vers une configuration IP MetroCluster à quatre nœuds (ONTAP 9.8 et versions ultérieures)"</a></p>
+<p><a href="task_disruptively_transition_from_a_two_node_mcc_fc_to_a_four_node_mcc_ip_configuration.html">"Lien vers la procédure"</a></p>
 </div></div></td>
 </tr>
 <tr>
@@ -6227,7 +6268,7 @@
 <p>Les nouveaux tiroirs de stockage sont pris en charge sur les plateformes d&#8217;origine comme sur les nouvelles. Les anciens tiroirs de stockage doivent être retirés.</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a href="task_disruptively_transition_while_move_volumes_from_old_shelves_to_new_shelves.html">"Transition sans interruption de la FC MetroCluster vers l&#8217;IP MetroCluster lors de la désactivation des tiroirs de stockage (ONTAP 9.8 et versions ultérieures)"</a></p>
+<p><a href="task_disruptively_transition_while_move_volumes_from_old_shelves_to_new_shelves.html">"Lien vers la procédure"</a></p>
 </div></div></td>
 </tr>
 <tr>
@@ -6241,11 +6282,22 @@
 <p>Les anciens tiroirs de stockage ne sont pas pris en charge sur les nouvelles plateformes. Les anciens tiroirs de stockage doivent être retirés.</p>
 </div></div></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a href="task_disruptively_transition_when_exist_shelves_are_not_supported_on_new_controllers.html">"Transition sans interruption lorsque les tiroirs existants ne sont pas pris en charge sur les nouveaux contrôleurs (ONTAP 9.8 et versions ultérieures)"</a></p>
+<p><a href="task_disruptively_transition_when_exist_shelves_are_not_supported_on_new_controllers.html">"Lien vers la procédure"</a></p>
 </div></div></td>
 </tr>
 </tbody>
 </table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="transition-vers-une-configuration-de-commutateur-partagé-cisco-9336c-fx2">Transition vers une configuration de commutateur partagé Cisco 9336C-FX2</h3>
+<div class="paragraph">
+<p>La transition vers une configuration de commutateur partagé Cisco 9336C-FX2 n&#8217;est pas prise en charge. Une <em>configuration de commutateur partagée</em> est une configuration où les commutateurs fournissent à la fois des connexions MetroCluster et des connexions du tiroir de stockage.</p>
+</div>
+<div class="paragraph">
+<p>Les configurations dans lesquelles le commutateur Cisco 9336C-FX2 fournit uniquement les connexions MetroCluster sont prises en charge.</p>
+</div>
+</div>
 
     </article>
     <!-- Page Container -->
