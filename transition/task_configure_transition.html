@@ -6155,7 +6155,7 @@
 <p class="page-details">
   
     
-    <time datetime="2022-12-22 17:39:55 +0000">12/22/2022</time>
+    <time datetime="2023-01-09 14:11:54 +0000">01/09/2023</time>
     
   
 
@@ -6803,7 +6803,7 @@ cluster_A::&gt;</pre>
 <li>
 <p>Mettez en miroir les agrégats racine :</p>
 <div class="paragraph">
-<p><code>storage aggregate mirror -aggregate aggr0_node_A_3-IP</code></p>
+<p><code>storage aggregate mirror -aggregate aggr0_node_A_3_IP</code></p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -6819,9 +6819,9 @@ Cette étape doit être effectuée sur chaque nœud IP MetroCluster.
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>cluster_A::&gt; aggr mirror -aggregate aggr0_node_A_3-IP
+<pre>cluster_A::&gt; aggr mirror -aggregate aggr0_node_A_3_IP
 
-Info: Disks would be added to aggregate "aggr0_node_A_3-IP"on node "node_A_3-IP"
+Info: Disks would be added to aggregate "aggr0_node_A_3_IP"on node "node_A_3-IP"
       in the following manner:
 
       Second Plex
@@ -6853,19 +6853,19 @@ cluster_A::&gt;</pre>
 
 Aggregate     Size Available Used% State   #Vols  Nodes            RAID Status
 --------- -------- --------- ----- ------- ------ ---------------- ------------
-aggr0_node_A_1-FC
+aggr0_node_A_1_FC
            349.0GB   16.84GB   95% online       1 node_A_1-FC      raid_dp,
                                                                    mirrored,
                                                                    normal
-aggr0_node_A_2-FC
+aggr0_node_A_2_FC
            349.0GB   16.84GB   95% online       1 node_A_2-FC      raid_dp,
                                                                    mirrored,
                                                                    normal
-aggr0_node_A_3-IP
+aggr0_node_A_3_IP
            467.6GB   22.63GB   95% online       1 node_A_3-IP      raid_dp,
                                                                    mirrored,
                                                                    normal
-aggr0_node_A_4-IP
+aggr0_node_A_4_IP
            467.6GB   22.62GB   95% online       1 node_A_4-IP      raid_dp,
                                                                    mirrored,
                                                                    normal
@@ -6967,13 +6967,13 @@ Vous devez créer au moins un agrégat de données en miroir par site. Il est re
 </table>
 </div>
 <div class="paragraph">
-<p>L&#8217;exemple suivant montre la création d&#8217;un agrégat du node_A_1-New.</p>
+<p>L&#8217;exemple suivant montre la création d&#8217;un agrégat sur node_A_3-IP.</p>
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>cluster_A::&gt; storage aggregate create -aggregate data_a3 -node node_A_1-new -diskcount 10 -mirror t
+<pre>cluster_A::&gt; storage aggregate create -aggregate data_a3 -node node_A_3-IP -diskcount 10 -mirror t
 
-Info: The layout for aggregate "data_a3" on node "node_A_1-new" would be:
+Info: The layout for aggregate "data_a3" on node "node_A_3-IP" would be:
 
       First Plex
 
@@ -7126,7 +7126,7 @@ cluster_A   MDV_CRS_d6b0b313ff5611e9837100a098544e51_B
         <div class="n-footer__copyright">
           <ul class="n-footer__copyright-list">
             <li class="n-footer__copyright-link">
-              <a href="https://www.netapp.com/us/legal/copyright.aspx">© 2022 NetApp, Inc.</a>
+              <a href="https://www.netapp.com/us/legal/copyright.aspx">© 2023 NetApp, Inc.</a>
             </li>
             <li class="n-footer__copyright-link">
               <a href="https://www.netapp.com/company/legal/terms-of-use/">Conditions générales</a>
