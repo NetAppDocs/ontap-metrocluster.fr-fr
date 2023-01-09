@@ -6794,7 +6794,6 @@
   <block id="29f2ad546591daf9c21a8e1e2148edae" category="list-text">Vérifiez le partitionnement et l'autoassignation des disques :</block>
   <block id="f65ec829d063a64803356b190c18d5ab" category="paragraph"><block ref="2bc6328da2f9af08cd251397c7478814" prefix="" category="inline-code"></block></block>
   <block id="900a1c5621c4209a92d13274e1b23272" category="list-text">Mettez en miroir les agrégats racine :</block>
-  <block id="f919294b56bd6736c2dacccd6ba7e8d2" category="paragraph"><block ref="0a781ae87118efd26a0b0e79ca0ebb06" prefix="" category="inline-code"></block></block>
   <block id="2494cf3ea6304f13d911614b50a2449f" category="admonition">Cette étape doit être effectuée sur chaque nœud IP MetroCluster.</block>
   <block id="4fbb06a55d361d0cd8cf430f9a799e67" category="list-text">Vérifier que les agrégats racine sont mis en miroir :</block>
   <block id="566d9f9b7bf49eab87dd8768b654754e" category="section-title">Finalisation de l'ajout des nœuds IP MetroCluster</block>
@@ -12768,8 +12767,6 @@
   <block id="e6e94fa732001e55f7fcf67c01c5f249" category="paragraph">Vous devrez peut-être configurer un commutateur qui possède un trafic MetroCluster sur un ISL, mais qui ne se connecte pas à une interface MetroCluster. Dans ce cas, le trafic est déjà classé et ne doit être mappé qu'à la file d'attente appropriée. Dans l'exemple suivant, tout le trafic COS5 est mappé à la classe RDMA, et tout le trafic COS4 est mappé à la classe iSCSI. Notez que cela affectera *tout* du trafic COS5 et COS4, pas seulement le trafic MetroCluster. Si vous ne souhaitez mapper le trafic MetroCluster que, vous devez utiliser les cartes de classes ci-dessus pour identifier le trafic à l'aide des groupes d'accès.</block>
   <block id="09d852286694a04fbe67a38fda6ca956" category="image-alt">matrice de transition ip fc de MetroCluster</block>
   <block id="421c8863e1f7223f216aacf99393b7dd" category="list-text">Remarque 1 : cette combinaison de plateformes nécessite ONTAP 9.11.1 ou une version ultérieure.</block>
-  <block id="234207cc1f3002485022da1892b4559b" category="list-text">Remarque 2 : vous devez disposer d'une interface 40 GbE pour les interfaces de cluster locales sur les nœuds FC.</block>
-  <block id="6ae32e231af4316f91162f3b9a761e43" category="list-text">Remarque 3 : une interface de 100 GbE est nécessaire pour les interfaces de cluster locales sur les nœuds FC.</block>
   <block id="60ddbd1babdd945c26fbc431202fea6c" category="inline-link-macro">Hardware Universe</block>
   <block id="f90dfbd0dbb63ace6227bf8f3e75efb6" category="admonition">Ne dépassez pas les limites d'objet du « bas » des plates-formes de la combinaison. Appliquez la limite inférieure des objets des deux plates-formes. Reportez-vous à la <block ref="62911b0739c1772914819ee9e7282ee4" category="inline-link-macro-rx"></block> pour les limites de plateforme.</block>
   <block id="6e2ee39d0f9ccdad593782674a048e67" category="inline-link-macro">Lien vers la procédure</block>
@@ -12845,4 +12842,9 @@
   <block id="81cce2035bed6113b6ccecaeb9cf25a9" category="sidebar">Choisissez la procédure d'extension</block>
   <block id="6ff6555fd4c104df84532572f5435476" category="sidebar">Mise à niveau des contrôleurs (AFF A700/FAS9000 vers AFF A900/FAS9500) dans le système FC MetroCluster au sein d'un système FC MetroCluster via le basculement et le rétablissement (ONTAP 9.10.1 ou version ultérieure)</block>
   <block id="87663f3a8212644181733b0573eae80d" category="sidebar">Mise à niveau des contrôleurs dans MetroCluster IP à l'aide du basculement et du rétablissement (ONTAP 9.8 et versions ultérieures)</block>
+  <block id="cbfda5b02caeddc103ebee1baa66d92c" category="list-text">Remarque 2 : vous devez disposer d'une interface 40 GbE pour les interfaces de cluster locales sur les nœuds FC. Cette combinaison de plateforme requiert ONTAP 9.12.1 ou une version ultérieure.</block>
+  <block id="55b44ccf6250ba590ce25f63cea8e958" category="list-text">Remarque 3 : une interface de 100 GbE est nécessaire pour les interfaces de cluster locales sur les nœuds FC. Cette combinaison de plateforme requiert ONTAP 9.12.1 ou une version ultérieure.</block>
+  <block id="9418f262fda4ce79d51366cacd6743b2" category="list-text">Les procédures de transition nécessitent toutes ONTAP 9.8 ou une version ultérieure, sauf indication contraire dans les notes ou comme requis par une plateforme individuelle.</block>
+  <block id="90041d31025da7832d4e0b6bec8c78d3" category="paragraph"><block ref="a29b6e7e71b2408a7ef70fb423944511" prefix="" category="inline-code"></block></block>
+  <block id="1ecf45c0e50d338e165546ea9f33580d" category="paragraph">L'exemple suivant montre la création d'un agrégat sur node_A_3-IP.</block>
 </blocks>
