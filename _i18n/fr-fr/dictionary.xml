@@ -6761,9 +6761,6 @@
   <block id="6fd67a5ed9276ba994c073cf2c532faf" category="paragraph">Vous devez ajouter les quatre nouveaux nœuds IP MetroCluster à la configuration MetroCluster existante.</block>
   <block id="b74949b8fefb7fd6ee33defaa6372e00" category="paragraph">Vous devez effectuer cette tâche sur les deux clusters.</block>
   <block id="0374a6e5ac7874327546ae00b1a604d8" category="list-text">Ajoutez les nœuds IP MetroCluster à la configuration MetroCluster existante.</block>
-  <block id="fbfd3619aa54cd6546a334791148c766" category="list-text">Joignez le premier nœud IP MetroCluster (node_A_1-IP) à la configuration FC MetroCluster existante.</block>
-  <block id="c6bbfa16738696bfd63392cfdc4c0a5c" category="list-text">Associez le second nœud IP MetroCluster (node_A_2-IP) à la configuration FC MetroCluster existante.</block>
-  <block id="3bd4a265daa0ebad936e251efefd2525" category="list-text">Répétez ces étapes pour joindre le noeud_B_1-IP et le noeud_B_2-IP au cluster_B.</block>
   <block id="d8bdae7e1444c808ab8559c95d7f81ec" category="section-title">Configuration des LIFs intercluster, création des interfaces MetroCluster, et mise en miroir des agrégats racines</block>
   <block id="6449a68d295414acaf212ddfd7df25b2" category="paragraph">Vous devez créer des LIF de peering de cluster, créer les interfaces MetroCluster sur les nouveaux nœuds IP MetroCluster.</block>
   <block id="7e339e8333d1f898a647bba5b4b5fa97" category="paragraph">Le port home utilisé dans les exemples est spécifique à la plate-forme. Vous devez utiliser le port d'accueil approprié spécifique à la plate-forme de nœud IP MetroCluster.</block>
@@ -6782,7 +6779,6 @@
   <block id="333744f802db71c53ff9d4ad61fbc125" category="list-text">Configurez les interfaces IP MetroCluster pour les nœuds IP MetroCluster nouvellement rejoints :</block>
   <block id="b1e0fc9a28d1fbc5566a3e38e1ba8e33" category="paragraph"><block ref="e36741948f6631f55a1d7c27b8da74e8" prefix="" category="inline-code"></block></block>
   <block id="2b6500c40992c83321292f4bcb8ec93d" category="paragraph">Voir <block ref="865643442db88296ffae2da0df72fe39" category="inline-link-macro-rx"></block> Pour les considérations relatives à la configuration des interfaces IP.</block>
-  <block id="29e21146baddc462ae95a60cebbec773" category="admonition">Vous pouvez configurer les interfaces IP MetroCluster depuis n'importe quel cluster. En outre, à partir de ONTAP 9.9.1, si vous utilisez une configuration de couche 3, vous devez également spécifier le<block ref="50e57debf79bf52aa078c6e993f8969f" prefix=" " category="inline-code"></block> Paramètre lors de la création des interfaces IP MetroCluster. Reportez-vous au lien :../install-ip/concept_considérations_layer_3.html.</block>
   <block id="8c74115e4c2bebadc09e695e69b012f5" category="list-text">Vérifiez que les interfaces IP MetroCluster sont créées :</block>
   <block id="30b6fb782c39e19cc96a63a24fc78cda" category="list-text">Connectez les interfaces IP MetroCluster :</block>
   <block id="e84d9abe5e1fc391ac4a450f001b2f71" category="paragraph"><block ref="2537b712544abaf1a4d2233756085f09" prefix="" category="inline-code"></block></block>
@@ -12847,4 +12843,21 @@
   <block id="9e70c8a747dbcd4eb73fc72a2155c425" category="paragraph">Basculement manuel non planifié (USO) si le basculement automatique dans le logiciel MetroCluster Tiebreaker n'est pas activé.</block>
   <block id="03a06951389ef81ee2c73f9db6d94fbf" category="list-text">Pour plus d'informations sur les combinaisons de mise à niveau de plate-forme prises en charge, consultez la table de mise à jour IP MetroCluster dans <block ref="ca31e6122d170c1a660e1ab5d0a9430f" category="inline-link-macro-rx"></block>.</block>
   <block id="04d849614bcf7a25c057bcb4f136cfc7" category="list-text">Pour en savoir plus sur les combinaisons de mise à niveau de plateforme prises en charge, consultez le tableau de mise à jour FC MetroCluster dans <block ref="2026df26c379ba66a79d2229c4a71dd8" category="inline-link-macro-rx"></block>.</block>
+  <block id="7f3573698486df0e906484a42b56260a" category="list-text">Reliez le premier nœud IP MetroCluster (node_A_3-IP) à la configuration FC MetroCluster existante.</block>
+  <block id="2cc9b0ebb585ef702d75e1a9560e44ee" category="list-text">Reliez le deuxième nœud IP MetroCluster (node_A_4-IP) à la configuration FC MetroCluster existante.</block>
+  <block id="43978c682537332f0c17e45dcf81c394" category="list-text">Répétez ces étapes pour joindre le noeud_B_3-IP et le noeud_B_4-IP au cluster_B.</block>
+  <block id="56276c01f8fdea330f7d547910dbe817" category="inline-link-macro">Considérations relatives aux réseaux étendus de couche 3</block>
+  <block id="5464631d6fd9ed12f95c271bf666c4bc" category="admonition">Vous pouvez configurer les interfaces IP MetroCluster depuis n'importe quel cluster. En outre, à partir de ONTAP 9.9.1, si vous utilisez une configuration de couche 3, vous devez également spécifier le<block ref="50e57debf79bf52aa078c6e993f8969f" prefix=" " category="inline-code"></block> Paramètre lors de la création des interfaces IP MetroCluster. Reportez-vous à la section <block ref="1e1496262359096cc1cfeecfa4cefcb5" category="inline-link-macro-rx"></block></block>
+  <block id="d62d7bce1fe91e6c1145e8a56018d13e" category="admonition">Sur les systèmes configurés pour le partitionnement de disque avancé, le type de conteneur est « partagé » plutôt que « distant », comme indiqué dans la sortie de l'exemple.</block>
+  <block id="bad8ee5726316ec5f26bb0039cbf4bc6" category="summary">Les activités MetroCluster Tiebreaker sont enregistrées dans des fichiers journaux d'événements.</block>
+  <block id="08b9323d7a1af549de439f419bb3096a" category="doc">Fichiers journaux d'événements pour MetroCluster Tiebreaker</block>
+  <block id="bbeded76bf1f0922d3c3d140c95591b9" category="paragraph">Le fichier d'historique des événements contient un journal de toutes les actions réalisées par le logiciel MetroCluster Tiebreaker.</block>
+  <block id="a683f94e07dea51d4fd5a8ef0f351f0a" category="paragraph">Il effectue les actions suivantes :</block>
+  <block id="4b331bdac9dc044af8ef6c6502e176f3" category="list-text">Détecte les incidents sur site</block>
+  <block id="62bb78b2baed22256e5a91c1b10b48ae" category="list-text">Détecte les modifications de configuration liées à la base de données, d'autres moniteurs disjoncteur d'attache ou le logiciel MetroCluster Tiebreaker</block>
+  <block id="74e0bf9f3312e196cf0f79415f5fd557" category="list-text">Détecte les connexions SSH et les connexions</block>
+  <block id="e7937ee1a1ffc7f60a0d80b1dcee5b56" category="list-text">Détecte les configurations MetroCluster</block>
+  <block id="98c16872714765876ef7301d6b92820a" category="paragraph">Ces actions sont consignées dans le fichier journal des événements au format suivant :</block>
+  <block id="efddb3b6772ab4f446bebb2bda2d2155" category="paragraph">module d'id de thread de gravité/journal d'horodatage</block>
+  <block id="690f8ff3b8b65da4f1bc779fb507da9d" category="sidebar">Fichiers journaux d'événements MetroCluster Tiebreaker</block>
 </blocks>

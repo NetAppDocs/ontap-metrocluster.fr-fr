@@ -167,7 +167,7 @@ Vous devez effectuer cette tâche sur les deux clusters.
 .Étapes
 . Ajoutez les nœuds IP MetroCluster à la configuration MetroCluster existante.
 +
-.. Joignez le premier nœud IP MetroCluster (node_A_1-IP) à la configuration FC MetroCluster existante.
+.. Reliez le premier nœud IP MetroCluster (node_A_3-IP) à la configuration FC MetroCluster existante.
 +
 ....
 
@@ -219,10 +219,10 @@ Do you want to use this configuration? {yes, no} [yes]: yes
 .
 .
 ....
-.. Associez le second nœud IP MetroCluster (node_A_2-IP) à la configuration FC MetroCluster existante.
+.. Reliez le deuxième nœud IP MetroCluster (node_A_4-IP) à la configuration FC MetroCluster existante.
 
 
-. Répétez ces étapes pour joindre le noeud_B_1-IP et le noeud_B_2-IP au cluster_B.
+. Répétez ces étapes pour joindre le noeud_B_3-IP et le noeud_B_4-IP au cluster_B.
 
 
 
@@ -343,7 +343,7 @@ Voir link:../install-ip/task_sw_config_configure_clusters.html#configuring-and-c
 
 +
 
-NOTE: Vous pouvez configurer les interfaces IP MetroCluster depuis n'importe quel cluster. En outre, à partir de ONTAP 9.9.1, si vous utilisez une configuration de couche 3, vous devez également spécifier le `-gateway` Paramètre lors de la création des interfaces IP MetroCluster. Reportez-vous au lien :../install-ip/concept_considérations_layer_3.html.
+NOTE: Vous pouvez configurer les interfaces IP MetroCluster depuis n'importe quel cluster. En outre, à partir de ONTAP 9.9.1, si vous utilisez une configuration de couche 3, vous devez également spécifier le `-gateway` Paramètre lors de la création des interfaces IP MetroCluster. Reportez-vous à la section link:../install-ip/concept_considerations_layer_3.html["Considérations relatives aux réseaux étendus de couche 3"]
 
 +
 ....
@@ -520,9 +520,12 @@ Disk                   Size Shelf Bay Type    Type        Name      Owner
 2.20.10             546.9GB    20  10 SAS     aggregate   rha1_a1_aggr1 node_a_1
 ...
 43 entries were displayed.
-
 cluster_A::>
 ....
++
+
+NOTE: Sur les systèmes configurés pour le partitionnement de disque avancé, le type de conteneur est « partagé » plutôt que « distant », comme indiqué dans la sortie de l'exemple.
+
 . Mettez en miroir les agrégats racine :
 +
 `storage aggregate mirror -aggregate aggr0_node_A_3_IP`
