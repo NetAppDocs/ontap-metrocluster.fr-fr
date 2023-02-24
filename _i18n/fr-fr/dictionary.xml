@@ -6791,7 +6791,6 @@
   <block id="4fbb06a55d361d0cd8cf430f9a799e67" category="list-text">Vérifier que les agrégats racine sont mis en miroir :</block>
   <block id="566d9f9b7bf49eab87dd8768b654754e" category="section-title">Finalisation de l'ajout des nœuds IP MetroCluster</block>
   <block id="756f29d7bcbe7decf6b979c0706fc9a1" category="paragraph">Vous devez intégrer le nouveau groupe de reprise après incident à la configuration MetroCluster et créer des agrégats de données en miroir sur les nouveaux nœuds.</block>
-  <block id="ab1c45cb56358465162f8f3a812e6fbe" category="list-text">Configurer le MetroCluster pour implémenter les modifications :</block>
   <block id="2ae5190e09d5d39bdc4388104b1ebcd4" category="paragraph"><block ref="3b3242ced99842a6c2c16f489b78e773" prefix="" category="inline-code"></block></block>
   <block id="2ab9c070f5e78bc6f7809e89ecd023eb" category="admonition">Vous devez exécuter<block ref="3b3242ced99842a6c2c16f489b78e773" prefix=" " category="inline-code"></block> et *pas*<block ref="7b61e46b8e4fceaa3b96a2ac23ad8213" prefix=" " category="inline-code"></block></block>
   <block id="7e6d5ec0a20a9a4499623036df823e6b" category="list-text">Vérifier que les nœuds sont ajoutés à leur groupe de reprise sur incident :</block>
@@ -12862,4 +12861,8 @@
   <block id="4026cb63b92cdc28e17e39a79de589f7" category="paragraph">Cluster ONTAP (LIF de données ou LIF de gestion de données)</block>
   <block id="fd9b3eaeebb236fdcf40b5456ccc900e" category="admonition">Les systèmes AFF A900 et FAS9500 prennent en charge huit liens ISL. Huit liens ISL sont pris en charge sur les systèmes Brocade 6510, G620, G620-1, G630, G630-1, Et commutateurs G720.</block>
   <block id="81d4bf20c117cfe06c727511dd63382b" category="paragraph">6510, G620, G620-1, G630, G630-1, G720</block>
+  <block id="64cdec386f8cc50c2a2ec9316633b629" category="paragraph">Avant de courir<block ref="3b3242ced99842a6c2c16f489b78e773" prefix=" " category="inline-code"></block>, Le mode HA et la mise en miroir DR ne sont pas activés et un message d'erreur peut s'afficher concernant ce comportement attendu. Vous activez le mode HA et la mise en miroir de reprise après incident plus tard lors de l'exécution de la commande<block ref="3b3242ced99842a6c2c16f489b78e773" prefix=" " category="inline-code"></block> pour implémenter la configuration.</block>
+  <block id="929a405a00082b7cddc01ac6b47159f6" category="list-text">Configurer le MetroCluster selon qu'il dispose d'un ou plusieurs agrégats de données :</block>
+  <block id="5ffd33f8dea25274cffabd9b7ab1c36e" category="paragraph">Vous devez répondre avec<block ref="415290769594460e2e485922904f345d" prefix=" " category="inline-code"></block> lorsque vous êtes invité à continuer en mode avancé et que vous voyez l'invite du mode avancé (*).</block>
+  <block id="1fd3081a4bf2b2b1ccafeb89c824a5d2" category="admonition">Il est recommandé d'avoir plusieurs agrégats de données en miroir. En effet, lorsqu'il n'existe qu'un seul agrégat en miroir, la protection est moindre, car les volumes de métadonnées sont situés sur le même agrégat plutôt que sur des agrégats distincts.</block>
 </blocks>

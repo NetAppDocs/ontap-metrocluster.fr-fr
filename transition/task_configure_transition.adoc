@@ -600,22 +600,51 @@ aggr_data_a2
 Vous devez intégrer le nouveau groupe de reprise après incident à la configuration MetroCluster et créer des agrégats de données en miroir sur les nouveaux nœuds.
 
 .Étapes
-. Configurer le MetroCluster pour implémenter les modifications :
+. Configurer le MetroCluster selon qu'il dispose d'un ou plusieurs agrégats de données :
 +
-`metrocluster configure`
+|===
 
-+
+
+| Si votre configuration MetroCluster possède... | Alors, procédez comme ça... 
+
+
+ a| 
+Plusieurs agrégats de données
+ a| 
+Depuis n'importe quelle invite de nœud, configurer MetroCluster :
+
+`metrocluster configure _node-name_`
+
 
 NOTE: Vous devez exécuter `metrocluster configure` et *pas* `metrocluster configure -refresh true`
 
+
+
+ a| 
+Un seul agrégat de données en miroir
+ a| 
+.. Depuis l'invite de n'importe quel nœud, passez au niveau de privilège avancé :
 +
-....
-cluster_A::> metrocluster configure
+`set -privilege advanced`
 
-[Job 439] Job succeeded: Configure is successful.
++
+Vous devez répondre avec `y` lorsque vous êtes invité à continuer en mode avancé et que vous voyez l'invite du mode avancé (*).
 
-cluster_A::>
-....
+.. Configurez le MetroCluster avec le `-allow-with-one-aggregate true` paramètre :
++
+`metrocluster configure -allow-with-one-aggregate true _node-name_`
+
+.. Retour au niveau de privilège admin :
++
+`set -privilege admin`
+
+
+
+|===
++
+
+NOTE: Il est recommandé d'avoir plusieurs agrégats de données en miroir. En effet, lorsqu'il n'existe qu'un seul agrégat en miroir, la protection est moindre, car les volumes de métadonnées sont situés sur le même agrégat plutôt que sur des agrégats distincts.
+
 . Vérifier que les nœuds sont ajoutés à leur groupe de reprise sur incident :
 +
 `metrocluster node show`
