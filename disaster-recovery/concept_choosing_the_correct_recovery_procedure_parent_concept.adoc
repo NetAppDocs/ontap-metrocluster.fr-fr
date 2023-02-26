@@ -13,6 +13,8 @@ summary: 'Après un échec de la configuration d"une MetroCluster, il faut séle
 [role="lead"]
 Après un échec de la configuration d'un MetroCluster, vous devez sélectionner la procédure de restauration appropriée. Utilisez le tableau et les exemples suivants pour sélectionner la procédure de récupération appropriée.
 
+Les informations contenues dans ce tableau supposent que l'installation ou la transition est terminée, ce qui signifie que l' `metrocluster configure` exécution de la commande réussie.
+
 |===
 
 
@@ -71,7 +73,21 @@ link:task_recover_from_a_multi_controller_and_or_storage_failure.html["La restau
 |===
 
 
-== Scénarios de défaillance du module de contrôleur lors de la transition FC-to-IP de MetroCluster
+== Scénarios de panne du module de contrôleur lors de l'installation de MetroCluster
+
+La réponse à une défaillance du module de contrôleur pendant la procédure de configuration du MetroCluster dépend de la présence ou non du `metrocluster configure` commande terminée avec succès.
+
+* Si le `metrocluster configure` La commande n'a pas encore été exécutée ou a échoué, vous devez redémarrer la procédure de configuration du logiciel MetroCluster depuis le début avec un module de contrôleur de remplacement.
++
+
+NOTE: Vous devez vous assurer d'effectuer les étapes de la section link:https://docs.netapp.com/us-en/ontap-metrocluster/install-ip/task_sw_config_restore_defaults.html["Restauration des valeurs par défaut du système sur un module de contrôleur"] sur chaque contrôleur (y compris le contrôleur de remplacement) pour vérifier que la configuration précédente a été supprimée.
+
+* Si le `metrocluster configure` commande terminée avec succès, puis le module de contrôleur a échoué. utilisez le tableau précédent pour déterminer la procédure de récupération correcte.
+
+
+
+
+== Scénarios de panne du module de contrôleur lors de la transition MetroCluster FC vers IP
 
 La procédure de restauration peut être utilisée en cas de défaillance d'un site pendant la transition. Cependant, elle ne peut être utilisée que si la configuration est une configuration mixte stable, avec un groupe FC DR et un groupe IP DR entièrement configurés. La sortie du `metrocluster node show` La commande doit afficher les deux groupes de reprise sur incident avec les huit nœuds.
 
