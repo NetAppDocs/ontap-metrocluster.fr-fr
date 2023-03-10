@@ -36,7 +36,7 @@ L'illustration suivante présente une configuration MetroCluster FC. La fonction
 image::../media/mcc_hw_architecture_local_ha.gif[architecture matérielle mcc haute disponibilité locale]
 
 .Informations associées
-https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-hacg/home.html["Configuration haute disponibilité"^]
+link:https://docs.netapp.com/us-en/ontap/high-availability/index.html["Configuration haute disponibilité"^]
 
 
 
@@ -225,7 +225,7 @@ Vous devez être familiarisé avec différents types de défaillances et d'incid
 Panne d'un seul composant de la paire haute disponibilité locale.
 
 +
-Dans une configuration MetroCluster à quatre nœuds, cette défaillance peut entraîner un basculement automatique ou négocié du nœud, selon le composant défaillant. La récupération de données est décrite dans le _High Availability Configuration Guide_.
+Dans une configuration MetroCluster à quatre nœuds, cette défaillance peut entraîner un basculement automatique ou négocié du nœud, selon le composant défaillant. La restauration des données est décrite à la section link:https://docs.netapp.com/us-en/ontap/high-availability/index.html["Gestion des paires haute disponibilité"^] .
 
 +
 Dans une configuration MetroCluster à deux nœuds, cette défaillance entraîne un basculement automatique non planifié.
@@ -235,7 +235,7 @@ Dans une configuration MetroCluster à deux nœuds, cette défaillance entraîne
 Tous les modules de contrôleur tombent en panne sur un site en raison d'une panne d'alimentation, d'un remplacement d'équipement ou d'un incident. En général, les configurations MetroCluster ne permettent pas de différencier les défaillances et les incidents. Toutefois, certains logiciels, comme le logiciel MetroCluster Tiebreaker, peuvent faire la différence. Une défaillance de contrôleur à l'échelle du site peut entraîner un basculement automatique si les liaisons et les commutateurs ISL (Inter-Switch Link) sont défaillants et que le stockage est accessible.
 
 +
-Le _High-Availability Configuration Guide_ contient plus d'informations sur la procédure de restauration suite à des défaillances de contrôleur au niveau du site qui n'incluent pas les défaillances de contrôleur, ainsi que les défaillances incluant un ou plusieurs contrôleurs.
+link:https://docs.netapp.com/us-en/ontap/high-availability/index.html["Gestion des paires haute disponibilité"^] a plus d'informations sur la restauration après des défaillances de contrôleur à l'échelle du site qui n'incluent pas les défaillances de contrôleur, ainsi que les défaillances qui incluent un ou plusieurs contrôleurs.
 
 * Défaillance de lien ISL
 +
@@ -285,7 +285,7 @@ La configuration MetroCluster à huit ou quatre nœuds étant constituée d'une 
 
 Dans le cas de configurations MetroCluster à quatre et huit nœuds, les défaillances de nœuds dues à des risques de défaillance d'alimentation ou de panique peuvent provoquer un basculement automatique.
 
-http://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-hacg/home.html["Configuration haute disponibilité"^]
+link:https://docs.netapp.com/us-en/ontap/high-availability/index.html["Gestion des paires haute disponibilité"^]
 
 En cas de seconde défaillance après un basculement local, l'événement MetroCluster Failover assure la continuité de l'activité. De même, après une opération de basculement, en cas de seconde panne sur l'un des nœuds survivants, un événement de basculement local assure une continuité de l'activité. Dans ce cas, le nœud survivant transmet des données aux trois autres nœuds du groupe de reprise après incident.
 

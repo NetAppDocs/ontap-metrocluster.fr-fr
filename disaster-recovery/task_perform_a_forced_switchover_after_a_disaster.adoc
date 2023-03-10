@@ -57,15 +57,16 @@ NOTE: Les configurations SnapMirror et SnapVault sont supprimées automatiquemen
 Le `metrocluster switchover` La commande bascule les nœuds dans tous les groupes DR dans la configuration MetroCluster. Par exemple, dans une configuration MetroCluster à 8 nœuds, il bascule les nœuds sur les deux groupes de reprise après incident.
 
 .Étapes
-. Mettre en œuvre le basculement :
+. Effectuez le basculement en exécutant la commande suivante sur le site survivant :
 +
 `metrocluster switchover -forced-on-disaster true`
 
 +
-L'opération peut prendre quelques minutes.
+
+NOTE: L'opération peut prendre quelques minutes. Vous pouvez vérifier la progression à l'aide du `metrocluster operation show` commande.
 
 . Réponse `y` lorsque vous êtes invité à poursuivre le basculement.
-. Vérifiez que le basculement a été effectué correctement en exécutant la commande MetroCluster Operation show.
+. Vérifiez que le basculement a été effectué avec succès en exécutant `metrocluster operation show` commande.
 +
 ....
 mcc1A::> metrocluster operation show
