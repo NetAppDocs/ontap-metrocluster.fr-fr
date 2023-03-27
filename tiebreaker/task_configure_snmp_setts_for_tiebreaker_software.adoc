@@ -11,29 +11,32 @@ summary: 'Pour utiliser SNMP avec le logiciel disjoncteur d"attache, vous devez 
 
 
 [role="lead"]
-Pour utiliser SNMP avec le logiciel disjoncteur d'attache, vous devez configurer les paramètres SNMP.
+Pour utiliser SNMP avec le logiciel Tiebreaker, vous devez configurer les paramètres SNMP.
 
-. Utilisez la commande disjoncteur d'attache de l'assistant de configuration snmp pour ajouter des configurations MetroCluster.
+. Utiliser l'interface de ligne de commande Tiebreaker `snmp config wizard` Pour ajouter des configurations MetroCluster.
 +
 
 NOTE: Un seul hôte d'interruption SNMP est actuellement pris en charge.
 
 +
-L'exemple suivant montre la configuration d'un récepteur SNMP prenant en charge SNMP V1 avec une adresse IP de 10.222.210.234, le numéro de port 162 pour les messages d'interruption et la chaîne de communauté définie sur public :
+L'exemple suivant montre la configuration d'un récepteur SNMP qui prend en charge SNMP V3 avec une adresse IP 10.240.45.66 et le port numéro 162 pour les messages d'interruption. Le logiciel disjoncteur d'attache est prêt à envoyer des traps au récepteur SNMP que vous avez spécifié.
 
 +
 ....
 
 NetApp MetroCluster Tiebreaker :> snmp config wizard
-Enter SNMP Version [V1/V3]: V1
-Enter SNMP Host: 10.222.210.234
+Enter SNMP Version[V1/V3]: v3
+Enter SNMP Host: 10.240.45.66
 Enter SNMP Port: 162
-Enter SNMP V1 Community: public
+Enter SNMP V3 Security Name: v3sec
+Enter SNMP V3 Authentication password:
+Enter SNMP V3 Privacy password:
+Engine ID : 8000031504932eff571825192a6f1193b265e24593
 Successfully added SNMP properties to NetApp MetroCluster Tiebreaker software.
-NetApp MetroCluster Tiebreaker :>
 ....
 +
-Le logiciel disjoncteur d'attache est prêt à envoyer des traps au récepteur SNMP que vous avez spécifié.
+
+NOTE: Vous devez configurer SNMPv3 car SNMPv1 n'est pas sécurisé. Assurez-vous que la chaîne de communauté par défaut est *NOT* définie sur public.
 
 . Vérifier que les paramètres SNMP sont configurés :
 +

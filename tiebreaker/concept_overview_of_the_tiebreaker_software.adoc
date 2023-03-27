@@ -120,9 +120,9 @@ Le logiciel disjoncteur d'attache déclenche immédiatement une alerte lorsque l
 
 === Panique
 
-Le logiciel disjoncteur d'attache déclenche une alerte lorsque la connexion d'interconnexion NV entre les sites est en panne et que le site survivant indique l'état « LinksSevered ». Cela se produit uniquement après la fin du processus de vidage de la coredump. Dans ce scénario, le temps pris entre le cluster devenu injoignable et la détection d'un incident peut être plus long ou environ égal au temps pris pour le processus de coredump. Dans de nombreux cas, la durée de détection est supérieure à 30 secondes.
+Dans les configurations MetroCluster FC, le logiciel Tiebreaker déclenche une alerte lorsque la connexion d'interconnexion NV entre les sites est en panne et que le site survivant indique l'état « AllLinksSevered ». Cela se produit uniquement après la fin du processus de vidage de la coredump. Dans ce scénario, le temps pris entre le cluster devenu injoignable et la détection d'un incident peut être plus long ou environ égal au temps pris pour le processus de coredump. Dans de nombreux cas, la durée de détection est supérieure à 30 secondes.
 
-Si un noeud cesse de fonctionner mais ne génère pas de fichier pour le processus coredump, le temps de détection ne doit pas dépasser 30 secondes.
+Si un noeud cesse de fonctionner mais ne génère pas de fichier pour le processus coredump, le temps de détection ne doit pas dépasser 30 secondes. Dans les configurations MetroCluster IP, le NV cesse de communiquer et le site survivant ne connaît pas le processus de vidage de la mémoire.
 
 
 
