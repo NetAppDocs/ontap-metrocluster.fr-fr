@@ -3379,8 +3379,6 @@
   <block id="91fda6ec6c364088ae4a9e6553b26f99" category="doc">Affectations des ports de plateforme pour les switchs IP SN2100 pris en charge par NVIDIA</block>
   <block id="1f0b82560627b660c6c6958a1df834b8" category="section-title">Configurations compatibles</block>
   <block id="5b7679ef32240286811b416ba05c54c1" category="paragraph">Les plates-formes suivantes sont actuellement prises en charge :</block>
-  <block id="e1da8c334241f25c9cc939f9d9e1c5b2" category="list-text">FAS500f/AFF A250</block>
-  <block id="cbdc5a97c94bd42a3c869ae6831f7b04" category="list-text">FAS8300/AFF A400</block>
   <block id="0588c4f1b58eac9f5062dc1da6e8435a" category="list-text">FAS8700</block>
   <block id="4c744d90883c4aab83c5469643da24c7" category="list-text">FAS9000/AFF A700</block>
   <block id="53270fbfda62583949b287e08ae3d063" category="list-text">AFF A800</block>
@@ -3388,17 +3386,7 @@
   <block id="570a8334b13f037157ca46f8cbbf662b" category="list-text">Transition FC-à-IP de MetroCluster</block>
   <block id="67ce3d63d94102f7ff725a6564099821" category="list-text">Configuration MetroCluster à 8 nœuds</block>
   <block id="5aa692c4552b821f69bb151f7aa0f216" category="paragraph">Si vous câconnectez plusieurs configurations MetroCluster, suivez le tableau correspondant. Par exemple :</block>
-  <block id="8bcb14049f972f715f22c433283f9028" category="list-text">Si vous câconnectez deux configurations MetroCluster à quatre nœuds de type AFF A700, puis connectez le premier disque MetroCluster indiqué comme « MetroCluster 1 » et le second MetroCluster indiqué comme « MetroCluster 2 » dans le tableau AFF A700.</block>
-  <block id="88a7b55f8e462f6453124192f872e512" category="admonition">Les ports 13 et 14 peuvent être utilisés en mode de vitesse native prenant en charge 40 Gbits/s et 100 Gbits/s, ou en mode d'arrachage pour prendre en charge 4 × 25 Gbits/s ou 4 × 10 Gbits/s. S'ils utilisent le mode de vitesse natif, ils sont représentés comme ports 13 et 14. S'ils utilisent le mode d'arrachage, soit 4 × 25 Gbits/s soit 4 × 10 Gbits/s, ils sont représentés comme 13s0-3 et 14s0-3.</block>
   <block id="10fe94c98083f4e751ef035d96910a62" category="paragraph">Les sections suivantes décrivent le schéma de câblage physique. Vous pouvez également vous reporter à la<block ref="c52b4d12f68853a25c52576697c6b2b5" category="inline-link-rx"></block> pour des informations détaillées sur le câblage.</block>
-  <block id="b331f2d1731f893814b832eca5529ae2" category="section-title">Utilisation des ports de switch pour les systèmes AFF A250 ou FAS500f</block>
-  <block id="09a5cc95a7bf7e0d1b588340d9deb189" category="image-alt">Câblage ip mcc A250 MSN2100</block>
-  <block id="541872b6e84c2b3b59c34a05762c406e" category="section-title">Utilisation des ports par commutateur pour les systèmes AFF A400, FAS8300 ou FAS8700</block>
-  <block id="189ceff67ac9718189406d45e1d9192a" category="image-alt">Câblage ip mcc A400 MSN2100</block>
-  <block id="9b1abf59f2c97ca1a2592e463ceb99ff" category="section-title">Utilisation des ports par switch pour AFF A700 ou FAS9000</block>
-  <block id="ef983d4a2755d55ad39ed1892fc3e613" category="image-alt">Câblage ip mcc A700 MSN2100</block>
-  <block id="e22ae8f3e1d3ede96551e02f922872f0" category="section-title">Utilisation du port du switch pour AFF A800</block>
-  <block id="31b0afd6a52b93da38138e53814052b1" category="image-alt">Câblage ip mcc A800 MSN2100</block>
   <block id="afc362bb21237b3cf262e5bb73c2e7ce" category="summary">Vous pouvez fournir une protection supplémentaire pour les fichiers de sauvegarde de la configuration du cluster en spécifiant une URL distante (HTTP ou FTP) dans laquelle les fichiers de sauvegarde de configuration seront chargés en plus des emplacements par défaut dans le cluster local.</block>
   <block id="4978301a508dcc7f7e8778cdb2401e04" category="doc">Protection des fichiers de sauvegarde de configuration</block>
   <block id="d459dc1ddad8d856203ba30b84fd6675" category="list-text">Définissez l'URL de la destination distante pour les fichiers de sauvegarde de configuration :</block>
@@ -4130,27 +4118,7 @@
   <block id="240c641ec7d44f443373981bb513fa5c" category="list-text">Le RcfFileGenerator pour MetroCluster IP fournit également une vue d'ensemble du câblage par port pour chaque commutateur.</block>
   <block id="e13e5f806fc6cae09bcb9fed7eecf125" category="paragraph">Utilisez cette présentation du câblage pour vérifier votre câblage.</block>
   <block id="9ae436c3a98ee403124b8482b69c2296" category="section-title">Câblage de deux configurations MetroCluster aux commutateurs</block>
-  <block id="8de052b5d3d53be55c4754beccef42e7" category="paragraph">Lors du câblage de plusieurs configurations MetroCluster à un commutateur Cisco 3132Q-V, reliez chaque MetroCluster conformément au tableau approprié. Par exemple, en cas de câblage d'un FAS2750 ou d'un A700 vers le même commutateur Cisco 3132Q-V. Ensuite, vous câconnectez le FAS2750 au MetroCluster Tableau 1 et le A700 conformément aux MetroCluster 2 ou MetroCluster 3 dans le Tableau 2. Vous ne pouvez pas connecter physiquement les FAS2750 et A700 comme 'MetroCluster 1'.</block>
-  <block id="57ada3c509e759653e7ddde7c86cc9bf" category="section-title">Câblage d'un système FAS2750 ou AFF A220 à un switch Cisco 3232C ou Cisco 9336C</block>
-  <block id="662b3c42563b02b87a5658cf19656bea" category="image-alt">mcc câblage ip entre AFF a220 ou fas2750 et un commutateur cisco 3232c ou cisco 9336c</block>
-  <block id="841eb4684c33dfc0d4a37ae1db9156e5" category="section-title">Câblage d'un système AFF A300 ou FAS8200 à un switch Cisco 3232C ou Cisco 9336C</block>
   <block id="08c525f5d86974627253ff3c6ab1498f" category="image-alt">mcc ip reliant un AFF a300 ou fas8200 à un commutateur cisco 3232c ou cisco 9336c</block>
-  <block id="90acfe77ad9c44917cb37dee731f57fb" category="section-title">Câblage d'un AFF A250 ou FAS500f à un switch Cisco 3232C ou Cisco 9336C</block>
-  <block id="c7682c171141e21812fd0b6c46ff12b1" category="image-alt">mcc câblage ip d’un AFF a250 ou fas500f vers un commutateur cisco 3232c ou cisco 9336c</block>
-  <block id="7af9f40955e7206056660c5c457442fd" category="section-title">Câblage d'un système AFF A320 à un switch Cisco 3232C ou Cisco 9336C</block>
-  <block id="c3b964a7ca5d4624a7d5bd6416b0f4ed" category="image-alt">câblage d'un système AFF a320 à un commutateur cisco 32336c ou cisco 9336c</block>
-  <block id="34e1842e0227b14ff640e97166eac7ef" category="section-title">Câblage d'un système AFF A400, FAS8300 ou FAS8700 vers un switch Cisco 3232C ou Cisco 9336C</block>
-  <block id="2f920fd31ced03bfae7e3e25615dc6bc" category="image-alt">câblage d'un module mcc ip AFF a400 fas8300 ou fas8700 à un commutateur cisco 3232c ou cisco 9336c</block>
-  <block id="b2292b7fd9f3ff212f4320f7514f7a84" category="section-title">Câblage d'un système AFF A700 ou FAS9000 à un switch Cisco 3232C ou Cisco 9336C</block>
-  <block id="c3622e8c695936793cc1d144ed2a0dcd" category="image-alt">mcc ip relie un AFF a700 ou fas9000 à un commutateur cisco 3232c ou cisco 9336c</block>
-  <block id="d1438768164c95178a940e0363badcd6" category="section-title">Câblage d'un AFF A800 à un switch Cisco 3232C ou Cisco 9336C</block>
-  <block id="18eee486aa8db1f9803e8ca4f2a1c002" category="image-alt">câblage d'un AFF a800 à un commutateur cisco 3232c ou cisco 9336c</block>
-  <block id="9c4b6feb4a0e2e1a3b0880149249570d" category="section-title">Câblage d'un AFF A900 ou FAS9500 à un switch Cisco 3232C ou Cisco 9336C</block>
-  <block id="cd87d30388635f4978d5e5f84d17c64e" category="admonition">Vous avez la possibilité d'utiliser les ports e5a et e7a en tant que LIFs intercluster dans une configuration MetroCluster IP.</block>
-  <block id="c12126891bd5121c9da9a05042a756ac" category="paragraph"><block ref="c12126891bd5121c9da9a05042a756ac" category="inline-image-macro-rx" type="image"></block></block>
-  <block id="5d21ef93e8cb12318e2d8486435cc6f1" category="section-title">Câblage d'un système AFF A320, AFF A400, AFF A700 ou AFF A800 à un commutateur partagé Cisco 9336C-FX2</block>
-  <block id="8522044be3175fd7ff7606798d41836f" category="image-alt">câblage ip de mcc AFF a320 a400 a700 a800 vers le commutateur partagé cisco 9336c</block>
-  <block id="2b1013f1c2f3e9436213f4a43069d1f4" category="image-alt">interfaces mcc par plate-forme 9336 partagée</block>
   <block id="8f40f02b2069b8947b976e569e5762e5" category="summary">Depuis la version ONTAP 9.6, les configurations IP de MetroCluster avec des commutateurs Cisco pris en charge peuvent partager les réseaux existants entre des liens ISL, au lieu de recourir à des liens ISL dédiés de MetroCluster.</block>
   <block id="137fb6b7668b4dc771dba830f9525b67" category="paragraph">Depuis la version ONTAP 9.6, les configurations IP de MetroCluster avec des commutateurs Cisco pris en charge peuvent partager les réseaux existants entre des liens ISL, au lieu de recourir à des liens ISL dédiés de MetroCluster. Les versions antérieures de ONTAP requièrent des liens ISL dédiés.</block>
   <block id="26a46433a2f75a74966a962fd286906b" category="paragraph">Les commutateurs IP MetroCluster sont dédiés à la configuration MetroCluster et ne peuvent pas être partagés. Par conséquent, un ensemble de commutateurs IP MetroCluster ne peut connecter qu'une seule configuration MetroCluster. Seuls les ports ISL MetroCluster des commutateurs IP MetroCluster peuvent se connecter aux commutateurs partagés.</block>
@@ -4743,7 +4711,6 @@
   <block id="5c1411fbd116047aebfa2b74c717f434" category="paragraph">Chacun des deux plexes de l'agrégat racine inclut les partitions suivantes :</block>
   <block id="a2e4b367e638086b2ebc46c43eab28ff" category="list-text">Trois partitions de données</block>
   <block id="9ac045d53981694ac00085732bed2ef9" category="list-text">Une partition de rechange</block>
-  <block id="2fa4712d7aa37e709ad53766a17e522f" category="section-title">ADP et affectation des disques sur les systèmes AFF A220</block>
   <block id="878451b3c3409179461a8121430d2819" category="paragraph">Disques internes uniquement</block>
   <block id="5d21f0ca4249a1dd3aa1ca99ea4c1b10" category="paragraph">Les disques internes sont répartis en quatre groupes identiques. Chaque groupe est automatiquement affecté à un pool distinct et chaque pool est affecté à un contrôleur distinct dans la configuration.</block>
   <block id="de5c61f9b523e845d26faafc2efdf938" category="admonition">La moitié des disques internes reste non affectés avant la configuration du MetroCluster.</block>
@@ -4758,20 +4725,17 @@
   <block id="3101be4d53f99469f2c1b39892d6d93f" category="list-text">Q2 : pool0 nœud_A_2</block>
   <block id="dbe07d3b0e16c3d4d765887b1b29b7bd" category="list-text">Q3 : node_B_1 pool1</block>
   <block id="36a6b2d82f1c99925006210a57878b24" category="list-text">Q4 :node_B_2 pool1</block>
-  <block id="88f336a63a2478d097af48b4a173b710" category="section-title">Affectation des disques et ADP sur les systèmes AFF A250</block>
   <block id="f3a88820bdb6aec9f587dc31d6c8d2a5" category="paragraph">Les partitions sur chaque tiroir sont utilisées pour créer l'agrégat racine. L'agrégat racine inclut les partitions suivantes dans chaque plex :</block>
   <block id="cf5928613cf8b77d8355882cdec38712" category="paragraph">16 disques internes uniquement</block>
   <block id="6ecbc3bbbc5acac0e3a1eaa928b0ef3a" category="list-text">Deux partitions de données</block>
   <block id="203589fdbad6f6dc48cf251ed51e812a" category="list-text">Pas de partitions de rechange</block>
   <block id="5f09ad28ed34c8a5a9d9a71b6cfab3ac" category="section-title">Affectation des disques et ADP sur les systèmes AFF A300</block>
-  <block id="973a8b1aa4f84638d8c79c058abe3370" category="section-title">Affectation d'un disque ou d'un ADP sur les systèmes AFF A400</block>
   <block id="eef4995b2b5cb936fd39ce523f41f36e" category="paragraph">96 disques</block>
   <block id="e6668b4aac77d165570602be7eb7cec3" category="paragraph">Les disques sont automatiquement affectés selon le type tiroir par tiroir.</block>
   <block id="cbe12377e4ad0771ba766a2156cee232" category="paragraph">Chacun des deux plexes de l'agrégat racine inclut :</block>
   <block id="4633d33fd87d963a27b8086f9c9221e3" category="list-text">20 partitions de données</block>
   <block id="25bc5caf83c0d709344d7afcc2319c3e" category="paragraph">Les disques sont divisés en quatre groupes égaux (quarts). Chaque tiroir est automatiquement attribué à un pool distinct.</block>
   <block id="e53bff6863910b8dc61a899d411a0628" category="section-title">Affectation des disques et ADP sur les systèmes AFF A700</block>
-  <block id="fd4d73a84fa4701c5b537bde0a1e536e" category="section-title">ADP et affectation des disques sur les systèmes AFF A800</block>
   <block id="c53b7d3a6a4dec447344623203b7118a" category="cell">Disposition ADP pour l'agrégat racine</block>
   <block id="4cc79bf7b84548df7d6cedf892dab8d3" category="paragraph">Disques internes et 96 disques externes</block>
   <block id="05fce716b1daba00f41c2bed56cc5f77" category="paragraph">Les partitions internes sont divisées en quatre groupes égaux (quarts). Chaque trimestre est attribué automatiquement à un pool distinct. Les disques des tiroirs externes sont automatiquement affectés selon le tiroir par tiroir, tous les disques de chaque tiroir étant affectés à l'un des quatre nœuds de la configuration MetroCluster.</block>
@@ -4799,7 +4763,6 @@
   <block id="1ea1224e95806d38188ac2833eef5d68" category="list-title">Remarques pour les tableaux ci-dessous :</block>
   <block id="84d5df4bc00912b5bf41517f871849dc" category="list-text">Sur certaines plateformes, vous pouvez utiliser les ports 49 à 54 pour les connexions MetroCluster ISL ou MetroCluster.</block>
   <block id="141c241c09745923a907fa0b44d6fdc2" category="paragraph">Ces ports requièrent une licence supplémentaire.</block>
-  <block id="ee1c57ea8aa164533e9450c35bd1eacb" category="list-text">Seul un système MetroCluster à quatre nœuds utilisant les systèmes A320 peut être connecté au commutateur.</block>
   <block id="c7ecc9ce844e9f4491596826d0847864" category="paragraph">Les fonctionnalités qui nécessitent un cluster commuté ne sont pas prises en charge dans cette configuration, notamment les procédures de transition FC vers IP et de mise à jour technologique de MetroCluster.</block>
   <block id="101ffe4f466417c1ce75564d3cc0a3b6" category="list-text">Les systèmes AFF A320 configurés avec des switchs Broadcom BES-53248 peuvent ne pas prendre en charge toutes les fonctionnalités.</block>
   <block id="541a17569d4a90ee94a9fd4035349deb" category="list-text">Mise à jour d'une configuration IP MetroCluster à quatre nœuds (ONTAP 9.8 et versions ultérieures)</block>
@@ -4808,12 +4771,7 @@
   <block id="2ad4e214daf4f2fbe760328984025270" category="list-text">Deux configurations MetroCluster composées uniquement de FAS2750/AFF A220 ou FAS500f/AFF A250, vous devez sélectionner les groupes de ports MetroCluster 3 et 4.</block>
   <block id="673f5a3eeb8366a43231216d5889b9fc" category="inline-link-macro">Utilisation des tables de ports avec l'outil RcfFileGenerator ou de plusieurs configurations MetroCluster</block>
   <block id="1c4e028af9d72f4e84ad919004a88581" category="list-text">Deux configurations MetroCluster dans lesquelles un MetroCluster est de type FAS2750/AFF A220 et l'autre est FAS500f/AFF A250, vous devez sélectionner les groupes de ports 3 et 4 pour une, et les groupes de ports 1 et 2 pour l'autre. Dans le<block ref="166489b3c340ece1eccb5706fda90624" category="inline-link-rx"></block>, les champs 1 et 2 ne sont remplis que de la plate-forme prise en charge après avoir sélectionné des plates-formes dans les zones déroulantes 3 et 4. Reportez-vous à la section <block ref="4dfd72a31c74d2e269d1ca49dcbd7291" category="inline-link-macro-rx"></block> pour plus d'informations sur l'utilisation des tables de ports.</block>
-  <block id="447ff1837fe6e9b2fe6c2430a25a0331" category="section-title">Utilisation des ports de switch pour les systèmes AFF A220 ou FAS2750</block>
-  <block id="db4f64f411307a751876f1eb0470efb7" category="image-alt">mcc ip reliant un AFF a220 ou fas2750 à un commutateur broadcom bes 53248</block>
-  <block id="d40faa36f20cf1b622ebf5067a583e1c" category="image-alt">mcc ip relie un AFF a250 ou fas500f à un commutateur broadcom bes 53248</block>
-  <block id="a9bf0a810b5c634110cced1dcc9dd514" category="section-title">Utilisation des ports de switch pour une utilisation combinée des systèmes AFF A250, FAS500f et AFF A220 ou FAS2750</block>
   <block id="eab2b22490c89198b6c41f5b7c6e6104" category="image-alt">câblage ip mcc AFF a250 et a220 vers un commutateur broadcom bes 53248</block>
-  <block id="4d03bcea2ca2c6441b30593805be9fed" category="section-title">Utilisation des ports par switch pour les systèmes AFF A300 ou FAS8200</block>
   <block id="dea9eb47178beaeb21ad431dae613392" category="image-alt">mcc ip reliant un AFF a300 ou fas8200 à un commutateur broadcom bes 53248</block>
   <block id="99abcc4b4e656e7c9d684acf6c9c05d8" category="image-alt">mcc ip relie un AFF a320 à un commutateur broadcom bes 53248</block>
   <block id="d13ba1eac1605fed2f8d4e769d4a477e" category="image-alt">mcc ip relie une carte fas8300 a400 ou fas8700 à un commutateur broadcom bes 53248</block>
@@ -5006,11 +4964,9 @@
   <block id="8fa16a4e9a93c3ddc0f5de5f06d654b2" category="paragraph">Ports X1146A/intégrés</block>
   <block id="4e420f0895c7c6aeabc962b55c31bcd4" category="paragraph">Emplacement 1</block>
   <block id="54af8799ee92be8b48f8774ae3b5b134" category="paragraph">e0b. e1b</block>
-  <block id="be0230807be10234aa034e45c6825280" category="paragraph">AFF A400 ET FAS8300</block>
   <block id="bdd6d5c8236c146756223f3fdbf8bc5d" category="paragraph">X1146A</block>
   <block id="c4ea0eec15aeb871f4ff708460f06623" category="paragraph">e1a, e1b</block>
   <block id="777915564b2f2870366331ca85d7d9a9" category="paragraph">X1116A</block>
-  <block id="64b4bef2f38301ebf3145c386cd6394d" category="paragraph">AFF A220 ET FAS2750</block>
   <block id="d30fc67c2a1cee6e54e9714145270705" category="paragraph">Ports intégrés</block>
   <block id="f1044ba6bab78a278fa587f690217ea7" category="paragraph">Emplacement 0</block>
   <block id="021129e5b6cda3c7398d4240f38ab938" category="paragraph">e0a, e0b</block>
@@ -10018,7 +9974,6 @@
   <block id="cefd59017a4a065f49d52af021a7df7a" category="paragraph"><block ref="cefd59017a4a065f49d52af021a7df7a" category="inline-link-rx"></block></block>
   <block id="e30d5ec5eece78451cf9285cb678b934" category="summary">Pour installer votre configuration Fabric-Attached MetroCluster, vous devez effectuer plusieurs procédures dans le bon ordre.</block>
   <block id="f2b75487be86fe362165761ed32f9169" category="list-text"><block ref="d8800598dd130bed5c7eb4a12dcecf69" category="inline-link-macro-rx"></block>.</block>
-  <block id="cce6b41c17958a4ae28e2639fe5c1c1a" category="list-text"><block ref="52d00daf67aaaf387590e09043aff43a" category="inline-link-macro-rx"></block>* <block ref="49cc90fa19d302674a7ac32a31b7a0c8" category="inline-link-macro-rx"></block></block>
   <block id="11be15880eab3352c16856fa1475d4db" category="list-text"><block ref="11be15880eab3352c16856fa1475d4db" category="inline-link-macro-rx"></block></block>
   <block id="29ad4be139be5b3e7f2133bef476991d" category="list-text"><block ref="29ad4be139be5b3e7f2133bef476991d" category="inline-link-macro-rx"></block></block>
   <block id="79d1eabb3b4c3024eae6de87ff7920f8" category="summary">Sur chaque contrôleur de la configuration clustered ONTAP MetroCluster, l'adaptateur FC-VI et les HBA doivent être câblés à des ports spécifiques sur les commutateurs FC existants.</block>
@@ -12639,10 +12594,8 @@
   <block id="9ecb124bd7cc72ce8836d42500ccf1c1" category="paragraph"><block ref="573c932508ccab841c5c117fb2cd2186" prefix="" category="inline-code"></block> Est l'adresse IP d'un serveur de noms sur votre réseau.</block>
   <block id="0b01a5f19097da529bc5a887225bb6d0" category="paragraph"><block ref="79e5a69f76d034adaafbb5cb6cb8fc45" prefix="" category="inline-code"></block> Est le nom de domaine DNS (Domain Name System). Si vous utilisez ce paramètre facultatif, vous n'avez pas besoin d'un nom de domaine complet dans l'URL du serveur netboot ; vous n'avez besoin que du nom d'hôte du serveur.</block>
   <block id="bafe4bc75cd2dda40df8007d783f6a0b" category="paragraph"><block ref="bafe4bc75cd2dda40df8007d783f6a0b" category="inline-link-macro-rx"></block></block>
-  <block id="2fc63d7ef73ec51fea07c22bee9e5328" category="open-title">Dans ONTAP 9.6 et versions ultérieures</block>
   <block id="a6716741999f9bc3ac379c0b1266ee9e" category="paragraph">Lancer la commande :<block ref="adc0f0943e919c37894a966fa46c4084" prefix=" " category="inline-code"></block></block>
   <block id="99aae08435ef4a82bc4ed2301471d60e" category="paragraph">Lancer la commande :<block ref="b7394405b5c746164dce6dfd2501d986" prefix=" " category="inline-code"></block></block>
-  <block id="6ddde2f3f00d7171e5fc3d8622653a6e" category="paragraph">Ron la commande :<block ref="fdb848f6761ac46e0ea7678b5269bd3c" prefix=" " category="inline-code"></block></block>
   <block id="9bb6c900985ca15d936c8e04295202f6" category="paragraph">Lancer la commande :<block ref="4686e63f75ecbb5593b9aac27ab89dd7" prefix=" " category="inline-code"></block></block>
   <block id="ef272f06b8afd4c6381d192259829c5a" category="paragraph">Lancer la commande :<block ref="e24a79e2175b07b7a27cd83a3dc6847e" prefix=" " category="inline-code"></block></block>
   <block id="bea69222028495543641d681312bfac9" category="paragraph">Lancer la commande :<block ref="a95e2d29f4907b8b27d7a8683d428c09" prefix=" " category="inline-code"></block></block>
@@ -12706,7 +12659,6 @@
   <block id="68d8047cbf72a612dd739f574baa912c" category="paragraph">Toute configuration ou fonctionnalité qui nécessite que les connexions locales du cluster soient connectées à un commutateur ne peut pas être utilisée. Par exemple, les configurations et procédures suivantes ne peuvent pas être utilisées avec un commutateur conforme à MetroCluster :</block>
   <block id="999a0234ad26235f40e860b0131203f6" category="admonition">Des valeurs manquantes indiquent que la plateforme ne peut pas être utilisée avec un switch compatible MetroCluster.</block>
   <block id="e6e94fa732001e55f7fcf67c01c5f249" category="paragraph">Vous devrez peut-être configurer un commutateur qui possède un trafic MetroCluster sur un ISL, mais qui ne se connecte pas à une interface MetroCluster. Dans ce cas, le trafic est déjà classé et ne doit être mappé qu'à la file d'attente appropriée. Dans l'exemple suivant, tout le trafic COS5 est mappé à la classe RDMA, et tout le trafic COS4 est mappé à la classe iSCSI. Notez que cela affectera *tout* du trafic COS5 et COS4, pas seulement le trafic MetroCluster. Si vous ne souhaitez mapper le trafic MetroCluster que, vous devez utiliser les cartes de classes ci-dessus pour identifier le trafic à l'aide des groupes d'accès.</block>
-  <block id="09d852286694a04fbe67a38fda6ca956" category="image-alt">matrice de transition ip fc de MetroCluster</block>
   <block id="421c8863e1f7223f216aacf99393b7dd" category="list-text">Remarque 1 : cette combinaison de plateformes nécessite ONTAP 9.11.1 ou une version ultérieure.</block>
   <block id="60ddbd1babdd945c26fbc431202fea6c" category="inline-link-macro">Hardware Universe</block>
   <block id="f90dfbd0dbb63ace6227bf8f3e75efb6" category="admonition">Ne dépassez pas les limites d'objet du « bas » des plates-formes de la combinaison. Appliquez la limite inférieure des objets des deux plates-formes. Reportez-vous à la <block ref="62911b0739c1772914819ee9e7282ee4" category="inline-link-macro-rx"></block> pour les limites de plateforme.</block>
@@ -12725,10 +12677,8 @@
   <block id="316cc41a2ded57b927048db5915a847f" category="section-title">Sélection de la procédure utilisant le processus de basculement et de rétablissement</block>
   <block id="310848f15048cc78b3cbee9c61235054" category="paragraph">Sélectionnez votre plateforme actuelle dans le tableau FC ou IP ci-dessous. Si l'intersection de la ligne de plateforme actuelle et de la colonne de plateforme cible est vide, la mise à niveau n'est pas prise en charge.</block>
   <block id="569cf9bf2c0f655af1cc3b1657f11706" category="section-title">Mises à niveau du contrôleur IP MetroCluster prises en charge</block>
-  <block id="540ce52d50e838f18565d459be99ad07" category="image-alt">tableau de mise à niveau ip de MetroCluster</block>
   <block id="871aaccc4c0a59b618736750595955e7" category="list-text">Remarque 1 : pour cette mise à niveau, utilisez la procédure <block ref="f668bd1de55e6e087edcf0e6120e96e3" category="inline-link-macro-rx"></block></block>
   <block id="59710baa552439a5c3866c2907720be7" category="section-title">Mises à niveau prises en charge du contrôleur MetroCluster FC</block>
-  <block id="4c3f5a4336bfad25061595eaff859835" category="image-alt">tableau de mise à niveau MetroCluster fc</block>
   <block id="9ae1fbeadb6e0efc4e024384fb8a4f8d" category="inline-link">Article de la base de connaissances</block>
   <block id="6bd20d1a4e5bd1d6bed1627ed32e934c" category="list-text">Remarque 1 : pour mettre à niveau les contrôleurs lorsque des connexions FCVI sur les nœuds FAS8020 ou AFF8020 existants utilisent les ports 1c et 1D, voir ci-dessous<block ref="058c6692589b3956d6bd485ac9c6cea6" category="inline-link-rx"></block>.</block>
   <block id="67be5a03851a4b6d9deae18ad49f328e" category="list-text">Remarque 2 : les mises à niveau du contrôleur depuis les plateformes AFF A300 ou FAS8200 via les ports intégrés 0e et 0f comme connexions FC-VI sont prises en charge uniquement sur les systèmes exécutant ONTAP 9.9.1. ou plus tôt. Pour plus d'informations, consultez la <block ref="54dac02f94a6488bb50eb2223b2531dc" category="inline-link-macro-rx"></block>.</block>
@@ -12772,7 +12722,6 @@
   <block id="88ea8505ba0420be98c64dcb7f91e23c" category="image-alt">mise à jour technologique MetroCluster fc</block>
   <block id="094d92c3e06727b6e6ff0d7a8d541bef" category="list-text">Assurez-vous de terminer la procédure de mise à jour technologique avant d'ajouter une nouvelle charge.</block>
   <block id="cfd1300cd3db131e8f69dc38177b5658" category="section-title">Combinaisons de mise à jour technologique MetroCluster IP prises en charge</block>
-  <block id="5a19a72f15dc5e9ad6e2a4e964365ace" category="image-alt">mise à jour technologique de MetroCluster ip</block>
   <block id="ad06b1bad80df72d4f2fa24312c0a9bf" category="cell">Méthode de rafraîchissement</block>
   <block id="56ad29882b1f5aa7a765e42a0bd3ca97" category="paragraph"><block ref="56ad29882b1f5aa7a765e42a0bd3ca97" category="inline-link-macro-rx"></block></block>
   <block id="65fc2b3acec6ee29de6484f084e9ad51" category="paragraph">Vous pouvez mettre à niveau certaines plateformes en utilisant l'opération de basculement et de rétablissement dans une configuration MetroCluster FC.</block>
@@ -13016,4 +12965,45 @@
   <block id="2a077243240a3af8fdb5a2c53c8dfd93" category="sidebar">Activez le basculement du stockage sur les deux modules de contrôleur et activez la haute disponibilité du cluster</block>
   <block id="3ae2a51b967ff5379c07b5d59d9bb892" category="sidebar">Reliez les nouveaux ports FC-VI et HBA des modules de contrôleur aux commutateurs FC</block>
   <block id="2ec9cf7fc01c78e918f2c1109d699ebd" category="sidebar">Configurez l'accès administrateur à ONTAPI et SSH</block>
+  <block id="afc391e4f426f99e79c7db52846734a8" category="image-alt">mise à jour technologique ip MetroCluster yellowdogp1</block>
+  <block id="cc2ec6d9e6bb31f9131384ee2ea63d52" category="image-alt">table de mise à niveau ip MetroCluster yellowdoddp1</block>
+  <block id="e99d1c22871517ed64fe9bd3e59b4c85" category="image-alt">MetroCluster fc table de mise à niveau yellowdogp1</block>
+  <block id="6dc537d2cf87cd236dd75c2694edbea6" category="image-alt">MetroCluster fc matrice de transition ip yellowdogp1</block>
+  <block id="3ba18986907ef3401544960b244376ed" category="section-title">Affectation des disques et ADP sur les systèmes AFF A150 et AFF A220</block>
+  <block id="cab91f7159880630a5bee29aa55d9f8a" category="section-title">Affectation des disques et des ADP sur les systèmes AFF C250 et AFF A250</block>
+  <block id="3e0a52646b307379f47860044c088d60" category="paragraph">Les disques de chaque tiroir externe sont divisés en deux groupes égaux (moitiés). Chaque demi-tiroir est automatiquement attribué à un pool distinct.</block>
+  <block id="b244c220ca2f00fdc24e97de45456f82" category="section-title">Affectation des disques et des ADP sur les systèmes AFF C400 et AFF A400</block>
+  <block id="ba9bcbab50848c136d0007b25231ce1e" category="section-title">ADP et affectation des disques sur les systèmes AFF C800 et AFF A800</block>
+  <block id="c977cafedb40d70c2be8514107ee4747" category="list-text">FAS500f / AFF C250 / AFF A250</block>
+  <block id="fc6e488d651b33ef6c6b35c501a7495f" category="list-text">FAS8300 / AFF C400 / AFF A400</block>
+  <block id="297b6e0ce5945c15596f1be2b7ce0585" category="list-text">AFF C800 / AFF A800</block>
+  <block id="8e65b308ba381d7e7d885330e749b55d" category="list-text">Si vous câblez deux configurations MetroCluster à quatre nœuds de type AFF A700, connectez le premier MetroCluster indiqué sous la forme « MetroCluster 1 » et le second MetroCluster sous la forme « MetroCluster 2 » dans le tableau AFF A700.</block>
+  <block id="e5c3d25338f9cf52b0644af8df5dd491" category="admonition">Les ports 13 et 14 peuvent être utilisés en mode de vitesse native prenant en charge 40 Gbits/s et 100 Gbits/s, ou en mode d'arrachage pour prendre en charge 4 × 25 Gbits/s ou 4 × 10 Gbits/s. S'ils utilisent le mode de vitesse natif, ils sont représentés par les ports 13 et 14. S'ils utilisent le mode écorché, soit 4 × 25 Gbit/s, soit 4 × 10 Gbit/s, ils sont représentés sous la forme de ports 13s0-3 et 14s0-3.</block>
+  <block id="1ad95d38a718a40f57a452228a018366" category="section-title">Utilisation des ports de commutation pour FAS500f, AFF C250 ou AFF A250</block>
+  <block id="32749c9f2fe889b20a4f9ed309297f2b" category="image-alt">Câblage mcc ip A250 C250 MSN2100</block>
+  <block id="3a1adad502af8b0ad25b006361e23ce5" category="section-title">Utilisez les ports de switch pour AFF C400, AFF A400, AFF A700 ou FAS9000, FAS8300 ou FAS8700 AFF A800</block>
+  <block id="6f71608a9b02340c422ff3d643b4afd7" category="image-alt">Câblage mcc ip aff250 400 700 800 cseriesMSN2100</block>
+  <block id="0995dd589b8b5229e4b9e28862db9b91" category="paragraph">Lorsque vous câblez plusieurs configurations MetroCluster à un commutateur Cisco 3132Q-V, vous devez câbler chaque MetroCluster selon le tableau approprié. Par exemple, si vous connectez un système FAS2750 et un système AFF A700 au même commutateur Cisco 3132Q-V. Connectez ensuite le système FAS2750 selon la norme « MetroCluster 1 » du Tableau 1 et le système AFF A700 selon la norme « MetroCluster 2 » ou « MetroCluster 3 » du Tableau 2. Vous ne pouvez pas connecter physiquement les systèmes FAS2750 et AFF A700 comme « MetroCluster 1 ».</block>
+  <block id="014322233c716b51b659a375ee0b236f" category="section-title">Câblage d'un système AFF A150, FAS2750, AFF A220, FAS500f, AFF C250 ou AFF A250 à un switch Cisco 3232C ou Cisco 9336-FX2C</block>
+  <block id="b1ae03d0492f9071184bcc685e4d9008" category="image-alt">câblage ip mcc a150 a220 a250 vers un commutateur cisco 323232c ou cisco 9336c</block>
+  <block id="f4a4caf899825065a94a65355e7134d1" category="section-title">Câblage d'un système FAS8200 ou d'un système AFF A300 à un switch Cisco 3232C ou Cisco 9336C</block>
+  <block id="03a4a17b1eab01f0b74373b2d602b107" category="section-title">Câblage d'un système AFF A320, FAS8300, AFF C400, AFF A400, FAS8700, FAS9000, AFF A700, AFF C800, AFF A800, FAS9500 ou AFF A900</block>
+  <block id="cf6033c90446afb2f2e4bf0a87384e97" category="image-alt">Câblage ip mcc a400 a320 a800 a900 cisco 3232C ou switch 9336c</block>
+  <block id="354182992aa934a6b659ad8284efa43c" category="section-title">Câblage d'un système AFF A320, AFF C400, AFF A400, AFF A700, AFF C800 Ou AFF A800 à un commutateur partagé Cisco 9336C-FX2</block>
+  <block id="16212daffd6a3883636683e7ad616747" category="image-alt">mcc ip cabling AFF a320 c400 a400 a700 c800 a800 vers le commutateur partagé cisco 9336c</block>
+  <block id="4aa636d0c8e798111a1395c5cf44abef" category="paragraph">AFF A800, AFF C800</block>
+  <block id="76a3e9deef2a9133b01bc4b8aa5ad045" category="paragraph">FAS8300, AFF A400 et AFF C400</block>
+  <block id="2d24d8597140717b72521869e1b9643a" category="paragraph">FAS2750, AFF A150 et AFF A220</block>
+  <block id="f557196ec910f221f73585a5c481f240" category="paragraph">FAS500f, AFF A250 et AFF C250</block>
+  <block id="bf9729690d4b6a4daedabf36c5b5ec8c" category="list-text">Seul un MetroCluster à quatre nœuds utilisant des systèmes AFF A320 peut être connecté au commutateur.</block>
+  <block id="9b7cca2be0457a3d0c492f8e904df901" category="section-title">Utilisation des ports de commutation pour les systèmes FAS2750, AFF 150 ou AFF A220</block>
+  <block id="8ee408688016c0cb16c82686873a5d8e" category="image-alt">mcc ip reliant un AFF a150 a220 ou fas2750 à un commutateur broadcom bes 53248</block>
+  <block id="58f2f8e1f41f44915c0a9dd64bc2bb2d" category="section-title">Utilisation des ports de commutation pour les systèmes FAS500f, AFF C250 ou AFF A250</block>
+  <block id="358099a0b111152a484a1e05b14c7c47" category="image-alt">mcc ip reliant un AFF c250 a250 ou fas500f à un commutateur broadcom bes 53248</block>
+  <block id="4dd9be0b315657693d8b4224514a84dd" category="section-title">Utilisation des ports de commutation pour une utilisation combinée des systèmes AFF A150, FAS2750, AFF A220 et FAS500f ou AFF C250 Ou AFF A250</block>
+  <block id="e4bf5275812c1279d2db37ca9929225f" category="section-title">Et utilisez les ports de switch pour les systèmes FAS8200 ou AFF A300</block>
+  <block id="3e2cc26117df5be817591b49f77f1480" category="section-title">Utilisation des ports de commutation pour les systèmes FAS8300, AFF C400, AFF A400 ou FAS8700</block>
+  <block id="52d00daf67aaaf387590e09043aff43a" category="list-text"><block ref="52d00daf67aaaf387590e09043aff43a" category="inline-link-macro-rx"></block></block>
+  <block id="49cc90fa19d302674a7ac32a31b7a0c8" category="list-text"><block ref="49cc90fa19d302674a7ac32a31b7a0c8" category="inline-link-macro-rx"></block></block>
+  <block id="566b66a4b36764e94944f56424f3b3ca" category="paragraph">Lancer la commande :<block ref="fdb848f6761ac46e0ea7678b5269bd3c" prefix=" " category="inline-code"></block></block>
 </blocks>
