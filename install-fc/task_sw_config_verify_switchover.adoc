@@ -2895,6 +2895,9 @@ Remote: cluster_A         Configuration state configured
 
 Vous devez configurer soit la livraison dans l'ordre (IOD), soit la livraison hors commande (OOD) des trames en fonction de la configuration du commutateur Fibre Channel (FC). Si le commutateur FC est configuré pour IOD, le logiciel ONTAP doit être configuré pour IOD. De la même façon, si le commutateur FC est configuré pour OOD, ONTAP doit être configuré pour OOD.
 
+
+NOTE: Vous devez redémarrer le contrôleur pour modifier la configuration.
+
 .Étapes
 . Configurez ONTAP pour qu'il fonctionne soit IOD ou OOD des trames.
 +
@@ -2964,6 +2967,7 @@ mcc4-b2      mlx4_0          IB       Up    false    192.0.2.10  	 ib2b
 mcc4-b12_siteB::*> metrocluster interconnect adapter modify -node mcc4-b1 -is-ood-enabled true
 mcc4-b12_siteB::*> metrocluster interconnect adapter modify -node mcc4-b2 -is-ood-enabled true
 ----
+... Redémarrez le contrôleur en effectuant un basculement haute disponibilité dans les deux sens.
 ... Vérifiez les paramètres :
 +
 `metrocluster interconnect adapter show`
