@@ -4,17 +4,22 @@ sidebar: sidebar
 keywords: metrocluster, upgrade, refresh, four, node, ip, configuration, add, autosupport 
 summary: Vous pouvez ajouter quatre nouveaux nœuds à la configuration IP MetroCluster en tant que second groupe DR. Cela crée une configuration MetroCluster à huit nœuds. 
 ---
-= Extension d'une configuration IP MetroCluster à quatre nœuds à une configuration à huit nœuds
+= Développement d'une configuration IP MetroCluster
 :allow-uri-read: 
 :icons: font
 :imagesdir: ../media/
 
 
 [role="lead"]
+Selon votre version de ONTAP, vous pouvez étendre votre configuration MetroCluster IP en ajoutant quatre nouveaux nœuds en tant que nouveau groupe de reprise sur incident.
+
+À partir de ONTAP 9.13.1, vous pouvez ajouter quatre nouveaux nœuds à la configuration IP de MetroCluster en tant que troisième groupe de reprise sur incident. Une configuration MetroCluster à douze nœuds est alors créée.
+
 Depuis ONTAP 9.9.1, vous pouvez ajouter quatre nouveaux nœuds à la configuration IP de MetroCluster en tant que second groupe de reprise après incident. Cela crée une configuration MetroCluster à huit nœuds.
 
 .Avant de commencer
 * L'ancien et le nouveau nœud doivent exécuter la même version de ONTAP.
+* Cette procédure décrit les étapes requises pour développer un groupe DR à quatre nœuds. Si vous disposez d'une configuration à huit nœuds (deux groupes DR), vous devez répéter la procédure complète pour chaque groupe DR.
 * Vous devez vous assurer que les anciens et nouveaux modèles de plate-forme sont pris en charge pour le mélange de plate-forme.
 +
 https://hwu.netapp.com["NetApp Hardware Universe"^]
@@ -64,6 +69,26 @@ dr_group_2-new
 
 
 |===
+
+
+== Combinaisons de plateformes prises en charge lors de l'ajout d'un deuxième groupe de reprise après incident
+
+Le tableau suivant présente les combinaisons de plateformes prises en charge pour les configurations IP à huit nœuds.
+
+[IMPORTANT]
+====
+* Les combinaisons de ce tableau s'appliquent uniquement aux configurations 8 nœuds standard ou permanentes.
+* Les combinaisons de plates-formes indiquées dans ce tableau *ne* s'appliquent pas si vous utilisez les procédures de transition ou d'actualisation.
+* Tous les nœuds d'un groupe de reprise après incident doivent être du même type et de la même configuration.
+
+
+====
+image::../media/8node_comb_ip.png[Combinaisons de plateformes pour configurations à 8 nœuds]
+
+* *Note 1* : ONTAP 9.9.1 ou version ultérieure (ou la version minimale de ONTAP prise en charge sur la plate-forme) est requise pour ces combinaisons.
+* *Note 2* : ONTAP 9.13.1 ou version ultérieure (ou la version minimale de ONTAP prise en charge sur la plate-forme) est requise pour ces combinaisons.
+
+
 
 
 == Envoi d'un message AutoSupport personnalisé avant la maintenance

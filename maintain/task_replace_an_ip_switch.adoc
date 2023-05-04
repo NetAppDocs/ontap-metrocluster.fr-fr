@@ -4,25 +4,67 @@ sidebar: sidebar
 keywords: metrocluster, maintain, service, replace, ip, switch 
 summary: 'Vous devrez peut-être remplacer un commutateur défectueux ou mettre à niveau ou rétrograder un commutateur. Le nouveau commutateur peut être le même que l"ancien commutateur en cas de défaillance d"un commutateur, ou vous pouvez modifier le type de commutateur \(mettre à niveau ou rétrograder le commutateur\).' 
 ---
-= Remplacement d'un commutateur IP
+= Remplacez un commutateur IP ou modifiez l'utilisation des commutateurs IP MetroCluster existants
 :allow-uri-read: 
 :icons: font
 :imagesdir: ../media/
 
 
 [role="lead"]
-Vous devrez peut-être remplacer un commutateur défectueux ou mettre à niveau ou rétrograder un commutateur. Le nouveau commutateur peut être identique à l'ancien commutateur en cas de défaillance d'un commutateur ou vous pouvez modifier le type de commutateur (mettre à niveau ou rétrograder le commutateur).
-
-Si vous souhaitez remplacer un commutateur défectueux par le même type de commutateur, il vous suffit de remplacer le commutateur défectueux. Si vous souhaitez mettre à niveau ou rétrograder un commutateur, vous devez régler deux commutateurs se trouvant sur le même réseau. Deux commutateurs se trouvent sur le même réseau s'ils sont connectés avec un lien ISL et ne sont pas situés sur le même site. Par exemple, le réseau 1 inclut IP_switch_A_1 et IP_switch_B_1. Le réseau 2 inclut IP_switch_A_2 et IP_switch_B_2 comme indiqué dans le schéma ci-dessous :
-
-image::../media/mcc_ip_hardware_architecture_ip_interconnect.png[interconnexion ip de l'architecture matérielle du mcc]
+Vous devrez peut-être remplacer un commutateur défectueux, mettre à niveau ou rétrograder un commutateur, ou modifier l'utilisation des commutateurs IP MetroCluster existants.
 
 Cette procédure s'applique lorsque vous utilisez des commutateurs validés par NetApp. Si vous utilisez des switchs conformes à MetroCluster, reportez-vous au fournisseur du commutateur.
 
-Si vous mettez à niveau ou déclarez les réseaux, vous devez répéter cette procédure pour le second réseau.
+Cette procédure prend en charge les conversions suivantes :
+
+* Modification du fournisseur, du type ou des deux commutateurs. Le nouveau commutateur peut être identique à l'ancien commutateur en cas de défaillance d'un commutateur ou vous pouvez modifier le type de commutateur (mettre à niveau ou rétrograder le commutateur).
++
+Par exemple, pour étendre une configuration IP MetroCluster d'une configuration unique à quatre nœuds à l'aide de contrôleurs AFF A400 et de commutateurs BES-53248 à une configuration à huit nœuds à l'aide de contrôleurs AFF A400, vous devez remplacer les commutateurs par un type pris en charge pour la configuration, car les commutateurs BES-53248 ne sont pas pris en charge dans la nouvelle configuration.
+
++
+Si vous souhaitez remplacer un commutateur défectueux par le même type de commutateur, vous devez remplacer uniquement le commutateur défectueux. Si vous souhaitez mettre à niveau ou rétrograder un commutateur, vous devez régler deux commutateurs situés sur le même réseau. Deux commutateurs se trouvent sur le même réseau lorsqu'ils sont connectés via une liaison ISL et non sur le même site. Par exemple, le réseau 1 inclut IP_switch_A_1 et IP_switch_B_1, et le réseau 2 inclut IP_switch_A_2 et IP_switch_B_2, comme indiqué dans le schéma ci-dessous :
+
++
+image::../media/mcc_ip_hardware_architecture_ip_interconnect.png[interconnexion ip de l'architecture matérielle du mcc]
+
++
+
+NOTE: Si vous remplacez un switch ou effectuez une mise à niveau vers d'autres switchs, vous pouvez préconfigurer les switchs en installant le firmware du switch et le fichier RCF.
+
+* Convertissez une configuration IP MetroCluster en configuration IP MetroCluster à l'aide de commutateurs MetroCluster de stockage partagé.
++
+Par exemple, si vous disposez d'une configuration IP MetroCluster standard avec les contrôleurs AFF A700 et que vous souhaitez reconfigurer le MetroCluster pour connecter les tiroirs NS224 aux mêmes switchs.
+
++
+[NOTE]
+====
+** Si vous ajoutez ou supprimez des tiroirs dans une configuration MetroCluster IP à l'aide de commutateurs MetroCluster IP de stockage partagé, suivez les étapes de la section link:https://docs.netapp.com/us-en/ontap-metrocluster/maintain/task_add_shelves_using_shared_storage.html["Ajout de tiroirs à une adresse IP MetroCluster à l'aide de commutateurs MetroCluster de stockage partagé"]
+** Votre adresse IP MetroCluster peut déjà se connecter directement aux tiroirs NS224 ou aux commutateurs de stockage dédiés.
+
+
+====
+
+
+.Fiche technique d'utilisation des ports
+Voici un exemple de feuille de calcul pour la conversion d'une configuration MetroCluster IP en une configuration de stockage partagé qui connecte deux tiroirs NS224 à l'aide des commutateurs existants.
+
+Définitions de feuille de calcul :
+
+* Configuration existante : câblage de la configuration MetroCluster existante.
+* Nouvelle configuration avec les tiroirs NS224 : configuration cible dans laquelle les switchs sont partagés entre le stockage et le MetroCluster.
+
+
+Les champs mis en surbrillance dans cette feuille de calcul indiquent les éléments suivants :
+
+* Vert : vous n'avez pas besoin de changer le câblage.
+* Jaune : vous devez déplacer des ports avec une configuration identique ou différente.
+* Bleu : ports qui sont de nouvelles connexions.
+
+
+image:../media/mcc_port_usage_workflow.png[""]
 
 .Étapes
-. Vérifier l'état de santé de la configuration.
+. [[all_step1]]Vérifiez l'état de santé de la configuration.
 +
 .. Vérifier que la MetroCluster est configurée et en mode normal sur chaque cluster : `*metrocluster show*`
 +
@@ -76,6 +118,9 @@ To check if the nodes are ready to do a switchover or switchback operation, run 
 
 . Configurer le nouveau commutateur avant l'installation.
 +
+Si vous réutilisez des commutateurs existants, passez à l' <<existing_step4,Étape 4>>.
+
++
 
 NOTE: Si vous mettez à niveau ou déclariez les commutateurs, vous devez configurer tous les commutateurs du réseau.
 
@@ -92,31 +137,103 @@ Si vous mettez à niveau ou déclasser un commutateur, appliquez le fichier RCF 
 +
 `*network port show*`
 
-. Débrancher les connexions ISL du commutateur distant qui se connecte à l'ancien commutateur.
+. [[existing_step4]]déconnectez les connexions de l'ancien commutateur.
 +
-Vous devez déconnecter les connexions ISL des ports de l'IP_switch_A_1 qui se connectent à IP_switch_B_1.
 
-. Mettez le commutateur hors tension, retirez les câbles et retirez physiquement IP_Switch_B_1.
-. Installer le nouveau commutateur.
+NOTE: Vous ne déconnectez que les connexions qui n'utilisent pas le même port dans les anciennes et les nouvelles configurations. Si vous utilisez de nouveaux commutateurs, vous devez déconnecter toutes les connexions.
+
 +
-Branchez d'abord le nouveau commutateur (y compris les liens ISL) conformément aux étapes de la section _câblage des commutateurs IP_ du link:https://docs.netapp.com/us-en/ontap-metrocluster/install-ip/using_rcf_generator.html["Installation et configuration de MetroCluster IP"].
+Déposer les connexions dans l'ordre suivant :
 
++
+** Si les interfaces de cluster locales sont connectées à un commutateur :
++
+*** Déconnectez les interfaces locales du cluster
+*** Déconnectez les liens ISL locaux du cluster
+
+
+** Déconnectez les interfaces IP MetroCluster
+** Déconnectez les liens ISL MetroCluster
++
+Dans l'exemple <<port_usage_worksheet>>, les commutateurs ne changent pas. Les liens ISL de MetroCluster sont déplacés et doivent être déconnectés. Vous n'avez pas besoin de déconnecter les connexions marquées en vert sur la feuille de travail.
+
+
+
+. Si vous utilisez de nouveaux commutateurs, mettez l'ancien commutateur hors tension, retirez les câbles et retirez physiquement l'ancien commutateur IP_Switch_B_1.
++
+Si vous réutilisez des commutateurs existants, passez à l' <<existing_step6,Étape 6>>.
+
++
+
+NOTE: Ne câblez *pas* les nouveaux commutateurs à l'exception de l'interface de gestion (le cas échéant).
+
+. [[existing_step6]]configurez les commutateurs existants.
++
+Si vous avez déjà préconfiguré les commutateurs, vous pouvez ignorer cette étape.
+
++
+Pour configurer les switchs existants, suivez la procédure d'installation et de mise à niveau des fichiers du micrologiciel et des fichiers RCF :
+
++
+** link:https://docs.netapp.com/us-en/ontap-metrocluster/maintain/task_upgrade_firmware_on_mcc_ip_switches.html["Mise à niveau du micrologiciel sur les commutateurs IP MetroCluster"]
+** link:https://docs.netapp.com/us-en/ontap-metrocluster/maintain/task_upgrade_rcf_files_on_mcc_ip_switches.html["Mettre à niveau les fichiers RCF sur les commutateurs IP MetroCluster"]
+
+
+. Câbler les commutateurs.
++
+Vous pouvez suivre les étapes de la section _câblage des commutateurs IP_ de la section link:https://docs.netapp.com/us-en/ontap-metrocluster/install-ip/using_rcf_generator.html["Installation et configuration de MetroCluster IP"].
+
++
+Câblez les interrupteurs dans l'ordre suivant (si nécessaire) :
+
++
+.. Reliez les liens ISL au site distant.
+.. Reliez les interfaces IP MetroCluster.
+.. Reliez les interfaces locales du cluster.
 +
 [NOTE]
 ====
-Les ports utilisés peuvent être différents de ceux de l'ancien commutateur si le type de commutateur est différent. Si vous effectuez une mise à niveau ou une rétrogradation des commutateurs, procédez à *PAS* de câble reliant les liens ISL locaux. Seuls les câbles ISL locaux sont câblés si vous mettez à niveau ou restaurez les commutateurs sur le second réseau, et les deux commutateurs d’un site sont de même type.
+*** Les ports utilisés peuvent être différents de ceux de l'ancien commutateur si le type de commutateur est différent. Si vous effectuez une mise à niveau ou une rétrogradation des commutateurs, procédez à *PAS* de câble reliant les liens ISL locaux. Connectez les liens ISL locaux uniquement si vous mettez à niveau ou rétrogradiez les switchs du second réseau, et que les deux commutateurs d'un site présentent le même type et le même câblage.
+*** Si vous mettez à niveau les commutateurs A1 et B1, vous devez effectuer les étapes 1 à 6 pour les commutateurs A2 et B2.
+
 
 ====
+
+
+. Finalisez le câblage local du cluster.
++
+.. Si les interfaces de cluster locales sont connectées à un commutateur :
++
+... Reliez les liens ISL du cluster local.
+
+
+.. Si les interfaces de cluster locales sont *non* connectées à un commutateur :
++
+... Utilisez le link:https://docs.netapp.com/us-en/ontap-systems-switches/switch-bes-53248/migrate-to-2n-switched.html["Migrer vers un environnement de cluster NetApp commuté"] procédure de conversion d'un cluster sans commutateur en cluster avec commutateur. Utiliser les orifices indiqués dans link:https://docs.netapp.com/us-en/ontap-metrocluster/install-ip/using_rcf_generator.html["Installation et configuration de MetroCluster IP"] Ou les fichiers de câblage RCF pour connecter l'interface de cluster locale.
+
+
+
+
 . Mettez le ou les commutateurs sous tension.
 +
 Si le nouveau commutateur est le même, mettez le nouveau commutateur sous tension. Si vous effectuez une mise à niveau ou une rétrogradation des commutateurs, mettez les deux commutateurs sous tension. La configuration peut fonctionner avec deux commutateurs différents sur chaque site jusqu'à la mise à jour du second réseau.
 
-. Vérifiez que la configuration MetroCluster fonctionne correctement en répétant l'étape 1.
+. Vérifiez que la configuration MetroCluster fonctionne correctement en répétant cette procédure <<all_step1,Étape 1>>.
 +
 Si vous effectuez une mise à niveau ou une rétrogradation des commutateurs du premier réseau, vous pouvez voir certaines alertes relatives à la mise en grappe locale.
 
 +
 
 NOTE: Si vous mettez à niveau ou déclarez les réseaux, répétez toutes les étapes pour le second réseau.
+
+. Vous pouvez également déplacer les tiroirs NS224.
++
+Si vous reconfigurez une configuration IP MetroCluster qui ne connecte pas les tiroirs NS224 aux commutateurs IP MetroCluster, suivez la procédure appropriée pour ajouter ou déplacer les tiroirs NS224 :
+
++
+** link:https://docs.netapp.com/us-en/ontap-metrocluster/maintain/task_add_shelves_using_shared_storage.html["Ajout de tiroirs à une adresse IP MetroCluster à l'aide de commutateurs MetroCluster de stockage partagé"]
+** link:https://docs.netapp.com/us-en/ontap-systems-switches/switch-cisco-9336c-fx2-shared/migrate-from-switchless-cluster-dat-storage.html["Migrez depuis un cluster sans commutateur avec du stockage DAS"^]
+** link:https://docs.netapp.com/us-en/ontap-systems-switches/switch-cisco-9336c-fx2-shared/migrate-from-switchless-configuration-sat-storage.html["Migrer d'une configuration sans commutateur vers un système de stockage FAS par commutateur en réutilisant les commutateurs de stockage"^]
+
 
 

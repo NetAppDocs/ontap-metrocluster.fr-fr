@@ -1,0 +1,32 @@
+= 
+:allow-uri-read: 
+
+
+Vous devez vérifier l'état haute disponibilité des contrôleurs et du châssis, et mettre à jour si nécessaire l'état en fonction de la configuration du système.
+
+.Étapes
+. En mode Maintenance, afficher l'état HA du module de contrôleur et du châssis :
++
+`ha-config show`
+
++
+L'état de haute disponibilité de tous les composants doit être `mccip`.
+
+. Si l'état système affiché du contrôleur ou du châssis n'est pas correct, définissez l'état HA :
++
+`ha-config modify controller mccip`
+
++
+`ha-config modify chassis mccip`
+
+. Arrêter le nœud : `halt`
++
+Le nœud doit s'arrêter au niveau du `LOADER>` à l'invite.
+
+. Sur chaque nœud, vérifiez la date, l'heure et le fuseau horaire du système : `show date`
+. Si nécessaire, définissez la date en UTC ou GMT : `set date <mm/dd/yyyy>`
+. Vérifiez l'heure à l'aide de la commande suivante à l'invite de l'environnement d'amorçage : `show time`
+. Si nécessaire, définissez l'heure en UTC ou GMT : `set time <hh:mm:ss>`
+. Enregistrer les paramètres : `saveenv`
+. Collecter les variables d'environnement : `printenv`
+

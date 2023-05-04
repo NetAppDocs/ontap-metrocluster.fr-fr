@@ -46,7 +46,7 @@ Vous ne pouvez pas utiliser d'applications ou d'appliances tierces pouvant décl
 
 == Prise en charge du protocole ONTAP pour le basculement automatique non planifié
 
-Le médiateur ONTAP stocke des informations d'état sur les nœuds MetroCluster dans des boîtes aux lettres situées sur l'hôte du médiateur. Les nœuds MetroCluster peuvent utiliser ces informations pour surveiller l'état de leurs partenaires DR et implémenter un basculement automatique non planifié assisté par un médiateur (MAUSO) en cas d'incident.
+Le médiateur ONTAP stocke des informations d'état sur les nœuds MetroCluster dans des boîtes aux lettres situées sur l'hôte du médiateur. Les nœuds MetroCluster peuvent utiliser ces informations pour surveiller l'état de leurs partenaires de reprise sur incident et mettre en œuvre un utilitaire MAUSO en cas d'incident.
 
 Lorsqu'un nœud détecte une défaillance de site nécessitant un basculement, il prend des mesures pour confirmer que le basculement est approprié et effectue le basculement.
 
@@ -54,10 +54,9 @@ Un MAUSO n'est lancé que dans les scénarios suivants :
 
 * La mise en miroir SyncMirror et la mise en miroir reprise après incident du cache non volatile de chaque nœud sont opérationnelles, et les caches et les miroirs sont synchronisés au moment de la panne.
 * Aucun des nœuds du site survivant n'est en état de basculement.
+* En cas d'incident sur site. Une catastrophe de site est une défaillance de *tous* nœuds sur le même site.
+* À partir de ONTAP 9.13.1, si les conditions ci-dessus sont remplies et qu'une panne de ventilateur ou de matériel entraîne un arrêt de l'environnement, par exemple une unité d'alimentation, une batterie NVRAM ou une défaillance de pulsation du processeur de service, ou une température élevée ou basse.
 
-
-
-IMPORTANT: Un MAUSO n'est lancé que si un incident de site se produit. Une catastrophe de site est une défaillance de *tous* nœuds sur le même site; toutefois, il y a quelques exceptions.
 
 Un MAUSO est *non* lancé dans les scénarios d'arrêt suivants :
 
@@ -67,5 +66,4 @@ Un MAUSO est *non* lancé dans les scénarios d'arrêt suivants :
 ** redémarrez les nœuds
 
 
-* Une panne de ventilateur ou de composant entraîne l'arrêt d'un système (arrêt environnemental)
 

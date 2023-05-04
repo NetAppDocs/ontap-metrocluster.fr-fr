@@ -697,7 +697,7 @@ Le processeur de service envoie et reçoit le trafic SNMP vers et depuis son par
 
 ==== Modification du paramètre AUSO dans les configurations MetroCluster FC
 
-AUSO est défini par défaut sur « auso-on-cluster-Disaster ». Son état peut être affiché dans la commande MetroCluster show.
+Par défaut, AUSO est défini sur « auso-on-cluster-Disaster ». Son état peut être affiché dans le `metrocluster show` commande.
 
 
 NOTE: Le paramètre AUSO ne s'applique pas aux configurations IP MetroCluster.
@@ -727,6 +727,10 @@ link:task_perform_switchover_for_tests_or_maintenance.html["Effectuer un bascule
 === Basculement automatique non planifié assisté par médiateur dans les configurations IP MetroCluster
 
 Dans les configurations IP MetroCluster, le système peut utiliser le médiateur ONTAP pour détecter des défaillances et effectuer un basculement automatique non planifié assisté par un médiateur (MAUSO).
+
+A partir de ONTAP 9.13.1, la valeur par défaut de l’état AUSO est définie sur “auso-on-dr-group” dans une configuration IP MetroCluster. Pour ONTAP 9.12.1 et les versions antérieures, la valeur par défaut est « auso-on-cluster-Disaster ». Dans une configuration IP MetroCluster à huit nœuds, cette option déclenche une AUSO si les deux nœuds d'une paire haute disponibilité échouent.
+
+Vous pouvez remplacer le domaine AUSO par le domaine « auso-on-cluster-désastre » à l'aide du `metrocluster modify -auto-switchover-failure-domain auso-on-cluster-disaster` commande.
 
 
 NOTE: La fonction MAUSO n'est pas prise en charge dans les configurations FC MetroCluster.

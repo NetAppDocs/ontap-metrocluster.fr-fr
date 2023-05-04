@@ -1,24 +1,25 @@
 ---
-permalink: upgrade/task_upgrade_controllers_system_control_commands_in_a_four_node_mcc_fc.html 
+permalink: upgrade/task_upgrade_controllers_system_control_commands_in_a_four_node_mcc_ip.html 
 sidebar: sidebar 
-keywords: metrocluster, upgrade, controllers, switchover, switchback, fc, configuration, net, boot, root, aggregate, system, commands, mcc 
-summary: 'Vous pouvez utiliser ce basculement automatisé MetroCluster dans nos guides pour effectuer une mise à niveau du contrôleur sans interruption dans le cas d"une configuration MetroCluster FC à quatre nœuds.' 
+keywords: metrocluster, upgrade, controllers, switchover, switchback, ip, configuration, net, boot, root, aggregate, system, commands, mcc 
+summary: 'Vous pouvez utiliser cette opération de basculement automatisé MetroCluster guidée pour effectuer une mise à niveau sans interruption du contrôleur dans le cas d"une configuration IP MetroCluster à quatre nœuds.' 
 ---
-= Mise à niveau des contrôleurs en une configuration FC MetroCluster à quatre nœuds via le basculement et le rétablissement avec des commandes « system contrôleur replace » (ONTAP 9.10.1 et versions ultérieures)
+= Mise à niveau des contrôleurs d'une configuration IP MetroCluster à quatre nœuds via le basculement et le rétablissement à l'aide des commandes « system Controller replace » (ONTAP 9.13.1 et versions ultérieures)
 :allow-uri-read: 
 :icons: font
 :imagesdir: ../media/
 
 
 [role="lead"]
-Vous pouvez utiliser ce basculement automatisé MetroCluster dans nos guides pour effectuer une mise à niveau du contrôleur sans interruption sur une configuration MetroCluster FC à quatre nœuds. Dans le cadre de cette procédure, d'autres composants (tels que des tiroirs de stockage ou des commutateurs) ne peuvent pas être mis à niveau.
+Vous pouvez utiliser cette opération de basculement automatisé MetroCluster guidée pour effectuer une mise à niveau sans interruption du contrôleur sur une configuration IP MetroCluster à quatre nœuds. Dans le cadre de cette procédure, d'autres composants (tels que des tiroirs de stockage ou des commutateurs) ne peuvent pas être mis à niveau.
 
 
 
 == Combinaisons de plateformes prises en charge
 
-* Pour en savoir plus sur les combinaisons de mise à niveau de plateforme prises en charge, consultez le tableau des mises à niveau FC MetroCluster dans link:concept_choosing_controller_upgrade_mcc.html#metrocluster-fc-controller-upgrades["Choisir la procédure de mise à niveau du contrôleur"].
+Cette procédure prend en charge les mises à niveau des systèmes FAS8200 vers FAS9500 et AFF A300 vers le contrôleur AFF A900.
 
+Pour plus d'informations sur les combinaisons de mise à niveau de plate-forme, consultez le tableau de mise à niveau IP MetroCluster dans link:concept_choosing_controller_upgrade_mcc.html#supported-metrocluster-ip-controller-upgrades["Choisir la procédure de mise à niveau du contrôleur"].
 
 Reportez-vous à la section https://docs.netapp.com/us-en/ontap-metrocluster/upgrade/concept_choosing_an_upgrade_method_mcc.html["Choisissez une méthode de mise à niveau ou de rafraîchissement"] pour les procédures supplémentaires.
 
@@ -30,13 +31,17 @@ Reportez-vous à la section https://docs.netapp.com/us-en/ontap-metrocluster/upg
 +
 Les autres composants de la configuration, tels que les tiroirs de stockage ou les commutateurs, ne peuvent pas être mis à niveau simultanément.
 
-* Cette procédure s'applique aux modules de contrôleur dans une configuration FC MetroCluster à quatre nœuds.
-* Ces plateformes doivent exécuter ONTAP 9.10.1 ou une version ultérieure.
+* Cette procédure s'applique aux modules de contrôleur dans une configuration IP MetroCluster à quatre nœuds exécutant ONTAP 9.13.1 ou une version ultérieure.
 +
 https://hwu.netapp.com["NetApp Hardware Universe"^]
 
-* Cette procédure vous permet de mettre à niveau les contrôleurs d'une configuration FC MetroCluster à quatre nœuds à l'aide du basculement et du rétablissement automatisés basé sur NSO. Pour effectuer une mise à niveau du contrôleur à l'aide du transfert d'agrégats (ARL), reportez-vous à https://docs.netapp.com/us-en/ontap-systems-upgrade/upgrade-arl-auto-app/["Utilisez les commandes « system contrôleur replace » pour mettre à niveau le matériel du contrôleur exécutant ONTAP 9.8 ou une version ultérieure"]. Il est recommandé d'utiliser la procédure automatisée basée sur le système NSO.
-* Si vos sites MetroCluster sont physiquement situés sur deux sites différents, vous devez suivre la procédure de mise à niveau automatisée du contrôleur NSO pour mettre à niveau les contrôleurs de chaque site de manière consécutive.
+* Les systèmes MetroCluster doivent exécuter la même version de ONTAP sur les deux sites.
+* Vous pouvez utiliser cette procédure pour mettre à niveau les contrôleurs d'une configuration IP MetroCluster à quatre nœuds à l'aide du basculement et du rétablissement automatisés basés sur NSO.
++
+
+NOTE: Une mise à niveau avec transfert d'agrégats (ARL) à l'aide de commandes « remplacement du contrôleur système » n'est pas prise en charge dans une configuration IP MetroCluster à quatre nœuds.
+
+* Vous devez utiliser la procédure de mise à niveau automatisée du contrôleur NSO pour mettre à niveau les contrôleurs dans l'ordre sur les deux sites.
 * Cette procédure de mise à niveau automatisée du contrôleur NSO-5 vous permet de lancer le remplacement du contrôleur sur un site de reprise après incident MetroCluster. Vous pouvez effectuer le remplacement d'un contrôleur uniquement sur un site à la fois.
 * Pour lancer un remplacement du contrôleur sur le site A, vous devez exécuter la commande de démarrage du remplacement du contrôleur depuis le site B. L'opération vous guide à remplacer les contrôleurs des deux nœuds sur le site A uniquement. Pour remplacer les contrôleurs sur le site B, vous devez exécuter la commande de démarrage de remplacement du contrôleur depuis le site A. Un message indique le site sur lequel les contrôleurs sont remplacés.
 
@@ -79,24 +84,27 @@ Les exemples de noms suivants sont utilisés dans cette procédure :
 
 
 
-== Préparation de la mise à niveau
+== Préparation à la mise à niveau
 
 Pour préparer la mise à niveau du contrôleur, vous devez effectuer des contrôles préalables du système et collecter les informations de configuration.
+
+Avant le démarrage des contrôles préalables, si le Mediator ONTAP est installé, il est automatiquement détecté et supprimé. Pour confirmer la suppression, vous êtes invité à entrer un nom d'utilisateur et un mot de passe. Lorsque vous avez terminé la mise à niveau, ou si les contrôles préalables échouent ou si vous choisissez de ne pas poursuivre la mise à niveau, vous devez link:task_upgrade_controllers_system_control_commands_in_a_four_node_mcc_ip.html#reconfigure-ontap-mediator["Reconfigurer manuellement le médiateur ONTAP"].
 
 À n'importe quel stade de la mise à niveau, vous pouvez exécuter le `system controller replace show` ou `system controller replace show-details` Commande du site A pour vérifier le statut. Si les commandes renvoient une sortie vide, attendez quelques minutes et exécutez à nouveau la commande.
 
 .Étapes
 . Lancer la procédure de remplacement automatisé du contrôleur depuis le site A pour remplacer les contrôleurs du site B :
 +
-`system controller replace start`
+`system controller replace start -nso true`
 
 +
 L'opération automatisée exécute les contrôles préalables. Si aucun problème n'est trouvé, l'opération s'interrompt pour que vous puissiez collecter manuellement les informations relatives à la configuration.
 
 +
-
-NOTE: Le système source actuel et tous les systèmes cible compatibles sont affichés. Si vous avez remplacé le contrôleur source par un contrôleur possédant une version ONTAP différente ou une plateforme non compatible, l'opération d'automatisation s'arrête et signale une erreur après le démarrage des nouveaux nœuds. Pour rétablir l'état sain du cluster, il est nécessaire de suivre la procédure de restauration manuelle.
-
+[NOTE]
+====
+** Si vous n'exécutez pas le `system controller replace start -nso true` La procédure de mise à niveau du contrôleur choisit le basculement et le rétablissement automatisés basés sur NSO comme procédure par défaut sur les systèmes IP MetroCluster.
+** Le système source actuel et tous les systèmes cible compatibles sont affichés. Si vous avez remplacé le contrôleur source par un contrôleur possédant une version ONTAP différente ou une plateforme non compatible, l'opération d'automatisation s'arrête et signale une erreur après le démarrage des nouveaux nœuds. Pour rétablir l'état sain du cluster, il est nécessaire de suivre la procédure de restauration manuelle.
 +
 Le `system controller replace start` la commande peut signaler l'erreur de vérification préalable suivante :
 
@@ -111,6 +119,9 @@ Node-A-1    Failed         MetroCluster check failed. Reason : MCC check showed 
 +
 Vérifiez si cette erreur s'est produite parce que vous avez des agrégats non mis en miroir ou en raison d'un autre problème d'agrégat. Vérifiez que tous les agrégats en miroir sont sains et ne sont pas dégradés ou ne sont pas dégradés. Si cette erreur est due uniquement aux agrégats non mis en miroir, vous pouvez annuler cette erreur en sélectionnant le `-skip-metrocluster-check true` sur le `system controller replace start` commande. Si le stockage distant est accessible, les agrégats sans miroir sont connectés après le basculement. En cas de défaillance de la liaison de stockage distante, les agrégats non mis en miroir ne parviennent pas à se mettre en ligne.
 
+
+
+====
 . Collectez manuellement les informations de configuration en se connectant sur le site B et en suivant les commandes répertoriées dans le message de la console sous le `system controller replace show` ou `system controller replace show-details` commande.
 
 
@@ -121,7 +132,7 @@ Vérifiez si cette erreur s'est produite parce que vous avez des agrégats non m
 Avant de procéder à la mise à niveau, si le volume racine est chiffré, vous devez vous fournir la clé de sauvegarde ainsi que d'autres informations permettant de démarrer les nouveaux contrôleurs avec les anciens volumes root chiffrés.
 
 .Description de la tâche
-Cette tâche s'effectue sur la configuration FC MetroCluster existante.
+Cette tâche est effectuée sur la configuration IP MetroCluster existante.
 
 .Étapes
 . Etiqueter les câbles pour les contrôleurs existants afin de faciliter l'identification des câbles lors de la configuration des nouveaux contrôleurs.
@@ -132,6 +143,9 @@ Cette tâche s'effectue sur la configuration FC MetroCluster existante.
 +
 Exécutez les commandes répertoriées sous le `show` commande provenant du cluster partenaire.
 
++
+Le `show` Le résultat des commandes affiche trois tableaux contenant les adresses IP de l'interface MetroCluster, les ID système et les UUID du système. Ces informations sont requises plus tard dans la procédure pour définir les bootargs lorsque vous démarrez le nouveau noeud.
+
 . Collectez les ID système des nœuds de la configuration MetroCluster :
 +
 --
@@ -139,7 +153,7 @@ Exécutez les commandes répertoriées sous le `show` commande provenant du clus
 
 Au cours de la procédure de remplacement, vous remplaceront ces ID système par les ID système des nouveaux modules de contrôleur.
 
-Dans cet exemple de configuration FC MetroCluster à quatre nœuds, les anciens ID système suivants sont récupérés :
+Dans cet exemple, pour une configuration IP MetroCluster à quatre nœuds, les anciens ID de système suivants sont récupérés :
 
 ** Node_A_1-Old : 4068741258
 ** Node_A_2-Old : 4068741260
@@ -158,7 +172,7 @@ dr-group-id        cluster           node            node-systemid     ha-partne
 1                    Cluster_B       Node_B_2-old    4068741256        4068741254              4068741260             4068741258
 4 entries were displayed.
 ----
-Dans cet exemple de configuration FC MetroCluster à deux nœuds, les anciens ID système suivants sont récupérés :
+Dans cet exemple, pour une configuration IP MetroCluster à deux nœuds, les anciens ID de système suivants sont récupérés :
 
 ** Node_A_1 : 4068741258
 ** Node_B_1 : 4068741254
@@ -255,7 +269,7 @@ Reportez-vous à la documentation de l'application.
 Une fois que vous avez recueilli des informations et que vous reprenez l'opération, l'automatisation procède à l'opération de basculement.
 
 .Description de la tâche
-L'opération d'automatisation entraîne le basculement, `heal-aggregates`, et `heal root-aggregates` exploitation. Une fois ces opérations terminées, l'opération s'interrompt à *interrompu pour l'intervention de l'utilisateur*. Vous pouvez ainsi installer les contrôleurs, démarrer les contrôleurs partenaires et réaffecter les disques d'agrégat racine au nouveau module de contrôleur à partir de la sauvegarde flash à l'aide de `sysids` rassemblés plus tôt.
+L'opération d'automatisation lance les opérations de basculement. Une fois ces opérations terminées, l'opération s'interrompt à *interrompu pour l'intervention de l'utilisateur*. Vous pouvez ainsi installer les contrôleurs, démarrer les contrôleurs partenaires et réaffecter les disques d'agrégat racine au nouveau module de contrôleur à partir de la sauvegarde flash à l'aide de `sysids` rassemblés plus tôt.
 
 .Avant de commencer
 Avant de lancer le basculement, l'automatisation s'interrompt pour que vous puissiez vérifier manuellement que toutes les LIF sont « en service » sur le site B. Si nécessaire, apportez toutes les LIF « propres » à « UP » et reprenez l'opération d'automatisation à l'aide du `system controller replace resume` commande.
@@ -375,7 +389,7 @@ L'espace rack dépend du modèle de plateforme des modules de contrôleur, des t
 . Mettez-vous à la terre.
 . Installez les modules de contrôleur sur le rack ou l'armoire.
 +
-https://docs.netapp.com/platstor/index.jsp["Centre de documentation AFF et FAS"^]
+https://docs.netapp.com/us-en/ontap-systems/index.html["Centre de documentation AFF et FAS"^]
 
 . Si les nouveaux modules de contrôleur ne sont pas livrés avec eux-mêmes des cartes FC-VI et si les cartes FC-VI des anciens contrôleurs sont compatibles avec les nouveaux contrôleurs, remplacez les cartes FC-VI et installez-les dans les connecteurs appropriés.
 +
@@ -386,7 +400,7 @@ Voir la link:https://hwu.netapp.com["NetApp Hardware Universe"^] Pour les inform
 Ne connectez pas d'autres câbles ayant été débranchés des anciens contrôleurs à l'heure actuelle.
 
 +
-https://docs.netapp.com/platstor/index.jsp["Centre de documentation AFF et FAS"^]
+https://docs.netapp.com/us-en/ontap-systems/index.html["Centre de documentation AFF et FAS"^]
 
 . Mettez les nouveaux nœuds sous tension et appuyez sur Ctrl-C lorsque vous êtes invité à afficher l'invite DU CHARGEUR.
 
@@ -404,17 +418,11 @@ Cette tâche est effectuée sur chacun des nouveaux modules de contrôleur.
 . Téléchargez le logiciel ONTAP approprié depuis la section de téléchargement de logiciels du site du support NetApp et stockez le fichier ontap-version_image.tgz dans un répertoire accessible en ligne.
 . Accédez au répertoire accessible sur le Web et vérifiez que les fichiers dont vous avez besoin sont disponibles.
 +
-|===
+Votre liste de répertoires doit contenir un dossier netboot avec un fichier noyau : ontap-version_image.tgz
 
++
+Il n'est pas nécessaire d'extraire le fichier ontap-version_image.tgz.
 
-| Si le modèle de plateforme est... | Alors... 
-
-
-| Systèmes de la gamme FAS/AFF8000 | Extrayez le contenu d'ontap-version_image.tgzfile dans le répertoire cible : tar -zxvf ontap-version_image.tgz REMARQUE : si vous extrayez le contenu sous Windows, utilisez 7-Zip ou WinRAR pour extraire l'image netboot. Votre liste de répertoires doit contenir un dossier netboot avec un fichier de noyau:netboot/kernel 
-
-
-| Tous les autres systèmes | Votre liste de répertoires doit contenir un dossier netboot avec un fichier du noyau : ontap-version_image.tgz vous n'avez pas besoin d'extraire le fichier ontap-version_image.tgz. 
-|===
 . À l'invite DU CHARGEUR, configurez la connexion netboot pour les LIF de gestion :
 +
 ** Si l'adressage IP est DHCP, configurez la connexion automatique :
@@ -582,6 +590,207 @@ FC
 
 
 
+=== Définissez l'état de haute disponibilité sur les nouveaux contrôleurs et châssis
+
+Vous devez vérifier l'état haute disponibilité des contrôleurs et du châssis, et mettre à jour si nécessaire l'état en fonction de la configuration du système.
+
+.Étapes
+. En mode Maintenance, afficher l'état HA du module de contrôleur et du châssis :
++
+`ha-config show`
+
++
+L'état de haute disponibilité de tous les composants doit être `mccip`.
+
+. Si l'état système affiché du contrôleur ou du châssis n'est pas correct, définissez l'état HA :
++
+`ha-config modify controller mccip`
+
++
+`ha-config modify chassis mccip`
+
+. Arrêter le nœud : `halt`
++
+Le nœud doit s'arrêter au niveau du `LOADER>` à l'invite.
+
+. Sur chaque nœud, vérifiez la date, l'heure et le fuseau horaire du système : `show date`
+. Si nécessaire, définissez la date en UTC ou GMT : `set date <mm/dd/yyyy>`
+. Vérifiez l'heure à l'aide de la commande suivante à l'invite de l'environnement d'amorçage : `show time`
+. Si nécessaire, définissez l'heure en UTC ou GMT : `set time <hh:mm:ss>`
+. Enregistrer les paramètres : `saveenv`
+. Collecter les variables d'environnement : `printenv`
+
+
+
+
+=== Mettre à jour les fichiers RCF de commutateur afin de s'adapter aux nouvelles plateformes
+
+Vous devez mettre à jour les commutateurs vers une configuration prenant en charge les nouveaux modèles de plate-forme.
+
+.Description de la tâche
+Vous pouvez effectuer cette tâche sur le site contenant les contrôleurs en cours de mise à niveau. Dans les exemples présentés dans cette procédure, nous mettons d'abord à niveau site_B.
+
+Les commutateurs du site_A seront mis à niveau lorsque les contrôleurs du site_A sont mis à niveau.
+
+.Étapes
+. Préparez les commutateurs IP pour l'application des nouveaux fichiers RCF.
++
+Suivez les étapes de la section correspondant à votre fournisseur de commutateur dans la section _MetroCluster IP installation and Configuration_.
+
++
+link:../install-ip/index.html["Installation et configuration de MetroCluster IP"]
+
++
+** link:../install-ip/task_switch_config_broadcom.html#resetting-the-broadcom-ip-switch-to-factory-defaults["Réinitialisation des paramètres d'usine du commutateur IP Broadcom"]
+** link:../install-ip/task_switch_config_broadcom.html#resetting-the-cisco-ip-switch-to-factory-defaults["Réinitialisation des paramètres d'usine du commutateur IP Cisco"]
+
+
+. Téléchargez et installez les fichiers RCF.
++
+Suivez les étapes de la section correspondant au fournisseur de votre commutateur du link:../install-ip/index.html["Installation et configuration de MetroCluster IP"].
+
++
+** link:../install-ip/task_switch_config_broadcom.html#downloading-and-installing-the-broadcom-rcf-files["Téléchargement et installation des fichiers RCF Broadcom"]
+** link:../install-ip/task_switch_config_broadcom.html#downloading-and-installing-the-cisco-ip-rcf-files["Téléchargement et installation des fichiers Cisco IP RCF"]
+
+
+
+
+
+
+=== Définissez les variables bootarg IP MetroCluster
+
+Certaines valeurs d'amorçage MetroCluster IP doivent être configurées sur les nouveaux modules de contrôleur. Les valeurs doivent correspondre à celles configurées sur les anciens modules de contrôleur.
+
+.Description de la tâche
+Dans cette tâche, vous utiliserez les UUID et les ID système identifiés précédemment dans la procédure de mise à niveau de link:task_upgrade_controllers_in_a_four_node_ip_mcc_us_switchover_and_switchback_mcc_ip.html#gathering-information-before-the-upgrade["Collecte des informations avant la mise à niveau"].
+
+.Étapes
+. Au `LOADER>` À l'invite, définissez les bootargs suivants sur les nouveaux nœuds à site_B :
++
+`setenv bootarg.mcc.port_a_ip_config _local-IP-address/local-IP-mask,0,HA-partner-IP-address,DR-partner-IP-address,DR-aux-partnerIP-address,vlan-id_`
+
++
+`setenv bootarg.mcc.port_b_ip_config _local-IP-address/local-IP-mask,0,HA-partner-IP-address,DR-partner-IP-address,DR-aux-partnerIP-address,vlan-id_`
+
++
+L'exemple suivant définit les valeurs de node_B_1 en utilisant VLAN 120 pour le premier réseau et VLAN 130 pour le second réseau :
+
++
+[listing]
+----
+setenv bootarg.mcc.port_a_ip_config 172.17.26.10/23,0,172.17.26.11,172.17.26.13,172.17.26.12,120
+setenv bootarg.mcc.port_b_ip_config 172.17.27.10/23,0,172.17.27.11,172.17.27.13,172.17.27.12,130
+----
++
+L'exemple suivant définit les valeurs de node_B_2 en utilisant VLAN 120 pour le premier réseau et VLAN 130 pour le second réseau :
+
++
+[listing]
+----
+setenv bootarg.mcc.port_a_ip_config 172.17.26.11/23,0,172.17.26.10,172.17.26.12,172.17.26.13,120
+setenv bootarg.mcc.port_b_ip_config 172.17.27.11/23,0,172.17.27.10,172.17.27.12,172.17.27.13,130
+----
+. Dans les nouveaux nœuds » `LOADER` À l'invite, définissez les UUID :
++
+`setenv bootarg.mgwd.partner_cluster_uuid _partner-cluster-UUID_`
+
++
+`setenv bootarg.mgwd.cluster_uuid _local-cluster-UUID_`
+
++
+`setenv bootarg.mcc.pri_partner_uuid _DR-partner-node-UUID_`
+
++
+`setenv bootarg.mcc.aux_partner_uuid _DR-aux-partner-node-UUID_`
+
++
+`setenv bootarg.mcc_iscsi.node_uuid _local-node-UUID_`
+
++
+.. Définissez les UUID sur node_B_1.
++
+L'exemple suivant montre les commandes permettant de définir les UUID sur node_B_1 :
+
++
+[listing]
+----
+setenv bootarg.mgwd.cluster_uuid ee7db9d5-9a82-11e7-b68b-00a098908039
+setenv bootarg.mgwd.partner_cluster_uuid 07958819-9ac6-11e7-9b42-00a098c9e55d
+setenv bootarg.mcc.pri_partner_uuid f37b240b-9ac1-11e7-9b42-00a098c9e55d
+setenv bootarg.mcc.aux_partner_uuid bf8e3f8f-9ac4-11e7-bd4e-00a098ca379f
+setenv bootarg.mcc_iscsi.node_uuid f03cb63c-9a7e-11e7-b68b-00a098908039
+----
+.. Définissez les UUID sur node_B_2 :
++
+L'exemple suivant montre les commandes permettant de définir les UUID sur node_B_2 :
+
++
+[listing]
+----
+setenv bootarg.mgwd.cluster_uuid ee7db9d5-9a82-11e7-b68b-00a098908039
+setenv bootarg.mgwd.partner_cluster_uuid 07958819-9ac6-11e7-9b42-00a098c9e55d
+setenv bootarg.mcc.pri_partner_uuid bf8e3f8f-9ac4-11e7-bd4e-00a098ca379f
+setenv bootarg.mcc.aux_partner_uuid f37b240b-9ac1-11e7-9b42-00a098c9e55d
+setenv bootarg.mcc_iscsi.node_uuid aa9a7a7a-9a81-11e7-a4e9-00a098908c35
+----
+
+
+. Si les systèmes d'origine ont été configurés pour ADP, à l'invite DU CHARGEUR des nœuds de remplacement, activez ADP :
++
+`setenv bootarg.mcc.adp_enabled true`
+
+. Définissez les variables suivantes :
++
+`setenv bootarg.mcc.local_config_id _original-sys-id_`
+
++
+`setenv bootarg.mcc.dr_partner _dr-partner-sys-id_`
+
++
+
+NOTE: Le `setenv bootarg.mcc.local_config_id` La variable doit être définie sur l'ID système du module de contrôleur *Original*, node_B_1.
+
++
+.. Définissez les variables sur node_B_1.
++
+L'exemple suivant montre les commandes permettant de définir les valeurs sur node_B_1 :
+
++
+[listing]
+----
+setenv bootarg.mcc.local_config_id 537403322
+setenv bootarg.mcc.dr_partner 537403324
+----
+.. Définissez les variables sur node_B_2.
++
+L'exemple suivant montre les commandes permettant de définir les valeurs sur node_B_2 :
+
++
+[listing]
+----
+setenv bootarg.mcc.local_config_id 537403321
+setenv bootarg.mcc.dr_partner 537403323
+----
+
+
+. Si vous utilisez le chiffrement avec un gestionnaire de clés externe, définissez les paramètres d'amorçage requis :
++
+`setenv bootarg.kmip.init.ipaddr`
+
++
+`setenv bootarg.kmip.kmip.init.netmask`
+
++
+`setenv bootarg.kmip.kmip.init.gateway`
+
++
+`setenv bootarg.kmip.kmip.init.interface`
+
+
+
+
+
 === Réaffectation des disques de l'agrégat racine
 
 Réallouer les disques de l'agrégat racine vers le nouveau module de contrôleur, à l'aide du `sysids` rassemblés plus tôt
@@ -589,7 +798,7 @@ Réallouer les disques de l'agrégat racine vers le nouveau module de contrôleu
 .Description de la tâche
 Cette tâche est effectuée en mode Maintenance.
 
-Les anciens ID système ont été identifiés dans link:task_upgrade_controllers_system_control_commands_in_a_four_node_mcc_fc.html#gathering-information-before-the-upgrade["Collecte des informations avant la mise à niveau"].
+Les anciens ID système ont été identifiés dans link:task_upgrade_controllers_system_control_commands_in_a_four_node_mcc_ip.html#gathering-information-before-the-upgrade["Collecte des informations avant la mise à niveau"].
 
 Les exemples de cette procédure utilisent des contrôleurs avec les ID système suivants :
 
@@ -640,6 +849,10 @@ rr18:9.126L27 node_B_1-old(4068741254)   Pool0  S0M1PSDW         node_B_1-old(40
 . Réallouer les disques racine de l'agrégat sur les tiroirs disques vers le nouveau contrôleur :
 +
 `disk reassign -s _old-sysid_ -d _new-sysid_`
+
++
+
+NOTE: Si votre système MetroCluster IP est configuré avec le partitionnement de disque avancé, vous devez inclure l'identifiant système partenaire de reprise sur incident en exécutant `disk reassign -s old-sysid -d new-sysid -r dr-partner-sysid` commande.
 
 +
 L'exemple suivant montre la réaffectation de disques :
@@ -753,7 +966,6 @@ Option « 11 »
 Suivez les invites pour fournir les entrées requises pour récupérer et restaurer la configuration du gestionnaire de clés.
 
 |===
-. Si AUTOBOOT est activé, interrompez l'AUTOBOOT en appuyant sur Ctrl-C.
 . Dans le menu de démarrage, exécutez l'option « 6 ».
 +
 
@@ -769,15 +981,8 @@ Successfully restored env file from boot media...
 
 Rebooting to load the restored env file...
 ----
-. Vérifiez que le partenaire-sysid est correct :
 +
-`printenv partner-sysid`
-
-+
-Si le partenaire-sysid n'est pas correct, définissez-le :
-
-+
-`setenv partner-sysid _partner-sysID_`
+Au cours de l'un des redémarrages après l'option « 6 », l'invite de confirmation `Override system ID? {y|n}` s'affiche. Entrez `y`.
 
 . Si le cryptage racine est utilisé, sélectionnez à nouveau l'option de menu d'amorçage pour la configuration de votre gestion des clés.
 +
@@ -832,7 +1037,7 @@ https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-nmg/GUID-003BDFCD-58
 Vous devrez peut-être reconfigurer le peering de cluster.
 
 +
-link:../install-fc/concept_configure_the_mcc_software_in_ontap.html#peering-the-clusters["Création d'une relation entre clusters"]
+link:../install-ip/task_sw_config_configure_clusters.html#peering-the-clusters["Création d'une relation entre clusters"]
 
 .. Recréez les VLAN et les groupes d'interfaces selon les besoins.
 +
@@ -900,7 +1105,7 @@ L'automatisation exécute des vérifications du système, puis s'interrompt pour
 +
 `system controller replace resume`
 
-. L'opération d'automatisation effectue le rétablissement sur le site A et les vérifications post-mise à niveau. Lorsque l'opération s'interrompt, vérifier manuellement le statut LIF SAN et vérifier la configuration du réseau en suivant le message de la console.
+. L'opération d'automatisation est effectuée `heal-aggregate`, `heal-root-aggregate`, Et les opérations de rétablissement sur le site A, et les vérifications post-mise à niveau. Lorsque l'opération s'interrompt, vérifier manuellement le statut LIF SAN et vérifier la configuration du réseau en suivant le message de la console.
 . Une fois la vérification terminée, reprendre l'opération :
 +
 `system controller replace resume`
@@ -913,6 +1118,15 @@ L'automatisation exécute des vérifications du système, puis s'interrompt pour
 Si les vérifications post-mise à niveau n'ont pas signalé d'erreurs, la mise à niveau est terminée.
 
 . Une fois la mise à niveau du contrôleur terminée, connectez-vous au site B et vérifiez que les contrôleurs remplacés sont configurés correctement.
+
+
+
+
+=== Reconfigurer le médiateur ONTAP
+
+Configurez manuellement le médiateur ONTAP qui a été automatiquement supprimé avant de commencer la mise à niveau.
+
+. Suivez les étapes de la section link:../install-ip/task_configuring_the_ontap_mediator_service_from_a_metrocluster_ip_configuration.html["Configurez le service Mediator ONTAP à partir d'une configuration IP MetroCluster"].
 
 
 

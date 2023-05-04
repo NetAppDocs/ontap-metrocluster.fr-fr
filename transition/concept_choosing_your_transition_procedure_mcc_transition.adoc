@@ -25,9 +25,14 @@ image::../media/metrocluster_fc_ip_transition_matrix_yellowdogp1.png[MetroCluste
 * Les procédures de transition nécessitent toutes ONTAP 9.8 ou une version ultérieure, sauf indication contraire dans les notes ou comme requis par une plateforme individuelle.
 
 
+[NOTE]
+====
+* Ne dépassez pas les limites d'objet du « bas » des plates-formes de la combinaison. Appliquez la limite inférieure des objets des deux plates-formes.
+* Si les limites de la plateforme cible sont inférieures aux limites de la MetroCluster, vous devez reconfigurer la MetroCluster pour qu'elle se situe au niveau ou en dessous des limites de la plateforme cible avant d'ajouter les nouveaux nœuds.
+* Reportez-vous à la link:https://hwu.netapp.html["Hardware Universe"^] pour les limites de plateforme.
 
-NOTE: Ne dépassez pas les limites d'objet du « bas » des plates-formes de la combinaison. Appliquez la limite inférieure des objets des deux plates-formes. Reportez-vous à la link:https://hwu.netapp.html["Hardware Universe"^] pour les limites de plateforme.
 
+====
 Vous devez sélectionner une procédure de transition selon votre configuration MetroCluster FC existante.
 
 Une procédure de transition remplace la structure du commutateur FC interne ou la connexion FC-VI par un réseau de commutateurs IP. La procédure exacte dépend de votre configuration de départ.
