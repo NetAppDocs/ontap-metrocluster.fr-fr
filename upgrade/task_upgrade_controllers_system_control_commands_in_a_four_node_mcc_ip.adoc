@@ -17,7 +17,7 @@ Vous pouvez utiliser cette opération de basculement automatisé MetroCluster gu
 
 == Combinaisons de plateformes prises en charge
 
-Cette procédure prend en charge les mises à niveau des systèmes FAS8200 vers FAS9500 et AFF A300 vers le contrôleur AFF A900.
+Cette procédure prend uniquement en charge les mises à niveau des contrôleurs AFF A300 à AFF A900.
 
 Pour plus d'informations sur les combinaisons de mise à niveau de plate-forme, consultez le tableau de mise à niveau IP MetroCluster dans link:concept_choosing_controller_upgrade_mcc.html#supported-metrocluster-ip-controller-upgrades["Choisir la procédure de mise à niveau du contrôleur"].
 
@@ -88,7 +88,7 @@ Les exemples de noms suivants sont utilisés dans cette procédure :
 
 Pour préparer la mise à niveau du contrôleur, vous devez effectuer des contrôles préalables du système et collecter les informations de configuration.
 
-Avant le démarrage des contrôles préalables, si le Mediator ONTAP est installé, il est automatiquement détecté et supprimé. Pour confirmer la suppression, vous êtes invité à entrer un nom d'utilisateur et un mot de passe. Lorsque vous avez terminé la mise à niveau, ou si les contrôles préalables échouent ou si vous choisissez de ne pas poursuivre la mise à niveau, vous devez link:task_upgrade_controllers_system_control_commands_in_a_four_node_mcc_ip.html#reconfigure-ontap-mediator["Reconfigurer manuellement le médiateur ONTAP"].
+Avant le démarrage des contrôles préalables, si le Mediator ONTAP est installé, il est automatiquement détecté et supprimé. Pour confirmer la suppression, vous êtes invité à entrer un nom d'utilisateur et un mot de passe. Lorsque vous avez terminé la mise à niveau, ou si les contrôles préalables échouent ou si vous choisissez de ne pas poursuivre la mise à niveau, vous devez <<man_reconfig_mediator,Reconfigurer manuellement le médiateur ONTAP>>.
 
 À n'importe quel stade de la mise à niveau, vous pouvez exécuter le `system controller replace show` ou `system controller replace show-details` Commande du site A pour vérifier le statut. Si les commandes renvoient une sortie vide, attendez quelques minutes et exécutez à nouveau la commande.
 
@@ -282,7 +282,7 @@ Pour assurer la reprise du réseau correctement sur les nouveaux contrôleurs, v
 
 .Description de la tâche
 * Cette tâche doit être effectuée sur chacun des anciens nœuds.
-* Vous utiliserez les informations recueillies dans <<Préparation de la mise à niveau>>.
+* Vous utiliserez les informations recueillies dans <<Préparation à la mise à niveau>>.
 
 
 .Étapes
