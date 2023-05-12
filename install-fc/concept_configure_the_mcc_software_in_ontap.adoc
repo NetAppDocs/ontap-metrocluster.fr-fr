@@ -1620,7 +1620,7 @@ ha-config modifier le châssis
 
 Vous devez configurer le protocole ONTAP sur chaque module de contrôleur.
 
-Si vous avez besoin de netboot sur les nouveaux contrôleurs, reportez-vous à la section http://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-mcc-upgrade/GUID-3370EC34-310E-4F09-829F-F632EC8CDD9B.html["Démarrage réseau des nouveaux modules de contrôleur"] Dans le _Guide de mise à niveau, de transition et d'extension de MetroCluster_.
+Si vous avez besoin de netboot sur les nouveaux contrôleurs, reportez-vous à la section http://["Démarrage réseau des nouveaux modules de contrôleur"] Dans le _Guide de mise à niveau, de transition et d'extension de MetroCluster_.
 
 .Choix
 * <<setup_ontap_2node_MCC,Configuration d'ONTAP dans une configuration MetroCluster à deux nœuds>>
@@ -1643,7 +1643,7 @@ Les nouveaux systèmes MetroCluster sont préconfigurés, mais il n'est pas néc
 
 Cette tâche doit être effectuée sur les deux clusters en configuration MetroCluster.
 
-Pour obtenir des informations plus générales sur la configuration de ONTAP, reportez-vous au https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-ssg/home.html["Configuration ONTAP"]
+Pour plus d'informations générales sur la configuration de ONTAP, reportez-vous à la section link:https://docs.netapp.com/us-en/ontap/task_configure_ontap.html["Configurer ONTAP"^].
 
 .Étapes
 . Mettez le premier nœud sous tension.
@@ -2493,7 +2493,7 @@ Cela met en miroir l'agrégat, il se compose d'un plex local et d'un plex distan
 
 
 .Informations associées
-https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-vsmg/home.html["Gestion du stockage logique"]
+link:https://docs.netapp.com/us-en/ontap/volumes/index.html["Gestion du stockage logique avec l'interface de ligne de commandes"^]
 
 
 
@@ -2504,7 +2504,7 @@ Vous devez créer un agrégat de données en miroir sur chaque nœud du groupe d
 * Vous devez savoir quels disques ou LUN de baie seront utilisés dans le nouvel agrégat.
 * Si votre système compte plusieurs types de disques (stockage hétérogène), vous devez comprendre comment vous assurer que le type de disque approprié est sélectionné.
 * Les disques et les LUN de baie sont détenus par un nœud spécifique. Lorsque vous créez un agrégat, tous les disques de cet agrégat doivent être détenus par le même nœud, qui devient le nœud de rattachement de cet agrégat.
-* Les noms d'agrégats doivent être conformes au schéma de nommage que vous avez déterminé lors de la planification de votre configuration MetroCluster. Voir https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-psmg/home.html["Gestion des disques et des agrégats"].
+* Les noms d'agrégats doivent être conformes au schéma de nommage que vous avez déterminé lors de la planification de votre configuration MetroCluster. Voir link:https://docs.netapp.com/us-en/ontap/disks-aggregates/index.html["Gestion des disques et des agrégats"^].
 
 
 .Étapes
@@ -2628,7 +2628,7 @@ controller_A_1::> storage aggregate create aggr1_controller_A_1 -diskcount 10 -n
 
 
 .Informations associées
-https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-psmg/home.html["Gestion des disques et des agrégats"]
+link:https://docs.netapp.com/us-en/ontap/disks-aggregates/index.html["Gestion des disques et des niveaux (agrégat)"^]
 
 
 
@@ -2700,7 +2700,7 @@ Vous devez répondre avec `y` lorsque vous êtes invité à passer en mode avanc
 |===
 +
 
-NOTE: Il est recommandé d'avoir plusieurs agrégats de données. Si le premier groupe de reprise après incident ne dispose que d'un seul agrégat et que vous souhaitez ajouter un groupe de reprise après incident avec un seul agrégat, vous devez déplacer le volume de métadonnées depuis ce dernier. Pour plus d'informations sur cette procédure, voir http://docs.netapp.com/ontap-9/topic/com.netapp.doc.hw-metrocluster-service/GUID-114DAE6E-F105-4908-ABB1-CE1D7B5C7048.html["Déplacement d'un volume de métadonnées dans les configurations MetroCluster"].
+NOTE: Il est recommandé d'avoir plusieurs agrégats de données. Si le premier groupe de reprise après incident ne dispose que d'un seul agrégat et que vous souhaitez ajouter un groupe de reprise après incident avec un seul agrégat, vous devez déplacer le volume de métadonnées depuis ce dernier. Pour plus d'informations sur cette procédure, voir http://["Déplacement d'un volume de métadonnées dans les configurations MetroCluster"].
 
 +
 La commande suivante permet d'activer la configuration MetroCluster sur tous les nœuds du groupe DR qui contient le Controller_A_1 :
@@ -3075,7 +3075,7 @@ Si le nom universel (WWN) du commutateur est affiché, le contrôle de l'état d
 
 
 .Informations associées
-https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-sag/home.html["Administration du système"]
+https://["Administration du système"]
 
 
 
@@ -3277,9 +3277,9 @@ mccint-fas9000-0304
 
 
 .Informations associées
-https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-psmg/home.html["Gestion des disques et des agrégats"]
+https://["Gestion des disques et des agrégats"]
 
-https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-nmg/home.html["Gestion du réseau et des LIF"]
+link:https://docs.netapp.com/us-en/ontap/network-management/index.html["Gestion du réseau et des LIF"^]
 
 
 
@@ -3296,7 +3296,7 @@ NOTE: Le support pour Config Advisor est limité et n'est disponible qu'en ligne
 .Étapes
 . Accédez à la page de téléchargement Config Advisor et téléchargez l'outil.
 +
-https://mysupport.netapp.com/site/tools/tool-eula/activeiq-configadvisor["Téléchargement NetApp : Config Advisor"^]
+https://["Téléchargement NetApp : Config Advisor"^]
 
 . Exécutez Config Advisor, examinez les résultats de l'outil et suivez les recommandations du produit pour résoudre tous les problèmes détectés.
 
@@ -3407,7 +3407,7 @@ controller_A_2 controller_A_1 true     Connected to controller_A_1
 
 
 .Informations associées
-https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-hacg/home.html["Configuration haute disponibilité"]
+link:https://docs.netapp.com/us-en/ontap/cloud/high-availability-concept.html["Configuration haute disponibilité"^]
 
 
 
@@ -3416,7 +3416,7 @@ https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-hacg/home.html["Conf
 Il est recommandé de vérifier les opérations de basculement, de rétablissement et de rétablissement de la configuration MetroCluster.
 
 .Étape
-. Utilisez les procédures négociées de basculement, de rétablissement et de rétablissement https://docs.netapp.com/us-en/ontap-metrocluster/manage/index.html["Restaurez vos données après un incident"].
+. Utilisez les procédures négociées de basculement, de rétablissement et de rétablissement https://["Restaurez vos données après un incident"].
 
 
 
@@ -3431,6 +3431,6 @@ Vous pouvez fournir une protection supplémentaire pour les fichiers de sauvegar
 `system configuration backup settings modify _URL-of-destination_`
 
 +
-Le https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-sag/home.html["Gestion du cluster via l'interface de ligne de commandes"] Contient des informations supplémentaires sous la section _gestion des sauvegardes de configuration_.
+Le https://["Gestion du cluster via l'interface de ligne de commandes"] Contient des informations supplémentaires sous la section _gestion des sauvegardes de configuration_.
 
 

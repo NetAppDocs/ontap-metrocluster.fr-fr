@@ -20,7 +20,7 @@ Vous pouvez utiliser ce basculement automatisé MetroCluster dans nos guides pou
 * Pour en savoir plus sur les combinaisons de mise à niveau de plateforme prises en charge, consultez le tableau des mises à niveau FC MetroCluster dans link:concept_choosing_controller_upgrade_mcc.html#metrocluster-fc-controller-upgrades["Choisir la procédure de mise à niveau du contrôleur"].
 
 
-Reportez-vous à la section https://docs.netapp.com/us-en/ontap-metrocluster/upgrade/concept_choosing_an_upgrade_method_mcc.html["Choisissez une méthode de mise à niveau ou de rafraîchissement"] pour les procédures supplémentaires.
+Reportez-vous à la section https://["Choisissez une méthode de mise à niveau ou de rafraîchissement"] pour les procédures supplémentaires.
 
 
 
@@ -33,9 +33,9 @@ Les autres composants de la configuration, tels que les tiroirs de stockage ou l
 * Cette procédure s'applique aux modules de contrôleur dans une configuration FC MetroCluster à quatre nœuds.
 * Ces plateformes doivent exécuter ONTAP 9.10.1 ou une version ultérieure.
 +
-https://hwu.netapp.com["NetApp Hardware Universe"^]
+https://["NetApp Hardware Universe"^]
 
-* Cette procédure vous permet de mettre à niveau les contrôleurs d'une configuration FC MetroCluster à quatre nœuds à l'aide du basculement et du rétablissement automatisés basé sur NSO. Pour effectuer une mise à niveau du contrôleur à l'aide du transfert d'agrégats (ARL), reportez-vous à https://docs.netapp.com/us-en/ontap-systems-upgrade/upgrade-arl-auto-app/["Utilisez les commandes « system contrôleur replace » pour mettre à niveau le matériel du contrôleur exécutant ONTAP 9.8 ou une version ultérieure"]. Il est recommandé d'utiliser la procédure automatisée basée sur le système NSO.
+* Cette procédure vous permet de mettre à niveau les contrôleurs d'une configuration FC MetroCluster à quatre nœuds à l'aide du basculement et du rétablissement automatisés basé sur NSO. Pour effectuer une mise à niveau du contrôleur à l'aide du transfert d'agrégats (ARL), reportez-vous à https://["Utilisez les commandes « system contrôleur replace » pour mettre à niveau le matériel du contrôleur exécutant ONTAP 9.8 ou une version ultérieure"]. Il est recommandé d'utiliser la procédure automatisée basée sur le système NSO.
 * Si vos sites MetroCluster sont physiquement situés sur deux sites différents, vous devez suivre la procédure de mise à niveau automatisée du contrôleur NSO pour mettre à niveau les contrôleurs de chaque site de manière consécutive.
 * Cette procédure de mise à niveau automatisée du contrôleur NSO-5 vous permet de lancer le remplacement du contrôleur sur un site de reprise après incident MetroCluster. Vous pouvez effectuer le remplacement d'un contrôleur uniquement sur un site à la fois.
 * Pour lancer un remplacement du contrôleur sur le site A, vous devez exécuter la commande de démarrage du remplacement du contrôleur depuis le site B. L'opération vous guide à remplacer les contrôleurs des deux nœuds sur le site A uniquement. Pour remplacer les contrôleurs sur le site B, vous devez exécuter la commande de démarrage de remplacement du contrôleur depuis le site A. Un message indique le site sur lequel les contrôleurs sont remplacés.
@@ -209,7 +209,7 @@ Vous devez collecter le résultat des commandes suivantes :
 
 . Si les nœuds MetroCluster utilisent le chiffrement pour des volumes ou des agrégats, copiez les informations concernant les clés et les clés de phrase secrète.
 +
-Pour plus d'informations, reportez-vous à la section https://docs.netapp.com/ontap-9/topic/com.netapp.doc.pow-nve/GUID-1677AE0A-FEF7-45FA-8616-885AA3283BCF.html["Sauvegarde manuelle des informations de gestion intégrée des clés"^].
+Pour plus d'informations, reportez-vous à la section https://["Sauvegarde manuelle des informations de gestion intégrée des clés"^].
 
 +
 .. Si le gestionnaire de clés intégré est configuré :
@@ -241,7 +241,7 @@ Vous aurez besoin de la phrase de passe plus tard dans la procédure de mise à 
 Si la configuration existante est contrôlée avec la configuration MetroCluster Tiebreaker ou d'autres applications tierces (telles que ClusterLion) capables d'effectuer un basculement, vous devez supprimer la configuration MetroCluster du logiciel disjoncteur d'attache ou autre logiciel avant de remplacer l'ancien contrôleur.
 
 .Étapes
-. http://docs.netapp.com/ontap-9/topic/com.netapp.doc.hw-metrocluster-tiebreaker/GUID-34C97A45-0BFF-46DD-B104-2AB2805A983D.html["Supprimez la configuration MetroCluster existante"^] À partir du logiciel disjoncteur d'attache.
+. http://["Supprimez la configuration MetroCluster existante"^] À partir du logiciel disjoncteur d'attache.
 . Supprimez la configuration MetroCluster existante de toute application tierce pouvant effectuer le basculement.
 +
 Reportez-vous à la documentation de l'application.
@@ -290,7 +290,7 @@ Toutes LES LIF de données, y compris SAN et NAS, seront admin « up » et « po
 Par exemple, « e0d » est un port physique des anciens contrôleurs et est également présent sur les nouveaux contrôleurs. « e0d » n'est pas utilisé comme port de cluster ou autre sur les nouveaux contrôleurs.
 
 +
-Pour l'utilisation des ports pour les modèles de plate-forme, reportez-vous à la section https://hwu.netapp.com/["NetApp Hardware Universe"^]
+Pour l'utilisation des ports pour les modèles de plate-forme, reportez-vous à la section https://["NetApp Hardware Universe"^]
 
 .. Modifier toutes LES LIFS de données pour utiliser le port commun comme port de base :
 +
@@ -375,7 +375,7 @@ L'espace rack dépend du modèle de plateforme des modules de contrôleur, des t
 . Mettez-vous à la terre.
 . Installez les modules de contrôleur sur le rack ou l'armoire.
 +
-https://docs.netapp.com/platstor/index.jsp["Centre de documentation AFF et FAS"^]
+https://["Centre de documentation AFF et FAS"^]
 
 . Si les nouveaux modules de contrôleur ne sont pas livrés avec eux-mêmes des cartes FC-VI et si les cartes FC-VI des anciens contrôleurs sont compatibles avec les nouveaux contrôleurs, remplacez les cartes FC-VI et installez-les dans les connecteurs appropriés.
 +
@@ -386,7 +386,7 @@ Voir la link:https://hwu.netapp.com["NetApp Hardware Universe"^] Pour les inform
 Ne connectez pas d'autres câbles ayant été débranchés des anciens contrôleurs à l'heure actuelle.
 
 +
-https://docs.netapp.com/platstor/index.jsp["Centre de documentation AFF et FAS"^]
+https://["Centre de documentation AFF et FAS"^]
 
 . Mettez les nouveaux nœuds sous tension et appuyez sur Ctrl-C lorsque vous êtes invité à afficher l'invite DU CHARGEUR.
 
@@ -400,7 +400,7 @@ Une fois les nouveaux nœuds installés, vous devez démarrage sur le réseau po
 Cette tâche est effectuée sur chacun des nouveaux modules de contrôleur.
 
 .Étapes
-. Accédez au https://mysupport.netapp.com/site/["Site de support NetApp"^] pour télécharger les fichiers utilisés pour effectuer le démarrage sur le réseau du système.
+. Accédez au https://["Site de support NetApp"^] pour télécharger les fichiers utilisés pour effectuer le démarrage sur le réseau du système.
 . Téléchargez le logiciel ONTAP approprié depuis la section de téléchargement de logiciels du site du support NetApp et stockez le fichier ontap-version_image.tgz dans un répertoire accessible en ligne.
 . Accédez au répertoire accessible sur le Web et vérifiez que les fichiers dont vous avez besoin sont disponibles.
 +
@@ -823,7 +823,7 @@ Si l'un des nœuds est en mode basculement, exécutez un retour à l'aide du `st
 
 .. Ajoutez n'importe quel port à un broadcast domain si nécessaire.
 +
-https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-nmg/GUID-003BDFCD-58A3-46C9-BF0C-BA1D1D1475F9.html["Ajout ou suppression de ports d'un broadcast domain"^]
+https://["Ajout ou suppression de ports d'un broadcast domain"^]
 
 .. Ajoutez le port physique qui hébergera les LIFs intercluster sur le broadcast domain correspondant.
 .. Modifier les LIFs intercluster de façon à utiliser le nouveau port physique en tant que port de départ.
@@ -839,10 +839,10 @@ link:../install-fc/concept_configure_the_mcc_software_in_ontap.html#peering-the-
 L'appartenance au VLAN et aux groupes d'interfaces peut être différente de celle de l'ancien nœud.
 
 +
-https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-nmg/GUID-8929FCE2-5888-4051-B8C0-E27CAF3F2A63.html["Création d'un VLAN"^]
+https://["Création d'un VLAN"^]
 
 +
-https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-nmg/GUID-DBC9DEE2-EAB7-430A-A773-4E3420EE2AA1.html["Combinaison de ports physiques pour créer des groupes d'interfaces"^]
+https://["Combinaison de ports physiques pour créer des groupes d'interfaces"^]
 
 .. Vérifier que le cluster partenaire est accessible et que la configuration a été resynchronisée sur le cluster partenaire :
 +
@@ -863,7 +863,7 @@ Gestion intégrée des clés
  a| 
 `security key-manager onboard sync`
 
-Pour plus d'informations, voir https://docs.netapp.com/ontap-9/topic/com.netapp.doc.pow-nve/GUID-E4AB2ED4-9227-4974-A311-13036EB43A3D.html["Restauration des clés de chiffrement intégrées de gestion des clés"^].
+Pour plus d'informations, voir https://["Restauration des clés de chiffrement intégrées de gestion des clés"^].
 
 
 
@@ -872,7 +872,7 @@ Gestion externe des clés
  a| 
 `security key-manager external restore -vserver _SVM_ -node _node_ -key-server _host_name|IP_address:port_ -key-id key_id -key-tag key_tag _node-name_`
 
-Pour plus d'informations, voir https://docs.netapp.com/ontap-9/topic/com.netapp.doc.pow-nve/GUID-32DA96C3-9B04-4401-92B8-EAF323C3C863.html["Restauration des clés de chiffrement externes de gestion des clés"^].
+Pour plus d'informations, voir https://["Restauration des clés de chiffrement externes de gestion des clés"^].
 
 |===
 . Avant de reprendre l'opération, vérifiez que le MetroCluster est configuré correctement. Vérifier l'état du nœud :
@@ -921,5 +921,5 @@ Si les vérifications post-mise à niveau n'ont pas signalé d'erreurs, la mise 
 
 Si le logiciel disjoncteur d'attache a déjà été configuré pour la surveillance de la configuration MetroCluster, vous pouvez restaurer la connexion ce dernier.
 
-. Suivez les étapes de la section http://docs.netapp.com/ontap-9/topic/com.netapp.doc.hw-metrocluster-tiebreaker/GUID-7259BCA4-104C-49C6-BAD0-1068CA2A3DA5.html["Ajout des configurations MetroCluster"].
+. Suivez les étapes de la section http://["Ajout des configurations MetroCluster"].
 
