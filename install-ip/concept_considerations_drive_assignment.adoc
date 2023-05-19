@@ -13,12 +13,34 @@ summary: 'Depuis ONTAP 9.4, les configurations MetroCluster IP prennent en charg
 [role="lead"]
 Depuis ONTAP 9.4, les configurations MetroCluster IP prennent en charge les nouvelles installations avec les systèmes AFF à l'aide du partitionnement de disque avancé (ADP). Dans la plupart des configurations, le partitionnement et l'affectation des disques sont effectués automatiquement lors de la configuration initiale des sites MetroCluster.
 
-Les versions ONTAP 9.4 et ultérieures incluent les modifications suivantes pour la prise en charge d'ADP :
+ONTAP 9.4 et versions ultérieures incluent les modifications suivantes pour l'assistance ADP :
 
 * Les affectations de disque du pool 0 sont effectuées en usine.
 * La racine non symétrisée est créée à l'usine.
 * L'affectation de la partition des données se fait sur le site du client pendant la procédure de configuration.
 * Dans la plupart des cas, l'affectation des disques et le partitionnement sont effectués automatiquement pendant les procédures de configuration.
+* Un disque et toutes ses partitions doivent être la propriété de nœuds d'une même paire haute disponibilité. La propriété de partition ou de disque au sein d'un seul disque ne peut pas être mélangée entre la paire haute disponibilité locale et le partenaire de reprise après incident ou le partenaire auxiliaire de reprise après incident.
++
+Exemple de configuration prise en charge :
+
++
+|===
+
+
+| Lecteur/partition | Propriétaire 
+
+
+| Lecteur : | `ClusterA-Node01` 
+
+
+| Partition 1 : | `ClusterA-Node01` 
+
+
+| Partition 2 : | `ClusterA-Node02` 
+
+
+| Partition 3 : | `ClusterA-Node01` 
+|===
 
 
 
@@ -31,7 +53,9 @@ NOTE: Lors de la mise à niveau de ONTAP 9.4 vers 9.5, le système reconnaît le
 ADP est exécuté automatiquement lors de la configuration initiale de la plate-forme.
 
 
-NOTE: Depuis ONTAP 9.5, l'assignation automatique des disques doit être activée avec la commande `storage disk option modify -autoassign on`.
+NOTE: Depuis ONTAP 9.5, l'assignation automatique des disques doit être activée avec `storage disk option modify -autoassign on` commande.
+
+Vous devez définir l'état ha-config sur `mccip` avant le provisionnement automatique, assurez-vous que les tailles de partition correctes sont sélectionnées pour permettre une taille de volume racine appropriée. Pour plus d'informations, voir link:https://docs.netapp.com/us-en/ontap-metrocluster/install-ip/task_sw_config_verify_haconfig.html["Vérification de l'état ha-config des composants"].
 
 Vous pouvez partitionner automatiquement un maximum de 96 disques lors de l'installation. Vous pouvez ajouter des lecteurs supplémentaires après l'installation initiale.
 

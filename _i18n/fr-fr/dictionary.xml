@@ -4606,7 +4606,6 @@
   <block id="08fcfce40ddd768f4ab6ad0534a40c73" category="paragraph"><block ref="08fcfce40ddd768f4ab6ad0534a40c73" category="inline-link-macro-rx"></block></block>
   <block id="8bcabb3e778663882c95082b775c75b8" category="summary">Depuis ONTAP 9.4, les configurations MetroCluster IP prennent en charge les nouvelles installations avec les systèmes AFF à l'aide du partitionnement de disque avancé (ADP).</block>
   <block id="3299ba9863a06ef7650cf2bb56d8651c" category="paragraph">Depuis ONTAP 9.4, les configurations MetroCluster IP prennent en charge les nouvelles installations avec les systèmes AFF à l'aide du partitionnement de disque avancé (ADP). Dans la plupart des configurations, le partitionnement et l'affectation des disques sont effectués automatiquement lors de la configuration initiale des sites MetroCluster.</block>
-  <block id="34e560639ffdd9bc9704af3387945fde" category="paragraph">Les versions ONTAP 9.4 et ultérieures incluent les modifications suivantes pour la prise en charge d'ADP :</block>
   <block id="a4a9824ba125eba903fb3d347f4f5eb6" category="list-text">Les affectations de disque du pool 0 sont effectuées en usine.</block>
   <block id="a1fbd6da7a08fa8c0a2a6b92a3b0a9c5" category="list-text">La racine non symétrisée est créée à l'usine.</block>
   <block id="c60c48f30552c5ad7630dd7b31eb4943" category="list-text">L'affectation de la partition des données se fait sur le site du client pendant la procédure de configuration.</block>
@@ -4614,7 +4613,6 @@
   <block id="bf17ab05d95b3cfd56763e2ed2c9c07d" category="admonition">Lors de la mise à niveau de ONTAP 9.4 vers 9.5, le système reconnaît les affectations de disques existantes.</block>
   <block id="5fafb49cc9fb9a65d03134ac546c84c0" category="section-title">Partitionnement automatique</block>
   <block id="bd7fdcf8e3958a26cae80f44fe7019eb" category="paragraph">ADP est exécuté automatiquement lors de la configuration initiale de la plate-forme.</block>
-  <block id="732888c3eafbc36a6c179a0d04b80675" category="admonition">Depuis ONTAP 9.5, l'assignation automatique des disques doit être activée avec la commande<block ref="9518ee5351ea31dd67cceada18bfcfd6" prefix=" " category="inline-code"></block>.</block>
   <block id="d80db6731d8005aabd1dad8b4bd740b7" category="paragraph">Vous pouvez partitionner automatiquement un maximum de 96 disques lors de l'installation. Vous pouvez ajouter des lecteurs supplémentaires après l'installation initiale.</block>
   <block id="8c27139a6a49272931ad3f34f0b1054e" category="section-title">Fonctionnement de l'affectation automatique « tiroir par tiroir »</block>
   <block id="7cf1eeb2e4f4fa2a69a78396893ace96" category="paragraph">Si chaque site est doté de quatre tiroirs externes, chaque tiroir est affecté à un nœud différent et à un pool différent, comme illustré ci-dessous :</block>
@@ -12934,7 +12932,6 @@
   <block id="e5c3d25338f9cf52b0644af8df5dd491" category="admonition">Les ports 13 et 14 peuvent être utilisés en mode de vitesse native prenant en charge 40 Gbits/s et 100 Gbits/s, ou en mode d'arrachage pour prendre en charge 4 × 25 Gbits/s ou 4 × 10 Gbits/s. S'ils utilisent le mode de vitesse natif, ils sont représentés par les ports 13 et 14. S'ils utilisent le mode écorché, soit 4 × 25 Gbit/s, soit 4 × 10 Gbit/s, ils sont représentés sous la forme de ports 13s0-3 et 14s0-3.</block>
   <block id="1ad95d38a718a40f57a452228a018366" category="section-title">Utilisation des ports de commutation pour FAS500f, AFF C250 ou AFF A250</block>
   <block id="32749c9f2fe889b20a4f9ed309297f2b" category="image-alt">Câblage mcc ip A250 C250 MSN2100</block>
-  <block id="3a1adad502af8b0ad25b006361e23ce5" category="section-title">Utilisez les ports de switch pour AFF C400, AFF A400, AFF A700 ou FAS9000, FAS8300 ou FAS8700 AFF A800</block>
   <block id="6f71608a9b02340c422ff3d643b4afd7" category="image-alt">Câblage mcc ip aff250 400 700 800 cseriesMSN2100</block>
   <block id="0995dd589b8b5229e4b9e28862db9b91" category="paragraph">Lorsque vous câblez plusieurs configurations MetroCluster à un commutateur Cisco 3132Q-V, vous devez câbler chaque MetroCluster selon le tableau approprié. Par exemple, si vous connectez un système FAS2750 et un système AFF A700 au même commutateur Cisco 3132Q-V. Connectez ensuite le système FAS2750 selon la norme « MetroCluster 1 » du Tableau 1 et le système AFF A700 selon la norme « MetroCluster 2 » ou « MetroCluster 3 » du Tableau 2. Vous ne pouvez pas connecter physiquement les systèmes FAS2750 et AFF A700 comme « MetroCluster 1 ».</block>
   <block id="014322233c716b51b659a375ee0b236f" category="section-title">Câblage d'un système AFF A150, FAS2750, AFF A220, FAS500f, AFF C250 ou AFF A250 à un switch Cisco 3232C ou Cisco 9336-FX2C</block>
@@ -13199,4 +13196,18 @@
   <block id="f624129c4d6772a2f62200de12382ad0" category="list-text">Déplacez tous les volumes de métadonnées MDV_CRS vers un autre groupe DR en suivant la procédure <block ref="9273ba8e8bd1c5c1cc0cd85662f27754" category="inline-link-macro-rx"></block> procédure.</block>
   <block id="112564590ec1ae4e651904cd571ed9d4" category="paragraph">Pour plus d'informations sur la configuration des ports, des LIF et du réseau dans ONTAP, reportez-vous à <block ref="378e9004462b7ecfad8256f25b57fbf6" category="inline-link-macro-rx"></block>.</block>
   <block id="347bde5f3be96b6c3eab8b4a360b9028" category="list-text">Attendez trente minutes, puis mettez tous les tiroirs de stockage, les commutateurs IP MetroCluster et les contrôleurs de stockage sous tension.</block>
+  <block id="0434950fcf46c88299084ad712ed62cc" category="list-text">FAS9500 / AFF A900</block>
+  <block id="bf63be372af426fed8556dc915b7ccb6" category="section-title">Utilisation des ports de switch pour AFF C400, AFF A400, AFF A700, FAS9000, FAS8300 FAS8700, AFF A800, FAS9500 ou AFF A900</block>
+  <block id="6789cbf331ef2c9b50d45082c81e74cb" category="paragraph">ONTAP 9.4 et versions ultérieures incluent les modifications suivantes pour l'assistance ADP :</block>
+  <block id="4b72d9ad6a5a5828529f4266cc3f2713" category="list-text">Un disque et toutes ses partitions doivent être la propriété de nœuds d'une même paire haute disponibilité. La propriété de partition ou de disque au sein d'un seul disque ne peut pas être mélangée entre la paire haute disponibilité locale et le partenaire de reprise après incident ou le partenaire auxiliaire de reprise après incident.</block>
+  <block id="352c5d749caa22e221b7fc037fede87d" category="paragraph">Exemple de configuration prise en charge :</block>
+  <block id="cd1c00b76cbbe512b20985ec2344b5ed" category="cell">Lecteur/partition</block>
+  <block id="de6f944fd72539769b70781e85ebcb0d" category="cell">Lecteur :</block>
+  <block id="5eceec2cc5b83a608e155b1545a68237" category="cell"><block ref="3adbe009bdc9265b370999a77c471e08" prefix="" category="inline-code"></block></block>
+  <block id="59e29fe03e3616d7a0f604bccecab054" category="cell">Partition 1 :</block>
+  <block id="282e3c3f77057f75613970647a21e39b" category="cell">Partition 2 :</block>
+  <block id="5e14931fa3c39251787af92197392ae0" category="cell"><block ref="b5713f91ed0348a8e6565b40d2be523a" prefix="" category="inline-code"></block></block>
+  <block id="7794a024d3134acafeb3b112e36c9a3f" category="cell">Partition 3 :</block>
+  <block id="6129d8bcf6f4ed452d528f954ce79ee6" category="admonition">Depuis ONTAP 9.5, l'assignation automatique des disques doit être activée avec<block ref="9518ee5351ea31dd67cceada18bfcfd6" prefix=" " category="inline-code"></block> commande.</block>
+  <block id="00427bfa7d8d8bd516409a3466e96821" category="paragraph">Vous devez définir l'état ha-config sur<block ref="32b858596eeb9351eca27c2906a21da4" prefix=" " category="inline-code"></block> avant le provisionnement automatique, assurez-vous que les tailles de partition correctes sont sélectionnées pour permettre une taille de volume racine appropriée. Pour plus d'informations, voir <block ref="ee9beb37ef6441cda28497e9b5b08a94" category="inline-link-macro-rx"></block>.</block>
 </blocks>
