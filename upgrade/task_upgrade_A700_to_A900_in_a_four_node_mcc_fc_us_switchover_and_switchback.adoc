@@ -27,7 +27,7 @@ Vous ne pouvez pas mettre à niveau d'autres composants de la configuration, par
 NOTE: Le système AFF A900 n'est pris en charge que dans ONTAP 9.10.1 ou version ultérieure.
 
 +
-https://["NetApp Hardware Universe"^]
+https://hwu.netapp.com/["NetApp Hardware Universe"^]
 
 
 
@@ -62,7 +62,7 @@ Le tableau suivant présente la matrice de modèles prise en charge pour la mise
 |===
 * Durant la procédure de mise à niveau, vous devez modifier la structure MetroCluster, notamment la FCR et les modifications physiques du câblage. Vous pouvez modifier la FCR et le câblage avant d'effectuer la mise à niveau du contrôleur.
 * Cette procédure de mise à niveau ne requiert pas de modifier les connexions de stockage, FC et Ethernet entre les nœuds d'origine et les nouveaux nœuds.
-* Durant la procédure de mise à niveau, vous ne devez pas ajouter ou supprimer d'autres cartes des systèmes AFF A700 ou FAS9000. Pour plus d'informations, reportez-vous à la section https://["NetApp Hardware Universe"^]
+* Durant la procédure de mise à niveau, vous ne devez pas ajouter ou supprimer d'autres cartes des systèmes AFF A700 ou FAS9000. Pour plus d'informations, reportez-vous à la section https://hwu.netapp.com/["NetApp Hardware Universe"^]
 
 
 Les exemples de noms suivants sont utilisés dans les exemples et les graphiques de cette procédure :
@@ -195,7 +195,7 @@ Vous devez exécuter cette commande sur chaque cluster.
 +
 .. Téléchargez et exécutez Config Advisor.
 +
-https://["Téléchargement NetApp : Config Advisor"^]
+https://mysupport.netapp.com/site/tools/tool-eula/activeiq-configadvisor["Téléchargement NetApp : Config Advisor"^]
 
 .. Une fois Config Advisor exécuté, vérifiez les résultats de l'outil et suivez les recommandations fournies dans la sortie pour résoudre tous les problèmes détectés.
 
@@ -208,7 +208,7 @@ https://["Téléchargement NetApp : Config Advisor"^]
 
 La structure MetroCluster AFF A900 ou FAS9500 exige deux adaptateurs FC-VI à quatre ports par nœud contre un seul adaptateur FC-VI à quatre ports requis par un système AFF A700. Avant de commencer la mise à niveau du contrôleur vers le contrôleur AFF A900 ou FAS9500, vous devez modifier les fichiers RCF de commutateur de structure pour prendre en charge la topologie de connexion AFF A900 ou FAS9500.
 
-. À partir du https://["Page de téléchargement du fichier RCF MetroCluster"^], Téléchargez le fichier RCF approprié pour un MetroCluster de structure AFF A900 ou FAS9500 et le modèle de switch utilisé avec la configuration AFF A700 ou FAS9000.
+. À partir du https://mysupport.netapp.com/site/products/all/details/metrocluster-rcf/downloads-tab["Page de téléchargement du fichier RCF MetroCluster"^], Téléchargez le fichier RCF approprié pour un MetroCluster de structure AFF A900 ou FAS9500 et le modèle de switch utilisé avec la configuration AFF A700 ou FAS9000.
 . [[Update-RCF]]mettre à jour le fichier RCF sur les commutateurs de la structure A, commutateur A1 et commutateur B1 en suivant les étapes de la link:../disaster-recovery/task_cfg_switches_mcfc.html["Configuration des commutateurs FC"].
 +
 
@@ -317,7 +317,7 @@ Vous devez exécuter cette commande sur chaque cluster.
 +
 .. Téléchargez et exécutez Config Advisor.
 +
-https://["Téléchargement NetApp : Config Advisor"^]
+https://mysupport.netapp.com/site/tools/tool-eula/activeiq-configadvisor["Téléchargement NetApp : Config Advisor"^]
 
 .. Une fois Config Advisor exécuté, vérifiez les résultats de l'outil et suivez les recommandations fournies dans la sortie pour résoudre tous les problèmes détectés.
 
@@ -406,7 +406,7 @@ Vous devez collecter le résultat des commandes suivantes :
 
 . Si les nœuds MetroCluster utilisent le chiffrement pour des volumes ou des agrégats, copiez les informations concernant les clés et les clés de phrase secrète.
 +
-Pour plus d'informations, reportez-vous à la section https://["Sauvegarde manuelle des informations de gestion intégrée des clés"^].
+Pour plus d'informations, reportez-vous à la section https://docs.netapp.com/us-en/ontap/encryption-at-rest/backup-key-management-information-manual-task.html["Sauvegarde manuelle des informations de gestion intégrée des clés"^].
 
 +
 .. Si le gestionnaire de clés intégré est configuré :
@@ -774,7 +774,7 @@ Selection (1-11)?
 
 NOTE: Ne tenez pas compte du message suivant : `This procedure is not supported for Non-Disruptive Upgrade on an HA pair.` Cette remarque s'applique aux mises à niveau logicielles ONTAP sans interruption et non aux mises à niveau du contrôleur. Utilisez toujours netboot pour mettre à jour le nouveau nœud vers l'image souhaitée. Si vous utilisez une autre méthode pour installer l'image sur le nouveau contrôleur, il est possible que la mauvaise image soit installée. Ce problème s'applique à toutes les versions de ONTAP.
 
-. Si vous êtes invité à poursuivre la procédure, entrez `y`, Et lorsque vous êtes invité à saisir l'URL du pack :http://[]
+. Si vous êtes invité à poursuivre la procédure, entrez `y`, Et lorsque vous êtes invité à saisir l'URL du pack :http://<web_server_ip/path_to_web-accessible_directory>/<ontap_version>_image.tgz[]
 . Procédez comme suit pour redémarrer le module de contrôleur :
 +
 .. Entrez `n` pour ignorer la récupération de sauvegarde lorsque l'invite suivante s'affiche :

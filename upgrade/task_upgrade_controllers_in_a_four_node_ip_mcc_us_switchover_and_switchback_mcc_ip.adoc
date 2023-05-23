@@ -24,7 +24,7 @@ Depuis ONTAP 9.8, vous pouvez utiliser le processus de basculement MetroCluster 
 +
 ** Pour plus d'informations sur les combinaisons de mise à niveau de plate-forme prises en charge, consultez le tableau de mise à niveau IP MetroCluster dans link:concept_choosing_controller_upgrade_mcc.html["Choisir la procédure de mise à niveau du contrôleur"].
 +
-Reportez-vous à la section https://["Choisissez une méthode de mise à niveau ou de rafraîchissement"] pour les procédures supplémentaires.
+Reportez-vous à la section https://docs.netapp.com/us-en/ontap-metrocluster/upgrade/concept_choosing_controller_upgrade_mcc.html#choosing-a-procedure-that-uses-the-switchover-and-switchback-process["Choisissez une méthode de mise à niveau ou de rafraîchissement"] pour les procédures supplémentaires.
 
 
 
@@ -42,7 +42,7 @@ L'exploitation de la configuration MetroCluster avec différents types de contr�
 * Les commutateurs IP doivent exécuter une version de micrologiciel prise en charge.
 * Si la nouvelle plate-forme comporte moins de slots que le système d'origine ou si elle comporte moins ou différents types de ports, vous devrez peut-être ajouter un adaptateur au nouveau système.
 +
-Pour plus d'informations, reportez-vous à la section https://["NetApp Hardware Universe"].
+Pour plus d'informations, reportez-vous à la section https://hwu.netapp.com/["NetApp Hardware Universe"].
 
 * Vous allez réutiliser les adresses IP, les masques réseau et les passerelles des plates-formes d'origine sur les nouvelles plates-formes.
 * Les exemples de noms suivants sont utilisés dans cette procédure :
@@ -383,7 +383,7 @@ Une fois les nouveaux nœuds installés, vous devez démarrage sur le réseau po
 .Étapes
 . NetBoot les nouveaux contrôleurs :
 +
-.. Accédez au https://["Site de support NetApp"] pour télécharger les fichiers utilisés pour effectuer le démarrage sur le réseau du système.
+.. Accédez au https://mysupport.netapp.com/site/["Site de support NetApp"] pour télécharger les fichiers utilisés pour effectuer le démarrage sur le réseau du système.
 .. Téléchargez le logiciel ONTAP approprié depuis la section de téléchargement des logiciels du site de support NetApp et stockez le `ontap-version_image.tgz` fichier dans un répertoire accessible sur le web.
 .. Accédez au répertoire accessible sur le Web et vérifiez que les fichiers dont vous avez besoin sont disponibles.
 +
@@ -603,7 +603,7 @@ Vous devez exécuter cette commande sur chaque cluster. Vous pouvez utiliser le 
 +
 .. Téléchargez et exécutez Config Advisor.
 +
-https://["Téléchargement NetApp : Config Advisor"]
+https://mysupport.netapp.com/site/tools/tool-eula/activeiq-configadvisor["Téléchargement NetApp : Config Advisor"]
 
 .. Une fois Config Advisor exécuté, vérifiez les résultats de l'outil et suivez les recommandations fournies dans la sortie pour résoudre tous les problèmes détectés.
 
@@ -732,7 +732,7 @@ Vous devez collecter le résultat des commandes suivantes :
 
 . Si les nœuds MetroCluster utilisent le chiffrement pour des volumes ou des agrégats, copiez les informations concernant les clés et les clés de phrase secrète.
 +
-Pour plus d'informations, reportez-vous à la section https://["Sauvegarde manuelle des informations de gestion intégrée des clés"].
+Pour plus d'informations, reportez-vous à la section https://docs.netapp.com/ontap-9/topic/com.netapp.doc.pow-nve/GUID-1677AE0A-FEF7-45FA-8616-885AA3283BCF.html["Sauvegarde manuelle des informations de gestion intégrée des clés"].
 
 +
 .. Si le gestionnaire de clés intégré est configuré : +
@@ -791,7 +791,7 @@ Avant de mettre à niveau les plates-formes, vous devez supprimer la surveillanc
  a| 
 Disjoncteur d'attache
  a| 
-http://["Suppression des configurations MetroCluster"] Dans le _MetroCluster Tiebreaker - Guide d'installation et de configuration_
+http://docs.netapp.com/ontap-9/topic/com.netapp.doc.hw-metrocluster-tiebreaker/GUID-34C97A45-0BFF-46DD-B104-2AB2805A983D.html["Suppression des configurations MetroCluster"] Dans le _MetroCluster Tiebreaker - Guide d'installation et de configuration_
 
 
 
@@ -908,7 +908,7 @@ Toutes LES LIF de données, y compris SAN et NAS, seront administrative et hors 
 Ainsi, le port e0d est un port physique des anciens contrôleurs et il est également présent sur les nouveaux contrôleurs. e0d n'est pas utilisé comme port de cluster ou autre sur les nouveaux contrôleurs.
 
 +
-Pour l'utilisation des ports pour les modèles de plate-forme, reportez-vous à la section https://["NetApp Hardware Universe"]
+Pour l'utilisation des ports pour les modèles de plate-forme, reportez-vous à la section https://hwu.netapp.com/["NetApp Hardware Universe"]
 
 .. Modifier toutes LES LIFS de données de manière à utiliser le port commun comme port de base : +
 `network interface modify -vserver _svm-name_ -lif _data-lif_ -home-port _port-id_`
@@ -1028,7 +1028,7 @@ L'espace rack dépend du modèle de plateforme des modules de contrôleur, des t
 . Mettez-vous à la terre.
 . Installez les modules de contrôleur sur le rack ou l'armoire.
 +
-https://["Centre de documentation AFF et FAS"]
+https://docs.netapp.com/platstor/index.jsp["Centre de documentation AFF et FAS"]
 
 . Reliez les contrôleurs aux commutateurs IP, comme décrit dans la link:../install-ip/concept_considerations_differences.html["Installation et configuration de MetroCluster IP"].
 +
@@ -1573,7 +1573,7 @@ Gestion intégrée des clés
  a| 
 `security key-manager onboard sync`
 
-Pour plus d'informations, voir https://["Restauration des clés de chiffrement intégrées de gestion des clés"].
+Pour plus d'informations, voir https://docs.netapp.com/ontap-9/topic/com.netapp.doc.pow-nve/GUID-E4AB2ED4-9227-4974-A311-13036EB43A3D.html["Restauration des clés de chiffrement intégrées de gestion des clés"].
 
 
 
@@ -1582,7 +1582,7 @@ Gestion externe des clés
  a| 
 `security key-manager external restore -vserver _SVM_ -node _node_ -key-server _host_name|IP_address:port_ -key-id key_id -key-tag key_tag _node-name_`
 
-Pour plus d'informations, voir https://["Restauration des clés de chiffrement externes de gestion des clés"].
+Pour plus d'informations, voir https://docs.netapp.com/ontap-9/topic/com.netapp.doc.pow-nve/GUID-32DA96C3-9B04-4401-92B8-EAF323C3C863.html["Restauration des clés de chiffrement externes de gestion des clés"].
 
 |===
 . Vérifier que tous les ports se trouvent dans un broadcast domain :
@@ -1593,17 +1593,17 @@ Pour plus d'informations, voir https://["Restauration des clés de chiffrement e
 
 .. Ajoutez n'importe quel port à un broadcast domain si nécessaire.
 +
-https://["Ajout ou suppression de ports d'un broadcast domain"]
+https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-nmg/GUID-003BDFCD-58A3-46C9-BF0C-BA1D1D1475F9.html["Ajout ou suppression de ports d'un broadcast domain"]
 
 .. Recréez les VLAN et les groupes d'interfaces selon les besoins.
 +
 L'appartenance au VLAN et aux groupes d'interfaces peut être différente de celle de l'ancien nœud.
 
 +
-https://["Création d'un VLAN"]
+https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-nmg/GUID-8929FCE2-5888-4051-B8C0-E27CAF3F2A63.html["Création d'un VLAN"]
 
 +
-https://["Combinaison de ports physiques pour créer des groupes d'interfaces"]
+https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-nmg/GUID-DBC9DEE2-EAB7-430A-A773-4E3420EE2AA1.html["Combinaison de ports physiques pour créer des groupes d'interfaces"]
 
 
 
