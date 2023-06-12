@@ -11567,7 +11567,6 @@
   <block id="e7acec6ea00d47c0f7752735341c6bb3" category="list-text">Licence Extended Fabric (pour des distances ISL de plus de 6 km)</block>
   <block id="9095235ccbae1acead09e083fb7b20dd" category="list-text">Licence Enterprise pour les sites avec plus d'un ISL et une distance ISL supérieure à 6 km</block>
   <block id="c447450429c7aa0c8fa978a8c7ab1f67" category="paragraph">La licence Enterprise inclut Brocade Network Advisor et toutes les licences à l'exception des licences de port supplémentaires.</block>
-  <block id="aaf82250987f97db574d1fc26bfc8c06" category="paragraph">Vous pouvez vérifier que les licences sont installées à l'aide du<block ref="c53664d593e772e240ea0e6fdcfc79e1" prefix=" " category="inline-code"></block> commande. Si vous ne disposez pas de ces licences, contactez votre représentant commercial avant de continuer.</block>
   <block id="e7b2ab89026c8038792876d17344e2a9" category="admonition">Conversion d'un port FC en port FC-VI avec le<block ref="10785a4aa266b76ef276330b69c7da40" prefix=" " category="inline-code"></block> La commande n'est prise en charge que sur les systèmes FAS8020 et AFF 8020. La conversion de ports FC en ports FCVI n'est pas prise en charge sur toute autre plateforme.</block>
   <block id="c860f7f0a8aaf5b10a9ec71f48b87682" category="inline-link-macro">Configuration des LIFs IP virtuelles</block>
   <block id="255e6fa1222b0f5f7521f1965844c1bf" category="paragraph">Consultez les instructions et l'illustration suivantes lors de la planification de votre solution de couche 3. Pour plus d'informations sur l'implémentation des protocoles VIP et BGP dans ONTAP, consultez <block ref="245303d2c60ac1935683ed89eb13f165" category="inline-link-macro-rx"></block>.</block>
@@ -11618,11 +11617,8 @@
   <block id="1711fdcc6944bbeddd35a626101f4b4d" category="list-text">Vérifiez que le commutateur utilise la méthode du port dynamique à la demande (POD).</block>
   <block id="2f3d07c01cbdac4d395d3a14b661150c" category="admonition">Pour les versions de Brocade Fabric OS antérieures à 8.0, vous exécutez les commandes suivantes en tant qu'administrateur, et pour les versions 8.0 et ultérieures, vous les exécutez en tant que root.</block>
   <block id="64fa0d568b3592806aa948b76b25721e" category="list-text">Exécutez la commande license :</block>
-  <block id="2fc05e860677e088c66d18d9fe3bb918" category="paragraph"><block ref="c3d759c84d82a17cd2fc31c0bbd2be02" prefix="" category="inline-code"></block></block>
   <block id="d63c14f8f4da1b2f3355284117aa43d6" category="list-text">Activez l'utilisateur root s'il est désactivé par Brocade.</block>
-  <block id="0495c36d7c4cd6e18740fbb344d64ab4" category="list-text">Changer la méthode de licence en dynamique :</block>
   <block id="58245d98714cc00602b18f5cd698870e" category="paragraph"><block ref="3164874cc01be770c11a12a6977eaa9e" prefix="" category="inline-code"></block></block>
-  <block id="dca190678a04e60a515a67708b3f0c76" category="admonition">Si la méthode POD dynamique n'est pas utilisée (si la méthode POD est statique), vous devez changer la méthode d'attribution de licence en dynamique. Ignorez cette étape si la méthode POD dynamique est utilisée.</block>
   <block id="06628fac4ad175a059dea1e8992ec356" category="paragraph"><block ref="40c3e9d40d7f5472056a085103ee278b" prefix="" category="inline-code"></block></block>
   <block id="ede0376c0e0928f0e121e5c4a17e579f" category="list-text">Vérifiez que les paramètres par défaut ont été implémentés :</block>
   <block id="384bb33c884dd5c4aed5b1cef7c99c53" category="list-text">Vérifiez que l'adresse IP est correctement définie :</block>
@@ -11654,7 +11650,6 @@
   <block id="b54ac66ca0ca34c593eeed1fe8cd4e03" category="list-text">La fonctionnalité Brocade Virtual Fabric (VF) n'est pas prise en charge.</block>
   <block id="c51b448f36df4e8b4b68e7af4df4c6b8" category="list-text">La segmentation FC basée sur le port de domaine est prise en charge, mais la segmentation basée sur le nom mondial (WWN) n'est pas prise en charge.</block>
   <block id="5f864e9896e626c0a0c857ef2de8b1d6" category="list-text">Vérifiez que les licences sont installées :</block>
-  <block id="085c43e1c750634547ed6d634183b052" category="paragraph"><block ref="c53664d593e772e240ea0e6fdcfc79e1" prefix="" category="inline-code"></block></block>
   <block id="4d8abf4bb34371dfeb410341732e506b" category="paragraph">Si vous ne disposez pas de ces licences, contactez votre représentant commercial avant de continuer.</block>
   <block id="29beb95dbfa349b40c8e018564927306" category="section-title">Définition des valeurs par défaut du commutateur Brocade FC</block>
   <block id="bc9a8f24ac7c37a611a7d6eccad46c1a" category="paragraph">Vous devez définir les paramètres par défaut du commutateur pour garantir la réussite de la configuration. Vous devez également attribuer un nom unique à chaque commutateur.</block>
@@ -11678,7 +11673,6 @@
   <block id="e39c65b9d816e2a7741f1d5584f8ae65" category="paragraph"><block ref="1fbc5cd6b74dbc54cd1577d9183f17e9" prefix="" category="inline-code"></block></block>
   <block id="ae6d4e9d4497377541a0ac6446e39a09" category="list-text">Sur les commutateurs Brocade 6510, désactivez la fonction Brocade Virtual Fabrics (VF) :</block>
   <block id="5592272feb1a1ba6847cf13d1a8c1474" category="list-text">Effacez la configuration du domaine administratif (AD) :</block>
-  <block id="acb1a0aabd466b89953a635308b148ef" category="paragraph"><block ref="af8d940a13b977febff8146e45835fa1" prefix="" category="inline-code"></block></block>
   <block id="41f75670bd6513f25d1942c68f417ebb" category="section-title">Configuration des paramètres de base du commutateur</block>
   <block id="b5200136ba99d499e1f31b6fc5df9dcc" category="paragraph">Vous devez configurer les paramètres globaux de base, y compris l'ID de domaine, pour les commutateurs Brocade.</block>
   <block id="402d1d9024cb07a63926bd7becbf4af3" category="paragraph">Cette tâche contient les étapes à effectuer sur chaque switch des deux sites MetroCluster.</block>
@@ -11706,11 +11700,9 @@
   <block id="9c5e2ae210ac93c8c28206f6341c674f" category="list-text">Vérifiez les paramètres du DOM :</block>
   <block id="555d0eb5e8f5efea1f9923360c2e1807" category="paragraph"><block ref="555d0eb5e8f5efea1f9923360c2e1807" category="inline-link-rx"></block></block>
   <block id="8e6415ee4068075bb4d9b0908c9e0ba1" category="list-text">Vérifiez que le commutateur utilise la méthode de licence de port dynamique.</block>
-  <block id="67c13f78d822be3160ea3c5b07cae707" category="paragraph"><block ref="652c8cde1b3411c9aaaf04ce42a4838b" prefix="" category="inline-code"></block></block>
   <block id="39c3f713772acf06f906fa354070ccae" category="admonition">Brocade FabricOS avant 8.0, exécutez les commandes suivantes en tant qu'admin et versions 8.0 et ultérieures, afin de les exécuter en tant que root.</block>
   <block id="bb455cc655a37d9370a7b572be5c356a" category="list-text">Activez l'utilisateur root.</block>
   <block id="9982799dc107b44357ff54b7e3b835e7" category="paragraph">Si l'utilisateur root est déjà désactivé par Brocade, activez-le comme indiqué dans l'exemple suivant :</block>
-  <block id="46714aac3ad4ae91307dcd356eefab49" category="admonition">Si la méthode de licence dynamique n'est pas utilisée (si la méthode est statique), vous devez changer la méthode de licence en dynamique. Ignorez cette étape si la méthode de licence dynamique est utilisée.</block>
   <block id="95da9f6e517e5c030f88ab1f88a8412b" category="list-text">Activer le trap T11-FC-ZONE-SERVEUR-MIB pour assurer une surveillance réussie de l'état des commutateurs dans ONTAP :</block>
   <block id="ed4e949381c1b26b6a818efefef7af72" category="list-text">Activer le T11-FC-ZONE-SERVEUR-MIB :</block>
   <block id="30b22579f9b8f04df9b75ac978e270dc" category="paragraph"><block ref="6e9bfa416f2cbe2c011d5e661b7a168b" prefix="" category="inline-code"></block></block>
@@ -13238,4 +13230,14 @@
   <block id="c6b98eed0e9727a5dfb3f152632a0f26" category="paragraph"><block ref="abef28b214988e1f461b70d9ddd96084" prefix="" category="inline-code"></block></block>
   <block id="5da08e80e3eab08ebb4baa8e1b142991" category="paragraph"><block ref="c15b1a514541c60b840d997ade873f6d" prefix="" category="inline-code"></block></block>
   <block id="9c2b22a66311e51f1e1983454811963b" category="paragraph"><block ref="6253a5e48e30f72d3113196e1239627c" prefix="" category="inline-code"></block></block>
+  <block id="5aec6e2f211b9dfd0cbd3f6c569bd08c" category="open-title">Pour Fabric OS 8.2.x et versions antérieures</block>
+  <block id="21a858f81918f7707fbcd7bef86f8797" category="paragraph">Lancer la commande<block ref="c53664d593e772e240ea0e6fdcfc79e1" prefix=" " category="inline-code"></block>.</block>
+  <block id="afff4aa2c1e899c46d499fb894d82ada" category="open-title">Pour Fabric OS 9.0 et versions ultérieures</block>
+  <block id="39219ac241ea7f4ccb98564b8a02b92c" category="paragraph">Lancer la commande<block ref="ee9cf2be6d80be01f66c5272dabe9164" prefix=" " category="inline-code"></block>.</block>
+  <block id="6662b782a3a75b8e31dda70ebe53c4f0" category="paragraph">Lancer la commande<block ref="c3d759c84d82a17cd2fc31c0bbd2be02" prefix=" " category="inline-code"></block>.</block>
+  <block id="1fb30ffcb217df70eb8b61a9c76f518f" category="paragraph">Lancer la commande<block ref="f7fd6058274b87da3f8cba419f53bb7e" prefix=" " category="inline-code"></block>.</block>
+  <block id="3c8938b87b13dff113f84a2814ddff39" category="paragraph"><block ref="f7fd6058274b87da3f8cba419f53bb7e" prefix="" category="inline-code"></block></block>
+  <block id="1ad5a70ead9bdd722df6000495e21c24" category="list-text">Si vous exécutez Fabric OS 8.2.x ou une version antérieure, vous devez définir la méthode de licence sur dynamique :</block>
+  <block id="7fafa568d6f3c9a0ee98323f64b1c01c" category="admonition">Dans Fabric OS 9.0 et versions ultérieures, la méthode de licence est dynamique par défaut. La méthode de licence statique n'est pas prise en charge.</block>
+  <block id="0b6c4085e3a8dba280dd11e4bbbbeee1" category="paragraph">Vous pouvez vérifier que les licences sont installées à l'aide de la commande 'license'.</block>
 </blocks>
