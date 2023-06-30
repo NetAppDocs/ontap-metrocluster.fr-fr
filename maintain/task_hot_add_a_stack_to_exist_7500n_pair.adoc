@@ -2,16 +2,16 @@
 permalink: maintain/task_hot_add_a_stack_to_exist_7500n_pair.html 
 sidebar: sidebar 
 keywords: metrocluster, maintain, service, hot, add, stack, sas, disk, shelves, existing, pair, fibrebridge, bridge 
-summary: Vous pouvez ajouter à chaud une pile de tiroirs disques SAS à une paire existante de ponts FiberBridge 7500N qui disposent de ports disponibles. 
+summary: Vous pouvez ajouter à chaud une pile de tiroirs disques SAS à une paire existante de ponts FibreBridge 7600N ou 7500N dotés de ports disponibles. 
 ---
-= Ajout à chaud d'une pile de tiroirs disques SAS à une paire existante de ponts FiberBridge 7500N
+= Ajout à chaud d'une pile de tiroirs disques SAS à une paire existante de ponts FibreBridge 7600N ou 7500N
 :allow-uri-read: 
 :icons: font
 :imagesdir: ../media/
 
 
 [role="lead"]
-Vous pouvez ajouter à chaud une pile de tiroirs disques SAS à une paire existante de ponts FiberBridge 7500N qui disposent de ports disponibles.
+Vous pouvez ajouter à chaud une pile de tiroirs disques SAS à une paire existante de ponts FibreBridge 7600N ou 7500N dotés de ports disponibles.
 
 .Avant de commencer
 * Vous devez avoir téléchargé le dernier firmware de disque et de tiroir disque.
@@ -22,7 +22,7 @@ https://mysupport.netapp.com/site/downloads/firmware/disk-drive-firmware["Télé
 +
 https://mysupport.netapp.com/site/downloads/firmware/disk-shelf-firmware["Téléchargements NetApp : firmware des tiroirs disques"^]
 
-* Les ponts FiberBridge 7500N doivent être connectés et disposent de ports SAS disponibles.
+* Les ponts FibreBridge 7600N ou 7500N doivent être connectés et avoir des ports SAS disponibles.
 
 
 .Description de la tâche
@@ -54,11 +54,6 @@ node_A_1             on           on           on           default
 node_A_2             on           on           on           default
 2 entries were displayed.
 ----
-. Désactivez les ports de commutateur de la nouvelle pile.
-. Mettez à jour le micrologiciel FiberBridge sur chaque pont.
-+
-Si le nouveau pont est du même type que celui de la mise à niveau de pont partenaire vers le même micrologiciel que le pont partenaire. Si le nouveau pont est de type différent du pont partenaire, effectuez une mise à niveau vers le dernier micrologiciel pris en charge par le pont et la version de ONTAP. Voir la section « mise à jour du micrologiciel sur un pont FibreBridge » dans le _MetroCluster Maintenance Guide_.
-
 . Sur chaque pont de la paire, activez le port SAS qui se connectera à la nouvelle pile :
 +
 `SASPortEnable _port-letter_`
@@ -208,7 +203,6 @@ NOTE: Si vous choisissez de diviser la propriété d'une seule pile de tiroirs d
 
 NOTE: Vous ne devez pas ajouter de disques à des agrégats ou des volumes avant la mise à jour du firmware des disques et des tiroirs disques, et les étapes de vérification ne sont pas terminées.
 
-. Activez les ports de commutateur de la nouvelle pile.
 . Vérifier le fonctionnement de la configuration MetroCluster dans ONTAP :
 +
 .. Vérifier si le système est multipathed :
@@ -231,9 +225,9 @@ NOTE: Vous ne devez pas ajouter de disques à des agrégats ou des volumes avant
 +
 `metrocluster check show`
 
-.. Vérifier la présence d'alertes d'intégrité sur les commutateurs (le cas échéant) :
+.. Vérifiez la présence d'alertes d'intégrité sur les ponts après l'ajout des nouvelles piles :
 +
-`storage switch show`
+`storage bridge show`
 
 .. Exécutez Config Advisor.
 +

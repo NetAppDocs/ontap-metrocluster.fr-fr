@@ -13,9 +13,13 @@ summary: 'Vous devez mettre hors tension l"ensemble de la configuration FC Metro
 [role="lead"]
 Vous devez mettre hors tension l'ensemble de la configuration FC MetroCluster et l'ensemble de l'équipement avant le début des opérations de maintenance ou de déplacement du site.
 
+.Description de la tâche
+Vous devez effectuer les étapes de cette procédure à partir des deux sites, en même temps.
+
 
 NOTE: Avec ONTAP 9.8, le `*storage switch*` la commande est remplacée par `*system switch*`. Les étapes suivantes présentent le `*storage switch*` Mais si vous exécutez ONTAP 9.8 ou version ultérieure, le `*system switch*` commande recommandée.
 
+.Étapes
 . Vérifier la configuration MetroCluster des deux sites de la configuration MetroCluster.
 +
 .. Vérifier la configuration MetroCluster et que le mode opérationnel est normal. +
@@ -63,12 +67,11 @@ cluster_A_site_A::*>metrocluster modify -auto-switchover-failure-domain auso-dis
 . Arrêtez les nœuds à l'aide de la commande suivante :
 `*halt*`
 +
-** Pour une configuration MetroCluster à quatre ou huit nœuds, utilisez le paramètre :
-`*inhibit-takeover*`
+** Pour une configuration MetroCluster à quatre ou huit nœuds, utilisez `*inhibit-takeover*` et `*skip-lif-migration-before-shutdown*` paramètres :
 +
 [listing]
 ----
-system node halt -node node1_SiteA -inhibit-takeover true -ignore-quorum-warnings true
+system node halt -node node1_SiteA -inhibit-takeover true -ignore-quorum-warnings true -skip-lif-migration-before-shutdown true
 ----
 ** Dans le cas d'une configuration MetroCluster à deux nœuds, utilisez la commande :
 +

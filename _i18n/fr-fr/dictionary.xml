@@ -1493,7 +1493,6 @@
   <block id="a5bdcf7a78025a6dd8c23463165acdf4" category="list-text">Exécuter la commande suivante : +<block ref="1dd9e6183d2d2d2960c32035cfcade4d" prefix=" " category="inline-code"></block></block>
   <block id="dde8f3550b8192d2b695c0bd40ddc1c4" category="list-text">Désactivez AUSO en modifiant le domaine de défaillance AUSO sur</block>
   <block id="17a482b02d43109c8b8a1497839ff0b4" category="list-text">Arrêtez les nœuds à l'aide de la commande suivante :<block ref="64741aee0c87a08ef7b37e6ec6fee1b9" prefix=" " category="inline-code"></block></block>
-  <block id="fad9503a100b92ad7c54437a9309f256" category="list-text">Pour une configuration MetroCluster à quatre ou huit nœuds, utilisez le paramètre :<block ref="1f019d491fcfc3956d780ccfd54601ba" prefix=" " category="inline-code"></block></block>
   <block id="93081236e78e8a13aff59ffaa04927e9" category="list-text">Dans le cas d'une configuration MetroCluster à deux nœuds, utilisez la commande :</block>
   <block id="63e64e288714d32cded7a6ed8dfec32c" category="list-text">Commutateurs FC MetroCluster (si utilisés et si la configuration n'est pas une configuration Stretch à deux nœuds)</block>
   <block id="043cef7f3b4952ab49e47a66b62d07cb" category="list-text">FibreBridge ATTO</block>
@@ -2392,10 +2391,8 @@
   <block id="b4de17ead867a3cf0b9d11e57e562672" category="doc">Traduction automatique</block>
   <block id="6b6c87870bfc5260f4e7282bb5b52dd6" category="paragraph">Pour plus d'informations sur le contenu localisé, consultez la page netapp.com.</block>
   <block id="db9bfd81e26275c9db26e2db3ac172c3" category="paragraph"><block ref="db9bfd81e26275c9db26e2db3ac172c3" category="inline-link-rx"></block></block>
-  <block id="0ddbccff2e33cdad7e25875f8ed5047b" category="summary">Vous pouvez ajouter à chaud une pile de tiroirs disques SAS à une paire existante de ponts FiberBridge 7500N qui disposent de ports disponibles.</block>
   <block id="695e87d61d65625619e3a56919865a2c" category="list-text">Vous devez avoir téléchargé le dernier firmware de disque et de tiroir disque.</block>
   <block id="8b82688b3d28b8ce8fbcbb8c09b13ce3" category="list-text">Tous les tiroirs disques de la configuration MetroCluster (tiroirs existants) doivent exécuter la même version de firmware. Si un ou plusieurs des disques ou tiroirs n'utilisent pas la dernière version du micrologiciel, mettez à jour le micrologiciel avant de connecter les nouveaux disques ou tiroirs.</block>
-  <block id="86c77fb0de5bbd53bda91b1946b5e7d6" category="list-text">Les ponts FiberBridge 7500N doivent être connectés et disposent de ports SAS disponibles.</block>
   <block id="8d372617f83f8c0b84203a0c342601a0" category="paragraph">Vous pouvez utiliser l'interface graphique ATTO ExpressNAV pour configurer et gérer un pont et mettre à jour le micrologiciel du pont. Vous pouvez utiliser l'utilitaire ATTO Quicknavigation pour configurer le port de gestion Ethernet de pont 1.</block>
   <block id="a2a09f3d137021820b6b1b04c4a12e84" category="paragraph">Vous pouvez utiliser d'autres interfaces de gestion, si nécessaire. Ces options incluent l'utilisation d'un port série ou Telnet pour configurer et gérer un pont, pour configurer le port Ethernet management 1 et l'utilisation de FTP pour mettre à jour le micrologiciel du pont. Si vous choisissez l'une de ces interfaces de gestion, vous devez satisfaire aux exigences applicables dans <block ref="7ab0568f22b62ca0e98b3c0cd29a60a1" category="inline-link-macro-rx"></block>.</block>
   <block id="0162c27051eec554a97d6a3f03a4a746" category="list-text">Depuis la console d'un autre contrôleur, vérifiez que l'autoassignation des disques est activée sur votre système :</block>
@@ -12608,7 +12605,6 @@
   <block id="421c8863e1f7223f216aacf99393b7dd" category="list-text">Remarque 1 : cette combinaison de plateformes nécessite ONTAP 9.11.1 ou une version ultérieure.</block>
   <block id="60ddbd1babdd945c26fbc431202fea6c" category="inline-link-macro">Hardware Universe</block>
   <block id="6e2ee39d0f9ccdad593782674a048e67" category="inline-link-macro">Lien vers la procédure</block>
-  <block id="7fcdce91feb430306391667c0a012cd7" category="paragraph"><block ref="7fcdce91feb430306391667c0a012cd7" category="inline-link-macro-rx"></block></block>
   <block id="0a623e8d3b5ae84e14f2fe4f454a3abb" category="paragraph"><block ref="0a623e8d3b5ae84e14f2fe4f454a3abb" category="inline-link-macro-rx"></block></block>
   <block id="8435af9be97e0c50b0d730d64b42f198" category="paragraph"><block ref="8435af9be97e0c50b0d730d64b42f198" category="inline-link-macro-rx"></block></block>
   <block id="f7080628c8d078c209fb6b6b18f03a3a" category="paragraph"><block ref="f7080628c8d078c209fb6b6b18f03a3a" category="inline-link-macro-rx"></block></block>
@@ -13240,4 +13236,12 @@
   <block id="1ad5a70ead9bdd722df6000495e21c24" category="list-text">Si vous exécutez Fabric OS 8.2.x ou une version antérieure, vous devez définir la méthode de licence sur dynamique :</block>
   <block id="7fafa568d6f3c9a0ee98323f64b1c01c" category="admonition">Dans Fabric OS 9.0 et versions ultérieures, la méthode de licence est dynamique par défaut. La méthode de licence statique n'est pas prise en charge.</block>
   <block id="0b6c4085e3a8dba280dd11e4bbbbeee1" category="paragraph">Vous pouvez vérifier que les licences sont installées à l'aide de la commande 'license'.</block>
+  <block id="6c05b41ac12af301a1c1201b16997220" category="paragraph">Vous devez effectuer les étapes de cette procédure à partir des deux sites, en même temps.</block>
+  <block id="a934aebb7868eacad4999d15212ac85f" category="list-text">Pour une configuration MetroCluster à quatre ou huit nœuds, utilisez<block ref="1f019d491fcfc3956d780ccfd54601ba" prefix=" " category="inline-code"></block> et<block ref="6c99881ddd2f188436900ed8d41d99ba" prefix=" " category="inline-code"></block> paramètres :</block>
+  <block id="28289de886d4bf23487d962fb6a696a3" category="summary">Vous pouvez ajouter à chaud une pile de tiroirs disques SAS à une paire existante de ponts FibreBridge 7600N ou 7500N dotés de ports disponibles.</block>
+  <block id="2e53212ba8ca8b35cbf4ed2b9eb52b0c" category="doc">Ajout à chaud d'une pile de tiroirs disques SAS à une paire existante de ponts FibreBridge 7600N ou 7500N</block>
+  <block id="e3e17f353727a0bf80bc5f781fadd978" category="list-text">Les ponts FibreBridge 7600N ou 7500N doivent être connectés et avoir des ports SAS disponibles.</block>
+  <block id="7ec840edd23c7b1a5bd3b9167d726942" category="list-text">Vérifiez la présence d'alertes d'intégrité sur les ponts après l'ajout des nouvelles piles :</block>
+  <block id="4aa202a3c65f2813f56a71404d4e0d9f" category="paragraph">Huit nœuds</block>
+  <block id="74c873abf18bb043c43561d25adce539" category="paragraph"><block ref="74c873abf18bb043c43561d25adce539" category="inline-link-macro-rx"></block></block>
 </blocks>
