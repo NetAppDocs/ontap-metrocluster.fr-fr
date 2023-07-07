@@ -4702,7 +4702,6 @@
   <block id="dbe07d3b0e16c3d4d765887b1b29b7bd" category="list-text">Q3 : node_B_1 pool1</block>
   <block id="36a6b2d82f1c99925006210a57878b24" category="list-text">Q4 :node_B_2 pool1</block>
   <block id="f3a88820bdb6aec9f587dc31d6c8d2a5" category="paragraph">Les partitions sur chaque tiroir sont utilisées pour créer l'agrégat racine. L'agrégat racine inclut les partitions suivantes dans chaque plex :</block>
-  <block id="cf5928613cf8b77d8355882cdec38712" category="paragraph">16 disques internes uniquement</block>
   <block id="6ecbc3bbbc5acac0e3a1eaa928b0ef3a" category="list-text">Deux partitions de données</block>
   <block id="203589fdbad6f6dc48cf251ed51e812a" category="list-text">Pas de partitions de rechange</block>
   <block id="5f09ad28ed34c8a5a9d9a71b6cfab3ac" category="section-title">Affectation des disques et ADP sur les systèmes AFF A300</block>
@@ -4716,7 +4715,6 @@
   <block id="4cc79bf7b84548df7d6cedf892dab8d3" category="paragraph">Disques internes et 96 disques externes</block>
   <block id="05fce716b1daba00f41c2bed56cc5f77" category="paragraph">Les partitions internes sont divisées en quatre groupes égaux (quarts). Chaque trimestre est attribué automatiquement à un pool distinct. Les disques des tiroirs externes sont automatiquement affectés selon le tiroir par tiroir, tous les disques de chaque tiroir étant affectés à l'un des quatre nœuds de la configuration MetroCluster.</block>
   <block id="6f53d85533c3e60dad3733efac10ae04" category="paragraph">L'agrégat root est créé avec 12 partitions root sur le tiroir interne.</block>
-  <block id="ebc41c749d217e4e33d72e9e61f637ae" category="paragraph">24 disques internes uniquement</block>
   <block id="982a2e1944b422fa6826f45f24630643" category="paragraph">Les partitions internes sont divisées en quatre groupes égaux (quarts). Chaque trimestre est attribué automatiquement à un pool distinct.</block>
   <block id="f674c4dddbf3c8f5d8282775b8f64dfc" category="list-text">Une partition de rechange</block>
   <block id="ef312d32820f8cc7d4f38a6f5049b24d" category="section-title">Affectation des disques et ADP sur les systèmes AFF A900</block>
@@ -7843,13 +7841,11 @@
   <block id="bd644239cebf0eee7e6c7d4b4e3a0c40" category="paragraph">Cette tâche s'effectue sur la configuration FC MetroCluster existante.</block>
   <block id="e8b2b31f6129e480376a3948b9b9d73c" category="list-text">Collectez les ID système du nœud de configuration MetroCluster :</block>
   <block id="85c4cdb0a97aae9e10995c21089e5b08" category="paragraph"><block ref="4d91d396972204eed657083f0ee1916e" prefix="" category="inline-code"></block></block>
-  <block id="3c0b6cb420c455a5a165c08c7cd7af73" category="paragraph">Au cours de la procédure de remplacement, vous remplaceront ces ID système par les ID système des modules de contrôleur.</block>
   <block id="783c0ee630587e0a74bf53bfb650c2e7" category="paragraph">Dans cet exemple de configuration FC MetroCluster à quatre nœuds, les anciens ID système suivants sont récupérés :</block>
   <block id="52d83d7ca0d0ff43bc0929d376512989" category="list-text">Node_A_1-A700 : 537037649</block>
   <block id="a0efecab010293ebd247221cd9cca871" category="list-text">Node_A_2-A700 : 537407030</block>
   <block id="c5c663e6628e19ffabcbcb01ecaa23e3" category="list-text">Node_B_1-A700 : 0537407114</block>
   <block id="447b7bdefc8e750f8d7dab18bb9172ea" category="list-text">Node_B_2-A700 : 537035354</block>
-  <block id="3401f9f19dd2ad33d88a3a8363ed6c9b" category="list-text">Collectez les informations de port et LIF pour chaque nœud.</block>
   <block id="cb06300d68318f6a2b2782f2f09beaf8" category="paragraph">Vous devez collecter les valeurs de sortie des commandes suivantes pour chaque nœud :</block>
   <block id="4fb12e23a9f5fb90c604b2b0c7dbf88a" category="list-text"><block ref="72452e9827bb858400e6b9e72c5245fc" prefix="" category="inline-code"></block></block>
   <block id="8b1a6434b118fdab6cffd5eef984796d" category="list-text">Si le volume racine est chiffré, collectez et enregistrez la phrase secrète utilisée pour le gestionnaire de clés :</block>
@@ -8149,7 +8145,6 @@
   <block id="2bfe0466886d075338fffdda007a312b" category="list-text">Planifiez l'utilisation de vos ports et, le cas échéant, remplissez les tableaux suivants pour vous y référer pour chacun des nouveaux nœuds.</block>
   <block id="45eedb3b70627315a33ac77a1f76c1b9" category="list-text">Etiqueter les câbles pour les contrôleurs existants, afin de faciliter l'identification des câbles lors de la configuration des nouveaux contrôleurs.</block>
   <block id="3894726aa348d9a18ddd016a54497034" category="list-text">Collectez les ID système des nœuds de la configuration MetroCluster :</block>
-  <block id="3cd530184990375ba5ce23dfb543233c" category="paragraph">Au cours de la procédure de remplacement, vous remplaceront ces ID système par les ID système des nouveaux modules de contrôleur.</block>
   <block id="1cd4744ff6d97a425af9a0e34512335b" category="list-text">Node_A_1-Old : 4068741258</block>
   <block id="58091da607d7ce6b90f5b3bdc5df9969" category="list-text">Node_A_2-Old : 4068741260</block>
   <block id="9bffdee166425a2a1facb56313eda964" category="list-text">Node_B_1-Old : 4068741254</block>
@@ -8218,7 +8213,6 @@
   <block id="cc5eb1ddd782b52c5fabe965793bc6f4" category="paragraph">Option « 10 »</block>
   <block id="1ba2ae150e1cee5c2dbe25aa1a0e18b0" category="paragraph">Suivez les invites pour fournir les entrées requises pour récupérer et restaurer la configuration du gestionnaire de clés.</block>
   <block id="f1318dc614d34488bcb6f8bef3e32bff" category="paragraph">Option « 11 »</block>
-  <block id="52b1f5429bdd6813cde83cf7eb1f6838" category="list-text">Dans ONTAP 9.7 et versions antérieures, exécutez la commande de menu de démarrage.</block>
   <block id="8cb7388f916ea57692be4e2442a4bb6e" category="cell">Exécutez cette commande à l'invite du menu de démarrage...</block>
   <block id="945a7facca1121e7c5b6eed95ea1b03a" category="paragraph"><block ref="7191584fa52473c1df15d3c03b065c0b" prefix="" category="inline-code"></block></block>
   <block id="e606299b52f4f296d9e1024342b77a75" category="paragraph"><block ref="7c1eea87f821ce315a7a85c3c85f59e5" prefix="" category="inline-code"></block></block>
@@ -12634,7 +12628,6 @@
   <block id="5f290ae29562085cc0cef01e0f484b1d" category="paragraph"><block ref="5f290ae29562085cc0cef01e0f484b1d" category="inline-link-macro-rx"></block></block>
   <block id="28d9d9e03b64356e498c630e744a9cdf" category="paragraph"><block ref="28d9d9e03b64356e498c630e744a9cdf" category="inline-link-macro-rx"></block></block>
   <block id="0feef50dfeaf08303a2284d2c2ff6eb4" category="cell">Transfert d'agrégats</block>
-  <block id="5c6fc64fa41aef579f27097f378325cb" category="paragraph">À l'aide de<block ref="616743bfa4fd61d558c556fe614cb2e9" prefix=" " category="inline-code"></block> Commandes et permutation du module de contrôleur et de la NVM (mise à niveau de AFF A700 vers AFF A900 uniquement)</block>
   <block id="38a031e8dad2eab70ea05c570be3935e" category="paragraph"><block ref="38a031e8dad2eab70ea05c570be3935e" category="inline-link-rx"></block></block>
   <block id="b80a36d83825959bd2fd92ffd36709e2" category="paragraph"><block ref="b80a36d83825959bd2fd92ffd36709e2" category="inline-link-rx"></block></block>
   <block id="ddf68ce76cf70c3d2061e221edeb7ae1" category="paragraph"><block ref="ddf68ce76cf70c3d2061e221edeb7ae1" category="inline-link-rx"></block></block>
@@ -13244,4 +13237,14 @@
   <block id="7ec840edd23c7b1a5bd3b9167d726942" category="list-text">Vérifiez la présence d'alertes d'intégrité sur les ponts après l'ajout des nouvelles piles :</block>
   <block id="4aa202a3c65f2813f56a71404d4e0d9f" category="paragraph">Huit nœuds</block>
   <block id="74c873abf18bb043c43561d25adce539" category="paragraph"><block ref="74c873abf18bb043c43561d25adce539" category="inline-link-macro-rx"></block></block>
+  <block id="0159b80d745d9b405520a30a29416d2d" category="paragraph">Avant de procéder à la mise à niveau, vous devez recueillir des informations pour chacun des anciens nœuds et, si nécessaire, ajuster les domaines de diffusion réseau, supprimer les VLAN et les groupes d'interface et collecter des informations de chiffrement.</block>
+  <block id="3b2740b2f65f79e770509c9b837df2de" category="paragraph">Au cours de la procédure de mise à niveau, vous remplacerez ces anciens ID système par les ID système des modules de contrôleur.</block>
+  <block id="22891a1da512f437a0d8620852295bd7" category="list-text">Collecte des informations relatives aux ports et aux LIF pour chaque ancien nœud.</block>
+  <block id="30872b2ff811f5e5d51bcf20468c730a" category="paragraph">Utilisation des commandes « system Controller replace » pour la mise à niveau des modèles de contrôleurs dans le même châssis</block>
+  <block id="e5fb04e9be2a470a838a8ae287e6100a" category="paragraph">Au cours de la procédure de mise à niveau, vous remplacerez ces anciens ID système par les ID système des nouveaux modules de contrôleur.</block>
+  <block id="9e25219bfef39dc2d94805b599244f8d" category="open-title">ONTAP 9.8 et versions ultérieures</block>
+  <block id="5a830b76ff5a71db59759b13f383410c" category="open-title">ONTAP 9.7 et versions antérieures</block>
+  <block id="5227f75c6a1f77d9623c7a089f1e3ea7" category="paragraph">Pour ONTAP 9.7 et les versions antérieures, exécutez la commande boot menu.</block>
+  <block id="3e3df3be76a18ca2c89904765d97f078" category="list-text">Vérifier que le basculement est possible et que les nœuds sont connectés en exécutant la commande suivante sur les deux clusters :</block>
+  <block id="3963205d7c5d1cb2f000d61f16c10f1d" category="paragraph">24 disques internes</block>
 </blocks>

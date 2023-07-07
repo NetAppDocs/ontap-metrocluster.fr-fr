@@ -35,8 +35,7 @@ https://hwu.netapp.com/["NetApp Hardware Universe"^]
 +
 Le tableau suivant présente la matrice de modèles prise en charge pour la mise à niveau du contrôleur.
 
-
-
++
 |===
 
 
@@ -44,19 +43,19 @@ Le tableau suivant présente la matrice de modèles prise en charge pour la mise
 
 
  a| 
-* AFF A700
+** AFF A700
 
  a| 
-* AFF A900
+** AFF A900
 
 
 
 
  a| 
-* FAS9000
+** FAS9000
 
  a| 
-* FAS9500
+** FAS9500
 
 
 |===
@@ -336,7 +335,7 @@ Si le connecteur 7 des contrôleurs AFF A700 ou FAS9000 est associé à une cart
 
 === Recueillez les informations avant la mise à niveau
 
-Avant la mise à niveau, vous devez collecter les informations de chacun des nœuds et, si nécessaire, ajuster les domaines de diffusion réseau, supprimer tous les VLAN et groupes d'interfaces et collecter des informations de cryptage.
+Avant de procéder à la mise à niveau, vous devez recueillir des informations pour chacun des anciens nœuds et, si nécessaire, ajuster les domaines de diffusion réseau, supprimer les VLAN et les groupes d'interface et collecter des informations de chiffrement.
 
 .Description de la tâche
 Cette tâche s'effectue sur la configuration FC MetroCluster existante.
@@ -347,7 +346,7 @@ Cette tâche s'effectue sur la configuration FC MetroCluster existante.
 `metrocluster node show -fields node-systemid,dr-partner-systemid`
 
 +
-Au cours de la procédure de remplacement, vous remplaceront ces ID système par les ID système des modules de contrôleur.
+Au cours de la procédure de mise à niveau, vous remplacerez ces anciens ID système par les ID système des modules de contrôleur.
 
 +
 Dans cet exemple de configuration FC MetroCluster à quatre nœuds, les anciens ID système suivants sont récupérés :
@@ -372,7 +371,7 @@ dr-group-id cluster    node           node-systemid ha-partner-systemid dr-partn
 
 4 entries were displayed.
 ----
-. Collectez les informations de port et LIF pour chaque nœud.
+. Collecte des informations relatives aux ports et aux LIF pour chaque ancien nœud.
 +
 Vous devez collecter les valeurs de sortie des commandes suivantes pour chaque nœud :
 

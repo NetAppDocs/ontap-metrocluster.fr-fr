@@ -389,7 +389,7 @@ Port intercluster
 
 === Collecte des informations avant la mise à niveau
 
-Avant la mise à niveau, vous devez collecter les informations de chacun des nœuds et, si nécessaire, ajuster les domaines de diffusion réseau, supprimer tous les VLAN et groupes d'interfaces et collecter des informations de cryptage.
+Avant de procéder à la mise à niveau, vous devez recueillir des informations pour chacun des anciens nœuds et, si nécessaire, ajuster les domaines de diffusion réseau, supprimer les VLAN et les groupes d'interface et collecter des informations de chiffrement.
 
 .Description de la tâche
 Cette tâche s'effectue sur la configuration FC MetroCluster existante.
@@ -401,7 +401,7 @@ Cette tâche s'effectue sur la configuration FC MetroCluster existante.
 `metrocluster node show -fields node-systemid,dr-partner-systemid`
 
 +
-Au cours de la procédure de remplacement, vous remplaceront ces ID système par les ID système des nouveaux modules de contrôleur.
+Au cours de la procédure de mise à niveau, vous remplacerez ces anciens ID système par les ID système des nouveaux modules de contrôleur.
 
 +
 Dans cet exemple de configuration FC MetroCluster à quatre nœuds, les anciens ID système suivants sont récupérés :
@@ -441,7 +441,7 @@ dr-group-id cluster    node      node-systemid dr-partner-systemid
 1           Cluster_B  node_B_1-old  -             -
 2 entries were displayed.
 ----
-. Collectez les informations de port et LIF pour chaque nœud.
+. Collecte des informations relatives aux ports et aux LIF pour chaque ancien nœud.
 +
 Vous devez collecter les valeurs de sortie des commandes suivantes pour chaque nœud :
 
@@ -1182,8 +1182,12 @@ Cette tâche doit être effectuée sur tous les nouveaux contrôleurs.
 
 . Si le cryptage racine est utilisé, en fonction de la version de ONTAP que vous utilisez, sélectionnez l'option du menu de démarrage ou lancez la commande du menu de démarrage pour votre configuration de gestion des clés.
 +
-** Depuis ONTAP 9.8, sélectionnez l'option de menu de démarrage.
-+
+[role="tabbed-block"]
+====
+.ONTAP 9.8 et versions ultérieures
+--
+Depuis ONTAP 9.8, sélectionnez l'option de menu de démarrage.
+
 |===
 
 
@@ -1207,8 +1211,11 @@ Option « 11 »
 Suivez les invites pour fournir les entrées requises pour récupérer et restaurer la configuration du gestionnaire de clés.
 
 |===
-** Dans ONTAP 9.7 et versions antérieures, exécutez la commande de menu de démarrage.
-+
+--
+.ONTAP 9.7 et versions antérieures
+--
+Pour ONTAP 9.7 et les versions antérieures, exécutez la commande boot menu.
+
 |===
 
 
@@ -1228,8 +1235,8 @@ Gestion externe des clés
 `recover_external_keymanager`
 
 |===
-
-
+--
+====
 . Si AUTOBOOT est activé, interrompez l'AUTOBOOT en appuyant sur CTRL-C.
 . Dans le menu de démarrage, exécutez l'option « 6 ».
 +
@@ -1258,8 +1265,12 @@ Si le partenaire-sysid n'est pas correct, définissez-le :
 
 . Si le cryptage racine est utilisé, en fonction de la version de ONTAP que vous utilisez, sélectionnez l'option du menu de démarrage ou exécutez de nouveau la commande du menu de démarrage pour la configuration de la gestion des clés.
 +
-** Depuis ONTAP 9.8, sélectionnez l'option de menu de démarrage.
-+
+[role="tabbed-block"]
+====
+.ONTAP 9.8 et versions ultérieures
+--
+Depuis ONTAP 9.8, sélectionnez l'option de menu de démarrage.
+
 |===
 
 
@@ -1283,11 +1294,13 @@ Option « 11 »
 Suivez les invites pour fournir les entrées requises pour récupérer et restaurer la configuration du gestionnaire de clés.
 
 |===
-+
 Selon le paramètre du gestionnaire de clés, effectuez la procédure de récupération en sélectionnant l'option « 10 » ou « 11 », suivie de l'option « 6 » à la première invite du menu d'amorçage. Pour démarrer complètement les nœuds, il est possible que vous deviez répéter la procédure de restauration suite à l'option « 1 » (démarrage normal).
 
-** Dans ONTAP 9.7 et versions antérieures, exécutez la commande de menu de démarrage.
-+
+--
+.ONTAP 9.7 et versions antérieures
+--
+Pour ONTAP 9.7 et les versions antérieures, exécutez la commande boot menu.
+
 |===
 
 
@@ -1307,11 +1320,10 @@ Gestion externe des clés
 `recover_external_keymanager`
 
 |===
-+
 Vous devrez peut-être émettre le `recover_xxxxxxxx_keymanager` commande à l'invite du menu de démarrage plusieurs fois jusqu'à ce que les nœuds démarrent entièrement.
 
-
-
+--
+====
 . Démarrez les nœuds :
 +
 `boot_ontap`
