@@ -1,0 +1,308 @@
+---
+permalink: maintain/task_migrating_root_agg_with_adp.html 
+sidebar: sidebar 
+keywords: metrocluster, maintain, service, migrate, root, aggregate, adp, disks, partition, advanced, disk, partitioning 
+summary: 'Vous pouvez migrer un agrégat racine existant sans interruption à l"aide du partitionnement de disque avancé (ADP).' 
+---
+= Migrer un agrégat racine configuré avec ADP dans les configurations IP MetroCluster
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+Vous pouvez migrer un agrégat racine existant sans interruption qui utilise le partitionnement de disque avancé (ADP) si l'agrégat racine manque d'espace ou si vous souhaitez passer de disques SSD de faible capacité à des disques SSD de grande capacité.
+
+.Description de la tâche
+* La paire haute disponibilité locale doit être activée pour le basculement du stockage.
+* Cette procédure ne génère aucune interruption.
+* La configuration doit être stable et permettre l'accès aux données normalement, sans interruption fréquente.
+* Au cours de cette procédure, n'effectuez aucune mise à niveau matérielle ni aucune autre opération susceptible d'entraîner des perturbations.
+* Vous ne pouvez migrer qu'un agrégat racine à la fois. N'essayez pas de migrer deux agrégats racine en même temps.
+
+
+.Étapes
+. [[STEP_1, vérifiez l'état de santé de la configuration]]Vérifiez l'état de santé de la configuration.
++
+.. Vérifier que la MetroCluster est configurée et en mode normal sur chaque cluster :
+ +
+`metrocluster show`
++
+[listing]
+----
+cluster_A::> metrocluster show
+Cluster                   Entry Name          State
+------------------------- ------------------- -----------
+ Local: cluster_A         Configuration state configured
+                          Mode                normal
+                          AUSO Failure Domain auso-on-cluster-disaster
+Remote: cluster_B         Configuration state configured
+                          Mode                normal
+                          AUSO Failure Domain auso-on-cluster-disaster
+----
+.. Vérifier que la mise en miroir est activée sur chaque nœud :
++
+`metrocluster node show`
+
++
+[listing]
+----
+cluster_A::> metrocluster node show
+DR                           Configuration  DR
+Group Cluster Node           State          Mirroring Mode
+----- ------- -------------- -------------- --------- --------
+1     cluster_A
+              node_A_1       configured     enabled   normal
+      cluster_B
+              node_B_1       configured     enabled   normal
+2 entries were displayed.
+----
+.. Vérifier que les composants MetroCluster sont sains :
++
+`metrocluster check run`
+
++
+[listing]
+----
+cluster_A::> metrocluster check run
+
+Last Checked On: 10/1/2014 16:03:37
+
+Component           Result
+------------------- ---------
+nodes               ok
+lifs                ok
+config-replication  ok
+aggregates          ok
+4 entries were displayed.
+
+Command completed. Use the "metrocluster check show -instance" command or sub-commands in "metrocluster check" directory for detailed results.
+To check if the nodes are ready to do a switchover or switchback operation, run "metrocluster switchover -simulate" or "metrocluster switchback -simulate", respectively.
+----
+.. Vérifier qu'il n'y a pas d'alerte de santé :
++
+`system health alert show`
+
+
+
+. Vérifier que la paire HA locale est activée pour le basculement du stockage :
++
+`storage failover show`
+
++
+Le résultat doit indiquer que le basculement est possible pour les deux nœuds :
+
++
+[listing]
+----
+cluster_A::> storage failover show
+                              Takeover
+Node           Partner        Possible State Description
+-------------- -------------- -------- ---------------------------
+cluster-01     cluster-02      true     Connected to cluster-02
+
+cluster-02     cluster-01      true     Connected to cluster-01
+2 entries were displayed.
+----
+. Mettre à zéro les disques de spare :
++
+`run * disk zero spares`
+
+. Identifier la taille de l'agrégat racine :
++
+`node run local aggr status -r <root_agg_name>`
+
++
+Dans l'exemple suivant, l'agrégat root comporte dix disques dans "pool0" et dix disques dans "pool1".
+
++
+[listing]
+----
+cluster_A::*> node run local aggr status -r <root_agg_name>
+Aggregate <root_agg_name> (online, raid_dp, mirrored, fast zeroed) (block checksums)
+  Plex /<root_agg_name>/plex0 (online, normal, active, pool0)
+    RAID group /<root_agg_name>/plex0/rg0 (normal, block checksums, max_wdbn 5767167)
+
+      RAID Disk Device  HA  SHELF BAY CHAN Pool Type  RPM  Used (MB/blks)    Phys (MB/blks)
+      --------- ------  ------------- ---- ---- ---- ----- --------------    --------------
+      dparity   e2a.11.0.0P3    e2a   11  0   NV:A   0 SSD-NVM   N/A 23956/6132864     23964/6134912 (fast zeroed)
+      parity    e10b.11.3.1P3   e10b  11  1   NV:B   0 SSD-NVM   N/A 23956/6132864     23964/6134912 (fast zeroed)
+      data      e2a.11.0.2P3    e2a   11  2   NV:A   0 SSD-NVM   N/A 23956/6132864     23964/6134912 (fast zeroed)
+      data      e2a.11.0.3P3    e2a   11  3   NV:A   0 SSD-NVM   N/A 23956/6132864     23964/6134912 (fast zeroed)
+      data      e2a.11.0.4P3    e2a   11  4   NV:A   0 SSD-NVM   N/A 23956/6132864     23964/6134912 (fast zeroed)
+      data      e10b.11.3.5P3   e10b  11  5   NV:B   0 SSD-NVM   N/A 23956/6132864     23964/6134912 (fast zeroed)
+      data      e10b.11.3.12P3  e10b  11  12  NV:B   0 SSD-NVM   N/A 23956/6132864     23964/6134912 (fast zeroed)
+      data      e10b.11.3.13P3  e10b  11  13  NV:B   0 SSD-NVM   N/A 23956/6132864     23964/6134912 (fast zeroed)
+      data      e10b.11.3.14P3  e10b  11  14  NV:B   0 SSD-NVM   N/A 23956/6132864     23964/6134912 (fast zeroed)
+      data      e10b.11.3.15P3  e10b  11  15  NV:B   0 SSD-NVM   N/A 23956/6132864     23964/6134912 (fast zeroed)
+
+  Plex /<root_agg_name>/plex2 (online, normal, active, pool1)
+    RAID group /<root_agg_name>/plex2/rg0 (normal, block checksums, max_wdbn 5767167)
+
+      RAID Disk Device  HA  SHELF BAY CHAN Pool Type  RPM  Used (MB/blks)    Phys (MB/blks)
+      --------- ------  ------------- ---- ---- ---- ----- --------------    --------------
+      dparity   0m.i2.2L1P3     0m    22  5          1 SSD-NVM   N/A 23956/6132864     23964/6134912 (fast zeroed)
+      parity    0m.i1.0L36P3    0m    22  14         1 SSD-NVM   N/A 23956/6132864     23964/6134912 (fast zeroed)
+      data      0v.i2.2L18P3    0v    22  12         1 SSD-NVM   N/A 23956/6132864     23964/6134912 (fast zeroed)
+      data      0v.i2.3L17P3    0v    22  2          1 SSD-NVM   N/A 23956/6132864     23964/6134912 (fast zeroed)
+      data      0v.i1.0L25P3    0v    22  13         1 SSD-NVM   N/A 23956/6132864     23964/6134912 (fast zeroed)
+      data      0v.i1.0L40P3    0v    22  4          1 SSD-NVM   N/A 23956/6132864     23964/6134912 (fast zeroed)
+      data      0m.i1.1L39P3    0m    22  17         1 SSD-NVM   N/A 23956/6132864     23964/6134912 (fast zeroed)
+      data      0m.i1.1L46P3    0m    22  15         1 SSD-NVM   N/A 23956/6132864     23964/6134912 (fast zeroed)
+      data      0m.i2.3L13P3    0m    22  0          1 SSD-NVM   N/A 23956/6132864     23964/6134912 (fast zeroed)
+      data      0v.i1.1L26P3    0v    22  1          1 SSD-NVM   N/A 23956/6132864     23964/6134912 (fast zeroed)
+
+cluster_A::*>
+----
+. Affecter les disques de conteneur.
++
+Avant d'attribuer les disques, vérifiez que le nombre recommandé de disques de spare est attribué à chaque nœud. Ces disques sont partitionnés avant la migration de l'agrégat racine. Pour plus d'informations, voir link:https://docs.netapp.com/us-en/ontap-metrocluster/install-ip/concept_considerations_drive_assignment.html["Considérations relatives à l'affectation automatique des disques et aux systèmes ADP dans ONTAP 9.4 et versions ultérieures"].
+
++
+Lancer la commande suivante pour assigner les disques :
+
++
+`storage disk assign -disklist 1.11.0,1.11.1,…  -owner cluster-01 -pool 0`
+
+. Identifiez la taille de la partition racine.
++
+La taille de la partition racine dépend du nombre de disques disponibles pour la partition sur chaque nœud. NetApp recommande d'avoir au moins 12 disques par nœud pour la partition.
+
++
+Le tableau suivant permet de déterminer la disposition de l'agrégat racine :
+
++
+[cols="25,75"]
+|===
+| Nombre de disques à partitionner | Disposition de l'agrégat racine 
+
+
+| 4 disques par nœud | 2 disques de données et 2 disques de parité 
+
+
+| 12 disques par nœud | 8 disques de données, 2 disques de parité et 2 disques de secours 
+
+
+| 24 disques par nœud | 20 disques de données, 2 disques de parité et 2 disques de secours 
+|===
++
+Pour identifier la taille de la partition racine, vous divisez le nombre total de blocs de 4 Ko de manière égale entre tous les disques de données.
+
++
+Par exemple, si vous disposez d'un agrégat racine de 8 disques de données, de 2 disques de parité et de 2 disques de spare avec un agrégat racine de 112958795 blocs, vous devez diviser 112958795 par 8 pour obtenir la taille de la partition racine.
+
++
+(112958795 / 8) = 14119849.375
+
++
+Une fois ce chiffre arrondi, la taille de la partition racine est de 14119850.
+
+. Partitionnez chaque disque de l'agrégat racine :
++
+`cluster_A*> disk partition -n 3 -i 3 -b <root_partition_size> <disk_id>`
+
+. Attribuez les partitions.
++
+
+NOTE: Dans les systèmes utilisant ADP, des agrégats sont créés à l'aide de partitions dans lesquelles chaque disque est partitionné en partitions P1, P2 et P3.
+
++
+.. Attribuez la partition P3 au même nœud qui possède le disque conteneur :
++
+`storage disk assign -disk <disk_id> -root true -pool 0 -owner cluster-01`
+
+.. Attribuez la partition P1 au système avec le numéro d'ID système inférieur dans la paire HA :
++
+`storage disk assign -disk <disk_id> -data1 true -pool 0 -owner cluster-01`
+
+.. Attribuez la partition P2 au système avec le numéro d'ID système le plus élevé dans la paire HA :
++
+`storage disk assign -disk <disk_name> -data2 true -pool 0 -owner cluster-02`
+
++
+Répétez cette étape pour chaque disque partitionné.
+
+
+
+. Vérifier que le basculement est possible :
++
+`storage failover show`
+
++
+[listing]
+----
+cluster_A::> storage failover show
+                              Takeover
+Node           Partner        Possible State Description
+-------------- -------------- -------- ---------------------------
+cluster-01     cluster-02      true     Connected to cluster-02
+
+cluster-02     cluster-01      true     Connected to cluster-01
+2 entries were displayed.
+----
+. Migrer l'agrégat racine.
++
+Pour chaque nœud, effectuer la migration en spécifiant la liste des disques dans pool0 et le type RAID cible comme paramètres :
+
++
+`system node migrate-root -node cluster-01 -disklist <pool0_disk_list> -raid-type <target_raid_type>`
+
++
+Par exemple, si l'agrégat root pour « cluster-01 » se compose de dix disques avec « raid_dp », la commande suivante migre l'agrégat root :
+
++
+[listing]
+----
+system node migrate-root -node cluster-01 -disklist 1.11.1.P3,1.11.2.P3,1.11.3.P3,1.11.4.P3,1.11.5.P3,1.11.6.P3,1.11.7.P3,1.11.8.P3,1.11.9.P3,1.11.10.P3 -raid-type raid_dp
+
+Warning: This is a partially automated and guided procedure for migrating the
+         root aggregate on the node "cluster-01".
+         Negotiated switchover is about to start.
+         Warning: This operation will create a new root aggregate and replace
+         the existing root on the node "cluster-01". The existing root
+         aggregate will be discarded.
+Do you want to continue? {y|n}: y
+
+Info: Started migrate-root job. Run "job show -id 51 -instance" command to
+      check the progress of the job.
+      Once the job is complete, mirror the root aggregate using the "storage
+      aggregate mirror" command
+----
++
+
+IMPORTANT: Si le nombre de disques n'est pas suffisant, ajoutez des disques ou choisissez un autre type de RAID.
+
++
+Le processus de migration peut prendre plusieurs minutes. Pendant la migration, le nœud redémarre plusieurs fois. Des erreurs peuvent apparaître sur les autres nœuds. Vous pouvez ignorer ces erreurs en toute sécurité et attendre la fin du processus de migration.
+
+. Vous pouvez également surveiller la progression de la migration.
++
+Depuis le second site, exécutez :
+
++
+`job show -id 51 -instance`
+
+. Réactiver le partitionnement automatique RAID pour tous les nœuds IP MetroCluster :
++
+`storage raidlm policy modify -node <node> -policy-name auto_partition_ssds_post_init -policy-type Shared-Disk -is-enable true`
+
+. Vérifier que la migration a réussi :
++
+`run local aggr status -r <root_agg_name>`
+
++
+[listing]
+----
+cluster_A::*> node run local aggr status -r <root_agg_name>
+Aggregate <root_agg_name> (online, raid0, fast zeroed) (block checksums)
+  Plex /<root_agg_name>/plex0 (online, normal, active, pool0)
+    RAID group /<root_agg_name>/plex0/rg0 (normal, block checksums, max_wdbn 6127616)
+
+      RAID Disk Device  HA  SHELF BAY CHAN Pool Type  RPM  Used (MB/blks)    Phys (MB/blks)
+      --------- ------  ------------- ---- ---- ---- ----- --------------    --------------
+      data      e2a.11.0.16P3   e2a   11  16  NV:A   0 SSD-NVM   N/A 23956/6132864     23964/6134912 (fast zeroed)
+      data      e10b.11.3.17P3  e10b  11  17  NV:B   0 SSD-NVM   N/A 23956/6132864     23964/6134912 (fast zeroed)
+
+cluster_A::*>
+----
+. Répéter les étapes à <<step_1,vérifiez l'état de santé de la configuration>>.
+
