@@ -42,18 +42,6 @@ Password: <user input>
 +
 Après avoir saisi votre mot de passe, le commutateur télécharge et exécute le fichier de configuration.
 
-. Activer le commutateur de manière persistante :
-+
-`switchcfgpersistentenable`
-
-+
-L'exemple montre comment activer de manière persistante le commutateur FC_A_1.
-
-+
-[listing]
-----
-FC_switch_A_1:admin> switchcfgpersistentenable
-----
 . Vérifiez que le fichier de configuration a défini le domaine du commutateur :
 +
 `switchShow`
@@ -161,6 +149,18 @@ Exemple : LE
 [listing]
 ----
 FC_switch_A_1:admin> portcfglongdistance 21 LE 1
+----
+. Activer le commutateur de manière persistante :
++
+`switchcfgpersistentenable`
+
++
+L'exemple montre comment activer de manière persistante le commutateur FC_A_1.
+
++
+[listing]
+----
+FC_switch_A_1:admin> switchcfgpersistentenable
 ----
 . Vérifiez si l'adresse IP est correctement définie :
 +
