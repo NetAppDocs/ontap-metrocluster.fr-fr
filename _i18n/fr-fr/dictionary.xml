@@ -1720,7 +1720,6 @@
   <block id="1249ce19ef6180e143506b5287be8a7a" category="list-text">icmp</block>
   <block id="19928e39d24e38d1c9928b94667fa5d5" category="list-text">menu à menu rapide</block>
   <block id="96f9963e25520a9011c82401920794f0" category="list-text">snmp</block>
-  <block id="0e9f0a250a9d56072ce7737a3cd51f63" category="list-text">telnet vous pouvez vérifier si un protocole spécifique est activé ou désactivé à l'aide de l'<block ref="78ffae24f50d1763051c5834f1e24a95" prefix=" " category="inline-code"></block> commande.</block>
   <block id="9d05079a491a98497153e953bbaddaa4" category="list-text">Si vous activez SNMP, vous devez également lancer la commande set SNMP Enabled :</block>
   <block id="944957367bcbba5f885d8dc885354148" category="paragraph"><block ref="27009b25568d408f9f05d4ea68455493" prefix="" category="inline-code"></block></block>
   <block id="2773e82b500feb0530b8577db9c276d7" category="paragraph">SNMP est le seul protocole qui nécessite une commande d'activation distincte.</block>
@@ -5932,7 +5931,6 @@
   <block id="b29b8c83f7d8c55b39ae87067330f426" category="list-text">[[step3-CABLE-Each-Bridge]]Connectez chaque pont aux modules de contrôleur :</block>
   <block id="4422c879aa9ea654583488de1d4d4e82" category="list-text">Reliez le port FC 1 du pont à un port FC du module de contrôleur dans cluster_A.</block>
   <block id="db0e7a22facf5e7460258a2022b5e9d5" category="list-text">Reliez le port FC 2 du pont à un port FC du module de contrôleur dans cluster_B.</block>
-  <block id="b952b3eddebea29b6169cd5bd56a3bc5" category="paragraph">Si le module de contrôleur est configuré avec un adaptateur FC à quatre ports, assurez-vous que les piles de stockage sont connectées à deux ports FC sur le même ASIC. Les ports a et b partagent le même ASIC, et les ports c et d partagent le même ASIC. Ne connectez pas une pile d'étagères aux ports a et b. Utilisez plutôt le port a et le port c, ou utilisez les ports b et d pour éviter un point de défaillance unique en cas de défaillance d'un ASIC.</block>
   <block id="48dda5bb7b1f8b58b068fa47d9879c67" category="paragraph">Si le module de contrôleur est configuré avec plusieurs adaptateurs FC, ne connectez pas les deux ports de pont à la même carte. Vous devez distribuer le port FC 1 à l'adaptateur A et le port FC 2 à l'adaptateur B pour éviter un point faible.</block>
   <block id="67d7a49e616a0e579f0506ada050a36b" category="image-alt">réseau de peering de cluster</block>
   <block id="2d5ce426423eeeead4f35769cd8b1b27" category="inline-xref">Étape 3</block>
@@ -5960,7 +5958,6 @@
   <block id="52812075c78ece551ae010bb2c3594ea" category="paragraph">Depuis ONTAP 9.5, _gestion intrabande_ des ponts sont pris en charge. Cela signifie que les ponts peuvent être configurés et surveillés depuis l'interface de ligne de commande de ONTAP via la connexion FC au pont. L'accès physique au pont via les ports Ethernet du pont n'est pas nécessaire et les interfaces utilisateur du pont ne sont pas requises.</block>
   <block id="5366fe8e6a583070b8536329d2fb2c42" category="paragraph">Depuis ONTAP 9.8, la fonction _gestion intrabande_ des ponts est prise en charge par défaut et la gestion SNMP hors bande est déconseillée.</block>
   <block id="f4a6a04204d80f2884055d8da7f250ae" category="paragraph"><block ref="39ce37a4ba621b15824f25d3ead980cb" prefix="" category="inline-code"></block> peut indiquer l'une des options suivantes :</block>
-  <block id="40e7c640678c064d478e2a07e47eb68a" category="list-text">telnet + vous pouvez vérifier si un protocole spécifique est activé ou désactivé à l'aide de l'<block ref="78ffae24f50d1763051c5834f1e24a95" prefix=" " category="inline-code"></block> commande.</block>
   <block id="a4cef338a5507901a886ba7a9f2c3930" category="summary">Droits d'auteur, marques commerciales et traduction automatique pour l'installation et la configuration de Stretch MetroCluster.</block>
   <block id="93ba9bcaf75f3b305567eed2f5797513" category="summary">Lors de l'ajout d'un stockage à la configuration, vous installez et câblez les ponts ATTO FibreBridge et les tiroirs disques SAS.</block>
   <block id="a9ed40443a225cecce5742ada138b243" category="doc">Installation de ponts FC-SAS et de tiroirs disques SAS</block>
@@ -6228,7 +6225,6 @@
   <block id="0dc491dada4885353b9e96030fce6bd3" category="paragraph">Toutes les interfaces iSCSI du SVM doivent être accessibles par le client iSCSI.</block>
   <block id="acb0e987f9b29d1eab50c31f4f95aa9a" category="list-text">Sur l'hôte ou le client iSCSI, identifiez les connexions iSCSI existantes entre l'hôte et le nœud FC MetroCluster :<block ref="0d3f69bc64054f4afeca7380b613ea30" prefix=" " category="inline-code"></block></block>
   <block id="d163a1c94db271251417ac64b011f503" category="list-text">Vérifiez les connexions à partir du nœud IP MetroCluster :<block ref="4b94292925d93bdf713ed83d6122558d" prefix=" " category="inline-code"></block></block>
-  <block id="47e1989be910f2a95cba13df244916de" category="list-text">Lister les interfaces iscsi en ONTAP pour le SVM qui contient les interfaces :<block ref="3c78b9e1a9fef2eea89905b0233c19ad" prefix=" " category="inline-code"></block></block>
   <block id="a36d68710357482d2ab6a01760a3ed96" category="list-text">Sur le client iSCSI, exécuter la détection sur l'une des adresses IP iSCSI du SVM afin de découvrir les nouvelles cibles :<block ref="efdc22f1b447b9fcadae70bd704444db" prefix=" " category="inline-code"></block></block>
   <block id="6d5e653b42496cb611cacbd3f1622d89" category="paragraph">La détection peut être exécutée sur n'importe quelle adresse IP du SVM, y compris sur des interfaces non iSCSI.</block>
   <block id="a461f22b707612a699bc8af021961c83" category="list-text">Sur le client iSCSI, connectez-vous à toutes les adresses découvertes :<block ref="29c5c7c7978be336e2ffc1d38827fe90" prefix=" " category="inline-code"></block></block>
@@ -6242,7 +6238,6 @@
   <block id="ca3831196a5922b44d1bd6c3f098a76e" category="paragraph">Les nœuds de reporting suivants sont des nœuds locaux tandis que les LUN se trouvent physiquement sur des nœuds FC node_A_1-FC et node_A_2-FC.</block>
   <block id="ada767f49af9e4d84ffa661e5dca75c7" category="list-text">Sur le nœud MetroCluster, ajoutez des nœuds de reporting :<block ref="818a482f6636e38f181e03045c2175a6" prefix=" " category="inline-code"></block></block>
   <block id="7b0a84102a195b8e0f8d8953620707ba" category="list-text">Sur le nœud MetroCluster, vérifiez que les nouveaux nœuds sont présents :<block ref="9e5febcddcd4002e96c0e9bd6fd2aefb" prefix=" " category="inline-code"></block></block>
-  <block id="33a3004b4b08a0f2ce598422f5d7b5f6" category="list-text">Sur l'hôte, exécutez la commande suivante pour analyser à nouveau le bus scsi sur l'hôte et découvrir les nouveaux chemins ajoutés :<block ref="9e65638d5d13acb691c4bec2ede5a483" prefix="" category="inline-code"></block></block>
   <block id="897e36e6985e9d4eb2bed54f3762a125" category="list-text">Sur l'hôte, exécutez la commande suivante pour lister les nouveaux chemins :<block ref="41dc2c94e82e1c56ba876085acf5a974" prefix=" " category="inline-code"></block></block>
   <block id="2a12888d763445436f29b56694f714b2" category="paragraph">Quatre chemins sont affichés pour chaque LUN.</block>
   <block id="2511d667d00c1cb6eba362bc0093b244" category="list-text">Sur la MetroCluster, déplacez le volume/les volumes contenant des LUN des nœuds FC vers les nœuds IP.</block>
@@ -6254,7 +6249,6 @@
   <block id="8ab7ca6cd6e1f79872ab4f322117ca76" category="list-text">Depuis le nœud IP MetroCluster, supprimez les nœuds de reporting distants (nœuds IP MetroCluster) pour les LUN Linux :<block ref="cd628f5257abfae28b6969563f236136" prefix=" " category="inline-code"></block></block>
   <block id="05048e4fdd078ddd77168cd8270fe3f4" category="paragraph">Dans ce cas, les nœuds distants sont des nœuds FC.</block>
   <block id="e90434592ed415a541e2a6f03284ae2d" category="list-text">Depuis le nœud IP MetroCluster, vérifiez les nœuds de rapports des LUN :<block ref="44e0b47a6df5bd39730c8ec6359013d7" prefix=" " category="inline-code"></block></block>
-  <block id="1e7ae3480577387e1ba55438a03a4513" category="list-text">Sur l'hôte iSCSI, relancez l'analyse du bus scsi :<block ref="06653a48f6165608045bd55ec32d95fb" prefix=" " category="inline-code"></block></block>
   <block id="d535eedec31c0a58f698132001cbc9bb" category="paragraph">Les chemins qui sont supprimés sont les chemins d'accès des nœuds FC.</block>
   <block id="af0774f5fa525955d74c2e77f5dab7e6" category="summary">Après la transition de la configuration MetroCluster, vous pouvez reprendre la surveillance avec l'utilitaire Tiebreaker ou Mediator.</block>
   <block id="ea7ae12637786fd2df51e9007bb6f639" category="doc">Restauration de la surveillance du disjoncteur d'attache ou du médiateur</block>
@@ -7014,21 +7008,17 @@
   <block id="aba0064857c6ce89cc764da8d55ce5c1" category="doc">Déplacement d'une charge de travail SAN FC des nœuds FC MetroCluster vers les nœuds IP MetroCluster</block>
   <block id="73f9743e086ef8ac735d8d9a5a299535" category="list-text">Configuration des nouvelles interfaces FC (LIF) sur les nœuds IP MetroCluster :</block>
   <block id="e050f35561c7894ee0a0e945c979a806" category="list-text">Si nécessaire, sur les nœuds IP MetroCluster, modifiez les ports FC à utiliser pour la connectivité client et la personnalité de la cible FC.</block>
-  <block id="4dbd9443241248d896c42809416cff33" category="paragraph">Cela peut nécessiter un redémarrage des nœuds.</block>
-  <block id="24bdd4e6fd63a2598d59b77c5076d636" category="list-text">Créez DES LIF/interfaces FC sur des nœuds IP pour tous les serveurs virtuels SAN. Vérifier éventuellement que les WWPN des LIF FC nouvellement créées sont connectés au commutateur FC SAN</block>
   <block id="2ea8e9b085e6487dc8f8677dad1b2007" category="list-text">Mettre à jour la configuration de la segmentation SAN pour les LIF FC qui ont été ajoutées sur les nœuds IP MetroCluster.</block>
   <block id="46be4a0b4ce48ea62086efafc65dbbab" category="paragraph">Pour faciliter le déplacement de volumes contenant des LUN qui fournissent activement les données aux clients SAN FC, mettre à jour les zones de commutation FC existantes afin que les clients SAN FC puissent accéder aux LUN sur les nœuds IP MetroCluster.</block>
   <block id="7cbcf73edeac7dc26492a2312ceba51d" category="list-text">Sur le commutateur FC SAN (Cisco ou Brocade), ajoutez les WWPN des LIF FC SAN récemment ajoutées à la zone.</block>
   <block id="4c3d801187dd3bd83498ab4cc39962cb" category="list-text">Mettre à jour, enregistrer et valider les modifications de zoning.</block>
   <block id="780d54d0c3dcaee808b6d845b2755068" category="list-text">Depuis le client, vérifiez que les connexions des initiateurs FC sont connexions aux nouvelles LIF SAN sur les nœuds IP MetroCluster :<block ref="41dc2c94e82e1c56ba876085acf5a974" prefix=" " category="inline-code"></block></block>
   <block id="7ff219f4bc061d194735ac6928a7e661" category="paragraph">À ce stade, le client doit voir et être connecté aux interfaces FC sur les nœuds IP MetroCluster FC et MetroCluster. Les LUN et les volumes sont toujours hébergés physiquement sur les nœuds FC MetroCluster.</block>
-  <block id="047884ddcb740bc854ce7ccb563642b2" category="paragraph">Les LUN étant signalées uniquement sur les interfaces de nœuds FC MetroCluster, le client affiche uniquement les chemins sur les nœuds FC. Cela peut être observé dans la sortie des commandes sanlun lun show -p et multipath -ll -d.</block>
   <block id="7903e3004ba7d039fbd00c128bd855bf" category="list-text">Modifiez les nœuds de reporting pour ajouter les nœuds IP MetroCluster</block>
   <block id="b37c9b18c1fffc0a2c04176485cc32aa" category="list-text">Liste des nœuds de rapports pour les LUN sur le SVM :<block ref="386542018c34f7eb9e58067fc17981fa" prefix=" " category="inline-code"></block></block>
   <block id="a8ac1b93cf5cb550949dfea97a05b60a" category="paragraph">Les nœuds de rapports affichés sont des nœuds locaux au fur et à mesure que les LUN se trouvent physiquement sur les nœuds FC A_1 et A_2.</block>
   <block id="ed464784c3f6c07bdf64a809c105429b" category="list-text">Ajoutez des nœuds de reporting pour inclure les nœuds IP MetroCluster.</block>
   <block id="c74a06acbdafccea854827ab3c1389ac" category="list-text">Lister les nœuds de reporting et vérifier la présence des nouveaux nœuds :</block>
-  <block id="7cb622a0ff86a1bb88637f6d85cf9f43" category="list-text">Relancez la détection du bus scsi sur l'hôte pour découvrir les nouveaux chemins ajoutés :<block ref="9e65638d5d13acb691c4bec2ede5a483" prefix=" " category="inline-code"></block></block>
   <block id="e1ee3a062911dfd9a5f37daadbab5edb" category="list-text">Afficher les nouveaux chemins ajoutés :<block ref="41dc2c94e82e1c56ba876085acf5a974" prefix=" " category="inline-code"></block></block>
   <block id="05eafc0806ed7438ec13d238537264c7" category="paragraph">Chaque LUN aura quatre chemins d'accès.</block>
   <block id="42d2c72ed1b78cf2ef6ae94126ea459b" category="list-text">Sur les contrôleurs, déplacez les volumes contenant des LUN du MetroCluster FC vers les nœuds IP de MetroCluster.</block>
@@ -7040,7 +7030,6 @@
   <block id="3412078ebeec5a57c10057087d69f64e" category="list-text">Supprimez les nœuds de reporting et rescannez les chemins du client.</block>
   <block id="4bb7a2cf16de0e88533fe09d20e8cacf" category="list-text">Supprimez les nœuds de reporting distants (nœuds FC MetroCluster) pour les LUN linux :<block ref="cd628f5257abfae28b6969563f236136" prefix=" " category="inline-code"></block></block>
   <block id="f2eed01c29702a10f9291aaa3e13f368" category="list-text">Vérifier les nœuds de reporting des LUN :<block ref="44e0b47a6df5bd39730c8ec6359013d7" prefix=" " category="inline-code"></block></block>
-  <block id="cb35b692ef8bc5399820e0ba83b8cb35" category="list-text">Relancez la détection du bus scsi sur le client :<block ref="06653a48f6165608045bd55ec32d95fb" prefix=" " category="inline-code"></block></block>
   <block id="8f8c9a65b706c1177309d44848cd6abe" category="paragraph">Les chemins d'accès des nœuds FC MetroCluster sont supprimés :</block>
   <block id="9dbd28fb326c06062ade74756b1829ab" category="list-text">Vérifier que seuls les chemins depuis les nœuds IP MetroCluster sont visibles depuis l'hôte :<block ref="41dc2c94e82e1c56ba876085acf5a974" prefix=" " category="inline-code"></block></block>
   <block id="0dcfa974a402a3458da069a245602792" category="list-text">Si nécessaire, supprimez les LIF iSCSI des nœuds FC MetroCluster.</block>
@@ -13272,4 +13261,14 @@
   <block id="6c92285fa6d3e827b198d120ea3ac674" category="inline-link-macro">ici</block>
   <block id="4992f0045a6913a2fb77a09884c4e55c" category="admonition">Vous pouvez effectuer les mises à niveau de contrôleur répertoriées dans le tableau ci-dessus sur les systèmes exécutant ONTAP 9.12.1 ou 9.11.1 en suivant la procédure de mise à niveau manuelle décrite <block ref="4254cdc4ef28ceba663ec4031c88c9dd" category="inline-link-macro-rx"></block>.</block>
   <block id="050dafe962829ef847f34f7607e36eb3" category="list-text"><block ref="050dafe962829ef847f34f7607e36eb3" category="inline-link-macro-rx"></block></block>
+  <block id="96011b4dbcd722924f3c53c7252522f8" category="list-text">Lister les interfaces iSCSI en ONTAP pour les SVM contenant les interfaces :<block ref="3c78b9e1a9fef2eea89905b0233c19ad" prefix=" " category="inline-code"></block></block>
+  <block id="2af958a8143c65676390b5e251abe90a" category="list-text">Vérifiez que le<block ref="a78608714add699f555f2a66df0ee249" prefix=" " category="inline-code"></block> Le package est installé sur l'hôte Linux. Cela permet d'éviter un<block ref="b0c94f1494e22d963244e235719a2582" prefix=" " category="inline-code"></block> Erreur lors de la nouvelle analyse de l'hôte Linux pour les LUN nouvellement mappées à l'aide du<block ref="685ca42026debec2f3691cc5faae67d5" prefix=" " category="inline-code"></block> commande.</block>
+  <block id="f4b770b44b57fa84a8b8fc29d6c6c8bb" category="list-text">Sur l'hôte, exécutez la commande suivante pour analyser à nouveau le bus SCSI sur l'hôte et découvrir les nouveaux chemins ajoutés :<block ref="9e65638d5d13acb691c4bec2ede5a483" prefix=" " category="inline-code"></block></block>
+  <block id="d1b38e9b356895decf6917b400433e15" category="list-text">Sur l'hôte iSCSI, lancez une nouvelle analyse du bus SCSI :<block ref="06653a48f6165608045bd55ec32d95fb" prefix=" " category="inline-code"></block></block>
+  <block id="1f52bd2314f9805b0a0098b0f56a0dc4" category="paragraph">Cela peut nécessiter un redémarrage des nœuds.</block>
+  <block id="ab85fd4f549c390675df901a8ef3f78e" category="list-text">Créez des LIF/interfaces FC sur des nœuds IP pour tous les SVM SAN. Vérifiez éventuellement que les WWPN des LIF FC nouvellement créées sont connectés au commutateur FC SAN</block>
+  <block id="cbabd53b8268cb963ad7b2c67de0b634" category="paragraph">Les LUN étant signalées uniquement sur les interfaces de nœuds FC MetroCluster, le client affiche uniquement les chemins sur les nœuds FC. Ceci est visible dans la sortie du<block ref="41dc2c94e82e1c56ba876085acf5a974" prefix=" " category="inline-code"></block> et<block ref="2fbf63deae0938cf669e6ca451f1eb2c" prefix=" " category="inline-code"></block> commandes.</block>
+  <block id="7162464dfaefdef75b18029dcb1bb1f1" category="list-text">Relancez la recherche du bus SCSI sur l'hôte pour découvrir les nouveaux chemins ajoutés :<block ref="9e65638d5d13acb691c4bec2ede5a483" prefix=" " category="inline-code"></block></block>
+  <block id="9b3bd2afae038f8967e9373560a3b6d2" category="list-text">Lancez une nouvelle analyse du bus SCSI sur le client :<block ref="06653a48f6165608045bd55ec32d95fb" prefix=" " category="inline-code"></block></block>
+  <block id="77139d079fd912afd88e4ca7f5623393" category="paragraph">Si le module de contrôleur est configuré avec un adaptateur FC à quatre ports, vérifiez que les piles de stockage ne sont pas connectées à deux ports FC sur le même ASIC. Les ports a et b partagent le même ASIC, et les ports c et d partagent le même ASIC. Ne connectez pas une pile d'étagères aux ports a et b. Utilisez plutôt le port a et le port c, ou utilisez les ports b et d pour éviter un point de défaillance unique en cas de défaillance d'un ASIC.</block>
 </blocks>

@@ -19,7 +19,7 @@ Lors de la transition entre des nœuds FC de MetroCluster et des nœuds IP sans 
 +
 Cela peut nécessiter un redémarrage des nœuds.
 
-.. Créez DES LIF/interfaces FC sur des nœuds IP pour tous les serveurs virtuels SAN. Vérifier éventuellement que les WWPN des LIF FC nouvellement créées sont connectés au commutateur FC SAN
+.. Créez des LIF/interfaces FC sur des nœuds IP pour tous les SVM SAN. Vérifiez éventuellement que les WWPN des LIF FC nouvellement créées sont connectés au commutateur FC SAN
 
 
 . Mettre à jour la configuration de la segmentation SAN pour les LIF FC qui ont été ajoutées sur les nœuds IP MetroCluster.
@@ -34,7 +34,7 @@ Pour faciliter le déplacement de volumes contenant des LUN qui fournissent acti
 À ce stade, le client doit voir et être connecté aux interfaces FC sur les nœuds IP MetroCluster FC et MetroCluster. Les LUN et les volumes sont toujours hébergés physiquement sur les nœuds FC MetroCluster.
 
 +
-Les LUN étant signalées uniquement sur les interfaces de nœuds FC MetroCluster, le client affiche uniquement les chemins sur les nœuds FC. Cela peut être observé dans la sortie des commandes sanlun lun show -p et multipath -ll -d.
+Les LUN étant signalées uniquement sur les interfaces de nœuds FC MetroCluster, le client affiche uniquement les chemins sur les nœuds FC. Ceci est visible dans la sortie du `sanlun lun show -p` et `multipath -ll -d` commandes.
 
 +
 [listing]
@@ -117,7 +117,8 @@ vsa_1   /vol/vsa_1_vol3/lun_linux_7   igroup_linux    A_1,A_2,B_1,B_2
 
 12 entries were displayed.
 ----
-.. Relancez la détection du bus scsi sur l'hôte pour découvrir les nouveaux chemins ajoutés : `/usr/bin/rescan-scsi-bus.sh -a`
+.. Vérifiez que le `sg3-utils` Le package est installé sur l'hôte Linux. Cela permet d'éviter un `rescan-scsi-bus.sh utility not found` Erreur lors de la nouvelle analyse de l'hôte Linux pour les LUN nouvellement mappées à l'aide du `rescan-scsi-bus` commande.
+.. Relancez la recherche du bus SCSI sur l'hôte pour découvrir les nouveaux chemins ajoutés : `/usr/bin/rescan-scsi-bus.sh -a`
 +
 [listing]
 ----
@@ -234,7 +235,7 @@ vsa_1 /vol/vsa_1_vol2/lun_linux_4 igroup_linux B_1,B_2
 
 12 entries were displayed.
 ----
-.. Relancez la détection du bus scsi sur le client : `/usr/bin/rescan-scsi-bus.sh -r`
+.. Lancez une nouvelle analyse du bus SCSI sur le client : `/usr/bin/rescan-scsi-bus.sh -r`
 +
 Les chemins d'accès des nœuds FC MetroCluster sont supprimés :
 
