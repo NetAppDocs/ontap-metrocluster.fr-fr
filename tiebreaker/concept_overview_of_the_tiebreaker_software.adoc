@@ -17,9 +17,11 @@ Il est utile de comprendre le logiciel NetApp MetroCluster Tiebreaker et le mode
 
 == Détection des défaillances avec le logiciel NetApp MetroCluster Tiebreaker
 
-Il réside sur un hôte Linux Vous n'avez besoin du logiciel disjoncteur d'attache que si vous voulez surveiller deux clusters et connaître l'état de connectivité entre eux depuis un troisième site. Dans un cluster, ceci permet à chaque partenaire de distinguer une panne de liaison ISL ou de liaison intersite d'une panne de site.
+Vous n'avez besoin du logiciel disjoncteur d'attache que si vous voulez surveiller deux clusters et connaître l'état de connectivité entre eux depuis un troisième site. Le logiciel Tiebreaker réside sur un hôte Linux sur le troisième site et permet à chaque partenaire d'un cluster de distinguer une panne de lien ISL, lorsque des liaisons inter-sites sont en panne, d'une défaillance de site.
 
 Après avoir installé le logiciel disjoncteur d'attache sur un hôte Linux, vous pouvez configurer les clusters dans une configuration MetroCluster afin de surveiller les incidents.
+
+Le logiciel Tiebreaker peut surveiller jusqu'à 15 configurations MetroCluster simultanément. Il prend en charge une combinaison de configurations MetroCluster IP, MetroCluster FC et Stretch MetroCluster.
 
 
 

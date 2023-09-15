@@ -1,0 +1,257 @@
+---
+permalink: tiebreaker/install_tiebreaker_package.html 
+sidebar: sidebar 
+keywords: install, tiebreaker, software, monitor, capabilities, capability, cluster, storage, environment, snmp, notification, event, node, connectivity, issue, site, disaster, system, install, upgrade, upgrading, software, dependencies, dependency, package, ntp, requirements, requirements for tiebreaker, tiebreaker requirements, mysql, mariadb, autostart, database 
+summary: 'Il offre des fonctionnalités de surveillance d"un environnement de stockage en cluster. Il envoie également des notifications SNMP en cas de problèmes de connectivité des nœuds et d"incidents sur site.' 
+---
+= Installation ou mise à niveau du progiciel
+:allow-uri-read: 
+
+
+Vous devez installer ou mettre à niveau le logiciel MetroCluster Tiebreaker sur votre ordinateur local, afin d'assurer le contrôle des configurations MetroCluster.
+
+.Description de la tâche
+* Votre système de stockage doit exécuter ONTAP 8.3.x ou une version ultérieure.
+* Vous devez avoir installé OpenJDK à l'aide de `yum install java-x.x.x-openjdk` commande. Pour les systèmes exécutant Tiebreaker 1.4 et versions antérieures, exécutez JRE 8. Pour les systèmes exécutant Tiebreaker 1.5 et versions ultérieures, exécutez OpenJDK 17, 18 ou 19. Les sorties de l'exemple montrent JRE 1.8.0. (JRE 8).
+* Vous pouvez installer MetroCluster Tiebreaker en tant qu'utilisateur non root disposant de privilèges d'administration suffisants pour effectuer l'installation de Tiebreaker, créer des tables, des utilisateurs et définir le mot de passe de l'utilisateur, etc
+
+
+.Étapes
+. Téléchargez la dernière version du logiciel MetroCluster Tiebreaker. Cet exemple utilise la version 1.5.
++
+https://mysupport.netapp.com/site/["Site de support NetApp"^]
+
+. Téléchargez le `MetroCluster_Tiebreaker_RPM_GPG` clé :
++
+https://mysupport.netapp.com/site/["Site de support NetApp"^]
+
+. Connectez-vous à l'hôte en tant qu'utilisateur racine.
+. Créez un utilisateur non root et le `mcctbgrp` groupe.
++
+.. Créez un utilisateur non root et définissez le mot de passe.
++
+Les exemples de commandes suivants créent un utilisateur non root nommé `mcctbuser1`:
+
++
+[listing]
+----
+[root@mcctb ~]# useradd mcctbuser1
+[root@mcctb ~]# passwd mcctbuser1
+Changing password for user mcctbuser1.
+New password:
+Retype new password:
+passwd: all authentication tokens updated successfully.
+----
+.. Créez un groupe nommé `mcctbgrp`:
++
+`[root@mcctb ~~]# groupadd mcctbgrp`
+
+.. Ajoutez l'utilisateur non racine que vous avez créé à l' `mcctbgrp` groupe.
++
+La commande suivante ajoute `mcctbuser1` à la `mcctbgrp` groupe :
+
++
+`[root@mcctb ~]# usermod -a -G mcctbgrp mcctbuser1`
+
+
+
+. Vérifiez le fichier RPM.
++
+Exécutez les sous-étapes suivantes à partir du répertoire contenant la clé RPM.
+
++
+.. Téléchargez et importez le fichier de clé RPM :
++
+[listing]
+----
+[root@mcctb ~]# rpm --import MetroCluster_Tiebreaker_RPM_GPG.key
+----
+.. Vérifiez que la clé correcte a été importée en vérifiant l'empreinte digitale.
++
+L'exemple suivant montre une empreinte de clé correcte :
+
++
+[listing]
+----
+root@mcctb:~/signing/mcctb-rpms# gpg --show-keys --with-fingerprint MetroCluster_Tiebreaker_RPM_GPG.key
+pub   rsa3072 2022-11-17 [SCEA] [expires: 2025-11-16]
+      65AC 1562 E28A 1497 7BBD  7251 2855 EB02 3E77 FAE5
+uid                      MCCTB-RPM (mcctb RPM production signing) <mcctb-rpm@netapp.com>
+----
+.. Vérifiez la signature : `rpm --checksig NetApp-MetroCluster-Tiebreaker-Software-1.5-1.x86_64.rpm`
++
+[listing]
+----
+NetApp-MetroCluster-Tiebreaker-Software-1.5-1.x86_64.rpm: digests OK
+----
++
+
+NOTE: Vous devez procéder à l'installation uniquement après avoir vérifié avec succès la signature.
+
+
+
+. [[install-tiebreaker]]installez ou mettez à niveau le logiciel Tiebreaker :
++
+
+NOTE: Vous ne pouvez effectuer une mise à niveau vers la version 1.5 de Tiebreaker que lorsque vous effectuez une mise à niveau à partir de la version 1.4 de Tiebreaker. La mise à niveau à partir de versions antérieures vers Tiebreaker 1.5 n'est pas prise en charge.
+
++
+Sélectionnez la procédure correcte ci-dessous selon que vous effectuez une nouvelle installation ou une mise à niveau d'une installation existante.
+
++
+[role="tabbed-block"]
+====
+.Effectuez une nouvelle installation
+--
+.. Récupérez et enregistrez le chemin absolu pour Java :
++
+[listing]
+----
+[root@mcctb ~]# readlink -f /usr/bin/java
+/usr/lib/jvm/java-19-openjdk-19.0.0.0.36-2.rolling.el8.x86_64/bin/java
+----
+.. Exécutez la commande suivante :
+`rpm -ivh NetApp-MetroCluster-Tiebreaker-Software-1.5-1.x86_64.rpm`
++
+Pour une installation réussie, le système affiche les valeurs de sortie suivantes :
+
++
+
+NOTE: Lorsque vous y êtes invité pendant l'installation, indiquez l'utilisateur non root que vous avez créé et affecté au système `mcctbgrp` groupe.
+
++
+[listing]
+----
+
+Verifying...                          ################################# [100%]
+Preparing...                          ################################# [100%]
+Updating / installing...
+   1:NetApp-MetroCluster-Tiebreaker-So################################# [100%]
+Enter the absolute path for Java : /usr/lib/jvm/java-19-openjdk-19.0.0.0.36-2.rolling.el8.x86_64/bin/java
+Verifying if Java exists...
+Found Java. Proceeding with the installation.
+Enter host user account to use for the installation:
+mcctbuser1
+User account mcctbuser1 found. Proceeding with the installation
+Enter database user name:
+root
+Please enter database password for root
+Enter password:
+Sealed          false
+Do you wish to auto unseal vault(y/n)?y
+Enter the key1:
+Enter the key2:
+Enter the key3:
+Success! Uploaded policy: mcctb-policy
+Error enabling approle auth: Error making API request.
+URL: POST http://127.0.0.1:8200/v1/sys/auth/approle
+Code: 400. Errors:
+* path is already in use at approle/
+Success! Enabled the kv secrets engine at: mcctb/
+Success! Data written to: auth/approle/role/mcctb-app
+Password updated successfully in the vault.
+Synchronizing state of netapp-metrocluster-tiebreaker-software.service with SysV service script with /usr/lib/systemd/systemd-sysv-install.
+Executing: /usr/lib/systemd/systemd-sysv-install enable netapp-metrocluster-tiebreaker-software
+Created symlink /etc/systemd/system/multi-user.target.wants/netapp-metrocluster-tiebreaker-software.service → /etc/systemd/system/netapp-metrocluster-tiebreaker-software.service.
+Attempting to start NetApp MetroCluster Tiebreaker software services
+Started NetApp MetroCluster Tiebreaker software services
+Successfully installed NetApp MetroCluster Tiebreaker software version 1.5.
+
+----
+
+
+--
+.Mise à niveau d'une installation existante
+--
+.. Vérifiez qu'une version prise en charge d'OpenJDK est installée et qu'elle correspond à la version Java actuelle située sur l'hôte.
++
+
+NOTE: Pour les mises à niveau vers Tiebreaker 1.5, vous devez installer OpenJDK version 17, 18 ou 19.
+
++
+[listing]
+----
+[root@mcctb ~]# readlink -f /usr/bin/java
+/usr/lib/jvm/java-19-openjdk-19.0.0.0.36-2.rolling.el8.x86_64/bin/java
+----
+.. Vérifiez que le service Vault n'est pas scellé et en cours d'exécution : `vault status`
++
+[listing]
+----
+[root@mcctb ~]# vault status
+Key             Value
+---             -----
+Seal Type       shamir
+Initialized     true
+Sealed          false
+Total Shares    5
+Threshold       3
+Version         1.12.2
+Build Date      2022-11-23T12:53:46Z
+Storage Type    file
+Cluster Name    vault
+Cluster ID      <cluster_id>
+HA Enabled      false
+----
+.. Mettez à niveau le logiciel Tiebreaker.
++
+[listing]
+----
+[root@mcctb ~]# rpm -Uvh NetApp-MetroCluster-Tiebreaker-Software-1.5-1.x86_64.rpm
+----
++
+Le système affiche les résultats suivants pour une mise à niveau réussie :
+
++
+[listing]
+----
+
+Verifying...                          ################################# [100%]
+Preparing...                          ################################# [100%]
+Updating / installing...
+   1:NetApp-MetroCluster-Tiebreaker-So################################# [ 50%]
+
+Enter the absolute path for Java : /usr/lib/jvm/java-19-openjdk-19.0.0.0.36-2.rolling.el8.x86_64/bin/java
+Verifying if Java exists...
+Found Java. Proceeding with the installation.
+Enter host user account to use for the installation:
+mcctbuser1
+User account mcctbuser1 found. Proceeding with the installation
+Sealed          false
+Do you wish to auto unseal vault(y/n)?y
+Enter the key1:
+Enter the key2:
+Enter the key3:
+Success! Uploaded policy: mcctb-policy
+Error enabling approle auth: Error making API request.
+URL: POST http://127.0.0.1:8200/v1/sys/auth/approle
+Code: 400. Errors:
+* path is already in use at approle/
+Success! Enabled the kv secrets engine at: mcctb/
+Success! Data written to: auth/approle/role/mcctb-app
+Enter database user name : root
+Please enter database password for root
+Enter password:
+Password updated successfully in the database.
+Password updated successfully in the vault.
+Synchronizing state of netapp-metrocluster-tiebreaker-software.service with SysV service script with /usr/lib/systemd/systemd-sysv-install.
+Executing: /usr/lib/systemd/systemd-sysv-install enable netapp-metrocluster-tiebreaker-software
+Attempting to start NetApp MetroCluster Tiebreaker software services
+Started NetApp MetroCluster Tiebreaker software services
+Successfully upgraded NetApp MetroCluster Tiebreaker software to version 1.5.
+Cleaning up / removing...
+   2:NetApp-MetroCluster-Tiebreaker-So################################# [100%]
+----
+
+
+--
+====
++
+
+NOTE: Si vous saisissez un mot de passe racine MySQL incorrect, le logiciel disjoncteur d'attache indique qu'il a été installé avec succès, mais affiche des messages « accès refusé ». Pour résoudre ce problème, vous devez désinstaller le logiciel disjoncteur d'attache à l'aide du `rpm -e` Puis réinstallez le logiciel en utilisant le mot de passe racine MySQL correct.
+
+. Vérifiez la connectivité Tiebreaker au logiciel MetroCluster en ouvrant une connexion SSH depuis l'hôte Tiebreaker vers chacune des LIFs de node management et des LIFs de cluster management.
+
+
+.Informations associées
+https://mysupport.netapp.com/site/["Support NetApp"^]

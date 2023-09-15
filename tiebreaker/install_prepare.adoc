@@ -1,0 +1,89 @@
+---
+permalink: tiebreaker/install_prepare.html 
+sidebar: sidebar 
+keywords: install, tiebreaker, software, monitor, capabilities, capability, cluster, storage, environment, snmp, notification, event, node, connectivity, issue, site, disaster, system, install, upgrade, upgrading, software, dependencies, dependency, package, ntp, requirements, requirements for tiebreaker, tiebreaker requirements, mysql, mariadb, autostart, database 
+summary: 'Il offre des fonctionnalités de surveillance d"un environnement de stockage en cluster. Il envoie également des notifications SNMP en cas de problèmes de connectivité des nœuds et d"incidents sur site.' 
+---
+= Examen des conditions requises
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Il offre des fonctionnalités de surveillance d'un environnement de stockage en cluster. Il envoie également des notifications SNMP en cas de problèmes de connectivité des nœuds et d'incidents sur site.
+
+Le logiciel Tiebreaker doit être installé et configuré.
+
+
+
+== Configuration logicielle requise
+
+Selon la version de Tiebreaker que vous installez, vous devez respecter la configuration logicielle suivante.
+
+[cols="1,1,1,2"]
+|===
+
+
+| Version Tiebreaker de ONTAP | Versions de ONTAP prises en charge | Versions Linux prises en charge | Configuration requise pour Java/MariaDB 
+
+
+ a| 
+1.5
+ a| 
+ONTAP 9.8 et versions ultérieures
+ a| 
+* Red Hat Enterprise Linux 8.1 à 8.7
+
+ a| 
+Avec Red Hat Enterprise Linux 8.1 à 8.7 :
+
+* MariaDB 10.x (utilisez la version par défaut installée à l'aide de "yum install mariadb-Server.x86_64")
+* OpenJDK 17, 18 ou 19
+
+
+
+
+ a| 
+1.4
+ a| 
+ONTAP 9.2 et versions ultérieures
+ a| 
+* Red Hat Enterprise Linux 8.1 à 8.7
+* Red Hat Enterprise Linux 7 à 7.9
+* CentOS 7 à 7.9 64 bits
+
+ a| 
+Avec CentOS :
+
+* Serveur MariaDB 5.5.52.x/MySQL 5.6x
+* 4 GO DE RAM
+* Ouvrez JRE 8
+
+
+Avec Red Hat Enterprise Linux 8.1 à 8.7 :
+
+*MariaDB 10.x (utilisez la version par défaut installée à l'aide de "yum install mariadb-Server.x86_64")
+*JRE 8
+
+|===
+
+
+== Supplémentaires requise
+
+Vous devez connaître les exigences supplémentaires suivantes :
+
+* Le logiciel disjoncteur d'attache est installé sur un troisième site, ce qui permet au logiciel de distinguer une panne de liaison interswitch (ISL) d'une panne sur un site. Votre système hôte doit respecter certaines exigences avant d'installer ou de mettre à niveau le logiciel disjoncteur d'attache sur votre ordinateur local afin de surveiller la configuration MetroCluster.
+* Vous devez disposer de privilèges « root » pour installer le logiciel MetroCluster Tiebreaker et les progiciels dépendants.
+* Vous ne pouvez utiliser qu'un seul moniteur Tiebreaker MetroCluster par configuration MetroCluster pour éviter tout conflit avec plusieurs moniteurs Tiebreaker.
+* Lorsque vous sélectionnez la source NTP (Network Time Protocol) pour le logiciel Tiebreaker, vous devez utiliser une source NTP locale. Le logiciel Tiebreaker ne doit pas utiliser la même source que les sites MetroCluster surveillés par le logiciel Tiebreaker.
+
+
+* Capacité du disque : 8 Go
+* Pare-feu :
++
+** Accès direct pour la configuration des messages AutoSupport
+** SSH (port 22/TCP), HTTPS (port 443/TCP) et ping (ICMP)
+
+
+
