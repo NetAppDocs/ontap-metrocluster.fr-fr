@@ -11,7 +11,7 @@ summary: 'Depuis ONTAP 9.4, les configurations MetroCluster IP prennent en charg
 
 
 [role="lead"]
-Depuis ONTAP 9.4, les configurations MetroCluster IP prennent en charge les nouvelles installations avec les systèmes AFF à l'aide du partitionnement de disque avancé (ADP). Dans la plupart des configurations, le partitionnement et l'affectation des disques sont effectués automatiquement lors de la configuration initiale des sites MetroCluster.
+Depuis ONTAP 9.4, les configurations IP de MetroCluster prennent en charge les nouvelles installations à l'aide du partitionnement de disque avancé (ADP). Dans la plupart des configurations, le partitionnement et l'affectation des disques sont effectués automatiquement lors de la configuration initiale des sites MetroCluster.
 
 ONTAP 9.4 et versions ultérieures incluent les modifications suivantes pour l'assistance ADP :
 
@@ -306,7 +306,7 @@ Chacun des deux plexes de l'agrégat racine inclut les partitions suivantes :
 |===
 
 
-=== Affectation des disques et des ADP sur les systèmes AFF C250 et AFF A250
+=== Affectation des disques et des ADP sur les systèmes AFF C250, AFF A250 et FAS500f
 
 |===
 
@@ -624,33 +624,8 @@ Sans objet
 
 === Affectation des disques sur les systèmes FAS500f
 
-|===
+Les mêmes règles et instructions d'affectation des disques pour les systèmes AFF C250 et AFF A250 s'appliquent aux systèmes FAS500f. Pour plus d'informations sur l'affectation des disques sur les systèmes FAS500f, reportez-vous au <<ADP_FAS500f>> tableau.
 
-
-| Directive | Nombre de disques par site | Règles d'affectation de disques | Mise en page ADP pour la partition racine 
-
-
- a| 
-Minimum de disques recommandés (par site)
- a| 
-48 disques
- a| 
-Les disques sont automatiquement affectés selon le type tiroir par tiroir.
- a| 
-Sans objet
-
-
-
- a| 
-Nombre minimal de disques pris en charge (par site)
- a| 
-24 disques
- a| 
-Les lecteurs sont répartis en quatre groupes égaux. Chaque tiroir est automatiquement attribué à un pool distinct.
- a| 
-Sans objet
-
-|===
 
 
 === Affectation des disques sur les systèmes FAS9000
