@@ -586,3 +586,32 @@ IP_switch_A_1# copy running-config startup-config
 
 . Répétez l'étape précédente sur les trois autres commutateurs de la configuration MetroCluster IP.
 
+
+
+
+== Désactivez les ports ISL et les canaux de port inutilisés
+
+NetApp recommande de désactiver les ports ISL et les canaux de port inutilisés afin d'éviter les alertes d'intégrité inutiles.
+
+. Identifier les ports ISL et les canaux de port inutilisés :
++
+`show interface brief`
+
+. Désactivez les ports ISL et les canaux de port inutilisés.
++
+Vous devez exécuter les commandes suivantes pour chaque port ou canal de port non utilisé identifié.
+
++
+[listing]
+----
+SwitchA_1# config t
+Enter configuration commands, one per line. End with CNTL/Z.
+SwitchA_1(config)# int Eth1/14
+SwitchA_1(config-if)# shutdown
+SwitchA_12(config-if)# exit
+SwitchA_1(config-if)# copy running-config startup-config
+[########################################] 100%
+Copy complete, now saving to disk (please wait)...
+Copy complete.
+----
+

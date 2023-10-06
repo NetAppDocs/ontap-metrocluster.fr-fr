@@ -866,3 +866,44 @@ IP_switch_A_1# reload
 ----
 . Répétez les étapes précédentes sur les trois autres commutateurs de la configuration MetroCluster IP.
 
+
+
+
+== Désactivez les ports ISL et les canaux de port inutilisés
+
+NetApp recommande de désactiver les ports ISL et les canaux de port inutilisés afin d'éviter les alertes d'intégrité inutiles.
+
+. Identifiez les ports ISL et les canaux de port inutilisés à l'aide de la bannière du fichier RCF :
++
+
+NOTE: Si le port est en mode écorché, le nom de port que vous spécifiez dans la commande peut être différent du nom indiqué dans la bannière RCF. Vous pouvez également utiliser les fichiers de câblage RCF pour trouver le nom du port.
+
++
+[role="tabbed-block"]
+====
+.Pour plus de détails sur le port ISL
+--
+Lancer la commande `show port all`.
+
+--
+.Pour plus d'informations sur les canaux de port
+--
+Lancer la commande `show port-channel all`.
+
+--
+====
+. Désactivez les ports ISL et les canaux de port inutilisés.
++
+Vous devez exécuter les commandes suivantes pour chaque port ou canal de port non utilisé identifié.
+
++
+[listing]
+----
+(SwtichA_1)> enable
+(SwtichA_1)# configure
+(SwtichA_1)(Config)# <port_name>
+(SwtichA_1)(Interface 0/15)# shutdown
+(SwtichA_1)(Interface 0/15)# end
+(SwtichA_1)# write memory
+----
+
