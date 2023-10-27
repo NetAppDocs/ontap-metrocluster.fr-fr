@@ -6169,42 +6169,9 @@
   <block id="715a557335c993fbdddacfeead63bcfb" category="list-text">Supprimez la configuration MetroCluster existante de toute application tierce pouvant effectuer le basculement.</block>
   <block id="c587e54ff9ed88f954efbfffaff5cb81" category="paragraph">Reportez-vous à la documentation de l'application.</block>
   <block id="46307856034c0d19deb4348b4c6fdf64" category="summary">Une fois que vous passez MetroCluster de FC à IP, vous devrez peut-être déplacer vos connexions hôtes iSCSI vers les nouveaux nœuds.</block>
-  <block id="ad6b5250334c326be9a638a7f4693ca4" category="doc">Déplacement des hôtes iSCSI Linux depuis les nœuds FC MetroCluster vers les nœuds IP MetroCluster</block>
-  <block id="4ffda0b442f3ec790dfbba912d0ea775" category="paragraph">Cette procédure permet de créer des interfaces IPv4.</block>
-  <block id="c69cc98613331b3414ecc19841ab7a4a" category="paragraph">Les commandes hôte et les exemples donnés dans ces procédures sont spécifiques aux systèmes d'exploitation LINUX.</block>
-  <block id="2635e8261b1d21ba35254c00e3e54eda" category="section-title">Configuration des nouvelles connexions iSCSI</block>
-  <block id="38182d0b7f94eabf093a27fc21d6c6e6" category="paragraph">Pour déplacer des connexions iSCSI, vous devez configurer de nouvelles connexions iSCSI sur les nœuds IP MetroCluster.</block>
-  <block id="b5c888106b46101190a9a9446ff7aeba" category="list-text">Créez des interfaces iSCSI sur les nœuds IP MetroCluster et vérifiez la connectivité ping des clients iSCSI aux nouvelles interfaces IP des nœuds IP MetroCluster.</block>
-  <block id="f2a6a6dfe9a7cb508ec1e1f475d326dc" category="inline-link">Création d'interfaces réseau</block>
-  <block id="cdf93537d7257dad75e41411958bb32c" category="paragraph"><block ref="cdf93537d7257dad75e41411958bb32c" category="inline-link-rx"></block></block>
-  <block id="0dc491dada4885353b9e96030fce6bd3" category="paragraph">Toutes les interfaces iSCSI du SVM doivent être accessibles par le client iSCSI.</block>
-  <block id="acb0e987f9b29d1eab50c31f4f95aa9a" category="list-text">Sur l'hôte ou le client iSCSI, identifiez les connexions iSCSI existantes entre l'hôte et le nœud FC MetroCluster :<block ref="0d3f69bc64054f4afeca7380b613ea30" prefix=" " category="inline-code"></block></block>
-  <block id="d163a1c94db271251417ac64b011f503" category="list-text">Vérifiez les connexions à partir du nœud IP MetroCluster :<block ref="4b94292925d93bdf713ed83d6122558d" prefix=" " category="inline-code"></block></block>
-  <block id="a36d68710357482d2ab6a01760a3ed96" category="list-text">Sur le client iSCSI, exécuter la détection sur l'une des adresses IP iSCSI du SVM afin de découvrir les nouvelles cibles :<block ref="efdc22f1b447b9fcadae70bd704444db" prefix=" " category="inline-code"></block></block>
   <block id="6d5e653b42496cb611cacbd3f1622d89" category="paragraph">La détection peut être exécutée sur n'importe quelle adresse IP du SVM, y compris sur des interfaces non iSCSI.</block>
-  <block id="a461f22b707612a699bc8af021961c83" category="list-text">Sur le client iSCSI, connectez-vous à toutes les adresses découvertes :<block ref="29c5c7c7978be336e2ffc1d38827fe90" prefix=" " category="inline-code"></block></block>
-  <block id="ab6390fa8cebdea69f293643fa6ca3ac" category="list-text">Sur le client iSCSI, vérifiez la connexion et les connexions :<block ref="0d3f69bc64054f4afeca7380b613ea30" prefix=" " category="inline-code"></block></block>
-  <block id="dbd11be9c2b255acab2242a02fc1a77e" category="list-text">Depuis le nœud MetroCluster, vérifiez l'ouverture de session et la connexion avec le client :<block ref="e8214f36e8ceb81d106267a1c9ff778a" prefix=" " category="inline-code"></block></block>
-  <block id="bc60b7e20cad666b78b99a17cd6677a3" category="paragraph">À l'issue de cette tâche, le client peut voir toutes les interfaces iSCSI (sur les nœuds FC et IP MetroCluster MetroCluster) et est connecté à toutes ces interfaces.</block>
-  <block id="677e4c06325c77f7c3bfe8975fe9b0df" category="paragraph">Les LUN et les volumes sont toujours hébergés physiquement sur des nœuds FC. Les LUN étant signalées uniquement sur les interfaces de nœuds FC MetroCluster, le client n'affichera que les chemins sur les nœuds FC MetroCluster. Cela peut être observé dans les sorties de commande sanlun lun show -p et multipath -ll -d. L'étape suivante consiste à ajouter des nœuds IP en tant que nœuds de reporting.</block>
-  <block id="af74a863cdb562e7957297f060551652" category="section-title">Ajout des nœuds IP MetroCluster en tant que nœuds de reporting</block>
-  <block id="de6fbd0b27f08771a0a17e006eb28d85" category="paragraph">Après avoir configuré les connexions aux nouveaux nœuds IP MetroCluster, vous devez ajouter de nouveaux nœuds de reporting.</block>
-  <block id="c3fa4a22a34cdd0dcd970ef661134749" category="list-text">Sur le nœud MetroCluster, lister les nœuds de rapports pour les LUN sur le SVM :<block ref="44e0b47a6df5bd39730c8ec6359013d7" prefix=" " category="inline-code"></block></block>
-  <block id="ca3831196a5922b44d1bd6c3f098a76e" category="paragraph">Les nœuds de reporting suivants sont des nœuds locaux tandis que les LUN se trouvent physiquement sur des nœuds FC node_A_1-FC et node_A_2-FC.</block>
-  <block id="ada767f49af9e4d84ffa661e5dca75c7" category="list-text">Sur le nœud MetroCluster, ajoutez des nœuds de reporting :<block ref="818a482f6636e38f181e03045c2175a6" prefix=" " category="inline-code"></block></block>
-  <block id="7b0a84102a195b8e0f8d8953620707ba" category="list-text">Sur le nœud MetroCluster, vérifiez que les nouveaux nœuds sont présents :<block ref="9e5febcddcd4002e96c0e9bd6fd2aefb" prefix=" " category="inline-code"></block></block>
-  <block id="897e36e6985e9d4eb2bed54f3762a125" category="list-text">Sur l'hôte, exécutez la commande suivante pour lister les nouveaux chemins :<block ref="41dc2c94e82e1c56ba876085acf5a974" prefix=" " category="inline-code"></block></block>
   <block id="2a12888d763445436f29b56694f714b2" category="paragraph">Quatre chemins sont affichés pour chaque LUN.</block>
-  <block id="2511d667d00c1cb6eba362bc0093b244" category="list-text">Sur la MetroCluster, déplacez le volume/les volumes contenant des LUN des nœuds FC vers les nœuds IP.</block>
-  <block id="e33b00901de3da30e6f72b62b448dbb9" category="list-text">Une fois le déplacement de volume terminé, utilisez la commande volume show pour vérifier que le volume ou la LUN est en ligne sur la MetroCluster.</block>
-  <block id="61edda4eb7dd41417f619b2deaf6f3bc" category="list-text">Les interfaces iSCSI sur les nœuds IP MetroCluster où réside la LUN sont mises à jour en tant que chemins principaux. Si le chemin d'accès principal n'est pas mis à jour après le déplacement du volume, exécutez /usr/bin/rescan-scsi-bus.sh -a et multipath -v3 ou attendez simplement que le chemin d'accès soit réexécuté.</block>
-  <block id="288fc657c3692f20a29305049548a50b" category="paragraph">Dans l'exemple suivant, le chemin principal est une LIF sur le nœud IP MetroCluster.</block>
-  <block id="78481b816b560f8944cfc9750c7c69ac" category="section-title">Suppression des nœuds de rapport et renumérisation des chemins</block>
   <block id="907ed284747209370db5d2e6065cf477" category="paragraph">Vous devez supprimer les nœuds de reporting et relancer la détection des chemins.</block>
-  <block id="8ab7ca6cd6e1f79872ab4f322117ca76" category="list-text">Depuis le nœud IP MetroCluster, supprimez les nœuds de reporting distants (nœuds IP MetroCluster) pour les LUN Linux :<block ref="cd628f5257abfae28b6969563f236136" prefix=" " category="inline-code"></block></block>
-  <block id="05048e4fdd078ddd77168cd8270fe3f4" category="paragraph">Dans ce cas, les nœuds distants sont des nœuds FC.</block>
-  <block id="e90434592ed415a541e2a6f03284ae2d" category="list-text">Depuis le nœud IP MetroCluster, vérifiez les nœuds de rapports des LUN :<block ref="44e0b47a6df5bd39730c8ec6359013d7" prefix=" " category="inline-code"></block></block>
-  <block id="d535eedec31c0a58f698132001cbc9bb" category="paragraph">Les chemins qui sont supprimés sont les chemins d'accès des nœuds FC.</block>
   <block id="af0774f5fa525955d74c2e77f5dab7e6" category="summary">Après la transition de la configuration MetroCluster, vous pouvez reprendre la surveillance avec l'utilitaire Tiebreaker ou Mediator.</block>
   <block id="ea7ae12637786fd2df51e9007bb6f639" category="doc">Restauration de la surveillance du disjoncteur d'attache ou du médiateur</block>
   <block id="36588e2aa5ad4fcf60167b3daa06db5a" category="list-text">Utilisez la procédure appropriée pour votre configuration.</block>
@@ -13071,9 +13038,6 @@
   <block id="7794a024d3134acafeb3b112e36c9a3f" category="cell">Partition 3 :</block>
   <block id="6129d8bcf6f4ed452d528f954ce79ee6" category="admonition">Depuis ONTAP 9.5, l'assignation automatique des disques doit être activée avec<block ref="9518ee5351ea31dd67cceada18bfcfd6" prefix=" " category="inline-code"></block> commande.</block>
   <block id="00427bfa7d8d8bd516409a3466e96821" category="paragraph">Vous devez définir l'état ha-config sur<block ref="32b858596eeb9351eca27c2906a21da4" prefix=" " category="inline-code"></block> avant le provisionnement automatique, assurez-vous que les tailles de partition correctes sont sélectionnées pour permettre une taille de volume racine appropriée. Pour plus d'informations, voir <block ref="ee9beb37ef6441cda28497e9b5b08a94" category="inline-link-macro-rx"></block>.</block>
-  <block id="7a1a87ce99eaab2774eb1f9eacc17d53" category="list-text">Sur l'hôte iSCSI, vérifiez que seuls les chemins depuis les nœuds IP MetroCluster sont visibles :</block>
-  <block id="60b4ea9b972dc75c3aa76b2fc2aab932" category="paragraph"><block ref="41dc2c94e82e1c56ba876085acf5a974" prefix="" category="inline-code"></block></block>
-  <block id="ba27cfcb3809ba8690469645b378b4af" category="paragraph"><block ref="2fbf63deae0938cf669e6ca451f1eb2c" prefix="" category="inline-code"></block></block>
   <block id="5338d1a8478f350f9f873b7c89a98b0f" category="summary">Remplacez les anciennes adresses IP de contrôle de l'état après avoir modifié les adresses IP des commutateurs back-end MetroCluster FC ou des ponts ATTO.</block>
   <block id="ab82e5baf31743b1a6f1bdd378ba458b" category="doc">Modifier une adresse IP de commutateur ou de pont ATTO pour la surveillance de l'intégrité</block>
   <block id="e3dbdae2799d2ed863a853d87ba77fd1" category="paragraph">Après avoir modifié les adresses IP des commutateurs back-end MetroCluster FC et des ponts ATTO, vous devez remplacer les anciennes adresses IP de contrôle de l'état par les nouvelles valeurs.</block>
@@ -13160,10 +13124,7 @@
   <block id="6c92285fa6d3e827b198d120ea3ac674" category="inline-link-macro">ici</block>
   <block id="4992f0045a6913a2fb77a09884c4e55c" category="admonition">Vous pouvez effectuer les mises à niveau de contrôleur répertoriées dans le tableau ci-dessus sur les systèmes exécutant ONTAP 9.12.1 ou 9.11.1 en suivant la procédure de mise à niveau manuelle décrite <block ref="4254cdc4ef28ceba663ec4031c88c9dd" category="inline-link-macro-rx"></block>.</block>
   <block id="050dafe962829ef847f34f7607e36eb3" category="list-text"><block ref="050dafe962829ef847f34f7607e36eb3" category="inline-link-macro-rx"></block></block>
-  <block id="96011b4dbcd722924f3c53c7252522f8" category="list-text">Lister les interfaces iSCSI en ONTAP pour les SVM contenant les interfaces :<block ref="3c78b9e1a9fef2eea89905b0233c19ad" prefix=" " category="inline-code"></block></block>
   <block id="2af958a8143c65676390b5e251abe90a" category="list-text">Vérifiez que le<block ref="a78608714add699f555f2a66df0ee249" prefix=" " category="inline-code"></block> Le package est installé sur l'hôte Linux. Cela permet d'éviter un<block ref="b0c94f1494e22d963244e235719a2582" prefix=" " category="inline-code"></block> Erreur lors de la nouvelle analyse de l'hôte Linux pour les LUN nouvellement mappées à l'aide du<block ref="685ca42026debec2f3691cc5faae67d5" prefix=" " category="inline-code"></block> commande.</block>
-  <block id="f4b770b44b57fa84a8b8fc29d6c6c8bb" category="list-text">Sur l'hôte, exécutez la commande suivante pour analyser à nouveau le bus SCSI sur l'hôte et découvrir les nouveaux chemins ajoutés :<block ref="9e65638d5d13acb691c4bec2ede5a483" prefix=" " category="inline-code"></block></block>
-  <block id="d1b38e9b356895decf6917b400433e15" category="list-text">Sur l'hôte iSCSI, lancez une nouvelle analyse du bus SCSI :<block ref="06653a48f6165608045bd55ec32d95fb" prefix=" " category="inline-code"></block></block>
   <block id="1f52bd2314f9805b0a0098b0f56a0dc4" category="paragraph">Cela peut nécessiter un redémarrage des nœuds.</block>
   <block id="ab85fd4f549c390675df901a8ef3f78e" category="list-text">Créez des LIF/interfaces FC sur des nœuds IP pour tous les SVM SAN. Vérifiez éventuellement que les WWPN des LIF FC nouvellement créées sont connectés au commutateur FC SAN</block>
   <block id="cbabd53b8268cb963ad7b2c67de0b634" category="paragraph">Les LUN étant signalées uniquement sur les interfaces de nœuds FC MetroCluster, le client affiche uniquement les chemins sur les nœuds FC. Ceci est visible dans la sortie du<block ref="41dc2c94e82e1c56ba876085acf5a974" prefix=" " category="inline-code"></block> et<block ref="2fbf63deae0938cf669e6ca451f1eb2c" prefix=" " category="inline-code"></block> commandes.</block>
@@ -13332,4 +13293,53 @@
   <block id="35c124f455f44a154eb3b514029ee58a" category="section-title">Informations de sécurité et avis réglementaires</block>
   <block id="a6518839a3ee2f900f136494094df3cf" category="paragraph"><block ref="a6518839a3ee2f900f136494094df3cf" category="inline-link-rx"></block></block>
   <block id="f00ba2972a9c532b4ab2bf7cf4fe1350" category="paragraph">Pour EFOS version 3.10.0.3 et ultérieure, utilisez le<block ref="c09633a606c51a161b16f8bf38f5ebb1" prefix=" " category="inline-code"></block> comme indiqué dans l'exemple suivant :</block>
+  <block id="067e2e3846b3b294b518d3f733e2a96b" category="list-text">Les interfaces IPv4 sont créées lors de la configuration des nouvelles connexions iSCSI.</block>
+  <block id="187aa569481ce25a564facc34217dda3" category="list-text">Les commandes hôtes et les exemples sont spécifiques aux systèmes d'exploitation Linux.</block>
+  <block id="6a7b2c1519b9ac2b9ebf90b5ebe2fa92" category="list-text">Les nœuds FC MetroCluster sont appelés anciens nœuds et les nœuds IP MetroCluster sont appelés nouveaux nœuds.</block>
+  <block id="ea6cc97cd446c8ab07c46f26be73c50d" category="section-title">Étape 1 : configuration de nouvelles connexions iSCSI</block>
+  <block id="552dfeee4aa45aab21f5db04ebc1f244" category="paragraph">Pour déplacer les connexions iSCSI, vous devez configurer de nouvelles connexions iSCSI sur les nouveaux nœuds.</block>
+  <block id="fc85dbac1706910c76a2b7a6f7638bdb" category="list-text">Créez des interfaces iSCSI sur les nouveaux nœuds et vérifiez la connectivité ping entre les hôtes iSCSI et les nouvelles interfaces sur les nouveaux nœuds.</block>
+  <block id="7bbfc198d3ba29087c1dd1984313d004" category="inline-link">Créer des interfaces réseau</block>
+  <block id="607be49a44f6d2de54aedb24c5821b8b" category="paragraph"><block ref="607be49a44f6d2de54aedb24c5821b8b" category="inline-link-rx"></block></block>
+  <block id="87c826df1266871a8db57cee9750cbd0" category="paragraph">Toutes les interfaces iSCSI depuis le SVM doivent être accessibles par l'hôte iSCSI.</block>
+  <block id="9709761b16b5aefc81534e48c85098d7" category="list-text">Sur l'hôte iSCSI, identifiez les connexions iSCSI existantes entre l'hôte et l'ancien nœud :</block>
+  <block id="90f2c25e2e05bd11190a9ace67be2df7" category="list-text">Sur le nouveau nœud, vérifiez les connexions à partir du nouveau nœud :</block>
+  <block id="840e7124a9aeed666f3cab70b890da0f" category="list-text">Sur le nouveau nœud, lister les interfaces iSCSI en ONTAP pour les SVM contenant les interfaces :</block>
+  <block id="e817bc638b8c95d84d9d468a31b9a9c6" category="list-text">Sur l'hôte iSCSI, lancer la détection sur l'une des adresses IP iSCSI du SVM pour découvrir les nouvelles cibles :</block>
+  <block id="4c2900dfa972d4e54c006349317ed61b" category="list-text">Sur l'hôte iSCSI, connectez-vous à toutes les adresses découvertes :</block>
+  <block id="50f723ce927cda10c297d19c642446b6" category="list-text">Sur l'hôte iSCSI, vérifiez la connexion et les connexions :</block>
+  <block id="c833c589f902c8c0ddc3bdb645a85fe9" category="list-text">Sur le nouveau nœud, vérifiez la connexion et la connexion avec l'hôte :</block>
+  <block id="8eea62084ca7e541d918e823422bd82e" category="paragraph-title">Résultat</block>
+  <block id="4e7233ab8e56169d5783c1e27cf80e62" category="paragraph">À la fin de cette tâche, l'hôte peut voir toutes les interfaces iSCSI (sur les anciens et nouveaux nœuds) et est connecté à toutes ces interfaces.</block>
+  <block id="1ea11cf2a7632efb274bdc8804c13cc8" category="paragraph">Les LUN et les volumes sont toujours hébergés physiquement sur les anciens nœuds. Les LUN étant signalées uniquement sur les anciennes interfaces de nœud, l'hôte n'affiche que les chemins sur les anciens nœuds. Pour voir ceci, exécutez le<block ref="41dc2c94e82e1c56ba876085acf5a974" prefix=" " category="inline-code"></block> et<block ref="2fbf63deae0938cf669e6ca451f1eb2c" prefix=" " category="inline-code"></block> sur l'hôte et examiner les sorties de la commande.</block>
+  <block id="85ef9de042295f197ffebdafe8989eba" category="section-title">Étape 2 : ajoutez les nouveaux nœuds en tant que nœuds de reporting</block>
+  <block id="63caeb58f676a0ef9b76df2d7cb19636" category="paragraph">Après avoir configuré les connexions aux nouveaux nœuds, vous ajoutez les nouveaux nœuds en tant que nœuds de reporting.</block>
+  <block id="491bf790c89cc65e6e44bc71af9a4016" category="list-text">Sur le nouveau nœud, lister les nœuds reporting pour les LUN sur le SVM :</block>
+  <block id="b04f1d6b7664813408094e25f316f33e" category="paragraph">Les nœuds de reporting suivants sont des nœuds locaux car les LUN sont physiquement sur les anciens nœuds node_A_1-Old et node_A_2-Old.</block>
+  <block id="cc171fdd8df3207be64edefc9b40c9ba" category="list-text">Sur le nouveau nœud, ajoutez des nœuds de reporting :</block>
+  <block id="d0cc5c260aaa60f4409e8ab9a2fc50be" category="list-text">Sur le nouveau nœud, vérifiez que les nouveaux nœuds ajoutés sont présents :</block>
+  <block id="1e9ecffd328dcde30affda2b4f6c9ece" category="list-text">Le<block ref="a78608714add699f555f2a66df0ee249" prefix=" " category="inline-code"></block> Le package doit être installé sur l'hôte Linux. Ceci empêche un<block ref="b0c94f1494e22d963244e235719a2582" prefix=" " category="inline-code"></block> Erreur lors de la nouvelle analyse de l'hôte Linux pour les LUN nouvellement mappées à l'aide du<block ref="685ca42026debec2f3691cc5faae67d5" prefix=" " category="inline-code"></block> commande.</block>
+  <block id="9e684d318658354d8e928df696e09c90" category="paragraph">Sur l'hôte, vérifiez que<block ref="a78608714add699f555f2a66df0ee249" prefix=" " category="inline-code"></block> le package est installé :</block>
+  <block id="bf0c6c5c08f9fbefa42c89aea32af827" category="list-text">Pour une distribution Debian :</block>
+  <block id="a06dd63aa02d1ca9f0480be58723d68a" category="list-text">Pour une distribution basée sur Red Hat :</block>
+  <block id="716de22554eea42da49644b2b136ecd9" category="paragraph">Si nécessaire, installer le<block ref="a78608714add699f555f2a66df0ee249" prefix=" " category="inline-code"></block> Package sur l'hôte Linux :</block>
+  <block id="7065b19f91f5ce4da99fc6ed95adb773" category="list-text">Sur l'hôte, lancez une nouvelle analyse du bus SCSI sur l'hôte et découvrez les nouveaux chemins ajoutés :</block>
+  <block id="a206b7156387b72b6602cf4ab7999c62" category="list-text">Sur l'hôte iSCSI, répertoriez les nouveaux chemins ajoutés :</block>
+  <block id="fba41109e69c86f9eb83af48257072a8" category="list-text">Sur le nouveau nœud, déplacez les volumes contenant des LUN des anciens nœuds vers les nouveaux nœuds.</block>
+  <block id="ac9a615f4366cb038c52dc84717f8ac2" category="list-text">Une fois le déplacement du volume vers les nouveaux nœuds terminé, vérifier que le volume est en ligne :</block>
+  <block id="a8ccb2f6b92c9e7445e9a052ff3fb3f9" category="list-text">Les interfaces iSCSI des nouveaux nœuds sur lesquels réside désormais la LUN sont mises à jour en tant que chemins principaux. Si le chemin principal n'est pas mis à jour après le déplacement du volume, exécutez<block ref="9e65638d5d13acb691c4bec2ede5a483" prefix=" " category="inline-code"></block> et<block ref="4bcfa5223bd4ad05f8dd421976cbc1c1" prefix=" " category="inline-code"></block> sur l'hôte ou attendez simplement que la nouvelle analyse des chemins d'accès multiples ait lieu.</block>
+  <block id="162b2246503837a755b6cd4dddb0c228" category="paragraph">Dans l'exemple suivant, le chemin primaire est une LIF sur le nouveau nœud.</block>
+  <block id="5fd8a55dd43f013ef906cc65f6986fc3" category="section-title">Étape 3 : supprimer les nœuds de rapport et les chemins de nouvelle analyse</block>
+  <block id="829b0bec40a94531d8e7e7dd5076a8ac" category="list-text">Sur le nouveau nœud, supprimez les nœuds de reporting distants (les nouveaux nœuds) des LUN Linux :</block>
+  <block id="2b57c94b011b67d2b972fc549295ffbe" category="paragraph">Dans ce cas, les nœuds distants sont d'anciens nœuds.</block>
+  <block id="1eae5e7b27384996cd8a3ccaee9ed11b" category="list-text">Sur le nouveau nœud, vérifier les nœuds de reporting des LUN :</block>
+  <block id="b40a504ccb3da532382333f0ef630e2d" category="list-text">Sur l'hôte iSCSI, lancez une nouvelle analyse du bus SCSI :</block>
+  <block id="3ab536112aae2adb0154a97a03a97995" category="paragraph">Les chemins qui sont supprimés sont les chemins des anciens nœuds.</block>
+  <block id="5eb2f5a07f8114a82bfca62a5f95b81d" category="list-text">Sur l'hôte iSCSI, vérifiez que seuls les chemins des nouveaux nœuds sont visibles :</block>
+  <block id="207e61ae33ef5e6ef918554d51d81114" category="paragraph">À partir de Fabric OS 9.0.1, SNMPv2 n'est pas pris en charge sur les commutateurs Brocade. Si vous effectuez une mise à niveau vers Fabric OS 9.0.1 ou une version ultérieure, vous devez utiliser SNMPv3 pour la surveillance de l'état de santé. Pour plus d'informations, voir <block ref="f40dae5fcb87cbbfe058698fbd8d3759" category="inline-link-macro-rx"></block>.</block>
+  <block id="acb3a81879787c0ac3484855a93f5ff6" category="paragraph">À partir de Fabric OS 9.0.1, SNMPv2 n'est pas pris en charge pour la surveillance de l'état des commutateurs Brocade, vous devez utiliser SNMPv3 à la place. Si vous utilisez SNMPv3, vous devez configurer SNMPv3 dans ONTAP avant de passer à la section suivante. Pour plus de détails, voir <block ref="84b6bc8814c8fff8860aaf6e2164af86" category="inline-xref-macro-rx"></block>.</block>
+  <block id="a4bed89e9f2e162a1bad93f81efe2681" category="paragraph">La commande que vous exécutez dépend de l'utilisation de SNMPv2 ou SNMPv3.</block>
+  <block id="bd041cb07dda4e5f8fbcf9fc40cd8e53" category="open-title">Ajouter un commutateur à l'aide de SNMPv3 :</block>
+  <block id="1ec64a333712792d694f6485f208d7bf" category="paragraph"><block ref="6483c1c2c512d0e62f46ddc53b9d4638" prefix="" category="inline-code"></block></block>
+  <block id="ebbf46e9806730b0f0c4ca0133de2d34" category="open-title">Ajouter un commutateur à l'aide de SNMPv2 :</block>
 </blocks>
