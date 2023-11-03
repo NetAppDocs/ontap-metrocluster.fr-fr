@@ -3101,9 +3101,6 @@
   <block id="38aab50f6d81fce560ddcd4349e66fc7" category="list-text">La reprise après incident de SnapMirror sur les SVM n'est prise en charge que sur les configurations MetroCluster qui exécutent les versions de ONTAP 9.5 ou ultérieures.</block>
   <block id="8aa8953fa014032d4074fce6f76630d4" category="section-title">Opérations MetroCluster dans ONTAP System Manager</block>
   <block id="a0e45cbea6afae054f370a0854ab9b4f" category="paragraph">Selon la version de votre ONTAP, certaines opérations propres à MetroCluster peuvent être effectuées à l'aide de ONTAP System Manager.</block>
-  <block id="ce54cea34e79331ac5a0d8398a0daeb2" category="list-text">Basculement et rétablissement dans les configurations IP MetroCluster (à partir de ONTAP 9.7).</block>
-  <block id="b9dc5407731afe77b8474622a7260199" category="list-text">Provisionnez et étendez les agrégats en miroir dans les configurations IP MetroCluster (à partir de ONTAP 9.8).</block>
-  <block id="dea75c52e73dcc7b5308af6dfbc8d3df" category="paragraph">Les agrégats non mis en miroir ne sont pas pris en charge dans System Manager.</block>
   <block id="89bbe5f6f49d96ef3219b3e3960c33d5" category="section-title">Prise en charge de FlexCache dans une configuration MetroCluster</block>
   <block id="0e0fb7c8f8c90679b6de81eb83cc9c05" category="paragraph">Les volumes FlexCache sont pris en charge sur les configurations MetroCluster depuis ONTAP 9.7. Il est important de connaître les exigences relatives à la dépelage manuel après les opérations de basculement ou de rétablissement.</block>
   <block id="25f74bbacb558877b948827961d27de6" category="section-title">SVM abroge après le basculement lorsque l'origine et le cache FlexCache se trouvent sur le même site MetroCluster</block>
@@ -5382,7 +5379,6 @@
   <block id="240d3868b181a0a12e2128654b07f892" category="inline-link">Guide de mise à niveau et d'extension de MetroCluster</block>
   <block id="bd3d9b1a42269f70b6fcebe5b0cf78b6" category="paragraph"><block ref="bd3d9b1a42269f70b6fcebe5b0cf78b6" category="inline-link-rx"></block></block>
   <block id="8510397a0db0873faf52a037f4e5c265" category="paragraph"><block ref="8510397a0db0873faf52a037f4e5c265" category="inline-link-rx"></block></block>
-  <block id="f6fd567c32c1fb87872959aed0c80c2e" category="paragraph">Selon la version de votre ONTAP, certaines opérations spécifiques à MetroCluster peuvent être effectuées à l'aide de ONTAP System Manager.</block>
   <block id="e1a39a6f1b5c4c92045693ad6ebdd2a1" category="paragraph">Après le basculement, les SVM vs1-mc et vs2-mc sont activés sur le site partenaire (site_B). Elles doivent être abrogés manuellement pour que FlexCache fonctionne avec<block ref="73ef473578e305fb86ebd8db4a77897c" prefix=" " category="inline-code"></block> commande.</block>
   <block id="05b1987240de2b0227bb9f6af346a70e" category="paragraph">Pour les relations FlexCache sur un cluster en dehors de la configuration MetroCluster, le peering doit toujours être reconfiguré manuellement après un basculement lorsque les clusters impliqués sont en mode déconnecté lors du basculement.</block>
   <block id="3b4a0463df76b45385a0a18ebfbb5917" category="paragraph">Lorsque le basculement est déclenché et si les sites_A et site_C ne sont pas connectés, vous devez modifier manuellement les SVM sur site_B (le cluster de basculement) et site_C à l'aide du<block ref="73ef473578e305fb86ebd8db4a77897c" prefix=" " category="inline-code"></block> commande après le basculement.</block>
@@ -13342,4 +13338,6 @@
   <block id="bd041cb07dda4e5f8fbcf9fc40cd8e53" category="open-title">Ajouter un commutateur à l'aide de SNMPv3 :</block>
   <block id="1ec64a333712792d694f6485f208d7bf" category="paragraph"><block ref="6483c1c2c512d0e62f46ddc53b9d4638" prefix="" category="inline-code"></block></block>
   <block id="ebbf46e9806730b0f0c4ca0133de2d34" category="open-title">Ajouter un commutateur à l'aide de SNMPv2 :</block>
+  <block id="10982c02dbedeb50373ef205f82ca3c8" category="inline-link-macro">Gérez des sites MetroCluster avec System Manager</block>
+  <block id="53eaf367aa3b61105b8ddce45278ab85" category="paragraph">Pour en savoir plus, consultez le <block ref="eef6283454e42ed2d47fdb00a9ff3e0c" category="inline-link-macro-rx"></block> documentation :</block>
 </blocks>
