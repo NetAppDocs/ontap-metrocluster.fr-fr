@@ -17,12 +17,13 @@ Le tableau suivant présente les combinaisons de plates-formes prises en charge.
 
 Par exemple, le passage d'une configuration FC MetroCluster composée de modules de contrôleur AFF8060 à une configuration IP composée de modules de contrôleur AFF A400 est pris en charge.
 
-image::../media/metrocluster_fc_ip_transition_matrix_yellowdogp1.png[MetroCluster fc matrice de transition ip yellowdogp1]
+image::../media/metrocluster_fc_ip_transition_matrix_914.png[matrice de transition ip fc MetroCluster 914]
 
 * Remarque 1 : cette combinaison de plateformes nécessite ONTAP 9.11.1 ou une version ultérieure.
 * Remarque 2 : vous devez disposer d'une interface 40 GbE pour les interfaces de cluster locales sur les nœuds FC. Cette combinaison de plateforme requiert ONTAP 9.12.1 ou une version ultérieure.
 * Remarque 3 : une interface de 100 GbE est nécessaire pour les interfaces de cluster locales sur les nœuds FC. Cette combinaison de plateforme requiert ONTAP 9.12.1 ou une version ultérieure.
 * Les procédures de transition nécessitent toutes ONTAP 9.8 ou une version ultérieure, sauf indication contraire dans les notes ou comme requis par une plateforme individuelle.
+* Tous les nœuds de la configuration MetroCluster doivent exécuter la même version de ONTAP. Par exemple, si vous avez une configuration à huit nœuds, les huit nœuds doivent exécuter la même version de ONTAP.
 
 
 [NOTE]
@@ -100,10 +101,3 @@ Les anciens tiroirs de stockage ne sont pas pris en charge sur les nouvelles pla
 link:task_disruptively_transition_when_exist_shelves_are_not_supported_on_new_controllers.html["Lien vers la procédure"]
 
 |===
-
-
-=== Transition vers une configuration de commutateur partagé Cisco 9336C-FX2
-
-La transition vers une configuration de commutateur partagé Cisco 9336C-FX2 n'est pas prise en charge. Une _configuration de commutateur partagée_ est une configuration où les commutateurs fournissent à la fois des connexions MetroCluster et des connexions du tiroir de stockage.
-
-Les configurations dans lesquelles le commutateur Cisco 9336C-FX2 fournit uniquement les connexions MetroCluster sont prises en charge.

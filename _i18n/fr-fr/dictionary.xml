@@ -3330,13 +3330,9 @@
   <block id="54744df94a6fdb7104348dee41697c48" category="summary">L'utilisation du port dans une configuration MetroCluster IP dépend du modèle de commutateur et du type de plate-forme.</block>
   <block id="91fda6ec6c364088ae4a9e6553b26f99" category="doc">Affectations des ports de plateforme pour les switchs IP SN2100 pris en charge par NVIDIA</block>
   <block id="1f0b82560627b660c6c6958a1df834b8" category="section-title">Configurations compatibles</block>
-  <block id="5b7679ef32240286811b416ba05c54c1" category="paragraph">Les plates-formes suivantes sont actuellement prises en charge :</block>
   <block id="0588c4f1b58eac9f5062dc1da6e8435a" category="list-text">FAS8700</block>
-  <block id="4c744d90883c4aab83c5469643da24c7" category="list-text">FAS9000/AFF A700</block>
   <block id="53270fbfda62583949b287e08ae3d063" category="list-text">AFF A800</block>
-  <block id="b6db688996a59c9dcd63d8adb538f928" category="paragraph">Les plates-formes et configurations suivantes ne sont pas actuellement prises en charge :</block>
   <block id="570a8334b13f037157ca46f8cbbf662b" category="list-text">Transition FC-à-IP de MetroCluster</block>
-  <block id="67ce3d63d94102f7ff725a6564099821" category="list-text">Configuration MetroCluster à 8 nœuds</block>
   <block id="5aa692c4552b821f69bb151f7aa0f216" category="paragraph">Si vous câconnectez plusieurs configurations MetroCluster, suivez le tableau correspondant. Par exemple :</block>
   <block id="10fe94c98083f4e751ef035d96910a62" category="paragraph">Les sections suivantes décrivent le schéma de câblage physique. Vous pouvez également vous reporter à la<block ref="c52b4d12f68853a25c52576697c6b2b5" category="inline-link-rx"></block> pour des informations détaillées sur le câblage.</block>
   <block id="afc362bb21237b3cf262e5bb73c2e7ce" category="summary">Vous pouvez fournir une protection supplémentaire pour les fichiers de sauvegarde de la configuration du cluster en spécifiant une URL distante (HTTP ou FTP) dans laquelle les fichiers de sauvegarde de configuration seront chargés en plus des emplacements par défaut dans le cluster local.</block>
@@ -4062,7 +4058,6 @@
   <block id="bbea4b02ce438e1ae0146e4c5cabb671" category="list-text">Les tableaux suivants indiquent l'utilisation des ports pour le site A. Le même câblage est utilisé pour le site B.</block>
   <block id="f57f407b5a71435a3bd46aac8befd7b8" category="list-text">Les commutateurs ne peuvent pas être configurés avec des ports de différentes vitesses (par exemple, un mélange de ports 100 Gbit/s et de ports 40 Gbit/s).</block>
   <block id="c57a7dcc596f78ac23d59a9297d99a56" category="list-text">Si vous configurez un seul MetroCluster avec les commutateurs, utilisez le groupe de ports *MetroCluster 1*.</block>
-  <block id="33fe8d1e8f8aa1d0b52b4b3a25fc436c" category="paragraph">Conservez une trace du groupe de ports MetroCluster (MetroCluster 1, MetroCluster 2 ou MetroCluster 3). Vous en aurez besoin lorsque vous utilisez l'outil RcfFileGenerator comme décrit plus loin dans cette procédure de configuration.</block>
   <block id="240c641ec7d44f443373981bb513fa5c" category="list-text">Le RcfFileGenerator pour MetroCluster IP fournit également une vue d'ensemble du câblage par port pour chaque commutateur.</block>
   <block id="e13e5f806fc6cae09bcb9fed7eecf125" category="paragraph">Utilisez cette présentation du câblage pour vérifier votre câblage.</block>
   <block id="9ae436c3a98ee403124b8482b69c2296" category="section-title">Câblage de deux configurations MetroCluster aux commutateurs</block>
@@ -4703,21 +4698,11 @@
   <block id="413a1a8040eaed9020b7af4ba6c24e5f" category="section-title">Affectation des disques sur les systèmes FAS9500</block>
   <block id="3e7d7088000e9b3208b36b1397763f5e" category="doc">Affectation de ports de plate-forme pour les commutateurs IP BES-53248 pris en charge par Broadcom</block>
   <block id="70797c25b23e4d3313107866a946ef86" category="paragraph">Les commutateurs ne peuvent pas être utilisés avec des ports ISL distants de différentes vitesses (par exemple, un port 25 Gbits/s connecté à un port ISL de 10 Gbits/s).</block>
-  <block id="1ea1224e95806d38188ac2833eef5d68" category="list-title">Remarques pour les tableaux ci-dessous :</block>
-  <block id="84d5df4bc00912b5bf41517f871849dc" category="list-text">Sur certaines plateformes, vous pouvez utiliser les ports 49 à 54 pour les connexions MetroCluster ISL ou MetroCluster.</block>
-  <block id="141c241c09745923a907fa0b44d6fdc2" category="paragraph">Ces ports requièrent une licence supplémentaire.</block>
-  <block id="c7ecc9ce844e9f4491596826d0847864" category="paragraph">Les fonctionnalités qui nécessitent un cluster commuté ne sont pas prises en charge dans cette configuration, notamment les procédures de transition FC vers IP et de mise à jour technologique de MetroCluster.</block>
   <block id="101ffe4f466417c1ce75564d3cc0a3b6" category="list-text">Les systèmes AFF A320 configurés avec des switchs Broadcom BES-53248 peuvent ne pas prendre en charge toutes les fonctionnalités.</block>
   <block id="541a17569d4a90ee94a9fd4035349deb" category="list-text">Mise à jour d'une configuration IP MetroCluster à quatre nœuds (ONTAP 9.8 et versions ultérieures)</block>
-  <block id="11956e846be834740959ad71d40b9547" category="list-text">Si vous connectez deux configurations MetroCluster et que les deux utilisent le même type de contrôleur, vous devez utiliser les groupes de ports MetroCluster 3 et 4. Si les contrôleurs sont différents, vous devez utiliser les groupes de ports MetroCluster 3 et 4 pour un type et les groupes de ports MetroCluster 1 et 2 pour l'autre.</block>
-  <block id="691efed68d0449f254968b0811d65b71" category="list-text">Par exemple, si vous vous connectez :</block>
-  <block id="2ad4e214daf4f2fbe760328984025270" category="list-text">Deux configurations MetroCluster composées uniquement de FAS2750/AFF A220 ou FAS500f/AFF A250, vous devez sélectionner les groupes de ports MetroCluster 3 et 4.</block>
   <block id="673f5a3eeb8366a43231216d5889b9fc" category="inline-link-macro">Utilisation des tables de ports avec l'outil RcfFileGenerator ou de plusieurs configurations MetroCluster</block>
-  <block id="1c4e028af9d72f4e84ad919004a88581" category="list-text">Deux configurations MetroCluster dans lesquelles un MetroCluster est de type FAS2750/AFF A220 et l'autre est FAS500f/AFF A250, vous devez sélectionner les groupes de ports 3 et 4 pour une, et les groupes de ports 1 et 2 pour l'autre. Dans le<block ref="166489b3c340ece1eccb5706fda90624" category="inline-link-rx"></block>, les champs 1 et 2 ne sont remplis que de la plate-forme prise en charge après avoir sélectionné des plates-formes dans les zones déroulantes 3 et 4. Reportez-vous à la section <block ref="4dfd72a31c74d2e269d1ca49dcbd7291" category="inline-link-macro-rx"></block> pour plus d'informations sur l'utilisation des tables de ports.</block>
-  <block id="eab2b22490c89198b6c41f5b7c6e6104" category="image-alt">câblage ip mcc AFF a250 et a220 vers un commutateur broadcom bes 53248</block>
   <block id="dea9eb47178beaeb21ad431dae613392" category="image-alt">mcc ip reliant un AFF a300 ou fas8200 à un commutateur broadcom bes 53248</block>
   <block id="99abcc4b4e656e7c9d684acf6c9c05d8" category="image-alt">mcc ip relie un AFF a320 à un commutateur broadcom bes 53248</block>
-  <block id="d13ba1eac1605fed2f8d4e769d4a477e" category="image-alt">mcc ip relie une carte fas8300 a400 ou fas8700 à un commutateur broadcom bes 53248</block>
   <block id="c2cd808fc4b0d9e71ea89cc518cef164" category="summary">Vous devez uniquement configurer le cryptage MACsec sur les ports WAN ISL qui s'exécutent entre les sites. Vous devez configurer MACsec après avoir appliqué le fichier RCF correct.</block>
   <block id="175313fe612a432e5a51082817a697f1" category="doc">Configurez le cryptage MACsec sur les commutateurs Cisco 9336C</block>
   <block id="4fc9e5c26af40c28636daa3983c7f130" category="paragraph">MACsec nécessite une licence de sécurité. Pour une explication complète du schéma de licence Cisco NX-OS et de la manière d'obtenir et de demander des licences, consultez le<block ref="d01700f99ea627187c1abef586c83faa" category="inline-link-rx"></block></block>
@@ -4841,9 +4826,7 @@
   <block id="14681192c7f80e2d7631c3a070df9619" category="doc">Affectation des ports de plateforme pour les commutateurs Cisco 3132Q-V.</block>
   <block id="3b83c4ddd89aceae283e372313711a0d" category="section-title">Utilisation des ports pour les systèmes FAS2750 ou AFF A220 et un commutateur Cisco 3132Q-V.</block>
   <block id="0d1dedffee468c654fc7737c161a5ef6" category="image-alt">mcc ip reliant un module fas2750 ou a220 à un commutateur cisco 3132q v</block>
-  <block id="017a22ca0ee5bf776874da5739566129" category="section-title">Utilisation des ports pour FAS9000, AFF A700 et un switch Cisco 3132Q-V.</block>
   <block id="f300420ccf8e917fff4dcf018758ab75" category="image-alt">mcc ip relie un fas9000 ou AFF a700 à un commutateur cisco 3132q v</block>
-  <block id="e029b19b88949b46b1b71209d9728ce5" category="section-title">Utilisation des ports pour AFF A800 et un commutateur Cisco 3132Q-V.</block>
   <block id="4ab951cbcd9d68b32f922b0a2d6e39c2" category="image-alt">câblage d'un AFF a800 à un commutateur cisco 3132q v</block>
   <block id="5b97f056c47eb55f7ac2ec585e184dd9" category="summary">Vous devez comprendre comment utiliser les informations des tables de ports pour générer correctement vos fichiers RCF.</block>
   <block id="6852fcac58b417258b30784060002d89" category="list-text">Conservez une trace du groupe de ports MetroCluster (MetroCluster 1, MetroCluster 2, etc.). Vous aurez besoin de ces informations lorsque vous utilisez l'outil RcfFileGenerator comme décrit plus loin dans cette procédure de configuration.</block>
@@ -6177,9 +6160,6 @@
   <block id="2687b88898e3642fcc69aaef6be8e73c" category="paragraph">Lors de votre transition vers une configuration MetroCluster IP, vous devez avoir une combinaison de modèles de plateforme pris en charge. Vous devez également vous assurer que la plateforme IP MetroCluster est une taille appropriée pour la charge que vous passez de la configuration FC MetroCluster à la configuration IP MetroCluster.</block>
   <block id="d9599a6265b31306f6c79d760a47a9aa" category="paragraph">Le tableau suivant présente les combinaisons de plates-formes prises en charge. Vous pouvez passer des plates-formes de la colonne de gauche à des plates-formes répertoriées comme pris en charge dans les colonnes de droite, comme indiqué par les cellules de tableau colorées.</block>
   <block id="1799408ec992ed3e5561f7b04ccef0fe" category="paragraph">Par exemple, le passage d'une configuration FC MetroCluster composée de modules de contrôleur AFF8060 à une configuration IP composée de modules de contrôleur AFF A400 est pris en charge.</block>
-  <block id="2abcc8e487f56251cd49b5a74738c4c4" category="section-title">Transition vers une configuration de commutateur partagé Cisco 9336C-FX2</block>
-  <block id="f8e0758b3af85da8f282b95e41204586" category="paragraph">La transition vers une configuration de commutateur partagé Cisco 9336C-FX2 n'est pas prise en charge. Une _configuration de commutateur partagée_ est une configuration où les commutateurs fournissent à la fois des connexions MetroCluster et des connexions du tiroir de stockage.</block>
-  <block id="1a0ece25400c2d4c0b3a063a4d9d1aad" category="paragraph">Les configurations dans lesquelles le commutateur Cisco 9336C-FX2 fournit uniquement les connexions MetroCluster sont prises en charge.</block>
   <block id="4ae19dc34e740fff9da77fec565653a1" category="summary">Depuis ONTAP 9.8, vous pouvez effectuer la transition sans interruption d'une configuration FC MetroCluster à deux nœuds et déplacer les données depuis les tiroirs disques existants, même si les tiroirs de stockage existants ne sont pas pris en charge par les nouveaux nœuds IP MetroCluster.</block>
   <block id="8a532061ed88c0b4cc8381f7f929de61" category="list-text">Cette procédure ne doit être utilisée que si les modèles de tiroirs de stockage existants ne sont pas pris en charge par les nouveaux modèles de plateforme IP MetroCluster.</block>
   <block id="bc7aab32c224c2ee49642086c4c9aa59" category="list-text">Cette procédure est prise en charge sur les systèmes exécutant ONTAP 9.8 et versions ultérieures.</block>
@@ -12501,8 +12481,6 @@
   <block id="0defe01fed70ecdf301ed45ee130f658" category="list-text">Pour en savoir plus sur les combinaisons de mise à niveau de plateforme prises en charge, consultez le tableau des mises à niveau FC MetroCluster dans <block ref="5e51ded3128b8f60bc0b91c41dccbb25" category="inline-link-macro-rx"></block>.</block>
   <block id="7aeedda5f35486a7239b2a68ae68fb9a" category="paragraph">En fonction du périmètre de la mise à niveau de l'équipement, le client choisit une procédure de mise à niveau du contrôleur, de mise à jour du système ou d'extension.</block>
   <block id="959c17d1eadff13225c68a5578c6da93" category="paragraph">La procédure de mise à niveau du contrôleur que vous utilisez dépend du modèle de plate-forme et du type de configuration MetroCluster.</block>
-  <block id="822ff8bdadd23c839b2a13dbdf0af776" category="paragraph">Dans le cadre d'une procédure de mise à niveau, les contrôleurs sont remplacés par un nouveau modèle de contrôleur. Les modèles de tiroirs de stockage ne sont pas mis à niveau.</block>
-  <block id="8ddc003a58eb9422a54e43b4cfe03f2e" category="list-text">Dans le cadre des procédures de basculement et de rétablissement, le basculement MetroCluster est utilisé pour fournir aux clients un service sans interruption pendant la mise à niveau des modules de contrôleur sur le cluster partenaire.</block>
   <block id="789c52582d523f3977d636da81e92dc0" category="list-text">Dans le cadre d'une procédure de mise à niveau du contrôleur basée sur le transfert d'agrégats, les opérations de transfert d'agrégats servent à déplacer des données de l'ancienne configuration vers la nouvelle configuration mise à niveau, et ce sans interruption.</block>
   <block id="316cc41a2ded57b927048db5915a847f" category="section-title">Sélection de la procédure utilisant le processus de basculement et de rétablissement</block>
   <block id="310848f15048cc78b3cbee9c61235054" category="paragraph">Sélectionnez votre plateforme actuelle dans le tableau FC ou IP ci-dessous. Si l'intersection de la ligne de plateforme actuelle et de la colonne de plateforme cible est vide, la mise à niveau n'est pas prise en charge.</block>
@@ -12548,7 +12526,6 @@
   <block id="5f565b56a7ba868b460ab51ab73790d6" category="paragraph">Reportez-vous à la section<block ref="6ddc20d2276dd2fc9d58822a83f46769" category="inline-link-rx"></block> pour les procédures supplémentaires.</block>
   <block id="3cdc2ade26b9bc4adc9df14235e19c7e" category="paragraph">La procédure de mise à jour du système que vous utilisez dépend du modèle de plate-forme et du type de configuration MetroCluster. Les procédures de mise à jour s'appliquent aux contrôleurs et aux tiroirs de stockage. Dans les procédures de mise à jour, de nouveaux contrôleurs et tiroirs sont ajoutés à la configuration MetroCluster, créant un deuxième groupe de reprise sur incident. Ensuite, les données sont migrées sans interruption vers les nouveaux nœuds. Les contrôleurs d'origine sont ensuite retirés du cluster.</block>
   <block id="d0b28fd083b63a9e12330f486ca47625" category="section-title">Combinaisons de mise à jour technologique MetroCluster FC prises en charge</block>
-  <block id="88ea8505ba0420be98c64dcb7f91e23c" category="image-alt">mise à jour technologique MetroCluster fc</block>
   <block id="cfd1300cd3db131e8f69dc38177b5658" category="section-title">Combinaisons de mise à jour technologique MetroCluster IP prises en charge</block>
   <block id="ad06b1bad80df72d4f2fa24312c0a9bf" category="cell">Méthode de rafraîchissement</block>
   <block id="56ad29882b1f5aa7a765e42a0bd3ca97" category="paragraph"><block ref="56ad29882b1f5aa7a765e42a0bd3ca97" category="inline-link-macro-rx"></block></block>
@@ -12746,38 +12723,19 @@
   <block id="2a077243240a3af8fdb5a2c53c8dfd93" category="sidebar">Activez le basculement du stockage sur les deux modules de contrôleur et activez la haute disponibilité du cluster</block>
   <block id="3ae2a51b967ff5379c07b5d59d9bb892" category="sidebar">Reliez les nouveaux ports FC-VI et HBA des modules de contrôleur aux commutateurs FC</block>
   <block id="2ec9cf7fc01c78e918f2c1109d699ebd" category="sidebar">Configurez l'accès administrateur à ONTAPI et SSH</block>
-  <block id="6dc537d2cf87cd236dd75c2694edbea6" category="image-alt">MetroCluster fc matrice de transition ip yellowdogp1</block>
   <block id="3ba18986907ef3401544960b244376ed" category="section-title">Affectation des disques et ADP sur les systèmes AFF A150 et AFF A220</block>
   <block id="3e0a52646b307379f47860044c088d60" category="paragraph">Les disques de chaque tiroir externe sont divisés en deux groupes égaux (moitiés). Chaque demi-tiroir est automatiquement attribué à un pool distinct.</block>
   <block id="b244c220ca2f00fdc24e97de45456f82" category="section-title">Affectation des disques et des ADP sur les systèmes AFF C400 et AFF A400</block>
   <block id="ba9bcbab50848c136d0007b25231ce1e" category="section-title">ADP et affectation des disques sur les systèmes AFF C800 et AFF A800</block>
-  <block id="c977cafedb40d70c2be8514107ee4747" category="list-text">FAS500f / AFF C250 / AFF A250</block>
-  <block id="fc6e488d651b33ef6c6b35c501a7495f" category="list-text">FAS8300 / AFF C400 / AFF A400</block>
-  <block id="297b6e0ce5945c15596f1be2b7ce0585" category="list-text">AFF C800 / AFF A800</block>
   <block id="8e65b308ba381d7e7d885330e749b55d" category="list-text">Si vous câblez deux configurations MetroCluster à quatre nœuds de type AFF A700, connectez le premier MetroCluster indiqué sous la forme « MetroCluster 1 » et le second MetroCluster sous la forme « MetroCluster 2 » dans le tableau AFF A700.</block>
   <block id="e5c3d25338f9cf52b0644af8df5dd491" category="admonition">Les ports 13 et 14 peuvent être utilisés en mode de vitesse native prenant en charge 40 Gbits/s et 100 Gbits/s, ou en mode d'arrachage pour prendre en charge 4 × 25 Gbits/s ou 4 × 10 Gbits/s. S'ils utilisent le mode de vitesse natif, ils sont représentés par les ports 13 et 14. S'ils utilisent le mode écorché, soit 4 × 25 Gbit/s, soit 4 × 10 Gbit/s, ils sont représentés sous la forme de ports 13s0-3 et 14s0-3.</block>
-  <block id="1ad95d38a718a40f57a452228a018366" category="section-title">Utilisation des ports de commutation pour FAS500f, AFF C250 ou AFF A250</block>
-  <block id="32749c9f2fe889b20a4f9ed309297f2b" category="image-alt">Câblage mcc ip A250 C250 MSN2100</block>
-  <block id="6f71608a9b02340c422ff3d643b4afd7" category="image-alt">Câblage mcc ip aff250 400 700 800 cseriesMSN2100</block>
   <block id="0995dd589b8b5229e4b9e28862db9b91" category="paragraph">Lorsque vous câblez plusieurs configurations MetroCluster à un commutateur Cisco 3132Q-V, vous devez câbler chaque MetroCluster selon le tableau approprié. Par exemple, si vous connectez un système FAS2750 et un système AFF A700 au même commutateur Cisco 3132Q-V. Connectez ensuite le système FAS2750 selon la norme « MetroCluster 1 » du Tableau 1 et le système AFF A700 selon la norme « MetroCluster 2 » ou « MetroCluster 3 » du Tableau 2. Vous ne pouvez pas connecter physiquement les systèmes FAS2750 et AFF A700 comme « MetroCluster 1 ».</block>
-  <block id="014322233c716b51b659a375ee0b236f" category="section-title">Câblage d'un système AFF A150, FAS2750, AFF A220, FAS500f, AFF C250 ou AFF A250 à un switch Cisco 3232C ou Cisco 9336-FX2C</block>
   <block id="b1ae03d0492f9071184bcc685e4d9008" category="image-alt">câblage ip mcc a150 a220 a250 vers un commutateur cisco 323232c ou cisco 9336c</block>
-  <block id="f4a4caf899825065a94a65355e7134d1" category="section-title">Câblage d'un système FAS8200 ou d'un système AFF A300 à un switch Cisco 3232C ou Cisco 9336C</block>
-  <block id="03a4a17b1eab01f0b74373b2d602b107" category="section-title">Câblage d'un système AFF A320, FAS8300, AFF C400, AFF A400, FAS8700, FAS9000, AFF A700, AFF C800, AFF A800, FAS9500 ou AFF A900</block>
   <block id="cf6033c90446afb2f2e4bf0a87384e97" category="image-alt">Câblage ip mcc a400 a320 a800 a900 cisco 3232C ou switch 9336c</block>
-  <block id="354182992aa934a6b659ad8284efa43c" category="section-title">Câblage d'un système AFF A320, AFF C400, AFF A400, AFF A700, AFF C800 Ou AFF A800 à un commutateur partagé Cisco 9336C-FX2</block>
   <block id="4aa636d0c8e798111a1395c5cf44abef" category="paragraph">AFF A800, AFF C800</block>
   <block id="76a3e9deef2a9133b01bc4b8aa5ad045" category="paragraph">FAS8300, AFF A400 et AFF C400</block>
   <block id="2d24d8597140717b72521869e1b9643a" category="paragraph">FAS2750, AFF A150 et AFF A220</block>
   <block id="f557196ec910f221f73585a5c481f240" category="paragraph">FAS500f, AFF A250 et AFF C250</block>
-  <block id="bf9729690d4b6a4daedabf36c5b5ec8c" category="list-text">Seul un MetroCluster à quatre nœuds utilisant des systèmes AFF A320 peut être connecté au commutateur.</block>
-  <block id="9b7cca2be0457a3d0c492f8e904df901" category="section-title">Utilisation des ports de commutation pour les systèmes FAS2750, AFF 150 ou AFF A220</block>
-  <block id="8ee408688016c0cb16c82686873a5d8e" category="image-alt">mcc ip reliant un AFF a150 a220 ou fas2750 à un commutateur broadcom bes 53248</block>
-  <block id="58f2f8e1f41f44915c0a9dd64bc2bb2d" category="section-title">Utilisation des ports de commutation pour les systèmes FAS500f, AFF C250 ou AFF A250</block>
-  <block id="358099a0b111152a484a1e05b14c7c47" category="image-alt">mcc ip reliant un AFF c250 a250 ou fas500f à un commutateur broadcom bes 53248</block>
-  <block id="4dd9be0b315657693d8b4224514a84dd" category="section-title">Utilisation des ports de commutation pour une utilisation combinée des systèmes AFF A150, FAS2750, AFF A220 et FAS500f ou AFF C250 Ou AFF A250</block>
-  <block id="e4bf5275812c1279d2db37ca9929225f" category="section-title">Et utilisez les ports de switch pour les systèmes FAS8200 ou AFF A300</block>
-  <block id="3e2cc26117df5be817591b49f77f1480" category="section-title">Utilisation des ports de commutation pour les systèmes FAS8300, AFF C400, AFF A400 ou FAS8700</block>
   <block id="52d00daf67aaaf387590e09043aff43a" category="list-text"><block ref="52d00daf67aaaf387590e09043aff43a" category="inline-link-macro-rx"></block></block>
   <block id="49cc90fa19d302674a7ac32a31b7a0c8" category="list-text"><block ref="49cc90fa19d302674a7ac32a31b7a0c8" category="inline-link-macro-rx"></block></block>
   <block id="566b66a4b36764e94944f56424f3b3ca" category="paragraph">Lancer la commande :<block ref="fdb848f6761ac46e0ea7678b5269bd3c" prefix=" " category="inline-code"></block></block>
@@ -12907,10 +12865,7 @@
   <block id="e73093705babe6125a16df08eedb00cc" category="image-alt">mcc dr groupe c5</block>
   <block id="68f99a795ff5a89f522232c02dc3bdef" category="paragraph"><block ref="ded257afb157d474a6461a3bc1b48d84" category="inline-link-macro-rx"></block> Dans _MetroCluster IP installation and Configuration_.</block>
   <block id="d64734f1819a8d6339e74ffe37dc5430" category="paragraph">Si votre plate-forme n'est pas répertoriée, aucune combinaison de mise à niveau du contrôleur n'est prise en charge.</block>
-  <block id="9cc4e1f05676227146cf00108c59fa28" category="image-alt">mise à niveau ip MetroCluster tableau 9 13 1</block>
   <block id="183ffd679adb1c9e843df285f2b91466" category="list-text">Remarque 2 : les mises à niveau des contrôleurs sont prises en charge sur les systèmes exécutant ONTAP 9.13.1 ou version ultérieure.</block>
-  <block id="565b432bf0dbccb436556aa228477fc4" category="image-alt">tableau de mise à niveau MetroCluster fc p 13 1</block>
-  <block id="ef7e86617c6692f308d834d239d77e9e" category="list-text">Remarque 4 : les mises à niveau du contrôleur sont prises en charge sur les systèmes exécutant ONTAP 9.13.1 ou version ultérieure.</block>
   <block id="5abae7190ce598d45fe390e44304cde0" category="paragraph">9.13.1 et versions ultérieures</block>
   <block id="80fd06bae5a00e691ac9334058ccace5" category="paragraph"><block ref="80fd06bae5a00e691ac9334058ccace5" category="inline-link-macro-rx"></block></block>
   <block id="338b3842cbe6f0ae991509f38e7d0cca" category="list-text">Vous devez terminer la procédure de mise à jour technologique avant d'ajouter un nouveau chargement.</block>
@@ -12919,7 +12874,6 @@
   <block id="fdc1be4b61fa768dbfcc3e8f0dab2595" category="paragraph">Le tableau suivant présente les combinaisons de plateformes prises en charge pour les configurations FC MetroCluster à 8 nœuds.</block>
   <block id="49782ec67fb4809f5d138aa07412fd9d" category="list-text">Les combinaisons indiquées dans ce tableau s'appliquent uniquement aux configurations à huit nœuds standard ou permanentes.</block>
   <block id="ea95591996a43e78cc0b5f96cb4d8f1c" category="list-text">Les combinaisons de plates-formes de ce tableau *ne* s'appliquent pas si vous utilisez les procédures de transition ou d'actualisation.</block>
-  <block id="c6e46da968a03eccf97571ae7315a6ce" category="image-alt">modification du câblage ip du mcc AFF a320 c400 a400 a700 c800 a800 vers le commutateur partagé cisco 9336c</block>
   <block id="1251b37475039ca3d9d370458002ce7c" category="paragraph">Le médiateur ONTAP stocke des informations d'état sur les nœuds MetroCluster dans des boîtes aux lettres situées sur l'hôte du médiateur. Les nœuds MetroCluster peuvent utiliser ces informations pour surveiller l'état de leurs partenaires de reprise sur incident et mettre en œuvre un utilitaire MAUSO en cas d'incident.</block>
   <block id="8227e4d84dc1594bf85338cfe09f1747" category="list-text">En cas d'incident sur site. Une catastrophe de site est une défaillance de *tous* nœuds sur le même site.</block>
   <block id="792f2e5a1dddb8ed73154e39c1bf5e77" category="list-text">À partir de ONTAP 9.13.1, si les conditions ci-dessus sont remplies et qu'une panne de ventilateur ou de matériel entraîne un arrêt de l'environnement, par exemple une unité d'alimentation, une batterie NVRAM ou une défaillance de pulsation du processeur de service, ou une température élevée ou basse.</block>
@@ -13020,8 +12974,6 @@
   <block id="f624129c4d6772a2f62200de12382ad0" category="list-text">Déplacez tous les volumes de métadonnées MDV_CRS vers un autre groupe DR en suivant la procédure <block ref="9273ba8e8bd1c5c1cc0cd85662f27754" category="inline-link-macro-rx"></block> procédure.</block>
   <block id="112564590ec1ae4e651904cd571ed9d4" category="paragraph">Pour plus d'informations sur la configuration des ports, des LIF et du réseau dans ONTAP, reportez-vous à <block ref="378e9004462b7ecfad8256f25b57fbf6" category="inline-link-macro-rx"></block>.</block>
   <block id="347bde5f3be96b6c3eab8b4a360b9028" category="list-text">Attendez trente minutes, puis mettez tous les tiroirs de stockage, les commutateurs IP MetroCluster et les contrôleurs de stockage sous tension.</block>
-  <block id="0434950fcf46c88299084ad712ed62cc" category="list-text">FAS9500 / AFF A900</block>
-  <block id="bf63be372af426fed8556dc915b7ccb6" category="section-title">Utilisation des ports de switch pour AFF C400, AFF A400, AFF A700, FAS9000, FAS8300 FAS8700, AFF A800, FAS9500 ou AFF A900</block>
   <block id="6789cbf331ef2c9b50d45082c81e74cb" category="paragraph">ONTAP 9.4 et versions ultérieures incluent les modifications suivantes pour l'assistance ADP :</block>
   <block id="4b72d9ad6a5a5828529f4266cc3f2713" category="list-text">Un disque et toutes ses partitions doivent être la propriété de nœuds d'une même paire haute disponibilité. La propriété de partition ou de disque au sein d'un seul disque ne peut pas être mélangée entre la paire haute disponibilité locale et le partenaire de reprise après incident ou le partenaire auxiliaire de reprise après incident.</block>
   <block id="352c5d749caa22e221b7fc037fede87d" category="paragraph">Exemple de configuration prise en charge :</block>
@@ -13340,4 +13292,73 @@
   <block id="ebbf46e9806730b0f0c4ca0133de2d34" category="open-title">Ajouter un commutateur à l'aide de SNMPv2 :</block>
   <block id="10982c02dbedeb50373ef205f82ca3c8" category="inline-link-macro">Gérez des sites MetroCluster avec System Manager</block>
   <block id="53eaf367aa3b61105b8ddce45278ab85" category="paragraph">Pour en savoir plus, consultez le <block ref="eef6283454e42ed2d47fdb00a9ff3e0c" category="inline-link-macro-rx"></block> documentation :</block>
+  <block id="e896a08242f1b8600bd891680083c89c" category="paragraph">Consultez ces directives avant d'utiliser les tableaux :</block>
+  <block id="11b0a2bdfcd224ea773788cafe8f7027" category="list-text">Si vous configurez le commutateur pour la transition FC vers IP MetroCluster, le port 5, le port 6, le port 13 ou le port 14 peuvent être utilisés pour connecter les interfaces de cluster locales du nœud FC MetroCluster. Reportez-vous à la <block ref="46a459674905c476821f71bc8486a4ba" category="inline-link-macro-rx"></block> et les fichiers de câblage générés pour plus de détails sur le câblage de cette configuration. Pour toutes les autres connexions, vous pouvez utiliser les affectations d'utilisation des ports répertoriées dans les tableaux.</block>
+  <block id="96072cdace8aeeb7214cc70597039994" category="section-title">Utilisation des ports pour les systèmes FAS9000 ou AFF A700 et un commutateur Cisco 3132Q-V.</block>
+  <block id="e0bf993f0bc1586df5f9dfb72954e8da" category="section-title">Utilisation des ports pour les systèmes AFF A800 ou ASA A800 et un commutateur Cisco 3132Q-V.</block>
+  <block id="91166ddb2661684df8dbc56e903ec043" category="paragraph">Les configurations suivantes ne sont actuellement pas prises en charge :</block>
+  <block id="ffbf0166c7ab0c630d8081caba93b8ff" category="list-text">La connexion d'une configuration MetroCluster à huit ou deux nœuds requiert ONTAP 9.14.1 ou version ultérieure et le fichier RCF version 2.00 ou version ultérieure.</block>
+  <block id="df1cd5b519ca6d9ac61c3fcdeed5dbc5" category="section-title">Câblage d'un AFF A150, ASA A150, FAS500f, AFF C250, ASA C250, système AFF A250 ou ASA A250 vers un commutateur NVIDIA SN2100</block>
+  <block id="b65df01fa47ee7a17ae4ac22e4f80fe1" category="image-alt">Câblage ip mcc AFF ASA a150 fas500f A250 C250 MSN2100</block>
+  <block id="600e74c5a86bfaafeac18b9626b2b791" category="section-title">Câblage d'un système FAS8300, AFF C400, ASA C400, AFF A400, ASA A400, FAS8700, FAS9000, AFF A700, AFF C800, ASA C800, AFF A800, ASA A800, FAS9500, AFF A900 ou ASA A900 vers un commutateur NVIDIA SN2100</block>
+  <block id="52447c97a913b0a7009beba2a860f2f1" category="image-alt">Câblage ip mcc fas8300 AFF ASA c400 a400 fas8700 fas9000 a700 a800 a900 fas9500 MSN2100</block>
+  <block id="2f37bf7d3a80ef892a37b5867710dc5e" category="paragraph">*Remarque 1* : si vous utilisez un adaptateur X91440A (40 Gbit/s), utilisez les ports e4a et e4e ou e4a et e8a. Si vous utilisez un adaptateur X91153A (100 Gbit/s), utilisez les ports e4a et e4b ou e4a et e8a.</block>
+  <block id="8232ac4b6380b290738aa1ce5cc7cff3" category="paragraph">Gardez une trace du groupe de ports MetroCluster (MetroCluster 1, MetroCluster 2, MetroCluster 3 ou MetroCluster 4). Vous en aurez besoin lorsque vous utilisez l'outil RcfFileGenerator comme décrit plus loin dans cette procédure de configuration.</block>
+  <block id="554d0ed2f8464fefa6da872d6dbcf5c5" category="list-text">Le fichier RCF version 2.10 ou ultérieure est requis pour le mode d'écorché 25G pour les liens ISL MetroCluster.</block>
+  <block id="5b43fcab432560bae73db4e0c9e34232" category="list-text">ONTAP 9.13.1 ou version ultérieure et le fichier RCF version 2.00 sont requis pour utiliser une plateforme autre que FAS8200 ou AFF A300 dans le groupe « MetroCluster 4 ».</block>
+  <block id="3c2d958a2069bca526b0229b6a1b15d8" category="section-title">Câblage d'un système AFF A150, ASA A150, FAS2750, AFF A220, FAS500f, système AFF C250, ASA C250, AFF A250 ou ASA A250 vers un switch Cisco 3232C ou Cisco 9336-FX2C</block>
+  <block id="0c52a66510db282f2898b1934e18c757" category="section-title">Câblage d'un système FAS8200 ou AFF A300 à un switch Cisco 3232C ou Cisco 9336C</block>
+  <block id="959103b0e0798459de77e2b5d8985ab3" category="paragraph">Si vous effectuez une mise à niveau à partir d'anciens fichiers RCF, la configuration du câblage peut utiliser des ports du groupe « MetroCluster 4 » (ports 25/26 et 29/30).</block>
+  <block id="dbbcebd42c4edb43711e86d3bbc61485" category="section-title">Câblage d'un système AFF A320, FAS8300, AFF C400, ASA C400, AFF A400, ASA A400, FAS8700, FAS9000, AFF A700, AFF C800 ASA C800, AFF A800, ASA A800, FAS9500, AFF A900, ou un système ASA A900 vers un switch Cisco 3232C ou Cisco 9336C-FX2</block>
+  <block id="905eeaf0eb85efa82c94d09cf33bd250" category="admonition">L'utilisation de ports dans le groupe « MetroCluster 4 » nécessite ONTAP 9.13.1 ou version ultérieure.</block>
+  <block id="57434776bd5888e009d9e57f22c69e23" category="doc">Attribution des ports de plate-forme pour un commutateur partagé Cisco 9336C-FX2</block>
+  <block id="732d615839cca3ffb6814dbae606c495" category="list-text">Au moins une configuration MetroCluster ou un groupe de reprise sur incident doit prendre en charge les tiroirs NS224 reliés par commutateur.</block>
+  <block id="3209e9c123d4238593063149c7f8b0e2" category="list-text">Les plateformes qui ne prennent pas en charge les tiroirs NS224 reliés par un commutateur peuvent uniquement être connectées comme une deuxième configuration MetroCluster ou comme un second groupe de reprise après incident.</block>
+  <block id="dae9a493a0381746910b46f271097afc" category="list-text">Le RcfFileGenerator affiche uniquement les plates-formes éligibles lorsque la première plate-forme est sélectionnée.</block>
+  <block id="dfaaea754370da30cfd269ee856da3a9" category="list-text">La connexion d'une configuration MetroCluster à huit ou deux nœuds requiert ONTAP 9.14.1 ou version ultérieure.</block>
+  <block id="b03c615d318e9480b137520def0c0019" category="section-title">Câblage d'un système AFF A320, AFF C400, ASA C400, AFF A400, ASA A400, AFF A700, AFF C800, ASA C800, AFF A800, AFF A900, ou du système ASA A900 vers un commutateur partagé Cisco 9336C-FX2</block>
+  <block id="6bb6a0936af73cac3f2bdbf32254d719" category="image-alt">câblage ip mcc a320 c400 a400 c800 a800 a900 vers le commutateur partagé cisco 9336c</block>
+  <block id="bf136b704de578c59a07363b76151378" category="section-title">Câblage d'un système AFF A150, ASA A150, FAS2750 ou AFF A220 vers un commutateur partagé Cisco 9336C-FX2</block>
+  <block id="dcbe5e1c651d61678fa6f79f5f231f44" category="image-alt">mcc ip reliant un AFF a150 ASA a150 fas27500 AFF a220 à un commutateur partagé cisco 9336c</block>
+  <block id="e5d9d3d0d01df5d39a8698af57def92a" category="section-title">Câblage d'un système FAS500f, AFF C250, ASA C250, AFF A250 ou ASA A250 à un commutateur partagé Cisco 9336C-FX2</block>
+  <block id="76df3d556d3a4275629b963054352251" category="image-alt">câblage ip mcc c250 ASA c250 a250 ASA a250 vers commutateur partagé cisco 9336c</block>
+  <block id="3fdaa78573cae6b8e4c297b899acfe37" category="section-title">Câblage entre un système FAS8200 ou AFF A300 et un commutateur partagé Cisco 9336C-FX2</block>
+  <block id="89d6082264fd0fa3fcf9fe31279df2a7" category="image-alt">câblage ip mcc fas8200 affa300 vers commutateur partagé cisco 9336c</block>
+  <block id="7cbcd9b9ad1f63a9723831b696a1d54d" category="section-title">Câblage d'un système FAS8300, FAS8700, FAS9000 ou FAS9500 à un commutateur partagé Cisco 9336C-FX2</block>
+  <block id="ae163524dd2fe8e287d9f71b5de5920f" category="image-alt">câblage ip mcc fas8300 fas8700 fas9000 9500 vers le commutateur partagé cisco 9336c</block>
+  <block id="82e2d7798ab15559f8ebbae8125f55c3" category="list-title">Consultez ces informations avant d'utiliser les tableaux :</block>
+  <block id="a5d0cab9bff9a930a5eb4ad5c7bce183" category="list-text">Si vous configurez le switch pour la transition MetroCluster FC vers IP, les ports suivants sont utilisés selon la plateforme cible que vous choisissez :</block>
+  <block id="f2a26c5fb823530f83a5b4d6bf512eb9" category="cell">Plate-forme cible</block>
+  <block id="c2a1880d9ec21424185dc32c708f7c2f" category="cell">FAS500f, AFF C250, ASA C250, AFF A250, ASA A250, FAS8300, AFF C400, ASA C400, AFF A400, ASA A400, ou FAS8700</block>
+  <block id="a346e4e54905b86ccf19d436cac4f72d" category="cell">Ports 1 à 6, 10 Gbits/s.</block>
+  <block id="520f683aecf042eb1afbf14be7588551" category="cell">Plateformes FAS8200 ou AFF A300</block>
+  <block id="81d990a756b6f5e5f14a9df8a16bbe34" category="cell">Ports 3 - 4 et 9 - 12, 10 Gbits/s.</block>
+  <block id="2df5ca4f8a203d43ca2d6ee0dcd3ffc5" category="list-title">Notes référencées dans les tableaux :</block>
+  <block id="afc53d7c7e597c30acb18fa3ed38cc86" category="list-text">*Remarque 1* : l'utilisation de ces ports nécessite une licence supplémentaire.</block>
+  <block id="87b750ce6fbbe87d62cbc08d2dc73e1f" category="list-text">*Remarque 2* : seul un MetroCluster à quatre nœuds utilisant des systèmes AFF A320 peut être connecté au commutateur.</block>
+  <block id="5e32839c7226a47e6623ae1f3ffc146d" category="paragraph">Les fonctionnalités nécessitant un cluster commuté ne sont pas prises en charge dans cette configuration, y compris la transition FC vers IP de MetroCluster et les procédures de mise à jour technologique.</block>
+  <block id="01ee52aecc80516ef9b51d0a149683a6" category="list-text">*Remarque 3* : le commutateur BES-53248 nécessite que tous les ports d'un groupe à quatre ports fonctionnent à la même vitesse. Pour connecter un mélange de plateformes AFF 150, ASA A150, FAS2750, AFF A220 et FAS500f, AFF C250, ASA C250, AFF A250 et ASA A250, vous devez utiliser des ports de commutation situés dans des groupes de quatre ports distincts. Si vous avez besoin de ce type de configuration, les conditions suivantes s'appliquent :</block>
+  <block id="23b8a1af268a574d717d9ea3d20d1b88" category="list-text">Dans le<block ref="166489b3c340ece1eccb5706fda90624" category="inline-link-rx"></block>, Les champs de la liste déroulante "MetroCluster 1" et "MetroCluster 2" sont remplis uniquement après avoir sélectionné une plate-forme pour MetroCluster 3 ou "MetroCluster 4".  Reportez-vous à la section <block ref="4dfd72a31c74d2e269d1ca49dcbd7291" category="inline-link-macro-rx"></block> pour plus d'informations sur l'utilisation des tables de ports.</block>
+  <block id="f94a1422b62d10932fbf032c0b5f1c48" category="list-text">Si les deux configurations MetroCluster utilisent la même plate-forme, NetApp vous recommande de sélectionner le groupe « MetroCluster 3 » pour une configuration et le groupe « MetroCluster 4 » pour l'autre. Si les plates-formes sont différentes, vous devez sélectionner « MetroCluster 3 » ou « MetroCluster 4 » pour la première configuration, puis sélectionner « MetroCluster 1 » ou « MetroCluster 2 » pour la deuxième configuration.</block>
+  <block id="67515cf8b1cb1eb3a194348da0494b5a" category="section-title">Câblage d'un système AFF A150, ASA A150, FAS2750, AFF A220, FAS500f, AFF C250, ASA C250, AFF A250 ou ASA A250 vers un commutateur Broadcom BES-53248</block>
+  <block id="c1362aea3362cced26c169c7f2579830" category="image-alt">mcc ip reliant un AFF ASA a150 a220 c250 a250 fas2750 à un commutateur broadcom bes 53248</block>
+  <block id="ae988cdaab88cda23ac7eae94e718156" category="section-title">Câblage d'un système FAS8200, AFF A300 ou AFF A320 à un commutateur Broadcom BES-53248</block>
+  <block id="5c48415a3384935ba5be90eee889bb15" category="section-title">Raccordement d'un système FAS8300, AFF C400, ASA C400, AFF A400, ASA A400 ou FAS8700 à un commutateur Broadcom BES-53248</block>
+  <block id="f9e62124423900674e7c280534c2b0d1" category="image-alt">mcc ip reliant un fas8300 a400 c400 ou fas8700 à un commutateur broadcom bes 53248</block>
+  <block id="5b5bc0c2a68a3a5df60e045184c265e7" category="paragraph">Reportez-vous à la section *commutateurs* du <block ref="41f66f34b3a905f864500c9319fdff8f" category="inline-link-macro-rx"></block> pour vérifier les émetteurs-récepteurs pris en charge.</block>
+  <block id="30ec0ec381148de730ef6f636244409c" category="paragraph">À partir de ONTAP 9.13.1, cette procédure est prise en charge dans les configurations MetroCluster IP dans lesquelles le MetroCluster et les tiroirs disques sont connectés aux mêmes commutateurs IP (une configuration de commutateur de stockage partagé).</block>
+  <block id="63d08c3cedf8143a5b62917cdffc9a26" category="image-alt">matrice de transition ip fc MetroCluster 914</block>
+  <block id="7411369ee6af7c3b06eeb0cb088ed313" category="list-text">Tous les nœuds de la configuration MetroCluster doivent exécuter la même version de ONTAP. Par exemple, si vous avez une configuration à huit nœuds, les huit nœuds doivent exécuter la même version de ONTAP.</block>
+  <block id="af03c8177e63c13156d2341adae52d1d" category="paragraph">Dans le cadre d'une procédure de mise à niveau, les contrôleurs sont remplacés par un nouveau modèle de contrôleur. Les modèles de tiroirs de stockage ne sont pas mis à niveau.</block>
+  <block id="a42deea73d6695bcde6da0ac8925f0f8" category="paragraph">Lorsque vous effectuez une mise à niveau du contrôleur, l'ancien et le nouveau type de plate-forme *doivent* correspondent.</block>
+  <block id="5fd3c01d6ba82ebe581c794d9a655304" category="list-text">Vous pouvez mettre à niveau un système FAS vers un système FAS ou un système AFF A-Series vers un système AFF A-Series.</block>
+  <block id="f4dbbbaca7fd3336a645956878f8c04c" category="list-text">Vous ne pouvez pas mettre à niveau un système FAS vers un système AFF A-Series ou un système AFF A-Series vers un système AFF C-Series.</block>
+  <block id="9d437f50da0d309aac4a2fd5117cc07f" category="paragraph">Par exemple, si la plateforme que vous souhaitez mettre à niveau est un système FAS8200, vous pouvez effectuer une mise à niveau vers un système FAS9000. Vous ne pouvez pas mettre à niveau un système FAS8200 vers un système AFF A700.</block>
+  <block id="78dd72417c3e7e39a5c94c9fe04d72d2" category="image-alt">mise à niveau ip MetroCluster tableau 914</block>
+  <block id="7e895ffe56c2c22085a060323bcc3b91" category="list-text">Tous les nœuds de la configuration MetroCluster doivent exécuter la même version de ONTAP. Par exemple, les nouveaux contrôleurs doivent exécuter la même version ONTAP que les anciens.</block>
+  <block id="4bdc0ece89d77527b0c94aa60d045b78" category="image-alt">tableau de mise à niveau de MetroCluster fc 914</block>
+  <block id="613e72a9b729773a1554cb0002fc99e8" category="list-text">Remarque 4 : les mises à niveau des contrôleurs sont prises en charge sur les systèmes exécutant ONTAP 9.13.1 ou version ultérieure.</block>
+  <block id="825d65b3b18d444d8008136946a33a99" category="list-text">Remarque 5 : les mises à niveau des contrôleurs sont prises en charge sur les systèmes exécutant ONTAP 9.14.1 ou version ultérieure.</block>
+  <block id="50338c34cfec6d9e54eae1256352e18d" category="image-alt">mise à jour technologique MetroCluster fc 914</block>
+  <block id="94487339ee219de4122a1e81d3919b34" category="admonition">Les disques de l'agrégat racine sont les seuls disques qui doivent être réaffectés pendant le processus de mise à niveau du contrôleur. La propriété des disques des agrégats de données est gérée dans le cadre de l'opération de basculement/rétablissement.</block>
 </blocks>
