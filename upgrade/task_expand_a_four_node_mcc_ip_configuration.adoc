@@ -20,15 +20,19 @@ Depuis ONTAP 9.9.1, vous pouvez ajouter quatre nouveaux nœuds à la configurati
 .Avant de commencer
 * L'ancien et le nouveau nœud doivent exécuter la même version de ONTAP.
 * Cette procédure décrit les étapes requises pour développer un groupe DR à quatre nœuds. Si vous disposez d'une configuration à huit nœuds (deux groupes DR), vous devez répéter la procédure complète pour chaque groupe DR.
-* Vous devez vous assurer que les anciens et nouveaux modèles de plate-forme sont pris en charge pour le mélange de plate-forme.
+* Vérifier que les anciens et nouveaux modèles de plate-forme sont pris en charge pour le mélange de plate-forme.
 +
 https://hwu.netapp.com["NetApp Hardware Universe"^]
 
-* Vous devez vous assurer que les anciens et les nouveaux modèles de plate-forme sont pris en charge par les commutateurs IP.
+* Vérifiez que les anciens et les nouveaux modèles de plate-forme sont pris en charge par les commutateurs IP.
 +
 https://hwu.netapp.com["NetApp Hardware Universe"^]
 
 * Les nouveaux nœuds doivent disposer d'un espace de stockage suffisant pour prendre en charge les données des anciens nœuds, ainsi que des disques adéquats pour les agrégats racine et les disques de spare.
+* Vérifiez qu'un domaine de diffusion par défaut est créé sur les anciens nœuds.
++
+Lorsque vous ajoutez de nouveaux nœuds à un cluster existant sans broadcast domain par défaut, les LIFs de node-management sont créées pour les nouveaux nœuds à l'aide d'UUID (Universal unique identifier) à la place des noms attendus. Pour plus d'informations, consultez l'article de la base de connaissances https://kb.netapp.com/onprem/ontap/os/Node_management_LIFs_on_newly-added_nodes_generated_with_UUID_names["Les LIF de gestion de nœuds sur les nouveaux nœuds ajoutés sont générées avec des noms UUID"^].
+
 
 
 

@@ -8736,8 +8736,6 @@
   <block id="b330eebf161ca27c703eccf6e8e36d29" category="summary">Vous pouvez ajouter quatre nouveaux nœuds à la configuration IP MetroCluster en tant que second groupe DR. Cela crée une configuration MetroCluster à huit nœuds.</block>
   <block id="a8307b4c5fa271005a1338d5b405ca1f" category="paragraph">Depuis ONTAP 9.9.1, vous pouvez ajouter quatre nouveaux nœuds à la configuration IP de MetroCluster en tant que second groupe de reprise après incident. Cela crée une configuration MetroCluster à huit nœuds.</block>
   <block id="44e7e75e628cd7549a2dac175d45b418" category="list-text">L'ancien et le nouveau nœud doivent exécuter la même version de ONTAP.</block>
-  <block id="8af994ab1dc202d685a253237ad12acd" category="list-text">Vous devez vous assurer que les anciens et nouveaux modèles de plate-forme sont pris en charge pour le mélange de plate-forme.</block>
-  <block id="b721d4593513d27cdfc55ebe6ceb044f" category="list-text">Vous devez vous assurer que les anciens et les nouveaux modèles de plate-forme sont pris en charge par les commutateurs IP.</block>
   <block id="2ee2465217913ae7b455ab4ef5e995e6" category="list-text">Les nouveaux nœuds doivent disposer d'un espace de stockage suffisant pour prendre en charge les données des anciens nœuds, ainsi que des disques adéquats pour les agrégats racine et les disques de spare.</block>
   <block id="83ea901534b27c16af49cdec25309a81" category="paragraph">dr_group_1-old</block>
   <block id="448197086f84c0166cecdd754aa5a117" category="paragraph">dr_group_2-new</block>
@@ -13361,4 +13359,9 @@
   <block id="825d65b3b18d444d8008136946a33a99" category="list-text">Remarque 5 : les mises à niveau des contrôleurs sont prises en charge sur les systèmes exécutant ONTAP 9.14.1 ou version ultérieure.</block>
   <block id="50338c34cfec6d9e54eae1256352e18d" category="image-alt">mise à jour technologique MetroCluster fc 914</block>
   <block id="94487339ee219de4122a1e81d3919b34" category="admonition">Les disques de l'agrégat racine sont les seuls disques qui doivent être réaffectés pendant le processus de mise à niveau du contrôleur. La propriété des disques des agrégats de données est gérée dans le cadre de l'opération de basculement/rétablissement.</block>
+  <block id="67c0d618a712fed303dbbf2eaf09695a" category="list-text">Vérifiez qu'un domaine de diffusion par défaut est créé sur les anciens nœuds.</block>
+  <block id="4fff770200a5d089fd8db4325afa94fc" category="inline-link">Les LIF de gestion de nœuds sur les nouveaux nœuds ajoutés sont générées avec des noms UUID</block>
+  <block id="fdf5e2eb479f201de0c9c62e9a32e769" category="paragraph">Lorsque vous ajoutez de nouveaux nœuds à un cluster existant sans broadcast domain par défaut, les LIFs de node-management sont créées pour les nouveaux nœuds à l'aide d'UUID (Universal unique identifier) à la place des noms attendus. Pour plus d'informations, consultez l'article de la base de connaissances<block ref="4808e3ddae1b3b2c14dc148b67bd36ea" category="inline-link-rx"></block>.</block>
+  <block id="f6410291c32fa961402f5a821c332f6c" category="list-text">Vérifier que les anciens et nouveaux modèles de plate-forme sont pris en charge pour le mélange de plate-forme.</block>
+  <block id="e220a628f1c5f8fb65824aaeb387520e" category="list-text">Vérifiez que les anciens et les nouveaux modèles de plate-forme sont pris en charge par les commutateurs IP.</block>
 </blocks>

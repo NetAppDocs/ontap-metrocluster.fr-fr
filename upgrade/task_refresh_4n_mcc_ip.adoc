@@ -41,6 +41,10 @@ NOTE: Si vous actualisez les deux groupes DR, il se peut que la combinaison de p
 
 
 .Étapes
+. Vérifiez qu'un domaine de diffusion par défaut est créé sur les anciens nœuds.
++
+Lorsque vous ajoutez de nouveaux nœuds à un cluster existant sans broadcast domain par défaut, les LIFs de node-management sont créées pour les nouveaux nœuds à l'aide d'UUID (Universal unique identifier) à la place des noms attendus. Pour plus d'informations, consultez l'article de la base de connaissances https://kb.netapp.com/onprem/ontap/os/Node_management_LIFs_on_newly-added_nodes_generated_with_UUID_names["Les LIF de gestion de nœuds sur les nouveaux nœuds ajoutés sont générées avec des noms UUID"^].
+
 . Collecte des informations des anciens nœuds.
 +
 À ce stade, la configuration à quatre nœuds apparaît comme illustré sur l'image suivante :
