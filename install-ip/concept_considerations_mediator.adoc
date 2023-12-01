@@ -55,8 +55,14 @@ Un MAUSO n'est lancé que dans les scénarios suivants :
 * La mise en miroir SyncMirror et la mise en miroir reprise après incident du cache non volatile de chaque nœud sont opérationnelles, et les caches et les miroirs sont synchronisés au moment de la panne.
 * Aucun des nœuds du site survivant n'est en état de basculement.
 * En cas d'incident sur site. Une catastrophe de site est une défaillance de *tous* nœuds sur le même site.
++
+
+NOTE: À partir de ONTAP 9.13.1, vous pouvez modifier le comportement pour initier une opération MAUSO en cas de défaillance du cluster *ou* d'une paire HA. Dans le cas d'une paire haute disponibilité, les deux nœuds doivent tomber en panne en même temps.
+
 * À partir de ONTAP 9.13.1, si les conditions ci-dessus sont remplies et qu'une panne de ventilateur ou de matériel entraîne un arrêt de l'environnement, par exemple une unité d'alimentation, une batterie NVRAM ou une défaillance de pulsation du processeur de service, ou une température élevée ou basse.
 
+
+Vous pouvez lancer un MAUSO pour des scénarios supplémentaires qui ne sont pas répertoriés ci-dessus. Pour plus d'informations, voir link:concept-risks-limitations-automatic-switchover.html["Risques et limitations liés à l'utilisation du basculement automatique forcé de MetroCluster"].
 
 Un MAUSO est *non* lancé dans les scénarios d'arrêt suivants :
 
@@ -70,6 +76,4 @@ Un MAUSO est *non* lancé dans les scénarios d'arrêt suivants :
 
 *Informations connexes*
 
-* link:concept-risks-limitations-automatic-switchover.html["Découvrez les risques et les limites de l'utilisation du basculement automatique forcé de MetroCluster"]
-* link:../manage/concept_understanding_mcc_data_protection_and_disaster_recovery.html#mediator-assisted-automatic-unplanned-switchover-in-metrocluster-ip-configurations["En savoir plus sur la gestion de MAUSO dans les configurations MetroCluster IP"]
-
+link:../manage/concept_understanding_mcc_data_protection_and_disaster_recovery.html#mediator-assisted-automatic-unplanned-switchover-in-metrocluster-ip-configurations["En savoir plus sur MAUSO dans les configurations MetroCluster IP"].

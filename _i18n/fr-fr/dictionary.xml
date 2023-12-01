@@ -522,8 +522,6 @@
   <block id="44b7f701c8b22fd32471d911de4c0984" category="paragraph">Suivez les instructions de la section <block ref="c355f6bb3dca677defb89e8a84e6c55b" category="inline-link-macro-rx"></block> Afin d'effectuer des opérations de rétablissement et de rétablissement en fonction de votre configuration MetroCluster.</block>
   <block id="e0b252916154b49ca991301bb62d8e77" category="summary">Il peut être nécessaire de mettre à niveau un fichier RCF sur un commutateur IP MetroCluster. Par exemple, une mise à niveau de ONTAP ou une mise à niveau du firmware du switch nécessite tous deux un nouveau fichier RCF.</block>
   <block id="56ba5c8d245e7af9f26245ccc8eddba9" category="doc">Mettre à niveau les fichiers RCF sur les commutateurs IP MetroCluster</block>
-  <block id="442c1b0de388e5078bf1b6c0bee713d7" category="section-title">Assurez-vous que le fichier RCF est pris en charge</block>
-  <block id="c5578900d835092e78f37c68ccc1b2ea" category="paragraph">Si vous modifiez la version de ONTAP en cours d'exécution sur les commutateurs, veillez à disposer d'un fichier RCF pris en charge pour cette version. Si vous utilisez le générateur FCR, le fichier RCF approprié sera généré pour vous.</block>
   <block id="bdff20b545d5f7f451d6cc86cddcd9d5" category="list-text">Utiliser les commandes suivantes des commutateurs pour vérifier la version du fichier RCF :</block>
   <block id="cb1e716ab831d1ef2a5741deabd44bd7" category="cell">À partir de ce commutateur...</block>
   <block id="5c0951f5a767642dcb5de6e5878a5032" category="cell">Exécutez cette commande...</block>
@@ -4573,7 +4571,6 @@
   <block id="eac95d67103889e23f4fae8c79139a7a" category="list-text">Dans la plupart des cas, l'affectation des disques et le partitionnement sont effectués automatiquement pendant les procédures de configuration.</block>
   <block id="bf17ab05d95b3cfd56763e2ed2c9c07d" category="admonition">Lors de la mise à niveau de ONTAP 9.4 vers 9.5, le système reconnaît les affectations de disques existantes.</block>
   <block id="5fafb49cc9fb9a65d03134ac546c84c0" category="section-title">Partitionnement automatique</block>
-  <block id="bd7fdcf8e3958a26cae80f44fe7019eb" category="paragraph">ADP est exécuté automatiquement lors de la configuration initiale de la plate-forme.</block>
   <block id="d80db6731d8005aabd1dad8b4bd740b7" category="paragraph">Vous pouvez partitionner automatiquement un maximum de 96 disques lors de l'installation. Vous pouvez ajouter des lecteurs supplémentaires après l'installation initiale.</block>
   <block id="8c27139a6a49272931ad3f34f0b1054e" category="section-title">Fonctionnement de l'affectation automatique « tiroir par tiroir »</block>
   <block id="7cf1eeb2e4f4fa2a69a78396893ace96" category="paragraph">Si chaque site est doté de quatre tiroirs externes, chaque tiroir est affecté à un nœud différent et à un pool différent, comme illustré ci-dessous :</block>
@@ -5952,7 +5949,6 @@
   <block id="93eb81c5bb51f5c82069014d257d73f7" category="section-title">Avant de commencer une procédure dans ce document</block>
   <block id="14192cce75fd2280d57cd86b8457d1e8" category="paragraph">Les exigences générales suivantes doivent être respectées avant d'effectuer cette tâche :</block>
   <block id="eec9a69f383dc26376611c0311190048" category="list-text">Avant l'installation, vous devez vous familiariser avec les considérations et les meilleures pratiques d'installation et de câblage des tiroirs disques pour votre modèle de tiroir disque.</block>
-  <block id="ae8995edf717de497e60100989504ef0" category="list-text">Tous les composants MictoCluster doivent être pris en charge.</block>
   <block id="46afce358fde8f707e4d3d83045d922c" category="paragraph">Dans le IMT, vous pouvez utiliser le champ solution de stockage pour sélectionner votre solution MetroCluster. Utilisez *Explorateur de composants* pour sélectionner les composants et la version ONTAP pour affiner votre recherche. Vous pouvez cliquer sur *Afficher les résultats* pour afficher la liste des configurations prises en charge qui correspondent aux critères.</block>
   <block id="7f96c284d8f2fd273d3fc8f28d037b35" category="list-text">Les termes « nœud » et « contrôleur » sont utilisés de manière interchangeable.</block>
   <block id="85977d467dedfc86d900cfc49456f320" category="paragraph">Vous pouvez tester une opération de basculement négociée (planifiée) pour confirmer la disponibilité des données sans interruption.</block>
@@ -12972,7 +12968,6 @@
   <block id="f624129c4d6772a2f62200de12382ad0" category="list-text">Déplacez tous les volumes de métadonnées MDV_CRS vers un autre groupe DR en suivant la procédure <block ref="9273ba8e8bd1c5c1cc0cd85662f27754" category="inline-link-macro-rx"></block> procédure.</block>
   <block id="112564590ec1ae4e651904cd571ed9d4" category="paragraph">Pour plus d'informations sur la configuration des ports, des LIF et du réseau dans ONTAP, reportez-vous à <block ref="378e9004462b7ecfad8256f25b57fbf6" category="inline-link-macro-rx"></block>.</block>
   <block id="347bde5f3be96b6c3eab8b4a360b9028" category="list-text">Attendez trente minutes, puis mettez tous les tiroirs de stockage, les commutateurs IP MetroCluster et les contrôleurs de stockage sous tension.</block>
-  <block id="6789cbf331ef2c9b50d45082c81e74cb" category="paragraph">ONTAP 9.4 et versions ultérieures incluent les modifications suivantes pour l'assistance ADP :</block>
   <block id="4b72d9ad6a5a5828529f4266cc3f2713" category="list-text">Un disque et toutes ses partitions doivent être la propriété de nœuds d'une même paire haute disponibilité. La propriété de partition ou de disque au sein d'un seul disque ne peut pas être mélangée entre la paire haute disponibilité locale et le partenaire de reprise après incident ou le partenaire auxiliaire de reprise après incident.</block>
   <block id="352c5d749caa22e221b7fc037fede87d" category="paragraph">Exemple de configuration prise en charge :</block>
   <block id="cd1c00b76cbbe512b20985ec2344b5ed" category="cell">Lecteur/partition</block>
@@ -13041,10 +13036,6 @@
   <block id="3e3df3be76a18ca2c89904765d97f078" category="list-text">Vérifier que le basculement est possible et que les nœuds sont connectés en exécutant la commande suivante sur les deux clusters :</block>
   <block id="3963205d7c5d1cb2f000d61f16c10f1d" category="paragraph">24 disques internes</block>
   <block id="d33f2a600ba4fe43084a26e95e4908c0" category="paragraph">*Informations connexes*</block>
-  <block id="33677e980c1bb7a6aad1c55805e512b3" category="inline-link-macro">Découvrez les risques et les limites de l'utilisation du basculement automatique forcé de MetroCluster</block>
-  <block id="8358918e22c23bbc5881522d821dd13e" category="list-text"><block ref="8358918e22c23bbc5881522d821dd13e" category="inline-link-macro-rx"></block></block>
-  <block id="e3aa563f27ef718a2d0767e57ad2f0c2" category="inline-link-macro">En savoir plus sur la gestion de MAUSO dans les configurations MetroCluster IP</block>
-  <block id="b1a9c412046cbd6accefdfa3f6f94916" category="list-text"><block ref="b1a9c412046cbd6accefdfa3f6f94916" category="inline-link-macro-rx"></block></block>
   <block id="7632b8724806890acaf96c668d641251" category="inline-link-macro">En savoir plus sur l'affectation automatique des disques et les systèmes ADP dans les configurations MetroCluster IP</block>
   <block id="85488d881ebf03beb1eca3be4b5fda44" category="paragraph">Votre version de ONTAP doit prendre en charge le mélange des tiroirs. Reportez-vous à la<block ref="e78382cc6f841e7f00c97b18a2e30f41" category="inline-link-rx"></block> Pour vérifier si votre version de ONTAP prend en charge la combinaison de tiroirs.</block>
   <block id="5fdc7ff67ace146413ecd7d44157aca4" category="paragraph">Pour plus de détails sur le mélange des étagères, voir<block ref="532c1f47a9370f9e21538610051f3830" category="inline-link-rx"></block></block>
@@ -13187,7 +13178,6 @@
   <block id="357559d73c5bb22e54ab3aeafca1013b" category="sidebar">Installez le pack logiciel</block>
   <block id="3689ab983cde586722e4881cdbf1822a" category="sidebar">Mettre à niveau l'hôte</block>
   <block id="3a234e68f5d62ce2d6b3d068c61605c3" category="paragraph">Les améliorations apportées au logiciel MetroCluster Tiebreaker sont fournies avec chaque version. Voici les nouveautés des dernières versions de MetroCluster Tiebreaker.</block>
-  <block id="5801d3e28a980df8d84e60a3eea8469c" category="paragraph">Depuis ONTAP 9.4, les configurations IP de MetroCluster prennent en charge les nouvelles installations à l'aide du partitionnement de disque avancé (ADP). Dans la plupart des configurations, le partitionnement et l'affectation des disques sont effectués automatiquement lors de la configuration initiale des sites MetroCluster.</block>
   <block id="e6ca378bbb6d15fd110961cea50b2eb0" category="section-title">Affectation des disques et des ADP sur les systèmes AFF C250, AFF A250 et FAS500f</block>
   <block id="91d96627fcbee13a9d474587060d13f8" category="paragraph">Les mêmes règles et instructions d'affectation des disques pour les systèmes AFF C250 et AFF A250 s'appliquent aux systèmes FAS500f. Pour plus d'informations sur l'affectation des disques sur les systèmes FAS500f, reportez-vous au <block ref="62481755a241b3efc5c68e4e7dd00bb5" category="inline-xref-macro-rx"></block> tableau.</block>
   <block id="d39fc122b5bc72857d3bc1cb28b2528b" category="summary">Vous devrez peut-être changer le fournisseur d'un commutateur FC (Cisco vers Brocade ou inversement), changer le modèle du commutateur, ou les deux.</block>
@@ -13364,4 +13354,19 @@
   <block id="fdf5e2eb479f201de0c9c62e9a32e769" category="paragraph">Lorsque vous ajoutez de nouveaux nœuds à un cluster existant sans broadcast domain par défaut, les LIFs de node-management sont créées pour les nouveaux nœuds à l'aide d'UUID (Universal unique identifier) à la place des noms attendus. Pour plus d'informations, consultez l'article de la base de connaissances<block ref="4808e3ddae1b3b2c14dc148b67bd36ea" category="inline-link-rx"></block>.</block>
   <block id="f6410291c32fa961402f5a821c332f6c" category="list-text">Vérifier que les anciens et nouveaux modèles de plate-forme sont pris en charge pour le mélange de plate-forme.</block>
   <block id="e220a628f1c5f8fb65824aaeb387520e" category="list-text">Vérifiez que les anciens et les nouveaux modèles de plate-forme sont pris en charge par les commutateurs IP.</block>
+  <block id="56f1ca12910041b73ea6fcc9bc18a954" category="paragraph">Depuis ONTAP 9.4, les configurations IP de MetroCluster prennent en charge les nouvelles installations à l'aide du partitionnement de disque avancé (ADP).</block>
+  <block id="72a38a5af8be1c706e478add3356ba90" category="paragraph">Lorsque vous utilisez ADP avec des configurations MetroCluster IP, vous devez prendre en compte les considérations suivantes :</block>
+  <block id="3cae0a231aac97485961fb33cea76ca2" category="list-text">ONTAP 9.4 et versions ultérieures sont nécessaires pour utiliser ADP avec les configurations IP MetroCluster.</block>
+  <block id="959bb45d9851a2b3efaeb05db74e0a80" category="list-text">ADPv2 est pris en charge dans les configurations MetroCluster IP.</block>
+  <block id="a393732e5defe7b7a921a586e53ec51d" category="list-text">L'agrégat racine doit se trouver dans la partition 3 pour tous les noeuds des deux sites.</block>
+  <block id="9ef6aecb7d030435d81fe80cacca477e" category="list-text">Le partitionnement et l'affectation des disques s'effectuent automatiquement lors de la configuration initiale des sites MetroCluster.</block>
+  <block id="82d98fe86a7b6dbc49abc0913b83f2ac" category="paragraph">ADP est exécuté automatiquement lors de la configuration initiale du système.</block>
+  <block id="2785e39cd183c09c66a74a7aad221542" category="admonition">À partir de ONTAP 9.13.1, vous pouvez modifier le comportement pour initier une opération MAUSO en cas de défaillance du cluster *ou* d'une paire HA. Dans le cas d'une paire haute disponibilité, les deux nœuds doivent tomber en panne en même temps.</block>
+  <block id="3ea08f3e8da19255d966a6ac28c7c9cf" category="paragraph">Vous pouvez lancer un MAUSO pour des scénarios supplémentaires qui ne sont pas répertoriés ci-dessus. Pour plus d'informations, voir <block ref="a3a7e72ce1f5f993a44ac5e44397056b" category="inline-link-macro-rx"></block>.</block>
+  <block id="e0907a528c832799b0d1ad87758c5f86" category="inline-link-macro">En savoir plus sur MAUSO dans les configurations MetroCluster IP</block>
+  <block id="b5a3168b79ae5368d7ec0db231f9a1fc" category="paragraph"><block ref="715b35e54e91f145a6041ef6c0fd6dbb" category="inline-link-macro-rx"></block>.</block>
+  <block id="2d183ed725bd043df73111a219fb4c10" category="list-text">Tous les composants MetroCluster doivent être pris en charge.</block>
+  <block id="a6ab1915ab3c895c47d4e04f54324428" category="paragraph">Il peut être nécessaire de mettre à niveau un fichier RCF sur un commutateur IP MetroCluster. Par exemple, si la version du fichier RCF exécutée sur les switchs n'est pas prise en charge par la version ONTAP, la version du firmware du switch ou les deux.</block>
+  <block id="3c895cdeb8d2489a220d797e54ab8b6f" category="section-title">Vérifiez que le fichier RCF est pris en charge</block>
+  <block id="aa71e3dcbe0cdabbe4cce28385ab2fd6" category="paragraph">Si vous modifiez la version de ONTAP ou la version du firmware du commutateur, vérifiez que vous disposez d'un fichier RCF pris en charge par cette version. Si vous utilisez le générateur FCR, le fichier RCF approprié sera généré pour vous.</block>
 </blocks>

@@ -11,10 +11,14 @@ summary: 'Depuis ONTAP 9.4, les configurations MetroCluster IP prennent en charg
 
 
 [role="lead"]
-Depuis ONTAP 9.4, les configurations IP de MetroCluster prennent en charge les nouvelles installations à l'aide du partitionnement de disque avancé (ADP). Dans la plupart des configurations, le partitionnement et l'affectation des disques sont effectués automatiquement lors de la configuration initiale des sites MetroCluster.
+Depuis ONTAP 9.4, les configurations IP de MetroCluster prennent en charge les nouvelles installations à l'aide du partitionnement de disque avancé (ADP).
 
-ONTAP 9.4 et versions ultérieures incluent les modifications suivantes pour l'assistance ADP :
+Lorsque vous utilisez ADP avec des configurations MetroCluster IP, vous devez prendre en compte les considérations suivantes :
 
+* ONTAP 9.4 et versions ultérieures sont nécessaires pour utiliser ADP avec les configurations IP MetroCluster.
+* ADPv2 est pris en charge dans les configurations MetroCluster IP.
+* L'agrégat racine doit se trouver dans la partition 3 pour tous les noeuds des deux sites.
+* Le partitionnement et l'affectation des disques s'effectuent automatiquement lors de la configuration initiale des sites MetroCluster.
 * Les affectations de disque du pool 0 sont effectuées en usine.
 * La racine non symétrisée est créée à l'usine.
 * L'affectation de la partition des données se fait sur le site du client pendant la procédure de configuration.
@@ -50,7 +54,7 @@ NOTE: Lors de la mise à niveau de ONTAP 9.4 vers 9.5, le système reconnaît le
 
 == Partitionnement automatique
 
-ADP est exécuté automatiquement lors de la configuration initiale de la plate-forme.
+ADP est exécuté automatiquement lors de la configuration initiale du système.
 
 
 NOTE: Depuis ONTAP 9.5, l'assignation automatique des disques doit être activée avec `storage disk option modify -autoassign on` commande.
