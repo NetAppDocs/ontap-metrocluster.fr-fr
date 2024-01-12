@@ -146,14 +146,16 @@ NOTE: Vous ne déconnectez que les connexions qui n'utilisent pas le même port 
 Déposer les connexions dans l'ordre suivant :
 
 +
-** Si les interfaces de cluster locales sont connectées à un commutateur :
+.. Modifier toutes les LIFs de cluster pour désactiver auto-revert :
 +
-*** Déconnectez les interfaces locales du cluster
-*** Déconnectez les liens ISL locaux du cluster
-
-
-** Déconnectez les interfaces IP MetroCluster
-** Déconnectez les liens ISL MetroCluster
+[source, asciidoc]
+----
+net int modify -vserver <vserver_name> -lif <lif_name> -auto-revert false
+----
+.. Déconnectez les interfaces locales du cluster
+.. Déconnectez les liens ISL locaux du cluster
+.. Déconnectez les interfaces IP MetroCluster
+.. Déconnectez les liens ISL MetroCluster
 +
 Dans l'exemple <<port_usage_worksheet>>, les commutateurs ne changent pas. Les liens ISL de MetroCluster sont déplacés et doivent être déconnectés. Vous n'avez pas besoin de déconnecter les connexions marquées en vert sur la feuille de travail.
 
