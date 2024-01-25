@@ -120,13 +120,15 @@ Le tableau ci-dessous montre l'état (en ligne ou hors ligne) d'un agrégat non 
 |===
 
 
-| Type de basculement | État 
+| Type de basculement | État de la configuration FC MetroCluster | État de configuration IP MetroCluster 
 
 
  a| 
 Basculement négocié (NSO)
  a| 
 En ligne
+ a| 
+Hors ligne (Remarque 1)
 
 
 
@@ -134,6 +136,8 @@ En ligne
 Basculement automatique non planifié (AUSO)
  a| 
 En ligne
+ a| 
+Hors ligne (Remarque 1)
 
 
 
@@ -143,8 +147,14 @@ Basculement non planifié (USO)
 * Si le stockage n'est pas disponible : hors ligne
 * Si le stockage est disponible : en ligne
 
+ a| 
+Hors ligne (Remarque 1)
 
 |===
+*Remarque 1* : dans les configurations MetroCluster IP, une fois le basculement terminé, vous pouvez mettre manuellement les agrégats sans miroir en ligne.
+
+En savoir plus sur <<Différences de basculement entre les configurations FC et IP de MetroCluster>>.
+
 
 NOTE: Après un basculement, si l'agrégat sans miroir est au niveau du nœud partenaire de reprise après incident et qu'une panne de lien ISL (Inter-switch Link) se produit, ce nœud local risque d'échouer.
 

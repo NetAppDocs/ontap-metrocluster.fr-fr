@@ -613,7 +613,7 @@ Plusieurs agrégats de données
  a| 
 Depuis n'importe quelle invite de nœud, configurer MetroCluster :
 
-`metrocluster configure _node-name_`
+`metrocluster configure <node-name>`
 
 
 NOTE: Vous devez exécuter `metrocluster configure` et *pas* `metrocluster configure -refresh true`
@@ -632,7 +632,7 @@ Vous devez répondre avec `y` lorsque vous êtes invité à continuer en mode av
 
 .. Configurez le MetroCluster avec le `-allow-with-one-aggregate true` paramètre :
 +
-`metrocluster configure -allow-with-one-aggregate true _node-name_`
+`metrocluster configure -allow-with-one-aggregate true -node-name <node-name>`
 
 .. Retour au niveau de privilège admin :
 +
@@ -720,6 +720,13 @@ Do you want to continue? {y|n}: y
 
 cluster_A::>
 ....
+. Vérifier que tous les nœuds du cluster fonctionnent correctement :
++
+`cluster show`
+
++
+La sortie doit s'afficher `true` pour le `health` pour tous les nœuds.
+
 . Vérifier que le basculement est possible et que les nœuds sont connectés en exécutant la commande suivante sur les deux clusters :
 +
 `storage failover show`
@@ -736,6 +743,18 @@ Node_FC_2      Node_FC_1              true      Connected to Node_FC_1
 Node_IP_1      Node_IP_2              true      Connected to Node_IP_2
 Node_IP_2      Node_IP_1              true      Connected to Node_IP_1
 ----
+. Vérifier que tous les disques connectés aux nœuds IP MetroCluster nouvellement joints sont présents :
++
+`disk show`
+
+. Vérifiez l'état de santé de la configuration MetroCluster en exécutant les commandes suivantes :
++
+.. `metrocluster check run`
+.. `metrocluster check show`
+.. `metrocluster interconnect mirror show`
+.. `metrocluster interconnect adapter show`
+
+
 . Déplacez les volumes MDV_CRS des anciens nœuds vers les nouveaux nœuds du privilège avancé.
 +
 .. Afficher les volumes pour identifier les volumes MDV :

@@ -13,13 +13,13 @@ summary: Vous pouvez ajouter quatre nouveaux nœuds à la configuration IP Metro
 [role="lead"]
 Selon votre version de ONTAP, vous pouvez étendre votre configuration MetroCluster IP en ajoutant quatre nouveaux nœuds en tant que nouveau groupe de reprise sur incident.
 
-À partir de ONTAP 9.13.1, vous pouvez ajouter quatre nouveaux nœuds à la configuration IP de MetroCluster en tant que troisième groupe de reprise sur incident. Une configuration MetroCluster à douze nœuds est alors créée.
+À partir de ONTAP 9.13.1, vous pouvez développer temporairement une configuration MetroCluster à huit nœuds pour actualiser les contrôleurs et le stockage. Voir link:https://docs.netapp.com/us-en/ontap-metrocluster/upgrade/task_refresh_4n_mcc_ip.html["Actualisation d'une configuration IP MetroCluster à quatre ou huit nœuds (ONTAP 9.8 et versions ultérieures)"] pour en savoir plus.
 
 Depuis ONTAP 9.9.1, vous pouvez ajouter quatre nouveaux nœuds à la configuration IP de MetroCluster en tant que second groupe de reprise après incident. Cela crée une configuration MetroCluster à huit nœuds.
 
 .Avant de commencer
 * L'ancien et le nouveau nœud doivent exécuter la même version de ONTAP.
-* Cette procédure décrit les étapes requises pour développer un groupe DR à quatre nœuds. Si vous disposez d'une configuration à huit nœuds (deux groupes DR), vous devez répéter la procédure complète pour chaque groupe DR.
+* Cette procédure décrit les étapes requises pour ajouter un groupe DR à quatre nœuds à une configuration IP MetroCluster existante. Si vous actualisez une configuration à huit nœuds, vous devez répéter l'intégralité de la procédure pour chaque groupe de reprise après incident, en l'ajoutant un à la fois.
 * Vérifier que les anciens et nouveaux modèles de plate-forme sont pris en charge pour le mélange de plate-forme.
 +
 https://hwu.netapp.com["NetApp Hardware Universe"^]

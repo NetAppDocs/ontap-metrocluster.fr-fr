@@ -1942,6 +1942,9 @@ Port ISL 8
 
 Les tableaux présentent le nombre maximal de configurations prises en charge, avec huit modules de contrôleur dans deux groupes de reprise sur incident. Pour les configurations plus petites, ignorez les lignes des modules de contrôleur supplémentaires.
 
+
+NOTE: Pour Cisco 9132T, voir <<cisco_9132t_port,Utilisation du port Cisco 9132T dans une configuration MetroCluster exécutant ONTAP 9.4 ou une version ultérieure>>.
+
 |===
 
 
@@ -2543,327 +2546,6 @@ Port d de l'adaptateur HBA
 -
  a| 
 32
-
-|===
-|===
-
-
-4+| Cisco 9132T 
-
-
-4+| Module MDS 1 
-
-
-| Composant | Port | Interrupteur 1 | Contacteur 2 
-
-
- a| 
-controller_x_1
- a| 
-Port FC-VI a
- a| 
-1
- a| 
--
-
-
-
- a| 
-Port FC-VI b
- a| 
--
- a| 
-1
-
-
-
- a| 
-Port c FC-VI
- a| 
-2
- a| 
--
-
-
-
- a| 
-Port FC-VI d
- a| 
--
- a| 
-2
-
-
-
- a| 
-Port a du HBA
- a| 
-3
- a| 
--
-
-
-
- a| 
-Port b de l'adaptateur HBA
- a| 
--
- a| 
-3
-
-
-
- a| 
-Port c de l'adaptateur HBA
- a| 
-4
- a| 
--
-
-
-
- a| 
-Port d de l'adaptateur HBA
- a| 
--
- a| 
-4
-
-
-
- a| 
-controller_x_2
- a| 
-Port FC-VI a
- a| 
-5
- a| 
--
-
-
-
- a| 
-Port FC-VI b
- a| 
--
- a| 
-5
-
-
-
- a| 
-Port c FC-VI
- a| 
-6
- a| 
--
-
-
-
- a| 
-Port FC-VI d
- a| 
--
- a| 
-6
-
-
-
- a| 
-Port a du HBA
- a| 
-7
- a| 
--
-
-
-
- a| 
-Port b de l'adaptateur HBA
- a| 
--
- a| 
-7
-
-
-
- a| 
-Port c de l'adaptateur HBA
- a| 
-8
- a| 
--
-
-
-
- a| 
-Port d de l'adaptateur HBA
- a| 
--
- a| 
-8
-
-
-
-4+| Module MDS 2 
-
-
- a| 
-Composant
- a| 
-Port
- a| 
-Interrupteur 1
- a| 
-Contacteur 2
-
-
-
- a| 
-controller_x_3
- a| 
-Port FC-VI a
- a| 
-1
- a| 
--
-
-
-
- a| 
-Port FC-VI b
- a| 
--
- a| 
-1
-
-
-
- a| 
-Port c FC-VI
- a| 
-2
- a| 
--
-
-
-
- a| 
-Port FC-VI d
- a| 
--
- a| 
-2
-
-
-
- a| 
-Port a du HBA
- a| 
-3
- a| 
--
-
-
-
- a| 
-Port b de l'adaptateur HBA
- a| 
--
- a| 
-3
-
-
-
- a| 
-Port c de l'adaptateur HBA
- a| 
-4
- a| 
--
-
-
-
- a| 
-Port d de l'adaptateur HBA
- a| 
--
- a| 
-4
-
-
-
- a| 
-controller_x_4
- a| 
-Port FC-VI a
- a| 
-5
- a| 
--
-
-
-
- a| 
-Port FC-VI b
- a| 
--
- a| 
-5
-
-
-
- a| 
-Port c FC-VI
- a| 
-6
- a| 
--
-
-
-
- a| 
-Port FC-VI d
- a| 
--
- a| 
-6
-
-
-
- a| 
-Port a du HBA
- a| 
-7
- a| 
--
-
-
-
- a| 
-Port b de l'adaptateur HBA
- a| 
--
- a| 
-7
-
-
-
- a| 
-Port c de l'adaptateur HBA
- a| 
-8
- a| 
--
-
-
-
- a| 
-Port d de l'adaptateur HBA
- a| 
--
- a| 
-8
 
 |===
 
@@ -3444,96 +3126,6 @@ FC2
 
 |===
 Des ponts supplémentaires pour un deuxième groupe de reprise sur incident ou une deuxième configuration MetroCluster peuvent être connectés en utilisant les ports 33 à 40 suivant le même modèle.
-
-|===
-
-
-4+| Cisco 9132T 
-
-
-| FibreBridge 7500 avec deux ports FC | Port | Commutateur | Contacteur 2 
-
-
- a| 
-bridge_x_1a
- a| 
-FC1
- a| 
-9
- a| 
--
-
-
-
- a| 
-FC2
- a| 
--
- a| 
-9
-
-
-
- a| 
-bridge_x_1b
- a| 
-FC1
- a| 
-10
- a| 
--
-
-
-
- a| 
-FC2
- a| 
--
- a| 
-10
-
-
-
- a| 
-bridge_x_2a
- a| 
-FC1
- a| 
-11
- a| 
--
-
-
-
- a| 
-FC2
- a| 
--
- a| 
-11
-
-
-
- a| 
-bridge_x_2b
- a| 
-FC1
- a| 
-12
- a| 
--
-
-
-
- a| 
-FC2
- a| 
--
- a| 
-12
-
-|===
-Des ponts supplémentaires pour un deuxième groupe de reprise sur incident ou une deuxième configuration MetroCluster peuvent être connectés en utilisant les mêmes numéros de port sur le deuxième module MDS.
 
 |===
 
@@ -4277,6 +3869,9 @@ Des ponts supplémentaires peuvent être connectés à l'aide des ports 25 à 48
 
 Le tableau suivant montre l'utilisation des ports ISL. L'utilisation des ports ISL est identique sur tous les commutateurs de la configuration.
 
+
+NOTE: Pour Cisco 9132T, voir <<cisco_9132t_port_isl,Utilisation du port ISL pour Cisco 9132T dans une configuration MetroCluster exécutant ONTAP 9.1 ou une version ultérieure>>.
+
 |===
 
 
@@ -4371,34 +3966,656 @@ ISL 4
  a| 
 48
 
+|===
+
+
+== Utilisation des ports Cisco 9132T dans des configurations MetroCluster à quatre et huit nœuds exécutant ONTAP 9.4 et versions ultérieures
+
+Le tableau suivant indique l'utilisation des ports sur un commutateur Cisco 9132T. Le tableau présente le nombre maximum de configurations prises en charge avec quatre et huit modules de contrôleur dans deux groupes de reprise sur incident.
+
+
+NOTE: Pour les configurations à huit nœuds, vous devez effectuer la segmentation manuellement, car les CFR ne sont pas fournis.
+
+|===
+
+
+7+| Configurations utilisant FibreBridge 7500N ou 7600N utilisant les deux ports FC (FC1 et FC2) 
+
+
+7+| MetroCluster 1 ou DR Groupe 1 
+
+
+4+|  2+| Quatre nœuds | Huit nœuds 
+
+
+2+| Composant | Port | Se connecte au commutateur FC... | 9132T (1 LEM) | 9132T (2 LEM) | 9132T (2 LEM) 
 
 
  a| 
-Cisco 9132T
+controller_x_1
  a| 
-ISL 1
+Port FC-VI a
  a| 
-Port 13 du module MDS 1
-
-
-
+1
  a| 
-ISL 2
+LEM1-1
  a| 
-Port 14 du module MDS 1
-
-
-
+LEM1-1
  a| 
-ISL 3
- a| 
-Port 15 du module MDS 1
+LEM1-1
 
 
 
  a| 
-ISL 4
+Port FC-VI b
  a| 
-Port 16 du module MDS 1
+2
+ a| 
+LEM1-1
+ a| 
+LEM1-1
+ a| 
+LEM1-1
 
+
+
+ a| 
+Port c FC-VI
+ a| 
+1
+ a| 
+LEM1-2
+ a| 
+LEM1-2
+ a| 
+LEM1-2
+
+
+
+ a| 
+Port FC-VI d
+ a| 
+2
+ a| 
+LEM1-2
+ a| 
+LEM1-2
+ a| 
+LEM1-2
+
+
+
+ a| 
+Port a du HBA
+ a| 
+1
+ a| 
+LEM1-5
+ a| 
+LEM1-5
+ a| 
+LEM1-3
+
+
+
+ a| 
+Port b de l'adaptateur HBA
+ a| 
+2
+ a| 
+LEM1-5
+ a| 
+LEM1-5
+ a| 
+LEM1-3
+
+
+
+ a| 
+Port c de l'adaptateur HBA
+ a| 
+1
+ a| 
+LEM1-6
+ a| 
+LEM1-6
+ a| 
+LEM1-4
+
+
+
+ a| 
+Port d de l'adaptateur HBA
+ a| 
+2
+ a| 
+LEM1-6
+ a| 
+LEM1-6
+ a| 
+LEM1-4
+
+
+
+ a| 
+controller_x_2
+ a| 
+Port FC-VI a
+ a| 
+1
+ a| 
+LEM1-7
+ a| 
+LEM1-7
+ a| 
+LEM1-5
+
+
+
+ a| 
+Port FC-VI b
+ a| 
+2
+ a| 
+LEM1-7
+ a| 
+LEM1-7
+ a| 
+LEM1-5
+
+
+
+ a| 
+Port c FC-VI
+ a| 
+1
+ a| 
+LEM1-8
+ a| 
+LEM1-8
+ a| 
+LEM1-6
+
+
+
+ a| 
+Port FC-VI d
+ a| 
+2
+ a| 
+LEM1-8
+ a| 
+LEM1-8
+ a| 
+LEM1-6
+
+
+
+ a| 
+Port a du HBA
+ a| 
+1
+ a| 
+LEM1-11
+ a| 
+LEM1-11
+ a| 
+LEM1-7
+
+
+
+ a| 
+Port b de l'adaptateur HBA
+ a| 
+2
+ a| 
+LEM1-11
+ a| 
+LEM1-11
+ a| 
+LEM1-7
+
+
+
+ a| 
+Port c de l'adaptateur HBA
+ a| 
+1
+ a| 
+LEM1-12
+ a| 
+LEM1-12
+ a| 
+LEM1-8
+
+
+
+ a| 
+Port d de l'adaptateur HBA
+ a| 
+2
+ a| 
+LEM1-12
+ a| 
+LEM1-12
+ a| 
+LEM1-8
+
+
+
+7+| MetroCluster 2 ou DR Groupe 2 
+
+
+ a| 
+controller_x_3
+ a| 
+Port FC-VI a
+ a| 
+1
+|  |   a| 
+LEM2-1
+
+
+
+ a| 
+Port FC-VI b
+ a| 
+2
+|  |   a| 
+LEM2-1
+
+
+
+ a| 
+Port c FC-VI
+ a| 
+1
+|  |   a| 
+LEM2-2
+
+
+
+ a| 
+Port FC-VI d
+ a| 
+2
+|  |   a| 
+LEM2-2
+
+
+
+ a| 
+Port a du HBA
+ a| 
+1
+|  |   a| 
+LEM2-3
+
+
+
+ a| 
+Port b de l'adaptateur HBA
+ a| 
+2
+|  |   a| 
+LEM2-3
+
+
+
+ a| 
+Port c de l'adaptateur HBA
+ a| 
+1
+|  |   a| 
+LEM2-4
+
+
+
+ a| 
+Port d de l'adaptateur HBA
+ a| 
+2
+|  |   a| 
+LEM2-4
+
+
+
+ a| 
+controller_x_4
+ a| 
+Port a du FC-VI-1
+ a| 
+1
+|  |   a| 
+LEM2-5
+
+
+
+ a| 
+Port b FC-VI-1
+ a| 
+2
+|  |   a| 
+LEM2-5
+
+
+
+ a| 
+Port c FC-VI-1
+ a| 
+1
+|  |   a| 
+LEM2-6
+
+
+
+ a| 
+Port d FC-VI-1
+ a| 
+2
+|  |   a| 
+LEM2-6
+
+
+
+ a| 
+Port a du HBA
+ a| 
+1
+|  |   a| 
+LEM2-7
+
+
+
+ a| 
+Port b de l'adaptateur HBA
+ a| 
+2
+|  |   a| 
+LEM2-7
+
+
+
+ a| 
+Port c de l'adaptateur HBA
+ a| 
+1
+|  |   a| 
+LEM2-8
+
+
+
+ a| 
+Port d de l'adaptateur HBA
+ a| 
+2
+|  |   a| 
+LEM2-8
+
+
+
+7+| MetroCluster 1 ou DR Groupe 1 
+
+
+4+|  2+| Quatre nœuds | Huit nœuds 
+
+
+2+| FibreBridge 7500 avec deux ports FC | Port | Se connecte au commutateur FC... | 9132T (1 LEM) | 9132T (2 LEM) | 9132T (2 LEM) 
+
+
+ a| 
+Pile 1
+ a| 
+bridge_x_1a
+ a| 
+FC1
+ a| 
+1
+ a| 
+LEM1-13
+ a| 
+LEM1-13
+ a| 
+LEM1-9
+
+
+
+ a| 
+FC2
+ a| 
+2
+ a| 
+LEM1-13
+ a| 
+LEM1-13
+ a| 
+LEM1-9
+
+
+
+ a| 
+bridge_x_1b
+ a| 
+FC1
+ a| 
+1
+ a| 
+LEM1-14
+ a| 
+LEM1-14
+ a| 
+LEM1-10
+
+
+
+ a| 
+FC2
+ a| 
+2
+ a| 
+LEM1-14
+ a| 
+LEM1-14
+ a| 
+LEM1-10
+
+
+
+ a| 
+Pile 2
+ a| 
+bridge_x_2a
+ a| 
+FC1
+ a| 
+1
+|   a| 
+LEM1-15
+ a| 
+LEM1-11
+
+
+
+ a| 
+FC2
+ a| 
+2
+|   a| 
+LEM1-15
+ a| 
+LEM1-11
+
+
+
+ a| 
+bridge_x_2b
+ a| 
+FC1
+ a| 
+1
+|   a| 
+LEM1-16
+ a| 
+LEM1-12
+
+
+
+ a| 
+FC2
+ a| 
+2
+|   a| 
+LEM1-16
+ a| 
+LEM1-12
+
+
+
+ a| 
+Pile 3
+ a| 
+bridge_x_3a
+ a| 
+FC1
+ a| 
+1
+|   a| 
+LEM2-1
+ a| 
+LEM2-9
+
+
+
+ a| 
+FC2
+ a| 
+2
+|   a| 
+LEM2-1
+ a| 
+LEM2-9
+
+
+
+ a| 
+bridge_x_3b
+ a| 
+FC1
+ a| 
+1
+|   a| 
+LEM2-2
+ a| 
+LEM2-10
+
+
+
+ a| 
+FC2
+ a| 
+2
+|   a| 
+LEM2-2
+ a| 
+LEM2-10
+
+
+
+ a| 
+Pile y
+ a| 
+pont_x_ya
+ a| 
+FC1
+ a| 
+1
+|   a| 
+LEM2-3
+ a| 
+LEM2-11
+
+
+
+ a| 
+FC2
+ a| 
+2
+|   a| 
+LEM2-3
+ a| 
+LEM2-11
+
+
+
+ a| 
+bridge_x_yb
+ a| 
+FC1
+ a| 
+1
+|   a| 
+LEM2-4
+ a| 
+LEM2-12
+
+
+
+ a| 
+FC2
+ a| 
+2
+|   a| 
+LEM2-4
+ a| 
+LEM2-12
+
+|===
+[NOTE]
+====
+* Dans les configurations à quatre nœuds, vous pouvez câbler des ponts supplémentaires aux ports LEM2-5 via LEM2-8 dans les commutateurs 9132T avec 2 plis.
+* Dans des configurations à huit nœuds, vous pouvez câbler des ponts supplémentaires aux ports LEM2-13 via LEM2-16 dans des commutateurs 9132T avec 2 plis.
+* Une seule (1) pile de ponts est prise en charge avec les commutateurs 9132T et un module LEM.
+
+
+====
+
+
+== Utilisation du port Cisco 9132T pour les liens ISL dans des configurations à quatre et huit nœuds dans une configuration MetroCluster exécutant ONTAP 9.1 ou une version ultérieure
+
+Le tableau suivant présente l'utilisation du port ISL pour un commutateur Cisco 9132T.
+
+|===
+
+
+4+| MetroCluster 1 ou DR Groupe 1 
+
+
+.2+| Port 2+| Quatre nœuds | Huit nœuds 
+
+
+| 9132T (1 LEM) | 9132T (2 LEM) | 9132T (2 LEM) 
+
+
+| ISL1 | LEM1-15 | LEM2-9 | LEM1-13 
+
+
+| ISL2 | LEM1-16 | LEM2-10 | LEM1-14 
+
+
+| ISL3 |  | LEM2-11 | LEM1-15 
+
+
+| ISL4 |  | LEM2-12 | LEM1-16 
+
+
+| ISL5 |  | LEM2-13 |  
+
+
+| ISL6 |  | LEM2-14 |  
+
+
+| ISL7 |  | LEM2-15 |  
+
+
+| ISL8 |  | LEM2-16 |  
 |===
