@@ -5279,12 +5279,6 @@
   <block id="3d47e198e02ccec25cafef6cbda2ebcc" category="paragraph">Mise à niveau d'une installation existante</block>
   <block id="dbe9b345ce63b9fd500e311eff185188" category="paragraph">Le système affiche les résultats suivants pour une mise à niveau réussie :</block>
   <block id="669f62b51efaf771cdc56bbd948e67a7" category="admonition">Si vous saisissez un mot de passe racine MySQL incorrect, le logiciel disjoncteur d'attache indique qu'il a été installé avec succès, mais affiche des messages « accès refusé ». Pour résoudre ce problème, vous devez désinstaller le logiciel disjoncteur d'attache à l'aide du<block ref="55afd34cc17c2c45c147636931e92977" prefix=" " category="inline-code"></block> Puis réinstallez le logiciel en utilisant le mot de passe racine MySQL correct.</block>
-  <block id="35a8ad649b3194dfec4cd801fff9f656" category="section-title">Mise à niveau de l'hôte où le contrôle Tiebreaker est en cours d'exécution</block>
-  <block id="c1b20466030a9b3540d83155ad9678ce" category="list-text">Vérifiez que les moniteurs sont en mode observateur :</block>
-  <block id="01e2bc057f0d0c9226b9b72fe02073dc" category="paragraph"><block ref="24dbc7aebdd464be7a23b360f1825695" prefix="" category="inline-code"></block></block>
-  <block id="dd369bd80b51fade2a8040849d0cdfb3" category="list-text">Changer tous les moniteurs en mode observateur.</block>
-  <block id="364ba5b8b3d13bcb103f29814c8bdc8b" category="list-text">Pour mettre à niveau le logiciel disjoncteur d'attache, suivez toutes les étapes indiquées dans la procédure suivante :</block>
-  <block id="3e3282862342655e70b0b4d411fbb78b" category="list-text">Désactivez le mode observateur pour remettre tous les moniteurs en mode en ligne.</block>
   <block id="00ff4e56e2d862a9b4fecd2d5cbdc838" category="summary">Lorsque vous planifiez votre configuration MetroCluster, vous devez comprendre les composants matériels et logiciels requis et pris en charge. Pour plus de commodité et de clarté, vous devez également comprendre les conventions de dénomination utilisées pour les composants dans les exemples de la documentation. Par exemple, un site est appelé site A et l'autre site est appelé site B.</block>
   <block id="813045b360f361be6e1c786a357f044b" category="doc">Composants matériels MetroCluster requis et conventions de nommage pour les configurations extensibles à deux nœuds</block>
   <block id="db7f3507e3689b5e8231f24b4faf5c4e" category="paragraph">Le matériel et le logiciel doivent être pris en charge pour la configuration MetroCluster FC.</block>
@@ -12532,7 +12526,6 @@
   <block id="b1da335cf10c2f924dba74d5fd88d108" category="list-text">Vérifier que les nouveaux utilisateurs admin sont créés :<block ref="025c83c1a746b39471a98aa72befe950" prefix=" " category="inline-code"></block></block>
   <block id="6ba7b5d818acb6cab3137d4c011e2db2" category="inline-link-macro">Authentification de l'administrateur et RBAC</block>
   <block id="e7d59a0eb3a6cfef54201efcc0c8d786" category="admonition"><block ref="7886b0aac53ba2a311aa54645e5cc1ff" category="inline-link-macro-rx"></block> est implémenté.</block>
-  <block id="928cee617936aa2a4fa44c397f9242d0" category="paragraph">Le logiciel Tiebreaker doit être installé et configuré.</block>
   <block id="2cdf4d361a0254ca58a3bec3a13f4c97" category="admonition">Vous devez disposer de privilèges « root » pour installer le logiciel MetroCluster Tiebreaker et les progiciels dépendants.</block>
   <block id="08821d58a0ccf55fa3dc84c09844d2be" category="admonition">Vous ne pouvez utiliser qu'un seul moniteur Tiebreaker MetroCluster par configuration MetroCluster pour éviter tout conflit avec plusieurs moniteurs Tiebreaker.</block>
   <block id="589527a6e982279d79d4094b9cb6a17d" category="list-text">Ouvrez JRE 8</block>
@@ -12626,8 +12619,6 @@
   <block id="7b21144e83a2d9bef049269b16711fb4" category="list-text">Connectez-vous en tant que<block ref="63a9f0ea7bb98050796b649e85481845" prefix=" " category="inline-code"></block> utilisateur ou utilisateur qui peut passer en mode de privilège avancé.</block>
   <block id="a85ec808ef0cc8f00cfefb33625bee2e" category="list-text">Vérifiez que le serveur MariaDB a démarré :</block>
   <block id="fe62eeb322eff90b81676630826cee46" category="list-text">Vous devez avoir installé OpenJDK à l'aide de<block ref="366f2699f7c6384b966350ad31d76b9d" prefix=" " category="inline-code"></block> commande. Pour les systèmes exécutant Tiebreaker 1.4 et versions antérieures, exécutez JRE 8. Pour les systèmes exécutant Tiebreaker 1.5 et versions ultérieures, exécutez OpenJDK 17, 18 ou 19. Les sorties de l'exemple montrent JRE 1.8.0. (JRE 8).</block>
-  <block id="8043dd95e39830a755744f552dcbfe87" category="list-text">Vous pouvez installer MetroCluster Tiebreaker en tant qu'utilisateur non root disposant de privilèges d'administration suffisants pour effectuer l'installation de Tiebreaker, créer des tables, des utilisateurs et définir le mot de passe de l'utilisateur, etc</block>
-  <block id="9e60d73d0ca4d4a89597b4e9640c5dab" category="list-text">Téléchargez la dernière version du logiciel MetroCluster Tiebreaker. Cet exemple utilise la version 1.5.</block>
   <block id="b11583eaa66ec31ee30afd4772390654" category="paragraph"><block ref="b11583eaa66ec31ee30afd4772390654" category="inline-link-rx"></block></block>
   <block id="afe5c13e8c0820ecf86c92cb3af131ee" category="list-text">Vérifiez le fichier RPM.</block>
   <block id="65efc23e428017c909aa7ce5f2ab429e" category="list-text">Téléchargez et importez le fichier de clé RPM :</block>
@@ -13064,9 +13055,7 @@
   <block id="a41a029b875096344ffc788be91b9870" category="list-text">Récupérez et enregistrez le chemin absolu pour Java :</block>
   <block id="bf2a1a18c2c6398b764f31d46e296f2f" category="list-text">Exécutez la commande suivante :<block ref="03b215d9ee73daa38b9c74b25129b68a" prefix=" " category="inline-code"></block></block>
   <block id="3ac11446b528739d814fa9e6668fa288" category="admonition">Lorsque vous y êtes invité pendant l'installation, indiquez l'utilisateur non root que vous avez créé et affecté au système<block ref="d5a9c5909d563fb968e1c3dc3e45cd64" prefix=" " category="inline-code"></block> groupe.</block>
-  <block id="2d0e9a7694bf5bc701c3af145a6bba71" category="doc">Examen des conditions requises</block>
   <block id="7ddb33edf227a18eb76201fcb9e2c9db" category="section-title">Configuration logicielle requise</block>
-  <block id="652ef26e1fed1ab97fdc4a6c15b02207" category="paragraph">Selon la version de Tiebreaker que vous installez, vous devez respecter la configuration logicielle suivante.</block>
   <block id="7756d8f2d40ed781cebba0f1c1f2b14d" category="cell">Version Tiebreaker de ONTAP</block>
   <block id="eae7ed824c301543a7e09d88d74d7b19" category="cell">Versions de ONTAP prises en charge</block>
   <block id="7086defea73bc85dfa4588f2db92a805" category="cell">Versions Linux prises en charge</block>
@@ -13090,11 +13079,6 @@
   <block id="d278aad9be542d15b42d2b30e3ac0701" category="section-title">Matrice de prise en charge du se</block>
   <block id="bc66e40e6d2b679666709d4696a3e3a0" category="cell">Version Tiebreaker</block>
   <block id="2ff01ce7887ede183a0dcb4bf579a040" category="cell">CentOS 7 - 7.9</block>
-  <block id="afdc9e833dc368813fa4f4ad3b6ff344" category="cell">Redhat 7 - 7.9</block>
-  <block id="a3d07f12ac6e702822c54bd39beca7e2" category="cell">Redhat 8.1 - 8.7</block>
-  <block id="f3bda6ae20e6fe147fffa682501d3941" category="paragraph">Si vous placez les moniteurs en mode observateur avant la mise à niveau, vous pouvez mettre à niveau l'hôte sur lequel le moniteur Tiebreaker fonctionne avec un minimum d'interruption.</block>
-  <block id="41d2ed82aa95a99454a02273bf71db16" category="inline-link-macro">Installez ou mettez à niveau le progiciel Tiebreaker</block>
-  <block id="4df70720c02e1beb11cbc3ae87370ddf" category="paragraph"><block ref="4df70720c02e1beb11cbc3ae87370ddf" category="inline-link-macro-rx"></block></block>
   <block id="e409cbaf30133c40afd8ba79b71e06ee" category="paragraph">#42 ; les ports 12 à 15 sont réservés au deuxième groupe MetroCluster ou DR sur le commutateur Brocade 7840.</block>
   <block id="2a8e60d3a0b3d603c27fa9c4562178bf" category="summary">Les configurations NetApp MetroCluster combinent la mise en cluster basée sur les baies et la réplication synchrone pour assurer une disponibilité continue et une duplication immédiate de toutes vos données stratégiques, transaction par transaction.</block>
   <block id="99d7ea00899cf98fde6ae4bd7a763fe6" category="list-text">Vérification de l'état du domaine de défaillance du basculement automatique non planifié (AUSO) :</block>
@@ -13104,7 +13088,6 @@
   <block id="142e30c0e2bc40260b6bba783159349f" category="admonition">Avant d'utiliser cette commande, consultez le <block ref="a3a7e72ce1f5f993a44ac5e44397056b" category="inline-link-macro-rx"></block>.</block>
   <block id="626946adf45b7bb7ff18b4ffcb520404" category="paragraph"><block ref="c3c9b152afaa4bfa0aa390b3e2063a6d" prefix="" category="inline-code"></block></block>
   <block id="33871b6190a8d5adbe8b15282054766c" category="sidebar">Quoi de neuf</block>
-  <block id="f76aaf3aaa7b30238e7a3e2b1a04493b" category="sidebar">Préparer l'installation</block>
   <block id="bbce41d7b43eef36d5db9bed94db0495" category="sidebar">Installez les dépendances</block>
   <block id="9adb8eb34f7ed5a25405fe6af3b01c0a" category="sidebar">Fixer l'installation</block>
   <block id="357559d73c5bb22e54ab3aeafca1013b" category="sidebar">Installez le pack logiciel</block>
@@ -13348,4 +13331,57 @@
   <block id="e402ac65c66b96e2f07562ac550c53d8" category="paragraph">Hors ligne (Remarque 1)</block>
   <block id="5993b684cff34ce50e30b3a1293c1f25" category="paragraph">*Remarque 1* : dans les configurations MetroCluster IP, une fois le basculement terminé, vous pouvez mettre manuellement les agrégats sans miroir en ligne.</block>
   <block id="0fc1dc5210ab6635b5582671b5100aaf" category="paragraph">En savoir plus sur <block ref="26007d4b0afff1c47eeefe43a1492ee9" category="inline-xref-macro-rx"></block>.</block>
+  <block id="edcdea907176b4b6176bfac47c1c23cc" category="doc">Monter le Tiebreaker 1.6</block>
+  <block id="51e78330040131fe6b93cb04e0fa15ec" category="paragraph">Effectuez une nouvelle installation ou mettez à niveau le logiciel Tiebreaker.</block>
+  <block id="9a9884d3e2c33b612fd52c46591cdf8b" category="list-text">Votre système de stockage doit exécuter ONTAP 9.12.1 ou une version ultérieure.</block>
+  <block id="f616ec898f7359b274487a4c46b54cfc" category="list-text">Vous pouvez installer MetroCluster Tiebreaker en tant qu'utilisateur non root disposant de privilèges d'administration suffisants pour effectuer l'installation de Tiebreaker, créer des tables et des utilisateurs et définir le mot de passe utilisateur.</block>
+  <block id="e19f14d0b2d10c8920d70cbad23314da" category="list-text">Téléchargez le logiciel MetroCluster Tiebreaker 1.6.</block>
+  <block id="51bf182ce0d0aa7ded2a3830ac9d79c1" category="list-text">Si vous effectuez une mise à niveau, vérifiez la version de Tiebreaker que vous exécutez :</block>
+  <block id="e114922bb72d15b2ebf1cdc8a84f5765" category="paragraph">L'exemple suivant montre Tiebreaker 1.5.</block>
+  <block id="a7f55356cc47030db5528f30a58edfb2" category="list-text">Installez ou mettez à niveau le logiciel Tiebreaker.</block>
+  <block id="aad71198aa2c8b35c39182535fa9f425" category="paragraph">Procéder comme suit pour une nouvelle installation de Tiebreaker 1.6.</block>
+  <block id="73bcbbea382be16f93642da3ea4e23a7" category="list-text">Exécutez la commande suivante sur le<block ref="e9af9a0ef1d120bf3a16357375ed6d36" prefix=" " category="inline-code"></block> demander de commencer l'installation :</block>
+  <block id="30c295d71ca99219187fc6466ee21568" category="open-title">Mise à niveau de Tiebreaker 1.5 vers 1.6</block>
+  <block id="8be93a7c27b9b66803ef47f46f3d4a36" category="paragraph">Procédez comme suit pour mettre à niveau la version du logiciel Tiebreaker 1.5 vers Tiebreaker 1.6.</block>
+  <block id="b9a8b4d6a676fac167bcd49bac74376b" category="list-text">Exécutez la commande suivante sur le<block ref="e9af9a0ef1d120bf3a16357375ed6d36" prefix=" " category="inline-code"></block> demander la mise à niveau du logiciel :</block>
+  <block id="cf316c5c67469aab7dcc16eed2309753" category="open-title">Mise à niveau de Tiebreaker 1.4 vers 1.6</block>
+  <block id="b6afd444ae977b739cc436bd2a8b5c0b" category="paragraph">Procédez comme suit pour mettre à niveau la version du logiciel Tiebreaker 1.4 vers Tiebreaker 1.6.</block>
+  <block id="67449e50a32d34759e501e37496d3308" category="doc">Workflow d'installation de Tiebreaker</block>
+  <block id="a6812db2442ae325a9ccd39373bbd9dd" category="paragraph-title">A propos de ce flux de travail</block>
+  <block id="c8c6970a40c7cbea5e435ea727fe8d20" category="paragraph">Vous pouvez utiliser ce flux de travail pour installer ou mettre à niveau le logiciel Tiebreaker.</block>
+  <block id="06c2cea18679d64399783748fa367bdd" category="inline-image-macro">Une seule</block>
+  <block id="5a49bb106c1b752cc4864e7b0efa6fe5" category="inline-link-macro">Préparez l'installation du logiciel Tiebreaker</block>
+  <block id="e3936efd5aa8f1ff93ede922e9557c0f" category="paragraph-title"><block ref="58f667aaf05f87159670e12bd9bc076b" category="inline-image-macro-rx" type="image"></block><block ref="e91136d8b3f350d5d04ba23e1d04db6b" category="inline-link-macro-rx"></block></block>
+  <block id="72fd6c80a8c842e3b015cb994df1977c" category="paragraph">Avant d'installer et de configurer le logiciel Tiebreaker, vérifiez que votre système répond à certaines exigences.</block>
+  <block id="e583219b5f5acce43fc0503407e380d9" category="paragraph-title"><block ref="444c1bf2e877f5617e8ce0a2ded57f4f" category="inline-image-macro-rx" type="image"></block><block ref="7cb52d79d7da7be8edad1414bc7d2aa6" category="inline-link-macro-rx"></block></block>
+  <block id="f6c088317f02d7149ad83fcd03fb7398" category="inline-link-macro">Installez le progiciel Tiebreaker</block>
+  <block id="493c3e1a38da21c140af6f670b03b68a" category="paragraph-title"><block ref="905b132c63e4b8e6831d77863275a213" category="inline-image-macro-rx" type="image"></block><block ref="be4ef0fa013cc9494ceb74b978af0a3a" category="inline-link-macro-rx"></block></block>
+  <block id="e139095a02563e8f280c56a9e455082b" category="paragraph">Effectuez une nouvelle installation ou une mise à niveau du logiciel Tiebreaker. La procédure d'installation que vous suivez dépend de la version de Tiebreaker que vous souhaitez installer.</block>
+  <block id="d7a4d09daa1ff7dd5f983bb4169e4858" category="summary">Avant d'installer et de configurer le logiciel Tiebreaker, vérifiez que votre système répond à certaines exigences.</block>
+  <block id="dbb70fa6f1b1115cf7c974a53e710591" category="paragraph">Selon la version de Tiebreaker que vous installez, vous devez respecter la configuration logicielle suivante.</block>
+  <block id="4341447b6ad78bf4d7eb59ebb5a53d63" category="paragraph">1.6</block>
+  <block id="16d9a40603d44eea561b00730eec3d91" category="paragraph">ONTAP 9.12.1 et versions ultérieures</block>
+  <block id="4951fe611f97b799b2abaf7474848aa1" category="inline-link-macro">Matrice de prise en charge du système d'exploitation</block>
+  <block id="30177b72c8d5a1bab13142ff42dfc513" category="paragraph">Reportez-vous à la <block ref="9f4435e7cf286b329f02bc934ba0dd4b" category="inline-link-macro-rx"></block> pour plus d'informations.</block>
+  <block id="e27eee16ff4c1ce2072fea31052ce7d5" category="paragraph">Aucune. Les dépendances sont incluses dans l'installation.</block>
+  <block id="4a558332080902b1daf6c9eb900f075a" category="summary">La procédure d'installation de Tiebreaker que vous suivez dépend de la version de Tiebreaker que vous installez.</block>
+  <block id="686cbe9ae98dac9e3c34fe747bedda27" category="doc">Choisissez votre procédure d'installation</block>
+  <block id="de537937e28d6ff9bfed73c24f238620" category="paragraph">Disjoncteur d'attache 1.6</block>
+  <block id="3d0eb4e198ae6fd77a45e8e5eeab8df8" category="paragraph"><block ref="3d0eb4e198ae6fd77a45e8e5eeab8df8" category="inline-link-macro-rx"></block></block>
+  <block id="fc8e9fcd20abea214d32b4b417fe9ee7" category="paragraph">Tiebreaker 1.5 ou 1.4</block>
+  <block id="2ffd1c81489309e0073aecd5609369ad" category="inline-link-macro">Monter le Tiebreaker 1.5 ou 1.4</block>
+  <block id="133f62a92e5c4fe1c8e0583979dbcf43" category="paragraph"><block ref="133f62a92e5c4fe1c8e0583979dbcf43" category="inline-link-macro-rx"></block></block>
+  <block id="9fc6565c0dbc4f2911a9e92430c80179" category="list-text">Téléchargez le logiciel MetroCluster Tiebreaker. Cet exemple utilise la version 1.5.</block>
+  <block id="92c6c9c27fa6ff626915d050a03cd801" category="doc">Mettez à niveau l'hôte sur lequel le moniteur Tiebreaker est en cours d'exécution</block>
+  <block id="bb6cdee210874ecf03d44e914a8ca0e2" category="paragraph">Vous devrez peut-être mettre à niveau l'hôte sur lequel le moniteur Tiebreaker est exécuté.</block>
+  <block id="5d7ada76e0c335aff8880d70d7058de7" category="list-text">Désinstallez le logiciel Tiebreaker :</block>
+  <block id="16918e6c9c1a391ee7fc51a19b77cc28" category="paragraph"><block ref="19124a01f5182120f436f905b2c95886" prefix="" category="inline-code"></block></block>
+  <block id="fb6ba2db993fb64b8ba9f47909fd4db1" category="list-text">Mettre à niveau l'hôte. Pour plus de détails, reportez-vous à la documentation du système d'exploitation hôte.</block>
+  <block id="cb75dafe5098e84554cfafc5f3f7cb18" category="list-text">Réinstallez le logiciel Tiebreaker.</block>
+  <block id="aa27f1e0fd685e0f4cde8697742ae6ac" category="paragraph">Procédez à une nouvelle installation de Tiebreaker en suivant les étapes de la section <block ref="34a05079494730e6ed0177e3b3032a6d" category="inline-link-macro-rx"></block>.</block>
+  <block id="be7c560a571a01eeb644e3be4ae88e59" category="list-text">Facilité d'installation améliorée</block>
+  <block id="6106648cc4773cdde37c48ca810022c0" category="cell">Red Hat 7 - 7.9</block>
+  <block id="7d04b9af5dfbfc78c7040183f68afdc4" category="cell">Red Hat 8.1 - 8.7</block>
+  <block id="33ef1f5aa9b12ecd01c340c91d8f9150" category="cell">Red Hat 8.8 -9,2</block>
+  <block id="003d136e5089a4f9ae0f1df3f6fc37fa" category="cell">Rocky Linux 9.0</block>
 </blocks>
