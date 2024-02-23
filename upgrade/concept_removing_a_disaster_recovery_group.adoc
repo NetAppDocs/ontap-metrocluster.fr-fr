@@ -31,15 +31,19 @@ image::../media/mcc_dr_groups_4_node.gif[mcc dr groups, nœud 4]
 
 == Suppression des nœuds du groupe DR de chaque cluster
 
+.Avant de commencer
 * Vous devez effectuer cette étape sur les deux clusters.
 * Le `metrocluster remove-dr-group` La commande n'est prise en charge que sur ONTAP 9.8 et les versions ultérieures.
+
+
+.Étapes
+. Préparer la suppression du groupe de reprise après incident, si ce n'est pas déjà le cas.
 +
-.. Préparer la suppression du groupe de reprise après incident, si ce n'est pas déjà le cas.
-+
-... Déplacez tous les volumes de données vers un autre groupe de reprise après incident.
-... Déplacez tous les volumes de métadonnées MDV_CRS vers un autre groupe DR en suivant la procédure link:https://docs.netapp.com/us-en/ontap-metrocluster/upgrade/task_move_a_metadata_volume_in_mcc_configurations.html["Déplacement d'un volume de métadonnées dans les configurations MetroCluster"] procédure.
-... Supprimez tous les volumes de métadonnées MDV_aud qui peuvent exister dans le groupe DR à supprimer.
-... Supprimez tous les agrégats de données du groupe de reprise sur incident à supprimer comme indiqué dans l'exemple suivant :
+.. Déplacez tous les volumes de données vers un autre groupe de reprise après incident.
+.. Si le groupe de reprise après incident à supprimer contient des volumes en miroir de partage de charge, ils ne peuvent pas être déplacés.  Recréez tous les volumes en miroir de partage de charge dans un autre groupe DR, puis supprimez les volumes en miroir de partage de charge dans le groupe DR à supprimer.
+.. Déplacez tous les volumes de métadonnées MDV_CRS vers un autre groupe DR en suivant la procédure link:https://docs.netapp.com/us-en/ontap-metrocluster/upgrade/task_move_a_metadata_volume_in_mcc_configurations.html["Déplacement d'un volume de métadonnées dans les configurations MetroCluster"] procédure.
+.. Supprimez tous les volumes de métadonnées MDV_aud qui peuvent exister dans le groupe DR à supprimer.
+.. Supprimez tous les agrégats de données du groupe de reprise sur incident à supprimer comme indiqué dans l'exemple suivant :
 +
 [listing]
 ----
@@ -52,16 +56,16 @@ ClusterB::> aggr delete -aggregate aggregate_name
 
 NOTE: Les agrégats racine ne sont pas supprimés.
 
-... Déplacez les LIF de données hors ligne.
+.. Déplacez les LIF de données hors ligne.
 `network interface modify -vserver _svm-name_ -lif _data-lif_ -status-admin down`
-... Migrez toutes les LIFs de données vers les nœuds d'un autre groupe de reprise après incident. +
+.. Migrez toutes les LIFs de données vers les nœuds d'un autre groupe de reprise après incident. +
 `network interface show -home-node _old_node_`
 +
 `network interface modify -vserver _svm-name_ -lif _data-lif_ -home-node _new_node_ -home-port _port-id_`
 
-... Remettez en ligne les LIF de données.
+.. Remettez en ligne les LIF de données.
 `network interface modify -vserver _svm-name_ -lif _data-lif_ -status-admin up`
-... Migrez la LIF de gestion de cluster vers un nœud de rattachement situé dans un autre groupe de reprise après incident.
+.. Migrez la LIF de gestion de cluster vers un nœud de rattachement situé dans un autre groupe de reprise après incident.
 +
 `network interface show -role cluster-mgmt`
 
@@ -71,7 +75,7 @@ NOTE: Les agrégats racine ne sont pas supprimés.
 +
 La gestion des nœuds et les LIF inter-cluster ne sont pas migrées.
 
-... Transférer epsilon vers un nœud dans un autre groupe de reprise après incident si nécessaire.
+.. Transférer epsilon vers un nœud dans un autre groupe de reprise après incident si nécessaire.
 +
 [listing]
 ----
@@ -89,13 +93,13 @@ ClusterB::*> set admin
 ----
 
 
-.. Identifier et supprimer le groupe de reprise sur incident.
+. Identifier et supprimer le groupe de reprise sur incident.
 +
-... Identifiez le groupe DR approprié pour la suppression :
+.. Identifiez le groupe DR approprié pour la suppression :
 +
 `metrocluster node show`
 
-... Supprimer les nœuds du groupe DR : +
+.. Supprimer les nœuds du groupe DR : +
 `metrocluster remove-dr-group -dr-group-id 1`
 +
 L'exemple suivant montre la suppression de la configuration du groupe de reprise sur incident sur cluster_A.
@@ -136,54 +140,52 @@ cluster_A::*>
 ----
 
 
-.. Répétez l'étape précédente sur le cluster partenaire.
-.. Si dans une configuration MetroCluster IP, supprimer les connexions MetroCluster sur les nœuds de l'ancien groupe DR.
+. Répétez l'étape précédente sur le cluster partenaire.
+. Si dans une configuration MetroCluster IP, supprimer les connexions MetroCluster sur les nœuds de l'ancien groupe DR.
 +
 Ces commandes peuvent être émises depuis un cluster et s'appliquer à tout le groupe de reprise sur incident sur les deux clusters.
 
 +
-... Débrancher les connexions :
+.. Débrancher les connexions :
 +
 `metrocluster configuration-settings connection disconnect _dr-group-id_`
 
-... Supprimez les interfaces MetroCluster sur les nœuds de l'ancien groupe DR :
+.. Supprimez les interfaces MetroCluster sur les nœuds de l'ancien groupe DR :
 +
 `metrocluster configuration-settings interface delete`
 
-... Supprimez l'ancienne configuration du groupe DR. +
+.. Supprimez l'ancienne configuration du groupe DR. +
 `metrocluster configuration-settings dr-group delete`
 
 
-.. Dissocier les nœuds de l'ancien groupe DR.
+. Dissocier les nœuds de l'ancien groupe DR.
 +
 Vous devez effectuer cette étape sur chaque cluster.
 
 +
-... Définissez le niveau de privilège avancé :
+.. Définissez le niveau de privilège avancé :
 +
 `set -privilege advanced`
 
-... Désactiver le basculement du stockage :
+.. Désactiver le basculement du stockage :
 +
 `storage failover modify -node _node-name_ -enable false`
 
-... Dissocier le nœud : +
+.. Dissocier le nœud : +
 `cluster unjoin -node _node-name_`
 +
 Répétez cette étape pour l'autre nœud local de l'ancien groupe DR.
 
-... Définissez le niveau de privilège admin : +
+.. Définissez le niveau de privilège admin : +
 `set -privilege admin`
 
 
-.. Réactiver la haute disponibilité du cluster dans le nouveau groupe de reprise après incident :
+. Réactiver la haute disponibilité du cluster dans le nouveau groupe de reprise après incident :
 +
 `cluster ha modify -configured true`
 
 +
 Vous devez effectuer cette étape sur chaque cluster.
 
-.. Arrêtez, mettez hors tension et retirez les anciens modules de contrôleur et tiroirs de stockage.
-
-
+. Arrêtez, mettez hors tension et retirez les anciens modules de contrôleur et tiroirs de stockage.
 

@@ -8712,7 +8712,6 @@
   <block id="b330eebf161ca27c703eccf6e8e36d29" category="summary">Vous pouvez ajouter quatre nouveaux nœuds à la configuration IP MetroCluster en tant que second groupe DR. Cela crée une configuration MetroCluster à huit nœuds.</block>
   <block id="a8307b4c5fa271005a1338d5b405ca1f" category="paragraph">Depuis ONTAP 9.9.1, vous pouvez ajouter quatre nouveaux nœuds à la configuration IP de MetroCluster en tant que second groupe de reprise après incident. Cela crée une configuration MetroCluster à huit nœuds.</block>
   <block id="44e7e75e628cd7549a2dac175d45b418" category="list-text">L'ancien et le nouveau nœud doivent exécuter la même version de ONTAP.</block>
-  <block id="2ee2465217913ae7b455ab4ef5e995e6" category="list-text">Les nouveaux nœuds doivent disposer d'un espace de stockage suffisant pour prendre en charge les données des anciens nœuds, ainsi que des disques adéquats pour les agrégats racine et les disques de spare.</block>
   <block id="83ea901534b27c16af49cdec25309a81" category="paragraph">dr_group_1-old</block>
   <block id="448197086f84c0166cecdd754aa5a117" category="paragraph">dr_group_2-new</block>
   <block id="abd5409a549dc57cdfd874a13b90ebf8" category="list-text">Node_A_3-New</block>
@@ -10401,7 +10400,6 @@
   <block id="ec31df7d1f18c6948a41ebc1330adb9e" category="image-alt">Ce graphique représente un exemple de configuration MetroCluster. Le graphique est expliqué dans le texte environnant.</block>
   <block id="5482b27fb601c9d5069a7533e0dd1b02" category="summary">Lorsque vous configurez un commutateur FC Brocade, vous pouvez installer les fichiers de configuration des commutateurs qui fournissent les paramètres de commutation complets pour certaines configurations.</block>
   <block id="c2a1b1aaf420fd5fc4e694faa94de89f" category="doc">Installation du fichier RCF de commutateur FC Brocade</block>
-  <block id="40a501dacb79ddf4f770555994a4dbe9" category="paragraph">Ces étapes doivent être répétées sur chacun des commutateurs FC Brocade dans la configuration de la structure MetroCluster.</block>
   <block id="2d6424f21b7898ba895ef0e70f5c13c8" category="list-text">Lancez le processus de téléchargement et de configuration :</block>
   <block id="3ef73a7a519c5b4a03c363a138b097eb" category="paragraph"><block ref="087055abbdd65f4791f9e6ce913c7cc4" prefix="" category="inline-code"></block></block>
   <block id="d304e0e1a0c74d4f29c7bf97c9e6c845" category="paragraph">Répondez aux invites comme indiqué dans l'exemple suivant.</block>
@@ -13297,7 +13295,6 @@
   <block id="44f3e9b14f204b411afdea78f7b0391c" category="doc">Notes de version de MetroCluster</block>
   <block id="af8a69aa12393a4d9b6992e884f1c919" category="sidebar">Documentation MetroCluster</block>
   <block id="b8b5370c063dd2b4ce4021558a49ac07" category="paragraph">Pour la configuration MetroCluster qui exécute ONTAP 9.8 et les versions antérieures, certaines procédures de transition vers la mise à niveau requièrent l'ajout d'un deuxième groupe de reprise après incident à quatre nœuds à la configuration afin de créer une configuration temporaire à huit nœuds.  Depuis la version ONTAP 9.9.1, les configurations MetroCluster permanentes à huit nœuds sont prises en charge.</block>
-  <block id="ff66d22d6ddbc0a6a59188599728f8d1" category="paragraph">À partir de ONTAP 9.13.1, vous pouvez développer temporairement une configuration MetroCluster à huit nœuds pour actualiser les contrôleurs et le stockage. Voir <block ref="6e6fb56321b906b7bb3a671d5fc5dfc7" category="inline-link-macro-rx"></block> pour en savoir plus.</block>
   <block id="0abe9117fda19697d2dbf1bd1d754e02" category="list-text">Cette procédure décrit les étapes requises pour ajouter un groupe DR à quatre nœuds à une configuration IP MetroCluster existante. Si vous actualisez une configuration à huit nœuds, vous devez répéter l'intégralité de la procédure pour chaque groupe de reprise après incident, en l'ajoutant un à la fois.</block>
   <block id="84d04e0c7f711ba6800f8d3bd5bc0847" category="inline-xref">Utilisation du port Cisco 9132T dans une configuration MetroCluster exécutant ONTAP 9.4 ou une version ultérieure</block>
   <block id="ccdfc130a534c248f558d6495323cb02" category="admonition">Pour Cisco 9132T, voir <block ref="3db7a367aafc64164b814f36e8341eaa" category="inline-xref-macro-rx"></block>.</block>
@@ -13418,4 +13415,15 @@
   <block id="4e8c2092c0a2bb40fde077763873c66c" category="paragraph"><block ref="c9e6cd6140c9d8677df821c7cce2aac1" prefix="" category="inline-code"></block></block>
   <block id="b9035c5f27542cbf7fb14fced8e330ba" category="list-text">Exécutez la commande suivante une fois le délai d'interrogation écoulé :</block>
   <block id="20c4c39b07a94d810605541c0137f531" category="paragraph"><block ref="9214d4fe696fff6386a131ecee126bc4" prefix="" category="inline-code"></block></block>
+  <block id="0ca1a0fce29aa8b27d10b5cf276a5a5c" category="list-text">Si vous utilisez une configuration xWDM, vous pouvez avoir besoin de paramètres supplémentaires sur les liens ISL. Pour plus d'informations, reportez-vous à la documentation du fournisseur xWDM.</block>
+  <block id="e389e5759cd93883cfbee1a000ab0c47" category="list-text">Vous devez répéter ces étapes sur chacun des commutateurs FC Brocade dans la configuration de la structure MetroCluster.</block>
+  <block id="9dc72cfc812a43dbca6ba4e6357b2b04" category="paragraph">À partir de ONTAP 9.13.1, vous pouvez développer temporairement une configuration MetroCluster à huit nœuds pour actualiser les contrôleurs et le stockage. Voir <block ref="df5e6373f54c9330727709bb1055a079" category="inline-link-macro-rx"></block> pour en savoir plus.</block>
+  <block id="e6f19b92e0e69fc5d74e94088b442a26" category="inline-link-macro">Actualisation d'une configuration IP MetroCluster à quatre ou huit nœuds</block>
+  <block id="ae236ebe2cd05ce4da7fe73d504f4946" category="list-text">Si vous l'êtes <block ref="54f4a86aff0fc5aba4d6e37b225734c0" category="inline-link-macro-rx"></block>, les nouveaux nœuds doivent disposer d'un espace de stockage suffisant pour prendre en charge les données des anciens nœuds, ainsi que les disques appropriés pour les agrégats racine et les disques de secours.</block>
+  <block id="30db39dffca5d3a3ab759b48303153b1" category="list-text">Si le groupe de reprise après incident à supprimer contient des volumes en miroir de partage de charge, ils ne peuvent pas être déplacés.  Recréez tous les volumes en miroir de partage de charge dans un autre groupe DR, puis supprimez les volumes en miroir de partage de charge dans le groupe DR à supprimer.</block>
+  <block id="0108924065f583138162139c8d2325c4" category="list-text">Effectuer les étapes sur un commutateur à la fois, dans l'ordre suivant : Switch_A_1, Switch_B_1, Switch_A_2, Switch_B_2.</block>
+  <block id="4c73c980356e24dbc4b9bfa823ff3540" category="inline-link-macro">Réinitialisation des paramètres par défaut du commutateur NVIDIA IP SN2100</block>
+  <block id="5ea045545da6545f166122f615c720c2" category="list-text"><block ref="5ea045545da6545f166122f615c720c2" category="inline-link-macro-rx"></block></block>
+  <block id="9d2a9152feb1a65b3472b15d2e557bca" category="inline-link-macro">Téléchargement et installation des fichiers RCF IP de NVIDIA</block>
+  <block id="3ebe02a815587b2ddedbada8c501d0ef" category="list-text"><block ref="3ebe02a815587b2ddedbada8c501d0ef" category="inline-link-macro-rx"></block></block>
 </blocks>
