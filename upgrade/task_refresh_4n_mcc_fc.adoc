@@ -33,7 +33,7 @@ image::../media/mcc_dr_group_a.png[mcc dr groupe a]
 
 . Suivez toutes les étapes de la procédure d'extension à quatre nœuds pour votre type de MetroCluster.
 +
-link:task_expand_a_four_node_mcc_fc_configuration_to_an_eight_node_configuration.html["Extension d'une configuration FC MetroCluster à quatre nœuds à une configuration à huit nœuds"]
+link:task_expand_a_four_node_mcc_fc_configuration_to_an_eight_node_configuration.html["Extension d'une configuration FC MetroCluster à quatre nœuds à une configuration à huit nœuds"^]
 
 +
 Lorsque la procédure d'extension est terminée, la configuration s'affiche comme illustré dans l'image suivante :
@@ -43,22 +43,22 @@ image::../media/mcc_dr_group_b.png[mcc dr groupe b]
 
 . Déplacez les volumes CRS.
 +
-Suivez les étapes de la section link:https://docs.netapp.com/us-en/ontap-metrocluster/upgrade/task_move_a_metadata_volume_in_mcc_configurations.html["Déplacement d'un volume de métadonnées dans les configurations MetroCluster"].
+Suivez les étapes de la section link:https://docs.netapp.com/us-en/ontap-metrocluster/upgrade/task_move_a_metadata_volume_in_mcc_configurations.html["Déplacer un volume de métadonnées dans les configurations MetroCluster"^].
 
-. Déplacez les données des anciens nœuds vers de nouveaux nœuds à l'aide des procédures suivantes de https://docs.netapp.com/platstor/topic/com.netapp.doc.hw-upgrade-controller/home.html["Autres procédures de plate-forme : Controller Hardware Upgrade Express"^].
+. Déplacez les données des anciens nœuds vers les nouveaux nœuds en procédant comme suit :
 +
-.. Effectuez toutes les étapes de la section http://docs.netapp.com/platstor/topic/com.netapp.doc.hw-upgrade-controller/GUID-AFE432F6-60AD-4A79-86C0-C7D12957FA63.html["Création d'un agrégat et déplacement des volumes vers les nouveaux nœuds"].
+.. Effectuez toutes les étapes de la section https://docs.netapp.com/us-en/ontap-systems-upgrade/upgrade/upgrade-create-aggregate-move-volumes.html["Créez un agrégat et déplacez des volumes vers les nouveaux nœuds"^].
 +
 
 NOTE: Vous pouvez choisir de mettre en miroir l'agrégat lors de sa création ou après sa création.
 
-.. Effectuez toutes les étapes de la section http://docs.netapp.com/platstor/topic/com.netapp.doc.hw-upgrade-controller/GUID-95CA9262-327D-431D-81AA-C73DEFF3DEE2.html["Déplacement des LIF de données non-SAN et des LIF de gestion du cluster vers les nouveaux nœuds"].
-.. Effectuez toutes les étapes de la section http://docs.netapp.com/platstor/topic/com.netapp.doc.hw-upgrade-controller/GUID-91EC7830-0C28-4C78-952F-6F956CC5A62F.html["Suppression des LIFs SAN des nœuds d'origine"].
+.. Effectuez toutes les étapes de la section https://docs.netapp.com/us-en/ontap-systems-upgrade/upgrade/upgrade-move-lifs-to-new-nodes.html["Déplacez les LIF de données non-SAN et les LIF de gestion du cluster vers les nouveaux nœuds"^].
+.. Effectuez toutes les étapes de la section https://docs.netapp.com/us-en/ontap-systems-upgrade/upgrade/upgrade-delete-san-lifs.html["Supprimez les LIFs SAN qui ne sont plus nécessaires des nœuds d'origine"^].
 
 
 . Suivez les étapes de la procédure de suppression de l'ancien groupe DR.
 +
-link:concept_removing_a_disaster_recovery_group.html["Suppression d'un groupe de reprise après incident"]
+link:concept_removing_a_disaster_recovery_group.html["Suppression d'un groupe de reprise après incident"^]
 
 +
 Après avoir supprimé l'ancien groupe DR (groupe DR un), la configuration s'affiche comme illustré dans l'image suivante :

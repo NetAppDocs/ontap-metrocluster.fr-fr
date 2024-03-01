@@ -11,7 +11,7 @@ summary: Vous devrez peut-être ajouter, supprimer ou modifier des ports ISL. Vo
 
 
 [role="lead"]
-Vous devrez peut-être ajouter, supprimer ou modifier des ports ISL sur des commutateurs IP Cisco. Vous pouvez convertir des ports ISL dédiés en ports ISL partagés ou modifier la vitesse des ports ISL sur un commutateur IP Cisco. Les liens ISL voyageant dans de grandes distances peuvent nécessiter une vitesse plus faible pour améliorer la qualité. Si vous ajoutez ou mettez à niveau du matériel, vous devrez peut-être augmenter la vitesse des ports ISL pour profiter des mises à niveau système et ajouter des liens ISL à un commutateur IP Cisco.
+Vous devrez peut-être ajouter, supprimer ou modifier des ports ISL sur des commutateurs IP Cisco. Vous pouvez convertir des ports ISL dédiés en ports ISL partagés ou modifier la vitesse des ports ISL sur un commutateur IP Cisco.
 
 .Description de la tâche
 Si vous convertissez des ports ISL dédiés en ports ISL partagés, assurez-vous que les nouveaux ports respectent le link:../install-ip/concept_considerations_layer_2.html["Exigences relatives aux ports ISL partagés"].
@@ -19,6 +19,9 @@ Si vous convertissez des ports ISL dédiés en ports ISL partagés, assurez-vous
 Vous devez effectuer toutes les étapes des deux commutateurs pour assurer la connectivité ISL.
 
 La procédure suivante suppose que vous remplacez un ISL de 10 Go connecté au port du commutateur eth1/24/1 par deux liens ISL de 100 Go connectés aux ports de commutation 17 et 18.
+
+
+NOTE: Si vous utilisez un commutateur Cisco 9336C-FX2 dans une configuration partagée qui connecte des tiroirs NS224, la modification des liens ISL peut nécessiter un nouveau fichier RCF. Vous n'avez pas besoin d'un nouveau fichier RCF si la vitesse ISL actuelle et la nouvelle vitesse sont de 40 Gbit/s et de 100 Gbit/s. Toute autre modification de la vitesse ISL requiert un nouveau fichier RCF. Par exemple, changer la vitesse des liens ISL de 40 Gbits/s à 100 Gbits/s ne nécessite pas de nouveau fichier RCF. En revanche, pour passer de 10 Gbits/s à 40 Gbits/s, la vitesse des liens ISL nécessite la création d'un nouveau fichier RCF.
 
 .Avant de commencer
 Reportez-vous à la section *commutateurs* du link:https://hwu.netapp.com/["NetApp Hardware Universe"^] pour vérifier les émetteurs-récepteurs pris en charge.
@@ -52,6 +55,10 @@ switch_B_1#
 ----
 . Retirez les câbles et émetteurs-récepteurs existants.
 . Modifiez le port ISL si nécessaire.
++
+
+NOTE: Si vous utilisez des switchs Cisco 9336C-FX2 dans une configuration partagée qui connecte des tiroirs NS224, et que vous devez mettre à niveau le fichier RCF et appliquer la nouvelle configuration pour les nouveaux ports ISL, suivez les étapes à link:task_upgrade_rcf_files_on_mcc_ip_switches.html["Mettez à niveau les fichiers RCF sur les switchs IP MetroCluster."]
+
 +
 [cols="30,70"]
 |===
@@ -101,9 +108,9 @@ switch_B_1(config-if)#
 switch_B_1#
 switch_B_1# copy running-config startup-config
 ----
-. Vérifiez que les liens ISL sont établis entre les deux commutateurs :
+. Vérifiez que les liens ISL et les canaux de port pour les liens ISL sont établis entre les deux commutateurs :
 +
-`switch_A_1# show int eth1/17,eth1/18 brief`
+`switch_A_1# show int brief`
 
 +
 Vous devez voir les interfaces ISL dans la sortie de la commande, comme dans l'exemple suivant :
@@ -111,21 +118,20 @@ Vous devez voir les interfaces ISL dans la sortie de la commande, comme dans l'e
 +
 [listing]
 ----
-switch_A_1# show int eth1/17,eth1/18 brief
+Switch_A_1# show interface brief
 --------------------------------------------------------------------------------
-Ethernet      VLAN    Type Mode   Status  Reason                   Speed     Port
-Interface                                                                                                        Ch #
+Ethernet        VLAN    Type Mode   Status  Reason                 Speed     Port
+Interface                                                                    Ch #
 --------------------------------------------------------------------------------
-Eth1/17       10         eth     access    up      none                       100G(D) 10
-Eth1/18       10         eth     access    up      none                       100G(D) 10
+Eth1/17         1       eth  access down    XCVR not inserted        auto(D) --
+Eth1/18         1       eth  access down    XCVR not inserted        auto(D) --
 
-switch_B_1# show int eth1/17,eth1/18 brief
---------------------------------------------------------------------------------
-Ethernet      VLAN    Type Mode   Status  Reason                   Speed     Port
-Interface                                                                                                        Ch #
---------------------------------------------------------------------------------
-Eth1/17       10         eth     access    up      none                       100G(D) 10
-Eth1/18       10         eth     access    up      none                       100G(D) 10
+------------------------------------------------------------------------------------------
+Port-channel VLAN    Type Mode   Status  Reason                              Speed   Protocol
+Interface
+------------------------------------------------------------------------------------------
+Po10         1       eth  trunk  up      none                                a-100G(D)  lacp
+Po11         1       eth  trunk  up      none                                a-100G(D)  lacp
 ----
 . Répéter la procédure pour le tissu 2.
 
