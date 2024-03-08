@@ -14,7 +14,40 @@ summary: 'La mise à niveau d"un fichier RCF peut être nécessaire sur un commu
 La mise à niveau d'un fichier RCF peut être nécessaire sur un commutateur IP Cisco. Par exemple, une mise à niveau de ONTAP ou une mise à niveau du firmware du switch nécessite tous deux un nouveau fichier RCF.
 
 .Description de la tâche
-À partir de la version 1.4a de RcfFileGenerator, il existe une nouvelle option permettant de modifier (mise à niveau, rétrogradation ou remplacement) la configuration du commutateur sur les commutateurs IP Cisco sans avoir à effectuer de « effacement d'écriture ».
+* À partir de la version 1.4a de RcfFileGenerator, il existe une nouvelle option permettant de modifier (mise à niveau, rétrogradation ou remplacement) la configuration du commutateur sur les commutateurs IP Cisco sans avoir à effectuer de « effacement d'écriture ».
+* Le switch Cisco 9336C-FX2 possède deux types de stockage de switch distincts dont le nom est différent dans le RCF. Utilisez le tableau suivant pour déterminer le type de stockage Cisco 9336C-FX2 adapté à votre configuration :
++
+[cols="3*"]
+|===
+| Si vous connectez le stockage suivant... | Choisissez le type de stockage Cisco 9336C-FX2... | Exemple de bannière/MOTD du fichier RCF 
+
+
+ a| 
+** Tiroirs SAS directement connectés
+** Tiroirs NVMe directement connectés
+** Tiroirs NVMe connectés à des switchs de stockage dédiés
+
+ a| 
+9336C-FX2 – stockage direct uniquement
+ a| 
+`* Switch    : NX9336C (direct storage, L2 Networks, direct ISL)`
+
+
+
+ a| 
+** Tiroirs SAS directement connectés
+** Tiroirs NVMe connectés aux switchs IP MetroCluster
+
+
+
+NOTE: Au moins un tiroir NVMe connecté Ethernet est requis
+ a| 
+9336C-FX2 : stockage SAS et Ethernet
+ a| 
+`* Switch    : NX9336C (SAS and Ethernet storage, L2 Networks, direct ISL)`
+
+|===
+
 
 .Avant de commencer
 Vous pouvez utiliser cette méthode si votre configuration répond aux exigences suivantes :
@@ -140,10 +173,6 @@ Utiliser cette procédure si la configuration répond aux exigences.
 +
 
 NOTE: Vous devez utiliser les CleanUpFiles de la même version que le fichier RCF et pour la même configuration. L'utilisation d'un CleanUpFile ne fonctionnera pas et peut nécessiter une réinitialisation complète du commutateur.
-
-+
-
-NOTE: Le type de stockage est peut-être différent -- le stockage SAS ou le stockage direct.
 
 +
 

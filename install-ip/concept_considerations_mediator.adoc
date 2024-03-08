@@ -11,7 +11,7 @@ summary: Les différentes configurations MetroCluster présentent des différenc
 
 
 [role="lead"]
-Depuis ONTAP 9.7, vous pouvez utiliser le basculement automatique non planifié assisté par médiateur ONTAP dans la configuration IP MetroCluster ou le logiciel MetroCluster Tiebreaker. Un seul des deux services peut être utilisé avec la configuration IP de MetroCluster.
+Depuis ONTAP 9.7, vous pouvez utiliser le basculement automatique non planifié assisté par médiateur ONTAP dans la configuration IP MetroCluster ou le logiciel MetroCluster Tiebreaker. Il n'est pas nécessaire d'utiliser le logiciel MAUSO ou Tiebreaker ; cependant, si vous choisissez de ne pas utiliser l'un de ces services, vous devez le faire link:../disaster-recovery/concept_dr_workflow.html["effectuer une récupération manuelle"] en cas d'incident.
 
 Les différentes configurations MetroCluster effectuent un basculement automatique dans plusieurs cas :
 
@@ -24,8 +24,7 @@ Dans ces configurations, AUSO est lancé en cas de défaillance des contrôleurs
 Dans ces configurations, MAUSO est lancé dans les mêmes circonstances que AUSO, comme décrit ci-dessus, ainsi qu'après une panne complète du site (contrôleurs, stockage et commutateurs).
 
 +
-
-NOTE: La fonction MAUSO n'est lancée que si la mise en miroir du cache non volatile (_DR mirroring_) et la mise en miroir SyncMirror plex sont en mode synchrone au moment de la défaillance.
+link:concept-ontap-mediator-supports-automatic-unplanned-switchover.html["Découvrez comment le médiateur ONTAP prend en charge le basculement automatique non planifié"].
 
 * *Configurations IP ou FC MetroCluster utilisant le logiciel disjoncteur d'attache en mode actif*
 +
@@ -42,38 +41,5 @@ Avant d'utiliser le logiciel disjoncteur d'attache, passez en revue link:../tieb
 
 Vous ne pouvez pas utiliser d'applications ou d'appliances tierces pouvant déclencher un basculement en combinaison avec le médiateur ONTAP. En outre, la surveillance d'une configuration MetroCluster avec le logiciel MetroCluster Tiebreaker n'est pas prise en charge avec le programme ONTAP Mediator.
 
-
-
-== Prise en charge du protocole ONTAP pour le basculement automatique non planifié
-
-Le médiateur ONTAP stocke des informations d'état sur les nœuds MetroCluster dans des boîtes aux lettres situées sur l'hôte du médiateur. Les nœuds MetroCluster peuvent utiliser ces informations pour surveiller l'état de leurs partenaires de reprise sur incident et mettre en œuvre un utilitaire MAUSO en cas d'incident.
-
-Lorsqu'un nœud détecte une défaillance de site nécessitant un basculement, il prend des mesures pour confirmer que le basculement est approprié et effectue le basculement.
-
-Un MAUSO n'est lancé que dans les scénarios suivants :
-
-* La mise en miroir SyncMirror et la mise en miroir reprise après incident du cache non volatile de chaque nœud sont opérationnelles, et les caches et les miroirs sont synchronisés au moment de la panne.
-* Aucun des nœuds du site survivant n'est en état de basculement.
-* En cas d'incident sur site. Une catastrophe de site est une défaillance de *tous* nœuds sur le même site.
-+
-
-NOTE: À partir de ONTAP 9.13.1, vous pouvez modifier le comportement pour initier une opération MAUSO en cas de défaillance du cluster *ou* d'une paire HA. Dans le cas d'une paire haute disponibilité, les deux nœuds doivent tomber en panne en même temps.
-
-* À partir de ONTAP 9.13.1, si les conditions ci-dessus sont remplies et qu'une panne de ventilateur ou de matériel entraîne un arrêt de l'environnement, par exemple une unité d'alimentation, une batterie NVRAM ou une défaillance de pulsation du processeur de service, ou une température élevée ou basse.
-
-
-Vous pouvez lancer un MAUSO pour des scénarios supplémentaires qui ne sont pas répertoriés ci-dessus. Pour plus d'informations, voir link:concept-risks-limitations-automatic-switchover.html["Risques et limitations liés à l'utilisation du basculement automatique forcé de MetroCluster"].
-
-Un MAUSO est *non* lancé dans les scénarios d'arrêt suivants :
-
-* Vous initiez un arrêt. Par exemple, lorsque vous :
-+
-** arrêtez les nœuds
-** redémarrez les nœuds
-
-
-
-
-*Informations connexes*
-
-link:../manage/concept_understanding_mcc_data_protection_and_disaster_recovery.html#mediator-assisted-automatic-unplanned-switchover-in-metrocluster-ip-configurations["En savoir plus sur MAUSO dans les configurations MetroCluster IP"].
+.Informations associées
+link:../manage/concept_understanding_mcc_data_protection_and_disaster_recovery.html#mediator-assisted-automatic-unplanned-switchover-in-metrocluster-ip-configurations["En savoir plus sur un utilitaire MAUSO dans les configurations MetroCluster IP"].

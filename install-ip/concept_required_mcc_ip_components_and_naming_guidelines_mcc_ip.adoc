@@ -89,28 +89,6 @@ Les configurations IP MetroCluster existantes sur les systèmes FAS peuvent êtr
 
 
 
-=== Modèles de contrôleur limités à des configurations à quatre nœuds
-
-Ces modèles sont limités à quatre dans une configuration MetroCluster.
-
-* AVEC AFF A220
-* AFF A250
-* FAS2750
-* FAS500f
-
-
-Par exemple, les configurations suivantes ne sont pas prises en charge :
-
-* Configuration à huit nœuds composée de huit contrôleurs AFF A250.
-* Configuration à huit nœuds composée de quatre contrôleurs AFF 220 et de quatre contrôleurs FAS500f.
-* Deux configurations IP MetroCluster à quatre nœuds, chacune composée de contrôleurs AFF A250 et partageant les mêmes commutateurs internes.
-* Configuration à huit nœuds composée du groupe DR 1 avec contrôleurs AFF A250 et du groupe DR 2 avec contrôleurs FAS9000.
-
-
-Vous pouvez configurer deux configurations IP MetroCluster à quatre nœuds distinctes avec les mêmes commutateurs back-end si le deuxième MetroCluster n'inclut aucun des modèles ci-dessus.
-
-
-
 === Exemples de noms
 
 Les noms d'exemple suivants sont utilisés dans la documentation :
@@ -141,7 +119,7 @@ Les configurations IP MetroCluster utilisent un adaptateur Ethernet 40/100 Gbits
 | Modèle de plateforme | Adaptateur Gigabit Ethernet requis | Logement requis pour l'adaptateur | Ports 
 
 
-| AFF A900 ET FAS9500 | X91146A | Emplacement 5, emplacement 7 | e5b, e7b 
+| AFF A900, ASA A900 et FAS9500 | X91146A | Emplacement 5, emplacement 7 | e5b, e7b 
 
 
  a| 
@@ -156,7 +134,7 @@ e5a, e5b
 
 
  a| 
-AFF A800, AFF C800
+AFF A800, AFF C800, ASA A800 et ASA C800
  a| 
 Ports X1146A/intégrés
  a| 
@@ -167,7 +145,7 @@ e0b. e1b
 
 
  a| 
-FAS8300, AFF A400 et AFF C400
+FAS8300, AFF A400, ASA A400, ASA C400 et AFF C400
  a| 
 X1146A
  a| 
@@ -189,7 +167,7 @@ e1a, e1b
 
 
  a| 
-FAS2750, AFF A150 et AFF A220
+FAS2750, AFF A150, ASA A150 et AFF A220
  a| 
 Ports intégrés
  a| 
@@ -200,7 +178,7 @@ e0a, e0b
 
 
  a| 
-FAS500f, AFF A250 et AFF C250
+FAS500f, AFF A250, ASA A250, ASA C250 et AFF C250
  a| 
 Ports intégrés
  a| 

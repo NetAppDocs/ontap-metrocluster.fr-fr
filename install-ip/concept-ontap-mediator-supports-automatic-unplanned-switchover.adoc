@@ -1,0 +1,74 @@
+---
+permalink: install-ip/concept-ontap-mediator-supports-automatic-unplanned-switchover.html 
+sidebar: sidebar 
+keywords: ontap, mediator, service, assist, metrocluster, ip, configuration, perform, automatic, unplan, switchover, physical, repository, status, information, configuring, configure, install, configuring, configure, forced 
+summary:  
+---
+= Prise en charge du protocole ONTAP pour le basculement automatique non planifié
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Le médiateur ONTAP fournit des LUN de boîte aux lettres pour stocker des informations d'état sur les nœuds IP MetroCluster. Ces LUN sont co-localisés avec le médiateur ONTAP, qui s'exécute sur un hôte Linux physiquement séparé des sites MetroCluster. Les nœuds IP MetroCluster peuvent utiliser les informations de la boîte aux lettres pour surveiller l'état de leurs partenaires de reprise après incident et mettre en œuvre un basculement non planifié assisté par Mediator (MAUSO) en cas d'incident.
+
+
+NOTE: La fonction MAUSO n'est pas prise en charge dans les configurations FC MetroCluster.
+
+Lorsqu'un nœud détecte une défaillance de site nécessitant un basculement, il prend des mesures pour confirmer que le basculement est approprié et effectue le basculement. Par défaut, un MAUSO est lancé pour les scénarios suivants :
+
+* La mise en miroir SyncMirror et la mise en miroir reprise après incident du cache non volatile de chaque nœud sont opérationnelles, et les caches et les miroirs sont synchronisés au moment de la panne.
+* Aucun des nœuds du site survivant n'est en état de basculement.
+* En cas d'incident sur site. Un incident de site est une défaillance de _tous_ nœuds sur le même site.
+
+
+Un MAUSO est _non_ initié dans les scénarios d'arrêt suivants :
+
+* Vous initiez un arrêt. Par exemple, lorsque vous :
++
+** Arrêtez les nœuds
+** Redémarrez les nœuds
+
+
+
+
+Découvrez les fonctionnalités MAUSO disponibles avec chaque version de ONTAP 9.
+
+[cols="1a,5a"]
+|===
+| À commencer par... | Description 
+
+
+ a| 
+ONTAP 9.13.1
+ a| 
+* Un MAUSO est lancé si un <<default_scenarios,scénario par défaut>> se produit et une panne de ventilateur ou de matériel entraîne un arrêt de l'environnement. Une température élevée ou basse, une unité d'alimentation, une batterie NVRAM ou une défaillance de pulsation du processeur de service sont des exemples de pannes matérielles.
+* La valeur par défaut du domaine de défaillance est définie sur « auso-on-dr-group » dans une configuration IP MetroCluster. Pour ONTAP 9.12.1 et les versions antérieures, la valeur par défaut est « auso-on-cluster-Disaster ».
++
+Dans une configuration IP MetroCluster à huit nœuds, « auso-on-dr-group » déclenche une commande MAUSO en cas de panne du cluster ou d'une paire HA dans un groupe DR. Dans le cas d'une paire haute disponibilité, les deux nœuds doivent tomber en panne en même temps.
+
++
+Vous pouvez également remplacer le paramètre de domaine de défaillance par le domaine « auso-on-cluster-désastre » à l'aide du `metrocluster modify -auto-switchover-failure-domain auso-on-cluster-disaster` Commande permettant de déclencher une commande MAUSO uniquement en cas de défaillance d'une paire de nœuds HA dans les deux groupes DR.
+
+* Vous pouvez modifier le comportement pour forcer une MAUSO même si la NVRAM n'est pas synchronisée au moment de la panne.
+
+
+
+
+ a| 
+[[mauso-9-12-1]] ONTAP 9.12.1
+ a| 
+Vous pouvez activer la fonction de basculement automatique forcé MetroCluster dans une configuration MetroCluster IP à l'aide de `metrocluster modify -allow-auto-forced-switchover true` commande.
+
+Le basculement en cas de détection d'une défaillance de site se produit automatiquement lorsque vous activez la fonctionnalité de basculement forcé automatique MetroCluster. Cette fonction peut être utilisée en complément de la fonctionnalité de basculement automatique MetroCluster IP.
+
+.Risques et limitations liés à l'utilisation du basculement automatique forcé de MetroCluster
+Lorsque vous autorisez une configuration MetroCluster IP à fonctionner en mode de basculement forcé automatique, le problème connu suivant peut entraîner une perte de données :
+
+* La mémoire non volatile des contrôleurs de stockage n'est pas mise en miroir sur le partenaire de reprise après incident distant du site partenaire.
+
+
+*Attention* : vous pouvez rencontrer des scénarios qui ne sont pas mentionnés. NetApp n'est pas responsable de la corruption des données, de la perte de données ou des autres dommages susceptibles d'apparaître liés à l'activation de la fonction de basculement automatique forcé de MetroCluster. N'utilisez pas la fonctionnalité de basculement automatique forcé de MetroCluster si les risques et les limitations ne sont pas acceptables.
+
+|===
