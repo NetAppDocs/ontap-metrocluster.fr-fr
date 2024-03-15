@@ -2111,7 +2111,6 @@
   <block id="a7c1dc82620aa47d13a5325a92e48b8b" category="paragraph">Si l'un des éléments ci-dessus est configuré, il est possible que vous ne puissiez pas appliquer une nouvelle configuration de fichier RCF. Cependant, vous pouvez revenir à la configuration précédente en rechargeant le commutateur *sans* enregistrer la configuration en cours d'exécution dans la configuration de démarrage. Le commutateur s'active avec la configuration précédente.</block>
   <block id="b96e894aca032efb6ce18c3fee836f2e" category="list-text">Appliquer le fichier RCF et vérifier que les ports sont en ligne.</block>
   <block id="57eec47f7c1d3f7c578a164a838dcb88" category="list-text">Appliquez les fichiers RCF.</block>
-  <block id="f3f957cad54a09303c58187ea562c4e0" category="admonition">Certains messages d'avertissement s'affichent lors de l'application de la configuration. Les messages d'erreur ne sont pas attendus.</block>
   <block id="94f2f59cf614fa38bf778db2f227f97f" category="list-text">Une fois la configuration appliquée, vérifiez que le cluster et les ports MetroCluster sont mis en ligne à l'aide de l'une des commandes suivantes,<block ref="9bacb249b0368cefba275373cd07ba98" prefix=" " category="inline-code"></block>,<block ref="cdf610401d84a31ec0b35a9530629e42" prefix=" " category="inline-code"></block>, ou<block ref="3820d68048e47b324f0599909ddc9e1f" prefix=" " category="inline-code"></block></block>
   <block id="36654f0d51aef3cf2ff1ad8320086412" category="admonition">Si vous avez modifié le VLAN pour le cluster local et que vous avez mis à niveau le premier commutateur du site, la surveillance de l'état du cluster risque de ne pas indiquer qu'il est « sain », car les VLAN de l'ancienne et des nouvelles configurations ne correspondent pas. Après la mise à jour du second contacteur, l'état doit revenir à l'état sain.</block>
   <block id="d83d3a40a56d46ffaf1367b944bbd493" category="paragraph">Si la configuration n'est pas correctement appliquée ou si vous ne souhaitez pas conserver la configuration, vous pouvez revenir à la configuration précédente en rechargeant le commutateur *sans* enregistrer la configuration en cours dans la configuration de démarrage. Le commutateur s'active avec la configuration précédente.</block>
@@ -12976,7 +12975,6 @@
   <block id="64b48b15797ae9ce8dde94af89070b3d" category="paragraph">Avec Red Hat Enterprise Linux 8.1 à 8.7 :</block>
   <block id="389dbd9d6deb8eabbab651256bf77680" category="list-text">OpenJDK 17, 18 ou 19</block>
   <block id="9e605ce3bb6ad134bb55c54d861ceb6a" category="paragraph">1.4</block>
-  <block id="d1b3737d5bc8f98b3241666f4d0cd1cf" category="paragraph">ONTAP 9.2 et versions ultérieures</block>
   <block id="09eecd50480033ff43835a86efed6607" category="list-text">Red Hat Enterprise Linux 7 à 7.9</block>
   <block id="ae1dfcc629f4542382fd6286dbfe5a0d" category="list-text">CentOS 7 à 7.9 64 bits</block>
   <block id="3f4ac8596d411de0ef0ad341cbeb82aa" category="paragraph">Avec CentOS :</block>
@@ -13394,8 +13392,6 @@
   <block id="b6933415b566c13842c75e7153f5e0bd" category="paragraph">Depuis ONTAP 9.7, vous pouvez utiliser le basculement automatique non planifié assisté par médiateur ONTAP dans la configuration IP MetroCluster ou le logiciel MetroCluster Tiebreaker. Il n'est pas nécessaire d'utiliser le logiciel MAUSO ou Tiebreaker ; cependant, si vous choisissez de ne pas utiliser l'un de ces services, vous devez le faire <block ref="ffc76c5e8798538fa424ea31c8f712bb" category="inline-link-macro-rx"></block> en cas d'incident.</block>
   <block id="b65bf2d95ccaa5163ee3e519ccc4f46c" category="inline-link-macro">Découvrez comment le médiateur ONTAP prend en charge le basculement automatique non planifié</block>
   <block id="79fa79dc9ecfb5181a7024131b90413f" category="paragraph"><block ref="66850f0d314a9b674fb83121fdb5639b" category="inline-link-macro-rx"></block>.</block>
-  <block id="2927bb12dad92f3aa1e9f54de7ac5c86" category="inline-link-macro">En savoir plus sur un utilitaire MAUSO dans les configurations MetroCluster IP</block>
-  <block id="861d9a7b4136ca5c52adba1b162580b0" category="paragraph"><block ref="dedd67391845326372399eb154d21c6c" category="inline-link-macro-rx"></block>.</block>
   <block id="88ddeb4aaff386fa8928e9ed590bcdd6" category="admonition">Depuis ONTAP 9.12.1, vous pouvez activer la fonctionnalité de basculement forcé automatique MetroCluster dans une configuration IP MetroCluster. Cette fonction est une extension du basculement non planifié assisté par un médiateur. Avant d'activer cette fonction, consultez le <block ref="b36331871b99d608d499593ef0805d3b" category="inline-link-macro-rx"></block>.</block>
   <block id="6627a26235928f19183374e55b041466" category="admonition">Avant d'utiliser cette commande, consultez le <block ref="b36331871b99d608d499593ef0805d3b" category="inline-link-macro-rx"></block>.</block>
   <block id="62dab2247ca5697a261fd865abf3712d" category="paragraph">Trimestre 4 : baies 36-47</block>
@@ -13433,4 +13429,11 @@
   <block id="b07b13f7f6740ff05e2edecf69453d1e" category="paragraph">Pour plus d'informations, consultez la <block ref="54dac02f94a6488bb50eb2223b2531dc" category="inline-link-macro-rx"></block>.</block>
   <block id="6c788f4f91230d4481264ef0fc97d4b2" category="inline-link-macro">Découvrez comment le médiateur ONTAP prend en charge le basculement automatique non planifié dans les configurations MetroCluster IP</block>
   <block id="83401bd8eb751fc79a9ff9e2e69be029" category="paragraph"><block ref="ff41f8886897126f1b4109a0b09cd291" category="inline-link-macro-rx"></block>.</block>
+  <block id="8ee0349da94a79740c2458822156c3f3" category="paragraph">ONTAP 9.13.1 et versions antérieures</block>
+  <block id="58ff5f456710e2c10351958a374f1bae" category="paragraph">ONTAP 9.11.1 et versions antérieures</block>
+  <block id="0b0ec9f1cc28b3c19dc6c36dcd5af7cc" category="paragraph">1.3</block>
+  <block id="7477ed6488d6dd27883a39484d4cd5f8" category="paragraph">ONTAP 9.10.1 et versions antérieures</block>
+  <block id="09e34111ef8649a5302b1889e0c7d303" category="list-text">JRE 8</block>
+  <block id="d434765df1b814e459b22676bed43318" category="paragraph">1,21Px</block>
+  <block id="b3c0f57dcdb05faa9fbc38832a492a4e" category="admonition">Certains messages d'avertissement s'affichent lors de l'application de la configuration. Les messages d'erreur ne sont généralement pas attendus. Toutefois, si vous êtes connecté à l'aide de SSH, vous pouvez recevoir l'erreur suivante :<block ref="f6ffe33fb36eb714adf6f81147c665f6" prefix=" " category="inline-code"></block></block>
 </blocks>
