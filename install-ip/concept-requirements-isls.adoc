@@ -1,0 +1,191 @@
+---
+permalink: install-ip/concept-requirements-isls.html 
+sidebar: sidebar 
+keywords: isl, isls, layer 2, layer 3, shared switch 
+summary: 'Cette section contient les conditions requises pour les liens inter-commutateurs (ISL) transportant le trafic MetroCluster sur toutes les configurations IP MetroCluster et topologies réseau.' 
+---
+= Considérations relatives aux liens ISL
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+Les liens ISL (Inter-Switch Links) transportant le trafic MetroCluster sur toutes les configurations IP MetroCluster et les topologies réseau ont certaines exigences. Ces exigences s'appliquent à tous les liens ISL transportant du trafic MetroCluster, que les liens ISL soient directs ou partagés entre les commutateurs des clients.
+
+
+
+== Exigences générales relatives aux liens ISL MetroCluster
+
+Ce qui suit s'applique aux liens ISL sur toutes les configurations MetroCluster IP :
+
+* Les deux tissus doivent avoir le même nombre de liens ISL.
+* Les liens ISL sur une structure doivent tous être de la même vitesse et de la même longueur.
+* Les liens ISL des deux tissus doivent être de la même vitesse et de la même longueur.
+* La différence de distance maximale prise en charge entre le tissu 1 et le tissu 2 est de 20 km ou 0,2 ms.
+* Les liens ISL d'une structure doivent avoir la même topologie. Par exemple, ils doivent tous être des liens directs, ou si la configuration utilise WDM, ils doivent tous utiliser WDM.
+* La vitesse ISL doit être au moins 10 Gbit/s.
+* Il doit y avoir au moins un port ISL 10 Gbits/s par structure.
+
+
+
+
+=== Limites de latence et de perte de paquets sur les liens ISL
+
+Ce qui suit s'applique au trafic aller-retour entre les commutateurs IP MetroCluster sur site_A et site_B, avec la configuration MetroCluster en état de fonctionnement stable :
+
+* Comme la distance entre deux sites MetroCluster augmente, la latence augmente, généralement dans la plage de 1 ms temps de retard aller-retour par 100 km (62 miles). La latence dépend également de l'accord de niveau de service (SLA) du réseau en termes de bande passante des liaisons ISL, de débit de paquets et de gigue sur le réseau. La faible bande passante, la gigue élevée et les baisses aléatoires de paquets entraînent différents mécanismes de récupération par les commutateurs ou le moteur TCP sur les modules de contrôleur, pour une livraison réussie des paquets. Ces mécanismes de restauration peuvent augmenter la latence globale. Pour plus d'informations sur la latence de trajet aller-retour et les exigences de distance maximale pour votre configuration, reportez-vous au link:https://hwu.netapp.com/["Hardware Universe :"^]
+* Tout périphérique qui contribue à la latence doit être pris en compte.
+* Le link:https://hwu.netapp.com/["Hardware Universe :"^] indique la distance en km Vous devez allouer 1 ms par 100 km. La distance maximale est définie par ce qui est atteint en premier, soit par le temps aller-retour maximal (RTT) en ms, soit par la distance en km Par exemple, si _le Hardware Universe_ indique une distance de 300 km, en se traduisant par 3 ms, votre ISL ne peut pas dépasser 300 km et la RTT maximale ne peut pas dépasser 3 ms, selon la première éventualité atteinte.
+* La perte de paquets doit être inférieure ou égale à 0.01 %. La perte maximale de paquets est la somme de toutes les pertes sur toutes les liaisons sur le chemin entre les nœuds MetroCluster et la perte sur les interfaces IP MetroCluster locales.
+* La valeur de gigue prise en charge est de 3 ms pour un aller-retour (ou 1,5 ms pour un aller-simple).
+* Le réseau doit allouer et maintenir la quantité de bande passante SLA requise pour le trafic MetroCluster, indépendamment des microrafales et des pics de trafic.
+* Si vous utilisez ONTAP 9.7 ou une version ultérieure, le réseau intermédiaire entre les deux sites doit fournir une bande passante minimale de 4,5 Gbit/s pour la configuration IP de MetroCluster.
+
+
+
+
+== Considérations relatives à l'émetteur-récepteur et au câble
+
+Tous les SFP ou SFP pris en charge par le fournisseur de l'équipement sont pris en charge pour les liens ISL de MetroCluster. Les SFP et QSFP fournis par NetApp ou le fournisseur de l'équipement doivent être pris en charge par le commutateur et le micrologiciel du commutateur.
+
+Lorsque vous connectez les contrôleurs aux commutateurs et aux liens ISL du cluster local, vous devez utiliser les émetteurs-récepteurs et les câbles fournis par NetApp avec le MetroCluster.
+
+
+
+== Utilisation de xWDM, TDM et de périphériques de cryptage externes
+
+Lorsque vous utilisez des périphériques xWDM/TDM ou des périphériques fournissant un cryptage dans une configuration IP MetroCluster, votre environnement doit satisfaire aux exigences suivantes :
+
+* Lors de la connexion des commutateurs IP MetroCluster au xWDM/TDM, les périphériques de cryptage externes ou l'équipement xWDM/TDM doivent être certifiés par le fournisseur pour le commutateur et le micrologiciel. La certification doit couvrir le mode de fonctionnement (tel que l'agrégation et le cryptage).
+* La latence et la gigue globales de bout en bout, y compris le cryptage, ne peuvent pas dépasser la quantité maximale indiquée dans le IMT et dans cette documentation.
+
+
+
+
+== Nombre pris en charge de liens ISL et de câbles de dérivation
+
+Le tableau suivant indique le nombre maximal de liens ISL pris en charge qui peuvent être configurés sur un commutateur IP MetroCluster à l'aide de la configuration du fichier de configuration de référence (RCF).
+
+|===
+
+
+| Modèle de commutateur IP MetroCluster | Type de port | Nombre maximal de liens ISL 
+
+
+ a| 
+Commutateurs BES-53248 pris en charge par Broadcom
+ a| 
+Ports natifs
+ a| 
+4 ISL utilisant 10 Gbits/s ou 25 Gbits/s.
+
+
+
+ a| 
+Commutateurs BES-53248 pris en charge par Broadcom
+ a| 
+Ports natifs (remarque 1)
+ a| 
+2 ISL utilisant 40 Gbit/s ou 100 Gbit/s.
+
+
+
+ a| 
+Cisco 3132Q-V
+ a| 
+Ports natifs
+ a| 
+6 ISL utilisant 40 Gbit/s.
+
+
+
+ a| 
+Cisco 3132Q-V
+ a| 
+Câbles de dérivation
+ a| 
+16 ISL utilisant 10 Gbits/s.
+
+
+
+ a| 
+Cisco 3232C
+ a| 
+Ports natifs
+ a| 
+6 ISL utilisant 40 Gbit/s ou 100 Gbit/s.
+
+
+
+ a| 
+Cisco 3232C
+ a| 
+Câbles de dérivation
+ a| 
+16 ISL utilisant 10 Gbits/s.
+
+
+
+ a| 
+Cisco 9336C-FX2 (pas de connexion des tiroirs NS224)
+ a| 
+Ports natifs
+ a| 
+6 ISL utilisant 40 Gbit/s ou 100 Gbit/s.
+
+
+
+ a| 
+Cisco 9336C-FX2 (pas de connexion des tiroirs NS224)
+ a| 
+Câbles de dérivation
+ a| 
+16 ISL utilisant 10
+
+
+
+ a| 
+Cisco 9336C-FX2 (connexion des tiroirs NS224)
+ a| 
+Ports natifs (remarque 2)
+ a| 
+4 ISL utilisant 40 Gbit/s ou 100 Gbit/s.
+
+
+
+ a| 
+Cisco 9336C-FX2 (connexion des tiroirs NS224)
+ a| 
+Câbles de dérivation (remarque 2)
+ a| 
+16 ISL utilisant 10 Gbits/s.
+
+
+
+ a| 
+NVIDIA SN2100
+ a| 
+Ports natifs (remarque 2)
+ a| 
+2 ISL utilisant 40 Gbit/s ou 100 Gbit/s.
+
+
+
+ a| 
+NVIDIA SN2100
+ a| 
+Câbles de dérivation (remarque 2)
+ a| 
+8 ISL utilisant 10 Gbits/s ou 25 Gbits/s.
+
+|===
+*Remarque 1* : l'utilisation de liens ISL de 40 Gbits/s ou de 100 Gbits/s sur un commutateur BES-53248 nécessite une licence supplémentaire.
+
+*Remarque 2* : les mêmes ports sont utilisés pour la vitesse native et le mode de répartition. Vous devez choisir d'utiliser les ports en mode de vitesse native ou en mode écorché lors de la création du fichier RCF.
+
+* Tous les liens ISL d'un commutateur IP MetroCluster doivent être à la même vitesse. L'utilisation simultanée de plusieurs ports ISL à des vitesses différentes n'est pas prise en charge.
+* Pour des performances optimales, vous devez utiliser au moins un lien ISL de 40 Gbit/s par réseau. Vous ne devez pas utiliser un lien ISL de 10 Gbits/s par réseau pour les systèmes FAS9000, AFF A700 ou d'autres plateformes haute capacité.
+
+
+
+NOTE: NetApp vous recommande de configurer un petit nombre de liens ISL à large bande passante plutôt qu'un grand nombre de liens ISL à faible bande passante. Par exemple, il est préférable de configurer un lien ISL de 40 Gbits/s au lieu de quatre liens ISL de 10 Gbits/s. Lorsque plusieurs liens ISL sont utilisés, l'équilibrage statistique de la charge peut avoir un impact sur le débit maximal. Un équilibrage inégal peut réduire le débit à celui d'un lien ISL unique.

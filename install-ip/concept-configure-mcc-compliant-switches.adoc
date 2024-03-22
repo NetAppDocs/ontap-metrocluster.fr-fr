@@ -1,0 +1,280 @@
+---
+permalink: install-ip/concept-configure-mcc-compliant-switches.html 
+sidebar: sidebar 
+keywords: metrocluster ip, metrocluster-compliant switches, metrocluster-compliant, requirements, compliant, configuration 
+summary: Découvrez les différentes configurations de ports de switch. 
+---
+= Exemples de configuration des ports de commutateur
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Découvrez les différentes configurations de ports de switch.
+
+
+NOTE: Les exemples suivants utilisent des valeurs décimales et suivent le tableau qui s'applique aux commutateurs Cisco. Selon le fournisseur du commutateur, il se peut que vous ayez besoin de valeurs différentes pour DSCP. Reportez-vous au tableau correspondant au fournisseur du commutateur pour confirmer la valeur correcte.
+
+|===
+
+
+| Valeur DSCP | Décimale | Hex | Signification 
+
+
+ a| 
+101 000
+ a| 
+16
+ a| 
+0x10
+ a| 
+CS2
+
+
+
+ a| 
+011 000
+ a| 
+24
+ a| 
+0x18
+ a| 
+CS3
+
+
+
+ a| 
+100 000
+ a| 
+32
+ a| 
+0x20
+ a| 
+CS4
+
+
+
+ a| 
+101 000
+ a| 
+40
+ a| 
+0x28
+ a| 
+CS5
+
+|===
+.Port de commutateur connectant une interface MetroCluster
+* Classification du trafic RDMA (Remote Direct Memory Access) :
++
+** Correspondance : port TCP 10006, source, destination ou les deux
+** Correspondance facultative : COS 5
+** Correspondance facultative : DSCP 40
+** Définissez DSCP 40
+** Définissez COS 5
+** Facultatif : mise en forme du débit à 20 Gbit/s.
+
+
+* Classification du trafic iSCSI :
++
+** Correspondance : port TCP 62500, source, destination ou les deux
+** Correspondance facultative : COS 4
+** Correspondance facultative : DSCP 32
+** Définissez DSCP 32
+** Définissez COS 4
+
+
+* L2FlowControl (pause), RX et TX
+
+
+.Ports ISL
+* Classification :
++
+** Correspondance CS 5 ou DSCP 40
++
+*** Définissez DSCP 40
+*** Définissez COS 5
+
+
+** Correspondance CS 4 ou DSCP 32
++
+*** Définissez DSCP 32
+*** Définissez COS 4
+
+
+
+
+* Sortie dans la file d'attente
++
+** Le groupe CS 4 a un seuil de configuration minimum de 2000 et un seuil maximum de 3000
+** Le groupe CS 5 a un seuil de configuration minimum de 3500 et un seuil maximum de 6500.
++
+
+NOTE: Les seuils de configuration peuvent varier en fonction de l'environnement. Vous devez évaluer les seuils de configuration en fonction de votre environnement.
+
+** ECN activé pour Q4 et Q5
+** ROUGE activé pour Q4 et Q5
+
+
+
+
+.Allocation de la bande passante (ports switchs connectant les interfaces MetroCluster et les ports ISL)
+* RDMA, COS 5 / DSCP 40 : 60 %
+* ISCSI, COS 4/DSCP 32 : 40 %
+* Capacité minimale requise par configuration MetroCluster et réseau : 10 Gbit/s.
+
+
+
+NOTE: Si vous utilisez des limites de taux, le trafic devrait être *façonné* sans introduire de perte.
+
+
+
+== Exemples de configuration des ports de commutateur connectant le contrôleur MetroCluster
+
+Les exemples de commandes fournis sont valables pour les commutateurs Cisco NX3232 ou Cisco NX9336. Les commandes varient en fonction du type de commutateur.
+
+Si une fonction ou son équivalent indiqué dans les exemples n'est pas disponible sur le commutateur, celui-ci ne répond pas à la configuration minimale requise et ne peut pas être utilisé pour déployer une configuration MetroCluster. Ceci est vrai pour tout commutateur connecté à une configuration MetroCluster et pour tous les commutateurs intermédiaires.
+
+
+NOTE: Les exemples suivants peuvent uniquement afficher la configuration d'un réseau.
+
+.Configuration de base
+Un réseau local virtuel (VLAN) doit être configuré dans chaque réseau. L'exemple suivant montre comment configurer un VLAN dans le réseau 10.
+
+*Exemple:*
+
+[listing]
+----
+# vlan 10
+The load balancing policy should be set so that order is preserved.
+----
+*Exemple:*
+
+[listing]
+----
+# port-channel load-balance src-dst ip-l4port-vlan
+----
+
+
+== Exemples de configuration de la classification
+
+Vous devez configurer des mappages d'accès et de classes pour mapper le trafic RDMA et iSCSI aux classes appropriées.
+
+Dans l'exemple suivant, tout le trafic TCP vers et depuis le port 65200 est mappé sur la classe de stockage (iSCSI). Tout le trafic TCP depuis et vers le port 10006 est mappé à la classe RDMA. Ces mappages de règles sont utilisés sur les ports de commutateur qui connectent les interfaces MetroCluster.
+
+*Exemple:*
+
+[listing]
+----
+ip access-list storage
+  10 permit tcp any eq 65200 any
+  20 permit tcp any any eq 65200
+ip access-list rdma
+  10 permit tcp any eq 10006 any
+  20 permit tcp any any eq 10006
+
+class-map type qos match-all storage
+  match access-group name storage
+class-map type qos match-all rdma
+match access-group name rdma
+----
+Vous devez configurer une stratégie d'entrée. Une politique d'entrée mappe le trafic comme classifié à différents groupes de CS. Dans cet exemple, le trafic RDMA est mappé au groupe CS 5 et le trafic iSCSI est mappé au groupe CS 4. La Ingress policy est utilisée sur les ports de commutateur connectant les interfaces MetroCluster et sur les ports ISL transportant le trafic MetroCluster.
+
+*Exemple:*
+
+[listing]
+----
+policy-map type qos MetroClusterIP_Node_Ingress
+class rdma
+  set dscp 40
+  set cos 5
+  set qos-group 5
+class storage
+  set dscp 32
+  set cos 4
+  set qos-group 4
+----
+NetApp vous recommande de façonner le trafic sur les ports de commutateur qui connectent une interface MetroCluster, comme illustré ci-dessous :
+
+*Exemple:*
+
+[listing]
+----
+policy-map type queuing MetroClusterIP_Node_Egress
+class type queuing c-out-8q-q7
+  priority level 1
+class type queuing c-out-8q-q6
+  priority level 2
+class type queuing c-out-8q-q5
+  priority level 3
+  shape min 0 gbps max 20 gbps
+class type queuing c-out-8q-q4
+  priority level 4
+class type queuing c-out-8q-q3
+  priority level 5
+class type queuing c-out-8q-q2
+  priority level 6
+class type queuing c-out-8q-q1
+  priority level 7
+class type queuing c-out-8q-q-default
+  bandwidth remaining percent 100
+  random-detect threshold burst-optimized ecn
+----
+
+
+== Exemples de configuration des ports de nœud
+
+Vous devrez peut-être configurer un port de nœud en mode écorché. Dans l'exemple suivant, les ports 25 et 26 sont configurés en mode écorché 4 x 25 Gbit/s.
+
+*Exemple:*
+
+[listing]
+----
+interface breakout module 1 port 25-26 map 25g-4x
+----
+Vous devrez peut-être configurer la vitesse du port de l'interface MetroCluster. L'exemple suivant montre comment configurer la vitesse en mode *auto* ou 40 Gbit/s :
+
+*Exemple:*
+
+[listing]
+----
+	speed auto
+
+	speed 40000
+----
+L'exemple suivant montre un port de commutateur configuré pour connecter une interface MetroCluster. Il s'agit d'un port en mode d'accès dans le VLAN 10, avec un MTU de 9 9216 et fonctionne en vitesse native. Le contrôle de flux (pause) symétrique (envoi et réception) est activé et les règles d'entrée et de sortie MetroCluster sont attribuées.
+
+*Exemple:*
+
+[listing]
+----
+interface eth1/9
+description MetroCluster-IP Node Port
+speed auto
+switchport access vlan 10
+spanning-tree port type edge
+spanning-tree bpduguard enable
+mtu 9216
+flowcontrol receive on
+flowcontrol send on
+service-policy type qos input MetroClusterIP_Node_Ingress
+service-policy type queuing output MetroClusterIP_Node_Egress
+no shutdown
+----
+Sur les ports 25 Gbit/s, vous devrez peut-être définir le paramètre correction d'erreur de transfert (FEC) sur « Désactivé », comme illustré dans l'exemple suivant.
+
+*Exemple:*
+
+[listing]
+----
+fec off
+----
+
+
+== Exemples de configuration des ports ISL dans l'ensemble du réseau
+
+Un commutateur compatible avec MetroCluster est considéré comme un commutateur intermédiaire, même s'il connecte directement les interfaces MetroCluster. Les ports ISL transportant le trafic MetroCluster sur le commutateur compatible MetroCluster doivent être configurés de la même manière que les ports ISL sur un commutateur intermédiaire. Reportez-vous à la section link:concept-considerations-layer-2-layer-3.html#required-settings-on-intermediate-switches["Réglages requis sur les commutateurs intermédiaires"] pour obtenir des conseils et des exemples.
+
+
+NOTE: Certaines cartes de règles sont identiques pour les ports de switch qui connectent les interfaces MetroCluster et les liens ISL transportant le trafic MetroCluster. Vous pouvez utiliser le même mappage de stratégie pour ces deux utilisations de port.

@@ -1,0 +1,56 @@
+---
+permalink: install-ip/concept-requirement-and-limitations-mcc-compliant-switches.html 
+sidebar: sidebar 
+keywords: metrocluster ip, metrocluster-compliant switches, metrocluster-compliant, requirements, compliant, limitations 
+summary: 'Depuis ONTAP 9.7, les configurations IP MetroCluster peuvent utiliser des commutateurs compatibles avec MetroCluster. Il s"agit de commutateurs non validés par NetApp, mais conformes aux spécifications NetApp. Cette section présente les exigences générales et les limites des switchs compatibles MetroCluster.' 
+---
+= Configuration requise et limitée lors de l'utilisation de switchs compatibles MetroCluster
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Depuis ONTAP 9.7, les configurations IP MetroCluster peuvent utiliser des commutateurs compatibles avec MetroCluster. Il s'agit de commutateurs non validés par NetApp, mais conformes aux spécifications NetApp. Cependant, NetApp ne fournit pas de services de dépannage ou de prise en charge de la configuration pour les commutateurs non validés. Vous devez connaître les exigences générales et les limites lorsque vous utilisez des switchs compatibles MetroCluster.
+
+
+
+== Exigences générales pour les commutateurs compatibles MetroCluster
+
+Le commutateur qui connecte les interfaces IP MetroCluster doit répondre aux exigences générales suivantes :
+
+* Les switchs doivent prendre en charge la qualité de service (QoS) et la classification du trafic.
+* Les commutateurs doivent prendre en charge la notification explicite de congestion (ECN).
+* Les switchs doivent prendre en charge une règle d'équilibrage de la charge pour préserver l'ordre sur le chemin.
+* Les commutateurs doivent prendre en charge le contrôle de débit L2 (L2FC).
+* Le port du commutateur doit fournir un taux dédié et ne doit pas être suralloué.
+* Les câbles et émetteurs-récepteurs reliant les nœuds aux commutateurs doivent être fournis par NetApp. Ces câbles doivent être pris en charge par le fournisseur du commutateur. Si vous utilisez un câblage optique, il est possible que l'émetteur-récepteur du commutateur ne soit pas fourni par NetApp. Vous devez vérifier qu'il est compatible avec l'émetteur-récepteur du contrôleur.
+* Les commutateurs qui connectent les nœuds MetroCluster peuvent transporter du trafic non-MetroCluster.
+* Seules les plateformes offrant des ports dédiés pour des interconnexions de cluster sans commutateur peuvent être utilisées avec un commutateur conforme à MetroCluster. Les plateformes telles que FAS2750 et AFF A220 ne peuvent pas être utilisées, car le trafic MetroCluster et le trafic d'interconnexion MetroCluster partagent les mêmes ports réseau.
+* Le commutateur conforme à MetroCluster ne doit pas être utilisé pour les connexions locales du cluster.
+* L'interface IP MetroCluster peut être connectée à n'importe quel port de commutateur pouvant être configuré pour répondre aux exigences.
+* Quatre commutateurs IP sont requis, deux pour chaque structure de commutateur. Si vous utilisez des directeurs, vous pouvez utiliser un seul directeur de chaque côté, mais les interfaces IP MetroCluster doivent se connecter à deux lames différentes dans deux domaines de défaillance différents sur ce directeur.
+* Les interfaces MetroCluster d'un nœud doivent se connecter à deux commutateurs ou lames réseau. Les interfaces MetroCluster d'un nœud ne peuvent pas être connectées au même réseau, au même commutateur ou au même serveur lame.
+* Le réseau doit répondre aux exigences décrites dans les sections suivantes :
++
+** link:concept-requirements-isls.html["Considérations relatives aux liens ISL"]
+** link:concept-considerations-layer-2-layer-3.html["Considérations relatives au déploiement de MetroCluster sur des réseaux partagés de couche 2 ou 3"]
+
+
+* L'unité de transmission maximale (MTU) de 9216 doit être configurée sur tous les commutateurs qui transportent le trafic IP MetroCluster.
+* La restauration vers ONTAP 9.6 ou une version antérieure n'est pas prise en charge.
+
+
+Tout switch intermédiaire que vous utilisez entre les switchs qui connecte les interfaces IP MetroCluster sur les deux sites doit répondre aux exigences et être configuré comme indiqué dans la link:concept-considerations-layer-2-layer-3.html["Considérations relatives au déploiement de MetroCluster sur des réseaux partagés de couche 2 ou 3"].
+
+
+
+== Limites lors de l'utilisation de switchs compatibles MetroCluster
+
+Vous ne pouvez pas utiliser de configuration ou de fonctionnalité qui nécessite que les connexions de cluster locales soient connectées à un commutateur. Par exemple, vous ne pouvez pas utiliser les configurations et procédures suivantes avec un commutateur compatible MetroCluster :
+
+* Configurations MetroCluster à 8 nœuds
+* Passez des configurations FC MetroCluster aux configurations IP MetroCluster
+* Mise à jour d'une configuration IP MetroCluster à quatre nœuds
+* Les plateformes partagent une interface physique pour le trafic MetroCluster et le cluster local. Reportez-vous à la section link:concept-network-speeds-and-switchport-modes.html["Vitesses réseau propres à la plateforme et modes de port des commutateurs pour les commutateurs compatibles avec MetroCluster"] pour les vitesses prises en charge.
+

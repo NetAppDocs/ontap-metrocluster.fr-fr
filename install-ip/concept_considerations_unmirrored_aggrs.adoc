@@ -15,14 +15,6 @@ Si votre configuration inclut des agrégats sans mise en miroir, vous devez conn
 
 
 
-== Considérations relatives aux agrégats non mis en miroir lors de tâches de maintenance nécessitant l'arrêt d'alimentation
-
-Si vous effectuez un basculement négocié pour des raisons de maintenance requérant une coupure d'alimentation à l'échelle du site, vous devez d'abord mettre manuellement hors ligne tous les agrégats non mis en miroir détenus par le site de secours.
-
-Si vous ne le faites pas, les nœuds du site survivant peuvent tomber en panne en raison de incohérences des disques. Cela peut se produire si les agrégats sans mise en miroir sont mis hors ligne ou manquants en raison de la perte de connectivité au stockage sur le site en cas de panne de courant ou de perte de liens ISL.
-
-
-
 == Considérations relatives aux agrégats non mis en miroir et aux espaces de noms hiérarchiques
 
 Si vous utilisez des espaces de noms hiérarchiques, vous devez configurer le chemin de jonction de sorte que tous les volumes de ce chemin soient sur des agrégats en miroir uniquement ou sur des agrégats non mis en miroir uniquement. La configuration d'agrégats non mis en miroir et en miroir dans le chemin de jonction peut empêcher l'accès aux agrégats non mis en miroir après le basculement.

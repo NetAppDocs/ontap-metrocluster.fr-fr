@@ -1,17 +1,17 @@
 ---
-permalink: install-ip/task_modify_ip_netmask_gateway_properties.html 
+permalink: maintain/task-modify-ip-netmask-properties.html 
 sidebar: sidebar 
 keywords: vlan, ip, gateway,netmask, address, network, interface, subnet 
 summary: 'Vous pouvez modifier les propriétés suivantes d"une interface IP MetroCluster, d"une adresse IP, d"un masque et d"une passerelle. Vous pouvez utiliser n"importe quelle combinaison de paramètres pour la mise à jour.' 
 ---
-= Modification de l'adresse, du masque de réseau et de la passerelle dans une adresse IP MetroCluster
+= Modifier l'adresse, le masque de réseau et la passerelle dans une configuration IP MetroCluster
 :allow-uri-read: 
 :icons: font
 :imagesdir: ../media/
 
 
 [role="lead"]
-À partir de ONTAP 9.10.1, vous pouvez modifier les propriétés suivantes d'une interface IP MetroCluster : adresse IP et masque, et passerelle. Vous pouvez utiliser n'importe quelle combinaison de paramètres pour la mise à jour.
+Depuis ONTAP 9.10.1, vous pouvez modifier les propriétés suivantes d'une interface IP MetroCluster : adresse IP et masque, et passerelle. Vous pouvez utiliser n'importe quelle combinaison de paramètres pour la mise à jour.
 
 Vous devrez peut-être mettre à jour ces propriétés, par exemple si une adresse IP dupliquée est détectée ou si une passerelle doit changer dans le cas d'un réseau de couche 3 en raison de modifications de configuration du routeur.
 
@@ -30,25 +30,22 @@ Utilisez le `metrocluster configuration-settings interface show`, `metrocluster 
 
 . Mettez à jour l'adresse IP, le masque de réseau et la passerelle pour un seul nœud et une seule interface :
 `metrocluster configuration-settings interface modify`
-
-
++
 La commande suivante indique comment mettre à jour l'adresse IP, le masque de réseau et la passerelle :
 
++
 [listing]
 ----
 cluster_A::* metrocluster configuration-settings interface modify -cluster-name cluster_A -home-node node_A_1 -home-port e0a-10 -address 192.168.12.101 -gateway 192.168.12.1 -netmask 255.255.254.0
 (metrocluster configuration-settings interface modify)
-
 Warning: This operation will disconnect and reconnect iSCSI and RDMA connections used for DR protection through port “e0a-10”. Partner nodes may need modifications for port “e0a-10” in order to completely establish network connectivity.
 Do you want to continue?" yes
-
 [Job 28] Setting up iSCSI target configuration. (pass2:iscsi13:0:-1:0): xpt_action_default: CCB type 0xe XPT_DEV_ADVINFO not supported
 [Job 28] Establishing iSCSI initiator connections.
 (pass6:iscsi14:0:-1:0): xpt_action_default: CCB type 0xe XPT_DEV_ADVINFO not supported
 (pass8:iscsi15:0:-1:0): xpt_action_default: CCB type 0xe XPT_DEV_ADVINFO not supported
 (pass9:iscsi16:0:-1:0): xpt_action_default: CCB type 0xe XPT_DEV_ADVINFO not supported
 [Job 28] Job succeeded: Interface Modify is successful.
-
 cluster_A::*> metrocluster configuration-settings interface modify -cluster-name cluster_A -home-node node_A_2 -home-port e0a-10 -address 192.168.12.201 -gateway 192.168.12.1 -netmask 255.255.254.0
 (metrocluster configuration-settings interface modify)
 Warning: This operation will disconnect and reconnect iSCSI and RDMA connections used for DR protection through port “e0a-10”. Partner nodes may need modifications for port “e0a-10” in order to completely establish network connectivity.
@@ -57,10 +54,10 @@ Do you want to continue?" yes
 ----
 . [[step2]]Vérifiez que toute la connectivité fonctionne pour toutes les interfaces :
 `metrocluster configuration-settings interface show`
-
-
++
 La commande suivante indique comment vérifier que toute la connectivité fonctionne pour toutes les interfaces :
 
++
 [listing]
 ----
 cluster_A::*> metrocluster configuration-settings interface show
@@ -89,12 +86,16 @@ Group Cluster Node    Network Address Netmask         Gateway         State
                       192.168.21.250  255.255.255.0   192.168.21.1    completed
 8 entries were displayed.
 ----
+
+
 . [[étape3]]Vérifiez que toutes les connexions fonctionnent :
++
 `metrocluster configuration-settings connection show`
 
-
++
 La commande suivante indique comment vérifier que toutes les connexions fonctionnent :
 
++
 [listing]
 ----
 cluster_A::*> metrocluster configuration-settings connection show
@@ -129,3 +130,4 @@ Group Cluster Node    Network Address Network Address Partner Type Config State
                  Home Port: e0b-20
                       192.168.20.100  192.168.21.250  DR Auxiliary completed
 ----
+
