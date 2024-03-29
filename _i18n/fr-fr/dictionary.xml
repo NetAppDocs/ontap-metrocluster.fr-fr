@@ -1103,7 +1103,6 @@
   <block id="a8d2847903c576898fb0a7f696b03aa1" category="paragraph">Pour modifier la distance d'un port ISL...</block>
   <block id="ad6e34d4719cd2f503bdb298311a85e4" category="paragraph">Utilisez le<block ref="cf8e239c84d2505f0fed7f26ad6f540a" prefix=" " category="inline-code"></block> commande sur les deux commutateurs de la structure.</block>
   <block id="43a533d4a7711d238594840dabecdae9" category="paragraph">Pour supprimer un ISL...</block>
-  <block id="0251accfd0a01d6b6678e4acc31b0511" category="paragraph">Débrancher la liaison \(câble\).</block>
   <block id="31e0f1d7c104cf71dda69e0e141d7dfa" category="paragraph">Pour ajouter un ISL...</block>
   <block id="30157269456de4c3887b93d1ec060d5c" category="paragraph">Pour déplacer un ISL...</block>
   <block id="aef3cfb377e896595d24bea72737dbb1" category="paragraph">Le déplacement d'un ISL est le même que la suppression, puis l'ajout d'un ISL. Supprimez d'abord le ISL en déconnectant la liaison, puis insérez des SFP dans les ports que vous ajoutez en tant que ports ISL.</block>
@@ -13240,7 +13239,6 @@
   <block id="baf55d93093b54950152b6be3f9bfec2" category="list-text">Les liens ISL sur une structure doivent tous être de la même vitesse et de la même longueur.</block>
   <block id="4b00dc01ca120693f1539bf736f11069" category="list-text">Les liens ISL des deux tissus doivent être de la même vitesse et de la même longueur.</block>
   <block id="ef6ab3e28db1093c7315b30edeb84730" category="list-text">La différence de distance maximale prise en charge entre le tissu 1 et le tissu 2 est de 20 km ou 0,2 ms.</block>
-  <block id="1b6ceb9b8db71407a3be0617e754101e" category="list-text">Les liens ISL d'une structure doivent avoir la même topologie. Par exemple, ils doivent tous être des liens directs, ou si la configuration utilise WDM, ils doivent tous utiliser WDM.</block>
   <block id="ddf41f2636c98d00a2698837f55a3f74" category="list-text">La vitesse ISL doit être au moins 10 Gbit/s.</block>
   <block id="cb806a9b25dfb1d4470413a3c2dd9944" category="list-text">Il doit y avoir au moins un port ISL 10 Gbits/s par structure.</block>
   <block id="25b13aa97e6e9eb228478bfddbcc84e9" category="paragraph">Ce qui suit s'applique au trafic aller-retour entre les commutateurs IP MetroCluster sur site_A et site_B, avec la configuration MetroCluster en état de fonctionnement stable :</block>
@@ -13501,4 +13499,20 @@ S'applique à toutes les configurations MetroCluster qui n'utilisent pas de swit
 S'applique à toutes les configurations MetroCluster.</block>
   <block id="20f7078fb96bd6060a10b9fed9306941" category="sidebar">Configuration requise et limitée des switchs compatibles MetroCluster</block>
   <block id="3c24829f69028dca3ac0aa982abad68d" category="sidebar">Vitesses du réseau et modes de ports de switch pour les switchs compatibles MetroCluster</block>
+  <block id="61a6d655671eebbd633c1d84fae09e17" category="cell">Si...</block>
+  <block id="9bb5e66f509f87b2056c49d88c3c1ad3" category="cell">Suivez la procédure...</block>
+  <block id="585259c85fa7332b7408c2bdbdccbd7e" category="cell">Vous disposez d'une FCR conforme à vos exigences</block>
+  <block id="6cd8985ef1c9ac5bb3c5ba019968286f" category="list-text"><block ref="6cd8985ef1c9ac5bb3c5ba019968286f" category="inline-link-macro-rx"></block></block>
+  <block id="876679dae881403e2f232efc9dd0bb3f" category="inline-link-macro">Configurer des switchs FC Cisco avec des fichiers RCF</block>
+  <block id="eb93031c42594d52b52dea4aa8c60cc7" category="list-text"><block ref="eb93031c42594d52b52dea4aa8c60cc7" category="inline-link-macro-rx"></block></block>
+  <block id="f95c75e9e3d1a3f06e2b3b15e304cf53" category="cell">N'avez pas de FCR ni de FCR ne répondant pas à vos exigences</block>
+  <block id="a7479abd1216b38814805eeb38bdbc15" category="list-text"><block ref="a7479abd1216b38814805eeb38bdbc15" category="inline-link-macro-rx"></block></block>
+  <block id="36d1363cb78273718bac11302a6ed445" category="paragraph">Débrancher la liaison.</block>
+  <block id="cde774a461b1ae0ea7e1a404c874f2a4" category="admonition">Lorsque vous apportez des modifications aux ports ISL, vous devrez peut-être également appliquer des paramètres supplémentaires recommandés par le fournisseur WDM. Reportez-vous à la documentation du fournisseur WDM pour obtenir des conseils.</block>
+  <block id="05ad4e95aa7945d2b5bc1c7c8a6eb220" category="list-text">Configurez le processeur de service :</block>
+  <block id="0e74984a18b6236a912a70cd78328256" category="inline-link-macro">Configuration du réseau SP/BMC</block>
+  <block id="1aea5f30cf555d730902505e498f4fd0" category="paragraph"><block ref="1aea5f30cf555d730902505e498f4fd0" category="inline-link-macro-rx"></block></block>
+  <block id="4010f2b8e90ddf85f94ac358d78075c1" category="inline-link-macro">Utilisez un processeur de service avec System Manager - ONTAP 9.7 et versions antérieures</block>
+  <block id="eaa2669881cbe475b9e0b278420a4005" category="paragraph"><block ref="eaa2669881cbe475b9e0b278420a4005" category="inline-link-macro-rx"></block></block>
+  <block id="adf442d82428813618df31b5f35c8c5d" category="list-text">Les liens ISL doivent avoir la même topologie. Par exemple, ils doivent tous être des liens directs, ou si la configuration utilise WDM, ils doivent tous utiliser WDM.</block>
 </blocks>
