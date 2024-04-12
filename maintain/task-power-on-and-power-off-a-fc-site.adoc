@@ -1,0 +1,679 @@
+---
+permalink: maintain/task-power-on-and-power-off-a-fc-site.html 
+sidebar: sidebar 
+keywords: metrocluster, maintain, service, power, off, on, data, center, relocate, reconfigure, maintenance 
+summary: Vous devez savoir comment mettre hors tension et sous tension un seul site dans une configuration MetroCluster FC à des fins de maintenance du site ou pour déplacer un site vers un autre emplacement. 
+---
+= Mettez le système hors tension et sous tension sur un seul site en configuration MetroCluster FC
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Si vous devez effectuer une maintenance sur site ou déplacer un seul site dans une configuration MetroCluster FC, vous devez savoir comment mettre le site hors tension et sous tension.
+
+Si vous devez déplacer et reconfigurer un site (par exemple, si vous devez passer d'un cluster à quatre nœuds à un cluster à huit nœuds), vous ne pouvez pas effectuer ces tâches en même temps. Cette procédure couvre uniquement les étapes nécessaires à la maintenance du site ou au transfert d'un site sans modifier sa configuration.
+
+Le schéma suivant présente une configuration MetroCluster. Cluster_B est hors tension pour des raisons de maintenance.
+
+image::power-on-off-data-center.gif[mettez le data center hors tension]
+
+
+
+== Mettez un site MetroCluster hors tension
+
+Vous devez mettre hors tension un site et tous les équipements avant le début de la maintenance ou du transfert du site.
+
+.Description de la tâche
+Toutes les commandes des étapes suivantes sont émises à partir du site qui reste sous tension.
+
+.Étapes
+. Avant de commencer, vérifiez que tous les agrégats non mis en miroir sur le site sont hors ligne.
+. Vérifier le fonctionnement de la configuration MetroCluster dans ONTAP :
++
+.. Vérifier si le système est multipathed :
++
+`node run -node _node-name_ sysconfig -a`
+
+.. Vérifier si des alertes d'intégrité sont disponibles sur les deux clusters :
++
+`system health alert show`
+
+.. Vérifier la configuration MetroCluster et que le mode opérationnel est normal :
++
+`metrocluster show`
+
+.. Effectuer une vérification MetroCluster : +
+`metrocluster check run`
+.. Afficher les résultats de la vérification MetroCluster :
++
+`metrocluster check show`
+
+.. Vérifier la présence d'alertes d'intégrité sur les commutateurs (le cas échéant) :
++
+`storage switch show`
+
+.. Exécutez Config Advisor.
++
+https://mysupport.netapp.com/site/tools/tool-eula/activeiq-configadvisor["Téléchargement NetApp : Config Advisor"]
+
+.. Une fois Config Advisor exécuté, vérifiez les résultats de l'outil et suivez les recommandations fournies dans la sortie pour résoudre tous les problèmes détectés.
+
+
+. Depuis le site que vous souhaitez rester à la hauteur, implémentez le basculement :
++
+`metrocluster switchover`
+
++
+[listing]
+----
+cluster_A::*> metrocluster switchover
+----
++
+L'opération peut prendre plusieurs minutes.
+
++
+Les agrégats sans miroir ne seront en ligne qu'après un basculement si les disques distants de l'agrégat sont accessibles. Si les liens ISL échouent, il est possible que le nœud local ne puisse pas accéder aux données des disques distants sans miroir. La défaillance d'un agrégat peut entraîner le redémarrage du nœud local.
+
+. Surveiller et vérifier la fin du basculement :
++
+`metrocluster operation show`
+
++
+[listing]
+----
+cluster_A::*> metrocluster operation show
+  Operation: Switchover
+ Start time: 10/4/2012 19:04:13
+State: in-progress
+   End time: -
+     Errors:
+
+cluster_A::*> metrocluster operation show
+  Operation: Switchover
+ Start time: 10/4/2012 19:04:13
+      State: successful
+   End time: 10/4/2012 19:04:22
+     Errors: -
+----
+. Mettez hors ligne tout volume et toute LUN appartenant à des agrégats non mis en miroir.
++
+.. Déplacez les volumes hors ligne.
++
+[listing]
+----
+cluster_A::* volume offline <volume name>
+----
+.. Mettez les LUN hors ligne.
++
+[listing]
+----
+cluster_A::* lun offline lun_path <lun_path>
+----
+
+
+. Déplacez les agrégats non mis en miroir hors ligne : `storage aggregate offline`
++
+[listing]
+----
+cluster_A*::> storage aggregate offline -aggregate <aggregate-name>
+----
+. Selon la configuration et la version de ONTAP, identifiez et déplacez les plexes affectés hors ligne situés sur le site de reprise sur incident (Cluster_B).
++
+Vous devez déplacer les plexes suivants hors ligne :
+
++
+--
+** Les plexes non mis en miroir se trouvent sur les disques situés sur le site de reprise après incident.
++
+Si vous ne déplacez pas les plexes non mis en miroir hors ligne sur le site d'incident, celui-ci risque d'être interrompu par la suite.
+
+** Les plexes en miroir situés sur les disques situés sur le site de reprise après incident pour la mise en miroir des agrégats. Une fois déplacés hors ligne, les plexes sont inaccessibles.
+
+
+--
++
+.. Identifier les plexes affectés.
++
+Les plexes qui appartiennent aux nœuds du site survivant se composent de disques Pool1. Les plexes qui appartiennent aux nœuds sur le site de secours se composent de disques de pool0.
+
++
+[listing]
+----
+Cluster_A::> storage aggregate plex show -fields aggregate,status,is-online,Plex,pool
+aggregate    plex  status        is-online pool
+------------ ----- ------------- --------- ----
+Node_B_1_aggr0 plex0 normal,active true     0
+Node_B_1_aggr0 plex1 normal,active true     1
+
+Node_B_2_aggr0 plex0 normal,active true     0
+Node_B_2_aggr0 plex5 normal,active true     1
+
+Node_B_1_aggr1 plex0 normal,active true     0
+Node_B_1_aggr1 plex3 normal,active true     1
+
+Node_B_2_aggr1 plex0 normal,active true     0
+Node_B_2_aggr1 plex1 normal,active true     1
+
+Node_A_1_aggr0 plex0 normal,active true     0
+Node_A_1_aggr0 plex4 normal,active true     1
+
+Node_A_1_aggr1 plex0 normal,active true     0
+Node_A_1_aggr1 plex1 normal,active true     1
+
+Node_A_2_aggr0 plex0 normal,active true     0
+Node_A_2_aggr0 plex4 normal,active true     1
+
+Node_A_2_aggr1 plex0 normal,active true     0
+Node_A_2_aggr1 plex1 normal,active true     1
+14 entries were displayed.
+
+Cluster_A::>
+----
++
+Les plexes affectés sont ceux qui sont distants vers le cluster A. Le tableau suivant indique si les disques sont locaux ou distants par rapport au cluster A :
+
++
+[cols="20,25,30,25"]
+|===
+
+
+| Nœud | Disques au pool | Les disques doivent-ils être mis hors ligne ? | Exemple de plexes à déplacer hors ligne 
+
+
+ a| 
+Noeud_A_1 et noeud_A_2
+ a| 
+Disques dans le pool 0
+ a| 
+Non Les disques sont locaux au cluster A.
+ a| 
+-
+
+
+
+ a| 
+Disques dans le pool 1
+ a| 
+Oui. Les disques sont distants du cluster A.
+ a| 
+Node_A_1_aggr0/plex4
+
+Node_A_1_aggr1/plex1
+
+Node_A_2_aggr0/plex4
+
+Node_A_2_aggr1/plex1
+
+
+
+ a| 
+Noeud _B_1 et noeud _B_2
+ a| 
+Disques dans le pool 0
+ a| 
+Oui. Les disques sont distants du cluster A.
+ a| 
+Node_B_1_aggr1/plex0
+
+Node_B_1_aggr0/plex0
+
+Node_B_2_aggr0/plex0
+
+Node_B_2_aggr1/plex0
+
+
+
+ a| 
+Disques dans le pool 1
+ a| 
+Non Les disques sont locaux au cluster A.
+ a| 
+-
+
+|===
+.. Déplacer les plexes affectés hors ligne :
++
+`storage aggregate plex offline`
+
++
+[listing]
+----
+storage aggregate plex offline -aggregate Node_B_1_aggr0 -plex plex0
+----
++
+
+NOTE: Effectuez cette étape pour tous les plexes dont les disques sont distants sur le cluster_A.
+
+
+
+. De manière persistante hors ligne les ports de commutateur ISL en fonction du type de commutateur.
++
+[cols="25,75"]
+|===
+
+
+| Type de commutateur | Action 
+
+
+ a| 
+Pour les commutateurs Brocade FC...
+ a| 
+.. Utilisez le `portcfgpersistentdisable <port>` commande pour désactiver de manière persistante les ports comme indiqué dans l'exemple suivant. Cela doit être fait sur les deux commutateurs du site survivant.
++
+[listing]
+----
+
+ Switch_A_1:admin> portcfgpersistentdisable 14
+ Switch_A_1:admin> portcfgpersistentdisable 15
+ Switch_A_1:admin>
+----
+.. Vérifiez que les ports sont désactivés à l'aide de l' `switchshow` commande présentée dans l'exemple suivant :
++
+[listing]
+----
+
+ Switch_A_1:admin> switchshow
+ switchName:	Switch_A_1
+ switchType:	109.1
+ switchState:	Online
+ switchMode:	Native
+ switchRole:	Principal
+ switchDomain:	2
+ switchId:	fffc02
+ switchWwn:	10:00:00:05:33:88:9c:68
+ zoning:		ON (T5_T6)
+ switchBeacon:	OFF
+ FC Router:	OFF
+ FC Router BB Fabric ID:	128
+ Address Mode:	0
+
+  Index Port Address Media Speed State     Proto
+  ==============================================
+   ...
+   14  14   020e00   id    16G   No_Light    FC  Disabled (Persistent)
+   15  15   020f00   id    16G   No_Light    FC  Disabled (Persistent)
+   ...
+ Switch_A_1:admin>
+----
+
+
+
+
+ a| 
+Pour les commutateurs Cisco FC...
+ a| 
+.. Utilisez le `interface` commande pour désactiver de manière persistante les ports. L'exemple suivant montre les ports 14 et 15 désactivés :
++
+[listing]
+----
+
+ Switch_A_1# conf t
+ Switch_A_1(config)# interface fc1/14-15
+ Switch_A_1(config)# shut
+
+ Switch_A_1(config-if)# end
+ Switch_A_1# copy running-config startup-config
+----
+.. Vérifiez que le port du commutateur est désactivé à l'aide du `show interface brief` comme indiqué dans l'exemple suivant :
++
+[listing]
+----
+
+ Switch_A_1# show interface brief
+ Switch_A_1
+----
+
+
+|===
+. Mettez l'équipement hors tension sur le site de secours.
++
+Les équipements suivants doivent être mis hors tension dans l'ordre indiqué :
+
++
+** Commutateurs FC MetroCluster
+** Contrôleurs de stockage : les contrôleurs de stockage doivent se trouver actuellement au niveau du `LOADER` vous devez les éteindre complètement.
+** Tiroirs de stockage
+** FibreBridges ATTO (le cas échéant)
+
+
+
+
+
+
+== Déplacement du site hors tension du MetroCluster
+
+Une fois le site hors tension, vous pouvez commencer les travaux de maintenance. La procédure est la même que si les composants MetroCluster sont déplacés au sein du même data Center ou vers un autre data Center.
+
+* Le matériel doit être câblé de la même manière que le site précédent.
+* Si la vitesse, la longueur ou le numéro de la liaison inter-commutateurs (ISL) ont changé, ils doivent tous être reconfigurés.
+
+
+.Étapes
+. Vérifiez que le câblage de tous les composants est soigneusement enregistré afin de pouvoir le reconnecter correctement au nouvel emplacement.
+. Déplacez physiquement l'ensemble du matériel, des contrôleurs de stockage, des commutateurs FC, des FibreBridges et des tiroirs de stockage.
+. Configurez les ports ISL et vérifiez la connectivité entre les sites.
++
+.. Mettez les commutateurs FC sous tension.
++
+
+NOTE: Ne pas mettre d'autres équipements sous tension.
+
+.. Activez les ports.
++
+Activez les ports selon les types de commutateurs corrects dans le tableau suivant :
+
++
+[cols="35,65"]
+|===
+
+
+| Type de commutateur | Commande 
+
+
+ a| 
+Pour les commutateurs Brocade FC...
+ a| 
+... Utilisez le `portcfgpersistentenable <port number>` commande pour activer le port de manière persistante. Cela doit être fait sur les deux commutateurs du site survivant.
++
+L'exemple suivant montre que les ports 14 et 15 sont activés sur Switch_A_1.
+
++
+[listing]
+----
+switch_A_1:admin> portcfgpersistentenable 14
+switch_A_1:admin> portcfgpersistentenable 15
+switch_A_1:admin>
+----
+... Vérifiez que le port du commutateur est activé : `switchshow`
++
+L'exemple suivant montre que les ports 14 et 15 sont activés :
+
++
+[listing]
+----
+switch_A_1:admin> switchshow
+switchName:	Switch_A_1
+switchType:	109.1
+
+switchState:	Online
+switchMode:	Native
+switchRole:	Principal
+switchDomain:	2
+switchId:	fffc02
+switchWwn:	10:00:00:05:33:88:9c:68
+zoning:		ON (T5_T6)
+switchBeacon:	OFF
+FC Router:	OFF
+FC Router BB Fabric ID:	128
+Address Mode:	0
+
+Index Port Address Media Speed State     Proto
+==============================================
+ ...
+ 14  14   020e00   id    16G   Online      FC  E-Port  10:00:00:05:33:86:89:cb "Switch_A_1"
+ 15  15   020f00   id    16G   Online      FC  E-Port  10:00:00:05:33:86:89:cb "Switch_A_1" (downstream)
+ ...
+switch_A_1:admin>
+----
+
+
+
+
+ a| 
+Pour les commutateurs Cisco FC...
+ a| 
+... Entrez le `interface` commande pour activer le port.
++
+L'exemple suivant montre que les ports 14 et 15 sont activés sur Switch_A_1.
+
++
+[listing]
+----
+
+ switch_A_1# conf t
+ switch_A_1(config)# interface fc1/14-15
+ switch_A_1(config)# no shut
+ switch_A_1(config-if)# end
+ switch_A_1# copy running-config startup-config
+----
+... Vérifiez que le port du commutateur est activé : `show interface brief`
++
+[listing]
+----
+
+ switch_A_1# show interface brief
+ switch_A_1#
+----
+
+
+|===
+
+
+. Utilisez les outils sur les commutateurs (lorsqu'ils sont disponibles) pour vérifier la connectivité entre les sites.
++
+
+NOTE: Vous ne devez continuer que si les liens sont correctement configurés et stables.
+
+. Désactivez à nouveau les liens s'ils sont stables.
++
+Désactivez les ports selon que vous utilisez des commutateurs Brocade ou Cisco comme indiqué dans le tableau suivant :
+
++
+[cols="35,65"]
+|===
+
+
+| Type de commutateur | Commande 
+
+
+ a| 
+Pour les commutateurs Brocade FC...
+ a| 
+.. Entrez le `portcfgpersistentdisable <port_number>` commande pour désactiver le port de manière persistante.
++
+Cela doit être fait sur les deux commutateurs du site survivant. L'exemple suivant montre que les ports 14 et 15 sont désactivés sur Switch_A_1 :
+
++
+[listing]
+----
+
+ switch_A_1:admin> portpersistentdisable 14
+ switch_A_1:admin> portpersistentdisable 15
+ switch_A_1:admin>
+----
+.. Vérifiez que le port du commutateur est désactivé : `switchshow`
++
+L'exemple suivant montre que les ports 14 et 15 sont désactivés :
+
++
+[listing]
+----
+switch_A_1:admin> switchshow
+switchName:	Switch_A_1
+switchType:	109.1
+switchState:	Online
+switchMode:	Native
+switchRole:	Principal
+switchDomain:	2
+switchId:	fffc02
+switchWwn:	10:00:00:05:33:88:9c:68
+zoning:		ON (T5_T6)
+switchBeacon:	OFF
+FC Router:	OFF
+FC Router BB Fabric ID:	128
+Address Mode:	0
+
+ Index Port Address Media Speed State     Proto
+ ==============================================
+  ...
+  14  14   020e00   id    16G   No_Light    FC  Disabled (Persistent)
+  15  15   020f00   id    16G   No_Light    FC  Disabled (Persistent)
+  ...
+switch_A_1:admin>
+----
+
+
+
+
+ a| 
+Pour les commutateurs Cisco FC...
+ a| 
+.. Désactivez le port à l'aide du `interface` commande.
++
+L'exemple suivant montre les ports fc1/14 et fc1/15 désactivés sur le commutateur A_1 :
+
++
+[listing]
+----
+switch_A_1# conf t
+
+switch_A_1(config)# interface fc1/14-15
+switch_A_1(config)# shut
+switch_A_1(config-if)# end
+switch_A_1# copy running-config startup-config
+----
+.. Vérifiez que le port du commutateur est désactivé à l'aide du `show interface brief` commande.
++
+[listing]
+----
+
+  switch_A_1# show interface brief
+  switch_A_1#
+----
+
+
+|===
+
+
+
+
+== Mise sous tension de la configuration MetroCluster et retour au fonctionnement normal
+
+Une fois la maintenance effectuée ou le site déplacé, vous devez mettre le site sous tension et rétablir la configuration MetroCluster.
+
+.Description de la tâche
+Toutes les commandes des étapes suivantes sont émises à partir du site que vous mettez sous tension.
+
+.Étapes
+. Mettez les commutateurs sous tension.
++
+Vous devez d'abord mettre les commutateurs sous tension. Si le site a été déplacé, il se peut qu'il ait été mis sous tension lors de l'étape précédente.
+
++
+.. Reconfigurez le lien ISL (Inter-Switch Link) si nécessaire ou si cela n'a pas été effectué dans le cadre du déplacement.
+.. Activez l'ISL si l'escrime a été terminé.
+.. Vérifiez le lien ISL.
+
+
+. Désactivez les liens ISL sur les commutateurs FC.
+. Mettez les contrôleurs de stockage sous tension et attendez que le s'affiche `LOADER` à l'invite. Les contrôleurs ne doivent pas être entièrement démarrés.
++
+Si le démarrage automatique est activé, appuyez sur `Ctrl+C` pour empêcher les contrôleurs de démarrer automatiquement.
+
+. Mettez les étagères sous tension et laissez suffisamment de temps pour qu'elles s'allumer complètement.
+. Mettez sous tension les ponts FiberBridge.
++
+.. Sur les commutateurs FC, vérifiez que les ports reliant les ponts sont bientôt en ligne.
++
+Vous pouvez utiliser une commande comme `switchshow` Pour les commutateurs Brocade, et `show interface brief` Pour les commutateurs Cisco.
+
+.. Vérifier que les shelfs et les disques sur les ponts sont bien visibles.
++
+Vous pouvez utiliser une commande comme `sastargets` Sur l'interface CLI ATTO.
+
+
+
+. Activez les liens ISL sur les commutateurs FC.
++
+Activez les ports selon que vous utilisez des commutateurs Brocade ou Cisco comme indiqué dans le tableau suivant :
+
++
+[cols="25,75"]
+|===
+
+
+| Type de commutateur | Commande 
+
+
+ a| 
+Pour les commutateurs Brocade FC...
+ a| 
+.. Entrez le `portcfgpersistentenable <port>` commande pour activer de manière persistante les ports. Cela doit être fait sur les deux commutateurs du site survivant.
++
+L'exemple suivant montre que les ports 14 et 15 sont activés sur Switch_A_1 :
+
++
+[listing]
+----
+
+ Switch_A_1:admin> portcfgpersistentenable 14
+ Switch_A_1:admin> portcfgpersistentenable 15
+ Switch_A_1:admin>
+----
+.. Vérifiez que le port du commutateur est activé à l'aide du +
+`switchshow` commande :
++
+[listing]
+----
+switch_A_1:admin> switchshow
+ switchName:	Switch_A_1
+ switchType:	109.1
+ switchState:	Online
+ switchMode:	Native
+ switchRole:	Principal
+ switchDomain:	2
+ switchId:	fffc02
+ switchWwn:	10:00:00:05:33:88:9c:68
+ zoning:		ON (T5_T6)
+ switchBeacon:	OFF
+ FC Router:	OFF
+ FC Router BB Fabric ID:	128
+ Address Mode:	0
+
+  Index Port Address Media Speed State     Proto
+  ==============================================
+   ...
+   14  14   020e00   id    16G   Online      FC  E-Port  10:00:00:05:33:86:89:cb "Switch_A_1"
+   15  15   020f00   id    16G   Online      FC  E-Port  10:00:00:05:33:86:89:cb "Switch_A_1" (downstream)
+   ...
+ switch_A_1:admin>
+----
+
+
+
+
+ a| 
+Pour les commutateurs Cisco FC...
+ a| 
+.. Utilisez le `interface` commande pour activer les ports.
++
+L'exemple suivant montre que les ports fc1/14 et fc1/15 sont activés sur le commutateur A_1 :
+
++
+[listing]
+----
+
+ switch_A_1# conf t
+ switch_A_1(config)# interface fc1/14-15
+ switch_A_1(config)# no shut
+ switch_A_1(config-if)# end
+ switch_A_1# copy running-config startup-config
+----
+.. Vérifiez que le port du commutateur est désactivé :
++
+[listing]
+----
+switch_A_1# show interface brief
+switch_A_1#
+----
+
+
+|===
+. Vérifiez que le stockage est visible depuis le site survivant. Remettez les plexes hors ligne. Cela redémarre les opérations de resynchronisation et rétablit le SyncMirror.
+. Rétablir la configuration MetroCluster.
++
+Suivez les instructions de la section link:../disaster-recovery/task_recover_from_a_non_controller_failure_mcc_dr.html#verifying-that-your-system-is-ready-for-a-switchback["Vérifier que votre système est prêt pour le rétablissement"] Afin d'effectuer des opérations de rétablissement et de rétablissement en fonction de votre configuration MetroCluster.
+
+

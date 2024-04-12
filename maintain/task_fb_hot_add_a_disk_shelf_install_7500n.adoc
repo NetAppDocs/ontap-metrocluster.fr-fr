@@ -17,8 +17,8 @@ Vous pouvez ajouter à chaud un tiroir disque pour augmenter le stockage sans r�
 * Votre environnement doit répondre à l'un des scénarios suivants pour ajouter à chaud un tiroir :
 +
 ** Deux ponts FibreBridge 7500N sont connectés à une pile de tiroirs disques SAS.
-** Vous disposez d'un pont FibreBridge 7500N et d'un pont FibreBridge 6500N connecté à une pile de tiroirs disques SAS.
-** Deux ponts FibreBridge 6500N sont connectés à une pile de tiroirs disques SAS.
+** Deux ponts FibreBridge 7600N sont connectés à une pile de tiroirs disques SAS.
+** Vous disposez d'un pont FibreBridge 7500N et d'un pont FibreBridge 7600N connectés à une pile de tiroirs disques SAS.
 
 
 * Cette procédure consiste à ajouter à chaud un tiroir disque au dernier tiroir disque d'une pile.
@@ -116,19 +116,11 @@ https://mysupport.netapp.com/site/downloads/firmware/disk-shelf-firmware["Télé
 
 . Installez et câconnectez le tiroir disque :
 +
-Prenez en compte les considérations suivantes :
+
+NOTE: Ne forcez pas un connecteur dans un orifice. Les câbles mini-SAS sont clavetés ; dans un port SAS, le câble SAS s'enclenche et le voyant LNK du port SAS du tiroir disque s'allume en vert.pour les tiroirs disques, insérez un connecteur de câble SAS dans la languette de retrait orientée vers le haut (sur le dessus du connecteur).
 
 +
-** Pour ponts FiberBridge 6500N :
-+
-Attendez au moins 10 secondes avant de connecter le port. Les connecteurs de câble SAS sont clavetés ; lorsqu'ils sont orientés correctement dans un port SAS, le connecteur s'enclenche et le voyant LNK du port SAS du tiroir disque s'allume en vert.pour les tiroirs disques, vous insérez un connecteur de câble SAS, la languette de retrait étant orientée vers le bas (sous le connecteur).
-
-** Pour ponts FiberBridge 7500N :
-+
-Ne forcez pas un connecteur dans un orifice. Les câbles mini-SAS sont clavetés ; dans un port SAS, le câble SAS s'enclenche et le voyant LNK du port SAS du tiroir disque s'allume en vert.pour les tiroirs disques, insérez un connecteur de câble SAS dans la languette de retrait orientée vers le haut (sur le dessus du connecteur).
-
-+
-... Installez le tiroir disque, mettez-le sous tension et définissez l'ID de tiroir.
+.. Installez le tiroir disque, mettez-le sous tension et définissez l'ID de tiroir.
 +
 Le _Guide d'installation_ de votre modèle de tiroir disque fournit des informations détaillées sur l'installation des tiroirs disques.
 
@@ -136,13 +128,11 @@ Le _Guide d'installation_ de votre modèle de tiroir disque fournit des informat
 
 NOTE: Vous devez mettre le tiroir disque sous tension et de conserver les ID de tiroir uniques pour chaque tiroir disque SAS dans l'ensemble du système de stockage.
 
-... Déconnecter le câble SAS du port IOM B du dernier shelf de la pile, puis le reconnecter au même port du nouveau shelf.
+.. Déconnecter le câble SAS du port IOM B du dernier shelf de la pile, puis le reconnecter au même port du nouveau shelf.
 +
 L'autre extrémité de ce câble reste connectée au pont B.
 
-... Connectez en série le nouveau tiroir disque en reliant les nouveaux ports IOM (du module d'E/S A et du module d'E/S B) aux derniers ports IOM de tiroir (du module d'E/S A et du module B).
-
-
+.. Connectez en série le nouveau tiroir disque en reliant les nouveaux ports IOM (du module d'E/S A et du module d'E/S B) aux derniers ports IOM de tiroir (du module d'E/S A et du module B).
 
 
 +

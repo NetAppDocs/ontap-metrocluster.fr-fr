@@ -14,7 +14,7 @@ summary:
 Vous pouvez ajouter à chaud (sans interruption) toute une pile, y compris les ponts, au système MetroCluster. Il doit y avoir des ports disponibles sur les commutateurs FC et vous devez mettre à jour la segmentation des commutateurs pour tenir compte des modifications.
 
 .Description de la tâche
-* Cette procédure peut être utilisée pour ajouter une pile à l'aide de ponts FiberBridge 7500N ou 6500N.
+* Cette procédure peut être utilisée pour ajouter une pile à l'aide de ponts FibreBridge 7600N ou 7500N.
 * Cette procédure est rédigée avec l'hypothèse que vous utilisez les interfaces de gestion des ponts recommandées : l'interface graphique ATTO ExpressNAV et l'utilitaire ATTO Quickmenu.
 +
 ** L'interface graphique ATTO ExpressNAV permet de configurer et de gérer un pont, ainsi que de mettre à jour le micrologiciel du pont. Utilisez l'utilitaire ATTO Quicknavigation pour configurer le port de gestion Ethernet de pont 1.
@@ -252,9 +252,8 @@ Dans les systèmes exécutant ONTAP 9.5 ou version ultérieure, la gestion intra
 Le débit de données FC pris en charge dépend du pont de votre modèle.
 
 +
-*** Le pont FiberBridge 7600 prend en charge jusqu'à 32, 16 ou 8 Gbits/s.
-*** Le pont FiberBridge 7500 prend en charge jusqu'à 16, 8 ou 4 Gbits/s.
-*** Le pont FiberBridge 6500 prend en charge jusqu'à 8, 4 ou 2 Gbits/s.
+*** Le pont FibreBridge 7600N prend en charge jusqu'à 32, 16 ou 8 Gbit/s.
+*** Le pont FibreBridge 7500N prend en charge jusqu'à 16, 8 ou 4 Gbit/s.
 +
 
 NOTE: La vitesse FCDataRate que vous sélectionnez est limitée à la vitesse maximale prise en charge par le pont et le commutateur auquel le port de pont se connecte. Les distances de câblage ne doivent pas dépasser les limites des SFP et autres matériels.
@@ -267,7 +266,7 @@ Si vous utilisez l'interface de ligne de commandes, vous devez exécuter la comm
 
 
 
-.. Si vous configurez un pont FibreBridge 7500N ou 6500N, configurez le mode de connexion utilisé par le port pour ptp.
+.. Si vous configurez un pont FibreBridge 7500N, configurez le mode de connexion utilisé par le port sur « ptp ».
 +
 
 NOTE: Le paramètre FCConnMode n’est pas nécessaire lors de la configuration d’un pont FiberBridge 7600N.
@@ -1275,7 +1274,7 @@ NOTE: Des ponts supplémentaires peuvent être câblés sur les ports 36 à 39 d
 |===
 
 
-12+| Configurations utilisant des ponts FibreBridge 6500N ou FibreBridge 7500N ou 7600N avec un seul port FC (FC1 ou FC2) uniquement 
+12+| Configurations utilisant FibreBridge 7500N ou 7600N avec un port FC (FC1 ou FC2) uniquement 
 
 
 12+| GROUPE DR 1 
@@ -1499,7 +1498,7 @@ NOTE: Des ponts supplémentaires peuvent être câblés sur les ports 12 - 17, 2
 |===
 
 
-10+| Configurations utilisant des ponts FibreBridge 6500N ou FibreBridge 7500N ou 7600N avec un seul port FC (FC1 ou FC2) uniquement 
+10+| Configurations utilisant FibreBridge 7500N ou 7600N avec un port FC (FC1 ou FC2) uniquement 
 
 
 10+| GROUPE DR 2 

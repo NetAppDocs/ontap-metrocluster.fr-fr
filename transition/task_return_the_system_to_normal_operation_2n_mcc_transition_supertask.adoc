@@ -17,7 +17,6 @@ Vous devez effectuer les étapes de configuration finales et rétablir le foncti
 
 == Vérification du fonctionnement du MetroCluster et affectation des disques après la transition
 
-[role="lead"]
 Vous devez vérifier que le MetroCluster fonctionne correctement et attribuer des disques à la seconde paire de nouveaux nœuds (node_A_2-IP et node_B_2-IP).
 
 . Vérifiez que la configuration MetroCluster est de type IP-Fabric : `metrocluster show`
@@ -35,7 +34,6 @@ Vous devez vérifier que le MetroCluster fonctionne correctement et attribuer de
 
 == Installation des licences pour le nouveau module de contrôleur
 
-[role="lead"]
 Vous devez ajouter des licences pour le nouveau module de contrôleur pour tous les services ONTAP nécessitant des licences standard (verrouillées par des nœuds). Pour les fonctionnalités avec licences standard, chaque nœud du cluster doit disposer de sa propre clé pour cette fonctionnalité.
 
 Pour plus d'informations sur les licences, consultez l'article de la base de connaissances 3013749 : présentation des licences et références Data ONTAP 8.2 sur le site de support NetApp et _System Administration Reference_.
@@ -57,7 +55,6 @@ Répétez cette étape pour chaque licence standard (verrouillée par nœud) req
 
 == Configuration des nœuds terminée
 
-[role="lead"]
 Il existe diverses étapes de configuration qui peuvent être effectuées avant d'effectuer les procédures. Certaines de ces étapes sont facultatives.
 
 . Configurer le processeur de service : `system service-processor network modify`
@@ -82,7 +79,6 @@ link:../tiebreaker/concept_overview_of_the_tiebreaker_software.html["Installatio
 
 == Envoi d'un message AutoSupport personnalisé après maintenance
 
-[role="lead"]
 Une fois la transition terminée, vous devez envoyer un message AutoSupport indiquant la fin de la maintenance. La création automatique de dossier peut ainsi reprendre.
 
 . Pour reprendre la génération automatique de dossier de support, envoyez un message AutoSupport pour indiquer que la maintenance est terminée.

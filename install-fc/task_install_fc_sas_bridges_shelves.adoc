@@ -1,5 +1,5 @@
 ---
-permalink: install-fc/task_fb_new_install.html 
+permalink: install-fc/task_install_fc_sas_bridges_shelves.html 
 sidebar: sidebar 
 keywords: install, installing, fc-to-sas, fc, sas, bridges, disk, shelves, atto, fibrebridge 
 summary: 'Lors de l"ajout d"un stockage à la configuration, vous installez et câblez les ponts ATTO FibreBridge et les tiroirs disques SAS.' 
@@ -140,7 +140,7 @@ NOTE: Les tiroirs SAS des configurations MetroCluster ne prennent pas en charge 
 Si vous utilisez une version ONTAP antérieure à 9.5 ou si vous prévoyez d'utiliser un accès hors bande au pont FiberBridge 7600N à l'aide de telnet ou d'autres protocoles et services de port IP (FTP, ExpressNAV, ICMP ou Quickmenu), vous pouvez activer les services d'accès via le port de console.
 
 .Description de la tâche
-Contrairement aux ponts ATTO FibreBridge 7500N et 6500N, le pont FibreBridge 7600N est livré avec tous les protocoles et services de port IP désactivés.
+Contrairement aux ponts ATTO FibreBridge 7500N, le pont FibreBridge 7600N est livré avec tous les protocoles et services de port IP désactivés.
 
 Depuis ONTAP 9.5, _gestion intrabande_ des ponts est pris en charge. Cela signifie que les ponts peuvent être configurés et surveillés depuis l'interface de ligne de commande de ONTAP via la connexion FC au pont. L'accès physique au pont via les ports Ethernet du pont n'est pas nécessaire et les interfaces utilisateur du pont ne sont pas requises.
 
@@ -311,9 +311,8 @@ Dans les systèmes exécutant ONTAP 9.5 ou version ultérieure, la gestion intra
 --
 Le débit de données FC pris en charge dépend du pont de votre modèle.
 
-*** Le pont FiberBridge 7600 prend en charge jusqu'à 32, 16 ou 8 Gbits/s.
-*** Le pont FiberBridge 7500 prend en charge jusqu'à 16, 8 ou 4 Gbits/s.
-*** Le pont FiberBridge 6500 prend en charge jusqu'à 8, 4 ou 2 Gbits/s.
+*** Le pont FibreBridge 7600N prend en charge jusqu'à 32, 16 ou 8 Gbit/s.
+*** Le pont FibreBridge 7500N prend en charge jusqu'à 16, 8 ou 4 Gbit/s.
 
 
 
@@ -324,7 +323,7 @@ Si vous utilisez l'interface de ligne de commandes, vous devez exécuter la comm
 `set FCDataRate _port-number_ _port-speed_`
 
 --
-.. Si vous configurez un pont FibreBridge 7500N ou 6500N, configurez le mode de connexion utilisé par le port pour ptp.
+.. Si vous configurez un pont FibreBridge 7500N, configurez le mode de connexion utilisé par le port sur « ptp ».
 +
 
 NOTE: Le paramètre FCConnMode n’est pas nécessaire lors de la configuration d’un pont FiberBridge 7600N.
@@ -459,7 +458,6 @@ Vous devez utiliser les ponts FC-SAS appropriés pour le câblage des tiroirs di
 .Choix
 * <<cabling_fb_7600N_7500N_with_iom12,Câblage d'un pont FiberBridge 7600N ou 7500N avec des tiroirs disques utilisant des modules IOM12>>
 * <<cabling_fb_7600N_7500N_with_iom6_iom3,Câblage d'un pont FibreBridge 7600N ou 7500N avec des tiroirs disques utilisant des modules IOM6 ou IOM3>>
-* <<cabling_fb_6500N_with_iom6_iom3,Câblage d'un pont FibreBridge 6500N avec des tiroirs disques utilisant des modules IOM6 ou IOM3>>
 
 
 
@@ -548,39 +546,6 @@ image::../media/mcc_cabling_bridge_and_sas_stack_with_7500n_four_stacks.gif[pont
 
 
 
-==== Câblage d'un pont FibreBridge 6500N avec des tiroirs disques utilisant des modules IOM6 ou IOM3
-
-Après avoir configuré le pont, vous pouvez commencer à câbler votre nouveau système. Le pont FibreBridge 6500N utilise des connecteurs QSFP.
-
-.Description de la tâche
-Attendez au moins 10 secondes avant de connecter le port. Les connecteurs de câble SAS sont clavetés ; lorsqu'ils sont orientés correctement dans un port SAS, le connecteur s'enclenche et le voyant LNK du port SAS du tiroir disque s'allume en vert. Pour les tiroirs disques, vous insérez un connecteur de câble SAS avec la languette de retrait orientée vers le bas (sous le connecteur).
-
-Le pont FibreBridge 6500N ne prend pas en charge les tiroirs disques utilisant IOM12.
-
-.Étapes
-. Connectez en série les tiroirs disques de chaque pile.
-+
-Pour plus d'informations sur la configuration en série des tiroirs disques, reportez-vous au _Guide d'installation et de maintenance_ du modèle de tiroir disque.
-
-. Pour chaque pile de tiroirs disques, reliez le port carré du module d'E/S A du premier tiroir au port SAS A du FibreBridge A.
-. Pour chaque pile de tiroirs disques, reliez le port Circle IOM B du dernier tiroir au port SAS A du FibreBridge B.
-+
-Chaque pont dispose d'un chemin vers sa pile de tiroirs disques : le pont A se connecte au côté A de la pile via le premier tiroir, et le pont B se connecte au côté B de la pile via le dernier tiroir.
-
-+
-
-NOTE: Le pont du port SAS B est désactivé.
-
-+
-L'illustration ci-dessous présente un ensemble de ponts câblés vers une pile de quatre tiroirs disques :
-
-+
-image::../media/mcc_cabling_bridge_and_sas_stack.gif[passerelle de câblage mcc et pile sas]
-
-
-
-
-
 === Vérification de la connectivité du pont et du câblage des ports FC du pont
 
 Vérifiez que chaque pont peut détecter tous les lecteurs de disque, puis reliez chaque pont aux commutateurs FC locaux.
@@ -620,12 +585,10 @@ Afficher les périphériques connectés :
 `sastargets`
 
 |===
-
-
++
 Le résultat indique les périphériques (disques et tiroirs disques) auxquels le pont est connecté. Les lignes de sortie sont numérotées de façon séquentielle afin que vous puissiez rapidement compter les périphériques. Par exemple, le résultat suivant indique que 10 disques sont connectés :
 
 +
-
 [listing]
 ----
 Tgt VendorID ProductID        Type        SerialNumber
@@ -640,7 +603,9 @@ Tgt VendorID ProductID        Type        SerialNumber
   8 NETAPP   X410_S15K6288A15 DISK        3QP1FY0T00009940G8PA
   9 NETAPP   X410_S15K6288A15 DISK        3QP1FXW600009940VERQ
 ----
-+ NOTE: Si le texte "reportsé tronqué" apparaît au début de la sortie, vous pouvez utiliser Telnet pour vous connecter au pont et entrer la même commande pour afficher l'ensemble de la sortie.
++
+
+NOTE: Si le texte "`reponse tronqué`" apparaît au début de la sortie, vous pouvez utiliser Telnet pour vous connecter au pont et entrer la même commande pour voir toutes les sorties.
 
 . Vérifiez que le résultat de la commande indique que le pont est connecté à tous les disques et tiroirs disques de la pile à laquelle il est supposé être connecté.
 +

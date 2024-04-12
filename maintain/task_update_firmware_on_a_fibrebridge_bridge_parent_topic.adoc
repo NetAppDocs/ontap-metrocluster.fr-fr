@@ -258,9 +258,9 @@ flashimages
 
 
 
-== Mise à jour du micrologiciel sur FibreBridge 7500N sur les configurations exécutant ONTAP 9.3.x et versions antérieures ou 6500N ponts
+== Mise à jour du micrologiciel sur FibreBridge 7500N sur les configurations exécutant ONTAP 9.3.x et versions antérieures
 
-Vous devrez peut-être mettre à jour le micrologiciel de vos ponts FibreBridge pour vous assurer que vous disposez des dernières fonctionnalités ou pour résoudre les problèmes éventuels. Cette procédure doit être utilisée pour FibreBridge 7500N sur les configurations exécutant ONTAP 9.3.x ou pour les ponts FiberBridge 6500N sur toutes les versions prises en charge de ONTAP.
+Vous devrez peut-être mettre à jour le micrologiciel de vos ponts FibreBridge pour vérifier que vous disposez des dernières fonctionnalités ou pour résoudre d'éventuels problèmes. Cette procédure doit être utilisée pour FibreBridge 7500N sur les configurations exécutant ONTAP 9.3.x.
 
 .Avant de commencer
 * La configuration MetroCluster doit fonctionner normalement.
@@ -276,7 +276,7 @@ Dans le IMT, vous pouvez utiliser le champ solution de stockage pour sélectionn
 
 
 
-Vous pouvez utiliser cette tâche avec des ponts FiberBridge 7500N ou 6500N. Depuis ONTAP 9.3, vous pouvez utiliser la commande ONTAP Storage Bridge Firmware update pour mettre à jour le firmware du pont sur les ponts FiberBridge 7500N.
+Depuis ONTAP 9.3, vous pouvez utiliser la commande ONTAP Storage Bridge Firmware update pour mettre à jour le firmware du pont sur les ponts FiberBridge 7500N.
 
 link:task_update_firmware_on_a_fibrebridge_bridge_parent_topic.html["Mise à jour du micrologiciel sur les ponts FiberBridge 7600N ou 7500N sur les configurations exécutant ONTAP 9.4 et versions ultérieures"]
 
@@ -305,17 +305,15 @@ https://mysupport.netapp.com/site/products/all/details/atto-fibrebridge/download
 . Effectuez une copie de la page de téléchargement du micrologiciel ATTO FibreBridge et des notes de version à titre de référence lorsque vous êtes invité à mettre à jour le micrologiciel de chaque pont.
 . Mettre à jour le pont :
 +
-.. Installez le micrologiciel sur le pont FibreBridge.
+.. Installez le micrologiciel sur le pont FibreBridge 7500N.
 +
-*** Si vous utilisez des ponts ATTO FibreBridge 7500N, vous devez vous reporter aux instructions fournies dans la section « mise à jour du micrologiciel » du Manuel d'installation et d'utilisation _ATTO FibreBridge 7500N_.
-*** Si vous utilisez des ponts ATTO FibreBridge 6500N, vous devez vous reporter aux instructions fournies dans la section « mise à jour du micrologiciel » du Manuel d'installation et d'utilisation _ATTO FibreBridge 6500N_.
+Reportez-vous aux instructions fournies dans la section « mise à jour du micrologiciel » du manuel d'installation et d'utilisation du _ATTO FibreBridge 7500N_.
+
 +
 *ATTENTION:* Assurez-vous que vous mettez le pont en marche maintenant. Si vous attendez et mettez hors tension les deux ponts simultanément dans une pile, le contrôleur risque de perdre l'accès aux disques, ce qui entraîne une défaillance plex ou une défaillance multidisque.
 
 +
 Le pont devrait redémarrer.
-
-
 
 .. Depuis la console de l'un des contrôleurs, vérifier que le pont a redémarré correctement :
 +

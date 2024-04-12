@@ -229,28 +229,7 @@ Device  D       4       Disabled        12Gb    5001086000a1c70c
 
 
 . Mettez-vous à la terre.
-. Mettez le pont ATTO hors tension.
-+
-[cols="35,65"]
-|===
-
-
-| Si vous utilisez... | Alors... 
-
-
- a| 
-Pont FiberBridge 7600N ou 7500N
- a| 
-Retirez les câbles d'alimentation connectés au pont.
-
-
-
- a| 
-Pont FibreBridge 6500N
- a| 
-Couper l'interrupteur d'alimentation du pont.
-
-|===
+. Mettez le pont ATTO hors tension et retirez les câbles d'alimentation connectés au pont.
 . Débranchez les câbles connectés à l'ancien pont.
 +
 Notez le port auquel chaque câble a été connecté.
@@ -350,9 +329,8 @@ Dans les systèmes exécutant ONTAP 9.5 ou version ultérieure, la gestion intra
 Le débit de données FC pris en charge dépend du pont de votre modèle.
 
 +
-*** Le pont FiberBridge 7600 prend en charge jusqu'à 32, 16 ou 8 Gbits/s.
-*** Le pont FiberBridge 7500 prend en charge jusqu'à 16, 8 ou 4 Gbits/s.
-*** Le pont FiberBridge 6500 prend en charge jusqu'à 8, 4 ou 2 Gbits/s.
+*** Le pont FibreBridge 7600N prend en charge jusqu'à 32, 16 ou 8 Gbit/s.
+*** Le pont FibreBridge 7500N prend en charge jusqu'à 16, 8 ou 4 Gbit/s.
 +
 
 NOTE: La vitesse FCDataRate que vous sélectionnez est limitée à la vitesse maximale prise en charge par le pont et le commutateur auquel le port de pont se connecte. Les distances de câblage ne doivent pas dépasser les limites des SFP et autres matériels.
@@ -365,7 +343,7 @@ Si vous utilisez l'interface de ligne de commandes, vous devez exécuter la comm
 
 
 
-.. Si vous configurez un pont FibreBridge 7500N ou 6500N, configurez le mode de connexion utilisé par le port pour ptp.
+.. Si vous configurez un FibreBridge 7500N, configurez le mode de connexion utilisé par le port sur « ptp ».
 +
 
 NOTE: Le paramètre FCConnMode n’est pas nécessaire lors de la configuration d’un pont FiberBridge 7600N.
@@ -437,7 +415,7 @@ Si le nouveau pont est du même type que celui de la mise à niveau de pont part
 
 . [[step17-reconnect-newbridge]]] reconnectez les câbles SAS et FC aux mêmes ports du nouveau pont.
 +
-Si le nouveau pont est un FibreBridge 7600N ou 7500N, vous devez remplacer les câbles reliant le pont au haut ou au bas de la pile de étagères. Le pont FibreBridge 6500N utilisait des câbles SAS. Les ponts FiberBridge 7600N et 7500N nécessitent des câbles mini-SAS pour ces connexions.
+Vous devez remplacer les câbles reliant le pont au haut ou au bas de la pile de tiroirs. Les ponts FibreBridge 7600N et 7500N nécessitent des câbles mini-SAS pour ces connexions.
 
 +
 
@@ -771,9 +749,8 @@ Dans les systèmes exécutant ONTAP 9.5 ou version ultérieure, la gestion intra
 Le débit de données FC pris en charge dépend du pont de votre modèle.
 
 +
-*** Le pont FiberBridge 7600 prend en charge jusqu'à 32, 16 ou 8 Gbits/s.
-*** Le pont FiberBridge 7500 prend en charge jusqu'à 16, 8 ou 4 Gbits/s.
-*** Le pont FiberBridge 6500 prend en charge jusqu'à 8, 4 ou 2 Gbits/s.
+*** Le pont FibreBridge 7600N prend en charge jusqu'à 32, 16 ou 8 Gbit/s.
+*** Le pont FibreBridge 7500N prend en charge jusqu'à 16, 8 ou 4 Gbit/s.
 +
 
 NOTE: La vitesse FCDataRate que vous sélectionnez est limitée à la vitesse maximale prise en charge par le pont et le port FC du module de contrôleur ou du commutateur auquel le port de pont se connecte. Les distances de câblage ne doivent pas dépasser les limites des SFP et autres matériels.
@@ -1180,9 +1157,9 @@ Dans les systèmes exécutant ONTAP 9.5 ou version ultérieure, la gestion intra
 Le débit de données FC pris en charge dépend du pont de votre modèle.
 
 +
-*** Le pont FiberBridge 7600 prend en charge jusqu'à 32, 16 ou 8 Gbits/s.
-*** Le pont FiberBridge 7500 prend en charge jusqu'à 16, 8 ou 4 Gbits/s.
-*** Le pont FiberBridge 6500 prend en charge jusqu'à 8, 4 ou 2 Gbits/s.
+*** Le pont FibreBridge 7600N prend en charge jusqu'à 32, 16 ou 8 Gbit/s.
+*** Le pont FibreBridge 7500N prend en charge jusqu'à 16, 8 ou 4 Gbit/s.
+*** Le pont FibreBridge 6500N prend en charge jusqu'à 8, 4 ou 2 Gbit/s.
 +
 
 NOTE: La vitesse FCDataRate que vous sélectionnez est limitée à la vitesse maximale prise en charge par le pont et le commutateur auquel le port de pont se connecte. Les distances de câblage ne doivent pas dépasser les limites des SFP et autres matériels.

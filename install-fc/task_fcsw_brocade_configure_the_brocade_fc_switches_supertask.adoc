@@ -1725,7 +1725,7 @@ Port   Configured    Active   Configured   Active  Speed
 
 == Configuration de la segmentation sur les commutateurs Brocade FC
 
-Vous devez attribuer les ports de commutateur à des zones distinctes pour séparer le trafic de contrôleur et de stockage. La procédure diffère selon que vous utilisez un pont FibreBridge 7500N ou FibreBridge 6500N.
+Vous devez attribuer les ports de commutateur à des zones distinctes pour séparer le trafic de contrôleur et de stockage.
 
 
 
@@ -1947,9 +1947,9 @@ QOSH2_MC1_FAB_2_FCVI (6520)
 |===
 
 
-=== Segmentation pour les ponts FiberBridge 6500N ou les ponts FiberBridge 7500N ou 7600N utilisant un seul port FC
+=== Segmentation pour les ponts FibreBridge 7500N ou 7600N à l'aide d'un port FC
 
-Si vous utilisez des ponts FibreBridge 6500N ou des ponts FibreBridge 7500N ou 7600N en utilisant un seul des deux ports FC, vous devez créer des zones de stockage pour les ports de pont. Avant de configurer les zones, vous devez connaître les zones et les ports associés.
+Si vous utilisez des ponts FibreBridge 7500N ou 7600N en utilisant uniquement l'un des deux ports FC, vous devez créer des zones de stockage pour les ports de pont. Avant de configurer les zones, vous devez connaître les zones et les ports associés.
 
 Les exemples montrent uniquement la segmentation pour le groupe DR 1. Si votre configuration inclut un second groupe de reprise sur incident, configurez le zoning pour le second groupe DR de la même manière, en utilisant les ports correspondants des contrôleurs et ponts.
 
@@ -1999,7 +1999,6 @@ Numéro du groupe de piles auquel la paire de ponts se connecte.
 +
 Le groupe de piles ne peut pas contenir plus de 10 tiroirs de stockage.
 
-* Les ponts FiberBridge 6500N ne prennent en charge qu'une seule pile dans le groupe de piles.
 
  a| 
 1, 2, etc
@@ -2443,7 +2442,6 @@ Numéro du groupe de piles auquel la paire de ponts se connecte.
 +
 Le groupe de piles ne peut pas contenir plus de 10 tiroirs de stockage.
 
-* Les ponts FiberBridge 6500N ne prennent en charge qu'une seule pile dans le groupe de piles.
 
  a| 
 1, 2, etc
@@ -4294,7 +4292,7 @@ Les étapes suivantes utilisent le zoning standard pour la configuration MetroCl
 
 link:task_fcsw_brocade_configure_the_brocade_fc_switches_supertask.html["Segmentation des ports FC-VI"]
 
-link:task_fcsw_brocade_configure_the_brocade_fc_switches_supertask.html["Segmentation pour les ponts FiberBridge 6500N ou les ponts FiberBridge 7500N ou 7600N utilisant un seul port FC"]
+link:task_fcsw_brocade_configure_the_brocade_fc_switches_supertask.html["Segmentation pour les ponts FibreBridge 7500N ou 7600N à l'aide d'un port FC"]
 
 link:task_fcsw_brocade_configure_the_brocade_fc_switches_supertask.html["Segmentation pour les ponts FiberBridge 7500N utilisant les deux ports FC"]
 
