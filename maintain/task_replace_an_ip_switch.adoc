@@ -137,6 +137,15 @@ Si vous mettez à niveau ou déclasser un commutateur, appliquez le fichier RCF 
 +
 `*network port show*`
 
++
+.. Modifier toutes les LIFs de cluster pour désactiver auto-revert :
++
+[source, asciidoc]
+----
+network interface modify -vserver <vserver_name> -lif <lif_name> -auto-revert false
+----
+
+
 . [[existing_step4]]déconnectez les connexions de l'ancien commutateur.
 +
 
@@ -146,12 +155,6 @@ NOTE: Vous ne déconnectez que les connexions qui n'utilisent pas le même port 
 Déposer les connexions dans l'ordre suivant :
 
 +
-.. Modifier toutes les LIFs de cluster pour désactiver auto-revert :
-+
-[source, asciidoc]
-----
-net int modify -vserver <vserver_name> -lif <lif_name> -auto-revert false
-----
 .. Déconnectez les interfaces locales du cluster
 .. Déconnectez les liens ISL locaux du cluster
 .. Déconnectez les interfaces IP MetroCluster
@@ -228,6 +231,12 @@ Si vous effectuez une mise à niveau ou une rétrogradation des commutateurs du 
 
 NOTE: Si vous mettez à niveau ou déclarez les réseaux, répétez toutes les étapes pour le second réseau.
 
+. Modifier toutes les LIFs de cluster pour réactiver auto-revert :
++
+[source, asciidoc]
+----
+network interface modify -vserver <vserver_name> -lif <lif_name> -auto-revert true
+----
 . Vous pouvez également déplacer les tiroirs NS224.
 +
 Si vous reconfigurez une configuration IP MetroCluster qui ne connecte pas les tiroirs NS224 aux commutateurs IP MetroCluster, suivez la procédure appropriée pour ajouter ou déplacer les tiroirs NS224 :
