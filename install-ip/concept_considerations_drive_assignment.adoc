@@ -59,10 +59,19 @@ ADP est exécuté automatiquement lors de la configuration initiale du système.
 
 NOTE: Depuis ONTAP 9.5, l'assignation automatique des disques doit être activée avec `storage disk option modify -autoassign on` commande.
 
-Vous devez définir l'état ha-config sur `mccip` avant le provisionnement automatique, assurez-vous que les tailles de partition correctes sont sélectionnées pour permettre une taille de volume racine appropriée. Pour plus d'informations, voir link:https://docs.netapp.com/us-en/ontap-metrocluster/install-ip/task_sw_config_verify_haconfig.html["Vérification de l'état ha-config des composants"].
+Vous devez définir l'état ha-config sur `mccip` avant le provisionnement automatique, assurez-vous que les tailles de partition correctes sont sélectionnées pour permettre une taille de volume racine appropriée. Pour plus d'informations, voir link:install-ip/task_sw_config_verify_haconfig.html["Vérification de l'état ha-config des composants"].
 
 Vous pouvez partitionner automatiquement un maximum de 96 disques lors de l'installation. Vous pouvez ajouter des lecteurs supplémentaires après l'installation initiale.
 
+[NOTE]
+====
+Si vous utilisez des lecteurs internes et externes, vous devez d'abord initialiser le MetroCluster avec uniquement les lecteurs internes utilisant ADP. Vous connectez ensuite manuellement le tiroir externe une fois l'installation ou la configuration terminée.
+
+Vous devez vous assurer que les tiroirs internes disposent du nombre minimal de disques recommandé, comme indiqué dans la <<adp-disk-assign,Différences d'affectation des disques et ADP par système>>.
+
+Pour les disques internes et externes, vous devez remplir les tiroirs partiellement pleins comme décrit dans la section <<populate-partially-full-shelves,Comment remplir les étagères partiellement pleines>>.
+
+====
 
 
 == Fonctionnement de l'affectation automatique « tiroir par tiroir »
@@ -122,7 +131,42 @@ Trimestre 4 : baies 36-47
 Baies 36-41
 
 |===
-Si vous utilisez deux tiroirs sur chaque site, des disques sont attribués en appliquant une politique de demi-tiroir. Si les tiroirs ne sont pas entièrement remplis, installez les disques de la même manière à partir de l'une des extrémités du tiroir.
+Le tableau ci-dessous présente un exemple de placement de 16 disques dans un tiroir interne de 24 disques.
+
+|===
+
+
+| Les 24 baies de disque sont divisées en quatre trimestres : | Installez quatre disques dans les quatre premières baies de chaque trimestre... 
+
+
+ a| 
+1er trimestre : baies 0-5
+ a| 
+Baies 0-3
+
+
+
+ a| 
+Deuxième trimestre : baies 6-11
+ a| 
+Baies 6-9
+
+
+
+ a| 
+Trimestre 3 : baies 12-17
+ a| 
+Baies 12-15
+
+
+
+ a| 
+Trimestre 4 : baies 18-23
+ a| 
+Baies 18-21
+
+|===
+Si vous utilisez deux tiroirs externes sur chaque site, les disques sont attribués selon une règle de demi-tiroir. Si les tiroirs ne sont pas entièrement remplis, installez les disques de la même manière à partir de l'une des extrémités du tiroir.
 
 Par exemple, si vous installez 12 disques dans un tiroir de 24 disques, installez les disques dans les baies 0-5 et 18-23.
 

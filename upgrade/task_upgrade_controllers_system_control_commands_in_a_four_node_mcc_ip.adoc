@@ -35,7 +35,7 @@ NOTE: Vous pouvez effectuer les mises à niveau de contrôleur répertoriées da
 
 Pour plus d'informations sur les combinaisons de mise à niveau de plate-forme, consultez le tableau de mise à niveau IP MetroCluster dans link:concept_choosing_controller_upgrade_mcc.html#supported-metrocluster-ip-controller-upgrades["Choisir la procédure de mise à niveau du contrôleur"].
 
-Reportez-vous à la section https://docs.netapp.com/us-en/ontap-metrocluster/upgrade/concept_choosing_an_upgrade_method_mcc.html["Choisissez une méthode de mise à niveau ou de rafraîchissement"] pour les procédures supplémentaires.
+Reportez-vous à la section link:https://docs.netapp.com/us-en/ontap-metrocluster/upgrade/concept_choosing_an_upgrade_method_mcc.html["Choisissez une méthode de mise à niveau ou de rafraîchissement"] pour les procédures supplémentaires.
 
 
 
@@ -269,7 +269,7 @@ Vous aurez besoin de la phrase de passe plus tard dans la procédure de mise à 
 Si la configuration existante est contrôlée avec la configuration MetroCluster Tiebreaker ou d'autres applications tierces (telles que ClusterLion) capables d'effectuer un basculement, vous devez supprimer la configuration MetroCluster du logiciel disjoncteur d'attache ou autre logiciel avant de remplacer l'ancien contrôleur.
 
 .Étapes
-. http://docs.netapp.com/ontap-9/topic/com.netapp.doc.hw-metrocluster-tiebreaker/GUID-34C97A45-0BFF-46DD-B104-2AB2805A983D.html["Supprimez la configuration MetroCluster existante"^] À partir du logiciel disjoncteur d'attache.
+. link:../tiebreaker/concept_configuring_the_tiebreaker_software.html#removing-metrocluster-configurations["Supprimez la configuration MetroCluster existante"] À partir du logiciel disjoncteur d'attache.
 . Supprimez la configuration MetroCluster existante de toute application tierce pouvant effectuer le basculement.
 +
 Reportez-vous à la documentation de l'application.
@@ -318,7 +318,7 @@ Toutes LES LIF de données, y compris SAN et NAS, seront admin « up » et « po
 Par exemple, « e0d » est un port physique des anciens contrôleurs et est également présent sur les nouveaux contrôleurs. « e0d » n'est pas utilisé comme port de cluster ou autre sur les nouveaux contrôleurs.
 
 +
-Pour l'utilisation des ports pour les modèles de plate-forme, reportez-vous à la section https://hwu.netapp.com/["NetApp Hardware Universe"^]
+Pour l'utilisation des ports pour les modèles de plate-forme, reportez-vous à la section link:https://hwu.netapp.com/["NetApp Hardware Universe"^]
 
 .. Modifier toutes LES LIFS de données pour utiliser le port commun comme port de base :
 +
@@ -428,7 +428,7 @@ Une fois les nouveaux nœuds installés, vous devez démarrage sur le réseau po
 Cette tâche est effectuée sur chacun des nouveaux modules de contrôleur.
 
 .Étapes
-. Accédez au https://mysupport.netapp.com/site/["Site de support NetApp"^] pour télécharger les fichiers utilisés pour effectuer le démarrage sur le réseau du système.
+. Accédez au link:https://mysupport.netapp.com/site/["Site de support NetApp"^] pour télécharger les fichiers utilisés pour effectuer le démarrage sur le réseau du système.
 . Téléchargez le logiciel ONTAP approprié depuis la section de téléchargement de logiciels du site du support NetApp et stockez le fichier ontap-version_image.tgz dans un répertoire accessible en ligne.
 . Accédez au répertoire accessible sur le Web et vérifiez que les fichiers dont vous avez besoin sont disponibles.
 +
