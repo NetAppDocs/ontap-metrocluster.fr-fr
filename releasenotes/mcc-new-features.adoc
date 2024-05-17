@@ -10,9 +10,51 @@ summary:
 :imagesdir: ./media/
 
 
+[role="lead"]
+Découvrez les nouvelles fonctionnalités de MetroCluster.
+
 [cols="20,65,15"]
 |===
 | Fonctionnalités prises en charge en configuration MetroCluster | Description et où en savoir plus | Disponible au début 
+
+
+ a| 
+Prise en charge de MetroCluster IP pour un chiffrement de bout en bout
+ a| 
+Le chiffrement de bout en bout est pris en charge sur les systèmes AFF A400, FAS8300 et FAS8700 afin de chiffrer le trafic back-end, tel que NVlog et les données de réplication du stockage, entre les sites d'une configuration IP MetroCluster.
+
+link:../maintain//task-configure-encryption.html["Configurer le chiffrement de bout en bout dans une configuration MetroCluster IP"]
+ a| 
+ONTAP 9.15.1
+
+
+
+ a| 
+Augmentation de la limite du volume pour les configurations MetroCluster IP à quatre nœuds sur les systèmes AFF A800 et AFF C800
+ a| 
+Dans les configurations MetroCluster IP à quatre nœuds, les limites de volume suivantes pour les systèmes AFF A800 et AFF C800 ont été augmentées :
+
+* Le nombre maximal de volumes FlexVol par agrégat est passé de 200 à 625.
+* Le nombre maximal de volumes FlexVol par nœud est passé de 800 à 1250.
+* Le nombre maximal de volumes FlexVol par paire haute disponibilité est passé de 1600 à 2500.
+
+ a| 
+ONTAP 9.15.1
+
+
+
+ a| 
+Augmentation de la limite du volume pour les configurations IP MetroCluster à quatre nœuds sur les systèmes AFF A900
+ a| 
+Dans les configurations MetroCluster IP à quatre nœuds, les limites de volume suivantes pour les systèmes AFF A900 ont augmenté :
+
+* Le nombre maximal de volumes FlexVol par agrégat est passé de 200 à 625.
+* Le nombre maximal de volumes FlexVol par nœud est passé de 800 à 1250.
+* Le nombre maximal de volumes FlexVol par paire haute disponibilité est passé de 1600 à 2500.
+
+ a| 
+ONTAP 9.14.1
+
 
 
  a| 
@@ -53,7 +95,7 @@ Le basculement automatique non planifié (MAUSO) assisté par un médiateur est 
  a| 
 Si un site s'arrête normalement en raison d'un arrêt environnemental, MAUSO est déclenché.
 
-https://docs.netapp.com/us-en/ontap-metrocluster/install-ip/concept_considerations_mediator.html#interoperability-of-ontap-mediator-with-other-applications-and-appliances["Interopérabilité du médiateur ONTAP avec d'autres applications et appareils"]
+https://docs.netapp.com/us-en/ontap-metrocluster/install-ip/concept-ontap-mediator-supports-automatic-unplanned-switchover.html["Prise en charge du protocole ONTAP pour le basculement automatique non planifié"]
  a| 
 ONTAP 9.13.1
 

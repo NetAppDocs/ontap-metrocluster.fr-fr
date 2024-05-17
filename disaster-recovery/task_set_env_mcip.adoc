@@ -514,6 +514,10 @@ setenv bootarg.mcc.lun_part true
 ----
 
 
+. Si les systèmes d'origine ont été configurés pour un chiffrement de bout en bout, à l'invite du CHARGEUR DE chacun des nœuds de remplacement, définissez le démarrage suivant :
++
+`setenv bootarg.mccip.encryption_enabled 1`
+
 . Si les systèmes d'origine ont été configurés pour ADP, à chaque invite DU CHARGEUR de nœuds de remplacement, définissez l'ID système d'origine (*et non* l'ID système du module de contrôleur de remplacement) et l'ID système du partenaire DR du nœud :
 +
 `setenv bootarg.mcc.local_config_id original-sysID`

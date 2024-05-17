@@ -55,6 +55,7 @@ https://hwu.netapp.com["NetApp Hardware Universe"^]
 
 NOTE: Une mise à niveau avec transfert d'agrégats (ARL) à l'aide de commandes « remplacement du contrôleur système » n'est pas prise en charge dans une configuration IP MetroCluster à quatre nœuds.
 
+* S'il est activé sur votre système, link:../maintain/task-configure-encryption.html#disable-end-to-end-encryption["Désactivez le chiffrement de bout en bout"] avant d'effectuer la mise à niveau.
 * Vous devez utiliser la procédure de mise à niveau automatisée du contrôleur NSO pour mettre à niveau les contrôleurs dans l'ordre sur les deux sites.
 * Cette procédure de mise à niveau automatisée du contrôleur NSO-5 vous permet de lancer le remplacement du contrôleur sur un site de reprise après incident MetroCluster. Vous pouvez effectuer le remplacement d'un contrôleur uniquement sur un site à la fois.
 * Pour lancer un remplacement du contrôleur sur le site A, vous devez exécuter la commande de démarrage du remplacement du contrôleur depuis le site B. L'opération vous guide à remplacer les contrôleurs des deux nœuds sur le site A uniquement. Pour remplacer les contrôleurs sur le site B, vous devez exécuter la commande de démarrage de remplacement du contrôleur depuis le site A. Un message indique le site sur lequel les contrôleurs sont remplacés.
@@ -1145,9 +1146,15 @@ Configurez manuellement le médiateur ONTAP qui a été automatiquement supprim�
 
 
 
-=== Restauration du contrôle disjoncteur d'attache
+=== Restaurez la surveillance du logiciel disjoncteur d'attache
 
 Si le logiciel disjoncteur d'attache a déjà été configuré pour la surveillance de la configuration MetroCluster, vous pouvez restaurer la connexion ce dernier.
 
 . Suivez les étapes de la section http://docs.netapp.com/ontap-9/topic/com.netapp.doc.hw-metrocluster-tiebreaker/GUID-7259BCA4-104C-49C6-BAD0-1068CA2A3DA5.html["Ajout des configurations MetroCluster"].
 
+
+
+
+=== Configurez le chiffrement de bout en bout
+
+Si votre système le prend en charge, vous pouvez chiffrer le trafic back-end, tel que les données NVlog et de réplication du stockage, entre les sites IP MetroCluster. Reportez-vous à la section link:../maintain/task-configure-encryption.html["Configurez le chiffrement de bout en bout"] pour en savoir plus.
