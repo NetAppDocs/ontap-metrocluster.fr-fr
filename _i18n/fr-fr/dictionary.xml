@@ -8387,8 +8387,6 @@
   <block id="1af99437570e0e0cef3934038e5fad74" category="list-text">Le site B est le site survivant.</block>
   <block id="f1fffd0b6a8970871d3567e9a497b669" category="list-text">Le nœud_B_1 fonctionne correctement.</block>
   <block id="d897e6e000123c95efed2cabbfa229df" category="list-text">Le nœud_B_2 fonctionne correctement.</block>
-  <block id="51b67fd3c27836fe854876631b03708d" category="inline-link-macro">Détermination des ID système des modules de contrôleur de remplacement</block>
-  <block id="ec6baca39edfa454417f6efd043215c9" category="paragraph">Les anciens et nouveaux ID système ont été identifiés dans <block ref="05dda3d9932a412ba342505a3437a308" category="inline-link-macro-rx"></block>.</block>
   <block id="0ce159ef649591974fe60d01c47f9f48" category="cell">Nombre de nœuds</block>
   <block id="06fac72061d413d519e1af365dba3018" category="cell">ID système d'origine</block>
   <block id="294f461a8e1ad12f8521a976f9a495e0" category="paragraph">4068741258</block>
@@ -8755,7 +8753,6 @@
   <block id="45a90cf1797a736ff538fdca7b5c8902" category="list-text"><block ref="45a90cf1797a736ff538fdca7b5c8902" category="inline-link-macro-rx"></block></block>
   <block id="4e3b6dac43e0506da50eaa98573ccb1c" category="inline-link-macro">Configuration MetroCluster FAS-Attached</block>
   <block id="e1b883336b514336526e9cd258980864" category="list-text"><block ref="e1b883336b514336526e9cd258980864" category="inline-link-macro-rx"></block></block>
-  <block id="a9daabfd9077566a0e834967642d46ae" category="section-title">Détermination des ID système et des ID VLAN des anciens modules de contrôleur</block>
   <block id="efc7bd2b93394141f506b62b353e26a8" category="paragraph">Après avoir remplacé tout le matériel sur le site de secours, vous devez déterminer les ID système des modules de contrôleur remplacés. Vous avez besoin des anciens identifiants système lorsque vous réaffectez des disques aux nouveaux modules de contrôleur. Si les systèmes sont AFF A220, AFF A250, AFF A400, AFF A800, FAS2750, Modèles FAS500f, FAS8300 ou FAS8700, vous devez également déterminer les ID VLAN utilisés par les interfaces IP MetroCluster.</block>
   <block id="3093030037c9fc57bbabc09d91167ff4" category="paragraph">Tous les équipements du site de secours doivent être hors tension.</block>
   <block id="822168a839dec742c54affa947049201" category="paragraph">Cette discussion présente des exemples de configurations à deux et quatre nœuds. Dans le cas de configurations à 8 nœuds, il faut tenir compte des éventuelles défaillances au niveau des nœuds supplémentaires sur le second groupe de reprise après incident.</block>
@@ -9079,7 +9076,6 @@
   <block id="f62e57c2cd756c745cc8c3dc7899bd5d" category="list-text">Si les systèmes d'origine ont été configurés pour ADP, à chaque invite DU CHARGEUR de nœuds de remplacement, définissez l'ID système d'origine (*et non* l'ID système du module de contrôleur de remplacement) et l'ID système du partenaire DR du nœud :</block>
   <block id="c980bf2e616d28dd836425b5a356ce9b" category="paragraph"><block ref="e520102daa11dbd039fcaf763b2f5892" prefix="" category="inline-code"></block></block>
   <block id="92670efa1844903ee0c7e2a809aaa8af" category="paragraph"><block ref="83befb2f945a63fae9499fd66ed66d93" prefix="" category="inline-code"></block></block>
-  <block id="a425862b94ecb00f4800b22c5dddfa63" category="paragraph"><block ref="a425862b94ecb00f4800b22c5dddfa63" category="inline-link-macro-rx"></block></block>
   <block id="8738db0f33e8971f5ce60fa831912fe3" category="paragraph">L'exemple suivant montre les commandes pour la définition des ID système sur node_A_1 :</block>
   <block id="bf344da7325a3258f9334bfb457fdaa2" category="list-text">L'ancien ID système du noeud_A_1 est 4068741258.</block>
   <block id="033a40861cdc97bad119d5799567c3af" category="list-text">L'ID système du noeud_B_1 est 4068741254.</block>
@@ -12543,7 +12539,6 @@
   <block id="bc66e40e6d2b679666709d4696a3e3a0" category="cell">Version Tiebreaker</block>
   <block id="2ff01ce7887ede183a0dcb4bf579a040" category="cell">CentOS 7 - 7.9</block>
   <block id="e409cbaf30133c40afd8ba79b71e06ee" category="paragraph">#42 ; les ports 12 à 15 sont réservés au deuxième groupe MetroCluster ou DR sur le commutateur Brocade 7840.</block>
-  <block id="2a8e60d3a0b3d603c27fa9c4562178bf" category="summary">Les configurations NetApp MetroCluster combinent la mise en cluster basée sur les baies et la réplication synchrone pour assurer une disponibilité continue et une duplication immédiate de toutes vos données stratégiques, transaction par transaction.</block>
   <block id="99d7ea00899cf98fde6ae4bd7a763fe6" category="list-text">Vérification de l'état du domaine de défaillance du basculement automatique non planifié (AUSO) :</block>
   <block id="914c0f805af7b6a979c9b14a8fca637d" category="admonition">L'exemple de sortie suivant s'applique à ONTAP 9.13.1 et versions ultérieures. Pour ONTAP 9.12.1 et les versions antérieures, l'état du domaine de défaillance AUSO doit être<block ref="8371e13c4fc64771e634f39be50ec198" prefix=" " category="inline-code"></block>.</block>
   <block id="1d2738c61f2ddb3b312cabca3378259b" category="list-text">Vous pouvez également configurer le basculement automatique forcé de MetroCluster.</block>
@@ -13334,7 +13329,6 @@ S'applique à toutes les configurations MetroCluster.</block>
   <block id="b5b517b5bd160188f72a49194aee565c" category="paragraph">Si le démarrage automatique est activé, appuyez sur<block ref="08102569ee3581db669c9d763e14b983" prefix=" " category="inline-code"></block> pour empêcher les contrôleurs de démarrer automatiquement.</block>
   <block id="235d6d36d1eabe510af7ea0ec5e96c6b" category="paragraph">Vous pouvez utiliser une commande comme<block ref="2aa3751083baf48c1e1ddef8df4ddcc3" prefix=" " category="inline-code"></block> Sur l'interface CLI ATTO.</block>
   <block id="480cf83fd6c463ccef2ed2a9d0dce2c4" category="list-text">Entrez le<block ref="bedfcd4488b13f5b7062e121a6a8baa5" prefix=" " category="inline-code"></block> commande pour activer de manière persistante les ports. Cela doit être fait sur les deux commutateurs du site survivant.</block>
-  <block id="9d1a338762e03c980c82e8098eb03744" category="list-text">Vérifiez que le stockage est visible depuis le site survivant. Remettez les plexes hors ligne. Cela redémarre les opérations de resynchronisation et rétablit le SyncMirror.</block>
   <block id="9f6a23c1abc971d714730192ce961b96" category="paragraph">Suivez les instructions de la section <block ref="9c0d52e0ce7a57d643217990aba10043" category="inline-link-macro-rx"></block> Afin d'effectuer des opérations de rétablissement et de rétablissement en fonction de votre configuration MetroCluster.</block>
   <block id="0b4bc6296d77be28e33d3b50e0ea0797" category="paragraph"><block ref="0b4bc6296d77be28e33d3b50e0ea0797" category="inline-link-macro-rx"></block></block>
   <block id="e49bc35e0118f2b5a5904c13e1833761" category="section-title">Mise à jour du micrologiciel sur FibreBridge 7500N sur les configurations exécutant ONTAP 9.3.x et versions antérieures</block>
@@ -13682,43 +13676,26 @@ L'exemple suivant montre que vous utilisez SCP pour télécharger le fichier<blo
   <block id="18bd3543357b4fa11f6a58101dfa61a5" category="sidebar">Installer le disjoncteur d'attache</block>
   <block id="d2875782347edc6066d3025cecc9df38" category="sidebar">Installer un médiateur (MetroCluster IP uniquement)</block>
   <block id="ade01a5a398372194a42c36e9f5279ac" category="sidebar">Maintenance</block>
-  <block id="7b8e5f5947a6dadc276f09b5a095667d" category="sidebar">Maintenance et remplacement des commutateurs FC dans les configurations MetroCluster FC</block>
   <block id="7f5d1cf6b92b5f6a9e5fe290c7d568fa" category="sidebar">Commutateurs IP</block>
-  <block id="e9e6a0d40b20996536edcfae7b0ca501" category="sidebar">Maintenance et remplacement des commutateurs IP dans les configurations MetroCluster IP</block>
   <block id="5360721f5d15a4a50d1c0ea177551d33" category="sidebar">Ponts ATTO</block>
-  <block id="6659ad060d95c49da27c02efe70880ee" category="sidebar">Maintenance et remplacement de ponts FC-SAS ATTO dans les configurations FC MetroCluster</block>
   <block id="c89a58741e7240ddf3c43ec7dbb21cd7" category="sidebar">Tiroirs disques</block>
-  <block id="bb2a6473813b98ffe9edacc863bb749e" category="sidebar">Remplacement des tiroirs disques par ajout à chaud et sans interruption des configurations MetroCluster FC.</block>
   <block id="9deb979aa141eacec55a34ce9dfd4cc9" category="sidebar">Fichiers RCF</block>
   <block id="277ccac115bb10401c3dbe796a5fd555" category="sidebar">Fichiers RCF MetroCluster</block>
-  <block id="f4ff45e882d7ee5ad1b4a9e07301850d" category="sidebar">Générer ou télécharger des fichiers RCF pour vos commutateurs MetroCluster.</block>
   <block id="d59048f21fd887ad520398ce677be586" category="sidebar">En savoir plus &gt;&gt;</block>
   <block id="b92dd7cb5813aceca4052255be1046a0" category="sidebar">Architecture et conception de la solution NetApp MetroCluster | TR-4705</block>
-  <block id="c8ed4eb56c00a193e2bf85d5a38119ee" category="sidebar">Étudier la solution MetroCluster FC.</block>
   <block id="d821955413ef2ce3b63ac32371a5186e" category="sidebar">Architecture et conception de la solution IP de MetroCluster | TR-4689</block>
-  <block id="33d6c0f3568f32d65b84533fcc9dcbcb" category="sidebar">Comprendre la solution MetroCluster IP.</block>
   <block id="3d5cf400e4fb829207d0ab81798b6587" category="sidebar">Mettre à niveau, développer et convertir</block>
   <block id="64cd3f6f5347e9d6c92e09aa1c656f87" category="sidebar">Mise à niveau et actualisation du matériel</block>
-  <block id="fdc7fb09ec4ebc533362a55d221d305f" category="sidebar">Mettre à niveau les contrôleurs dans une configuration MetroCluster.</block>
   <block id="e912938f380bdbc5125a46cb6974c985" category="sidebar">Développez un MetroCluster à deux nœuds</block>
-  <block id="c495f5fb55d923c4b5bdcc9031d17504" category="sidebar">Ajoutez des contrôleurs aux configurations MetroCluster pour créer une configuration à quatre ou huit nœuds.</block>
   <block id="8b9fb0a48d871747071a5767bb11c3c9" category="sidebar">Développez un MetroCluster à quatre nœuds</block>
-  <block id="f0de1d093d27614c73e83446489eec92" category="sidebar">Ajoutez des contrôleurs aux configurations MetroCluster pour créer une configuration à huit nœuds.</block>
   <block id="daf3fcb291d6eb9e42a7777197caa458" category="sidebar">Conversion de MetroCluster FC en MetroCluster IP</block>
-  <block id="689a3f6927feed4862b6b5b03d4f0018" category="sidebar">Effectuer la transition d'une configuration IP MetroCluster existante vers une configuration IP MetroCluster.</block>
   <block id="822970998ef8866cd59ed6ba8d63af83" category="sidebar">Mettre à niveau les fichiers RCF IP MetroCluster</block>
-  <block id="b2899a6511f7a2ac6656022f75581e5a" category="sidebar">Mettre à niveau les fichiers RCF des switchs dans les configurations MetroCluster IP.</block>
   <block id="b7c02f1bc7ffc889ddb9e99702663c56" category="sidebar">Firmware du pont ATTO</block>
   <block id="ddac5beff5f77bf22595caa98bac08f9" category="sidebar">FiberBridge 7600N</block>
-  <block id="7189e471dda7f4816814f7b74c6948d1" category="sidebar">Téléchargez le micrologiciel pour un pont 7600.</block>
   <block id="dcb741f9e6e5d6050aeb3d8fd347e9fd" category="sidebar">FibreBridge 7500N</block>
-  <block id="81defdfe6f2018754b9c90215acaf8c1" category="sidebar">Téléchargez le micrologiciel pour un pont 7500.</block>
   <block id="dfcc398099d6a64026e51ab282e16253" category="sidebar">Ressources supplémentaires</block>
   <block id="fa0344a10c89a05b4e9232391d5feb01" category="sidebar">NetApp Config Advisor</block>
-  <block id="7bde48e6b0d33c17d731b283a4674428" category="sidebar">Vérifiez la configuration et le câblage.</block>
-  <block id="d5552b01bf48dde88719269e524ddbb9" category="sidebar">Vérifiez que votre matériel est pris en charge.</block>
   <block id="3f2b90ec5a9b43745b9c8c9fedf48d8d" category="sidebar">Base de connaissances du support NetApp</block>
-  <block id="b2cdf9234a2dabbbb6acb6f71e098209" category="sidebar">Recherchez des réponses à vos questions de support.</block>
   <block id="67ed9530c4069b662839f89c94d4a160" category="inline-link-macro">Désactivez le chiffrement de bout en bout</block>
   <block id="ade87983ca16ac3bdbf2b32cf6e9b0d5" category="list-text">S'il est activé sur votre système, <block ref="8a6f29aee2b87dab72caa4c63be583f5" category="inline-link-macro-rx"></block> avant d'effectuer la mise à niveau du contrôleur.</block>
   <block id="3d8fb38a661b136fb35b34201d24ef76" category="section-title">Configurez le chiffrement de bout en bout</block>
@@ -13759,7 +13736,6 @@ L'exemple suivant montre que vous utilisez SCP pour télécharger le fichier<blo
   <block id="efd20e2b544e4614b2e657ac6783ec0a" category="paragraph">Prise en charge de MetroCluster IP pour un chiffrement de bout en bout</block>
   <block id="4a4b85199291f3e23fc84fb47fb5ca30" category="paragraph">Le chiffrement de bout en bout est pris en charge sur les systèmes AFF A400, FAS8300 et FAS8700 afin de chiffrer le trafic back-end, tel que NVlog et les données de réplication du stockage, entre les sites d'une configuration IP MetroCluster.</block>
   <block id="a9734ca6d9ffb317f9b6a802b2dbb3aa" category="inline-link-macro">Configurer le chiffrement de bout en bout dans une configuration MetroCluster IP</block>
-  <block id="c39138b0d883de358017e1fce7fa55a9" category="paragraph"><block ref="c39138b0d883de358017e1fce7fa55a9" category="inline-link-macro-rx"></block></block>
   <block id="aec0d8caac35e70ca6b42831fa957b4d" category="paragraph">Augmentation de la limite du volume pour les configurations MetroCluster IP à quatre nœuds sur les systèmes AFF A800 et AFF C800</block>
   <block id="cbd27762af6b4c6335bac75a098542ce" category="paragraph">Dans les configurations MetroCluster IP à quatre nœuds, les limites de volume suivantes pour les systèmes AFF A800 et AFF C800 ont été augmentées :</block>
   <block id="2c18214fb090b3346dccf036f48c7f39" category="list-text">Le nombre maximal de volumes FlexVol par agrégat est passé de 200 à 625.</block>
@@ -13783,4 +13759,20 @@ L'exemple suivant montre que vous utilisez SCP pour télécharger le fichier<blo
   <block id="98db7bcad911ca4f97f6c512fd15dba5" category="admonition">Reportez-vous à la section <block ref="21cf3ec43c40018cebe1c66cf55306b2" category="inline-link-macro-rx"></block> pour les systèmes pris en charge.</block>
   <block id="03e22cbc7470f9e3b1bc635479554ca9" category="sidebar">Nouveautés de la prise en charge MetroCluster des fonctionnalités ONTAP</block>
   <block id="89753eb00eabd16383d2c616cc908230" category="sidebar">Nouveautés de la prise en charge des switchs et de la plateforme IP MetroCluster</block>
+  <block id="1a8f5be2d2808b5d69a091661c1fdb57" category="paragraph"><block ref="1a8f5be2d2808b5d69a091661c1fdb57" category="inline-link-macro-rx"></block></block>
+  <block id="d8654b161561461c8ec014d5d660db0d" category="list-text">Vérifiez que le stockage est visible.</block>
+  <block id="8c31a85fbae513d968c02205e8c210d4" category="list-text">Vérifiez que le stockage est visible depuis le site survivant. Remettez les plexes hors ligne en ligne pour redémarrer l'opération de resynchronisation et rétablir la SyncMirror.</block>
+  <block id="262891df0c6ebb50acbcb126fb5c8761" category="summary">Lors des opérations de maintenance, vous devrez peut-être arrêter le port d'interface IP de MetroCluster.</block>
+  <block id="4261a47766ada379b26b2c3a719f75b2" category="doc">Ports d'interface IP MetroCluster en ligne ou hors ligne</block>
+  <block id="cb6838ec9d371f50679bbbc58c45370a" category="paragraph">Lorsque vous effectuez des tâches de maintenance, vous devrez peut-être mettre un port d'interface IP MetroCluster hors ligne ou en ligne.</block>
+  <block id="c8611b3438fb84a6c442fe7b05f52a15" category="paragraph">Vous pouvez effectuer les étapes suivantes pour mettre hors ligne ou en ligne un port d'interface IP MetroCluster.</block>
+  <block id="3c84f1de018751821bb0b4202f14bf0a" category="list-text">Définissez le niveau de privilège sur avancé.</block>
+  <block id="6ca857f7a44a21cfffda914cf9549710" category="paragraph">*Exemple de sortie*</block>
+  <block id="260ab9e602296cf4759b74ba30cbd850" category="list-text">Mettre le port d'interface IP MetroCluster hors ligne.</block>
+  <block id="fdc6d534c52f6619e898db680403f69b" category="list-text">Vérifiez que l'interface IP de MetroCluster est hors ligne.</block>
+  <block id="2d393525a6ebfc702ca856ed72512167" category="list-text">Mettez le port d'interface IP MetroCluster en ligne.</block>
+  <block id="0ab751f551b18333e82474f5ca9b4122" category="list-text">Vérifiez que le port de l'interface IP MetroCluster est en ligne.</block>
+  <block id="e387b7f8f98fe6ef00364ba0984c08a9" category="paragraph">Les anciens et nouveaux ID système ont été identifiés dans <block ref="ce17cf746f0f051ba197f9e3096bf7f5" category="inline-link-macro-rx"></block>.</block>
+  <block id="124ba57298a92342f8aec06ebcfb6415" category="inline-link-macro">Déterminez les ID système des anciens modules de contrôleur</block>
+  <block id="3ac27de4b4347c98785ff06870fe7221" category="paragraph"><block ref="3ac27de4b4347c98785ff06870fe7221" category="inline-link-macro-rx"></block></block>
 </blocks>

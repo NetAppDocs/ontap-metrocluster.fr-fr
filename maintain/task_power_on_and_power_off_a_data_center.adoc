@@ -259,8 +259,8 @@ NOTE: Effectuez cette étape pour tous les plexes dont les disques sont distants
 Vous devez mettre l'équipement suivant hors tension dans l'ordre indiqué :
 
 +
+** Contrôleurs de stockage : les contrôleurs de stockage doivent se trouver actuellement au niveau du `LOADER` vous devez les éteindre complètement.
 ** Commutateurs IP MetroCluster
-** Contrôleurs de stockage
 ** Tiroirs de stockage
 
 
@@ -321,16 +321,14 @@ Vous devez d'abord mettre les commutateurs sous tension. Si le site a été dép
 Si le démarrage automatique est activé, appuyez sur `Ctrl+C` pour empêcher les contrôleurs de démarrer automatiquement.
 
 . Mettez les tiroirs sous tension, en leur laissant suffisamment de temps pour pouvoir les mettre complètement sous tension.
+. Vérifiez que le stockage est visible.
 +
-.. Vérifier que les shelfs et les disques sur les ponts sont bien visibles.
-+
-Vous pouvez utiliser une commande comme `sastargets` Sur l'interface CLI ATTO.
-
-
-
-. Vérifiez que le stockage local est visible depuis le nœud en mode Maintenance :
+.. Vérifiez que le stockage est visible depuis le site survivant. Remettez les plexes hors ligne en ligne pour redémarrer l'opération de resynchronisation et rétablir la SyncMirror.
+.. Vérifiez que le stockage local est visible depuis le nœud en mode Maintenance :
 +
 `disk show -v`
+
+
 
 . Rétablir la configuration MetroCluster.
 +

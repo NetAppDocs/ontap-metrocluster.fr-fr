@@ -332,10 +332,10 @@ Pour les commutateurs Cisco FC...
 Les équipements suivants doivent être mis hors tension dans l'ordre indiqué :
 
 +
-** Commutateurs FC MetroCluster
 ** Contrôleurs de stockage : les contrôleurs de stockage doivent se trouver actuellement au niveau du `LOADER` vous devez les éteindre complètement.
-** Tiroirs de stockage
+** Commutateurs FC MetroCluster
 ** FibreBridges ATTO (le cas échéant)
+** Tiroirs de stockage
 
 
 
@@ -568,10 +568,6 @@ Vous devez d'abord mettre les commutateurs sous tension. Si le site a été dép
 
 
 . Désactivez les liens ISL sur les commutateurs FC.
-. Mettez les contrôleurs de stockage sous tension et attendez que le s'affiche `LOADER` à l'invite. Les contrôleurs ne doivent pas être entièrement démarrés.
-+
-Si le démarrage automatique est activé, appuyez sur `Ctrl+C` pour empêcher les contrôleurs de démarrer automatiquement.
-
 . Mettez les étagères sous tension et laissez suffisamment de temps pour qu'elles s'allumer complètement.
 . Mettez sous tension les ponts FiberBridge.
 +
@@ -671,7 +667,15 @@ switch_A_1#
 
 
 |===
-. Vérifiez que le stockage est visible depuis le site survivant. Remettez les plexes hors ligne. Cela redémarre les opérations de resynchronisation et rétablit le SyncMirror.
+. Vérifiez que le stockage est visible.
++
+.. Vérifiez que le stockage est visible depuis le site survivant. Remettez les plexes hors ligne en ligne pour redémarrer l'opération de resynchronisation et rétablir la SyncMirror.
+.. Vérifiez que le stockage local est visible depuis le nœud en mode Maintenance :
++
+`disk show -v`
+
+
+
 . Rétablir la configuration MetroCluster.
 +
 Suivez les instructions de la section link:../disaster-recovery/task_recover_from_a_non_controller_failure_mcc_dr.html#verifying-that-your-system-is-ready-for-a-switchback["Vérifier que votre système est prêt pour le rétablissement"] Afin d'effectuer des opérations de rétablissement et de rétablissement en fonction de votre configuration MetroCluster.
