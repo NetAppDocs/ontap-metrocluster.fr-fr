@@ -3963,7 +3963,7 @@ ISL 4
 
 == Utilisation des ports Cisco 9132T dans des configurations MetroCluster à quatre et huit nœuds exécutant ONTAP 9.4 et versions ultérieures
 
-Le tableau suivant indique l'utilisation des ports sur un commutateur Cisco 9132T. Le tableau présente le nombre maximum de configurations prises en charge avec quatre et huit modules de contrôleur dans deux groupes de reprise sur incident.
+Les tableaux suivants indiquent l'utilisation des ports sur un commutateur Cisco 9132T. Les tableaux présentent le nombre maximum de configurations prises en charge avec quatre et huit modules de contrôleur dans deux groupes de reprise sur incident.
 
 
 NOTE: Pour les configurations à huit nœuds, vous devez effectuer la segmentation manuellement, car les CFR ne sont pas fournis.
@@ -3971,392 +3971,18 @@ NOTE: Pour les configurations à huit nœuds, vous devez effectuer la segmentati
 |===
 
 
-7+| Configurations utilisant FibreBridge 7500N ou 7600N utilisant les deux ports FC (FC1 et FC2) 
+4+| Cisco 9132T avec 1 LEM 
 
 
-7+| MetroCluster 1 ou DR Groupe 1 
+4+| MetroCluster 1 ou DR Groupe 1 
 
 
-4+|  2+| Quatre nœuds | Huit nœuds 
+3+|  | Quatre nœuds 
 
 
-2+| Composant | Port | Se connecte au commutateur FC... | 9132T (1 LEM) | 9132T (2 LEM) | 9132T (2 LEM) 
+| FibreBridge 7500N ou 7600N à l'aide de deux ports FC | Port | Se connecte au commutateur FC... | 9132T (1 LEM) 
 
 
- a| 
-controller_x_1
- a| 
-Port FC-VI a
- a| 
-1
- a| 
-LEM1-1
- a| 
-LEM1-1
- a| 
-LEM1-1
-
-
-
- a| 
-Port FC-VI b
- a| 
-2
- a| 
-LEM1-1
- a| 
-LEM1-1
- a| 
-LEM1-1
-
-
-
- a| 
-Port c FC-VI
- a| 
-1
- a| 
-LEM1-2
- a| 
-LEM1-2
- a| 
-LEM1-2
-
-
-
- a| 
-Port FC-VI d
- a| 
-2
- a| 
-LEM1-2
- a| 
-LEM1-2
- a| 
-LEM1-2
-
-
-
- a| 
-Port a du HBA
- a| 
-1
- a| 
-LEM1-5
- a| 
-LEM1-5
- a| 
-LEM1-3
-
-
-
- a| 
-Port b de l'adaptateur HBA
- a| 
-2
- a| 
-LEM1-5
- a| 
-LEM1-5
- a| 
-LEM1-3
-
-
-
- a| 
-Port c de l'adaptateur HBA
- a| 
-1
- a| 
-LEM1-6
- a| 
-LEM1-6
- a| 
-LEM1-4
-
-
-
- a| 
-Port d de l'adaptateur HBA
- a| 
-2
- a| 
-LEM1-6
- a| 
-LEM1-6
- a| 
-LEM1-4
-
-
-
- a| 
-controller_x_2
- a| 
-Port FC-VI a
- a| 
-1
- a| 
-LEM1-7
- a| 
-LEM1-7
- a| 
-LEM1-5
-
-
-
- a| 
-Port FC-VI b
- a| 
-2
- a| 
-LEM1-7
- a| 
-LEM1-7
- a| 
-LEM1-5
-
-
-
- a| 
-Port c FC-VI
- a| 
-1
- a| 
-LEM1-8
- a| 
-LEM1-8
- a| 
-LEM1-6
-
-
-
- a| 
-Port FC-VI d
- a| 
-2
- a| 
-LEM1-8
- a| 
-LEM1-8
- a| 
-LEM1-6
-
-
-
- a| 
-Port a du HBA
- a| 
-1
- a| 
-LEM1-11
- a| 
-LEM1-11
- a| 
-LEM1-7
-
-
-
- a| 
-Port b de l'adaptateur HBA
- a| 
-2
- a| 
-LEM1-11
- a| 
-LEM1-11
- a| 
-LEM1-7
-
-
-
- a| 
-Port c de l'adaptateur HBA
- a| 
-1
- a| 
-LEM1-12
- a| 
-LEM1-12
- a| 
-LEM1-8
-
-
-
- a| 
-Port d de l'adaptateur HBA
- a| 
-2
- a| 
-LEM1-12
- a| 
-LEM1-12
- a| 
-LEM1-8
-
-
-
-7+| MetroCluster 2 ou DR Groupe 2 
-
-
- a| 
-controller_x_3
- a| 
-Port FC-VI a
- a| 
-1
-|  |   a| 
-LEM2-1
-
-
-
- a| 
-Port FC-VI b
- a| 
-2
-|  |   a| 
-LEM2-1
-
-
-
- a| 
-Port c FC-VI
- a| 
-1
-|  |   a| 
-LEM2-2
-
-
-
- a| 
-Port FC-VI d
- a| 
-2
-|  |   a| 
-LEM2-2
-
-
-
- a| 
-Port a du HBA
- a| 
-1
-|  |   a| 
-LEM2-3
-
-
-
- a| 
-Port b de l'adaptateur HBA
- a| 
-2
-|  |   a| 
-LEM2-3
-
-
-
- a| 
-Port c de l'adaptateur HBA
- a| 
-1
-|  |   a| 
-LEM2-4
-
-
-
- a| 
-Port d de l'adaptateur HBA
- a| 
-2
-|  |   a| 
-LEM2-4
-
-
-
- a| 
-controller_x_4
- a| 
-Port a du FC-VI-1
- a| 
-1
-|  |   a| 
-LEM2-5
-
-
-
- a| 
-Port b FC-VI-1
- a| 
-2
-|  |   a| 
-LEM2-5
-
-
-
- a| 
-Port c FC-VI-1
- a| 
-1
-|  |   a| 
-LEM2-6
-
-
-
- a| 
-Port d FC-VI-1
- a| 
-2
-|  |   a| 
-LEM2-6
-
-
-
- a| 
-Port a du HBA
- a| 
-1
-|  |   a| 
-LEM2-7
-
-
-
- a| 
-Port b de l'adaptateur HBA
- a| 
-2
-|  |   a| 
-LEM2-7
-
-
-
- a| 
-Port c de l'adaptateur HBA
- a| 
-1
-|  |   a| 
-LEM2-8
-
-
-
- a| 
-Port d de l'adaptateur HBA
- a| 
-2
-|  |   a| 
-LEM2-8
-
-
-
-7+| MetroCluster 1 ou DR Groupe 1 
-
-
-4+|  2+| Quatre nœuds | Huit nœuds 
-
-
-2+| FibreBridge 7500N utilisant deux ports FC | Port | Se connecte au commutateur FC... | 9132T (1 LEM) | 9132T (2 LEM) | 9132T (2 LEM) 
-
-
- a| 
-Pile 1
  a| 
 bridge_x_1a
  a| 
@@ -4365,10 +3991,6 @@ FC1
 1
  a| 
 LEM1-13
- a| 
-LEM1-13
- a| 
-LEM1-9
 
 
 
@@ -4378,8 +4000,235 @@ FC2
 2
  a| 
 LEM1-13
+
+
+
+ a| 
+bridge_x_1b
+ a| 
+FC1
+ a| 
+1
+ a| 
+LEM1-14
+
+
+
+ a| 
+FC2
+ a| 
+2
+ a| 
+LEM1-14
+
+|===
+
+NOTE: Une seule (1) pile de ponts est prise en charge avec les commutateurs 9132T et un module LEM.
+
+|===
+
+
+4+| Cisco 9132T avec 2 LEM et un MetroCluster ou un groupe DR à quatre nœuds 
+
+
+4+| MetroCluster 1 ou DR Groupe 1 
+
+
+3+|  | Quatre nœuds 
+
+
+| FibreBridge 7500N ou 7600N à l'aide de deux ports FC | Port | Se connecte au commutateur FC... | 9132T (2 LEM) 
+
+
+ a| 
+bridge_x_1a
+ a| 
+FC1
+ a| 
+1
  a| 
 LEM1-13
+
+
+
+ a| 
+FC2
+ a| 
+2
+ a| 
+LEM1-13
+
+
+
+ a| 
+bridge_x_1b
+ a| 
+FC1
+ a| 
+1
+ a| 
+LEM1-14
+
+
+
+ a| 
+FC2
+ a| 
+2
+ a| 
+LEM1-14
+
+
+
+ a| 
+bridge_x_2a
+ a| 
+FC1
+ a| 
+1
+ a| 
+LEM1-15
+
+
+
+ a| 
+FC2
+ a| 
+2
+ a| 
+LEM1-15
+
+
+
+ a| 
+bridge_x_2b
+ a| 
+FC1
+ a| 
+1
+ a| 
+LEM1-16
+
+
+
+ a| 
+FC2
+ a| 
+2
+ a| 
+LEM1-16
+
+
+
+ a| 
+bridge_x_3a
+ a| 
+FC1
+ a| 
+1
+ a| 
+LEM2-1
+
+
+
+ a| 
+FC2
+ a| 
+2
+ a| 
+LEM2-1
+
+
+
+ a| 
+bridge_x_3b
+ a| 
+FC1
+ a| 
+1
+ a| 
+LEM2-2
+
+
+
+ a| 
+FC2
+ a| 
+2
+ a| 
+LEM2-2
+
+
+
+ a| 
+pont_x_ya
+ a| 
+FC1
+ a| 
+1
+ a| 
+LEM2-3
+
+
+
+ a| 
+FC2
+ a| 
+2
+ a| 
+LEM2-3
+
+
+
+ a| 
+bridge_x_yb
+ a| 
+FC1
+ a| 
+1
+ a| 
+LEM2-4
+
+
+
+ a| 
+FC2
+ a| 
+2
+ a| 
+LEM2-4
+
+|===
+
+NOTE: Dans les configurations à quatre nœuds, vous pouvez câbler des ponts supplémentaires aux ports LEM2-5 via LEM2-8 dans les commutateurs 9132T avec 2 plis.
+
+|===
+
+
+4+| Cisco 9132T avec deux MetroCluster à quatre nœuds ou un MetroCluster à huit nœuds avec deux groupes de reprise après incident 
+
+
+4+| MetroCluster 1 ou DR Groupe 1 
+
+
+| FibreBridge 7500N ou 7600N à l'aide de deux ports FC | Port | Se connecte au commutateur FC... | 9132T (2 LEM) 
+
+
+ a| 
+bridge_x_1a
+ a| 
+FC1
+ a| 
+1
+ a| 
+LEM1-9
+
+
+
+ a| 
+FC2
+ a| 
+2
  a| 
 LEM1-9
 
@@ -4392,10 +4241,6 @@ FC1
  a| 
 1
  a| 
-LEM1-14
- a| 
-LEM1-14
- a| 
 LEM1-10
 
 
@@ -4405,24 +4250,16 @@ FC2
  a| 
 2
  a| 
-LEM1-14
- a| 
-LEM1-14
- a| 
 LEM1-10
 
 
 
- a| 
-Pile 2
  a| 
 bridge_x_2a
  a| 
 FC1
  a| 
 1
-|   a| 
-LEM1-15
  a| 
 LEM1-11
 
@@ -4432,8 +4269,6 @@ LEM1-11
 FC2
  a| 
 2
-|   a| 
-LEM1-15
  a| 
 LEM1-11
 
@@ -4445,8 +4280,6 @@ bridge_x_2b
 FC1
  a| 
 1
-|   a| 
-LEM1-16
  a| 
 LEM1-12
 
@@ -4456,23 +4289,23 @@ LEM1-12
 FC2
  a| 
 2
-|   a| 
-LEM1-16
  a| 
 LEM1-12
 
 
 
- a| 
-Pile 3
+4+| MetroCluster 2 ou DR Groupe 2 
+
+
+| FibreBridge 7500N ou 7600N à l'aide de deux ports FC | Port | Se connecte au commutateur FC... | 9132T (2 LEM) 
+
+
  a| 
 bridge_x_3a
  a| 
 FC1
  a| 
 1
-|   a| 
-LEM2-1
  a| 
 LEM2-9
 
@@ -4482,8 +4315,6 @@ LEM2-9
 FC2
  a| 
 2
-|   a| 
-LEM2-1
  a| 
 LEM2-9
 
@@ -4495,8 +4326,6 @@ bridge_x_3b
 FC1
  a| 
 1
-|   a| 
-LEM2-2
  a| 
 LEM2-10
 
@@ -4506,23 +4335,17 @@ LEM2-10
 FC2
  a| 
 2
-|   a| 
-LEM2-2
  a| 
 LEM2-10
 
 
 
  a| 
-Pile y
- a| 
 pont_x_ya
  a| 
 FC1
  a| 
 1
-|   a| 
-LEM2-3
  a| 
 LEM2-11
 
@@ -4532,8 +4355,6 @@ LEM2-11
 FC2
  a| 
 2
-|   a| 
-LEM2-3
  a| 
 LEM2-11
 
@@ -4545,8 +4366,6 @@ bridge_x_yb
 FC1
  a| 
 1
-|   a| 
-LEM2-4
  a| 
 LEM2-12
 
@@ -4556,20 +4375,13 @@ LEM2-12
 FC2
  a| 
 2
-|   a| 
-LEM2-4
  a| 
 LEM2-12
 
 |===
-[NOTE]
-====
-* Dans les configurations à quatre nœuds, vous pouvez câbler des ponts supplémentaires aux ports LEM2-5 via LEM2-8 dans les commutateurs 9132T avec 2 plis.
-* Dans des configurations à huit nœuds, vous pouvez câbler des ponts supplémentaires aux ports LEM2-13 via LEM2-16 dans des commutateurs 9132T avec 2 plis.
-* Une seule (1) pile de ponts est prise en charge avec les commutateurs 9132T et un module LEM.
 
+NOTE: Dans des configurations à huit nœuds, vous pouvez câbler des ponts supplémentaires aux ports LEM2-13 via LEM2-16 dans des commutateurs 9132T avec 2 plis.
 
-====
 
 
 == Utilisation du port Cisco 9132T pour les liens ISL dans des configurations à quatre et huit nœuds dans une configuration MetroCluster exécutant ONTAP 9.1 ou une version ultérieure
