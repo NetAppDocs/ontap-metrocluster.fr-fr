@@ -471,8 +471,6 @@
   <block id="282bc05e82ec2895ab48f3f9377e06d3" category="list-text">Pour vérifier que le micrologiciel du commutateur est pris en charge, reportez-vous aux sections suivantes :</block>
   <block id="da160308e3b4b4a80bf1b72b5bdbedb8" category="inline-link">Hardware Universe</block>
   <block id="8d0f34f00997c62960ad51adbe64457d" category="list-text"><block ref="8d0f34f00997c62960ad51adbe64457d" category="inline-link-rx"></block></block>
-  <block id="10f02f59043b28fac9ff50a9e24e6044" category="inline-link">Interopérabilité NetApp</block>
-  <block id="8ae1a8b6dc4a3df150f27ca419fb9a6c" category="list-text"><block ref="8ae1a8b6dc4a3df150f27ca419fb9a6c" category="inline-link-rx"></block></block>
   <block id="bde0605fb74695c23ddd122685cfc65e" category="section-title">Mettre à niveau les fichiers RCF</block>
   <block id="1ac88e41a3fe5cd70b12c660a33460a7" category="paragraph">Si vous installez un nouveau firmware du commutateur, vous devez installer le micrologiciel du commutateur avant de mettre à niveau le fichier RCF.</block>
   <block id="e301a104c554483554dbecab048bf670" category="paragraph">Cette procédure perturbe le trafic sur le commutateur où le fichier RCF est mis à niveau. Le trafic reprend lorsque le nouveau fichier RCF est appliqué.</block>
@@ -1082,9 +1080,7 @@
   <block id="c930f1407b119fed6e0e8cb7aab0c04e" category="paragraph"><block ref="3e553fc48f78ab9c545115ebcf297b1f" prefix="" category="inline-code"></block></block>
   <block id="848c91462fdf4b2756db71b5b7cf8d20" category="list-text">Dans l'invite ONTAP du cluster contenant le pont, redémarrez le firmware du pont :</block>
   <block id="9684ced23869ffd0ef90656a6aa83c1d" category="paragraph"><block ref="5f8c76c5246344cdbc54fffd2aa86640" prefix="" category="inline-code"></block></block>
-  <block id="a89a5b71cb60acbd82724db1a629420a" category="summary">Vous devez vérifier que vous utilisez les affectations de ports spécifiées lors de l'attribution des câbles des commutateurs FC. Les affectations de ports sont différentes entre ONTAP 9.0 et les versions ultérieures de ONTAP.</block>
   <block id="2688c925fec0ab4e936ae385ba142c24" category="paragraph">Les ports qui ne sont pas utilisés pour la connexion de ports d'initiateur, de ports FC-VI ou de liens ISL peuvent être reconfigurés pour agir en tant que ports de stockage. Toutefois, si les CFR soutenus sont utilisés, le zonage doit être modifié en conséquence.</block>
-  <block id="3db4017b12769c890b399a8cee60dfb5" category="paragraph">Si les fichiers RCF pris en charge sont utilisés, les ports ISL peuvent ne pas se connecter aux mêmes ports indiqués ici et devoir être reconfigurés manuellement.</block>
   <block id="a45eb6ab149dfb9c88ab3dcd2184e695" category="section-title">Instructions générales de câblage</block>
   <block id="c41d521acb0fc63853fafb5270777e87" category="paragraph">Lors de l'utilisation des tables de câblage, il est important de connaître les consignes suivantes :</block>
   <block id="85efea09b8971fa839b814e34e5b06b9" category="list-text">Les commutateurs Brocade et Cisco utilisent une numérotation de port différente :</block>
@@ -1094,17 +1090,13 @@
   <block id="fa15cd6e7a73a7cac602236af691b901" category="list-text">Les systèmes de stockage AFF A300 et FAS8200 peuvent être commandés avec l'une des deux options de connectivité FC-VI :</block>
   <block id="f8ead55cd533754df60e1d996c261dcc" category="list-text">Ports intégrés 0e et 0f configurés en mode FC-VI.</block>
   <block id="f39eec234d6cdc6ec6c13fbe95529ebe" category="list-text">Ports 1a et 1b sur une carte FC-VI dans l'emplacement 1.</block>
-  <block id="7cdeeb5d6c1afe20f2835793af3716df" category="section-title">Utilisation du port Brocade pour les connexions du contrôleur dans une configuration MetroCluster à 8 nœuds exécutant ONTAP 9.0</block>
-  <block id="4c400b3f7160abe1ed688a9b8979589e" category="paragraph">Le tableau suivant montre l'utilisation des ports de contrôleur sur les modèles Brocade Brocade Brocade Brocade 6505, 6510 ou DCX 8510-8 :</block>
   <block id="9bf4e8720024939a31910559506487e8" category="cell">controller_x_3</block>
   <block id="1679091c5a880faf6fb5e6087eb1b2dc" category="cell">6</block>
   <block id="8f14e45fceea167a5a36dedd4bea2543" category="cell">7</block>
   <block id="f65c08d82a4d03d0ccfe8c069b7a950f" category="cell">controller_x_4</block>
   <block id="45c48cce2e2d7fbdea1afc51c7c6ad26" category="cell">9</block>
   <block id="d3d9446802a44259755d38e6d163e820" category="cell">10</block>
-  <block id="afad1c27cb5fc5d1d792e5ba791ef840" category="section-title">Utilisation du port Brocade pour les connexions en pont FC-SAS dans une configuration MetroCluster à huit nœuds exécutant ONTAP 9.0</block>
   <block id="de8504b73ea228d0ea9bbce69752092e" category="cell">Pont</block>
-  <block id="fac64949de3a43257f3c8a97a35449a1" category="cell">Port de pont</block>
   <block id="d752b12b0fc874dddc6f67101b900706" category="cell">FC1</block>
   <block id="c20ad4d76fe97759aa27a0c99bff6710" category="cell">12</block>
   <block id="ff9971710c5b208a0619e9b58d986c82" category="cell">FC2</block>
@@ -1129,8 +1121,6 @@
   <block id="f5bad2a06048272d8713fb8303c967a5" category="cell">bridge_x_7b</block>
   <block id="968f63536cc26e1ac460060836284646" category="cell">bridge_x_8a</block>
   <block id="4409c993164a314b23d52edf9f7ddb07" category="cell">bridge_x_8b</block>
-  <block id="ecbaae7ed0bf3689e37afedee8f6c249" category="section-title">Utilisation du port Brocade pour les liaisons ISL dans une configuration MetroCluster à huit nœuds exécutant ONTAP 9.0</block>
-  <block id="394f60a83bf45a2e06134eded4e6adc2" category="paragraph">Le tableau suivant montre l'utilisation des ports ISL pour les commutateurs Brocade 6505, 6510 ou DCX 8510-8 :</block>
   <block id="780738b38ccf649c36173b77e28ff349" category="cell">Port ISL</block>
   <block id="771258dc7c4b533338a8b8c444330806" category="cell">Port ISL 1</block>
   <block id="98f13708210194c475687be6106a3b84" category="cell">20</block>
@@ -1140,51 +1130,18 @@
   <block id="b6d767d2f8ed5d21a44b0e5886680cb9" category="cell">22</block>
   <block id="7baac79c2a4b41b76452ed707ff7f4a8" category="cell">Port ISL 4</block>
   <block id="37693cfc748049e45d87b8c7d8b9aacd" category="cell">23</block>
-  <block id="720e1fb07c36d94aa69e0ee7eb5cb7f3" category="section-title">Utilisation des ports Brocade pour les contrôleurs dans une configuration MetroCluster à quatre nœuds exécutant ONTAP 9.0</block>
-  <block id="253a9adeaa7038a2700f39aad347d73d" category="paragraph">Le câblage est le même pour chaque commutateur FC dans la structure du commutateur. Le tableau suivant indique l'utilisation des commutateurs Brocade 6505, 6510 et DCX 8510-8.</block>
   <block id="af86c239e657127cf0c5e7987a178e14" category="cell">controller_x_2</block>
   <block id="eccbc87e4b5ce2fe28308fd9f2a7baf3" category="cell">3</block>
   <block id="a87ff679a2f3e71d9181a67b7542122c" category="cell">4</block>
   <block id="e4da3b7fbbce2345d7772b0674a318d5" category="cell">5</block>
-  <block id="bb98798a94eabd991690e4d98bb1e93d" category="section-title">Utilisation du port Brocade pour les ponts dans une configuration MetroCluster à quatre nœuds exécutant ONTAP 9.0</block>
-  <block id="814568b4249c0114f7f5acf6d86149fb" category="cell">Pont FiberBridge 7500</block>
-  <block id="4b1342698b69db9277c10ae5d059e837" category="cell">FC_Switch_x_1 (6510 ou DCX 8510-8)</block>
-  <block id="e49423aa401904cc19d9c93b1dba3f71" category="cell">FC_Switch_x_2 (6510 ou DCX 8510-8)</block>
-  <block id="8e8e002bc58d3a842d05c1be7b04ba4c" category="cell">FC_Switch_x_1 (6505)</block>
-  <block id="7ab09fefe83fcbd6007a5ac115dfefbc" category="cell">FC_Switch_x_2 (6505)</block>
-  <block id="5cf1fa7f2c6c9825315b7608236abe2b" category="cell">des ponts supplémentaires peuvent être câblés via le port 19, puis les ports 24 à 47</block>
-  <block id="c4381a0b6bf2d250fd5afa1d8db80d48" category="cell">des ponts supplémentaires peuvent être câblés via le port 23</block>
-  <block id="3f0d7bda291f9b3c6f2f35a20a63c52e" category="section-title">Utilisation du port Brocade pour les liaisons ISL dans une configuration MetroCluster à quatre nœuds exécutant ONTAP 9.0</block>
-  <block id="69862326bc727c309184d534a3f3cff8" category="paragraph">Le tableau suivant montre l'utilisation des ports ISL :</block>
-  <block id="160cef04b33948c7b91144a2fdf46988" category="section-title">Utilisation des ports Brocade pour les contrôleurs dans une configuration MetroCluster à deux nœuds exécutant ONTAP 9.0</block>
-  <block id="7699bf8a4df6f7e15f159269bd8927e4" category="paragraph">Le câblage est le même pour chaque commutateur FC dans la structure du commutateur. Le tableau suivant indique le câblage des commutateurs Brocade 6505, 6510 et DCX 8510-8.</block>
-  <block id="4d3b4ab0ee0d27226cd4d951952dc8aa" category="section-title">Utilisation du port Brocade pour les ponts dans une configuration MetroCluster à deux nœuds exécutant ONTAP 9.0</block>
-  <block id="f87cb62014b08eabb93a84e435b02ea9" category="section-title">Utilisation du port Brocade pour ISL dans une configuration MetroCluster à deux nœuds exécutant ONTAP 9.0</block>
-  <block id="851032b3e8ee16b9eb2ed6098216108e" category="paragraph">Le tableau suivant montre l'utilisation des ports ISL pour les commutateurs Brocade 6505, 6510 et DCX 8510-8 :</block>
-  <block id="944ef169ea9b385ec2fc06c60bcdd267" category="section-title">Utilisation des ports Cisco pour les contrôleurs dans une configuration MetroCluster à 8 nœuds exécutant ONTAP 9.0</block>
-  <block id="062caca7c0bb29ebff9fcc7a33a75d93" category="paragraph">Le tableau suivant indique l'utilisation des ports de contrôleur sur les commutateurs Cisco 9148 et 9148S :</block>
-  <block id="7dd0f293a7e09ad1d4ac1014f18a018a" category="section-title">Utilisation des ports Cisco pour les ponts FC-SAS dans une configuration MetroCluster à huit nœuds exécutant ONTAP 9.0</block>
   <block id="1d8dd340273647eae3a36eff43fc547e" category="paragraph">Des ponts supplémentaires peuvent être connectés à l'aide des ports 25 à 48 en suivant le même modèle.</block>
-  <block id="c4739fa521713dbbe264a1366afde348" category="section-title">L'utilisation des ports Cisco pour ISL dans une configuration MetroCluster à 8 nœuds exécutant ONTAP 9.0</block>
-  <block id="524e7c19dbf542bdc24be3909a68aa5b" category="paragraph">Le tableau suivant montre l'utilisation des ports ISL pour les commutateurs Cisco 9148 et 9148S :</block>
   <block id="84a71a9e63ead8784cd365088a3be8c4" category="cell">Ports ISL</block>
   <block id="1ff1de774005f8da13f42943881c655f" category="cell">24</block>
-  <block id="bf9995231adba64383dd274717591fad" category="section-title">Utilisation des ports Cisco pour les contrôleurs dans une configuration MetroCluster à quatre nœuds</block>
-  <block id="9009bb494f588eb453c941a0f5346de2" category="paragraph">Le tableau suivant indique l'utilisation des ports de contrôleur sur les commutateurs Cisco 9148, 9148S et 9250i :</block>
-  <block id="8a960a450c78ddb1326827d52c10a15a" category="section-title">Utilisation des ports Cisco pour les ponts FC-SAS dans une configuration MetroCluster à quatre nœuds exécutant ONTAP 9.0</block>
-  <block id="6fcd6dc740970bb42bde0c9a37d97275" category="section-title">Utilisation des ports Cisco 9148 et 9148S pour les liens ISL dans une configuration MetroCluster à quatre nœuds exécutant ONTAP 9.0</block>
   <block id="19ca14e7ea6328a42e0eb13d585e4c22" category="cell">36</block>
   <block id="d645920e395fedad7bbbed0eca3fe2e0" category="cell">40</block>
   <block id="f7177163c833dff4b38fc8d2872f1ec6" category="cell">44</block>
   <block id="642e92efb79421734881b53e1e1b18b6" category="cell">48</block>
-  <block id="d8547f2a1e0767433bffe41b5c4ca3bc" category="section-title">Utilisation de ports Cisco 9250i pour des liaisons ISL dans une configuration MetroCluster à quatre nœuds exécutant ONTAP 9.0</block>
-  <block id="183f17b261b81d0d886cf2452983cce8" category="paragraph">Le commutateur Cisco 9250i utilise les ports FCIP pour l'ISL.</block>
   <block id="4389b93bd76334095ae6f5fdb926d4ee" category="paragraph">Les ports 40 à 48 sont des ports 10 GbE et ne sont pas utilisés dans la configuration MetroCluster.</block>
-  <block id="fa69aa564bc90d7adecfb54c289d23be" category="section-title">Utilisation des ports Cisco pour les contrôleurs dans une configuration MetroCluster à deux nœuds</block>
-  <block id="762b426bcd4ea34fc55a0f899cf2086d" category="section-title">Utilisation des ports Cisco pour les ponts FC-SAS dans une configuration MetroCluster à deux nœuds exécutant ONTAP 9.0</block>
-  <block id="ba2044d8a6c35bb667c35d13e7a3277d" category="section-title">Utilisation des ports Cisco 9148 ou 9148S pour les liens ISL dans une configuration MetroCluster à deux nœuds exécutant ONTAP 9.0</block>
-  <block id="2bc92937819403549f510c08d8a54058" category="paragraph">Le tableau suivant montre l'utilisation des ports ISL pour les commutateurs Cisco 9148 ou 9148S :</block>
-  <block id="e936a0e4e03d3d3120e966eca42a0b28" category="section-title">Utilisation de ports Cisco 9250i pour des liaisons ISL dans une configuration MetroCluster à deux nœuds exécutant ONTAP 9.0</block>
   <block id="0f4890949e646d00de6b9e66bd1b1968" category="summary">Vous devrez peut-être remplacer un commutateur défectueux ou mettre à niveau ou rétrograder un commutateur. Le nouveau commutateur peut être le même que l'ancien commutateur en cas de défaillance d'un commutateur, ou vous pouvez modifier le type de commutateur \(mettre à niveau ou rétrograder le commutateur\).</block>
   <block id="5e2a519a0cc2ae15695c5cf1d46f0cc9" category="doc">Remplacement d'un commutateur IP</block>
   <block id="8884ae199fd568dc7ca11305cb40b82e" category="image-alt">interconnexion ip de l'architecture matérielle du mcc</block>
@@ -1322,7 +1279,6 @@
   <block id="79fb12280740c382675b2f2b02401b80" category="list-text">Tous les disques et tiroirs disques du système doivent exécuter la dernière version du firmware.</block>
   <block id="623d27fb1a71775c853589b6aa232fcb" category="paragraph">Vous pouvez mettre à jour le firmware des disques et des tiroirs dans la configuration MetroCluster avant d'ajouter des tiroirs.</block>
   <block id="c3204e26e12ab80395709eeaa0f8642d" category="paragraph"><block ref="c3204e26e12ab80395709eeaa0f8642d" category="inline-link-rx"></block></block>
-  <block id="c073c8226440025a816eb4efa16a17a3" category="admonition">Si votre système exécute une version prise en charge de ONTAP, vous pouvez utiliser plusieurs modules IOM12 et IOM6 au sein de la même pile. Pour déterminer si votre version de ONTAP prend en charge la combinaison de tiroirs, Reportez-vous à la matrice d'interopérabilité (IMT).https://mysupport.netapp.com/NOW/products/interoperability[NetApp interopérabilité] si votre version de ONTAP n'est pas prise en charge, et vous ne pouvez pas mettre à niveau ou déclasser les modules IOM sur la pile existante ou le nouveau tiroir à ajouter à une combinaison de modules IOM prise en charge, vous devez effectuer l'une des opérations suivantes :</block>
   <block id="64974d0b5eb2e258428a89835ce229c9" category="list-text">Démarrez une nouvelle pile sur un nouveau port SAS (si elle est prise en charge par la paire de ponts).</block>
   <block id="ad45a06e82c1f0983fdfd0e3d30dc8f8" category="list-text">Démarrer une nouvelle pile sur une paire de ponts supplémentaire.</block>
   <block id="b7b17808a6e64c132f3bf8c4f253b38d" category="list-text">Téléchargez ou consultez les documents suivants depuis le site de support NetApp :</block>
@@ -4955,7 +4911,6 @@
   <block id="f230aa9272cfae103f41403290ae21df" category="list-text">Shelf_A_1_2</block>
   <block id="3045f5f4f1093cf13cd0757dba1576cb" category="list-text">Shelf_B_1_1</block>
   <block id="1a10354dd8ac3ce1f01a352c0c19ac1d" category="list-text">Shelf_B_1_2</block>
-  <block id="76379c0e7357a2749284a8099ed9c896" category="paragraph">Votre version de ONTAP doit prendre en charge le mélange des tiroirs. Consultez la matrice d'interopérabilité (IMT) pour savoir si votre version de ONTAP prend en charge la combinaison de tiroirs.<block ref="02d7a1e934f8b62a0243dc749b1b650b" category="inline-link-rx"></block></block>
   <block id="40478efcbffc865e999b3e1e2108a0cc" category="paragraph">Pour plus de détails sur le mélange des étagères, voir :<block ref="532c1f47a9370f9e21538610051f3830" category="inline-link-rx"></block></block>
   <block id="4eddf6976105fa027f2ae8a47fff2624" category="summary">Pour plus d'informations sur la configuration et le fonctionnement de MetroCluster, consultez la documentation NetApp.</block>
   <block id="547ba73dc7a2f4ba675a33d38364c3f9" category="paragraph">Pour en savoir plus sur la configuration et le fonctionnement de MetroCluster,</block>
@@ -5021,7 +4976,6 @@
   <block id="e11100cda92220a37aefe15b3df72fc6" category="section-title">Au moins quatre tiroirs disques SAS (recommandé)</block>
   <block id="3e203d1fe20288fbdc8e4b477bffda73" category="paragraph">La configuration Stretch MetroCluster (SAS-Attached) requiert au moins deux tiroirs disques SAS. Quatre tiroirs disques SAS sont recommandés.</block>
   <block id="a862108f875d286d39adac239f0619d5" category="paragraph">Deux tiroirs sont recommandés sur chaque site pour permettre la propriété du disque par tiroir. Au moins un tiroir est pris en charge sur chaque site.</block>
-  <block id="d5d16fad39e71fb59dc90d88df5e1025" category="paragraph">Votre version de ONTAP doit prendre en charge le mélange des tiroirs. Consultez la matrice d'interopérabilité (IMT) pour savoir si votre version de ONTAP prend en charge la combinaison de tiroirs.<block ref="ac420cca75b9dbbf7e4e74995a005185" category="inline-link-rx"></block></block>
   <block id="e5e4a159b56e91f667faa79be11c280f" category="paragraph">Pour plus de détails sur le mélange des étagères, voir :<block ref="96c52bfd2d59063b848ae852888ce36d" category="inline-link-rx"></block></block>
   <block id="9f7478d92348559576a9b780c5262d0e" category="summary">Après avoir configuré le pont, vous pouvez commencer à câbler le système. Le pont FiberBridge 7600N ou 7500N utilise des connecteurs mini-SAS et prend en charge les tiroirs qui utilisent des modules IOM6 ou IOM3.</block>
   <block id="f80a33b608fae76a65bf5266714d4698" category="doc">Câblage d'un pont FibreBridge 7600N ou 7500N avec des tiroirs utilisant des modules IOM6 ou IOM3</block>
@@ -5757,7 +5711,6 @@
   <block id="ea7ae12637786fd2df51e9007bb6f639" category="doc">Restauration de la surveillance du disjoncteur d'attache ou du médiateur</block>
   <block id="36588e2aa5ad4fcf60167b3daa06db5a" category="list-text">Utilisez la procédure appropriée pour votre configuration.</block>
   <block id="7efa6fc838c006d396e42638b4ff25d1" category="paragraph"><block ref="7efa6fc838c006d396e42638b4ff25d1" category="inline-link-macro-rx"></block></block>
-  <block id="fe45fe811f6f58baafc88df1114b43df" category="paragraph">Lien :../install-ip/concept_mediator_requirements.html #configure-the-ontap-médiateur-service-from-a-metrocluster-ip-configuration[Configuration du service ONTAP Mediator à partir d'une configuration IP MetroCluster]</block>
   <block id="c5ca83d0e723113560fb2c95b33b532b" category="doc">Plateformes prises en charge pour une transition sans interruption</block>
   <block id="2687b88898e3642fcc69aaef6be8e73c" category="paragraph">Lors de votre transition vers une configuration MetroCluster IP, vous devez avoir une combinaison de modèles de plateforme pris en charge. Vous devez également vous assurer que la plateforme IP MetroCluster est une taille appropriée pour la charge que vous passez de la configuration FC MetroCluster à la configuration IP MetroCluster.</block>
   <block id="d9599a6265b31306f6c79d760a47a9aa" category="paragraph">Le tableau suivant présente les combinaisons de plates-formes prises en charge. Vous pouvez passer des plates-formes de la colonne de gauche à des plates-formes répertoriées comme pris en charge dans les colonnes de droite, comme indiqué par les cellules de tableau colorées.</block>
@@ -10058,14 +10011,6 @@
   <block id="9eecc3d31e1dca8ff5a3adf6988fa6d7" category="paragraph"><block ref="9eecc3d31e1dca8ff5a3adf6988fa6d7" category="inline-link-macro-rx"></block></block>
   <block id="81af25de9f68ba8cc7b0883b71b9d3cb" category="inline-link-macro">Exemple de câblage des ports de la baie de stockage aux commutateurs FC dans une configuration MetroCluster à huit nœuds</block>
   <block id="2740d289d4d49097464e045111134762" category="paragraph"><block ref="2740d289d4d49097464e045111134762" category="inline-link-macro-rx"></block></block>
-  <block id="1070ce9e7bae97d7e7228e149c0b9eb4" category="paragraph">Le tableau suivant montre l'utilisation du port de contrôleur sur les commutateurs Brocade :</block>
-  <block id="cd45205e4fc2077e0c4d75cfa092a45c" category="cell">Configuration MetroCluster à 8 nœuds</block>
-  <block id="8fa7af407bf3527ae51a64903584fb97" category="cell">Configuration MetroCluster à quatre nœuds</block>
-  <block id="b568f2bc70056e5c549443721bcfb52b" category="cell">Brocade 6510 ou DCX 8510-8</block>
-  <block id="6ffb8f2c32009a20c314f0eeec771f81" category="cell">Brocade 6510, DCX 8510-8</block>
-  <block id="a435d7a239e10d99dd0bb66c0966f44d" category="paragraph">Le tableau suivant montre l'utilisation des ports de contrôleur sur les commutateurs Cisco :</block>
-  <block id="b54c734a5be7921355fc2aa93b69ba59" category="cell">Cisco 9148 ou 9148S</block>
-  <block id="11278506140805617313d6fd9ed8b0fc" category="cell">Cisco 9148, 9148S ou 9250i</block>
   <block id="0366d9269d29429c70a416504b9933a6" category="summary">Vous devez télécharger le fichier RCF sur chaque commutateur de la configuration MetroCluster Fabric.</block>
   <block id="3943df800bc20bb77a1a12e989c29d6f" category="doc">Téléchargement et installation des fichiers Cisco FC RCF</block>
   <block id="96d44db22d3fd08538feb9a1879238ff" category="paragraph">Cette tâche nécessite un logiciel de transfert de fichiers, tel que FTP, TFTP (Trivial File Transfer Protocol), SFTP ou SCP (Secure Copy Protocol), pour copier les fichiers sur les commutateurs.</block>
@@ -11019,7 +10964,6 @@
   <block id="0298c9d72aff4562d5434fe4a448c6a1" category="doc">Préparation d'une baie de stockage à l'utilisation avec les systèmes ONTAP</block>
   <block id="6ceeef6f6fdaf06b95cae87e460cfe9b" category="paragraph">Les baies de stockage, les firmwares et les commutateurs que vous prévoyez d'utiliser dans la configuration doivent être pris en charge par la version ONTAP spécifique.</block>
   <block id="a011aa6047381b9696e67c3b40f1802e" category="inline-link">Interopérabilité NetApp (IMT)</block>
-  <block id="adbd7f6da5b8c687e8c9973fbac44739" category="list-text"><block ref="adbd7f6da5b8c687e8c9973fbac44739" category="inline-link-rx"></block></block>
   <block id="567997ebab95ad5c797a8c2164e69988" category="paragraph">Vous devez coordonner cette tâche avec l'administrateur de la baie de stockage.</block>
   <block id="c6d70523707016c24377e7ebb500eef1" category="list-text">Créez des LUN sur la baie de stockage en fonction du nombre de nœuds de la configuration MetroCluster.</block>
   <block id="b30da40dcd4e32f00364fe223122c3ab" category="paragraph">Chaque nœud de la configuration MetroCluster nécessite des LUN de baie pour l'agrégat racine, l'agrégat de données et les Spares.</block>
@@ -12442,7 +12386,6 @@
   <block id="3e3df3be76a18ca2c89904765d97f078" category="list-text">Vérifier que le basculement est possible et que les nœuds sont connectés en exécutant la commande suivante sur les deux clusters :</block>
   <block id="3963205d7c5d1cb2f000d61f16c10f1d" category="paragraph">24 disques internes</block>
   <block id="7632b8724806890acaf96c668d641251" category="inline-link-macro">En savoir plus sur l'affectation automatique des disques et les systèmes ADP dans les configurations MetroCluster IP</block>
-  <block id="85488d881ebf03beb1eca3be4b5fda44" category="paragraph">Votre version de ONTAP doit prendre en charge le mélange des tiroirs. Reportez-vous à la<block ref="e78382cc6f841e7f00c97b18a2e30f41" category="inline-link-rx"></block> Pour vérifier si votre version de ONTAP prend en charge la combinaison de tiroirs.</block>
   <block id="5fdc7ff67ace146413ecd7d44157aca4" category="paragraph">Pour plus de détails sur le mélange des étagères, voir<block ref="532c1f47a9370f9e21538610051f3830" category="inline-link-rx"></block></block>
   <block id="e868bded76541295e018b74bb15a7920" category="inline-link-macro">Présentation de l'installation et de la configuration des switchs NVIDIA SN2100</block>
   <block id="b86c7f3554d9472f6a1e417c7f70fb18" category="admonition">Pour plus d'informations sur l'installation de Cumulus Linux, voir <block ref="ac21c0d53d9fcd547ee85e9d73d53854" category="inline-link-macro-rx"></block></block>
@@ -12724,9 +12667,7 @@
   <block id="fdf5e2eb479f201de0c9c62e9a32e769" category="paragraph">Lorsque vous ajoutez de nouveaux nœuds à un cluster existant sans broadcast domain par défaut, les LIFs de node-management sont créées pour les nouveaux nœuds à l'aide d'UUID (Universal unique identifier) à la place des noms attendus. Pour plus d'informations, consultez l'article de la base de connaissances<block ref="4808e3ddae1b3b2c14dc148b67bd36ea" category="inline-link-rx"></block>.</block>
   <block id="f6410291c32fa961402f5a821c332f6c" category="list-text">Vérifier que les anciens et nouveaux modèles de plate-forme sont pris en charge pour le mélange de plate-forme.</block>
   <block id="e220a628f1c5f8fb65824aaeb387520e" category="list-text">Vérifiez que les anciens et les nouveaux modèles de plate-forme sont pris en charge par les commutateurs IP.</block>
-  <block id="56f1ca12910041b73ea6fcc9bc18a954" category="paragraph">Depuis ONTAP 9.4, les configurations IP de MetroCluster prennent en charge les nouvelles installations à l'aide du partitionnement de disque avancé (ADP).</block>
   <block id="72a38a5af8be1c706e478add3356ba90" category="paragraph">Lorsque vous utilisez ADP avec des configurations MetroCluster IP, vous devez prendre en compte les considérations suivantes :</block>
-  <block id="3cae0a231aac97485961fb33cea76ca2" category="list-text">ONTAP 9.4 et versions ultérieures sont nécessaires pour utiliser ADP avec les configurations IP MetroCluster.</block>
   <block id="959bb45d9851a2b3efaeb05db74e0a80" category="list-text">ADPv2 est pris en charge dans les configurations MetroCluster IP.</block>
   <block id="a393732e5defe7b7a921a586e53ec51d" category="list-text">L'agrégat racine doit se trouver dans la partition 3 pour tous les noeuds des deux sites.</block>
   <block id="9ef6aecb7d030435d81fe80cacca477e" category="list-text">Le partitionnement et l'affectation des disques s'effectuent automatiquement lors de la configuration initiale des sites MetroCluster.</block>
@@ -13273,12 +13214,6 @@ S'applique à toutes les configurations MetroCluster.</block>
   <block id="0351289236b3260f9d0c35b64f62689c" category="paragraph">Vous pouvez suivre le câblage du pont FibreBridge 7500N ou 7600N en utilisant un seul port FC (FC1 ou FC2). Au lieu d'utiliser quatre initiateurs, connectez uniquement deux initiateurs et laissez les deux autres connectés au port du commutateur vides.</block>
   <block id="4883312b6c36aa2f1d5ce2e2f17638bd" category="paragraph">Si la segmentation est effectuée manuellement, suivez la segmentation utilisée pour un pont FibreBridge 7500N ou 7600N utilisant un port FC (FC1 ou FC2). Dans ce scénario, un port initiateur au lieu de deux est ajouté à chaque membre de zone par structure.</block>
   <block id="1e008e69dc731ad28df3d6927462a7f3" category="paragraph">Vous pouvez modifier le zonage ou effectuer une mise à niveau d'un FibreBridge 6500N vers un FibreBridge 7500N en suivant la procédure décrite dans <block ref="0b4bc6296d77be28e33d3b50e0ea0797" category="inline-link-macro-rx"></block>.</block>
-  <block id="803d845c069720e0ec75ee03ea5a43d4" category="paragraph">Le tableau suivant indique l'utilisation des ports de pont lors de l'utilisation des ponts FibreBridge 7500N et 7600N :</block>
-  <block id="2cd1f3df6c3bbd7c9891d742ad23d04a" category="cell">Pont FibreBridge 7500N ou 7600N</block>
-  <block id="81b2aac60df91543fcf4f05563b1f80e" category="paragraph">Le tableau suivant indique l'utilisation des ports de pont jusqu'au port 17 lors de l'utilisation des ponts FibreBridge 7500N et 7600N. Des ponts supplémentaires peuvent être câblés vers les ports 18 à 23.</block>
-  <block id="85878b4f87459062c8904a27720ba2be" category="paragraph">Le tableau suivant indique l'utilisation des ports de pont jusqu'au port 23 lors de l'utilisation de ponts FibreBridge 7500N ou 7600N. Des ponts supplémentaires peuvent être connectés à l'aide des ports 25 à 48.</block>
-  <block id="6f40fc62599b436af99e9090bcb1fe21" category="paragraph">Le tableau suivant indique l'utilisation des ports de pont jusqu'au port 14 lors de l'utilisation de ponts FibreBridge 7500N ou 7600N. Des ponts supplémentaires peuvent être connectés aux ports 15 à 32 en suivant le même modèle.</block>
-  <block id="836f2645702f9125726ff7335ed42bd5" category="paragraph">Le tableau suivant indique l'utilisation des ports de pont jusqu'au port 14 lors de l'utilisation des ponts FibreBridge 7500N et 7600N. Des ponts supplémentaires peuvent être connectés aux ports 15 à 32 en suivant le même modèle.</block>
   <block id="7f921cbd9f23de85fa3d483b640e428b" category="open-title">Si les nœuds sont hors tension :</block>
   <block id="5f4eaac69c780a3f8ab154192e4a1a26" category="paragraph">Mettez les nœuds sous tension.</block>
   <block id="2900f8420dafccee0a2692e48506c6cb" category="open-title">Si les nœuds se trouvent à l'invite DU CHARGEUR :</block>
@@ -13340,12 +13275,6 @@ S'applique à toutes les configurations MetroCluster.</block>
   <block id="1cef707d96d59ea52cd45984a36d2f11" category="list-text">Mettez les commutateurs IP sous tension.</block>
   <block id="ac8327044a4ce63889944095a1b6aed8" category="list-text">Mettez les tiroirs sous tension, en leur laissant suffisamment de temps pour pouvoir les mettre complètement sous tension.</block>
   <block id="d5061566f9570e151daa3fd59fb31405" category="list-text">Vérifiez que le stockage local est visible depuis le nœud en mode Maintenance :</block>
-  <block id="7a492d8ba3deac8ecd729c56c1058794" category="paragraph">Le tableau suivant indique l'utilisation des ports de pont lors de l'utilisation de ponts FibreBridge 7500N ou 7600N :</block>
-  <block id="2d5d944d1466716b339b20936cc4b7ec" category="paragraph">Le tableau suivant indique l'utilisation des ports de pont jusqu'au port 17 lors de l'utilisation de ponts FibreBridge 7500N ou 7600N. Des ponts supplémentaires peuvent être câblés vers les ports 18 à 23.</block>
-  <block id="f912eaa76cd834cbed98a7201254e72e" category="paragraph">Le tableau suivant indique l'utilisation des ports de pont jusqu'au port 17 lors de l'utilisation de ponts FibreBridge 7500N ou 7600N avec des commutateurs Brocade 6505, 6510 et DCX 8510-8. Des ponts supplémentaires peuvent être câblés vers les ports 18 à 23.</block>
-  <block id="e75c88d98fec123855e6503ffa20ae16" category="paragraph">Le tableau suivant indique l'utilisation des ports de pont jusqu'au port 23 lors de l'utilisation de ponts FibreBridge 7500N ou 7600N avec des commutateurs Cisco 9148 ou 9148S.</block>
-  <block id="0d792f55f305e85c0f763a05b6d33ae1" category="paragraph">Le tableau suivant indique l'utilisation des ports de pont jusqu'au port 14 lors de l'utilisation de ponts FibreBridge 7500N ou 7600N avec des commutateurs Cisco 9148, 9148S ou 9250i. Des ponts supplémentaires peuvent être connectés aux ports 15 à 32 en suivant le même modèle.</block>
-  <block id="972c5512c843cde59ea3263b1073efea" category="paragraph">Le tableau suivant indique l'utilisation des ports de pont jusqu'au port 14 lors de l'utilisation de ponts FibreBridge 7500N ou 7600N avec des commutateurs Cisco 9148, 9148S et 9250i. Des ponts supplémentaires peuvent être connectés aux ports 15 à 32 en suivant le même modèle.</block>
   <block id="8bc67669b17eba9ca754ee74dd34564c" category="list-text">Si vous utilisez la version conforme FIPS de EFOS, générez les clés ECDSA. L'exemple suivant crée les clés d'une longueur de 521. Les valeurs valides sont 256, 384 ou 521.</block>
   <block id="8eb0b3dc24b7128748cd767385d5a9f2" category="paragraph">Chaque nœud de la configuration IP MetroCluster dispose d'interfaces dédiées pour la connexion au réseau IP back-end :</block>
   <block id="ad1b97f0744b9c154b01cc69afb505d7" category="list-text">Deux interfaces locales du cluster</block>
@@ -13772,4 +13701,15 @@ L'exemple suivant montre que vous utilisez SCP pour télécharger le fichier<blo
   <block id="478093bd7e01c5abe587038bf808af00" category="paragraph">Les tableaux suivants indiquent l'utilisation des ports sur un commutateur Cisco 9132T. Les tableaux présentent le nombre maximum de configurations prises en charge avec quatre et huit modules de contrôleur dans deux groupes de reprise sur incident.</block>
   <block id="9e667988f536ce55f0a4c5cf0908d042" category="cell">Cisco 9132T avec 2 LEM et un MetroCluster ou un groupe DR à quatre nœuds</block>
   <block id="7d83eb0736445dbf18519e99146d2fff" category="cell">Cisco 9132T avec deux MetroCluster à quatre nœuds ou un MetroCluster à huit nœuds avec deux groupes de reprise après incident</block>
+  <block id="a786547181c9c8f446791420d2be691f" category="paragraph">Votre version de ONTAP doit prendre en charge le mélange des tiroirs. Reportez-vous à la<block ref="f93341e63c1888be05256ff042174623" category="inline-link-rx"></block> Pour vérifier si votre version de ONTAP prend en charge la combinaison de tiroirs.</block>
+  <block id="27211cf5d485f8491ca9b566aefe2d6d" category="paragraph">Depuis ONTAP 9.4, les configurations IP de MetroCluster prennent en charge les nouvelles installations à l'aide d'un partitionnement de disque avancé et d'une affectation automatique des disques.</block>
+  <block id="e528d26e96f91b34e70a35c4661d620d" category="list-text">ONTAP 9.4 et versions ultérieures sont nécessaires pour utiliser ADP avec les configurations IP MetroCluster sur les systèmes AFF et ASA.</block>
+  <block id="bacc4dbebf17d22c9a0361ded0994067" category="paragraph"><block ref="bacc4dbebf17d22c9a0361ded0994067" category="inline-link-macro-rx"></block></block>
+  <block id="bc8be72fdc9d6054f356bb2b7f80fd12" category="inline-link">Matrice d'interopérabilité NetApp</block>
+  <block id="769db6797bc8c70f9ceb0ea238fcfef2" category="list-text"><block ref="769db6797bc8c70f9ceb0ea238fcfef2" category="inline-link-rx"></block></block>
+  <block id="c9dd6bad4c7d561872f2e2d498a990bf" category="inline-link-macro">Matrice d'interopérabilité (IMT)</block>
+  <block id="520ac91f29d97371c4fac829efc70617" category="admonition">Si votre système exécute une version prise en charge de ONTAP, vous pouvez utiliser plusieurs modules IOM12 et IOM6 au sein de la même pile. Pour savoir si votre version de ONTAP prend en charge la combinaison de tiroirs, reportez-vous au <block ref="cd3982462c40dc1b1a511ada7c72bab9" category="inline-link-macro-rx"></block>. Si votre version de ONTAP n'est pas prise en charge et que vous ne pouvez pas mettre à niveau ou rétrograder les modules IOM de la pile existante ou du nouveau tiroir à ajouter à une combinaison de modules IOM prise en charge, vous devez effectuer l'une des opérations suivantes :</block>
+  <block id="c5dcd35af16918a17ee9c3a5c153f0af" category="inline-link">IMT</block>
+  <block id="24d65add9a27d74b80e9a9cebdfc8e56" category="paragraph">Votre version de ONTAP doit prendre en charge le mélange des tiroirs. Consultez la matrice d'interopérabilité (IMT) pour savoir si votre version de ONTAP prend en charge la combinaison de tiroirs.<block ref="30796bf173a80af0dc9c120f98ffaed6" category="inline-link-rx"></block></block>
+  <block id="8872b0d09737dfd9b6fcafd4e8c2356b" category="list-text"><block ref="8872b0d09737dfd9b6fcafd4e8c2356b" category="inline-link-rx"></block></block>
 </blocks>
