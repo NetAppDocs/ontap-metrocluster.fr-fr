@@ -14,15 +14,36 @@ summary: 'Dans les configurations IP MetroCluster, vous récupérez l"adresse IP
 Dans les configurations IP MetroCluster, vous devez récupérer l'adresse IP des interfaces MetroCluster sur les ports Ethernet, puis les utiliser pour configurer les interfaces sur les modules de remplacement du contrôleur.
 
 .Description de la tâche
-Cette tâche n'est requise que dans les configurations IP de MetroCluster.
+* Cette tâche n'est requise que dans les configurations IP de MetroCluster.
+* Les commandes de cette tâche sont exécutées à partir de l'invite de cluster du site survivant et de l'invite DU CHARGEUR des nœuds du site de reprise sur incident.
 
-Les commandes de cette tâche sont exécutées à partir de l'invite de cluster du site survivant et de l'invite DU CHARGEUR des nœuds du site de reprise sur incident.
 
-Les nœuds de ces exemples possèdent les adresses IP suivantes pour leurs connexions IP MetroCluster :
+[[vlan_id_supported_platfoms]]
+* Certaines plates-formes utilisent un VLAN pour l'interface IP de MetroCluster. Par défaut, chacun des deux ports utilise un VLAN différent : 10 et 20.
++
+S'il est pris en charge, vous pouvez également spécifier un VLAN différent (non par défaut) supérieur à 100 (entre 101 et 4095) à l'aide du `vlan-id` paramètre.
 
++
+Les plates-formes suivantes ne prennent pas en charge le `vlan-id` paramètre :
+
++
+** FAS8200 ET AFF A300
+** AFF A320
+** FAS9000 et AFF A700
+** AFF C800, ASA C800, AFF A800 et ASA A800
++
+Toutes les autres plates-formes prennent en charge le `vlan-id` paramètre.
+
+
+
+
+
+* Les nœuds de ces exemples possèdent les adresses IP suivantes pour leurs connexions IP MetroCluster :
++
 
 NOTE: Ces exemples concernent un système AFF A700 ou FAS9000. Les interfaces varient en fonction du modèle de plate-forme.
 
++
 |===
 
 
@@ -92,8 +113,10 @@ e5b
 172.17.27.12
 
 |===
++
 Le tableau suivant récapitule les relations entre les nœuds et les adresses IP MetroCluster de chaque nœud.
 
++
 |===
 
 
@@ -103,26 +126,26 @@ Le tableau suivant récapitule les relations entre les nœuds et les adresses IP
  a| 
 Nœud_A_1
 
-* e5a : 172.17.26.10
-* e5b : 172.17.27.10
+** e5a : 172.17.26.10
+** e5b : 172.17.27.10
 
  a| 
 Nœud_A_2
 
-* e5a : 172.17.26.11
-* e5b : 172.17.27.11
+** e5a : 172.17.26.11
+** e5b : 172.17.27.11
 
  a| 
 Nœud_B_1
 
-* e5a : 172.17.26.13
-* e5b : 172.17.27.13
+** e5a : 172.17.26.13
+** e5b : 172.17.27.13
 
  a| 
 Nœud_B_2
 
-* e5a : 172.17.26.12
-* e5b : 172.17.27.12
+** e5a : 172.17.26.12
+** e5b : 172.17.27.12
 
 
 
@@ -130,26 +153,26 @@ Nœud_B_2
  a| 
 Nœud_A_2
 
-* e5a : 172.17.26.11
-* e5b : 172.17.27.11
+** e5a : 172.17.26.11
+** e5b : 172.17.27.11
 
  a| 
 Nœud_A_1
 
-* e5a : 172.17.26.10
-* e5b : 172.17.27.10
+** e5a : 172.17.26.10
+** e5b : 172.17.27.10
 
  a| 
 Nœud_B_2
 
-* e5a : 172.17.26.12
-* e5b : 172.17.27.12
+** e5a : 172.17.26.12
+** e5b : 172.17.27.12
 
  a| 
 Nœud_B_1
 
-* e5a : 172.17.26.13
-* e5b : 172.17.27.13
+** e5a : 172.17.26.13
+** e5b : 172.17.27.13
 
 
 
@@ -157,26 +180,26 @@ Nœud_B_1
  a| 
 Nœud_B_1
 
-* e5a : 172.17.26.13
-* e5b : 172.17.27.13
+** e5a : 172.17.26.13
+** e5b : 172.17.27.13
 
  a| 
 Nœud_B_2
 
-* e5a : 172.17.26.12
-* e5b : 172.17.27.12
+** e5a : 172.17.26.12
+** e5b : 172.17.27.12
 
  a| 
 Nœud_A_1
 
-* e5a : 172.17.26.10
-* e5b : 172.17.27.10
+** e5a : 172.17.26.10
+** e5b : 172.17.27.10
 
  a| 
 Nœud_A_2
 
-* e5a : 172.17.26.11
-* e5b : 172.17.27.11
+** e5a : 172.17.26.11
+** e5b : 172.17.27.11
 
 
 
@@ -184,53 +207,31 @@ Nœud_A_2
  a| 
 Nœud_B_2
 
-* e5a : 172.17.26.12
-* e5b : 172.17.27.12
+** e5a : 172.17.26.12
+** e5b : 172.17.27.12
 
  a| 
 Nœud_B_1
 
-* e5a : 172.17.26.13
-* e5b : 172.17.27.13
+** e5a : 172.17.26.13
+** e5b : 172.17.27.13
 
  a| 
 Nœud_A_2
 
-* e5a : 172.17.26.11
-* e5b : 172.17.27.11
+** e5a : 172.17.26.11
+** e5b : 172.17.27.11
 
  a| 
 Nœud_A_1
 
-* e5a : 172.17.26.10
-* e5b : 172.17.27.10
+** e5a : 172.17.26.10
+** e5b : 172.17.27.10
 
 
 |===
-Le tableau suivant répertorie les modèles de plateforme qui utilisent des ID VLAN sur les interfaces IP MetroCluster. Ces modèles peuvent nécessiter des étapes supplémentaires si vous n'utilisez pas les ID de VLAN par défaut.
-
-|===
 
 
-2+| Modèles de plateforme qui utilisent des ID VLAN avec les interfaces IP MetroCluster 
-
-
- a| 
-* AFF A70
-* AFF A90
-* AFF A1K
-* AVEC AFF A220
-* AFF A250
-* AFF A400
-
- a| 
-* FAS500f
-* FAS2750
-* FAS8300
-* FAS8700
-
-
-|===
 .Étapes
 . Depuis le site survivant, collectez les adresses IP des interfaces MetroCluster sur le site de reprise sur incident :
 +
@@ -325,7 +326,7 @@ Group Cluster Node    Network Address Network Address Partner Type Config State
 `metrocluster configuration-settings interface show`
 
 +
-** Vous avez besoin de l'ID VLAN si les modèles de plate-forme utilisent des ID VLAN (voir la liste ci-dessus) et si vous n'utilisez pas les ID VLAN par défaut.
+** Vous devez déterminer l'ID VLAN si les modèles de plate-forme prennent en charge les ID VLAN (voir <<vlan_id_supported_platfoms,liste ci-dessus>>) et si vous n'utilisez pas les ID VLAN par défaut.
 ** Vous avez besoin de l'adresse de passerelle si vous utilisez link:../install-ip/concept_considerations_layer_3.html["Réseaux étendus de couche 3"].
 +
 Les ID VLAN sont inclus dans la colonne *adresse réseau* de la sortie. La colonne *Gateway* affiche l'adresse IP de la passerelle.
@@ -354,7 +355,7 @@ Group Cluster Node     Network Address Netmask         Gateway         State
 +
 [NOTE]
 ====
-** Si les interfaces utilisent les VLAN par défaut ou si le modèle de plate-forme n'utilise pas d'ID VLAN (voir la liste ci-dessus), l'ID _vlan_ n'est pas nécessaire.
+** Si les interfaces utilisent les VLAN par défaut ou si le modèle de plate-forme n'utilise pas d'ID VLAN (voir <<vlan_id_supported_platfoms,liste ci-dessus>>), le _vlan-ID_ n'est pas nécessaire.
 ** Si la configuration n'utilise pas link:../install-ip/concept_considerations_layer_3.html["Les réseaux étendus Layer3"], La valeur de _Gateway-IP-address_ est *0* (zéro).
 
 

@@ -2,37 +2,48 @@
 :allow-uri-read: 
 
 
+Certaines plates-formes utilisent un VLAN pour l'interface IP de MetroCluster. Par défaut, chacun des deux ports utilise un VLAN différent : 10 et 20.
+
++ si pris en charge, vous pouvez également spécifier un VLAN différent (non par défaut) supérieur à 100 (entre 101 et 4095) en utilisant le `-vlan-id` paramètre de la `metrocluster configuration-settings interface create` commande.
+
++ les plates-formes suivantes ne supportent pas le `-vlan-id` paramètre :
+
++ ** FAS8200 et AFF A300 ** AFF A320 ** FAS9000 et AFF A700 ** AFF C800, ASA C800, AFF A800 et ASA A800
+
++ toutes les autres plates-formes supportent le `-vlan-id` paramètre.
+
++ les affectations VLAN par défaut et valides dépendent de la prise en charge du paramètre par la plate-forme `-vlan-id` :
+
 +
 
---
-[NOTE]
+[role="tabbed-block"]
 ====
-* Certaines plates-formes utilisent un VLAN pour l'interface IP de MetroCluster. Par défaut, chacun des deux ports utilise un VLAN différent : 10 et 20. Vous pouvez également spécifier un VLAN différent (non par défaut) supérieur à 100 (entre 101 et 4095) à l'aide du `-vlan-id parameter` dans le `metrocluster configuration-settings interface create` commande.
-* À partir de ONTAP 9.9.1, si vous utilisez une configuration de couche 3, vous devez également spécifier le `-gateway` Paramètre lors de la création des interfaces IP MetroCluster. Reportez-vous à la section link:../install-ip/concept_considerations_layer_3.html["Considérations relatives aux réseaux étendus de couche 3"].
-
-
-====
+.Les plateformes qui prennent en charge <code>-vlan-</code>
 --
-+ les modèles de plate-forme suivants peuvent être ajoutés à la configuration MetroCluster existante si les VLAN utilisés sont de 10/20 ou plus de 100. Si d'autres VLAN sont utilisés, ces plateformes ne peuvent pas être ajoutées à la configuration existante car l'interface MetroCluster ne peut pas être configurée. Si vous utilisez une autre plate-forme, la configuration VLAN n'est pas pertinente car elle n'est pas requise dans ONTAP.
+VLAN par défaut :
 
-+
-
-|===
-
-
-| Plateformes AFF | Plateformes FAS 
+* Lorsque le `-vlan-id` paramètre n'est pas spécifié, les interfaces sont créées avec le VLAN 10 pour les ports "A" et le VLAN 20 pour les ports "B".
+* Le VLAN spécifié doit correspondre au VLAN sélectionné dans la FCR.
 
 
- a| 
-* AVEC AFF A220
-* AFF A250
-* AFF A400
+Plages VLAN valides :
 
- a| 
-* FAS2750
-* FAS500f
-* FAS8300
-* FAS8700
+* VLAN 10 et 20 par défaut
+* VLAN 101 et supérieur (entre 101 et 4095)
 
 
-|===
+--
+.Les plateformes qui ne prennent pas en charge <code>-vlan-</code>
+--
+VLAN par défaut :
+
+* Sans objet L'interface ne nécessite pas la spécification d'un VLAN sur l'interface MetroCluster. Le port du commutateur définit le VLAN utilisé.
+
+
+Plages VLAN valides :
+
+* Tous les VLAN non explicitement exclus lors de la génération de la FCR. Le RCF vous avertit si le VLAN n'est pas valide.
+
+
+--
+====

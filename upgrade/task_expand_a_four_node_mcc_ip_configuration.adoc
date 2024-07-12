@@ -4,7 +4,7 @@ sidebar: sidebar
 keywords: metrocluster, upgrade, refresh, four, node, ip, configuration, add, autosupport 
 summary: Vous pouvez ajouter quatre nouveaux nœuds à la configuration IP MetroCluster en tant que second groupe DR. Cela crée une configuration MetroCluster à huit nœuds. 
 ---
-= Développement d'une configuration IP MetroCluster
+= Développez une configuration MetroCluster IP
 :allow-uri-read: 
 :icons: font
 :imagesdir: ../media/
@@ -90,9 +90,6 @@ Les tableaux suivants présentent les combinaisons de plateformes prises en char
 .Combinaisons d'extension IP AFF et FAS MetroCluster prises en charge
 Le tableau suivant présente les combinaisons de plateformes prises en charge pour l'extension d'un système AFF ou FAS dans une configuration IP MetroCluster :
 
-
-NOTE: Les systèmes AFF A70, AFF A90 et AFF A1K requièrent ONTAP 9.15.1 ou une version ultérieure.
-
 image::../media/8node_comb_ip_aff_fas.png[Combinaisons de plateformes pour configurations à 8 nœuds]
 
 * *Note 1* : ONTAP 9.9.1 ou version ultérieure (ou la version minimale de ONTAP prise en charge sur la plate-forme) est requise pour ces combinaisons.
@@ -118,7 +115,7 @@ Cette tâche doit être effectuée sur chaque site MetroCluster.
 +
 .. Exécutez la commande suivante :
 +
-`system node autosupport invoke -node * -type all -message "MAINT=10h Upgrading _old-model_ to _new-model"_`
+`system node autosupport invoke -node * -type all -message "MAINT=10h Upgrading <old-model> to <new-model>`
 
 +
 Cet exemple spécifie une fenêtre de maintenance de 10 heures. Selon votre plan, il est possible que vous souhaitiez accorder plus de temps.
@@ -136,16 +133,82 @@ Si la maintenance est terminée avant le temps écoulé, vous pouvez appeler un 
 
 
 
+== Considérations relatives aux VLAN lors de l'ajout d'un nouveau groupe DR
+
+* Les considérations VLAN suivantes s'appliquent lors de l'extension d'une configuration MetroCluster IP :
++
+Certaines plates-formes utilisent un VLAN pour l'interface IP de MetroCluster. Par défaut, chacun des deux ports utilise un VLAN différent : 10 et 20.
+
++
+Si elle est prise en charge, vous pouvez également spécifier un VLAN différent (non par défaut) supérieur à 100 (entre 101 et 4095) en utilisant le `-vlan-id` paramètre de la `metrocluster configuration-settings interface create` commande.
+
++
+Les plates-formes suivantes ne prennent pas en charge le `-vlan-id` paramètre :
+
++
+** FAS8200 ET AFF A300
+** AFF A320
+** FAS9000 et AFF A700
+** AFF C800, ASA C800, AFF A800 et ASA A800
++
+Toutes les autres plates-formes prennent en charge le `-vlan-id` paramètre.
+
++
+Les affectations de VLAN par défaut et valides dépendent du fait que la plate-forme prend en charge le `-vlan-id` paramètre :
+
++
+[role="tabbed-block"]
+====
+.Les plateformes qui prennent en charge <code>-vlan-</code>
+--
+VLAN par défaut :
+
+*** Lorsque le `-vlan-id` paramètre n'est pas spécifié, les interfaces sont créées avec le VLAN 10 pour les ports "A" et le VLAN 20 pour les ports "B".
+*** Le VLAN spécifié doit correspondre au VLAN sélectionné dans la FCR.
+
+
+Plages VLAN valides :
+
+*** VLAN 10 et 20 par défaut
+*** VLAN 101 et supérieur (entre 101 et 4095)
+
+
+--
+.Les plateformes qui ne prennent pas en charge <code>-vlan-</code>
+--
+VLAN par défaut :
+
+*** Sans objet L'interface ne nécessite pas la spécification d'un VLAN sur l'interface MetroCluster. Le port du commutateur définit le VLAN utilisé.
+
+
+Plages VLAN valides :
+
+*** Tous les VLAN non explicitement exclus lors de la génération de la FCR. Le RCF vous avertit si le VLAN n'est pas valide.
+
+
+--
+====
+
+
+
+
+* Les deux groupes de reprise sur incident utilisent les mêmes VLAN lorsque vous effectuez un développement à partir d'une configuration à quatre nœuds vers une configuration MetroCluster à huit nœuds.
+* Si les deux groupes DR ne peuvent pas être configurés à l'aide du même VLAN, vous devez mettre à niveau le groupe DR qui ne prend pas en charge `vlan-id` le paramètre pour utiliser un VLAN pris en charge par l'autre groupe DR.
+* Selon votre version de ONTAP, vous pouvez modifier certaines propriétés de l'interface IP de MetroCluster après la configuration initiale. Reportez-vous link:../maintain/task-modify-ip-netmask-properties.html["Modifiez les propriétés d'une interface IP MetroCluster"] à pour plus de détails sur ce qui est pris en charge.
+
+
+
+
 == Vérification de l'état de santé de la configuration MetroCluster
 
-Vous devez vérifier l'état et la connectivité de la configuration MetroCluster avant d'effectuer la transition
+Vous devez vérifier l'intégrité et la connectivité de la configuration MetroCluster avant d'effectuer l'extension.
 
 .Étapes
 . Vérifier le fonctionnement de la configuration MetroCluster dans ONTAP :
 +
 .. Vérifier si le système est multipathed :
 +
-`node run -node _node-name_ sysconfig -a`
+`node run -node <node-name> sysconfig -a`
 
 .. Vérifier si des alertes d'intégrité sont disponibles sur les deux clusters :
 +
@@ -334,16 +397,13 @@ Dans ces étapes, vous effacez la configuration sur les nœuds et désactivez la
 
 .Étapes
 . Installez les nouveaux contrôleurs.
-. Reliez les nouveaux nœuds IP MetroCluster aux commutateurs IP, comme indiqué dans la configuration et l'installation de _MetroCluster._
+. Reliez les nouveaux nœuds IP MetroCluster aux commutateurs IP, comme illustré à la link:../install-ip/using_rcf_generator.html["Câblez les commutateurs IP"].
+. Configurez les nœuds IP MetroCluster à l'aide des procédures suivantes :
 +
-link:../install-ip/using_rcf_generator.html["Câblage des commutateurs IP"]
-
-. Configurez les nœuds IP MetroCluster à l'aide des sections suivantes de l'installation et de la configuration _MetroCluster._
-+
-.. link:../install-ip/task_sw_config_gather_info.html["Collecte des informations requises"]
-.. link:../install-ip/task_sw_config_restore_defaults.html["Restauration des valeurs par défaut du système sur un module de contrôleur"]
-.. link:../install-ip/task_sw_config_verify_haconfig.html["Vérification de l'état ha-config des composants"]
-.. link:../install-ip/task_sw_config_assign_pool0.html#manually-assigning-drives-for-pool-0-ontap-9-4-and-later["Affectation manuelle de lecteurs pour le pool 0 (ONTAP 9.4 et versions ultérieures)"]
+.. link:../install-ip/task_sw_config_gather_info.html["Collectez les informations requises"]
+.. link:../install-ip/task_sw_config_restore_defaults.html["Restaurez les paramètres par défaut du système sur un module de contrôleur"]
+.. link:../install-ip/task_sw_config_verify_haconfig.html["Vérifiez l'état des composants HA-config"]
+.. link:../install-ip/task_sw_config_assign_pool0.html#manually-assigning-drives-for-pool-0-ontap-9-4-and-later["Attribution manuelle de disques pour le pool 0 (ONTAP 9.4 et versions ultérieures)"]
 
 
 . Depuis le mode maintenance, lancer la commande halt pour quitter le mode Maintenance, puis lancer la commande boot_ontap pour démarrer le système et obtenir le setup du cluster.
@@ -395,7 +455,7 @@ Component           Result
 nodes               ok
 lifs                ok
 config-replication  ok
-aggregates          warning
+aggregates          ok
 clusters            ok
 connections         not-applicable
 volumes             ok
@@ -416,8 +476,9 @@ volumes             ok
 Suivez les étapes pour votre fournisseur de commutateur :
 
 +
-** link:../install-ip/task_switch_config_broadcom.html["Réinitialisation des paramètres d'usine du commutateur IP Broadcom"^]
-** link:../install-ip/task_switch_config_cisco.html["Réinitialisation des paramètres d'usine du commutateur IP Cisco"^]
+** link:../install-ip/task_switch_config_broadcom.html["Réinitialisez les paramètres par défaut du commutateur IP Broadcom"]
+** link:../install-ip/task_switch_config_cisco.html["Réinitialisez le commutateur IP Cisco sur les paramètres d'usine par défaut"]
+** link:../install-ip/task_switch_config_nvidia.html["Réinitialisez les paramètres par défaut du commutateur NVIDIA IP SN2100"]
 
 
 . Téléchargez et installez le fichier RCF IP, selon votre fournisseur de commutateur.
@@ -426,11 +487,12 @@ Suivez les étapes pour votre fournisseur de commutateur :
 NOTE: Mettre à jour les interrupteurs dans l'ordre suivant : Switch_A_1, Switch_B_1, Switch_A_2, Switch_B_2
 
 +
-** link:../install-ip/task_switch_config_broadcom.html#downloading-and-installing-the-broadcom-rcf-files["Téléchargement et installation des fichiers RCF IP de Broadcom"]
-** link:../install-ip/task_switch_config_cisco.html#downloading-and-installing-the-cisco-ip-rcf-files["Téléchargement et installation des fichiers Cisco IP RCF"]
+** link:../install-ip/task_switch_config_broadcom.html["Téléchargez et installez les fichiers RCF IP Broadcom"]
+** link:../install-ip/task_switch_config_cisco.html["Téléchargez et installez les fichiers RCF IP Cisco"]
+** link:../install-ip/task_switch_config_nvidia.html["Téléchargez et installez les fichiers RCF IP de NVIDIA"]
 +
 
-NOTE: Si vous disposez d'une configuration réseau L2 partagée ou L3, il se peut que vous deviez ajuster les ports ISL sur les commutateurs intermédiaire/client. Le mode de port de commutateur peut passer du mode « accès » au mode « réseau ». Ne procédez à la mise à niveau de la deuxième paire de commutateurs (A_2, B_2) que si la connectivité réseau entre les commutateurs A_1 et B_1 est pleinement opérationnelle et que le réseau fonctionne correctement.
+NOTE: Si vous disposez d'une configuration réseau L2 partagée ou L3, il se peut que vous deviez ajuster les ports ISL sur les commutateurs intermédiaire/client. Le mode du port du commutateur peut passer du mode d'accès au mode de jonction. Ne procédez à la mise à niveau de la deuxième paire de commutateurs (A_2, B_2) que si la connectivité réseau entre les commutateurs A_1 et B_1 est pleinement opérationnelle et que le réseau fonctionne correctement.
 
 
 
@@ -438,7 +500,7 @@ NOTE: Si vous disposez d'une configuration réseau L2 partagée ou L3, il se peu
 
 
 
-== Ajout aux clusters des nouveaux nœuds
+== Reliez les nouveaux nœuds aux clusters
 
 Vous devez ajouter les quatre nouveaux nœuds IP MetroCluster à la configuration MetroCluster existante.
 
@@ -526,7 +588,9 @@ Do you want to use this configuration? {yes, no} [yes]: yes
 Vous devez créer des LIF de peering de cluster, créer les interfaces MetroCluster sur les nouveaux nœuds IP MetroCluster.
 
 .Description de la tâche
-Le port home utilisé dans les exemples est spécifique à la plate-forme. Vous devez utiliser le port d'accueil approprié spécifique à la plate-forme de nœud IP MetroCluster.
+* Le port home utilisé dans les exemples est spécifique à la plate-forme. Vous devez utiliser le port home spécifique à votre plate-forme de nœuds IP MetroCluster.
+* Consultez les informations de la section <<Considérations relatives aux VLAN lors de l'ajout d'un nouveau groupe DR>> avant d'effectuer cette tâche.
+
 
 .Étapes
 . Sur les nouveaux nœuds IP MetroCluster, configurer les LIFs intercluster à l'aide des procédures suivantes :
@@ -613,47 +677,16 @@ cluster_A::>
 ----
 . Configurez les interfaces IP MetroCluster pour les nœuds IP MetroCluster nouvellement rejoints :
 +
-`metrocluster configuration-settings interface create -cluster-name`
-
-+
---
 [NOTE]
 ====
-** Certaines plates-formes utilisent un VLAN pour l'interface IP de MetroCluster. Par défaut, chacun des deux ports utilise un VLAN différent : 10 et 20. Vous pouvez également spécifier un VLAN différent (non par défaut) supérieur à 100 (entre 101 et 4095) à l'aide du `-vlan-id parameter` dans le `metrocluster configuration-settings interface create` commande.
-** À partir de ONTAP 9.9.1, si vous utilisez une configuration de couche 3, vous devez également spécifier le `-gateway` Paramètre lors de la création des interfaces IP MetroCluster. Reportez-vous à la section link:../install-ip/concept_considerations_layer_3.html["Considérations relatives aux réseaux étendus de couche 3"].
+** Si elle est prise en charge, vous pouvez spécifier un VLAN différent (non par défaut) supérieur à 100 (entre 101 et 4095) en utilisant le `-vlan-id` paramètre de la `metrocluster configuration-settings interface create` commande. Reportez-vous <<Considérations relatives aux VLAN lors de l'ajout d'un nouveau groupe DR>> à pour obtenir des informations sur la plate-forme prise en charge
+** Vous pouvez configurer les interfaces IP MetroCluster depuis n'importe quel cluster.
 
 
 ====
---
 +
-Les modèles de plateforme suivants peuvent être ajoutés à la configuration MetroCluster existante si les VLAN utilisés sont de 10/20 ou plus de 100. Si d'autres VLAN sont utilisés, ces plateformes ne peuvent pas être ajoutées à la configuration existante car l'interface MetroCluster ne peut pas être configurée. Si vous utilisez une autre plate-forme, la configuration VLAN n'est pas pertinente car elle n'est pas requise dans ONTAP.
+`metrocluster configuration-settings interface create -cluster-name`
 
-+
-|===
-
-
-| Plateformes AFF | Plateformes FAS 
-
-
- a| 
-** AVEC AFF A220
-** AFF A250
-** AFF A400
-
- a| 
-** FAS2750
-** FAS500f
-** FAS8300
-** FAS8700
-
-
-|===
-+
---
-
-NOTE: Vous pouvez configurer les interfaces IP MetroCluster depuis n'importe quel cluster.
-
---
 +
 [listing]
 ----
@@ -1028,7 +1061,7 @@ cluster_A::*> metrocluster configure -refresh true
 
 . Créez des agrégats de données en miroir sur chacun des nouveaux nœuds MetroCluster :
 +
-`storage aggregate create -aggregate _aggregate-name_ -node _node-name_ -diskcount _no-of-disks_ -mirror true`
+`storage aggregate create -aggregate <aggregate-name> -node <node-name> -diskcount <no-of-disks> -mirror true`
 
 +
 
@@ -1135,7 +1168,7 @@ cluster_A   MDV_CRS_d6b0b313ff5611e9837100a098544e51_B
 
 .. Déplacer les volumes MDV, un par un :
 +
-`volume move start -volume _mdv-volume_ -destination-aggregate _aggr-on-new-node_ -vserver _vserver-name_`
+`volume move start -volume <mdv-volume> -destination-aggregate <aggr-on-new-node> -vserver <svm-name>`
 
 +
 L'exemple suivant montre la commande et la sortie pour le déplacement de "MDV_CRS_d6b0b313ff5611e9837100a098544e51_A" vers "Data_a3" sur "node_A_3".
@@ -1153,7 +1186,7 @@ Warning: You are about to modify the system volume
 ----
 .. Utilisez la commande volume show pour vérifier que le volume MDV a bien été déplacé :
 +
-`volume show _mdv-name_`
+`volume show <mdv-name>`
 
 +
 Le résultat suivant indique que le volume MDV a été déplacé avec succès.
@@ -1189,11 +1222,11 @@ node_A_4-new      false
 ----
 .. Définir epsilon sur false sur l'ancien nœud (node_A_1-Old) :
 +
-`cluster modify -node _old-node_ -epsilon false*`
+`cluster modify -node <old-node> -epsilon false*`
 
 .. Défini sur true sur le nouveau nœud (node_A_3-New) :
 +
-`cluster modify -node _new-node_ -epsilon true`
+`cluster modify -node <new-node> -epsilon true`
 
 .. Vérifier que epsilon a déplacé vers le nœud approprié :
 +
