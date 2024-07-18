@@ -9942,7 +9942,6 @@
   <block id="aa5e90893b7f412ef5c52dd995d1a238" category="paragraph">*Tiroirs disques du site B*</block>
   <block id="60e70e31928f915722e922383e40f330" category="list-text">Si nécessaire, affectez explicitement des disques sur les tiroirs disques connectés au pool approprié :</block>
   <block id="f271a505e3d3d46c62979906b1ac4922" category="paragraph">L'utilisation de caractères génériques dans la commande vous permet d'affecter tous les disques d'un tiroir disque à l'aide d'une commande. Vous pouvez identifier les ID de tiroir disque et les baies de chaque disque disposant du<block ref="2d62c52d696a7f91354f0506866b5b47" prefix=" " category="inline-code"></block> commande.</block>
-  <block id="cc1fc0be4e8cd8fa55b631956b8bd17f" category="paragraph"><block ref="6f3bb54099e9178891c7c495e9fda883" prefix="" category="inline-code"></block></block>
   <block id="7e902fb75b9d2939fe12e5e54d005da1" category="paragraph"><block ref="cdb6235a6dc5fe59205068f59934babe" prefix="" category="inline-code"></block></block>
   <block id="f96aff9bb92f47a99bb9e80c8aefd182" category="list-text"><block ref="0ce177c637860f04ef435f1d4df8c7a1" category="inline-xref-macro-rx"></block></block>
   <block id="80f5aa2c1fd8d40ec861adc9b8554601" category="inline-xref">Configuration de ONTAP dans une configuration MetroCluster à huit ou quatre nœuds</block>
@@ -11759,7 +11758,6 @@
   <block id="e167cf704969390451b66b4604d89501" category="list-text">Seules les plateformes offrant des ports dédiés pour des interconnexions de cluster sans commutateur peuvent être utilisées avec un commutateur conforme à MetroCluster. Les plateformes telles que FAS2750 et AFF A220 ne peuvent pas être utilisées, car le trafic MetroCluster et le trafic d'interconnexion MetroCluster partagent les mêmes ports réseau.</block>
   <block id="832bfdec136453c59e06674dc5b1fbfc" category="paragraph">Le commutateur conforme à MetroCluster ne doit pas être utilisé pour les connexions locales du cluster.</block>
   <block id="999a0234ad26235f40e860b0131203f6" category="admonition">Des valeurs manquantes indiquent que la plateforme ne peut pas être utilisée avec un switch compatible MetroCluster.</block>
-  <block id="421c8863e1f7223f216aacf99393b7dd" category="list-text">Remarque 1 : cette combinaison de plateformes nécessite ONTAP 9.11.1 ou une version ultérieure.</block>
   <block id="60ddbd1babdd945c26fbc431202fea6c" category="inline-link-macro">Hardware Universe</block>
   <block id="6e2ee39d0f9ccdad593782674a048e67" category="inline-link-macro">Lien vers la procédure</block>
   <block id="0a623e8d3b5ae84e14f2fe4f454a3abb" category="paragraph"><block ref="0a623e8d3b5ae84e14f2fe4f454a3abb" category="inline-link-macro-rx"></block></block>
@@ -12494,7 +12492,6 @@
   <block id="87b750ce6fbbe87d62cbc08d2dc73e1f" category="list-text">*Remarque 2* : seul un MetroCluster à quatre nœuds utilisant des systèmes AFF A320 peut être connecté au commutateur.</block>
   <block id="5b5bc0c2a68a3a5df60e045184c265e7" category="paragraph">Reportez-vous à la section *commutateurs* du <block ref="41f66f34b3a905f864500c9319fdff8f" category="inline-link-macro-rx"></block> pour vérifier les émetteurs-récepteurs pris en charge.</block>
   <block id="30ec0ec381148de730ef6f636244409c" category="paragraph">À partir de ONTAP 9.13.1, cette procédure est prise en charge dans les configurations MetroCluster IP dans lesquelles le MetroCluster et les tiroirs disques sont connectés aux mêmes commutateurs IP (une configuration de commutateur de stockage partagé).</block>
-  <block id="63d08c3cedf8143a5b62917cdffc9a26" category="image-alt">matrice de transition ip fc MetroCluster 914</block>
   <block id="7411369ee6af7c3b06eeb0cb088ed313" category="list-text">Tous les nœuds de la configuration MetroCluster doivent exécuter la même version de ONTAP. Par exemple, si vous avez une configuration à huit nœuds, les huit nœuds doivent exécuter la même version de ONTAP.</block>
   <block id="af03c8177e63c13156d2341adae52d1d" category="paragraph">Dans le cadre d'une procédure de mise à niveau, les contrôleurs sont remplacés par un nouveau modèle de contrôleur. Les modèles de tiroirs de stockage ne sont pas mis à niveau.</block>
   <block id="5fd3c01d6ba82ebe581c794d9a655304" category="list-text">Vous pouvez mettre à niveau un système FAS vers un système FAS ou un système AFF A-Series vers un système AFF A-Series.</block>
@@ -12518,8 +12515,6 @@
   <block id="aa71e3dcbe0cdabbe4cce28385ab2fd6" category="paragraph">Si vous modifiez la version de ONTAP ou la version du firmware du commutateur, vérifiez que vous disposez d'un fichier RCF pris en charge par cette version. Si vous utilisez le générateur FCR, le fichier RCF approprié sera généré pour vous.</block>
   <block id="9f4a5b5c7a3f862c1d0ff77f72d3eea0" category="paragraph">Vous êtes invité à entrer le nom d'utilisateur et le mot de passe du compte d'utilisateur admin du Mediator ONTAP.</block>
   <block id="c471c44c2f26c78f9327863d90427cb7" category="admonition">Si le médiateur ONTAP est arrêté, le<block ref="1eafb93bfc40f298e60cf17e8a8c598c" prefix=" " category="inline-code"></block> La commande vous invite toujours à saisir le nom d'utilisateur et le mot de passe du compte utilisateur admin du Mediator ONTAP et supprime le service ONTAP Mediator de la configuration MetroCluster.</block>
-  <block id="21b5cf2db61fccc0ace8b80bac8b35b7" category="list-text">Remarque 2 : vous devez disposer d'une interface 40 GbE pour les interfaces de cluster locales sur les nœuds FC. Cette combinaison de plates-formes nécessite ONTAP 9.11.1 ou une version ultérieure.</block>
-  <block id="13cdbd43c145584bcad75658a29e498d" category="list-text">Remarque 3 : une interface de 100 GbE est nécessaire pour les interfaces de cluster locales sur les nœuds FC. Cette combinaison de plates-formes nécessite ONTAP 9.11.1 ou une version ultérieure.</block>
   <block id="646d7d5f93b4a6d7bbbc65acf5ac1077" category="inline-link">Documentation des systèmes matériels ONTAP</block>
   <block id="a6060d4587fc5fc5f841d3287d08316c" category="paragraph"><block ref="a6060d4587fc5fc5f841d3287d08316c" category="inline-link-rx"></block></block>
   <block id="777cc85682fbb64f0c41aa09dccf0ca4" category="paragraph"><block ref="777cc85682fbb64f0c41aa09dccf0ca4" category="inline-link-rx"></block></block>
@@ -14011,4 +14006,35 @@ L'exemple suivant montre que vous utilisez SCP pour télécharger le fichier<blo
   <block id="ef5e947e6fcfcc998981842db2980963" category="paragraph"><block ref="03c173f1a61527f819558186b9d61be9" prefix="" category="inline-code"></block></block>
   <block id="f17f69c6edf98777a15cba11703ecfa4" category="paragraph"><block ref="3e67c1f4fcc76e1369016e8e183fdf3b" prefix="" category="inline-code"></block></block>
   <block id="0f137b9473f8c1720c69f6c82c079dba" category="paragraph"><block ref="3b297593c0c2375482cbced8777ea2a8" prefix="" category="inline-code"></block></block>
+  <block id="df0de59a7d82bfac9aeb4c3a4d0ff3d5" category="paragraph"><block ref="593e2b872fdc863863b3175980b503ee" prefix="" category="inline-code"></block></block>
+  <block id="ce4d776f761276cab4718597907e9b25" category="paragraph"><block ref="ce4d776f761276cab4718597907e9b25" category="inline-image-macro-rx" type="image"></block></block>
+  <block id="4bbabfb39bdaa67802b5f83f085672a9" category="image-alt">Affiche les combinaisons de plateformes prises en charge pour la transition IP vers FC</block>
+  <block id="32571d30b5ea67a42d51725233459057" category="list-text">Remarque 1 : cette combinaison de plates-formes nécessite ONTAP 9.13.1 ou une version ultérieure.</block>
+  <block id="c6a7b9b858b4fca6a11eb81808875db0" category="list-text">Remarque 2 : une interface de 100 GbE est nécessaire pour les interfaces de cluster locales sur les nœuds FC. Cette combinaison de plates-formes nécessite ONTAP 9.11.1 ou une version ultérieure.</block>
+  <block id="5a4027b63d6ed294211392e256667c2c" category="list-text">Modifier les LIFs intercluster sur les anciens contrôleurs de manière à utiliser un port home différent de celui des ports utilisés pour l'interconnexion haute disponibilité ou l'interconnexion MetroCluster IP DR sur les nouveaux contrôleurs.</block>
+  <block id="931a74601edef3262a75c3d8d8e6acda" category="admonition">Cette étape est requise pour une mise à niveau réussie.</block>
+  <block id="f7f8cd16da4423b24e25a4d21cb4bc83" category="paragraph">Les LIF intercluster des anciens contrôleurs doivent utiliser un port home différent de celui des ports utilisés pour l'interconnexion haute disponibilité ou l'interconnexion MetroCluster IP DR sur les nouveaux contrôleurs. Par exemple, lorsque vous effectuez une mise à niveau vers des contrôleurs AFF A90, les ports d'interconnexion haute disponibilité sont e1a et e7a et les ports d'interconnexion pour la reprise après incident IP MetroCluster sont e2b et e3b. Vous devez déplacer les LIFs intercluster sur les anciens contrôleurs s'ils sont hébergés sur les ports e1a, e7a, e2b ou e3b.</block>
+  <block id="8a09de643687f0a8327c0493bea75cfb" category="paragraph">Pour la distribution et l'allocation des ports sur les nouveaux nœuds, reportez-vous à la<block ref="ed4326c3351d8ac0e334b8b4d9b37c82" category="inline-link-rx"></block>.</block>
+  <block id="898c71cbc0947646bf37a832e77fa31f" category="list-text">Sur les anciens contrôleurs, afficher les LIFs intercluster :</block>
+  <block id="ebaeb89c15e72f7de931e5d21d67c21b" category="paragraph"><block ref="a8ef5efd140dbfca42670e5d3b15ccff" prefix="" category="inline-code"></block></block>
+  <block id="1e81235f7b13b0f2e88bd765d2e46a34" category="paragraph">Effectuez l'une des actions suivantes si les LIF intercluster des anciens contrôleurs utilisent les mêmes ports que les ports utilisés pour l'interconnexion haute disponibilité ou l'interconnexion MetroCluster IP DR sur les nouveaux contrôleurs.</block>
+  <block id="9e1cf8f40a604f4c38391100a2f69945" category="cell">Si les LIFs intercluster...</block>
+  <block id="9ff403929760ba2610f86579a49399e0" category="cell">Utilisez le même port de base</block>
+  <block id="ed8c1f612253f0c38c2a68c1be34ff71" category="inline-xref">Sous-étape b</block>
+  <block id="27efb084ea8cfb0b1acbce0b33637bf2" category="cell"><block ref="310c42a30486c061e617f12669b1cb31" category="inline-xref-macro-rx"></block></block>
+  <block id="667c8b04e1c765d2ac10d6029d6c4a67" category="cell">Utilisez un autre port de base</block>
+  <block id="97508d4e4a3b7631b6c05c3f42e9f3c7" category="cell"><block ref="177a8a15f5f4315b71d3ece7c721a178" category="inline-xref-macro-rx"></block></block>
+  <block id="d19c71c5a36e79bee005548e97a3430a" category="list-text">[[Controller_Manual_upgrade_prepare_network_ports_2b]]modifiez les LIFs intercluster pour utiliser un autre port home :</block>
+  <block id="ecc099ad90b879286453572c6448dca3" category="paragraph"><block ref="7d49fda2e15c7e56a195e4a13068da53" prefix="" category="inline-code"></block></block>
+  <block id="67feed2eb0a24db24a92109ddf08b1d3" category="list-text">Vérifier que toutes les LIFs intercluster se trouvent sur leurs nouveaux ports home :</block>
+  <block id="eceba4f3e0b4a9871c405b2a29588160" category="paragraph"><block ref="e4179081ff1589282042af635786a6a1" prefix="" category="inline-code"></block></block>
+  <block id="e053c6b6612e1badd81926ae9048a6d0" category="paragraph">La sortie de la commande doit être vide, ce qui indique que toutes les LIFs intercluster se trouvent sur leurs ports home respectifs.</block>
+  <block id="424031e17e88451da4f8822abbe10ecc" category="list-text">S'il existe des LIFs qui ne se trouvent pas sur leurs ports home, les redeviennent à l'aide de la commande suivante :</block>
+  <block id="85c3f52ae5c990518a32da157e1d43de" category="paragraph"><block ref="7f926cf3edf705b92de0cde858fac3c8" prefix="" category="inline-code"></block></block>
+  <block id="39b8c0f5fb5a1532d766cc2a0500ae92" category="paragraph">Répéter la commande pour chaque LIF intercluster qui ne se trouve pas sur le home port.</block>
+  <block id="270f1324a7b7f1a7e5f85816e9ee67a1" category="list-text">[[Controller_Manual_upgrade_prepare_network_ports_3]]affectez le port de base de toutes les LIFs de données de l'ancien contrôleur à un port commun identique sur l'ancien et le nouveau module de contrôleur.</block>
+  <block id="fc655e61a175b85fccd1c37c00f3ccaa" category="cell"><block ref="ea90f75ed68d4ddf4266e92157cc0fae" category="inline-xref-macro-rx"></block></block>
+  <block id="b0b6d9c342452ad19a9b24e1caf2ff35" category="cell"><block ref="e7896f2437c8c50a74bfea383fc26eb3" category="inline-xref-macro-rx"></block></block>
+  <block id="3872acc735c86484cf5289e6f36d9d09" category="list-text">[[Controller_replace_upgrade_prepare_network_ports_2b]]modifiez les LIFs intercluster pour utiliser un autre port home :</block>
+  <block id="bd14e125f8f9035fe1f7a46be559035d" category="list-text">[[Controller_replace_upgrade_prepare_network_ports_3]]affectez le port home de toutes les LIFs de données de l'ancien contrôleur à un port commun identique sur l'ancien et le nouveau module de contrôleur.</block>
 </blocks>
