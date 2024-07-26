@@ -4,12 +4,12 @@ sidebar: sidebar
 keywords: metrocluster, maintain, service, change, fc, switch 
 summary: 'Vous devrez peut-être changer le fournisseur d"un commutateur FC (Cisco vers Brocade ou inversement), changer le modèle du commutateur, ou les deux.' 
 ---
-= Changement de fournisseur ou de modèle d'un commutateur FC
+= Changement de fournisseur ou de modèle des commutateurs FC
 :allow-uri-read: 
 
 
 [role="lead"]
-Vous devrez peut-être changer le fournisseur d'un commutateur FC de Cisco à Brocade, ou inversement, changer le modèle du commutateur, ou les deux.
+Vous devrez peut-être changer de fournisseur pour les commutateurs FC de Cisco à Brocade, ou inversement, changer de modèle de commutateur, ou modifier les deux.
 
 .Description de la tâche
 * Cette procédure s'applique lorsque vous utilisez des switchs validés NetApp.
@@ -53,8 +53,6 @@ Group Cluster Node           State          Mirroring Mode
 ----
 cluster_A::> metrocluster check run
 
-Last Checked On: 10/1/2014 16:03:37
-
 Component           Result
 ------------------- ---------
 nodes               ok
@@ -69,42 +67,29 @@ To check if the nodes are ready to do a switchover or switchback operation, run 
 .. Vérifier qu'il n'y a pas d'alerte de santé : `*system health alert show*`
 
 
-. Configurer le nouveau commutateur avant l'installation.
+. Configurez les nouveaux commutateurs avant l'installation.
 +
-Suivez les étapes de la section link:https://docs.netapp.com/us-en/ontap-metrocluster/install-fc/task_reset_the_brocade_fc_switch_to_factory_defaults.html["Configuration des commutateurs FC"].
+Suivez les étapes de la section link:../install-fc/concept-configure-fc-switches.html["Configuration des commutateurs FC"].
 
-. Débrancher les connexions de l'ancien commutateur en retirant les connexions dans l'ordre suivant :
+. Débrancher les connexions des anciens commutateurs en retirant les connexions dans l'ordre suivant :
 +
-.. Si les interfaces de cluster locales sont connectées à un commutateur :
-+
-... Déconnectez les interfaces locales du cluster
-... Déconnectez les liens ISL locaux du cluster
-
-
-.. Déconnectez les interfaces MetroCluster FC.
+.. Débrancher les interfaces MetroCluster FC et FCVI.
+.. Débrancher les ponts FibreBridge ATTO.
 .. Déconnectez les liens ISL MetroCluster.
 
 
-. Mettez l'ancien commutateur hors tension, retirez les câbles et remplacez physiquement l'ancien commutateur par le nouveau.
+. Mettez les anciens commutateurs hors tension, retirez les câbles et remplacez physiquement les anciens par le nouveau commutateur.
 . Câbler les contacteurs dans l'ordre suivant :
 +
-Vous devez suivre les étapes de la section link:https://docs.netapp.com/us-en/ontap-metrocluster/install-fc/task_rack_the_hardware_components_mcc_fabric_and_ip.html["Installer et câbler les composants MetroCluster"].
+Vous devez suivre les étapes de la section link:../install-fc/task_configure_the_mcc_hardware_components_fabric.html["Câblage d'une configuration MetroCluster Fabric-Attached"].
 
 +
 .. Reliez les liens ISL au site distant.
-.. Reliez les interfaces FC MetroCluster.
-.. Reliez les interfaces locales du cluster.
-+
-Si les interfaces de cluster locales sont connectées à un commutateur :
-
-+
-... Reliez les interfaces locales du cluster.
-... Reliez les liens ISL du cluster local.
+.. Câblez les ponts FibreBridge ATTO.
+.. Câblez les interfaces MetroCluster FC et FCVI.
 
 
-
-
-. Mettez le commutateur sous tension.
+. Mettez les commutateurs sous tension.
 . Vérifiez que la configuration MetroCluster fonctionne correctement en répétant cette procédure <<Étape 1>>.
 . Répétez les étapes 1 à 7 pour la deuxième structure de la configuration.
 

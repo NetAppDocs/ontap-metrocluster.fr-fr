@@ -4,23 +4,21 @@ sidebar: sidebar
 keywords: select, transition, procedure, depend, exist, metrocluster, fc, configuration, choosing, choose 
 summary: Vous devez sélectionner une procédure de transition selon votre configuration MetroCluster FC existante. 
 ---
-= Choix de la procédure de transition
+= Choisissez la procédure de transition
 :allow-uri-read: 
 :icons: font
 :imagesdir: ../media/
 
 
 [role="lead"]
-Lors de votre transition vers une configuration MetroCluster IP, vous devez avoir une combinaison de modèles de plateforme pris en charge. Vous devez également vous assurer que la plateforme IP MetroCluster est une taille appropriée pour la charge que vous passez de la configuration FC MetroCluster à la configuration IP MetroCluster.
+Lors de votre transition vers une configuration MetroCluster IP, vous devez avoir une combinaison de modèles de plateforme pris en charge.
 
-Le tableau suivant présente les combinaisons de plates-formes prises en charge. Vous pouvez passer des plates-formes de la colonne de gauche à des plates-formes répertoriées comme pris en charge dans les colonnes de droite, comme indiqué par les cellules de tableau colorées.
+Vous devez également vous assurer que la plateforme IP MetroCluster est une taille appropriée pour la charge que vous passez de la configuration FC MetroCluster à la configuration IP MetroCluster.
 
-Par exemple, le passage d'une configuration FC MetroCluster composée de modules de contrôleur AFF8060 à une configuration IP composée de modules de contrôleur AFF A400 est pris en charge.
 
-image::../media/four_node_transition_mcc_9151.png[Affiche les combinaisons de plateformes prises en charge pour la transition IP vers FC]
 
-* Remarque 1 : cette combinaison de plates-formes nécessite ONTAP 9.13.1 ou une version ultérieure.
-* Remarque 2 : une interface de 100 GbE est nécessaire pour les interfaces de cluster locales sur les nœuds FC. Cette combinaison de plates-formes nécessite ONTAP 9.11.1 ou une version ultérieure.
+== Combinaisons de plateformes prises en charge
+
 * Les procédures de transition nécessitent toutes ONTAP 9.8 ou une version ultérieure, sauf indication contraire dans les notes ou comme requis par une plateforme individuelle.
 * Tous les nœuds de la configuration MetroCluster doivent exécuter la même version de ONTAP. Par exemple, si vous avez une configuration à huit nœuds, les huit nœuds doivent exécuter la même version de ONTAP.
 
@@ -33,6 +31,41 @@ image::../media/four_node_transition_mcc_9151.png[Affiche les combinaisons de pl
 
 
 ====
+.Prise en charge des combinaisons de transition AFF et FAS
+Le tableau suivant présente les combinaisons de plates-formes prises en charge. Vous pouvez passer des plates-formes de la colonne de gauche à des plates-formes répertoriées comme pris en charge dans les colonnes de droite, comme indiqué par les cellules de tableau colorées.
+
+Par exemple, le passage d'une configuration FC MetroCluster composée de modules de contrôleur AFF8060 à une configuration IP composée de modules de contrôleur AFF A400 est pris en charge.
+
+image::../media/4node-transition-9151-update.png[Affiche les combinaisons de plateformes prises en charge pour la transition IP vers FC]
+
+* Remarque 1 : cette combinaison de plateformes nécessite ONTAP 9.11.1 ou une version ultérieure.
+* Remarque 2 : vous devez disposer d'une interface 40 GbE pour les interfaces de cluster locales sur les nœuds FC.
+* Remarque 3 : une interface de 100 GbE est nécessaire pour les interfaces de cluster locales sur les nœuds FC.
+
+
+.Prise en charge de combinaisons de plateformes de transition ASA
+Le tableau suivant présente les combinaisons de plateformes prises en charge par les systèmes ASA.
+
+[cols="3*"]
+|===
+| Source : plateforme FC MetroCluster | Plate-forme IP MetroCluster cible | Pris en charge ? 
+
+
+.2+| ASA A400 | ASA A400 | Oui. 
+
+
+| ASA A900 | Non 
+
+
+.2+| ASA A900 | ASA A400 | Non 
+
+
+| ASA A900 | Oui. 
+|===
+
+
+== Choisissez la procédure de transition
+
 Vous devez sélectionner une procédure de transition selon votre configuration MetroCluster FC existante.
 
 Une procédure de transition remplace la structure du commutateur FC interne ou la connexion FC-VI par un réseau de commutateurs IP. La procédure exacte dépend de votre configuration de départ.

@@ -11,12 +11,13 @@ summary: Selon vos besoins, vous pouvez utiliser des réseaux partagés de couch
 [role="lead"]
 Selon vos besoins, vous pouvez utiliser des réseaux partagés de couche 2 ou 3 pour déployer MetroCluster.
 
-À partir de ONTAP 9.6, les configurations IP MetroCluster avec commutateurs Cisco pris en charge peuvent partager des réseaux existants pour des liaisons inter-commutateurs (ISL) au lieu d'utiliser des liens ISL MetroCluster dédiés. Cette topologie est appelée _réseaux partagés de couche 2_.
+À partir de ONTAP 9.6, les configurations IP MetroCluster avec commutateurs pris en charge peuvent partager des réseaux existants pour des liaisons inter-commutateurs (ISL) au lieu d'utiliser des liens MetroCluster dédiés. Cette topologie est appelée _réseaux de couche 2 partagés_.
 
 Depuis ONTAP 9.9.1, les configurations MetroCluster IP peuvent être implémentées avec des connexions back-end IP-routées (couche 3). Cette topologie est appelée _réseaux de couche 3 partagés_.
 
 [NOTE]
 ====
+* Toutes les fonctionnalités ne sont pas prises en charge dans toutes les topologies réseau.
 * Vous devez vérifier que vous disposez d'une capacité réseau adéquate et que la taille de lien ISL est adaptée à votre configuration. Une faible latence est primordiale pour la réplication des données entre les sites MetroCluster. Les problèmes de latence sur ces connexions peuvent affecter les E/S client
 * Toutes les références aux switchs Back-end MetroCluster font référence aux switchs validés par NetApp ou compatibles MetroCluster. Voir link:mcc-compliant-netapp-validated-switches.html["Commutateurs validés par NetApp et compatibles MetroCluster"] pour en savoir plus.
 
