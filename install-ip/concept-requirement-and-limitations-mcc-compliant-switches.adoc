@@ -15,6 +15,25 @@ Depuis ONTAP 9.7, les configurations IP MetroCluster peuvent utiliser des commut
 
 
 
+== Switchs compatibles MetroCluster par rapport aux switchs validés NetApp
+
+Un commutateur est validé par NetApp s'il répond aux exigences suivantes :
+
+* Le switch est fourni par NetApp dans le cadre de la configuration IP MetroCluster
+* Le commutateur est répertorié dans le link:https://hwu.netapp.com/["NetApp Hardware Universe"^] Comme commutateur pris en charge sous _MetroCluster-over-IP-connections_
+* Le commutateur n'est utilisé que pour connecter des contrôleurs IP MetroCluster et, dans certaines configurations, des tiroirs disques NS224
+* Le commutateur est configuré à l'aide du fichier RCF (Reference Configuration File) fourni par NetApp
+
+
+Tout switch qui ne répond pas à ces exigences n'est *pas* un switch validé par NetApp.
+
+Un commutateur conforme à MetroCluster n'est pas validé par NetApp, mais peut être utilisé dans une configuration MetroCluster IP si elle répond à certaines exigences et directives de configuration.
+
+
+NOTE: NetApp ne fournit pas de services de support pour la résolution de problèmes ni la configuration pour un switch non validé conforme à MetroCluster.
+
+
+
 == Exigences générales pour les commutateurs compatibles MetroCluster
 
 Le commutateur qui connecte les interfaces IP MetroCluster doit répondre aux exigences générales suivantes :
