@@ -13,19 +13,25 @@ summary: 'Si la panne du contrôleur s"étend à tous les modules de contrôleur
 [role="lead"]
 Si la panne du contrôleur s'étend à tous les modules de contrôleur du côté d'un groupe de reprise sur incident dans une configuration MetroCluster (comprenant un contrôleur unique dans une configuration MetroCluster à deux nœuds), ou si le stockage a été remplacé, vous devez remplacer l'équipement et réaffecter la propriété des disques pour restaurer la solution après incident.
 
-* Vous devez passer en revue les procédures de récupération disponibles avant de décider d'utiliser cette procédure.
+Vérifiez que vous avez vérifié et effectué les tâches suivantes avant d'utiliser cette procédure :
+
+* Passez en revue les procédures de restauration disponibles avant de décider d'utiliser cette procédure.
 +
 link:concept_choosing_the_correct_recovery_procedure_parent_concept.html["Choix de la procédure de récupération correcte"]
 
-* Le site de catastrophe doit être clôturé.
+* Vérifiez que la journalisation de la console est activée sur vos appareils.
++
+link:task-enable-console-logging.html["Activer la journalisation de la console"]
+
+* Assurez-vous que le site de secours est clôturé.
 +
 link:task_perform_a_forced_switchover_after_a_disaster.html#fencing-off-the-disaster-site["Escrime hors site de la catastrophe"].
 
-* Le basculement doit avoir été effectué.
+* Vérifiez que le basculement a été effectué.
 +
 link:task_perform_a_forced_switchover_after_a_disaster.html#performing-a-forced-switchover["Effectuer un basculement forcé"].
 
-* Les disques de remplacement et les modules de contrôleurs doivent être nouveaux et n'ont pas été attribués précédemment.
+* Vérifiez que les disques de remplacement et les modules de contrôleur sont nouveaux et qu'ils ne doivent pas avoir été affectés à la propriété auparavant.
 * Les exemples de cette procédure illustrent des configurations à deux ou quatre nœuds. Si vous disposez d'une configuration à huit nœuds (deux groupes de reprise après incident), vous devez prendre en compte toute défaillance et effectuer la tâche de restauration requise sur les modules de contrôleur supplémentaires.
 
 
