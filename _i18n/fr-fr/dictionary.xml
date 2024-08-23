@@ -642,9 +642,7 @@
   <block id="147fd0500c6c6d57f507339941c4ecdb" category="paragraph">Vous êtes invité à redémarrer le pont.</block>
   <block id="0d0c0c98576403d7d46bc7ee7fa9fa7a" category="list-text">Mettez à jour le micrologiciel FiberBridge sur chaque pont.</block>
   <block id="b2d9f80a5c71fe34bed7839914c2fd68" category="paragraph">Si le nouveau pont est du même type que celui de la mise à niveau de pont partenaire vers le même micrologiciel que le pont partenaire. Si le nouveau pont est de type différent du pont partenaire, effectuez une mise à niveau vers le dernier micrologiciel pris en charge par le pont et la version de ONTAP. Reportez-vous à la section « mise à jour du micrologiciel sur un pont FibreBridge » dans le _MetroCluster Maintenance_.</block>
-  <block id="9013c925bc3a423f843c073690ed8081" category="list-text">[[step17-reconnect-newbridge]]] reconnectez les câbles SAS et FC aux mêmes ports du nouveau pont.</block>
   <block id="3b5ef1874490ddb39e2ab56e91c15fd9" category="admonition">Attendez au moins 10 secondes avant de connecter le port. Les connecteurs de câble SAS sont clavetés ; lorsqu'ils sont orientés correctement dans un port SAS, le connecteur s'enclenche et le voyant LNK du port SAS du tiroir disque s'allume en vert. Pour les tiroirs disques, vous insérez un connecteur de câble SAS avec la languette de retrait orientée vers le bas (sous le connecteur). Pour les contrôleurs, l'orientation des ports SAS peut varier en fonction du modèle de plateforme. Par conséquent, l'orientation correcte du connecteur de câble SAS varie.</block>
-  <block id="6795687b051fe5f1cb692559517648dd" category="list-text">[[step18-revérifier-chaque-pont]]Vérifiez que chaque pont peut voir tous les disques et tiroirs disques sur lesquels le pont est connecté.</block>
   <block id="51618dab77295eddd5c15097ed80ca2d" category="cell">Si vous utilisez...</block>
   <block id="8d7a98cf0e3de35b46f4b4e7fca074f1" category="paragraph">Interface graphique ATTO ExpressNAV</block>
   <block id="cf6dbfa4f0192b540abc550aae0f260f" category="list-text">Dans un navigateur Web pris en charge, entrez l'adresse IP du pont dans la zone de navigation.</block>
@@ -663,11 +661,8 @@
   <block id="29219bad186be0330f9ec59a1f483a14" category="cell">Si la sortie est...</block>
   <block id="d0a3892a5b340ce4f3472dc7595dce02" category="paragraph">Exact</block>
   <block id="b9da98e99c8057fc3b9a54d9d19ff501" category="inline-xref">Étape 18</block>
-  <block id="828e19cfb619dbe3f082c13af71c8804" category="paragraph">Recommencez <block ref="eecb3f0fe03b243e2ecc1f82fe37ecc5" category="inline-xref-macro-rx"></block> pour chaque pont restant.</block>
   <block id="03f13166de52c74a41327e27684b674e" category="paragraph">Incorrect</block>
   <block id="9c709df0d0930ada3ab147bf9abe8f06" category="inline-xref">Étape 17</block>
-  <block id="78cffeb475b967afce30e7091b0a7aec" category="list-text">Vérifiez que les câbles SAS ne sont pas correctement branchés ou corrigez le câblage SAS en répétant <block ref="34712c7e0b7391b53f3aade40f6e2ba2" category="inline-xref-macro-rx"></block>.</block>
-  <block id="daae67946266f0e5177fa51a3f38fec3" category="list-text">Recommencez <block ref="eecb3f0fe03b243e2ecc1f82fe37ecc5" category="inline-xref-macro-rx"></block>.</block>
   <block id="2273b85e84dfebeb5a21bbd359461d0f" category="list-text">Si le pont se trouve dans une configuration Fabric-Attached MetroCluster, réactivez le port de commutateur FC que vous avez désactivé au début de cette procédure.</block>
   <block id="9a20682ddc8cef489d77b087b78b3e16" category="paragraph">Il doit s'agir du port qui se connecte au pont.</block>
   <block id="253278bf8807d2fb353066f7109cc7f2" category="list-text">Depuis la console système des deux modules de contrôleur, vérifiez que tous les modules de contrôleur ont accès via le nouveau pont vers les tiroirs disques (c'est-à-dire que le système est câblé pour la haute disponibilité multivoie) :</block>
@@ -14099,4 +14094,14 @@ L'exemple suivant montre que vous utilisez SCP pour télécharger le fichier<blo
   <block id="764a523cf339780ca4471f143c5ae04c" category="paragraph"><block ref="d1f7a93b5f0792c01647ca314d5d7e27" prefix="" category="inline-code"></block></block>
   <block id="6e7eea4bc90b7da31497a85ace82eec8" category="paragraph"><block ref="751a8e9d76de229f9092fac6fb23b628" prefix="" category="inline-code"></block></block>
   <block id="f1fe27301697eb21073abfcd231c91ab" category="section-title">Effectuez la procédure d'actualisation</block>
+  <block id="a713923def413049fcd7bd32d239c3b4" category="list-text">Connectez les câbles FC aux mêmes ports du nouveau pont.</block>
+  <block id="c09b16f8a5b97a430a942e2624c2ffc8" category="paragraph">Si le nouveau pont est du même type que le pont partenaire, mettez à niveau vers le même firmware que le pont partenaire. Si le nouveau pont est de type différent du pont partenaire, effectuez une mise à niveau vers le dernier micrologiciel pris en charge par le pont et la version de ONTAP. Voir <block ref="55e804464be1a7c24451c93244c66ff0" category="inline-link-macro-rx"></block></block>
+  <block id="b5a56495c6cd7b15008b12f44e1c09f9" category="list-text">[[step18-reconnect-newbridge]] reconnectez les câbles SAS aux mêmes ports du nouveau pont.</block>
+  <block id="1bf1e8417c00edaec85599df5b47ee94" category="list-text">[[step19-revérifier-chaque-pont]]Vérifiez que chaque pont peut voir tous les disques et tiroirs disques sur lesquels le pont est connecté.</block>
+  <block id="287bc804244a679c73d0cac4cb0c0b2c" category="inline-xref">Étape 19</block>
+  <block id="c582e7ac4118500a1aaf382ea318eeeb" category="paragraph">Répétez <block ref="1c41b1b96665f865995fbed1d8884dfe" category="inline-xref-macro-rx"></block> l'opération pour chaque pont restant.</block>
+  <block id="2788b7f6b6e21bc5a33df0d4aebf4730" category="list-text">Vérifiez que les câbles SAS ne sont pas desserrés ou corrigez le câblage SAS en répétant <block ref="4f69a23cfa1cdd17cebbee3d88ffc0e9" category="inline-xref-macro-rx"></block>.</block>
+  <block id="dd59329be100bd10605cd63312522627" category="list-text">Répétez <block ref="1c41b1b96665f865995fbed1d8884dfe" category="inline-xref-macro-rx"></block>.</block>
+  <block id="0b9029dad5ded8eb8b9621381b59b85b" category="paragraph">Procédez comme suit pour actualiser la configuration MetroCluster FC.</block>
+  <block id="e80b737c5dcc4e6b9a5a4eecb2dc9582" category="paragraph">Procédez comme suit pour actualiser la configuration IP de MetroCluster.</block>
 </blocks>

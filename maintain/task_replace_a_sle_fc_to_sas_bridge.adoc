@@ -409,11 +409,12 @@ Vous êtes invité à redémarrer le pont.
 
 
 
+. Connectez les câbles FC aux mêmes ports du nouveau pont.
 . Mettez à jour le micrologiciel FiberBridge sur chaque pont.
 +
-Si le nouveau pont est du même type que celui de la mise à niveau de pont partenaire vers le même micrologiciel que le pont partenaire. Si le nouveau pont est de type différent du pont partenaire, effectuez une mise à niveau vers le dernier micrologiciel pris en charge par le pont et la version de ONTAP. Reportez-vous à la section « mise à jour du micrologiciel sur un pont FibreBridge » dans le _MetroCluster Maintenance_.
+Si le nouveau pont est du même type que le pont partenaire, mettez à niveau vers le même firmware que le pont partenaire. Si le nouveau pont est de type différent du pont partenaire, effectuez une mise à niveau vers le dernier micrologiciel pris en charge par le pont et la version de ONTAP. Voir link:task_update_firmware_on_a_fibrebridge_bridge_parent_topic.html["Mise à jour du micrologiciel sur un pont FiberBridge"]
 
-. [[step17-reconnect-newbridge]]] reconnectez les câbles SAS et FC aux mêmes ports du nouveau pont.
+. [[step18-reconnect-newbridge]] reconnectez les câbles SAS aux mêmes ports du nouveau pont.
 +
 Vous devez remplacer les câbles reliant le pont au haut ou au bas de la pile de tiroirs. Les ponts FibreBridge 7600N et 7500N nécessitent des câbles mini-SAS pour ces connexions.
 
@@ -421,7 +422,7 @@ Vous devez remplacer les câbles reliant le pont au haut ou au bas de la pile de
 
 NOTE: Attendez au moins 10 secondes avant de connecter le port. Les connecteurs de câble SAS sont clavetés ; lorsqu'ils sont orientés correctement dans un port SAS, le connecteur s'enclenche et le voyant LNK du port SAS du tiroir disque s'allume en vert. Pour les tiroirs disques, vous insérez un connecteur de câble SAS avec la languette de retrait orientée vers le bas (sous le connecteur). Pour les contrôleurs, l'orientation des ports SAS peut varier en fonction du modèle de plateforme. Par conséquent, l'orientation correcte du connecteur de câble SAS varie.
 
-. [[step18-revérifier-chaque-pont]]Vérifiez que chaque pont peut voir tous les disques et tiroirs disques sur lesquels le pont est connecté.
+. [[step19-revérifier-chaque-pont]]Vérifiez que chaque pont peut voir tous les disques et tiroirs disques sur lesquels le pont est connecté.
 +
 [cols="35,65"]
 |===
@@ -496,15 +497,15 @@ Tgt VendorID ProductID        Type SerialNumber
  a| 
 Exact
  a| 
-Recommencez <<step18-verify-each-bridge,Étape 18>> pour chaque pont restant.
+Répétez <<step19-verify-each-bridge,Étape 19>> l'opération pour chaque pont restant.
 
 
 
  a| 
 Incorrect
  a| 
-.. Vérifiez que les câbles SAS ne sont pas correctement branchés ou corrigez le câblage SAS en répétant <<step17-reconnect-newbridge,Étape 17>>.
-.. Recommencez <<step18-verify-each-bridge,Étape 18>>.
+.. Vérifiez que les câbles SAS ne sont pas desserrés ou corrigez le câblage SAS en répétant <<step18-reconnect-newbridge,Étape 18>>.
+.. Répétez <<step19-verify-each-bridge,Étape 19>>.
 
 
 |===
