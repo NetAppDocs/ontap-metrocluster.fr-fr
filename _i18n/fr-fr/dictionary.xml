@@ -5977,12 +5977,10 @@
   <block id="4fbb06a55d361d0cd8cf430f9a799e67" category="list-text">Vérifier que les agrégats racine sont mis en miroir :</block>
   <block id="566d9f9b7bf49eab87dd8768b654754e" category="section-title">Finalisation de l'ajout des nœuds IP MetroCluster</block>
   <block id="756f29d7bcbe7decf6b979c0706fc9a1" category="paragraph">Vous devez intégrer le nouveau groupe de reprise après incident à la configuration MetroCluster et créer des agrégats de données en miroir sur les nouveaux nœuds.</block>
-  <block id="2ae5190e09d5d39bdc4388104b1ebcd4" category="paragraph"><block ref="3b3242ced99842a6c2c16f489b78e773" prefix="" category="inline-code"></block></block>
   <block id="2ab9c070f5e78bc6f7809e89ecd023eb" category="admonition">Vous devez exécuter<block ref="3b3242ced99842a6c2c16f489b78e773" prefix=" " category="inline-code"></block> et *pas*<block ref="7b61e46b8e4fceaa3b96a2ac23ad8213" prefix=" " category="inline-code"></block></block>
   <block id="7e6d5ec0a20a9a4499623036df823e6b" category="list-text">Vérifier que les nœuds sont ajoutés à leur groupe de reprise sur incident :</block>
   <block id="b24de9180a5deb759a394eebcd1a0305" category="list-text">Créez des agrégats de données en miroir sur chacun des nouveaux nœuds MetroCluster :</block>
   <block id="a8f0490385b664bc34aae209741dbdce" category="paragraph"><block ref="edf828d9708194065efb37a90089aae4" prefix="" category="inline-code"></block></block>
-  <block id="aabce8f4cea0092b527adf5c08e57ba7" category="admonition">Vous devez créer au moins un agrégat de données en miroir par site. Il est recommandé d'avoir deux agrégats de données en miroir par site sur des nœuds IP MetroCluster pour héberger les volumes MDV. Cependant, un seul agrégat par site est pris en charge (mais non recommandé). Il est possible qu'un site de MetroCluster dispose d'un seul agrégat de données en miroir et que l'autre site dispose de plusieurs agrégats de données en miroir.</block>
   <block id="7062dd7205e5ed0cba84efd4203bc9cc" category="paragraph">L'exemple suivant montre la création d'un agrégat du node_A_1-New.</block>
   <block id="d607e1acecde451facff1ac4a2c32440" category="list-text">Déplacez les volumes MDV_CRS des anciens nœuds vers les nouveaux nœuds du privilège avancé.</block>
   <block id="ec4e7a3ff9894fa6a469a40a07dfca12" category="list-text">Afficher les volumes pour identifier les volumes MDV :</block>
@@ -8102,7 +8100,6 @@
   <block id="2dccf53d6ed326f889d8e764529b9794" category="list-text">Vérifiez l'affectation automatique et le partitionnement des disques :</block>
   <block id="3f95b2ea711d433e26a8b5eb63bbd17a" category="paragraph"><block ref="02b924a96c72679822883a70dfe48211" prefix="" category="inline-code"></block></block>
   <block id="6c46e592d5f16891d3a16e5f364e031b" category="section-title">Finalisation de l'ajout des nouveaux nœuds</block>
-  <block id="f00a8c2c5126c8a92b929c756950f0f8" category="list-text">Actualisez la configuration MetroCluster sur l'un des nouveaux nœuds :</block>
   <block id="7d7a3fc828a61ba2a0ef14619b7c2ccb" category="list-text">Vérifiez que les nœuds sont ajoutés à leur groupe de reprise après incident.</block>
   <block id="b0d21d87e852192022d32882c31d8709" category="paragraph">L'exemple suivant montre les volumes MDV dans<block ref="0c5606ed319753bb2d86a485f23c8f6d" prefix=" " category="inline-code"></block> résultat :</block>
   <block id="aacab676cefc900d32e2155650f1b66e" category="paragraph">L'exemple suivant montre la commande et la sortie pour le déplacement de "MDV_CRS_d6b0b313ff5611e9837100a098544e51_A" vers "Data_a3" sur "node_A_3".</block>
@@ -14031,4 +14028,12 @@ L'exemple suivant montre que vous utilisez SCP pour télécharger le fichier<blo
   <block id="4ac7d2ae8e04576a892556ab9a493959" category="list-text">Supprimer les ports VLAN et ifgrp du broadcast domain :<block ref="bd72bbf935a7a9d39c21cf3731500f70" prefix=" " category="inline-code"></block></block>
   <block id="07b3edb46d2774fa411b0f9a1b01bead" category="sidebar">Préparer la maintenance MetroCluster</block>
   <block id="053564114ce5591908a1b29312289c15" category="sidebar">Ajoutez des tiroirs à une configuration MetroCluster IP à l'aide de commutateurs MetroCluster de stockage partagé</block>
+  <block id="59a029b0a65d8928b8afd42fd7a5bfe2" category="admonition">Vous devez créer au moins un agrégat de données en miroir par site. Il est recommandé d'avoir deux agrégats de données en miroir par site sur des nœuds IP MetroCluster pour héberger les volumes MDV. Cependant, un seul agrégat par site est pris en charge (mais non recommandé). Il est acceptable qu'un site du MetroCluster dispose d'un seul agrégat de données en miroir et que l'autre site possède plusieurs agrégats en miroir.</block>
+  <block id="478e4322f0111cf3e7bdad12bea24701" category="list-text">Actualiser la configuration MetroCluster sur l'un des nœuds :</block>
+  <block id="4ad402ea3fb0bcfdc921fd3083047f45" category="paragraph">À partir de l'invite de n'importe quel nœud, exécutez :</block>
+  <block id="28d0a71b806dfc9c57cc495498c72954" category="paragraph">Un seul agrégat de données en miroir sur un ou les deux sites</block>
+  <block id="d419812c67afb77388be54f4cb41eb86" category="paragraph">Depuis l'invite d'un nœud, configurez le MetroCluster avec le<block ref="d972f8bbe9b04d39b8b96b699cf921e9" prefix=" " category="inline-code"></block> paramètre :</block>
+  <block id="3635681631407e08104ac78c0039ed70" category="paragraph"><block ref="0825cd88596408a485ffc279f70b9da9" prefix="" category="inline-code"></block></block>
+  <block id="753303bac17f77fab4f01ca22a7ff80e" category="list-text">Déplacez les volumes MDV_CRS en mode privilèges avancés.</block>
+  <block id="4e934a5efc9ac0d78daef92737cd79bf" category="paragraph">Si vous étendez une configuration MetroCluster à quatre nœuds à une configuration permanente à huit nœuds, vous devez déplacer l'un des volumes MDV vers le nouveau groupe DR.</block>
 </blocks>

@@ -1063,20 +1063,32 @@ Vous devez intégrer le nouveau groupe de reprise après incident à la configur
 +
 `set -privilege advanced`
 
-.. Actualisez la configuration MetroCluster sur l'un des nouveaux nœuds :
+.. Actualiser la configuration MetroCluster sur l'un des nœuds :
 +
-`metrocluster configure`
+[cols="30,70"]
+|===
 
-+
-L'exemple suivant montre la configuration MetroCluster mise à jour sur les deux groupes de reprise sur incident :
 
-+
-[listing]
-----
-cluster_A::*> metrocluster configure -refresh true
+| Si votre configuration MetroCluster possède... | Alors, procédez comme ça... 
 
-[Job 726] Job succeeded: Configure is successful.
-----
+
+ a| 
+Plusieurs agrégats de données
+ a| 
+À partir de l'invite de n'importe quel nœud, exécutez :
+
+`metrocluster configure <node-name>`
+
+
+
+ a| 
+Un seul agrégat de données en miroir sur un ou les deux sites
+ a| 
+Depuis l'invite d'un nœud, configurez le MetroCluster avec le `-allow-with-one-aggregate true` paramètre :
+
+`metrocluster configure -allow-with-one-aggregate true <node-name>`
+
+|===
 .. Rebooter chacun des nouveaux nœuds :
 +
 `node reboot -node <node_name> -inhibit-takeover true`
@@ -1093,7 +1105,7 @@ cluster_A::*> metrocluster configure -refresh true
 
 +
 
-NOTE: Vous devez créer au moins un agrégat de données en miroir par site. Il est recommandé d'avoir deux agrégats de données en miroir par site sur des nœuds IP MetroCluster pour héberger les volumes MDV. Cependant, un seul agrégat par site est pris en charge (mais non recommandé). Il est possible qu'un site de MetroCluster dispose d'un seul agrégat de données en miroir et que l'autre site dispose de plusieurs agrégats de données en miroir.
+NOTE: Vous devez créer au moins un agrégat de données en miroir par site. Il est recommandé d'avoir deux agrégats de données en miroir par site sur des nœuds IP MetroCluster pour héberger les volumes MDV. Cependant, un seul agrégat par site est pris en charge (mais non recommandé). Il est acceptable qu'un site du MetroCluster dispose d'un seul agrégat de données en miroir et que l'autre site possède plusieurs agrégats en miroir.
 
 +
 L'exemple suivant montre la création d'un agrégat du node_A_1-New.
@@ -1161,12 +1173,14 @@ Group Cluster Node               State          Mirroring Mode
 
 cluster_A::*>
 ----
-. Déplacez les volumes MDV_CRS des anciens nœuds vers les nouveaux nœuds du privilège avancé.
+. Déplacez les volumes MDV_CRS en mode privilèges avancés.
 +
 .. Afficher les volumes pour identifier les volumes MDV :
 +
+Si vous disposez d'un seul agrégat de données en miroir par site, déplacez les deux volumes MDV vers cet agrégat unique. Si vous disposez de deux agrégats de données en miroir ou plus, déplacez chaque volume MDV vers un agrégat différent.
 
-NOTE: Si vous disposez d'un seul agrégat de données en miroir par site, déplacez les deux volumes MDV vers cet agrégat unique. Si vous disposez de deux agrégats de données en miroir ou plus, déplacez chaque volume MDV vers un agrégat différent.
++
+Si vous étendez une configuration MetroCluster à quatre nœuds à une configuration permanente à huit nœuds, vous devez déplacer l'un des volumes MDV vers le nouveau groupe DR.
 
 +
 L'exemple suivant montre les volumes MDV dans `volume show` résultat :
