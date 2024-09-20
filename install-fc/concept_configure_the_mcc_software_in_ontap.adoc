@@ -674,6 +674,122 @@ Obligatoire
 |===
 
 
+== Vérification et configuration de l'état HA des composants en mode maintenance
+
+Lors de la configuration d'un système de stockage dans une configuration MetroCluster FC, vous devez vous assurer que l'état haute disponibilité (HA) du module de contrôleur et des composants du châssis est mcc ou mcc-2n afin que ces composants puissent démarrer correctement. Bien que cette valeur doive être préconfigurée sur les systèmes reçus de l'usine, vous devez toujours vérifier le réglage avant de continuer.
+
+[CAUTION]
+====
+Si l'état haute disponibilité du module de contrôleur et du châssis est incorrect, vous ne pouvez pas configurer la MetroCluster sans avoir réinitialisé le nœud. Vous devez corriger le paramètre à l'aide de cette procédure, puis initialiser le système à l'aide de l'une des procédures suivantes :
+
+* Dans une configuration IP MetroCluster, suivez les étapes de la section link:https://docs.netapp.com/us-en/ontap-metrocluster/install-ip/task_sw_config_verify_haconfig.html["Restaurez les paramètres par défaut du système sur un module de contrôleur"].
+* Dans une configuration MetroCluster FC, suivez les étapes de la section link:https://docs.netapp.com/us-en/ontap-metrocluster/install-fc/concept_configure_the_mcc_software_in_ontap.html#restoring-system-defaults-and-configuring-the-hba-type-on-a-controller-module["Restaurez les paramètres par défaut du système et configurez le type de HBA sur un module de contrôleur"].
+
+
+====
+.Avant de commencer
+Vérifiez que le système est en mode Maintenance.
+
+.Étapes
+. En mode Maintenance, afficher l'état HA du module de contrôleur et du châssis :
++
+`ha-config show`
+
++
+L'état correct de haute disponibilité dépend de votre configuration MetroCluster.
+
++
+|===
+
+
+| Type de configuration MetroCluster | État HAUTE DISPONIBILITÉ pour tous les composants... 
+
+
+ a| 
+Configuration FC MetroCluster à huit ou quatre nœuds
+ a| 
+mcc
+
+
+
+ a| 
+Configuration FC MetroCluster à deux nœuds
+ a| 
+mcc-2n
+
+
+
+ a| 
+Configuration IP MetroCluster à huit ou quatre nœuds
+ a| 
+ccip
+
+|===
+. Si l'état système affiché du contrôleur est incorrect, définissez l'état de haute disponibilité correct pour votre configuration sur le module de contrôleur :
++
+|===
+
+
+| Type de configuration MetroCluster | Commande 
+
+
+ a| 
+Configuration FC MetroCluster à huit ou quatre nœuds
+ a| 
+`ha-config modify controller mcc`
+
+
+
+ a| 
+Configuration FC MetroCluster à deux nœuds
+ a| 
+`ha-config modify controller mcc-2n`
+
+
+
+ a| 
+Configuration IP MetroCluster à huit ou quatre nœuds
+ a| 
+`ha-config modify controller mccip`
+
+|===
+. Si l'état système affiché du châssis n'est pas correct, définissez l'état de haute disponibilité correct pour votre configuration sur le châssis :
++
+|===
+
+
+| Type de configuration MetroCluster | Commande 
+
+
+ a| 
+Configuration FC MetroCluster à huit ou quatre nœuds
+ a| 
+`ha-config modify chassis mcc`
+
+
+
+ a| 
+Configuration FC MetroCluster à deux nœuds
+ a| 
+`ha-config modify chassis mcc-2n`
+
+
+
+ a| 
+Configuration IP MetroCluster à huit ou quatre nœuds
+ a| 
+`ha-config modify chassis mccip`
+
+|===
+. Démarrez le nœud sur ONTAP :
++
+`boot_ontap`
+
+. Répétez cette procédure pour vérifier l'état de haute disponibilité sur chaque nœud de la configuration MetroCluster.
+
+
+
+
 == Restauration des paramètres par défaut du système et configuration du type de HBA sur un module de contrôleur
 
 .Description de la tâche
@@ -1502,116 +1618,6 @@ Si le contrôleur de stockage node_B_1 dispose de quatre tiroirs, vous exécutez
 
 
 
-
-
-
-
-== Vérification et configuration de l'état HA des composants en mode maintenance
-
-Lors de la configuration d'un système de stockage dans une configuration MetroCluster, assurez-vous que l'état haute disponibilité (HA) du module de contrôleur et des composants du châssis est mcc ou mcc-2n afin que ces composants démarrent correctement.
-
-.Avant de commencer
-Le système doit être en mode Maintenance.
-
-.Description de la tâche
-Cette tâche n'est pas requise sur les systèmes reçus de l'usine.
-
-.Étapes
-. En mode Maintenance, afficher l'état HA du module de contrôleur et du châssis :
-+
-`ha-config show`
-
-+
-L'état correct de haute disponibilité dépend de votre configuration MetroCluster.
-
-+
-|===
-
-
-| Nombre de contrôleurs dans la configuration MetroCluster | L'état HAUTE DISPONIBILITÉ de tous les composants doit être... 
-
-
- a| 
-Configuration FC MetroCluster à huit ou quatre nœuds
- a| 
-mcc
-
-
-
- a| 
-Configuration FC MetroCluster à deux nœuds
- a| 
-mcc-2n
-
-
-
- a| 
-Configuration MetroCluster IP
- a| 
-ccip
-
-|===
-. Si l'état système affiché du contrôleur n'est pas correct, définissez l'état HA pour le module de contrôleur :
-+
-|===
-
-
-| Nombre de contrôleurs dans la configuration MetroCluster | Commande 
-
-
- a| 
-Configuration FC MetroCluster à huit ou quatre nœuds
- a| 
-ha-config modifier le contrôleur mcc
-
-
-
- a| 
-Configuration FC MetroCluster à deux nœuds
- a| 
-ha-config modifier le contrôleur mcc-2n
-
-
-
- a| 
-Configuration MetroCluster IP
- a| 
-ha-config modifier le contrôleur mcclip
-
-|===
-. Si l'état du système affiché du châssis n'est pas correct, définissez l'état de haute disponibilité du châssis :
-+
-|===
-
-
-| Nombre de contrôleurs dans la configuration MetroCluster | Commande 
-
-
- a| 
-Configuration FC MetroCluster à huit ou quatre nœuds
- a| 
-ha-config modifier le châssis mcc
-
-
-
- a| 
-Configuration FC MetroCluster à deux nœuds
- a| 
-ha-config modifier le châssis mcc-2n
-
-
-
- a| 
-Configuration MetroCluster IP
- a| 
-ha-config modifier le châssis
-
-|===
-. Démarrez le nœud sur ONTAP :
-+
-`boot_ontap`
-
-. Répétez cette procédure sur chaque nœud de la configuration MetroCluster.
 
 
 

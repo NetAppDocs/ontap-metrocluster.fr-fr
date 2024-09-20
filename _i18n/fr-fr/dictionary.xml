@@ -3939,14 +3939,9 @@
   <block id="938a9f49acfde2902a8737d1aadbf6a1" category="paragraph">Après la configuration, l'activation et la vérification de la configuration MetroCluster, vous pouvez terminer la configuration du cluster en ajoutant des SVM, des interfaces réseau et d'autres fonctionnalités ONTAP supplémentaires, si nécessaire.</block>
   <block id="7a56c93af328a3c1fa4e3fccdc177cb5" category="summary">Dans une configuration IP MetroCluster qui n'est pas préconfigurée en usine, vous devez vérifier que l'état ha-config des composants du contrôleur et du châssis est défini sur mcclip afin qu'ils s'démarrent correctement. Pour les systèmes reçus en usine, cette valeur est préconfigurée et vous n'avez pas besoin de la vérifier.</block>
   <block id="6260a0c66ccd92620d9889772b65cffe" category="doc">Vérification de l'état ha-config des composants</block>
-  <block id="b09496e62afe76db185677ab92dd3695" category="paragraph">Dans une configuration IP MetroCluster qui n'est pas préconfigurée en usine, vous devez vérifier que l'état ha-config des composants du contrôleur et du châssis est défini sur "mccip" afin qu'ils s'démarrent correctement. Pour les systèmes reçus en usine, cette valeur est préconfigurée et vous n'avez pas besoin de la vérifier.</block>
   <block id="3293f2fb312a722f96251c9029636630" category="paragraph">Le système doit être en mode Maintenance.</block>
-  <block id="d0dddd5779102f5b72e8edf336fef717" category="list-text">Afficher l'état HA du module de contrôleur et du châssis :</block>
   <block id="70cfb57c22486ea2d08d331675532dce" category="paragraph"><block ref="fb4e6c2e33b945c3ff4d042cb66d2ed4" prefix="" category="inline-code"></block></block>
-  <block id="c1420c708cdb03e8e6259f7cb1285a08" category="paragraph">Le module de contrôleur et le châssis devraient montrer la valeur "mccip".</block>
-  <block id="717daacc38ffb11ae03c79a7871ba94a" category="list-text">Si l'état système affiché du contrôleur n'est pas "`mccip`", définissez l'état HA du contrôleur :</block>
   <block id="5878093a3e92b9c4d3e64a93fc927a8a" category="paragraph"><block ref="d68e680c0ad920bf3b70363718aa8c5b" prefix="" category="inline-code"></block></block>
-  <block id="1be7c4ddc79016b4335125e64b368241" category="list-text">Si l'état système affiché du châssis n'est pas "mccip", définissez l'état HA du châssis :</block>
   <block id="b687dd86b8db3b030c46a3fbc2a2d024" category="paragraph"><block ref="e2f29383f427c1bb29ab03d5c0b0ea17" prefix="" category="inline-code"></block></block>
   <block id="49eb5704f61afb2484b6cc1439fa40de" category="list-text">Répétez cette procédure sur chaque nœud de la configuration MetroCluster.</block>
   <block id="e52e46b2e9a285a92c4fb276c84c544e" category="summary">Vous devez configurer les switchs IP NVIDIA pour une utilisation en tant qu'interconnexion de cluster et pour la connectivité IP MetroCluster back-end.</block>
@@ -11408,7 +11403,6 @@
   <block id="bc2027184e27075969cdcd60662c6642" category="sidebar">Configuration des commutateurs IP Cisco</block>
   <block id="84a335bc70808c0497de1c62a99aaf43" category="sidebar">Configurer les paramètres de base</block>
   <block id="fb66ffdb7a65b64035629ded64b78faf" category="sidebar">Configurez les commutateurs IP NVIDIA</block>
-  <block id="2e513789c4a513cc3bc3dbb07880d342" category="sidebar">Configuration de configurations à 8 nœuds</block>
   <block id="41aa5998b40e00d8eb4f7bb40bb2bc22" category="sidebar">Collectez les informations requises</block>
   <block id="4497ab40f5579cccfc00e6aed35cdae9" category="sidebar">Vérifiez l'état des composants HA-config</block>
   <block id="aa9c71b40476a8ccda9213b9a9416d55" category="sidebar">Configurer les clusters dans une configuration MetroCluster</block>
@@ -14036,4 +14030,19 @@ L'exemple suivant montre que vous utilisez SCP pour télécharger le fichier<blo
   <block id="3635681631407e08104ac78c0039ed70" category="paragraph"><block ref="0825cd88596408a485ffc279f70b9da9" prefix="" category="inline-code"></block></block>
   <block id="753303bac17f77fab4f01ca22a7ff80e" category="list-text">Déplacez les volumes MDV_CRS en mode privilèges avancés.</block>
   <block id="4e934a5efc9ac0d78daef92737cd79bf" category="paragraph">Si vous étendez une configuration MetroCluster à quatre nœuds à une configuration permanente à huit nœuds, vous devez déplacer l'un des volumes MDV vers le nouveau groupe DR.</block>
+  <block id="dbe62ccc612e92f8dc68e42a4661fecb" category="paragraph">Si l'état haute disponibilité du module de contrôleur et du châssis est incorrect, vous ne pouvez pas configurer la MetroCluster sans avoir réinitialisé le nœud. Vous devez corriger le paramètre à l'aide de cette procédure, puis initialiser le système à l'aide de l'une des procédures suivantes :</block>
+  <block id="a86b0de4e0b4c477962412e4fb878fa1" category="list-text">Dans une configuration IP MetroCluster, suivez les étapes de la section <block ref="46904e83320ab310261c288a6a607871" category="inline-link-macro-rx"></block>.</block>
+  <block id="73fa02989b9da1f069817272869a683b" category="inline-link-macro">Restaurez les paramètres par défaut du système et configurez le type de HBA sur un module de contrôleur</block>
+  <block id="20e47a9aa4ad4f6197046707d54204fc" category="list-text">Dans une configuration MetroCluster FC, suivez les étapes de la section <block ref="61b5232c30227f4608eee40560fc97c5" category="inline-link-macro-rx"></block>.</block>
+  <block id="db298781944827895a870278a91cf51d" category="paragraph">Vérifiez que le système est en mode Maintenance.</block>
+  <block id="8043a3bf6cce640e7454f2cd339995d4" category="cell">Type de configuration MetroCluster</block>
+  <block id="b2044c373529567844418af6b99b9c47" category="cell">État HAUTE DISPONIBILITÉ pour tous les composants...</block>
+  <block id="3ec28b19df1922ba15c732a6c9ce26e7" category="paragraph">Configuration FC MetroCluster à huit ou quatre nœuds</block>
+  <block id="02c92aa95863fe523d726679c13e1c11" category="paragraph">Configuration IP MetroCluster à huit ou quatre nœuds</block>
+  <block id="8d1f63834a0230ca4c300e584f887131" category="list-text">Si l'état système affiché du contrôleur est incorrect, définissez l'état de haute disponibilité correct pour votre configuration sur le module de contrôleur :</block>
+  <block id="46be68db9978eb3b9ac4054e394c92ce" category="list-text">Si l'état système affiché du châssis n'est pas correct, définissez l'état de haute disponibilité correct pour votre configuration sur le châssis :</block>
+  <block id="330acb0fa4964235e5dabc85b0488f57" category="list-text">Répétez cette procédure pour vérifier l'état de haute disponibilité sur chaque nœud de la configuration MetroCluster.</block>
+  <block id="84afb0fe12dfc2a5fa1e2e978393b33c" category="paragraph">Lors de la configuration d'un système de stockage dans une configuration MetroCluster FC, vous devez vous assurer que l'état haute disponibilité (HA) du module de contrôleur et des composants du châssis est mcc ou mcc-2n afin que ces composants puissent démarrer correctement. Bien que cette valeur doive être préconfigurée sur les systèmes reçus de l'usine, vous devez toujours vérifier le réglage avant de continuer.</block>
+  <block id="cbc29e9b371b7013e6625c2fa3c7ec20" category="paragraph">Dans une configuration IP MetroCluster, vous devez vérifier que l'état ha-config du contrôleur et des composants du châssis est défini sur `mccip` pour qu'ils démarrent correctement. Bien que cette valeur doive être préconfigurée sur les systèmes reçus de l'usine, vous devez toujours vérifier le réglage avant de continuer.</block>
+  <block id="b6eb7f38a057c8f63ffc29f23e6be071" category="sidebar">Comment configurer des configurations à huit nœuds</block>
 </blocks>
