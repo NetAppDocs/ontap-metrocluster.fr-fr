@@ -53,12 +53,9 @@ image::../media/brocade_upgr_to_g620_fab_1_down.gif[mise à niveau brocade vers 
 +
 image::../media/brocade_upgr_to_g620_replaced_a_1.gif[brocade upgr à g620 a remplacé un 1]
 
-.. Désactiver les nouveaux commutateurs :
+.. Désactiver les nouveaux commutateurs en exécutant la commande suivante sur les deux commutateurs :
 +
 `switchCfgPersistentDisable`
-
-+
-La commande désactive les deux commutateurs dans la structure du commutateur.
 
 +
 [listing]
@@ -79,8 +76,13 @@ image::../media/brocade_upgr_to_g620_replaced_b_1.gif[la mise à niveau brocade 
 
 
 . Mettez les nouveaux commutateurs sous tension et laissez-les démarrer.
-. Téléchargez les fichiers RCF pour le nouveau commutateur.
-. Appliquez les fichiers RCF sur les deux nouveaux commutateurs de la structure en suivant les instructions de la page de téléchargement.
+. Configurez les commutateurs Brocade FC à l'aide de l'une des procédures suivantes :
++
+link:../install-fc/task_reset_the_brocade_fc_switch_to_factory_defaults.html["Configuration des commutateurs FC Brocade avec des fichiers RCF"]
+
++
+link:../install-fc/task_fcsw_brocade_configure_the_brocade_fc_switches_supertask.html["Configurez manuellement les commutateurs FC Brocade"]
+
 . Enregistrez la configuration du commutateur :
 +
 `cfgSave`
