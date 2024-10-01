@@ -1,0 +1,128 @@
+---
+permalink: maintain/verify-health-mcc-config.html 
+sidebar: sidebar 
+keywords: metrocluster, ip, fc, verify, health, troubleshoot, cli, system manager, error, event, problem, maintenance, fix, correction, check 
+summary: Découvrez comment vérifier que les composants MetroCluster fonctionnent correctement. 
+---
+= Vérifiez l'état de santé d'une configuration MetroCluster
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Découvrez comment vérifier que les composants MetroCluster fonctionnent correctement.
+
+.Description de la tâche
+* Dans les configurations MetroCluster IP et FC, vous pouvez utiliser l'interface de ligne de commandes pour exécuter des commandes de vérification de l'état des composants MetroCluster.
+* Dans les configurations MetroCluster IP exécutant ONTAP 9.8 ou une version ultérieure, vous pouvez également utiliser ONTAP System Manager pour surveiller et dépanner les alertes de vérification de l'état de santé.
+
+
+.Étapes
+Vérifiez l'état de santé de la configuration MetroCluster selon que vous utilisez l'interface de ligne de commandes ou System Manager.
+
+[role="tabbed-block"]
+====
+.CLI
+--
+Procédez comme suit pour vérifier l'état de santé d'une configuration MetroCluster à l'aide de l'interface de ligne de commandes.
+
+.Étapes
+. Vérifiez que les composants MetroCluster sont sains :
++
+[source, cli]
+----
+metrocluster check run
+----
++
+[listing]
+----
+cluster_A::*> metrocluster check run
+----
++
+L'opération s'exécute en arrière-plan.
+
+. Une fois l' `metrocluster check run`opération terminée, afficher les résultats :
++
+[source, cli]
+----
+metrocluster check show
+----
++
+Après environ cinq minutes, les résultats suivants s'affichent :
+
++
+[listing]
+----
+cluster_A:::*> metrocluster check show
+
+Component           Result
+------------------- ---------
+nodes               ok
+lifs                ok
+config-replication  ok
+aggregates          ok
+clusters            ok
+connections         not-applicable
+volumes             ok
+7 entries were displayed.
+----
+. Vérifier l'état de l'opération de vérification MetroCluster en cours :
++
+[source, cli]
+----
+metrocluster operation history show -job-id <id>
+----
+. Vérifiez qu'il n'y a pas d'alerte de santé :
++
+[source, cli]
+----
+system health alert show
+----
+
+
+--
+.Gestionnaire système ONTAP (MetroCluster IP uniquement)
+--
+Depuis la version ONTAP 9.8, System Manager surveille l'état de santé des configurations IP de MetroCluster et vous aide à identifier et corriger les problèmes potentiels.
+
+System Manager vérifie régulièrement l'état de santé de votre configuration MetroCluster IP. Lorsque vous affichez la section MetroCluster du tableau de bord, le message généralement « les systèmes MetroCluster sont sains ».
+
+Cependant, lorsqu'un problème se produit, le message indique le nombre d'événements. Vous pouvez cliquer sur ce message et afficher les résultats du bilan de santé des composants suivants :
+
+* Nœud
+* Interface réseau
+* Niveau (stockage)
+* Cluster
+* Connexion
+* Volumétrie
+* Réplication de la configuration
+
+
+La colonne *Status* identifie les composants qui présentent des problèmes et la colonne *Details* indique comment corriger le problème.
+
+.Étapes
+. Dans System Manager, sélectionnez *Dashboard*.
+. Afficher le message dans la section *MetroCluster* :
++
+.. Si le message indique que la configuration de votre MetroCluster est correcte et que les connexions entre les clusters et le médiateur ONTAP sont en bon état (avec des cases à cocher), alors vous n'avez aucun problème à corriger.
+.. Si le message indique le nombre d'événements, ou si les connexions ont diminué (indiqué par un « X »), passez à l'étape suivante.
+
+
+. Cliquez sur le message indiquant le nombre d'événements.
++
+Le rapport d'intégrité MetroCluster s'affiche.
+
+. Dépanner les problèmes qui apparaissent dans le rapport en utilisant les suggestions dans la colonne *Détails*.
+. Lorsque tous les problèmes ont été corrigés, cliquez sur *vérifier l'état de santé du MetroCluster*.
++
+
+NOTE: Vous devez effectuer toutes vos tâches de dépannage avant d'exécuter la vérification, car le bilan de santé MetroCluster utilise une quantité intensive de ressources.
+
++
+La vérification de l'état de santé de MetroCluster s'exécute en arrière-plan. Vous pouvez travailler sur d'autres tâches pendant que vous attendez la fin.
+
+
+
+--
+====

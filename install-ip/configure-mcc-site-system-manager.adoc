@@ -1,0 +1,56 @@
+---
+sidebar: sidebar 
+permalink: install-ip/configure-mcc-site-system-manager.html 
+keywords: metrocluster, configuration, config, mcc, HA, cluster 
+summary: Depuis ONTAP 9.8, vous pouvez gérer les opérations de configuration IP de MetroCluster avec System Manager. Cela implique la configuration, le peering et la configuration de deux clusters. 
+---
+= Configurez un site IP MetroCluster
+:hardbreaks:
+:toclevels: 1
+:allow-uri-read: 
+:toclevels: 1
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Depuis ONTAP 9.8, vous pouvez gérer les opérations de configuration IP de MetroCluster avec System Manager. Cela implique la configuration de deux clusters, le peering de cluster et la configuration des clusters.
+
+.Avant de commencer
+Effectuez les procédures suivantes :
+
+* link:set-up-mcc-site-system-manager.html["Configurez un site IP MetroCluster"]
+* link:set-up-mcc-peering-system-manager.html["Configurer le peering IP MetroCluster"]
+
+
+
+
+== Configurer la connexion entre les clusters
+
+.Étapes
+. Connectez-vous à System Manager sur l'un des sites et sélectionnez *Dashboard*.
++
+Dans la section *MetroCluster*, le graphique montre les deux clusters que vous avez configurés et associés pour les sites MetroCluster. Le cluster depuis lequel vous travaillez (cluster local) s'affiche sur la gauche.
+
+. Cliquez sur *configurer MetroCluster*. Dans cette fenêtre, effectuez les opérations suivantes :
++
+.. Les nœuds de chaque cluster de la configuration MetroCluster sont affichés. Utilisez les listes déroulantes pour sélectionner les nœuds du cluster local qui seront associés à la reprise sur incident avec les nœuds du cluster distant.
+.. Cochez la case si vous souhaitez configurer le service ONTAP Mediator. Voir link:./task-sm-mediator.html["Configurez le service Mediator ONTAP"].
+.. Si les deux clusters disposent d'une licence pour activer le chiffrement, la section *Encryption* s'affiche.
++
+Pour activer le chiffrement, entrez une phrase de passe.
+
+.. Cochez la case si vous souhaitez configurer MetroCluster avec un réseau de couche 3 partagé.
++
+
+NOTE: Les nœuds partenaires haute disponibilité et les commutateurs réseau qui se connectent aux nœuds doivent avoir une configuration correspondante.
+
+
+
+. Cliquez sur *Enregistrer* pour configurer les sites MetroCluster.
++
+Dans la section *MetroCluster* du *Tableau de bord*, le graphique montre une coche sur la liaison entre les deux grappes, indiquant une connexion saine.
+
+
