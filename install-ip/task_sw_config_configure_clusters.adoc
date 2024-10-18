@@ -712,6 +712,9 @@ Cluster_A::> metrocluster configuration-settings dr-group create -partner-cluste
 
 Vous devez configurer les interfaces IP MetroCluster utilisées pour la réplication du stockage de chaque nœud et du cache non volatile. Vous déterminez ensuite les connexions en utilisant les interfaces IP de MetroCluster. Cela crée des connexions iSCSI pour la réplication du stockage.
 
+
+NOTE: L'adresse IP MetroCluster et les ports de commutateur connectés ne sont pas mis en ligne avant la création des interfaces IP MetroCluster.
+
 .Description de la tâche
 * Vous devez créer deux interfaces pour chaque nœud. Les interfaces doivent être associées aux VLAN définis dans le fichier RCF MetroCluster.
 * Selon votre version de ONTAP, vous pouvez modifier certaines propriétés de l'interface IP de MetroCluster après la configuration initiale. Reportez-vous link:../maintain/task-modify-ip-netmask-properties.html["Modifiez les propriétés d'une interface IP MetroCluster"] à pour plus de détails sur ce qui est pris en charge.
