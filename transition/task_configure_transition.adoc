@@ -645,6 +645,14 @@ Vous devez répondre avec `y` lorsque vous êtes invité à continuer en mode av
 
 NOTE: Il est recommandé d'avoir plusieurs agrégats de données en miroir. En effet, lorsqu'il n'existe qu'un seul agrégat en miroir, la protection est moindre, car les volumes de métadonnées sont situés sur le même agrégat plutôt que sur des agrégats distincts.
 
+. Rebooter chacun des nouveaux nœuds :
++
+`node reboot -node <node_name> -inhibit-takeover true`
+
++
+
+NOTE: Vous n'avez pas besoin de redémarrer les nœuds dans un ordre spécifique, mais vous devez attendre qu'un nœud soit entièrement démarré et que toutes les connexions soient établies avant de redémarrer le nœud suivant.
+
 . Vérifier que les nœuds sont ajoutés à leur groupe de reprise sur incident :
 +
 `metrocluster node show`
