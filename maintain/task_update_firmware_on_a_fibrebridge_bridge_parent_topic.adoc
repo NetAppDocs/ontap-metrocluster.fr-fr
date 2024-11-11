@@ -41,7 +41,7 @@ Dans le IMT, vous pouvez utiliser le champ solution de stockage pour sélectionn
 NOTE: Cette procédure ne génère aucune interruption et ne prend que 30 minutes environ.
 
 
-NOTE: Avec ONTAP 9.8, le `storage bridge` la commande est remplacée par `system bridge`. Les étapes suivantes présentent le `storage bridge` Mais si vous exécutez ONTAP 9.8 ou version ultérieure, le `system bridge` commande recommandée.
+NOTE: Depuis ONTAP 9.8, la `system bridge` commande remplace la `storage bridge`. Les étapes suivantes montrent la `system bridge` commande, mais si vous exécutez une version antérieure à ONTAP 9.8, vous devez utiliser `storage bridge` la commande.
 
 .Étapes
 . Appelez un message AutoSupport indiquant le début de la maintenance :
@@ -70,15 +70,52 @@ Vous pouvez saisir les commandes aux étapes restantes à partir de la console d
 +
 Vous devez répondre par « y » lorsque vous êtes invité à passer en mode avancé et à afficher l'invite du mode avancé (*>).
 
-. Mettez à jour le micrologiciel du pont :
+. Mettre à jour le micrologiciel du pont.
 +
-`storage bridge firmware update -bridge name -uri _URL-of-firmware-package_`
+À partir de ONTAP 9.16.1, vous pouvez utiliser les informations d'identification pour mettre à jour le micrologiciel du pont s'ils sont requis par le serveur pour télécharger le progiciel.
 
 +
+[role="tabbed-block"]
+====
+.Si les informations d'identification ne sont pas requises :
+--
+.. Mettez à jour le micrologiciel du pont :
+
+
+[source, cli]
+----
+system bridge firmware update -bridge <name> -uri <URL-of-firmware-package>
+----
+.Exemple
 [listing]
 ----
-cluster_A> storage bridge firmware update -bridge bridge_A_1a -uri http://192.168.132.97/firmware.ZBD
+cluster_A> system bridge firmware update -bridge bridge_A_1a -uri http://192.168.132.97/firmware.ZBD
 ----
+--
+.Si des informations d'identification sont requises :
+--
+.. Mettez à jour le micrologiciel du pont et spécifiez le nom d'utilisateur requis :
++
+[source, cli]
+----
+system bridge firmware update -bridge <name> -uri <URL-of-firmware-package> -username <name>
+----
+.. Entrez le mot de passe lorsque vous y êtes invité dans le résultat, comme indiqué dans l'exemple suivant :
+
+
+.Exemple
+[listing]
+----
+cluster_A> system bridge firmware update -bridge bridge_A_1a -uri http://192.168.132.97/firmware.ZBD -username abc
+
+(system bridge)
+
+Enter the password:
+
+[Job 70] Job is queued: System bridge firmware update job.
+----
+--
+====
 . Retour au niveau de privilège admin :
 +
 `set -privilege admin`
@@ -88,12 +125,12 @@ cluster_A> storage bridge firmware update -bridge bridge_A_1a -uri http://192.16
 `job show -name "_job-name_"`
 
 +
-L'exemple suivant montre que le travail "`sStorage Bridge Firmware update`" est toujours en cours d'exécution :
+L'exemple suivant montre que le travail "mise à jour du microprogramme du pont système" est toujours en cours d'exécution:
 
 +
 [listing]
 ----
-cluster_A> job show -name "storage bridge firmware update"
+cluster_A> job show -name "system bridge firmware update"
 Owning
 
 Job ID Name                 Vserver    Node           State
@@ -102,7 +139,7 @@ Job ID Name                 Vserver    Node           State
                             cluster_A
                                        node_A_1
                                                       Running
-Description: Storage bridge firmware update job
+Description: System bridge firmware update job
 ----
 +
 Après environ 10 minutes, le nouveau micrologiciel est entièrement installé et l'état de la tâche est réussi :
@@ -110,16 +147,16 @@ Après environ 10 minutes, le nouveau micrologiciel est entièrement installé e
 +
 [listing]
 ----
-cluster_A> job show -name "storage bridge firmware update"
+cluster_A> job show -name "system bridge firmware update"
 
                             Owning
 Job ID Name                 Vserver    Node           State
 ------ -------------------- ---------- -------------- ----------
-2246   Storage bridge firmware update
+2246   System bridge firmware update
                             cluster_A
                                        node_A_1
                                                       Success
-Description: Storage bridge firmware update job
+Description: System bridge firmware update job
 ----
 . Suivez les étapes indiquées ci-dessous si la gestion intrabande est activée et la version de ONTAP exécutée sur votre système :
 +
@@ -151,7 +188,7 @@ Ready.
 *** Si vous exécutez ONTAP 9.5 ou version ultérieure, la gestion intrabande est prise en charge et la commande peut être émise depuis l'invite de cluster :
 
 
-.. Exécutez le `storage bridge run-cli -name _bridge-name_ -command FlashImages` commande.
+.. Exécutez `system bridge run-cli -name _bridge-name_ -command FlashImages` la commande.
 +
 
 NOTE: L'exemple montre que l'image flash primaire montre la nouvelle image du micrologiciel, tandis que l'image flash secondaire affiche l'ancienne image.
@@ -159,7 +196,7 @@ NOTE: L'exemple montre que l'image flash primaire montre la nouvelle image du mi
 +
 [listing]
 ----
-cluster_A> storage bridge run-cli -name ATTO_7500N_IB_1 -command FlashImages
+cluster_A> system bridge run-cli -name ATTO_7500N_IB_1 -command FlashImages
 
 [Job 2257]
 
@@ -174,7 +211,7 @@ Ready.
 ----
 .. Si nécessaire, redémarrer le pont :
 +
-`storage bridge run-cli -name ATTO_7500N_IB_1 -command FirmwareRestart`
+`system bridge run-cli -name ATTO_7500N_IB_1 -command FirmwareRestart`
 
 +
 
@@ -201,12 +238,12 @@ System Storage Configuration: Quad-Path HA
 ----
 . Vérifiez que le micrologiciel FibreBridge a été mis à jour :
 +
-`storage bridge show -fields fw-version,symbolic-name`
+`system bridge show -fields fw-version,symbolic-name`
 
 +
 [listing]
 ----
-cluster_A> storage bridge show -fields fw-version,symbolic-name
+cluster_A> system bridge show -fields fw-version,symbolic-name
 name fw-version symbolic-name
 ----------------- ----------------- -------------
 ATTO_20000010affeaffe 3.10 A06X bridge_A_1a
