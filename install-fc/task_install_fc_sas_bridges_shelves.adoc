@@ -47,95 +47,45 @@ La disponibilité de la gestion intrabande des ponts dépend de la version de ON
 Les commandes CLI Bridge peuvent être émises à partir de l'interface ONTAP `storage bridge run-cli -name _bridge_name_ -command _bridge_command_name_` Commande au niveau de l'interface ONTAP.
 
 
-NOTE: Il est recommandé d'utiliser la gestion intrabande avec l'accès IP désactivé pour améliorer la sécurité en limitant la connectivité physique du pont.
+NOTE: L'utilisation de la gestion intrabande avec l'accès IP désactivé est recommandée pour améliorer la sécurité en limitant la connectivité physique au pont.
 
 
 
-== Nombre de disques et de tiroirs pris en charge sur les ponts FibreBridge 7600N et 7500N
+== Limites de pont FibreBridge 7600N et 7500N et règles de connexion
 
-Les tableaux suivants indiquent le nombre de disques et de tiroirs pris en charge par une paire de ponts FibreBridge 7600N et 7500N.
+Passez en revue les limites et les considérations lors de la fixation des ponts FibreBridge 7600N et 7500N.
 
-[NOTE]
-====
-* La première limite atteinte s'applique.
-* Si vous utilisez des tiroirs DS460C, vous pouvez utiliser seulement 240 disques, ce qui équivaut à 4 tiroirs.
-* Si vous utilisez des tiroirs DS212C, seuls 120 disques peuvent être utilisés, ce qui équivaut à 10 tiroirs.
+.Limites de pont FibreBridge 7600N et 7500N
+* Le nombre maximum de disques durs et SSD combinés est de 240.
+* Le nombre maximum de disques SSD est de 96.
+* Le nombre maximal de disques SSD par port SAS est de 48.
+* Le nombre maximum de tiroirs par port SAS est de 10.
 
 
-====
-.Nombre de disques pris en charge
-Vérifiez le nombre de disques pris en charge derrière une paire de ponts FibreBridge 7600N ou 7500N :
+.Règles de connexion des ponts FibreBridge 7600N et 7500N
+* Ne mélangez pas des disques SSD et HDD sur le même port SAS.
+* Répartissez les tiroirs de manière homogène entre les ports SAS.
+* Vous ne devez pas avoir de tiroirs DS460 sur le même port SAS que d'autres types de tiroirs (par exemple, tiroirs DS212 ou DS224).
 
-[cols="3*"]
+
+.Exemple de configuration
+Voici un exemple de configuration permettant de connecter quatre tiroirs DS224 avec des disques SSD et six tiroirs DS224 avec des disques durs :
+
+[cols="2*"]
 |===
-| Configuration de disque | Type de disque | Nombre total de disques par paire de ponts 
+| Port SAS | Tiroirs et disques 
 
 
-| Tous disques SSD | SSD | 96 
+| Port SAS A | 2 tiroirs DS224 avec disques SSD 
 
 
-| Uniquement sur disques durs | DISQUES DURS | 240 
+| Port SAS B | 2 tiroirs DS224 avec disques SSD 
 
 
-.2+| Mixte (96 SSD) | SSD | 96 
+| Port SAS C | 3 tiroirs DS224 avec disques durs 
 
 
-| DISQUES DURS | 144 
-
-
-.2+| Mixte (72 SSD) | SSD | 72 
-
-
-| DISQUES DURS | 168 
-
-
-.2+| Mixte (48 SSD) | SSD | 48 
-
-
-| DISQUES DURS | 192 
-
-
-.2+| Mixte (24 SSD) | SSD | 24 
-
-
-| DISQUES DURS | 216 
-|===
-.Nombre de tiroirs pris en charge
-Vérifiez le nombre de tiroirs pris en charge derrière une paire de ponts FibreBridge 7600N et 7500N :
-
-[cols="3*"]
-|===
-| Configuration de disque | Type de disque | Nombre total de tiroirs 
-
-
-| Tous disques SSD | SSD | 4 
-
-
-| Uniquement sur disques durs | DISQUES DURS | 10 
-
-
-.2+| Mixte | SSD | 1 
-
-
-| DISQUES DURS | 9 
-
-
-.2+| Mixte | SSD | 2 
-
-
-| DISQUES DURS | 8 
-
-
-.2+| Mixte | SSD | 3 
-
-
-| DISQUES DURS | 7 
-
-
-.2+| Mixte | SSD | 4 
-
-
-| DISQUES DURS | 6 
+| Port SAS D | 3 tiroirs DS224 avec disques durs 
 |===
 
 
