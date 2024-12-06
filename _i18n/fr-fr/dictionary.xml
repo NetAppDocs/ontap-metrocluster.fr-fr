@@ -3896,7 +3896,6 @@
   <block id="99202cf08ee605465b048d280b130030" category="list-text">Installez et câisez les tiroirs disques qui contiennent les agrégats non mis en miroir.</block>
   <block id="8a9f1a9fa3d7dcf9bab5aa2cdbeb6b5e" category="paragraph">Vous pouvez utiliser les procédures décrites dans la documentation installation et configuration de la plateforme et des tiroirs disques.</block>
   <block id="2d1ee8760a765460b6dcc34dbf24e95d" category="list-text">Attribuer manuellement tous les disques du nouveau shelf au nœud approprié :</block>
-  <block id="29d368b17fa8f6a4c00f53e0b1b0ddcd" category="paragraph"><block ref="4cafcb14d2185733637950489e651a6a" prefix="" category="inline-code"></block></block>
   <block id="6d6f602efa1b388ca6264b6013787a0e" category="paragraph">Si vous êtes connecté au cluster depuis l'interface de gestion du cluster, vous pouvez créer un agrégat sur n'importe quel nœud du cluster. Pour vérifier que l'agrégat est créé sur un nœud spécifique, vous devez utiliser le paramètre -node ou spécifier les disques qui appartiennent à ce nœud.</block>
   <block id="c867a6fd725cedea57bb7663de5a37c2" category="paragraph">Vous devez également vous assurer d'inclure uniquement les disques du tiroir sans miroir à l'agrégat.</block>
   <block id="a6480a829f17700a2c732897b3a46dd7" category="list-text">Liste de disques spécifiques ou de LUN de baies à ajouter à l'agrégat</block>
@@ -4321,7 +4320,6 @@
   <block id="c4ea0eec15aeb871f4ff708460f06623" category="paragraph">e1a, e1b</block>
   <block id="777915564b2f2870366331ca85d7d9a9" category="paragraph">X1116A</block>
   <block id="d30fc67c2a1cee6e54e9714145270705" category="paragraph">Ports intégrés</block>
-  <block id="f1044ba6bab78a278fa587f690217ea7" category="paragraph">Emplacement 0</block>
   <block id="021129e5b6cda3c7398d4240f38ab938" category="paragraph">e0a, e0b</block>
   <block id="976dfaa29917d0a4edcbb9a22b57a8e5" category="paragraph">e0c, e0d</block>
   <block id="b05a1e68af8885ea43084ad2698d8a02" category="paragraph">e0g, e0h</block>
@@ -14267,4 +14265,9 @@ L'exemple suivant montre que vous utilisez SCP pour télécharger le fichier<blo
   <block id="7e8efc833fbde0ff722d85e00415edec" category="list-text">Téléchargez le micrologiciel du commutateur à partir du <block ref="7b0bfad9e7dd6186ed0f14c867034109" category="inline-link-macro-rx"></block>.</block>
   <block id="e6d64e0eb5e781bce7f755d1457a9170" category="paragraph"><block ref="b2f8990b0f3f5de2520bc483556b14eb" prefix="" category="inline-code"></block></block>
   <block id="b0782c02cc2d2b20315a3f6a825b3fbe" category="list-text">Exécutez<block ref="2586ba33015a99bfc10dda523f819039" prefix=" " category="inline-code"></block> la commande.</block>
+  <block id="a32cead873928387fe22f14cfa816430" category="admonition">Les ports intégrés sont intégrés au matériel du contrôleur (slot 0) et ne peuvent pas être remplacés. Le slot requis pour l'adaptateur n'est donc pas applicable.</block>
+  <block id="ca024a4ac8a10799527aecc96451c4ce" category="paragraph">Logement 1/ne s'applique pas aux ports intégrés</block>
+  <block id="ad084693a846cdc2cf77ad2bb2e7382a" category="paragraph"><block ref="1c61f86d2f111f8c80a5d8ff728df70d" prefix="" category="inline-code"></block></block>
+  <block id="5f9a9e91fc7e98f1998a1dcee4eab83f" category="paragraph">Vérifiez que vous n'avez inclus que les disques du tiroir sans miroir à l'agrégat.</block>
+  <block id="6f1eb898d916ac10201421006f5406e2" category="admonition">Vous pouvez également utiliser<block ref="2ee4c97cd7e2dff2e12ae3225818c09b" prefix=" " category="inline-code"></block> le paramètre de la commande pour spécifier les disques que vous souhaitez utiliser pour l'agrégat.</block>
 </blocks>
