@@ -243,6 +243,7 @@ Lors de la création de LIF, vous devez tenir compte des consignes suivantes :
 * Diffusions ARP : vous devez activer les diffusions ARP entre les deux clusters
 * Dupliquer les LIF : vous ne devez pas créer plusieurs LIF avec la même adresse IP (LIFs dupliquées) dans un IPspace
 * Configurations NFS et SAN : vous devez utiliser différents SVM pour les agrégats sans miroir et en miroir
+* Avant de créer une LIF, vous devez créer un objet de sous-réseau. Un objet de sous-réseau permet à ONTAP de déterminer les cibles de basculement sur le cluster de destination, car il possède un broadcast domain associé.
 
 
 
