@@ -896,7 +896,7 @@ La fonctionnalité de correction automatique des agrégats après le basculement
 
 == Supprimez les configurations d'interface et désinstallez les anciens contrôleurs
 
-Vous devez déplacer les LIF de données vers un port commun, supprimer les VLAN et les groupes d'interfaces des anciens contrôleurs, puis désinstaller physiquement les contrôleurs.
+Vérifier le bon positionnement du LIF. Supprimez ensuite les VLAN et les groupes d'interface des anciens contrôleurs et désinstallez physiquement les contrôleurs.
 
 .Description de la tâche
 * Ces étapes sont réalisées sur les anciens contrôleurs (node_B_1-Old, node_B_2-Old).
@@ -960,6 +960,10 @@ Répéter la commande pour chaque LIF intercluster qui ne se trouve pas sur le h
 
 . [[Controller_Manual_upgrade_prepare_network_ports_3]]affectez le port de base de toutes les LIFs de données de l'ancien contrôleur à un port commun identique sur l'ancien et le nouveau module de contrôleur.
 +
+
+CAUTION: Si les anciens et les nouveaux contrôleurs ne disposent pas de port commun, il n'est pas nécessaire de modifier les LIFs data. Ignorez cette étape et passez directement à <<upgrades_manual_without_matching_ports,Étape 4>>.
+
++
 .. Afficher les LIFs :
 +
 `network interface show`
@@ -989,7 +993,7 @@ network interface modify -vserver vs0 -lif datalif1 -home-port e0d
 ----
 
 
-. Modifier les domaines de diffusion pour supprimer les VLAN et les ports physiques qui doivent être supprimés :
+. [[upgrades_Manual_without_matching_ports]] modifiez les domaines de diffusion pour supprimer le VLAN et les ports physiques qui doivent être supprimés :
 +
 `broadcast-domain remove-ports -broadcast-domain <broadcast-domain-name> -ports <node-name:port-id>`
 
@@ -1796,19 +1800,36 @@ Vérifiez que les LIFs sont hébergées sur des nœuds et des ports appropriés,
 * Voir le plan de mappage des ports que vous avez créé dans link:task_upgrade_controllers_in_a_four_node_ip_mcc_us_switchover_and_switchback_mcc_ip.html["Mappage des ports des anciens nœuds sur les nouveaux nœuds"].
 
 
+
+CAUTION: Vous devez vérifier que l'emplacement des LIFs de données est correct sur les nouveaux nœuds avant d'effectuer un rétablissement. Lorsque vous rétablissez la configuration, ONTAP tente de reprendre le trafic sur le port d'attache utilisé par les LIFs. Une panne d'E/S peut se produire lorsque la connexion du port d'accueil au port du commutateur et au VLAN est incorrecte.
+
 .Étapes
-. Vérifiez que les LIF sont hébergées sur le nœud et les ports appropriés avant le rétablissement.
+. Vérifiez que les LIFs sont hébergées sur le nœud et les ports appropriés avant le rétablissement.
 +
 .. Changement au niveau de privilège avancé :
 +
 `set -privilege advanced`
 
-.. Remplacez la configuration des ports pour assurer un placement LIF approprié :
+.. Afficher les LIFs et vérifier que chaque LIF de données utilise le bon port home :
 +
-`vserver config override -command "network interface modify -vserver <svm-name> -home-port <active_port_after_upgrade> -lif <lif_name> -home-node <new_node_name>`
+`network interface show`
+
+.. Modifier les LIFs qui n'utilisent pas le bon port de home :
++
+`network interface modify -vserver <svm-name> -lif <data-lif> -home-port <port-id>`
+
++
+Si la commande renvoie une erreur, vous pouvez remplacer la configuration des ports :
+
++
+`vserver config override -command "network interface modify -vserver <svm-name> -home-port <active_port_after_upgrade> -lif <lif_name> -home-node <new_node_name>"`
 
 +
 Lors de la saisie de la commande network interface modify dans le `vserver config override` vous ne pouvez pas utiliser la fonction de saisie semi-automatique de l'onglet. Vous pouvez créer le réseau `interface modify` à l'aide de la commande auto complete, puis placez-la dans le `vserver config override` commande.
+
+.. Vérifier que toutes les LIFs data se trouvent sur le bon port de home :
++
+`network interface show`
 
 .. Retour au niveau de privilège admin :
 +

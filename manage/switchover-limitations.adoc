@@ -1,0 +1,52 @@
+---
+permalink: manage/switchover-limitations.html 
+sidebar: sidebar 
+keywords: switchover, perform, heal, operation, restore, metrocluster, functionality, fc, configuration, ip, limitations, 
+summary: 'Lors d"un basculement, certaines opérations ne doivent pas être effectuées.' 
+---
+= Limitations lors du basculement de la configuration MetroCluster
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Lorsque le système est en cours de basculement, certaines opérations ne doivent pas être effectuées. En savoir plus sur les opérations restreintes lors du basculement du système.
+
+
+
+== Opérations restreintes lors du basculement
+
+Lorsque le système est en mode de basculement, les opérations suivantes ne sont pas prises en charge :
+
+* Création ou suppression d'agrégats et de volumes
+* Création ou suppression de SVM
+* Création ou suppression de LIFs
+* Ajout ou retrait de disques (uniquement si vous les remplacez dans le cadre d'une procédure de récupération)
+* Effectuer des modifications de configuration du SVM DR SnapMirror
+* Modification de domaines de diffusion existants ou création de nouveaux domaines de diffusion
+* Modification des sous-réseaux réseau
+
+
+
+
+== Remplacement du matériel lors du basculement
+
+Utilisez les procédures suivantes pour remplacer le matériel du contrôleur lorsque le système est en cours de basculement :
+
+* Si vous devez remplacer un contrôleur du même type, sur le site pas en mode de basculement, suivez la procédure à link:../disaster-recovery/task_recover_from_a_multi_controller_and_or_storage_failure.html["Effectuer une restauration en cas de défaillance de plusieurs contrôleurs ou du stockage"].
++
+** Si vous devez remplacer les modules de contrôleur et le châssis alors que les nœuds sont basculés sur le site survivant, arrêtez les deux contrôleurs, puis exécutez la procédure à link:../disaster-recovery/task_recover_from_a_multi_controller_and_or_storage_failure.html["Effectuer une restauration en cas de défaillance de plusieurs contrôleurs ou du stockage"]l' .
+
+
+* Si vous devez remplacer un contrôleur par un autre type de contrôleur, suivez la procédure de configuration décrite dans link:../upgrade/concept_choosing_controller_upgrade_mcc.html["Choisir la procédure de mise à niveau du contrôleur"].
++
+** En cas de basculement du système suite à une panne du contrôleur ou en cas de défaillance du contrôleur lors du basculement, vous devez d'abord remplacer le matériel du contrôleur, effectuer un rétablissement, puis mettre à niveau le contrôleur :
++
+... Pour remplacer le matériel du contrôleur et effectuer le rétablissement, suivez la procédure link:../disaster-recovery/task_recover_from_a_multi_controller_and_or_storage_failure.html["Effectuer une restauration en cas de défaillance de plusieurs contrôleurs ou du stockage"].
+... Après avoir remplacé le matériel, effectuez une mise à niveau du contrôleur en suivant les procédures de la section link:../upgrade/concept_choosing_controller_upgrade_mcc.html["Choisir la procédure de mise à niveau du contrôleur"].
+
+
+
+
+

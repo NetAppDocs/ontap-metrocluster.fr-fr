@@ -362,7 +362,7 @@ Avant de lancer le basculement, l'automatisation s'interrompt pour que vous puis
 
 === Préparer la configuration réseau des anciens contrôleurs
 
-Pour assurer la reprise du réseau correctement sur les nouveaux contrôleurs, vous devez déplacer les LIF vers un port commun, puis supprimer la configuration réseau des anciens contrôleurs.
+Pour que la mise en réseau puisse reprendre proprement sur les nouveaux contrôleurs, vérifiez que le placement des LIF est correct et supprimez la configuration réseau des anciens contrôleurs.
 
 .Description de la tâche
 * Cette tâche doit être effectuée sur chacun des anciens nœuds.
@@ -426,6 +426,10 @@ Répéter la commande pour chaque LIF intercluster qui ne se trouve pas sur le h
 
 . [[Controller_replace_upgrade_prepare_network_ports_3]]affectez le port home de toutes les LIFs de données de l'ancien contrôleur à un port commun identique sur l'ancien et le nouveau module de contrôleur.
 +
+
+CAUTION: Si les anciens et les nouveaux contrôleurs ne disposent pas de port commun, il n'est pas nécessaire de modifier les LIFs data. Ignorez cette étape et passez directement à <<upgrades_assisted_without_matching_ports,Étape 4>>.
+
++
 .. Afficher les LIFs :
 +
 `network interface show`
@@ -457,7 +461,7 @@ network interface modify -vserver vs0 -lif datalif1 -home-port e0d
 ----
 
 
-. Modifier les domaines de diffusion pour supprimer les VLAN et les ports physiques qui doivent être supprimés :
+. [[upgrades_Assisted_without_matching_ports]] modifiez les domaines de diffusion pour supprimer le VLAN et les ports physiques qui doivent être supprimés :
 +
 `broadcast-domain remove-ports -broadcast-domain <broadcast-domain-name>-ports <node-name:port-id>`
 
@@ -1323,12 +1327,68 @@ Gestion externe des clés
 Pour plus d'informations, voir https://docs.netapp.com/ontap-9/topic/com.netapp.doc.pow-nve/GUID-32DA96C3-9B04-4401-92B8-EAF323C3C863.html["Restauration des clés de chiffrement externes de gestion des clés"^].
 
 |===
-. Avant de reprendre l'opération, vérifiez que le MetroCluster est configuré correctement. Vérifier l'état du nœud :
+. Vérifiez que le MetroCluster est correctement configuré. Vérifier l'état du nœud :
 +
 `metrocluster node show`
 
 +
 Vérifiez que les nouveaux nœuds (site_B) sont dans *en attente de l'état de rétablissement* à partir de site_A.
+
+
+
+
+
+=== Vérification et restauration de la configuration LIF
+
+Vérifiez que les LIF sont hébergées sur les nœuds appropriés avant de procéder à l'opération de rétablissement automatisé.
+
+.Description de la tâche
+* Cette tâche est effectuée sur site_B.
+
+
+
+CAUTION: Vous devez vérifier que l'emplacement des LIFs de données est correct sur les nouveaux nœuds avant d'effectuer un rétablissement. Lorsque vous rétablissez la configuration, ONTAP tente de reprendre le trafic sur le port d'attache utilisé par les LIFs. Une panne d'E/S peut se produire lorsque la connexion du port d'accueil au port du commutateur et au VLAN est incorrecte.
+
+.Étapes
+. Vérifiez que les LIFs sont hébergées sur le nœud et les ports appropriés avant le rétablissement.
++
+.. Changement au niveau de privilège avancé :
++
+`set -privilege advanced`
+
+.. Afficher les LIFs et vérifier que chaque LIF de données utilise le bon port home :
++
+`network interface show`
+
+.. Modifier les LIFs qui n'utilisent pas le bon port de home :
++
+`network interface modify -vserver <svm-name> -lif <data-lif> -home-port <port-id>`
+
++
+Si la commande renvoie une erreur, vous pouvez remplacer la configuration des ports :
+
++
+`vserver config override -command "network interface modify -vserver <svm-name> -home-port <active_port_after_upgrade> -lif <lif_name> -home-node <new_node_name>"`
+
++
+Lors de la saisie de la commande network interface modify dans le `vserver config override` vous ne pouvez pas utiliser la fonction de saisie semi-automatique de l'onglet. Vous pouvez créer le réseau `interface modify` à l'aide de la commande auto complete, puis placez-la dans le `vserver config override` commande.
+
+.. Vérifier que toutes les LIFs data se trouvent sur le bon port de home :
++
+`network interface show`
+
+.. Retour au niveau de privilège admin :
++
+`set -privilege admin`
+
+
+
+. Revert les interfaces sur leur home node :
++
+`network interface revert * -vserver <svm-name>`
+
++
+Suivez cette étape sur tous les SVM, si nécessaire.
 
 . Reprendre l'opération :
 +

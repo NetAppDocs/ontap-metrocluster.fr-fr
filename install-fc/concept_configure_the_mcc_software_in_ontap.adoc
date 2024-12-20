@@ -3029,10 +3029,19 @@ Ces tâches s'appliquent uniquement aux systèmes avec des ponts FC-SAS.
 [NOTE]
 ====
 * Vous devez placer des ponts et une LIF de node-management dans un réseau dédié pour éviter les interférences provenant d'autres sources.
-* Si vous utilisez un réseau dédié pour la surveillance de l'état de santé, chaque nœud doit disposer d'une LIF de node-management sur ce réseau dédié.
+* Si vous utilisez un réseau dédié pour le contrôle de l'état, chaque nœud doit disposer d'une LIF de node-management dans ce réseau dédié.
 
 
 ====
+NetApp prend uniquement en charge les outils suivants pour contrôler les composants d'une configuration FC MetroCluster :
+
+* Brocade Network Advisor (BNA)
+* Système de navigation Brocade
+* Active IQ Config Advisor
+* Surveillance de l'état de santé NetApp (ONTAP)
+* Collecteur de données MetroCluster (MC_DC)
+
+
 
 
 ==== Configuration des commutateurs MetroCluster FC pour le contrôle de l'état du système
