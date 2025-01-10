@@ -38,15 +38,17 @@ IMPORTANT: Vous devez utiliser les protocoles d'authentification et de confident
 [listing]
 ----
 (IP_switch_1)# config
-(IP_switch_1) (Config)# snmp-server user <user_name> network-admin [auth-md5/auth-sha/noauth] "<auth_password>" [priv-aes128/priv-des] "<priv_password>"
+(IP_switch_1) (Config)# snmp-server user <user_name> network-admin auth-sha priv-aes128
 ----
 +
-Vous devez utiliser des guillemets autour des mots de passe d'authentification et de confidentialité, comme illustré dans l'exemple suivant :
+Entrez le mot de passe d'authentification lorsque vous y êtes invité.
 
 +
 [listing]
 ----
-snmp-server user admin1 network-admin auth-md5 "password" priv-des "password"
+#snmp-server user admin1 network-admin auth-sha priv-aes128
+
+Enter Authentication Password:
 ----
 
 
