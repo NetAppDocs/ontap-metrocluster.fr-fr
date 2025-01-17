@@ -6224,7 +6224,6 @@
   <block id="6690ef88016d17f6c44bd4b48aa3376d" category="list-text">Switch_B_1-IP</block>
   <block id="e1ae82bc069f614184f815cc069f6923" category="list-text">Switch_B_2-IP</block>
   <block id="26335ad95c44f5e233c28d27ab09f461" category="doc">Exigences relatives à la transition sans interruption de FC à IP</block>
-  <block id="1c80ea06ae866b6e42e9d266e0cb8906" category="list-text">Il doit prendre en charge une configuration de cluster commuté.</block>
   <block id="ae1d45e598f1c8a3374fce238800dbd0" category="summary">Vous devez vous assurer que les commutateurs IP sont pris en charge. Si le modèle de commutateur existant est pris en charge à la fois par la configuration FC MetroCluster d'origine et par la nouvelle configuration IP MetroCluster, vous pouvez réutiliser les commutateurs existants.</block>
   <block id="0893a7f23b0f90a08c249bbe325bf60f" category="doc">Considérations relatives aux commutateurs IP</block>
   <block id="ccd67995cab28bf139c1e242119020df" category="section-title">Commutateurs pris en charge</block>
@@ -6236,7 +6235,6 @@
   <block id="ee6ed7097775dc1dd54c183bab7fabca" category="list-text">La carte MetroCluster FC est un cluster sans commutateur ; de nouveaux commutateurs sont donc nécessaires.</block>
   <block id="f6ee19cc42b9955140e50bd5845ab941" category="list-text">Le FC MetroCluster est un cluster commuté, mais les commutateurs IP existants ne sont pas pris en charge par la configuration IP MetroCluster.</block>
   <block id="f2e4f8254f9371aba3bca00c7ae823a3" category="list-text">Vous voulez utiliser des commutateurs différents pour la configuration MetroCluster IP.</block>
-  <block id="4ee1b040d263e389d67330e3d505f6c5" category="paragraph">Consultez le document _NetApp Hardware Universe_ pour plus d'informations sur le modèle de plateforme et la prise en charge des commutateurs.</block>
   <block id="7b7a9334a27a1a54e96837d61b9dd49a" category="paragraph">Les nœuds de la configuration d'origine ont le suffixe -FC, ce qui indique qu'ils sont dans une configuration MetroCluster étendue ou Fabric.</block>
   <block id="05bbb43b3d923283e0b6ffafd088f41f" category="cell">Composants</block>
   <block id="05a9ed781d8f8fa2efe1cde3935013cd" category="list-text">Shelf_A_1</block>
@@ -11772,8 +11770,6 @@
   <block id="65cc666ecd4a5bdf3c624b12e425c91f" category="admonition">Vous devez redémarrer le contrôleur pour modifier la configuration.</block>
   <block id="57d89ae0fa9051439d76f5f61398fa16" category="list-text">Redémarrez le contrôleur en effectuant un basculement haute disponibilité dans les deux sens.</block>
   <block id="ee587f5bd979b8f81d1cbf341f0b2470" category="list-text">Si vous avez une configuration à huit nœuds, vous devez répéter la procédure complète à partir de <block ref="e821f1828723ededc57f2e891aea4a6a" category="inline-link-macro-rx"></block> Pour chacun des groupes FC DR.</block>
-  <block id="bb6c47f32358fe5242b175ac608f7d32" category="list-text">Si vous avez une configuration à huit nœuds, tous les nœuds doivent exécuter ONTAP 9.13.1 ou une version ultérieure.</block>
-  <block id="d8e49cb116ea5302a217647ce0506ea6" category="list-text">Si vous avez une configuration à quatre nœuds, tous les nœuds doivent exécuter ONTAP 9.8 ou une version ultérieure.</block>
   <block id="b8c86c478bbb73c53f5440966b9fb7d1" category="list-text">Ne dépassez pas les limites d'objet du « bas » des plates-formes de la combinaison. Appliquez la limite inférieure des objets des deux plates-formes.</block>
   <block id="c5c0eb8cddac9e2347091241dce72719" category="list-text">Si les limites de la plateforme cible sont inférieures aux limites de la MetroCluster, vous devez reconfigurer la MetroCluster pour qu'elle se situe au niveau ou en dessous des limites de la plateforme cible avant d'ajouter les nouveaux nœuds.</block>
   <block id="dc63943b5b97ad0f10f23219d6f93cd4" category="list-text">Modifiez l'adresse IP de l'homologue de cluster des nœuds IP transférés pour chaque cluster :</block>
@@ -14328,4 +14324,16 @@ L'exemple suivant montre que vous utilisez SCP pour télécharger le fichier<blo
   <block id="f4c0383379a5ae93d0b5e4c4f8586e47" category="open-title">Systèmes utilisant des ports partagés de cluster/haute disponibilité</block>
   <block id="fce1683696c48d3d34e98e19d634ae19" category="open-title">Systèmes utilisant des ports MetroCluster/HA partagés</block>
   <block id="eabf799ca909dc7fa9808c3abb476773" category="paragraph">Entrez le mot de passe d'authentification lorsque vous y êtes invité.</block>
+  <block id="8c62b33499e87d946c3be674c109e802" category="inline-link-macro">Étendez votre système à une configuration IP MetroCluster à huit nœuds</block>
+  <block id="d3f54bf5e1d7bcb93c8d615f71713d7f" category="paragraph">Si vous utilisez des commutateurs MetroCluster de stockage partagé, vous pouvez uniquement passer à une configuration IP MetroCluster à quatre nœuds. La transition vers une configuration IP MetroCluster à huit nœuds via des commutateurs MetroCluster de stockage partagé n'est pas prise en charge. Une fois la transition vers une configuration IP MetroCluster à quatre nœuds terminée, vous pouvez <block ref="6dee49609367b51155e32a3a9526bace" category="inline-link-macro-rx"></block>.</block>
+  <block id="2e6fac9e7be327118126470b28ac80e9" category="paragraph">Voir<block ref="16a6d09025d51cb8dd3516798b3fee8a" category="inline-link-rx"></block> pour plus d'informations sur les modèles de plate-forme et la prise en charge des commutateurs.</block>
+  <block id="e77208401ec89552ec5e85789d235879" category="paragraph">Avant de démarrer le processus de transition, vérifiez que la configuration répond aux exigences.</block>
+  <block id="1229d62fc62771990d4aca35e86babbb" category="paragraph">Vous pouvez effectuer une transition FC à IP sans interruption si votre configuration répond aux exigences suivantes :</block>
+  <block id="c93eb5b603c598e0771b611b95a1f13a" category="list-text">Si vous avez une configuration à huit nœuds, tous les nœuds exécutent ONTAP 9.13.1 ou une version ultérieure.</block>
+  <block id="fbe14351123598a8a64fee33aa1a2a2b" category="list-text">Si vous avez une configuration à quatre nœuds, tous les nœuds exécutent ONTAP 9.8 ou une version ultérieure.</block>
+  <block id="d7b625bf0290f633deca10fab483feb9" category="list-text">Les plateformes existantes et nouvelles constituent une combinaison prise en charge pour la transition.</block>
+  <block id="449f221b85b0830ccbe6f932311166dc" category="list-text">Votre configuration prend en charge une configuration de cluster commuté.</block>
+  <block id="ec4312d0db3bce928129e7e5c3a58d73" category="paragraph"><block ref="ec4312d0db3bce928129e7e5c3a58d73" category="inline-link-rx"></block></block>
+  <block id="c42a1c17fcba2c3f1c614f6d301144e6" category="paragraph">Si vous utilisez des commutateurs MetroCluster de stockage partagé, vous pouvez uniquement passer à une configuration IP MetroCluster à quatre nœuds. La transition vers une configuration IP MetroCluster à huit nœuds via des commutateurs MetroCluster de stockage partagé n'est pas prise en charge. Une fois la transition vers une configuration IP MetroCluster à quatre nœuds terminée, vous pouvez <block ref="6dee49609367b51155e32a3a9526bace" category="inline-link-macro-rx"></block>.</block>
+  <block id="fb9168c2e293c1ba8ecd781a9f35d00f" category="list-text">Votre configuration répond à toutes les exigences et est câblée comme décrit dans les procédures _MetroCluster installation and Configuration_ suivantes.</block>
 </blocks>

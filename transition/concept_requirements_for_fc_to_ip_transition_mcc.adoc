@@ -11,19 +11,28 @@ summary: Avant de lancer le processus de transition, vous devez vérifier que la
 
 
 [role="lead"]
-Avant de lancer le processus de transition, vous devez vérifier que la configuration répond aux exigences.
+Avant de démarrer le processus de transition, vérifiez que la configuration répond aux exigences.
 
-* Si vous avez une configuration à huit nœuds, tous les nœuds doivent exécuter ONTAP 9.13.1 ou une version ultérieure.
-* Si vous avez une configuration à quatre nœuds, tous les nœuds doivent exécuter ONTAP 9.8 ou une version ultérieure.
-* Les plateformes existantes et nouvelles doivent être prises en charge pour la transition.
+Vous pouvez effectuer une transition FC à IP sans interruption si votre configuration répond aux exigences suivantes :
+
+* Si vous avez une configuration à huit nœuds, tous les nœuds exécutent ONTAP 9.13.1 ou une version ultérieure.
+* Si vous avez une configuration à quatre nœuds, tous les nœuds exécutent ONTAP 9.8 ou une version ultérieure.
+* Les plateformes existantes et nouvelles constituent une combinaison prise en charge pour la transition.
 +
 link:concept_choosing_your_transition_procedure_mcc_transition.html["Plateformes prises en charge pour une transition sans interruption"]
 
-* Il doit prendre en charge une configuration de cluster commuté.
+* Votre configuration prend en charge une configuration de cluster commuté.
 +
-https://hwu.netapp.com["NetApp Hardware Universe"]
+https://hwu.netapp.com["Hardware Universe"^]
 
-* Il doit répondre à toutes les exigences et à tous les câbles, comme décrit dans les procédures _MetroCluster installation and Configuration_.
+
+
+[CAUTION]
+====
+Si vous utilisez des commutateurs MetroCluster de stockage partagé, vous pouvez uniquement passer à une configuration IP MetroCluster à quatre nœuds. La transition vers une configuration IP MetroCluster à huit nœuds via des commutateurs MetroCluster de stockage partagé n'est pas prise en charge. Une fois la transition vers une configuration IP MetroCluster à quatre nœuds terminée, vous pouvez link:../upgrade/task_expand_a_four_node_mcc_ip_configuration.html["Étendez votre système à une configuration IP MetroCluster à huit nœuds"].
+
+====
+* Votre configuration répond à toutes les exigences et est câblée comme décrit dans les procédures _MetroCluster installation and Configuration_ suivantes.
 +
 link:../install-fc/index.html["Installation et configuration de la solution Fabric-Attached MetroCluster"]
 
