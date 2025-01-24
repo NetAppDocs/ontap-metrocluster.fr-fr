@@ -1,0 +1,77 @@
+---
+permalink: upgrade/upgrade-mcc-ip-system-controller-replace-requirements.html 
+sidebar: sidebar 
+keywords: metrocluster, upgrade, controllers, switchover, switchback, ip, configuration, net, boot, root, aggregate, system, commands, mcc 
+summary: 'Vérifiez que votre système répond à toutes les exigences avant d"effectuer la mise à niveau du contrôleur.' 
+---
+= Configuration requise pour l'utilisation de cette procédure de mise à niveau MetroCluster IP
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vérifiez que votre système répond à toutes les exigences avant d'effectuer la mise à niveau du contrôleur.
+
+* Cette procédure ne peut être utilisée que pour la mise à niveau du contrôleur.
++
+Les autres composants de la configuration, tels que les tiroirs de stockage ou les commutateurs, ne peuvent pas être mis à niveau simultanément.
+
+* Les commutateurs IP MetroCluster (type de commutateur, fournisseur et modèle) et la version du micrologiciel doivent être pris en charge sur les contrôleurs existants et nouveaux de votre configuration de mise à niveau.
++
+Reportez-vous link:https://hwu.netapp.com["Hardware Universe"^] au ou au link:https://imt.netapp.com/matrix/["IMT"^] pour connaître les versions de micrologiciel et les commutateurs pris en charge.
+
+* Les systèmes IP MetroCluster doivent exécuter la même version de ONTAP sur les deux sites.
+* Lorsque vous effectuez une mise à niveau à partir de systèmes disposant de plus de slots ou de ports que le nouveau système, vous devez vérifier qu'il y a suffisamment de slots et de ports sur le nouveau système.
++
+Avant de commencer la mise à niveau, reportez-vous au link:https://hwu.netapp.com["Hardware Universe"^]pour vérifier le nombre de slots et de ports sur le nouveau système.
+
+* Vous pouvez utiliser cette procédure pour mettre à niveau les contrôleurs d'une configuration IP MetroCluster à quatre nœuds à l'aide du basculement et du rétablissement automatisés basés sur NSO.
++
+
+NOTE: Une mise à niveau avec transfert d'agrégats (ARL) avec des commandes de remplacement des contrôleurs de systèmes n'est pas prise en charge dans une configuration IP MetroCluster à quatre nœuds.
+
+* S'il est activé sur votre système, link:../maintain/task-configure-encryption.html#disable-end-to-end-encryption["désactivez le chiffrement de bout en bout"] avant d'effectuer la mise à niveau.
+* Vous devez utiliser la procédure de mise à niveau automatisée du contrôleur NSO pour mettre à niveau les contrôleurs dans l'ordre sur les deux sites.
+* Cette procédure de mise à niveau automatisée du contrôleur NSO-5 vous permet de lancer le remplacement du contrôleur sur un site de reprise après incident MetroCluster. Vous pouvez effectuer le remplacement d'un contrôleur uniquement sur un site à la fois.
+* Pour lancer un remplacement du contrôleur sur le site A, vous devez exécuter la commande de démarrage du remplacement du contrôleur depuis le site B. L'opération vous guide à remplacer les contrôleurs des deux nœuds sur le site A uniquement. Pour remplacer les contrôleurs sur le site B, vous devez exécuter la commande de démarrage de remplacement du contrôleur depuis le site A. Un message indique le site sur lequel les contrôleurs sont remplacés.
+
+
+Les exemples de noms suivants sont utilisés dans cette procédure :
+
+* Cluster_A au site_A
++
+** Avant la mise à niveau :
++
+*** Node_A_1-Old
+*** Node_A_2-Old
+
+
+** Après la mise à niveau :
++
+*** Node_A_1-New
+*** Node_A_2-New
+
+
+
+
+* Cluster_B au niveau du site_B
++
+** Avant la mise à niveau :
++
+*** Node_B_1-Old
+*** Node_B_2-Old
+
+
+** Après la mise à niveau :
++
+*** Node_B_1-New
+*** Node_B_2-New
+
+
+
+
+
+
+.Et la suite ?
+link:upgrade-mcc-ip-system-controller-replace-console-logging.html["Activer la journalisation de la console"].

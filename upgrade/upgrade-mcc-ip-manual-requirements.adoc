@@ -1,0 +1,92 @@
+---
+permalink: upgrade/upgrade-mcc-ip-manual-requirements.html 
+sidebar: sidebar 
+keywords: metrocluster, upgrade, controllers, switchover, switchback, ip, configuration, net, boot, root, aggregate, system, commands, mcc, requirements 
+summary: 'Vérifiez que votre système répond à toutes les exigences avant d"effectuer la mise à niveau du contrôleur.' 
+---
+= Configuration requise pour l'utilisation de cette procédure de mise à niveau MetroCluster IP
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vérifiez que votre système répond à toutes les exigences avant d'effectuer la mise à niveau du contrôleur.
+
+
+
+== Plateformes prises en charge par cette procédure
+
+* Ces plateformes doivent exécuter ONTAP 9.8 ou une version ultérieure.
+* La plateforme cible (nouvelle) doit être un modèle différent de celui de la plateforme d'origine.
+* Vous pouvez uniquement mettre à niveau des modèles de plate-forme spécifiques en suivant cette procédure dans une configuration MetroCluster IP.
++
+** Pour plus d'informations sur les combinaisons de mise à niveau de plate-forme prises en charge, consultez le tableau de mise à niveau IP MetroCluster dans link:concept_choosing_controller_upgrade_mcc.html["Choisir la procédure de mise à niveau du contrôleur"].
++
+Reportez-vous à la section https://docs.netapp.com/us-en/ontap-metrocluster/upgrade/concept_choosing_controller_upgrade_mcc.html#choosing-a-procedure-that-uses-the-switchover-and-switchback-process["Choisissez une méthode de mise à niveau ou de rafraîchissement"] pour les procédures supplémentaires.
+
+
+
+
+
+
+
+== De formation
+
+* Cette procédure s'applique aux modules de contrôleur dans une configuration MetroCluster IP.
+* Tous les contrôleurs de la configuration doivent être mis à niveau pendant la même période de maintenance.
++
+L'exploitation de la configuration MetroCluster avec différents types de contrôleurs n'est pas prise en charge en dehors de cette activité de maintenance.
+
+* Les systèmes IP MetroCluster doivent exécuter la même version de ONTAP sur les deux sites.
+* Les commutateurs IP MetroCluster (type de commutateur, fournisseur et modèle) et la version du firmware doivent être pris en charge sur les contrôleurs existants et nouveaux de votre configuration de mise à niveau.
++
+Reportez-vous link:https://hwu.netapp.com["Hardware Universe"^] au ou au link:https://imt.netapp.com/matrix/["IMT"^] pour connaître les versions de micrologiciel et les commutateurs pris en charge.
+
+* Lorsque vous effectuez une mise à niveau à partir de systèmes disposant de plus de slots ou de ports que le nouveau système, vous devez vérifier qu'il y a suffisamment de slots et de ports sur le nouveau système.
++
+Avant de commencer la mise à niveau, reportez-vous au link:https://hwu.netapp.com["Hardware Universe"^]pour vérifier le nombre de slots et de ports sur le nouveau système.
+
+* S'il est activé sur votre système, link:../maintain/task-configure-encryption.html#disable-end-to-end-encryption["désactivez le chiffrement de bout en bout"] avant d'effectuer la mise à niveau.
+* Si la nouvelle plate-forme comporte moins de slots que le système d'origine ou si elle comporte moins ou différents types de ports, vous devrez peut-être ajouter un adaptateur au nouveau système.
+* Vous réutilisez les adresses IP, les masques de réseau et les passerelles des plates-formes d'origine sur les nouvelles plates-formes.
+
+
+Les exemples de noms suivants sont utilisés dans cette procédure :
+
+* Cluster_A au site_A
++
+** Avant la mise à niveau :
++
+*** Node_A_1-Old
+*** Node_A_2-Old
+
+
+** Après la mise à niveau :
++
+*** Node_A_1-New
+*** Node_A_2-New
+
+
+
+
+* Cluster_B au niveau du site_B
++
+** Avant la mise à niveau :
++
+*** Node_B_1-Old
+*** Node_B_2-Old
+
+
+** Après la mise à niveau :
++
+*** Node_B_1-New
+*** Node_B_2-New
+
+
+
+
+
+
+.Et la suite ?
+link:upgrade-mcc-ip-manual-console-logging.html["Activer la journalisation de la console"].

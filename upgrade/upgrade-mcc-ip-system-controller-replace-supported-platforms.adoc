@@ -1,0 +1,50 @@
+---
+permalink: upgrade/upgrade-mcc-ip-system-controller-replace-supported-platforms.html 
+sidebar: sidebar 
+keywords: metrocluster, upgrade, controllers, switchover, switchback, ip, configuration, net, boot, root, aggregate, system, commands, mcc 
+summary: Avant de commencer la mise à niveau du contrôleur IP MetroCluster, vous devez vérifier que votre combinaison de mise à niveau est prise en charge. 
+---
+= Mises à niveau de contrôleurs IP MetroCluster prises en charge à l'aide de commandes « system Controller replace »
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Avant de commencer la mise à niveau du contrôleur IP MetroCluster, vous devez vérifier que votre combinaison de mise à niveau est prise en charge.
+
+Trouvez votre plate-forme *Source* dans les tableaux de mise à niveau du contrôleur MetroCluster de cette section. Si l'intersection de la ligne de plate-forme *Source* et de la colonne de plate-forme *Target* est vide, la mise à niveau n'est pas prise en charge.
+
+Avant de commencer la mise à niveau, vérifiez les points suivants afin de vous assurer que votre configuration est prise en charge.
+
+* Si votre plate-forme n'est pas répertoriée, aucune combinaison de mise à niveau du contrôleur n'est prise en charge.
+* Lorsque vous effectuez une mise à niveau du contrôleur, l'ancien et le nouveau type de plate-forme *doivent* correspondre :
++
+** Vous pouvez mettre à niveau un système FAS vers un système FAS ou un système AFF A-Series vers un système AFF A-Series.
+** Vous ne pouvez pas mettre à niveau un système FAS vers un système AFF A-Series ou un système AFF A-Series vers un système AFF C-Series.
++
+Par exemple, si la plateforme que vous souhaitez mettre à niveau est un système FAS8200, vous pouvez effectuer une mise à niveau vers un système FAS9000. Vous ne pouvez pas mettre à niveau un système FAS8200 vers un système AFF A700.
+
+
+
+* Tous les nœuds (anciens et nouveaux) de la configuration MetroCluster doivent exécuter la même version de ONTAP. Reportez-vous au link:https://hwu.netapp.com["Hardware Universe"^]pour connaître la version minimale de ONTAP prise en charge pour votre combinaison.
+
+
+.Mises à niveau des contrôleurs IP AFF et FAS MetroCluster prises en charge
+Le tableau suivant présente les combinaisons de plateformes prises en charge pour la mise à niveau d'un système AFF ou FAS dans une configuration IP MetroCluster à l'aide des commandes « system Controller replace » :
+
+image:../media/mccip_assisted_controller_upgrade_comb.png["Le présente les combinaisons de plateformes prises en charge pour les mises à niveau IP MetroCluster à l'aide des commandes de remplacement du contrôleur système."]
+
+* Remarque 1 : les mises à niveau des contrôleurs sont prises en charge sur les systèmes exécutant ONTAP 9.13.1 ou version ultérieure.
+* Remarque 2 : la plateforme cible ne peut pas avoir de disques internes tant que la mise à niveau du contrôleur n'est pas terminée. Vous pouvez ajouter les lecteurs internes après la mise à niveau.
+* Remarque 3 : nécessite le remplacement des modules de contrôleur.
+* Remarque 4 : requiert des modules IOM pour convertir les anciens contrôleurs en tiroir SAS externe. Pour connaître les modules IOM pris en charge, reportez-vous aulink:https://hwu.netapp.com/["Hardware Universe"^].
+
+
+.Mises à niveau du contrôleur IP ASA MetroCluster prises en charge
+La mise à niveau des contrôleurs à l'aide de `system controller replace` commandes sur les systèmes ASA n'est pas prise en charge.
+
+Reportez-vous link:https://docs.netapp.com/us-en/ontap-metrocluster/upgrade/concept_choosing_an_upgrade_method_mcc.html["Choisissez une méthode de mise à niveau ou d'actualisation"]à pour connaître les procédures supplémentaires.
+
+.Et la suite ?
+Examinez le link:upgrade-mcc-ip-system-controller-replace-requirements.html["conditions requises pour utiliser cette procédure de mise à niveau"].

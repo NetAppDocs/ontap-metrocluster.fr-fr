@@ -1,0 +1,166 @@
+---
+permalink: upgrade/upgrade-mcc-ip-manual-hba-set-ha.html 
+sidebar: sidebar 
+keywords: metrocluster, upgrade, controllers, switchover, switchback, ip, configuration, net, boot, root, aggregate, system, commands, mcc 
+summary: 'Configurez les cartes HBA dans le module de contrôleur, puis vérifiez et définissez l"état haute disponibilité du contrôleur et du châssis.' 
+---
+= Restaurez la configuration du HBA et définissez l'état haute disponibilité du contrôleur IP et du châssis MetroCluster
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Configurez les cartes HBA dans le module de contrôleur, puis vérifiez et définissez l'état haute disponibilité du contrôleur et du châssis.
+
+
+
+== Restaurez la configuration HBA
+
+En fonction de la présence et de la configuration des cartes HBA dans le module de contrôleur, vous devez les configurer correctement pour votre site.
+
+.Étapes
+. En mode Maintenance, configurez les paramètres des HBA du système :
++
+.. Vérifiez les paramètres actuels des ports : `ucadmin show`
+.. Mettez à jour les paramètres de port selon vos besoins.
+
+
++
+|===
+
+
+| Si vous disposez de ce type de HBA et du mode souhaité... | Utilisez cette commande... 
+
+
+ a| 
+FC CNA
+ a| 
+`ucadmin modify -m fc -t initiator <adapter-name>`
+
+
+
+ a| 
+Ethernet CNA
+ a| 
+`ucadmin modify -mode cna <adapter-name>`
+
+
+
+ a| 
+Cible FC
+ a| 
+`fcadmin config -t target <adapter-name>`
+
+
+
+ a| 
+Initiateur FC
+ a| 
+`fcadmin config -t initiator <adapter-name>`
+
+|===
+. Quitter le mode Maintenance :
++
+`halt`
+
++
+Après avoir exécuté la commande, attendez que le nœud s'arrête à l' `LOADER` invite.
+
+. Redémarrez le nœud en mode Maintenance pour appliquer les modifications de configuration :
++
+`boot_ontap maint`
+
+. Vérifiez les modifications :
++
+|===
+
+
+| Si vous disposez de ce type de HBA... | Utilisez cette commande... 
+
+
+ a| 
+CNA
+ a| 
+`ucadmin show`
+
+
+
+ a| 
+FC
+ a| 
+`fcadmin show`
+
+|===
+
+
+
+
+== Définissez l'état de haute disponibilité sur les nouveaux contrôleurs et châssis
+
+Vous devez vérifier l'état haute disponibilité des contrôleurs et du châssis, et mettre à jour si nécessaire l'état en fonction de la configuration du système.
+
+.Étapes
+. En mode Maintenance, afficher l'état HA du module de contrôleur et du châssis :
++
+`ha-config show`
+
++
+L'état de haute disponibilité de tous les composants doit être `mccip`.
+
+. Si l'état système affiché du contrôleur ou du châssis est incorrect, définissez l'état de haute disponibilité :
++
+`ha-config modify controller mccip`
+
++
+`ha-config modify chassis mccip`
+
+. Vérifiez et modifiez les ports Ethernet connectés aux tiroirs NS224 ou aux commutateurs de stockage.
++
+.. Vérifiez les ports Ethernet connectés aux tiroirs NS224 ou aux commutateurs de stockage :
++
+`storage port show`
+
+.. Configurez tous les ports Ethernet connectés aux tiroirs Ethernet ou aux commutateurs de stockage, y compris les commutateurs partagés pour le stockage et le cluster sur le `storage` mode :
++
+`storage port modify -p <port> -m storage`
+
++
+Exemple :
+
++
+[listing]
+----
+*> storage port modify -p e5b -m storage
+Changing NVMe-oF port e5b to storage mode
+----
++
+
+NOTE: Ce paramètre doit être défini sur tous les ports concernés pour que la mise à niveau soit réussie.
+
++
+Les disques des tiroirs connectés aux ports Ethernet sont indiqués dans la `sysconfig -v` sortie.
+
++
+Pour plus d'informations sur les ports de stockage du système vers lequel vous effectuez la mise à niveau, reportez-vous link:https://hwu.netapp.com["Hardware Universe"^] au.
+
+.. Vérifier que `storage` le mode est défini et vérifier que les ports sont à l'état online :
++
+`storage port show`
+
+
+
+. Arrêter le nœud : `halt`
++
+Le nœud doit s'arrêter au niveau du `LOADER>` à l'invite.
+
+. Sur chaque nœud, vérifiez la date, l'heure et le fuseau horaire du système : `show date`
+. Si nécessaire, définissez la date en UTC ou GMT : `set date <mm/dd/yyyy>`
+. Vérifiez l'heure à l'aide de la commande suivante à l'invite de l'environnement d'amorçage : `show time`
+. Si nécessaire, définissez l'heure en UTC ou GMT : `set time <hh:mm:ss>`
+. Enregistrer les paramètres : `saveenv`
+. Collecter les variables d'environnement : `printenv`
+
+
+.Et la suite ?
+link:upgrade-mcc-ip-manual-apply-rcf-set-bootarg.html["Mettez à jour les CFR du commutateur et définissez les valeurs de démarrage IP MetroCluster"].

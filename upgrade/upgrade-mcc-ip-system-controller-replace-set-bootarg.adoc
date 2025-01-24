@@ -1,0 +1,113 @@
+---
+permalink: upgrade/upgrade-mcc-ip-system-controller-replace-set-bootarg.html 
+sidebar: sidebar 
+keywords: metrocluster, upgrade, controllers, switchover, switchback, ip, configuration, net, boot, root, aggregate, system, commands, mcc 
+summary: Les mises à niveau de systèmes introduites dans ONTAP 9.15.1 ou version ultérieure nécessitent que vous mettiez un bootarg avant de pouvoir procéder à la mise à niveau. 
+---
+= Définir le démarrage requis (pour les mises à niveau MetroCluster IP vers les systèmes introduits dans ONTAP 9.15.1 ou version ultérieure)
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Les mises à niveau de systèmes introduites dans ONTAP 9.15.1 ou version ultérieure nécessitent que vous mettiez un bootarg avant de pouvoir procéder à la mise à niveau.
+
+
+
+== Étape 1 : déterminez le démarrage que vous devez définir sur les anciens contrôleurs
+
+Pour toutes les mises à niveau prises en charge vers les systèmes suivants, vous devez définir un amorçage sur les anciens contrôleurs avant d'effectuer la mise à niveau du contrôleur :
+
+* AFF A70, AFF A90, AFF A1K
+* FAS70, FAS90
+* AFF C80
+* AFF A50, AFF A20, AFF A30
+* AFF C30, AFF C60
+
+
+
+CAUTION: Si vous effectuez une mise à niveau vers l'un des systèmes répertoriés, vous *devez* définir un démarrage requis sur le système existant avant d'effectuer la mise à niveau. Pour toutes les autres mises à niveau, vous pouvez ignorer cette tâche et accéder directement à link:upgrade-mcc-ip-system-controller-replace-prechecks.html["Préparez le système pour la mise à niveau"].
+
+La plupart des mises à niveau de systèmes introduites dans ONTAP 9.15.1 ou version ultérieure nécessitent que vous définissez le `hw.cxgbe.toe_keepalive_disable` démarrage sur les anciens contrôleurs. Cependant, certains chemins de mise à niveau nécessitent que vous mettiez le `bootarg.siw.interop_enabled` bootarg à la place.
+
+Utilisez le tableau suivant pour déterminer quel bootarg vous devez définir pour votre combinaison de mise à niveau spécifique.
+
+[cols="2*"]
+|===
+| Pour cette mise à niveau... | Définir le bootarg... 
+
+
+| De AFF A250 à AFF A30 | `bootarg.siw.interop_enabled` 
+
+
+| De AFF C250 à AFF C30 | `bootarg.siw.interop_enabled` 
+
+
+| De AFF A150 à AFF A20 | `bootarg.siw.interop_enabled` 
+
+
+| De AFF A220 à AFF A20 | `bootarg.siw.interop_enabled` 
+
+
+| Toutes les autres mises à niveau prises en charge vers les systèmes AFF A70, AFF A90, AFF A1K, FAS70, FAS90, AFF C80, AFF A50, AFF A20, AFF A30, AFF C30 ou AFF C60 | `hw.cxgbe.toe_keepalive_disable` 
+|===
+
+
+== Étape 2 : définissez le démarrage requis sur les anciens contrôleurs
+
+Cette tâche est *uniquement* requise lorsque vous effectuez une mise à niveau vers un système AFF A70, AFF A90, AFF A1K, FAS70, FAS90, AFF C80, AFF A50, AFF A20, AFF A30, AFF C30 ou AFF C60.
+
+.Étapes
+. Arrêtez un nœud sur chaque site et permettez à son partenaire haute disponibilité d'effectuer une prise de contrôle du stockage du nœud :
++
+`halt  -node <node_name>`
+
+. Définissez le démarrage requis pour votre combinaison de mise à niveau. Vous avez déjà déterminé le bootarg que vous devez définir en utilisant la table dans <<upgrade_paths_bootarg_assisted,déterminez le bootarg à définir>>.
++
+[role="tabbed-block"]
+====
+.hw.cxgbe.tep_keepalive_disable
+--
+.. À `LOADER` l'invite du nœud interrompu, entrez les informations suivantes :
++
+`setenv hw.cxgbe.toe_keepalive_disable 1`
+
++
+`saveenv`
+
++
+`printenv hw.cxgbe.toe_keepalive_disable`
+
+
+
+--
+.bootarg.siw.interop_enabled
+--
+.. À `LOADER` l'invite du nœud interrompu, entrez les informations suivantes :
++
+`setenv bootarg.siw.interop_enabled 1`
+
++
+`saveenv`
+
++
+`printenv bootarg.siw.interop_enabled`
+
+
+
+--
+====
+. Démarrez le nœud :
++
+`boot_ontap`
+
+. Au démarrage du nœud, effectuez un rétablissement pour le nœud à l'invite :
++
+`storage failover giveback -ofnode <node_name>`
+
+. Répétez les étapes pour chaque nœud du groupe de reprise sur incident en cours de mise à niveau.
+
+
+.Et la suite
+link:upgrade-mcc-ip-system-controller-replace-prechecks.html["Préparez le système pour la mise à niveau"].

@@ -1,0 +1,57 @@
+---
+permalink: upgrade/upgrade-mcc-ip-manual-switchover.html 
+sidebar: sidebar 
+keywords: metrocluster, upgrade, controllers, switchover, switchback, ip, configuration, net, boot, root, aggregate, system, commands, mcc 
+summary: Vous basculez la configuration sur site_A pour que les plates-formes sur site_B puissent être mises à niveau. 
+---
+= Basculer la configuration IP MetroCluster
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous basculez la configuration sur site_A pour que les plates-formes sur site_B puissent être mises à niveau.
+
+.Description de la tâche
+Cette tâche doit être effectuée sur site_A.
+
+Une fois cette tâche terminée :
+
+* Cluster_A est actif et assure le service des données pour les deux sites.
+* Cluster_B est inactif et prêt à commencer le processus de mise à niveau.
+
+
+image::../media/mcc_upgrade_cluster_a_in_switchover.png[La présente cluster_A est prêt pour la mise à niveau et cluster_B est en mode de basculement]
+
+.Étapes
+. Basculer la configuration MetroCluster sur site_A afin de mettre à niveau les nœuds site_B :
++
+.. Exécutez la commande suivante sur cluster_A :
++
+`metrocluster switchover -controller-replacement true`
+
++
+L'opération peut prendre plusieurs minutes.
+
+.. Surveiller le fonctionnement du basculement :
++
+`metrocluster operation show`
+
+.. Une fois l'opération terminée, vérifiez que les nœuds sont en état de basculement :
++
+`metrocluster show`
+
+.. Vérifier l'état des nœuds MetroCluster :
++
+`metrocluster node show`
+
++
+La fonctionnalité de correction automatique des agrégats après le basculement négocié est désactivée lors d'une mise à niveau du contrôleur.
+
+
+
+
+
+.Et la suite ?
+link:upgrade-mcc-ip-manual-uninstall-controllers.html["Supprimez les configurations d'interface et désinstallez les anciens contrôleurs"].

@@ -1,0 +1,29 @@
+---
+permalink: upgrade/upgrade-mcc-ip-manual.html 
+sidebar: sidebar 
+keywords: metrocluster, upgrade, controllers, switchover, switchback, ip, configuration, net, boot, root, aggregate, system, commands, mcc 
+summary: Depuis ONTAP 9.8, vous pouvez utiliser le processus de basculement MetroCluster pour fournir aux clients un service sans interruption pendant la mise à niveau des modules de contrôleur sur le cluster partenaire. 
+---
+= Workflow de mise à niveau du contrôleur IP MetroCluster avec basculement et rétablissement (ONTAP 9.8 et versions ultérieures)
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Depuis ONTAP 9.8, vous pouvez utiliser le processus de basculement MetroCluster pour fournir aux clients un service sans interruption pendant la mise à niveau des modules de contrôleur sur le cluster partenaire. Dans le cadre de cette procédure, d'autres composants (tels que des tiroirs de stockage ou des commutateurs) ne peuvent pas être mis à niveau.
+
+.A propos de ce flux de travail
+Ce workflow peut être utilisé pour mettre à niveau les contrôleurs IP MetroCluster à l'aide du basculement et de la reprise sur les systèmes exécutant ONTAP 9.8 ou version ultérieure.
+
+.image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-1.png["Une seule"]link:upgrade-mcc-ip-manual-requirements.html["Préparation à la mise à niveau"]
+[role="quick-margin-para"]
+Vérifiez les combinaisons de mises à niveau et la configuration requise prises en charge, puis effectuez les tâches requises pour préparer votre système à la mise à niveau du contrôleur.
+
+.image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-2.png["Deux"]link:upgrade-mcc-ip-manual-switchover.html["Mettez à niveau vos contrôleurs"]
+[role="quick-margin-para"]
+Basculer la configuration MetroCluster afin de supprimer la configuration des anciens contrôleurs, mettre en rack et installer les nouveaux contrôleurs, réaffecter les disques de l'agrégat racine et démarrer les nouveaux contrôleurs avant d'effectuer un rétablissement.
+
+.image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-3.png["Trois"]link:upgrade-mcc-ip-manual-complete-upgrade.html["Terminez la mise à niveau"]
+[role="quick-margin-para"]
+Terminez la mise à niveau du contrôleur en répétant les tâches de mise à niveau sur le second site et en restaurant toute configuration de contrôle.

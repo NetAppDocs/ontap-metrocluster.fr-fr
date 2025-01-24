@@ -1,0 +1,131 @@
+---
+permalink: upgrade/upgrade-mcc-ip-manual-reassign-root-agg.html 
+sidebar: sidebar 
+keywords: metrocluster, upgrade, controllers, switchover, switchback, ip, configuration, net, boot, root, aggregate, system, commands, mcc 
+summary: 'Réaffectez les disques de l"agrégat racine au nouveau module de contrôleur, en utilisant les ID système que vous avez collectés précédemment.' 
+---
+= Réaffectez les disques d'agrégat racine au nouveau module de contrôleur IP MetroCluster
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Réaffectez les disques de l'agrégat racine au nouveau module de contrôleur à l'aide des ID système que vous avez collectés précédemment.
+
+.Description de la tâche
+Les anciens ID système ont été identifiés dans link:upgrade-mcc-ip-prepare-system.html#gather-information-before-the-upgrade["Recueillez les informations avant la mise à niveau"].
+
+Vous effectuez les étapes en mode Maintenance.
+
+
+NOTE: Les disques de l'agrégat racine sont les seuls disques qui doivent être réaffectés pendant le processus de mise à niveau du contrôleur. La propriété des disques des agrégats de données est gérée dans le cadre de l'opération de basculement/rétablissement.
+
+.Étapes
+. Démarrez le système en mode maintenance :
++
+`boot_ontap maint`
+
+. Afficher les disques du node_B_1-New à partir de l'invite du mode maintenance :
++
+`disk show -a`
+
++
+
+CAUTION: Avant de procéder à la réaffectation des disques, vérifiez que les disques pool0 et pool1 appartenant à l'agrégat racine du nœud sont affichés dans la `disk show` sortie. Dans l'exemple suivant, le résultat répertorie les disques pool0 et pool1 appartenant à node_B_1-Old.
+
++
+Le résultat de la commande affiche l'ID système du nouveau module de contrôleur (1574774970). Cependant, l'ancien ID système (537403322) possède toujours les disques de l'agrégat racine. Cet exemple n'affiche pas les disques appartenant à d'autres nœuds dans la configuration MetroCluster.
+
++
+[listing]
+----
+*> disk show -a
+Local System ID: 1574774970
+DISK                  OWNER                 POOL   SERIAL NUMBER   HOME                  DR HOME
+------------          ---------             -----  -------------   -------------         -------------
+prod3-rk18:9.126L44   node_B_1-old(537403322)  Pool1  PZHYN0MD     node_B_1-old(537403322)  node_B_1-old(537403322)
+prod4-rk18:9.126L49   node_B_1-old(537403322)  Pool1  PPG3J5HA     node_B_1-old(537403322)  node_B_1-old(537403322)
+prod4-rk18:8.126L21   node_B_1-old(537403322)  Pool1  PZHTDSZD     node_B_1-old(537403322)  node_B_1-old(537403322)
+prod2-rk18:8.126L2    node_B_1-old(537403322)  Pool0  S0M1J2CF     node_B_1-old(537403322)  node_B_1-old(537403322)
+prod2-rk18:8.126L3    node_B_1-old(537403322)  Pool0  S0M0CQM5     node_B_1-old(537403322)  node_B_1-old(537403322)
+prod1-rk18:9.126L27   node_B_1-old(537403322)  Pool0  S0M1PSDW     node_B_1-old(537403322)  node_B_1-old(537403322)
+.
+.
+.
+----
+. Réallouer les disques racine de l'agrégat sur les tiroirs disques vers les nouveaux contrôleurs.
++
+|===
+
+
+| Si vous utilisez ADP... | Utilisez ensuite cette commande... 
+
+
+ a| 
+Oui.
+ a| 
+`disk reassign -s <old-sysid> -d <new-sysid> -r <dr-partner-sysid>`
+
+
+
+ a| 
+Non
+ a| 
+`disk reassign -s <old-sysid> -d <new-sysid>`
+
+|===
+. Réallouer les disques root de l'agrégat sur les tiroirs disques vers les nouveaux contrôleurs :
++
+`disk reassign -s <old-sysid> -d <new-sysid>`
+
++
+L'exemple suivant montre la réaffectation de disques dans une configuration non ADP :
+
++
+[listing]
+----
+*> disk reassign -s 537403322 -d 1574774970
+Partner node must not be in Takeover mode during disk reassignment from maintenance mode.
+Serious problems could result!!
+Do not proceed with reassignment if the partner is in takeover mode. Abort reassignment (y/n)? n
+
+After the node becomes operational, you must perform a takeover and giveback of the HA partner node to ensure disk reassignment is successful.
+Do you want to continue (y/n)? y
+Disk ownership will be updated on all disks previously belonging to Filer with sysid 537403322.
+Do you want to continue (y/n)? y
+----
+. Vérifier que les disques de l'agrégat racine sont correctement réaffectés :
++
+`disk show`
+
++
+`storage aggr status`
+
++
+[listing]
+----
+
+*> disk show
+Local System ID: 537097247
+
+  DISK                    OWNER                    POOL   SERIAL NUMBER   HOME                     DR HOME
+------------              -------------            -----  -------------   -------------            -------------
+prod03-rk18:8.126L18 node_B_1-new(537097247)  Pool1  PZHYN0MD        node_B_1-new(537097247)   node_B_1-new(537097247)
+prod04-rk18:9.126L49 node_B_1-new(537097247)  Pool1  PPG3J5HA        node_B_1-new(537097247)   node_B_1-new(537097247)
+prod04-rk18:8.126L21 node_B_1-new(537097247)  Pool1  PZHTDSZD        node_B_1-new(537097247)   node_B_1-new(537097247)
+prod02-rk18:8.126L2  node_B_1-new(537097247)  Pool0  S0M1J2CF        node_B_1-new(537097247)   node_B_1-new(537097247)
+prod02-rk18:9.126L29 node_B_1-new(537097247)  Pool0  S0M0CQM5        node_B_1-new(537097247)   node_B_1-new(537097247)
+prod01-rk18:8.126L1  node_B_1-new(537097247)  Pool0  S0M1PSDW        node_B_1-new(537097247)   node_B_1-new(537097247)
+::>
+::> aggr status
+           Aggr          State           Status                Options
+aggr0_node_B_1           online          raid_dp, aggr         root, nosnap=on,
+                                         mirrored              mirror_resync_priority=high(fixed)
+                                         fast zeroed
+                                         64-bit
+----
+
+
+.Et la suite ?
+link:upgrade-mcc-ip-manual-boot-new-controllers.html["Démarrer les nouveaux contrôleurs et restaurer la configuration LIF"].

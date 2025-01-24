@@ -1,0 +1,107 @@
+---
+permalink: upgrade/upgrade-mcc-ip-manual-setup-controllers.html 
+sidebar: sidebar 
+keywords: metrocluster, upgrade, controllers, switchover, switchback, ip, configuration, net, boot, root, aggregate, system, commands, mcc 
+summary: Installez et câblez les nouveaux contrôleurs IP MetroCluster. 
+---
+= Configurez les nouveaux contrôleurs IP MetroCluster
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Installez et câblez les nouveaux contrôleurs IP MetroCluster.
+
+.Étapes
+. Planifiez le positionnement des nouveaux modules de contrôleur et tiroirs de stockage en fonction des besoins.
++
+L'espace rack dépend du modèle de plateforme des modules de contrôleur, des types de switchs et du nombre de tiroirs de stockage de votre configuration.
+
+. Mettez-vous à la terre.
+. Si votre mise à niveau nécessite le remplacement des modules de contrôleur, par exemple la mise à niveau d'un AFF A800 vers un système AFF A90 ou d'un AFF C800 vers un système AFF C80, vous devez retirer le module de contrôleur du châssis lorsque vous remplacez le module de contrôleur. Pour toutes les autres mises à niveau, passez à <<ip_upgrades_so_sb_4,Étape 4>>.
++
+À l'avant du châssis, enfoncez fermement chaque disque jusqu'à ce que vous sentiez un arrêt positif. Cela permet de vérifier que les disques sont fermement installés contre le fond de panier central du châssis.
+
++
+image::../media/drw-a800-drive-seated.png[La illustre le retrait du module de contrôleur du châssis]
+
+. [[ip_upgrades_so_sb_4]] installez les modules de contrôleur.
++
+La procédure d'installation suivante varie selon que la mise à niveau nécessite le remplacement des modules de contrôleur ou si les modules IOM sont nécessaires pour convertir les anciens contrôleurs en tiroir externe.
+
++
+[cols="2*"]
+|===
+| Si vous effectuez une mise à niveau... | Suivez les étapes pour ... 
+
+
+ a| 
+** D'un système AFF A150 à un système AFF A20
+** D'un système AFF A220 à un système AFF A20
+
+| Conversion contrôleur en tiroir externe 
+
+
+ a| 
+** D'un AFF A800 vers un système AFF A90
+** D'un système AFF C800 vers un système AFF C80
+
+| Remplacement du module de contrôleur 
+
+
+| Toute autre combinaison de mise à niveau du contrôleur | Toutes les autres mises à niveau 
+|===
++
+[role="tabbed-block"]
+====
+.Conversion contrôleur en tiroir externe
+--
+Si vos contrôleurs IP MetroCluster d'origine sont des modèles AFF A150 ou AFF A220, vous pouvez convertir la paire haute disponibilité AFF A150 ou AFF A220 en tiroir de disque DS224C, puis la connecter aux nouveaux nœuds.
+
+Par exemple, lors de la mise à niveau d'un système AFF A150 ou AFF A220 vers un système AFF A20, vous pouvez convertir la paire haute disponibilité AFF A150 ou AFF A220 en tiroir DS224C en remplaçant les modules de contrôleur AFF A150 ou AFF A220 par des modules IOM12.
+
+.Étapes
+.. Remplacez les modules de contrôleur dans le nœud que vous convertissez avec des modules de tiroir IOM12.
++
+https://hwu.netapp.com["Hardware Universe"^]
+
+.. Définissez l'ID de tiroir disque.
++
+Chaque tiroir disque, châssis compris, requiert un ID unique.
+
+.. Réinitialise les autres ID de tiroir disque selon vos besoins.
+.. Mettez les tiroirs hors tension.
+.. Reliez le tiroir disque converti à un port SAS du nouveau système et, si vous utilisez un câblage ACP hors bande, au port ACP du nouveau nœud.
+.. Mettez le système sous tension afin que le tiroir disque converti et tous les autres tiroirs disques reliés aux nouveaux nœuds.
+.. Mettez les nouveaux nœuds sous tension, puis interrompez le processus de démarrage de chaque nœud en appuyant sur Ctrl-C pour accéder à l'invite de l'environnement de démarrage.
+
+
+--
+.Remplacement du module de contrôleur
+--
+L'installation séparée des nouveaux contrôleurs n'est pas applicable pour la mise à niveau des systèmes intégrés avec des disques et des contrôleurs dans le même châssis, par exemple d'un système AFF A800 vers un système AFF A90. Vous devez remplacer les nouveaux modules de contrôleur et les nouvelles cartes d'E/S après avoir mis les anciens contrôleurs hors tension, comme indiqué dans l'image ci-dessous.
+
+L'exemple d'image ci-dessous est représenté uniquement. Les modules de contrôleur et les cartes d'E/S peuvent varier d'un système à l'autre.
+
+image::../media/a90-a70-pcm-swap.png[Affiche le remplacement du module de contrôleur]
+
+--
+.Toutes les autres mises à niveau
+--
+Installez les modules de contrôleur sur le rack ou l'armoire.
+
+--
+====
+. Reliez l'alimentation, la console série et les connexions de gestion des contrôleurs, comme décrit à la section link:../install-ip/using_rcf_generator.html["Branchez les câbles des commutateurs IP MetroCluster"].
++
+Ne connectez pas d'autres câbles débranchés des anciens contrôleurs pour le moment.
+
++
+https://docs.netapp.com/us-en/ontap-systems/index.html["Documentation des systèmes matériels ONTAP"^]
+
+. Mettez les nouveaux nœuds sous tension et démarrez-les en mode de maintenance.
+
+
+.Et la suite ?
+link:upgrade-mcc-ip-manual-hba-set-ha.html["Restaurez la configuration du HBA et définissez l'état de haute disponibilité"].

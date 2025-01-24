@@ -232,7 +232,7 @@ e0a, e0b
  a| 
 e3a, e3b
  a| 
-Aucun port correspondant. Après la mise à niveau, vous devez recréer les ports du cluster.link:task_prepare_cluster_ports_on_the_exist_controller.html["Préparation des ports de cluster sur un module de contrôleur existant"]
+Aucun port correspondant. Après la mise à niveau, recréez les ports du cluster. link:task_prepare_cluster_ports_on_the_exist_controller.html["Préparation des ports de cluster sur un module de contrôleur existant"]
 
 
 
@@ -869,15 +869,14 @@ The node must be rebooted to start using the newly installed software. Do you wa
 
 === Effacement de la configuration sur un module de contrôleur
 
-[role="lead"]
 Avant d'utiliser un nouveau module de contrôleur dans la configuration MetroCluster, il faut effacer la configuration existante.
 
 .Étapes
-. Si nécessaire, arrêtez le nœud pour afficher l'invite DU CHARGEUR :
+. Si nécessaire, arrêtez le nœud pour afficher l' `LOADER`invite :
 +
 `halt`
 
-. Dans l'invite DU CHARGEUR, définissez les variables environnementales sur les valeurs par défaut :
+. À l' `LOADER`invite, définissez les variables d'environnement sur les valeurs par défaut :
 +
 `set-defaults`
 
@@ -885,7 +884,7 @@ Avant d'utiliser un nouveau module de contrôleur dans la configuration MetroClu
 +
 `saveenv`
 
-. À l'invite DU CHARGEUR, lancez le menu de démarrage :
+. À l' `LOADER`invite, lancez le menu de démarrage :
 +
 `boot_ontap menu`
 

@@ -1,0 +1,128 @@
+---
+permalink: upgrade/upgrade-mcc-ip-manual-complete-upgrade.html 
+sidebar: sidebar 
+keywords: metrocluster, upgrade, controllers, switchover, switchback, ip, configuration, net, boot, root, aggregate, system, commands, mcc, complete 
+summary: Après la mise à niveau des modules de contrôleur, effectuez les tâches nécessaires pour terminer la mise à niveau du contrôleur. 
+---
+= Terminez la mise à niveau du contrôleur IP MetroCluster
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Après la mise à niveau des modules de contrôleur, effectuez les tâches nécessaires pour terminer la mise à niveau du contrôleur.
+
+
+
+== Vérifier l'état de santé de la configuration MetroCluster
+
+Après la mise à niveau des modules de contrôleur, vous devez vérifier l'état de santé de la configuration MetroCluster.
+
+.Description de la tâche
+Vous pouvez effectuer cette tâche sur n'importe quel nœud de la configuration MetroCluster.
+
+.Étapes
+. Vérifier le fonctionnement de la configuration MetroCluster :
++
+.. Vérifier la configuration MetroCluster et que le mode opérationnel est normal : +
+`metrocluster show`
+.. Effectuer une vérification MetroCluster : +
+`metrocluster check run`
+.. Afficher les résultats de la vérification MetroCluster :
++
+`metrocluster check show`
+
+
+
+. Vérifiez la connectivité et le statut de MetroCluster.
++
+.. Vérifiez les connexions IP du MetroCluster :
++
+`storage iscsi-initiator show`
+
+.. Vérifiez que les nœuds fonctionnent :
++
+`metrocluster node show`
+
+.. Vérifier que les interfaces IP MetroCluster sont bien les suivantes :
++
+`metrocluster configuration-settings interface show`
+
+.. Vérifier que le basculement local est activé :
++
+`storage failover show`
+
+
+
+
+
+
+
+== Mettre à niveau les nœuds sur cluster_A
+
+Vous devez répéter les tâches de mise à niveau pour mettre à niveau les nœuds sur le cluster_A sur le site A.
+
+.Étapes
+. Répétez les étapes pour mettre à niveau les nœuds sur cluster_A, en commençant par link:upgrade-mcc-ip-manual-requirements.html["Préparation à la mise à niveau"].
++
+Au fur et à mesure que vous effectuez les tâches, toutes les références aux clusters et aux nœuds sont inversées. Par exemple, si vous avez l'intention de basculer du cluster_A, vous effectuez le basculement du cluster_B.
+
+
+
+
+
+== Restaurer la surveillance du disjoncteur d'attache ou du médiateur
+
+Après avoir effectué la mise à niveau de la configuration MetroCluster, vous pouvez reprendre la surveillance avec l'utilitaire Tiebreaker ou Mediator.
+
+.Étapes
+. Restaurer la surveillance si nécessaire, en suivant la procédure de configuration.
++
+|===
+| Si vous utilisez... | Suivre cette procédure 
+
+
+ a| 
+Disjoncteur d'attache
+ a| 
+link:../tiebreaker/concept_configuring_the_tiebreaker_software.html#adding-metrocluster-configurations["Ajouter des configurations MetroCluster"].
+
+
+
+ a| 
+Médiateur
+ a| 
+link:../install-ip/concept_mediator_requirements.html["Configurez le service Mediator ONTAP à partir d'une configuration IP MetroCluster"].
+
+
+
+ a| 
+Applications tierces
+ a| 
+Reportez-vous à la documentation du produit.
+
+|===
+
+
+
+
+== Envoyez un message AutoSupport personnalisé après la maintenance
+
+Une fois la mise à niveau terminée, envoyer un message AutoSupport indiquant la fin de la maintenance. La création automatique de dossier peut reprendre.
+
+.Étapes
+. Pour reprendre la génération automatique de dossier de support, envoyez un message AutoSupport pour indiquer que la maintenance est terminée.
++
+.. Lancer la commande suivante : +
+`system node autosupport invoke -node * -type all -message MAINT=end`
+.. Répétez la commande sur le cluster partenaire.
+
+
+
+
+
+
+== Configurez le chiffrement de bout en bout
+
+Si votre système le prend en charge, vous pouvez chiffrer le trafic back-end, tel que les données NVlog et de réplication du stockage, entre les sites IP MetroCluster. Reportez-vous à la section link:../maintain/task-configure-encryption.html["Configurez le chiffrement de bout en bout"] pour en savoir plus.

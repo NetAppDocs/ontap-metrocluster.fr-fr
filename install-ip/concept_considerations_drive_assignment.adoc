@@ -261,15 +261,11 @@ Les disques de chaque tiroir externe sont divisés en deux groupes égaux (moiti
  a| 
 Un tiroir est utilisé par la paire haute disponibilité locale. Le second tiroir est utilisé par la paire haute disponibilité distante.
 
-Les partitions sur chaque tiroir sont utilisées pour créer l'agrégat racine. Chacun des deux plexes de l'agrégat racine inclut les partitions suivantes::
-+
---
+Les partitions sur chaque tiroir sont utilisées pour créer l'agrégat racine. Chacun des deux plexes de l'agrégat racine inclut les partitions suivantes :
+
 * Huit partitions pour les données
 * Deux partitions de parité
 * Deux partitions de rechange
-
-
---
 
 
 
@@ -306,8 +302,7 @@ Disques internes uniquement
  a| 
 Les disques internes sont répartis en quatre groupes identiques. Chaque groupe est automatiquement affecté à un pool distinct et chaque pool est affecté à un contrôleur distinct dans la configuration.
 
-
-NOTE: La moitié des disques internes reste non affectés avant la configuration du MetroCluster.
+*Remarque :* la moitié des lecteurs internes restent non affectés avant la configuration de MetroCluster.
  a| 
 Deux trimestres sont utilisés par la paire haute disponibilité locale. Les deux autres trimestres sont utilisés par la paire haute disponibilité distante.
 
@@ -341,8 +336,7 @@ Par exemple : un tiroir de Q1 à Q4 peut avoir les attributions suivantes :
 * Q4 :node_B_2 pool1
 
 
-
-NOTE: La moitié des disques internes reste non affectés avant la configuration du MetroCluster.
+*Remarque :* la moitié des lecteurs internes restent non affectés avant la configuration de MetroCluster.
  a| 
 Chacun des deux plexes de l'agrégat racine inclut les partitions suivantes :
 
@@ -354,7 +348,7 @@ Chacun des deux plexes de l'agrégat racine inclut les partitions suivantes :
 |===
 
 
-=== Affectation des disques et ADP sur les systèmes AFF C250, AFF A250, ASA A250, ASA C250 et FAS500f
+=== Affectation des disques et de l'ADP sur les systèmes AFF A250, AFF C250, ASA A250, ASA C250, FAS500f, AFF A20, AFF A30 et AFF C30
 
 |===
 
@@ -362,10 +356,8 @@ Chacun des deux plexes de l'agrégat racine inclut les partitions suivantes :
 | Directive | Nombre de disques par site | Règles d'affectation de disques | Mise en page ADP pour la partition racine 
 
 
- a| 
-Minimum de disques recommandés (par site)
- a| 
-48 disques
+.2+| Minimum de disques recommandés (par site)  a| 
+48 disques (disques externes uniquement, pas de disques internes)
  a| 
 Les disques de chaque tiroir externe sont divisés en deux groupes égaux (moitiés). Chaque demi-tiroir est automatiquement attribué à un pool distinct.
  a| 
@@ -381,9 +373,78 @@ Les partitions sur chaque tiroir sont utilisées pour créer l'agrégat racine. 
 
 
  a| 
+48 disques (disques externes et internes)
+ a| 
+Les partitions internes sont divisées en quatre groupes égaux (quarts). Chaque trimestre est attribué automatiquement à un pool distinct. Les disques des tiroirs externes sont divisés en quatre groupes égaux (trimestres). Chaque trimestre est attribué automatiquement à un pool distinct.
+ a| 
+Chacun des deux plexes de l'agrégat racine inclut :
+
+* Huit partitions pour les données
+* Deux partitions de parité
+* Deux partitions de rechange
+
+
+
+
+ a| 
 Nombre minimal de disques pris en charge (par site)
  a| 
 16 disques internes
+ a| 
+Les lecteurs sont répartis en quatre groupes égaux. Chaque tiroir est automatiquement attribué à un pool distinct.
+ a| 
+Chacun des deux plexes de l'agrégat racine inclut les partitions suivantes :
+
+* Deux partitions de données
+* Deux partitions de parité
+* Pas de partitions de rechange
+
+
+|===
+
+
+=== ADP et affectation des disques sur les systèmes AFF A50 et AFF C60
+
+|===
+
+
+| Directive | Nombre de disques par site | Règles d'affectation de disques | Mise en page ADP pour la partition racine 
+
+
+.2+| Minimum de disques recommandés (par site)  a| 
+48 disques (disques externes uniquement, pas de disques internes)
+ a| 
+Les disques de chaque tiroir externe sont divisés en deux groupes égaux (moitiés). Chaque demi-tiroir est automatiquement attribué à un pool distinct.
+ a| 
+La paire haute disponibilité locale utilise un tiroir. La paire haute disponibilité distante utilise le second tiroir.
+
+Les partitions sur chaque tiroir sont utilisées pour créer l'agrégat racine. L'agrégat racine inclut les partitions suivantes dans chaque plex :
+
+* Huit partitions pour les données
+* Deux partitions de parité
+* Deux partitions de rechange
+
+
+
+
+ a| 
+48 disques (disques externes et internes)
+ a| 
+Les partitions internes sont divisées en quatre groupes égaux (quarts). Chaque trimestre est attribué automatiquement à un pool distinct. Les disques des tiroirs externes sont divisés en quatre groupes égaux (trimestres). Chaque trimestre est attribué automatiquement à un pool distinct.
+ a| 
+Chacun des deux plexes de l'agrégat racine inclut :
+
+* Huit partitions pour les données
+* Deux partitions de parité
+* Deux partitions de rechange
+
+
+
+
+ a| 
+Nombre minimal de disques pris en charge (par site)
+ a| 
+24 disques internes
  a| 
 Les lecteurs sont répartis en quatre groupes égaux. Chaque tiroir est automatiquement attribué à un pool distinct.
  a| 
@@ -522,7 +583,7 @@ Chacun des deux plexes de l'agrégat racine inclut :
 |===
 
 
-=== ADP et affectation des disques sur AFF C800, ASA C800, ASA A800, AFF A800, AFF A70, et AFF A90
+=== ADP et affectation des disques sur les systèmes AFF C800, ASA C800, ASA A800 et AFF A800
 
 |===
 
@@ -537,8 +598,51 @@ Disques internes et 96 disques externes
  a| 
 Les partitions internes sont divisées en quatre groupes égaux (quarts). Chaque trimestre est attribué automatiquement à un pool distinct. Les disques des tiroirs externes sont automatiquement affectés selon le tiroir par tiroir, tous les disques de chaque tiroir étant affectés à l'un des quatre nœuds de la configuration MetroCluster.
  a| 
-L'agrégat root est créé avec 12 partitions root sur le tiroir interne.
+Chacun des deux plexes de l'agrégat racine inclut :
 
+* Huit partitions pour les données
+* Deux partitions de parité
+* Deux partitions de rechange
+
+
+*Note:* l'agrégat racine est créé avec 12 partitions racine sur le shelf interne.
+
+
+
+ a| 
+Nombre minimal de disques pris en charge (par site)
+ a| 
+24 disques internes
+ a| 
+Les partitions internes sont divisées en quatre groupes égaux (quarts). Chaque trimestre est attribué automatiquement à un pool distinct.
+ a| 
+Chacun des deux plexes de l'agrégat racine inclut :
+
+* Trois partitions de données
+* Deux partitions de parité
+* Une partition de rechange
+
+
+*Note:* l'agrégat racine est créé avec 12 partitions racine sur le shelf interne.
+
+|===
+
+
+=== Affectation des disques et des ADP sur les systèmes AFF A70, AFF A90 et AFF C80
+
+|===
+
+
+| Directive | Nombre de disques par site | Règles d'affectation de disques | Disposition ADP pour l'agrégat racine 
+
+
+ a| 
+Minimum de disques recommandés (par site)
+ a| 
+Disques internes et 96 disques externes
+ a| 
+Les partitions internes sont divisées en quatre groupes égaux (quarts). Chaque trimestre est attribué automatiquement à un pool distinct. Les disques des tiroirs externes sont automatiquement affectés selon le tiroir par tiroir, tous les disques de chaque tiroir étant affectés à l'un des quatre nœuds de la configuration MetroCluster.
+ a| 
 Chacun des deux plexes de l'agrégat racine inclut :
 
 * Huit partitions pour les données
@@ -555,8 +659,6 @@ Nombre minimal de disques pris en charge (par site)
  a| 
 Les partitions internes sont divisées en quatre groupes égaux (quarts). Chaque trimestre est attribué automatiquement à un pool distinct.
  a| 
-L'agrégat root est créé avec 12 partitions root sur le tiroir interne.
-
 Chacun des deux plexes de l'agrégat racine inclut :
 
 * Trois partitions de données
@@ -676,43 +778,12 @@ Les mêmes règles et instructions d'affectation des disques pour les systèmes 
 
 
 
-=== Affectation des disques sur les systèmes FAS9000
+=== Affectation des disques sur les systèmes FAS9000, FAS9500, FAS70 et FAS90
 
 |===
 
 
 | Directive | Nombre de disques par site | Règles d'affectation de disques | Mise en page ADP pour la partition racine 
-
-
- a| 
-Minimum de disques recommandés (par site)
- a| 
-96 disques
- a| 
-Les disques sont automatiquement affectés selon le type tiroir par tiroir.
- a| 
-Sans objet
-
-
-
- a| 
-Nombre minimal de disques pris en charge (par site)
- a| 
-48 disques
- a| 
-Les disques des tiroirs sont divisés en deux groupes égaux (moitiés). Chaque demi-tiroir est automatiquement attribué à un pool distinct.
- a| 
-Sans objet
-
-|===
-
-
-=== Affectation des disques sur les systèmes FAS9500
-
-|===
-
-
-| Directive | Tiroirs par site | Règles d'affectation de disques | Mise en page ADP pour la partition racine 
 
 
  a| 

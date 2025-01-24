@@ -3024,10 +3024,8 @@
   <block id="86290de1e3dc18d66aadd1f00e3ca1b1" category="list-text">Répétez l'étape précédente sur les trois autres commutateurs de la configuration MetroCluster IP.</block>
   <block id="54744df94a6fdb7104348dee41697c48" category="summary">L'utilisation du port dans une configuration MetroCluster IP dépend du modèle de commutateur et du type de plate-forme.</block>
   <block id="91fda6ec6c364088ae4a9e6553b26f99" category="doc">Affectations des ports de plateforme pour les switchs IP SN2100 pris en charge par NVIDIA</block>
-  <block id="1f0b82560627b660c6c6958a1df834b8" category="section-title">Configurations compatibles</block>
   <block id="0588c4f1b58eac9f5062dc1da6e8435a" category="list-text">FAS8700</block>
   <block id="53270fbfda62583949b287e08ae3d063" category="list-text">AFF A800</block>
-  <block id="570a8334b13f037157ca46f8cbbf662b" category="list-text">Transition FC-à-IP de MetroCluster</block>
   <block id="5aa692c4552b821f69bb151f7aa0f216" category="paragraph">Si vous câconnectez plusieurs configurations MetroCluster, suivez le tableau correspondant. Par exemple :</block>
   <block id="10fe94c98083f4e751ef035d96910a62" category="paragraph">Les sections suivantes décrivent le schéma de câblage physique. Vous pouvez également vous reporter à la<block ref="c52b4d12f68853a25c52576697c6b2b5" category="inline-link-rx"></block> pour des informations détaillées sur le câblage.</block>
   <block id="afc362bb21237b3cf262e5bb73c2e7ce" category="summary">Vous pouvez fournir une protection supplémentaire pour les fichiers de sauvegarde de la configuration du cluster en spécifiant une URL distante (HTTP ou FTP) dans laquelle les fichiers de sauvegarde de configuration seront chargés en plus des emplacements par défaut dans le cluster local.</block>
@@ -4087,7 +4085,6 @@
   <block id="a36ace5028dbc9ce506fdc61a4be82e9" category="paragraph">48 disques</block>
   <block id="36927b3f609916615a039c55b35adb83" category="paragraph">Les disques de chaque tiroir externe sont divisés en deux groupes égaux (moitiés). Chaque demi-tiroir est automatiquement attribué à un pool distinct.</block>
   <block id="00221b2e9e3a8c400840ac5ddfcf9694" category="paragraph">Un tiroir est utilisé par la paire haute disponibilité locale. Le second tiroir est utilisé par la paire haute disponibilité distante.</block>
-  <block id="3b6570c59271e36a9045425efd003349" category="list-text">Les partitions sur chaque tiroir sont utilisées pour créer l'agrégat racine. Chacun des deux plexes de l'agrégat racine inclut les partitions suivantes</block>
   <block id="0721787c5c1b5b09a38630ae8113913b" category="list-text">Huit partitions pour les données</block>
   <block id="284789f6546c0cb3d37138cb7153f429" category="list-text">Deux partitions de parité</block>
   <block id="11e35192cb11fd0648408f836e3bb54e" category="list-text">Deux partitions de rechange</block>
@@ -4099,7 +4096,6 @@
   <block id="9ac045d53981694ac00085732bed2ef9" category="list-text">Une partition de rechange</block>
   <block id="878451b3c3409179461a8121430d2819" category="paragraph">Disques internes uniquement</block>
   <block id="5d21f0ca4249a1dd3aa1ca99ea4c1b10" category="paragraph">Les disques internes sont répartis en quatre groupes identiques. Chaque groupe est automatiquement affecté à un pool distinct et chaque pool est affecté à un contrôleur distinct dans la configuration.</block>
-  <block id="de5c61f9b523e845d26faafc2efdf938" category="admonition">La moitié des disques internes reste non affectés avant la configuration du MetroCluster.</block>
   <block id="92d5f34519d09561aa3770a5781117ee" category="paragraph">Deux trimestres sont utilisés par la paire haute disponibilité locale. Les deux autres trimestres sont utilisés par la paire haute disponibilité distante.</block>
   <block id="b21312eba495855ff66394e02bb5ffa6" category="paragraph">L'agrégat racine inclut les partitions suivantes dans chaque plex :</block>
   <block id="2111210e0771d89abc3101ae163a348a" category="paragraph">16 disques internes</block>
@@ -4124,7 +4120,6 @@
   <block id="c53b7d3a6a4dec447344623203b7118a" category="cell">Disposition ADP pour l'agrégat racine</block>
   <block id="4cc79bf7b84548df7d6cedf892dab8d3" category="paragraph">Disques internes et 96 disques externes</block>
   <block id="05fce716b1daba00f41c2bed56cc5f77" category="paragraph">Les partitions internes sont divisées en quatre groupes égaux (quarts). Chaque trimestre est attribué automatiquement à un pool distinct. Les disques des tiroirs externes sont automatiquement affectés selon le tiroir par tiroir, tous les disques de chaque tiroir étant affectés à l'un des quatre nœuds de la configuration MetroCluster.</block>
-  <block id="6f53d85533c3e60dad3733efac10ae04" category="paragraph">L'agrégat root est créé avec 12 partitions root sur le tiroir interne.</block>
   <block id="982a2e1944b422fa6826f45f24630643" category="paragraph">Les partitions internes sont divisées en quatre groupes égaux (quarts). Chaque trimestre est attribué automatiquement à un pool distinct.</block>
   <block id="f674c4dddbf3c8f5d8282775b8f64dfc" category="list-text">Une partition de rechange</block>
   <block id="c62a718b8f06da8fda597def926b5514" category="cell">Tiroirs par site</block>
@@ -4138,11 +4133,7 @@
   <block id="f5282c0c22db3753989149a870ee22a6" category="paragraph">Les disques des tiroirs externes sont divisés en deux groupes égaux (moitiés). Chaque demi-tiroir est automatiquement attribué à un pool distinct.</block>
   <block id="361139022557555da3940779901816d7" category="paragraph">Affectation manuelle requise.</block>
   <block id="f279008175291c0c57dfde21cb38762c" category="section-title">Affectation des disques sur les systèmes FAS500f</block>
-  <block id="f0c4d23b82531840374581ef188b7b09" category="section-title">Affectation des disques sur les systèmes FAS9000</block>
-  <block id="b31528d4d44f8ae9a9a8ee050022bd35" category="paragraph">Les disques des tiroirs sont divisés en deux groupes égaux (moitiés). Chaque demi-tiroir est automatiquement attribué à un pool distinct.</block>
-  <block id="413a1a8040eaed9020b7af4ba6c24e5f" category="section-title">Affectation des disques sur les systèmes FAS9500</block>
   <block id="3e7d7088000e9b3208b36b1397763f5e" category="doc">Affectation de ports de plate-forme pour les commutateurs IP BES-53248 pris en charge par Broadcom</block>
-  <block id="70797c25b23e4d3313107866a946ef86" category="paragraph">Les commutateurs ne peuvent pas être utilisés avec des ports ISL distants de différentes vitesses (par exemple, un port 25 Gbits/s connecté à un port ISL de 10 Gbits/s).</block>
   <block id="101ffe4f466417c1ce75564d3cc0a3b6" category="list-text">Les systèmes AFF A320 configurés avec des switchs Broadcom BES-53248 peuvent ne pas prendre en charge toutes les fonctionnalités.</block>
   <block id="541a17569d4a90ee94a9fd4035349deb" category="list-text">Mise à jour d'une configuration IP MetroCluster à quatre nœuds (ONTAP 9.8 et versions ultérieures)</block>
   <block id="673f5a3eeb8366a43231216d5889b9fc" category="inline-link-macro">Utilisation des tables de ports avec l'outil RcfFileGenerator ou de plusieurs configurations MetroCluster</block>
@@ -4264,7 +4255,6 @@
   <block id="14681192c7f80e2d7631c3a070df9619" category="doc">Affectation des ports de plateforme pour les commutateurs Cisco 3132Q-V.</block>
   <block id="5b97f056c47eb55f7ac2ec585e184dd9" category="summary">Vous devez comprendre comment utiliser les informations des tables de ports pour générer correctement vos fichiers RCF.</block>
   <block id="6852fcac58b417258b30784060002d89" category="list-text">Conservez une trace du groupe de ports MetroCluster (MetroCluster 1, MetroCluster 2, etc.). Vous aurez besoin de ces informations lorsque vous utilisez l'outil RcfFileGenerator comme décrit plus loin dans cette procédure de configuration.</block>
-  <block id="b070262d5faad84092129cb1c7a44daa" category="list-text">Le<block ref="166489b3c340ece1eccb5706fda90624" category="inline-link-rx"></block> fournit également un aperçu du câblage par port pour chaque commutateur. Utilisez cette présentation du câblage pour vérifier votre câblage.</block>
   <block id="b12eae1983992a43e1aff6798c40b450" category="section-title">Câblage des configurations MetroCluster à 8 nœuds</block>
   <block id="134c13e2a51797233ea2a5ce24406813" category="paragraph">Pour ces configurations, vous utilisez la même méthode que celle décrite ci-dessus. Au lieu d'un deuxième MetroCluster, vous câbler un autre groupe de reprise après incident à quatre nœuds.</block>
   <block id="d5e8fd3a5a09a2e20b7a2ae3865f7eef" category="paragraph">Par exemple, votre configuration inclut les éléments suivants :</block>
@@ -6566,8 +6556,6 @@
   <block id="0b0c0d8fa1e4052e4b5d4195ede1e340" category="list-text">Vérifiez si les bootargs suivants ont été définis :</block>
   <block id="99892b3569ad9c719e8f7c24fa15b733" category="list-text">Si bootarg a été défini sur une valeur, désactivez-la et démarrez ONTAP :</block>
   <block id="a5fdb9326ad2e31e2935d19209d70143" category="paragraph">Avant d'utiliser un nouveau module de contrôleur dans la configuration MetroCluster, il faut effacer la configuration existante.</block>
-  <block id="7c118227cfe507ef660214732b94e5ac" category="list-text">Si nécessaire, arrêtez le nœud pour afficher l'invite DU CHARGEUR :</block>
-  <block id="7945c50dd819c63cfdc35bac7aeea32c" category="list-text">Dans l'invite DU CHARGEUR, définissez les variables environnementales sur les valeurs par défaut :</block>
   <block id="68e0aa863b2299bdbb1d6eace7efa9d7" category="list-text">À l'invite du menu de démarrage, effacez la configuration :</block>
   <block id="ba68bac0be7ad49544e9629601cb670c" category="paragraph">Répondez<block ref="a6105c0a611b41b08f1209506350279e" prefix=" " category="inline-code"></block> à l'invite de confirmation.</block>
   <block id="2fa38a35d5b9cc8f1b69fd7f9bbe4303" category="paragraph">Le nœud redémarre et le menu de démarrage s'affiche de nouveau.</block>
@@ -7246,7 +7234,6 @@
   <block id="f49f60b6304797900db897e855566402" category="inline-link-macro">Mise à niveau des contrôleurs en une configuration FC MetroCluster à quatre nœuds via le basculement et le rétablissement avec des commandes « system contrôleur replace » (ONTAP 9.10.1 et versions ultérieures)</block>
   <block id="4f7dd0fe0940df4a5fda327a4ee4ddbd" category="paragraph">9.8</block>
   <block id="3f28886cbb43f1c7c0c4f4d35ecafdde" category="inline-link-macro">Mise à niveau des contrôleurs en une configuration MetroCluster FC à l'aide du basculement et du rétablissement</block>
-  <block id="48f1cbfd98903541f8e454a15e0879c3" category="inline-link-macro">Mise à niveau des contrôleurs dans une configuration MetroCluster IP à l'aide du basculement et du rétablissement (ONTAP 9.8 et versions ultérieures)</block>
   <block id="da72e287071989d880a84bc9f714faf6" category="section-title">Choix d'une procédure à l'aide du transfert d'agrégats</block>
   <block id="04c19f5eb2ebdc099239a7074f8d6534" category="paragraph">9.10.1 et versions ultérieures</block>
   <block id="b9e53a247da3982cb706e33287d2a8fd" category="paragraph">À l'aide de<block ref="616743bfa4fd61d558c556fe614cb2e9" prefix=" " category="inline-code"></block> commandes</block>
@@ -7332,7 +7319,6 @@
   <block id="a6f73f963414469045b156f635d81903" category="cell">Nouveau contrôleur</block>
   <block id="8350941ac33c250a74a7bdf85a15fb0c" category="cell">Action requise</block>
   <block id="112ed9eca68e97857fba4d0db6ce268d" category="paragraph">e3a, e3b</block>
-  <block id="5ac8082d208bbf03d0cce2d606e0f49f" category="paragraph">Aucun port correspondant. Après la mise à niveau, vous devez recréer les ports du cluster.<block ref="2305a256def4f5c38d82352fac177e1d" category="inline-link-macro-rx"></block></block>
   <block id="229d858313e11e88210813eb6c3082e7" category="paragraph">e0a,e0b,e0c,e0d</block>
   <block id="8ebf2ebde560540be4173f22041f6955" category="paragraph">e0c et e0d sont des ports correspondants. Vous n'avez pas à modifier la configuration, mais après une mise à niveau, vous pouvez répartir les LIF de cluster entre les ports disponibles.</block>
   <block id="de88222e72c721931475b633a0ac0ac0" category="list-text">Identifiez les ports physiques disponibles sur les nouveaux contrôleurs et les LIFs peuvent être hébergées sur les ports.</block>
@@ -7489,29 +7475,14 @@
   <block id="1105b1e9f2d843b22143dc8f0c9ab49c" category="list-text">Vous pouvez uniquement mettre à niveau des modèles de plate-forme spécifiques en suivant cette procédure dans une configuration MetroCluster IP.</block>
   <block id="5606659eb62f79273b91080445f7165a" category="list-text">Cette procédure s'applique aux modules de contrôleur dans une configuration MetroCluster IP.</block>
   <block id="4eef4343ca82afa388103a13e5acd0be" category="paragraph">L'exploitation de la configuration MetroCluster avec différents types de contrôleurs n'est pas prise en charge en dehors de cette activité de maintenance.</block>
-  <block id="7eff81fa57d161d2ba7ff45b22720013" category="section-title">Flux de production de mise à niveau des contrôleurs dans une configuration MetroCluster IP</block>
-  <block id="b61b94c87764061cb7ada38fa4273155" category="paragraph">Selon les anciens modèles de plateforme, ou si la configuration des commutateurs ne repose pas sur la version minimale, ou si vous souhaitez modifier les ID VLAN utilisés par les connexions MetroCluster internes, vous devez mettre à jour les fichiers RCF de commutateur avant de lancer la procédure de mise à niveau de la plateforme.</block>
-  <block id="6a17bc0f56c24d8e5fe4a9640dca29f0" category="paragraph">Vous devez mettre à jour le fichier RCF dans les scénarios suivants :</block>
-  <block id="0aa42d3b4e9fea86e18bc380dd4833e1" category="list-text">Pour certains modèles de plate-forme, les commutateurs doivent utiliser un ID VLAN pris en charge pour les connexions IP MetroCluster internes. Si l'ancien ou le nouveau modèle de plate-forme sont dans le tableau suivant, *et non* utilisant un ID VLAN pris en charge, vous devez mettre à jour les fichiers RCF de commutateur.</block>
-  <block id="5ef697d15178cf944c213dee85218dda" category="admonition">Les connexions locales du cluster peuvent utiliser n'importe quel VLAN, elles n'ont pas besoin d'être dans la plage indiquée.</block>
-  <block id="8cd92b0f95565d027b5c8cc1e51b94ef" category="cell">Modèle de plateforme (ancien ou nouveau)</block>
-  <block id="2fa54ae7bf07959b7479dbdbc60f56b5" category="list-text">La configuration du commutateur n'a pas été configurée avec la version RCF minimale prise en charge :</block>
-  <block id="cba1b73e0a7dce1b5aeb4cf091cab09b" category="cell">Version du fichier RCF requise</block>
   <block id="6383d84a4827bb60fdcfc949929e33de" category="paragraph">1.7 ou ultérieure</block>
   <block id="79ddbe00231bda83f336a9a9821115f2" category="paragraph">1.3 ou ultérieure</block>
-  <block id="86cc371c694e2f7ff373b6b274812466" category="list-text">Vous souhaitez modifier la configuration VLAN.</block>
-  <block id="21eaf0cdaaa2f979118e1696c6ca3fe7" category="paragraph">La plage d'ID de VLAN est comprise entre 101 et 4096 inclus.</block>
-  <block id="6e6782d6710ef4f900b4910ccf50eff4" category="paragraph">Vous devez vérifier que les ports physiques du node_A_1-Old sont correctement associés aux ports physiques du node_A_1-New, qui permettront à node_A_1-New de communiquer avec d'autres nœuds du cluster et avec le réseau après la mise à niveau.</block>
-  <block id="1804bc4c5fb7a95408fded0e6818ecaf" category="paragraph">Aucun port correspondant. Après la mise à niveau, vous devez recréer les ports du cluster.</block>
-  <block id="91d33818fef965162b77e41ea0904f19" category="paragraph">L'utilisation des ports du contrôleur dépend du module de plate-forme et des commutateurs que vous utiliserez dans la configuration IP de MetroCluster. Vous pouvez collecter l'utilisation des ports des nouvelles plates-formes à partir du <block ref="c7de98113170eef3b5acdc2cf9602241" category="inline-link-macro-rx"></block>.</block>
   <block id="0d4ad75e0716be856c986b26056dc9e0" category="list-text">Planifiez l'utilisation de vos ports et remplissez les tableaux suivants pour référence pour chacun des nouveaux nœuds.</block>
   <block id="a22d8b3d45a0a714676015f3d6879afe" category="list-text">NetBoot les nouveaux contrôleurs :</block>
-  <block id="7d7b595501a22c5e8b1d85aae62b9d71" category="list-text">Accédez au<block ref="ce05c15478baf1fd107c1e0b09c6e8b0" category="inline-link-rx"></block> pour télécharger les fichiers utilisés pour effectuer le démarrage sur le réseau du système.</block>
   <block id="3dcdfa7154959e2158a0ec92a60660c4" category="list-text">Téléchargez le logiciel ONTAP approprié depuis la section de téléchargement des logiciels du site de support NetApp et stockez le<block ref="24f58b52875ae0cf9e2f71f5f4715aba" prefix=" " category="inline-code"></block> fichier dans un répertoire accessible sur le web.</block>
   <block id="6850735b567ffc238538643166a7d89e" category="paragraph">Votre liste de répertoires doit contenir un dossier netboot avec un fichier du noyau :</block>
   <block id="3a1d38fb3626e6c6f9c179d11fad1cdc" category="paragraph"><block ref="fd10345910ec2a124c27471e14c09703" prefix="" category="inline-code"></block></block>
   <block id="61e842763712fd979eba9fa9d8c334e2" category="paragraph"><block ref="51654457d77e7151c919912e5b745ae2" prefix="" category="inline-code"></block></block>
-  <block id="0070312d07f58e9d845938da3303af9d" category="paragraph">Il n'est pas nécessaire d'extraire le<block ref="51654457d77e7151c919912e5b745ae2" prefix=" " category="inline-code"></block> fichier.</block>
   <block id="d28de6877e1c71b43aa9dbe62d9bc5a1" category="cell">Si l'adressage IP est...</block>
   <block id="54201c55d2bdc7a9e19d9e032d8c0ede" category="paragraph">DHCP</block>
   <block id="889a570a6d909bcb61d57622b98029e5" category="paragraph">Configurer la connexion automatique :</block>
@@ -7526,24 +7497,17 @@
   <block id="35c6a54d16dbc8107b1b047469f11486" category="paragraph"><block ref="9f674dc644ec60dbb17e8819c0cdea82" prefix="" category="inline-code"></block></block>
   <block id="721c36a45f3a645f3bd8e17576537355" category="list-text">Entrez le nom d'utilisateur et le mot de passe, le cas échéant, ou appuyez sur entrée pour continuer.</block>
   <block id="15e148fc4b52c094ee57889a642d7cb8" category="list-text">Redémarrez en entrant<block ref="13a9c4ec1810b3cc11a9e77c220f41c9" prefix=" " category="inline-code"></block> lorsque vous voyez une invite similaire à la suivante :</block>
-  <block id="7438295fe2bd85e74c4dfae7d7d32936" category="list-text">Collecte des informations d'interconnexion, de port et de LIF pour chaque nœud</block>
   <block id="88f8061f6e1681a4b263515885a900e3" category="list-text">Rassemblez les UUID du site_B (site dont les plates-formes sont actuellement mises à niveau) :</block>
   <block id="46cca5fb6d68b1c01f7d79e871dca57d" category="paragraph"><block ref="fc4730ee6534cb30d0808401d2e84d19" prefix="" category="inline-code"></block></block>
-  <block id="9ef5a5d531a716f744c14e463cdbd35a" category="paragraph">Ces valeurs doivent être configurées avec précision sur les nouveaux modules de contrôleur site_B pour garantir la réussite de la mise à niveau. Copiez les valeurs dans un fichier afin de pouvoir les copier dans les commandes appropriées ultérieurement dans le processus de mise à niveau.</block>
   <block id="9bc90fe013f61635e9dbb97bc6c05864" category="paragraph">L'exemple suivant montre la sortie de la commande avec les UID :</block>
   <block id="5dd8e2bcd1fdeaf6207d2362484a454c" category="list-text">Si le gestionnaire de clés intégré est configuré : +<block ref="32ba7af89b7557f6e3e6d80a922080ce" prefix=" " category="inline-code"></block></block>
   <block id="009130140f2855cf19e7630eb5284573" category="paragraph"><block ref="566ae4de3748e9ef87e905f8461c5c78" prefix="" category="inline-code"></block><block ref="c9b37f9017fc101cecef415e707e7b5f" prefix=" " category="inline-code"></block></block>
   <block id="fb46345d4cd3f7e829969de1d6aa05e7" category="list-text">Collectez les ID système des nœuds existants :</block>
   <block id="1e3274490101aef5fa048a9bc641d5ec" category="paragraph"><block ref="4d3b009b80c640171a18324e0d1bf109" prefix="" category="inline-code"></block></block>
-  <block id="2a48a344c8ec986dbb3d64b273b3ce40" category="paragraph">Une fois cette tâche terminée, cluster_A est actif et assure le service des données des deux sites. Cluster_B est inactif et prêt à démarrer le processus de mise à niveau.</block>
-  <block id="982f6eba58d95bda2318d44b2dcea2e3" category="paragraph">La fonctionnalité de correction automatique des agrégats après le basculement négocié est désactivée lors de la mise à niveau du contrôleur.</block>
-  <block id="895a79b8b51d133ae9c32d8cb48b9eb7" category="list-text">Ces étapes sont réalisées sur les anciens contrôleurs (node_B_1-Old, node_B_2-Old).</block>
   <block id="4339dfdd37f410724931874e2a95e452" category="list-text">Démarrez les anciens nœuds et connectez-vous aux nœuds :</block>
-  <block id="edb043a5bb74f4379f9f716b89bda737" category="list-text">Arrêtez les nœuds à l'invite DU CHARGEUR :</block>
   <block id="edc29843f20e9b115f06b29809565731" category="paragraph"><block ref="18b4d9cfdd1264931ca23bf76cbd448f" prefix="" category="inline-code"></block></block>
   <block id="7d0c5485611d6bb6608dc139509b8698" category="list-text">Rassemblez les valeurs de bootarg :</block>
   <block id="b4ff26e77c5a79cdf419fcae6d8daba2" category="paragraph"><block ref="d3bc32150d1d972afca2cd16da79c694" prefix="" category="inline-code"></block></block>
-  <block id="cd60490d5712d0d4fead93178d76d0d7" category="paragraph">Suivez les étapes de la procédure pour votre fournisseur de commutateur :</block>
   <block id="fa14a702e51b19084e9474a2f3ee6905" category="list-text">Mettez les nouveaux nœuds sous tension et démarrez-les en mode de maintenance.</block>
   <block id="b6eb4854ed8abef4df5eb8ee192a6d06" category="list-text">Dans l'invite DU CHARGEUR des nouveaux nœuds, définissez les UID :</block>
   <block id="c9d5ebb47f50b3ec208877d0c063b7ff" category="list-text">Définissez les UUID sur noeud_B_1-New.</block>
@@ -7556,20 +7520,11 @@
   <block id="736072509b631ec5e3b6fd381758250d" category="list-text">Définissez les variables sur noeud_B_2-New.</block>
   <block id="d0aca50523d84af21a22095d52467ea6" category="paragraph">L'exemple suivant montre les commandes de paramétrage des valeurs sur node_B_2-New :</block>
   <block id="37560fb59fd31efbdaa6bb67153a8fc3" category="list-text">Afficher les disques du node_B_1-New à partir de l'invite du mode maintenance :</block>
-  <block id="4d51e88535cd7d4f18d9f99b4757f877" category="list-text">Vérifier que les disques de l'agrégat racine sont correctement réaffectés Old-remove :</block>
   <block id="178098baf7cc420884cc556dea26c7ca" category="paragraph">Option<block ref="d3d9446802a44259755d38e6d163e820" prefix=" " category="inline-code"></block></block>
   <block id="6f5ca753326737c7593f401e5c5d7859" category="paragraph">Option<block ref="6512bd43d9caa6e02c990b0a82652dca" prefix=" " category="inline-code"></block></block>
   <block id="814a61c853e0924925006646c354415b" category="list-text">Dans le menu de démarrage, sélectionnez "`(6) mettre à jour la mémoire flash à partir de la configuration de sauvegarde".</block>
-  <block id="0d011eba353e9308f99977dbb07116e8" category="list-text">Sur LE CHARGEUR, vérifiez deux fois les valeurs d'amorçage et mettez à jour les valeurs si nécessaire.</block>
-  <block id="b62c48c82e4ea4a71a96e2e228f80a9b" category="paragraph">Suivez les étapes de la section <block ref="c3652d8371e8759d3786637bc5f1c8bc" category="inline-link-macro-rx"></block>.</block>
   <block id="628ec0782add3a1eca1d1b88c88303f8" category="list-text">Si le cryptage racine est utilisé, sélectionnez à nouveau l'option de menu d'amorçage pour la configuration de votre gestion des clés.</block>
   <block id="37ef00a03e6b4bacbc26b2ee369f838f" category="paragraph">Selon le paramètre du gestionnaire de clés, effectuez la procédure de récupération en sélectionnant l'option « 10 » ou « 11 », suivie de l'option<block ref="1679091c5a880faf6fb5e6087eb1b2dc" prefix=" " category="inline-code"></block> à la première invite du menu de démarrage. Pour démarrer complètement les nœuds, il est possible que vous deviez répéter la procédure de restauration suite à l'option « 1 » (démarrage normal).</block>
-  <block id="9fb51d4d13437ec63f1213f3923021a6" category="paragraph">Pour plus d'informations, voir<block ref="776d197cbf08d1a48ca3c854fbecd090" category="inline-link-rx"></block>.</block>
-  <block id="48e70a95a504e447ce8a3651dbabebad" category="paragraph"><block ref="48e70a95a504e447ce8a3651dbabebad" category="inline-link-rx"></block></block>
-  <block id="5c45da4ca5ec7e9d28eb987314a5305e" category="paragraph"><block ref="5c45da4ca5ec7e9d28eb987314a5305e" category="inline-link-rx"></block></block>
-  <block id="eee74a5fbb91c1e61f0861dec4f05ecf" category="list-text">Voir le plan de mappage des ports que vous avez créé dans <block ref="ab9fddb5e9f46cc8a59622b30650af49" category="inline-link-macro-rx"></block>.</block>
-  <block id="50f4e96f99c70a7e3b9840b8f3295862" category="list-text">Répétez les étapes pour mettre à niveau les nœuds du cluster_A, en commençant par <block ref="757f7f08bca76a1242dc77528a445472" category="inline-link-macro-rx"></block>.</block>
-  <block id="ff8648705a32483b6efc36e81f3ff6c9" category="paragraph"><block ref="7efa6fc838c006d396e42638b4ff25d1" category="inline-link-macro-rx"></block>.</block>
   <block id="8d6ff276cbe7c1327bc29f95e89536f9" category="summary">Vous devez identifier les contrôleurs existants et confirmer les relations \(DR\) de reprise après incident entre eux, que les contrôleurs sont en mode normal et que les agrégats sont en miroir.</block>
   <block id="49b388dfb89609b843d9a9109622e00c" category="doc">Vérification de l'état de la configuration du MetroCluster</block>
   <block id="6228e10459ae3618158c27f3c69d26f3" category="paragraph">Vous devez identifier les contrôleurs existants et confirmer les relations de reprise sur incident entre eux, que les contrôleurs sont en mode normal et que les agrégats sont mis en miroir.</block>
@@ -11372,7 +11327,6 @@
   <block id="62cbee147331935911956f9a0173e5dc" category="sidebar">Choisissez la procédure d'actualisation du système</block>
   <block id="3cf7b8011f891632a5de191822ee417b" category="sidebar">Mise à niveau des contrôleurs dans le système MetroCluster FC à l'aide du basculement et du rétablissement</block>
   <block id="ebd157c1e8defc9bf33ac98105172329" category="sidebar">Mise à niveau des contrôleurs sur le FC MetroCluster à quatre nœuds via le basculement et le rétablissement avec des commandes « remplacement du contrôleur système » (ONTAP 9.10.1 et versions ultérieures)</block>
-  <block id="0f0bf8d23aa860be830e25b6f1b90c86" category="sidebar">Mise à niveau des contrôleurs (AFF A700/FAS9000 vers AFF A900/FAS9500) dans MetroCluster IP avec basculement et rétablissement (ONTAP 9.10.1 ou version ultérieure)</block>
   <block id="34e0a85e8dfaaeca6dadc1260cdef2ae" category="sidebar">Actualisez une configuration FC MetroCluster à quatre nœuds</block>
   <block id="6e1b901662872166ef0e661d1481924c" category="sidebar">Étendez une configuration FC MetroCluster à deux nœuds à une configuration à quatre nœuds</block>
   <block id="fbda6a351e5c32b65583383006360afa" category="sidebar">Vérifiez l'état de la configuration MetroCluster</block>
@@ -11523,7 +11477,6 @@
   <block id="ebf8099b0d57d09213f64014fd257ea1" category="section-title">[[Reset-the-switch]] Réinitialiser les valeurs par défaut du commutateur NVIDIA IP SN2100</block>
   <block id="841793e4a1e005b1b9596c374804395a" category="section-title">[[RCF-fichier-option]]Réinitialiser le commutateur à l'aide de l'option de fichier RCF</block>
   <block id="66dfac56c9206023b345746e3fd92eae" category="section-title">[[Download-and-install]]Télécharger et installer les fichiers RCF NVIDIA</block>
-  <block id="c938b5cfd075c2f653372f886805b37a" category="paragraph-title">Vérifiez ces considérations avant d'utiliser les tables de configuration</block>
   <block id="3f710cadb0123c693533da68aaf5b596" category="paragraph-title">Que faire ensuite</block>
   <block id="0fcee5126250d77f3f33a330fd9c5a17" category="paragraph">Insérez des SFP dans les ports que vous ajoutez en tant que ports ISL. Assurez-vous que ces ports sont répertoriés dans le <block ref="5488151483f7e2bfe24758bbbb4d6f40" category="inline-link-macro-rx"></block> pour le commutateur auquel vous les ajoutez.</block>
   <block id="4b18b6ffcae5c35c0fd047b621fdb59e" category="section-title">Site A nbsp;informations AutoSupport</block>
@@ -11593,7 +11546,6 @@
   <block id="f75b229104808ecf96fca33d4778f2a8" category="paragraph">IP à quatre nœuds</block>
   <block id="1ff96f961a0386158191fbc0f4fb218b" category="paragraph">ONTAP 9.9.1 et versions ultérieures</block>
   <block id="f775e4c4edc895975c9cd478e2a512c1" category="paragraph"><block ref="f775e4c4edc895975c9cd478e2a512c1" category="inline-link-macro-rx"></block></block>
-  <block id="cc6f5bdcaa380f5a02b85aa487423648" category="list-text">Pour plus d'informations sur les combinaisons de mise à niveau de plate-forme prises en charge, consultez le tableau de mise à niveau IP MetroCluster dans <block ref="a934c7831e4c0e5d9741460d2b55f4b9" category="inline-link-macro-rx"></block>.</block>
   <block id="5f565b56a7ba868b460ab51ab73790d6" category="paragraph">Reportez-vous à la section<block ref="6ddc20d2276dd2fc9d58822a83f46769" category="inline-link-rx"></block> pour les procédures supplémentaires.</block>
   <block id="d0b28fd083b63a9e12330f486ca47625" category="section-title">Combinaisons de mise à jour technologique MetroCluster FC prises en charge</block>
   <block id="cfd1300cd3db131e8f69dc38177b5658" category="section-title">Combinaisons de mise à jour technologique MetroCluster IP prises en charge</block>
@@ -11754,7 +11706,6 @@
   <block id="8ac6e9edd68ffb00104a32fd0a3ef455" category="list-text">Vérifiez la connectivité Tiebreaker au logiciel MetroCluster en ouvrant une connexion SSH depuis l'hôte Tiebreaker vers chacune des LIFs de node management et des LIFs de cluster management.</block>
   <block id="92d17a99a2247a42900b1a4c61e8e7d0" category="paragraph">Pour utiliser SNMP avec le logiciel Tiebreaker, vous devez configurer les paramètres SNMP.</block>
   <block id="b108689bc1b65903b90d77f19e30d295" category="list-text">Utiliser l'interface de ligne de commande Tiebreaker<block ref="5ef546c28db0706808d8d451d5a71029" prefix=" " category="inline-code"></block> Pour ajouter des configurations MetroCluster.</block>
-  <block id="a645efc9b9e1d2189f4d79d85cfaefce" category="sidebar">Mise à niveau des contrôleurs (AFF A700/FAS9000 vers AFF A900/FAS9500) en configuration FC MetroCluster via le basculement et le rétablissement (ONTAP 9.10.1 ou version ultérieure)</block>
   <block id="6f4c27e539cc3005215fed00a58a0521" category="sidebar">Reliez les ports FC-VI et HBA du nouveau module de contrôleur aux commutateurs FC</block>
   <block id="da3f2d04a7e97d4412b48daacd47915e" category="sidebar">Câblage des connexions de peering de cluster du nouveau module contrôleur</block>
   <block id="2a077243240a3af8fdb5a2c53c8dfd93" category="sidebar">Activez le basculement du stockage sur les deux modules de contrôleur et activez la haute disponibilité du cluster</block>
@@ -11808,24 +11759,15 @@
   <block id="99e6dcb4734e7eef8858b52e3c36d08c" category="list-text">Cette procédure décrit les étapes nécessaires à la transition d'un groupe de reprise après incident FC à quatre nœuds. Si vous disposez d'une configuration à huit nœuds (deux groupes DR FC), vous devez répéter l'intégralité de la procédure pour chaque groupe DR FC.</block>
   <block id="7085ef0783c3069c714c62b941d51195" category="summary">Vous pouvez utiliser cette opération de basculement automatisé MetroCluster guidée pour effectuer une mise à niveau sans interruption du contrôleur dans le cas d'une configuration IP MetroCluster à quatre nœuds.</block>
   <block id="be2a104272635035d829d9eb66247a6e" category="doc">Mise à niveau des contrôleurs d'une configuration IP MetroCluster à quatre nœuds via le basculement et le rétablissement à l'aide des commandes « system Controller replace » (ONTAP 9.13.1 et versions ultérieures)</block>
-  <block id="7644562e2fb618084cb09ad85c576c00" category="paragraph">Vous pouvez utiliser cette opération de basculement automatisé MetroCluster guidée pour effectuer une mise à niveau sans interruption du contrôleur sur une configuration IP MetroCluster à quatre nœuds. Dans le cadre de cette procédure, d'autres composants (tels que des tiroirs de stockage ou des commutateurs) ne peuvent pas être mis à niveau.</block>
-  <block id="d6777f90334e4deb82616ecb9b6f9fb9" category="list-text">Les systèmes MetroCluster doivent exécuter la même version de ONTAP sur les deux sites.</block>
   <block id="55a7a35f233fa5c7dc761790158ed06d" category="list-text">Vous pouvez utiliser cette procédure pour mettre à niveau les contrôleurs d'une configuration IP MetroCluster à quatre nœuds à l'aide du basculement et du rétablissement automatisés basés sur NSO.</block>
-  <block id="c5825fe35515c4155fffecab1329d16f" category="admonition">Une mise à niveau avec transfert d'agrégats (ARL) à l'aide de commandes « remplacement du contrôleur système » n'est pas prise en charge dans une configuration IP MetroCluster à quatre nœuds.</block>
   <block id="77eb4e36d322d7ab218107d7c498326a" category="list-text">Vous devez utiliser la procédure de mise à niveau automatisée du contrôleur NSO pour mettre à niveau les contrôleurs dans l'ordre sur les deux sites.</block>
-  <block id="06b8cd9278c28e36ddc1fc586a6f840c" category="inline-link-macro">Reconfigurer manuellement le médiateur ONTAP</block>
   <block id="3cc4806cb19cbb655dbea9a73d4aab85" category="paragraph"><block ref="4baef16133ebdeaa64de2abee5aaa778" prefix="" category="inline-code"></block></block>
   <block id="ad84135061ac4d026b0f6b6b0b90c976" category="list-text">Si vous n'exécutez pas le<block ref="4baef16133ebdeaa64de2abee5aaa778" prefix=" " category="inline-code"></block> La procédure de mise à niveau du contrôleur choisit le basculement et le rétablissement automatisés basés sur NSO comme procédure par défaut sur les systèmes IP MetroCluster.</block>
   <block id="c37cd78225bfd28b27aba6fdb4ffdb05" category="paragraph">Cette tâche est effectuée sur la configuration IP MetroCluster existante.</block>
   <block id="41658c9a662bf36d1d1079b0d7e61f18" category="paragraph">Le<block ref="a7dd12b1dab17d25467b0b0a4c8d4a92" prefix=" " category="inline-code"></block> Le résultat des commandes affiche trois tableaux contenant les adresses IP de l'interface MetroCluster, les ID système et les UUID du système. Ces informations sont requises plus tard dans la procédure pour définir les bootargs lorsque vous démarrez le nouveau noeud.</block>
   <block id="103e238a461bced8a19653fadfc6b06f" category="paragraph">Dans cet exemple, pour une configuration IP MetroCluster à quatre nœuds, les anciens ID de système suivants sont récupérés :</block>
   <block id="f517753faa986ef4fe936b6ef049742a" category="paragraph">Dans cet exemple, pour une configuration IP MetroCluster à deux nœuds, les anciens ID de système suivants sont récupérés :</block>
-  <block id="8351b67dee4e0c692cf4f28e83b54b0a" category="paragraph">L'opération d'automatisation lance les opérations de basculement. Une fois ces opérations terminées, l'opération s'interrompt à *interrompu pour l'intervention de l'utilisateur*. Vous pouvez ainsi installer les contrôleurs, démarrer les contrôleurs partenaires et réaffecter les disques d'agrégat racine au nouveau module de contrôleur à partir de la sauvegarde flash à l'aide de<block ref="5fb641c5977b93de82b81e36db0454cf" prefix=" " category="inline-code"></block> rassemblés plus tôt.</block>
-  <block id="956cd19055bcda776c4aa38d849f5270" category="paragraph">Votre liste de répertoires doit contenir un dossier netboot avec un fichier noyau : ontap-version_image.tgz</block>
-  <block id="d58685908c79a70d5ff1a6db6c223402" category="paragraph">Il n'est pas nécessaire d'extraire le fichier ontap-version_image.tgz.</block>
-  <block id="ca0df34f59e377032b2f4b42096b5055" category="admonition">Si votre système MetroCluster IP est configuré avec le partitionnement de disque avancé, vous devez inclure l'identifiant système partenaire de reprise sur incident en exécutant<block ref="1d9572d24113365244a97e4cb81d5a77" prefix=" " category="inline-code"></block> commande.</block>
   <block id="3d76ebef670d0f7bd3eab697fb186812" category="paragraph">Au cours de l'un des redémarrages après l'option « 6 », l'invite de confirmation<block ref="adeeb123a02ab1bcf79fc4bdffdd3b9f" prefix=" " category="inline-code"></block> s'affiche. Entrez<block ref="415290769594460e2e485922904f345d" prefix=" " category="inline-code"></block>.</block>
-  <block id="16de7447f84bfaba1c8cf72b93fbf6ee" category="paragraph"><block ref="16de7447f84bfaba1c8cf72b93fbf6ee" category="inline-link-macro-rx"></block></block>
   <block id="9d278f0716d4f0b8bdeaa91150592096" category="list-text">L'opération d'automatisation est effectuée<block ref="f62e58c376725d0e22a9e8040934124c" prefix=" " category="inline-code"></block>,<block ref="f71080a9d0eed0afac5e99d0ac5f5781" prefix=" " category="inline-code"></block>, Et les opérations de rétablissement sur le site A, et les vérifications post-mise à niveau. Lorsque l'opération s'interrompt, vérifier manuellement le statut LIF SAN et vérifier la configuration du réseau en suivant le message de la console.</block>
   <block id="7058a4e91dbbbe7dcf2fde3987421db0" category="section-title">Reconfigurer le médiateur ONTAP</block>
   <block id="37a1beb7755a7b8722d2585dbc965263" category="paragraph">Configurez manuellement le médiateur ONTAP qui a été automatiquement supprimé avant de commencer la mise à niveau.</block>
@@ -11834,7 +11776,6 @@
   <block id="3d296dee09f5acd9721e7bd1f885a1ff" category="doc">Développement d'une configuration IP MetroCluster</block>
   <block id="f7ebd0c3919ed1a579352a95f757a9e6" category="paragraph">Selon votre version de ONTAP, vous pouvez étendre votre configuration MetroCluster IP en ajoutant quatre nouveaux nœuds en tant que nouveau groupe de reprise sur incident.</block>
   <block id="5ffb6f10d2a660f5653c90be923e511a" category="section-title">Combinaisons de plateformes prises en charge lors de l'ajout d'un deuxième groupe de reprise après incident</block>
-  <block id="a321522d8592d70cc3e6c26d2e63f256" category="list-text">Les combinaisons de ce tableau s'appliquent uniquement aux configurations 8 nœuds standard ou permanentes.</block>
   <block id="999074f8fe2e3e48d827312298ab3915" category="list-text">Les combinaisons de plates-formes indiquées dans ce tableau *ne* s'appliquent pas si vous utilisez les procédures de transition ou d'actualisation.</block>
   <block id="33ad7ee6bdd54750e4657cc259182b15" category="list-text">Tous les nœuds d'un groupe de reprise après incident doivent être du même type et de la même configuration.</block>
   <block id="0f186c4f0b005580a0159670474d7e66" category="image-alt">Combinaisons de plateformes pour configurations à 8 nœuds</block>
@@ -11943,7 +11884,6 @@
   <block id="d87d22ecaeaff0e5d4bd4030a9e08302" category="sidebar">Mise à niveau des contrôleurs dans une configuration MetroCluster IP à quatre nœuds via le basculement et le rétablissement à l'aide des commandes « system Controller replace » (ONTAP 9.13.1 et versions ultérieures)</block>
   <block id="12651c133a2edc8c764efaddca32ca42" category="sidebar">Actualisation d'une configuration IP MetroCluster à quatre ou huit nœuds (ONTAP 9.8 et versions ultérieures)</block>
   <block id="f11af7573a10a71e1161a2099db36bcc" category="sidebar">Développez une configuration MetroCluster IP</block>
-  <block id="f60298ca20150ed82728ebbcf934dcdd" category="paragraph">Avant le démarrage des contrôles préalables, si le Mediator ONTAP est installé, il est automatiquement détecté et supprimé. Pour confirmer la suppression, vous êtes invité à entrer un nom d'utilisateur et un mot de passe. Lorsque vous avez terminé la mise à niveau, ou si les contrôles préalables échouent ou si vous choisissez de ne pas poursuivre la mise à niveau, vous devez <block ref="27c582b1d219a53bd62704e35b9572aa" category="inline-xref-macro-rx"></block>.</block>
   <block id="a6d521ed969131c6ad881b1c930a769c" category="list-text">Si vous utilisez de nouveaux commutateurs, mettez l'ancien commutateur hors tension, retirez les câbles et retirez physiquement l'ancien commutateur.</block>
   <block id="3e49e5936cffd2e96856c25fa0417df2" category="inline-link-macro">Gestion du réseau</block>
   <block id="a4c47e03a7d497b0826db4991d94d6d6" category="paragraph">Vous devez ajouter les nouveaux ports disponibles sur les nouveaux contrôleurs à un broadcast domain s'il n'est pas déjà attribué à un. Le cas échéant, créez des VLAN ou des groupes d'interfaces sur les nouveaux ports. Voir <block ref="1c21ab35e530b06d4d331f67f55dccef" category="inline-link-macro-rx"></block></block>
@@ -12223,9 +12163,7 @@
   <block id="53eaf367aa3b61105b8ddce45278ab85" category="paragraph">Pour en savoir plus, consultez le <block ref="eef6283454e42ed2d47fdb00a9ff3e0c" category="inline-link-macro-rx"></block> documentation :</block>
   <block id="e896a08242f1b8600bd891680083c89c" category="paragraph">Consultez ces directives avant d'utiliser les tableaux :</block>
   <block id="11b0a2bdfcd224ea773788cafe8f7027" category="list-text">Si vous configurez le commutateur pour la transition FC vers IP MetroCluster, le port 5, le port 6, le port 13 ou le port 14 peuvent être utilisés pour connecter les interfaces de cluster locales du nœud FC MetroCluster. Reportez-vous à la <block ref="46a459674905c476821f71bc8486a4ba" category="inline-link-macro-rx"></block> et les fichiers de câblage générés pour plus de détails sur le câblage de cette configuration. Pour toutes les autres connexions, vous pouvez utiliser les affectations d'utilisation des ports répertoriées dans les tableaux.</block>
-  <block id="91166ddb2661684df8dbc56e903ec043" category="paragraph">Les configurations suivantes ne sont actuellement pas prises en charge :</block>
   <block id="ffbf0166c7ab0c630d8081caba93b8ff" category="list-text">La connexion d'une configuration MetroCluster à huit ou deux nœuds requiert ONTAP 9.14.1 ou version ultérieure et le fichier RCF version 2.00 ou version ultérieure.</block>
-  <block id="2f37bf7d3a80ef892a37b5867710dc5e" category="paragraph">*Remarque 1* : si vous utilisez un adaptateur X91440A (40 Gbit/s), utilisez les ports e4a et e4e ou e4a et e8a. Si vous utilisez un adaptateur X91153A (100 Gbit/s), utilisez les ports e4a et e4b ou e4a et e8a.</block>
   <block id="8232ac4b6380b290738aa1ce5cc7cff3" category="paragraph">Gardez une trace du groupe de ports MetroCluster (MetroCluster 1, MetroCluster 2, MetroCluster 3 ou MetroCluster 4). Vous en aurez besoin lorsque vous utilisez l'outil RcfFileGenerator comme décrit plus loin dans cette procédure de configuration.</block>
   <block id="554d0ed2f8464fefa6da872d6dbcf5c5" category="list-text">Le fichier RCF version 2.10 ou ultérieure est requis pour le mode d'écorché 25G pour les liens ISL MetroCluster.</block>
   <block id="5b43fcab432560bae73db4e0c9e34232" category="list-text">ONTAP 9.13.1 ou version ultérieure et le fichier RCF version 2.00 sont requis pour utiliser une plateforme autre que FAS8200 ou AFF A300 dans le groupe « MetroCluster 4 ».</block>
@@ -12235,7 +12173,6 @@
   <block id="3209e9c123d4238593063149c7f8b0e2" category="list-text">Les plateformes qui ne prennent pas en charge les tiroirs NS224 reliés par un commutateur peuvent uniquement être connectées comme une deuxième configuration MetroCluster ou comme un second groupe de reprise après incident.</block>
   <block id="dae9a493a0381746910b46f271097afc" category="list-text">Le RcfFileGenerator affiche uniquement les plates-formes éligibles lorsque la première plate-forme est sélectionnée.</block>
   <block id="dfaaea754370da30cfd269ee856da3a9" category="list-text">La connexion d'une configuration MetroCluster à huit ou deux nœuds requiert ONTAP 9.14.1 ou version ultérieure.</block>
-  <block id="82e2d7798ab15559f8ebbae8125f55c3" category="list-title">Consultez ces informations avant d'utiliser les tableaux :</block>
   <block id="a5d0cab9bff9a930a5eb4ad5c7bce183" category="list-text">Si vous configurez le switch pour la transition MetroCluster FC vers IP, les ports suivants sont utilisés selon la plateforme cible que vous choisissez :</block>
   <block id="f2a26c5fb823530f83a5b4d6bf512eb9" category="cell">Plate-forme cible</block>
   <block id="c2a1880d9ec21424185dc32c708f7c2f" category="cell">FAS500f, AFF C250, ASA C250, AFF A250, ASA A250, FAS8300, AFF C400, ASA C400, AFF A400, ASA A400, ou FAS8700</block>
@@ -12450,7 +12387,6 @@
   <block id="6627a26235928f19183374e55b041466" category="admonition">Avant d'utiliser cette commande, consultez le <block ref="b36331871b99d608d499593ef0805d3b" category="inline-link-macro-rx"></block>.</block>
   <block id="62dab2247ca5697a261fd865abf3712d" category="paragraph">Trimestre 4 : baies 36-47</block>
   <block id="c81d9f1aaf4df29053805f321b5b089d" category="section-title">Affectation des disques et ADP sur les systèmes AFF A150, ASA A150 et AFF A220</block>
-  <block id="f7895982d569530633368489a09d6077" category="section-title">Affectation des disques et ADP sur les systèmes AFF C250, AFF A250, ASA A250, ASA C250 et FAS500f</block>
   <block id="6a0fb9ba6a0c02751fb5fc909455894f" category="section-title">Affectation des disques et des données sur les systèmes AFF C400, AFF A400, ASA C400 et ASA A400</block>
   <block id="fd659a09a0244eaf6b3f61e3ca61a14d" category="paragraph">Le médiateur ONTAP fournit des LUN de boîte aux lettres pour stocker des informations d'état sur les nœuds IP MetroCluster. Ces LUN sont co-localisés avec le médiateur ONTAP, qui s'exécute sur un hôte Linux physiquement séparé des sites MetroCluster. Les nœuds IP MetroCluster peuvent utiliser les informations de la boîte aux lettres pour surveiller l'état de leurs partenaires de reprise après incident et mettre en œuvre un basculement non planifié assisté par Mediator (MAUSO) en cas d'incident.</block>
   <block id="30340ec1ae42c7ca90b5fdd7fab0a4a3" category="paragraph">Lorsqu'un nœud détecte une défaillance de site nécessitant un basculement, il prend des mesures pour confirmer que le basculement est approprié et effectue le basculement. Par défaut, un MAUSO est lancé pour les scénarios suivants :</block>
@@ -12862,8 +12798,6 @@ S'applique à toutes les configurations MetroCluster.</block>
   <block id="636a367cc04fb36c02707f67c1a70771" category="paragraph">Reportez-vous à la section <block ref="ff174d1e305f5f579b29dcdb0a617c23" category="inline-link-macro-rx"></block> pour les procédures supplémentaires.</block>
   <block id="332fe4e638c485c04f214b0a13747f6d" category="list-text">Cette procédure vous permet de mettre à niveau les contrôleurs d'une configuration FC MetroCluster à quatre nœuds à l'aide du basculement et du rétablissement automatisés basé sur NSO. Pour effectuer une mise à niveau du contrôleur à l'aide du transfert d'agrégats (ARL), reportez-vous à <block ref="0fe967effd4f0eaf84576f897dbfd368" category="inline-link-macro-rx"></block>. Il est recommandé d'utiliser la procédure automatisée basée sur le système NSO.</block>
   <block id="75132a926df50e23a26bd72dde0371b7" category="list-text"><block ref="46f4c9c8d582aa241b60c75ea3bcb2c9" category="inline-link-macro-rx"></block> À partir du logiciel disjoncteur d'attache.</block>
-  <block id="3f37428974fb63458f8dd07028049c05" category="paragraph">Reportez-vous à la section <block ref="9fe99ab9f2ddf89daf4666d8f9010550" category="inline-link-macro-rx"></block> pour les procédures supplémentaires.</block>
-  <block id="d1f739b347487947f18d3ad9cfbc668e" category="paragraph">Pour l'utilisation des ports pour les modèles de plate-forme, reportez-vous à la section <block ref="41f66f34b3a905f864500c9319fdff8f" category="inline-link-macro-rx"></block></block>
   <block id="0b22fb8d0feec85055f45c8c4a298766" category="list-text">Si vous êtes invité à poursuivre la procédure, entrez<block ref="415290769594460e2e485922904f345d" prefix=" " category="inline-code"></block>, Et lorsque vous êtes invité à saisir l'URL du pack :</block>
   <block id="84ea00dba7c6a1cf0426e58385307e4f" category="paragraph"><block ref="5b9047ebb0d87499d679fd69fbda42cf" prefix="" category="inline-code"></block></block>
   <block id="b57c06e6dad65cb8a7fb01050706349f" category="paragraph">Vous pouvez utiliser ONTAP System Manager et pointer votre navigateur Web vers l'adresse IP de gestion du cluster (\https://172.17.12.153).)</block>
@@ -13010,24 +12944,20 @@ L'exemple suivant montre que vous utilisez SCP pour télécharger le fichier<blo
   <block id="983ef706fb7088bc127ca2ea08447cd2" category="paragraph">Prise en charge du stockage objet S3 sur les agrégats en miroir et sans miroir</block>
   <block id="9200b87f425cf8ffb4a16ea10431a73e" category="paragraph">Vous pouvez activer un serveur de stockage objet S3 sur une SVM dans un agrégat en miroir ou sans miroir dans des configurations MetroCluster IP et FC.</block>
   <block id="c89f9fd1a8019dc4d7a2559a982d3aa8" category="inline-link">Présentation de la configuration S3</block>
-  <block id="ef9047c785e1f9b26fe99b3bcf88bd4d" category="paragraph"><block ref="ef9047c785e1f9b26fe99b3bcf88bd4d" category="inline-link-rx"></block></block>
   <block id="8020ad245e7cbc2ac49c84b7f4ace684" category="paragraph">ONTAP 9.14.1</block>
   <block id="1e4cf16edaf417e94a695644f4089a2f" category="paragraph">Prise en charge du provisionnement d'un compartiment S3 sur des agrégats en miroir et sans miroir dans un cluster MetroCluster</block>
   <block id="54c9cab829044acca6994285d3185409" category="paragraph">Dans les configurations MetroCluster, vous pouvez créer un compartiment sur un agrégat en miroir ou sans miroir.</block>
   <block id="ea0c90724ad3d5959704fb91a048c28c" category="inline-link">Créez un compartiment sur un agrégat en miroir ou sans miroir dans une configuration MetroCluster</block>
-  <block id="7a5d298867b0efc5adf88dfe965f7137" category="paragraph"><block ref="7a5d298867b0efc5adf88dfe965f7137" category="inline-link-rx"></block></block>
   <block id="594e1ec3daa27e540baa061f731f028f" category="paragraph">ONTAP 9.12.1</block>
   <block id="6eaae443849a6746c6ace7f4204bd085" category="paragraph">Prise en charge IPsec du protocole hôte frontal dans les configurations MetroCluster IP et MetroCluster FAS</block>
   <block id="d70d383ef18fafd59eb655545c1017bd" category="paragraph">La prise en charge IPSec pour le protocole hôte frontal (tel que NFS et iSCSI) est disponible dans les configurations FAS MetroCluster IP et MetroCluster.</block>
   <block id="3d84ccfa2f8722220108717d5cfdc457" category="inline-link">Configurez la sécurité IP (IPsec) sur le cryptage filaire</block>
-  <block id="ad8910c15c5709955bf29783dc65c7b6" category="paragraph"><block ref="ad8910c15c5709955bf29783dc65c7b6" category="inline-link-rx"></block></block>
   <block id="b59cced8914a5ae4b2997c54c8cfeb8d" category="paragraph">ONTAP 9.11.1</block>
   <block id="6165c4352e1504dbaeef34d0cc50c187" category="paragraph">Groupes de cohérence</block>
   <block id="3fb697436dcc4f2ae2cdd29dc91fd043" category="paragraph">Les groupes de cohérence sont pris en charge dans les configurations MetroCluster.</block>
   <block id="7b25d54164390a979173c966708bcd3e" category="paragraph">FabricPool est mis en miroir dans les configurations MetroCluster</block>
   <block id="456a60d3d7f70b899491cde66c53e366" category="paragraph">Vous pouvez configurer une FabricPool en miroir sur les configurations MetroCluster pour déplacer les données inactives vers deux zones de défaillance différentes.</block>
   <block id="50adf775e4799022cdc6de484f49f3f1" category="inline-link">Configuration des magasins d'objets pour FabricPool dans une configuration MetroCluster</block>
-  <block id="64d61908c9d9a568c06988ad32aea4f4" category="paragraph"><block ref="64d61908c9d9a568c06988ad32aea4f4" category="inline-link-rx"></block></block>
   <block id="4bac6a2c11bf11dd13d68729ea0a8869" category="paragraph">Reprise d'activité de SVM</block>
   <block id="757efaf9f255f5bc7d684262790601ff" category="paragraph">Les machines virtuelles de stockage actives (SVM) dans une configuration MetroCluster peuvent être utilisées comme sources grâce à la fonctionnalité de reprise d'activité SVM de SnapMirror.</block>
   <block id="47d81ac708cab22da7ea952550b6f757" category="summary">De nouvelles fonctionnalités du médiateur ONTAP sont fournies avec chaque version.  Voici les nouveautés.</block>
@@ -13275,12 +13205,10 @@ L'exemple suivant montre que vous utilisez SCP pour télécharger le fichier<blo
   <block id="e2974b23926ca4d7d377fe83a01893cc" category="list-text">À l'invite DU CHARGEUR pour chacun des nœuds du site d'incident, définissez la valeur de démarrage en fonction du modèle de plateforme :</block>
   <block id="7e9ada96e6c7ea5b82a0e953f38fc85c" category="paragraph">La valeur de _HA-Partner-IP-address_ doit être définie sur *0* (zéro) sur les systèmes introduits dans ONTAP 9.15.1 ou version ultérieure car ils ont des ports distincts pour DR et HA.</block>
   <block id="fd053f45281bc461c7ff13c80dc7a0ef" category="paragraph">Définissez le démarrage suivant :</block>
-  <block id="b1656b6f4acc345525c67f4fc0341f24" category="section-title">ADP et affectation des disques sur AFF C800, ASA C800, ASA A800, AFF A800, AFF A70, et AFF A90</block>
   <block id="9f4ca92781c17387aacdcaad01922666" category="section-title">Affectation des disques et ADP sur les systèmes AFF A900, ASA A900 et AFF A1K</block>
   <block id="855e77b312a37887818fdd759e02e635" category="paragraph">X50132A</block>
   <block id="cb90ff75f6769672089edcf1b5a430c2" category="paragraph">Emplacement 2</block>
   <block id="1861ea3bcf41c2d0077d0ec89bff163f" category="paragraph">e2a, e2b</block>
-  <block id="e6f9eb6f48a1c73f8869c3018d94ce49" category="paragraph">AFF A90 et AFF A1K</block>
   <block id="7c941395c7474fbf4256f8c308a5d9a8" category="paragraph">Emplacement 2, emplacement 3</block>
   <block id="00e2655d7c31ea9101ed27d4696d5c94" category="paragraph">e2b, e3b</block>
   <block id="875e533ea6255c6d2f92900744fe1528" category="paragraph">*Remarque :* les ports e2a et e3a doivent rester inutilisés. L'utilisation de ces ports pour les réseaux frontaux ou le peering n'est pas prise en charge.</block>
@@ -13301,8 +13229,6 @@ L'exemple suivant montre que vous utilisez SCP pour télécharger le fichier<blo
   <block id="8d0d4c4989ca3a66a7d2d68ea1014ba3" category="image-alt">Affiche les attributions de port de la plate-forme Cisco 3132Q-V.</block>
   <block id="bc96235583bdab0e6796c3feabb688a2" category="paragraph">Vérifiez les attributions de ports de plateforme pour connecter un système FAS9000 ou AFF A700 à un commutateur Cisco 3132Q-V :</block>
   <block id="f147a65f5cf3438e76a8b0e61ed4bc9a" category="paragraph">Vérifiez les affectations des ports de la plateforme pour relier un système AFF A800 ou ASA A800 à un commutateur Cisco 3132Q-V :</block>
-  <block id="c04953afd7340fd5dc8facf4675172a9" category="paragraph">AFF A150, ASA A150, FAS2750, AFF A220</block>
-  <block id="3e28b7f2fae6fd64638704a6984b0c6b" category="paragraph">FAS500f, AFF C250, ASA C250, AFF A250, ASA A250</block>
   <block id="a55997bcb52ea47d76c7693089c4411b" category="inline-xref">Attributions de ports de la plateforme Cisco 3232C ou Cisco 9336C (groupe 1)</block>
   <block id="c024b3c7d421518d7eb77f06a0afffb1" category="cell"><block ref="6d3d31dd5453e3b467ac6e4ca8f02d56" category="inline-xref-macro-rx"></block></block>
   <block id="0b3e5d156cf864da2f269d95d3fcc8fa" category="cell">FAS8200, AFF A300</block>
@@ -13314,7 +13240,6 @@ L'exemple suivant montre que vous utilisez SCP pour télécharger le fichier<blo
   <block id="054b22baf62d3195ebaf8ecfe2361739" category="cell">FAS9000, AFF A700 AFF C800, ASA C800, AFF A800, ASA A800 FAS9500, AFF A900, ASA A900</block>
   <block id="2226e1588cfda1f99bdd93ae81369cbc" category="inline-xref">Attributions de port de la plateforme Cisco 3232C ou Cisco 9336C (groupe 4)</block>
   <block id="c943d58a767750622bb22e4321d98b49" category="cell"><block ref="959c288a998a0080d9480c0767159234" category="inline-xref-macro-rx"></block></block>
-  <block id="1d895f249034078e8d0864ccac388901" category="cell">AFF A70 AFF A90 AFF A1K *Remarque :* ces systèmes nécessitent ONTAP 9.15.1 ou une version ultérieure.</block>
   <block id="59c59d66414422c937d61eff4de12116" category="inline-xref">Attributions de port de la plateforme Cisco 3232C ou Cisco 9336C (groupe 5)</block>
   <block id="fe7a114e5e984cbae45640593d3154ca" category="cell"><block ref="80843075b55b672cbe9cacce61884d3c" category="inline-xref-macro-rx"></block></block>
   <block id="2f08fa253f72ece3683a45d943018e9e" category="paragraph">Passez en revue les affectations des ports de la plateforme pour connecter les câbles des systèmes AFF A150, ASA A150, FAS2750, AFF A220, FAS500f, système AFF C250, ASA C250, AFF A250 ou ASA A250 vers un switch Cisco 3232C ou 9336C :</block>
@@ -13322,8 +13247,6 @@ L'exemple suivant montre que vous utilisez SCP pour télécharger le fichier<blo
   <block id="95b3cf0d5bfefca59c78627146fba641" category="paragraph">Vérifiez les attributions de ports de plateforme pour connecter un système FAS8200 ou AFF A300 à un switch Cisco 3232C ou 9336C :</block>
   <block id="be6fae0369c7f11eec2fbd1d464b74fd" category="paragraph">Consultez les attributions de ports de plateforme pour connecter les systèmes AFF A320, FAS8300, AFF C400, ASA C400, FAS8700, système AFF A400 ou ASA A400 vers un switch Cisco 3232C ou 9336C :</block>
   <block id="9d55c6ea91959d97bbe3100622e6c086" category="paragraph">Consultez les affectations des ports de plateforme pour connecter les câbles des systèmes FAS9000, AFF A700, AFF C800, ASA C800, AFF A800, système ASA A800, FAS9500, AFF A900 ou ASA A900 vers un switch Cisco 3232C ou 9336C :</block>
-  <block id="e2f3683f965e8d15cad454e450ed2654" category="paragraph">Vérifiez les attributions de ports de plateforme pour câbler un système AFF A70, AFF A90 ou AFF A1K à un switch Cisco 3232C ou 9336C :</block>
-  <block id="ead5ac015522b2debf023fd3b632c5b7" category="admonition">Les systèmes de ce tableau nécessitent ONTAP 9.15.1 ou une version ultérieure.</block>
   <block id="e896857ceffdb603548885cb5100edfc" category="list-text">Au moins une configuration MetroCluster ou un groupe de reprise sur incident doit prendre en charge les tiroirs NS224 reliés par commutateur.</block>
   <block id="bc72159143eff0b74341b77947b6f3ff" category="paragraph">Consultez le tableau d'affectation des ports correspondant à votre configuration. Cette section comporte deux ensembles de tables de câblage :</block>
   <block id="1c704961a2a6e9aa5979ae30105b7b6f" category="inline-xref">Tableaux de câblage pour les contrôleurs se connectant aux tiroirs NS224 reliés par un commutateur</block>
@@ -13339,7 +13262,6 @@ L'exemple suivant montre que vous utilisez SCP pour télécharger le fichier<blo
   <block id="b6098cea8a2777e5c03f397eddba1384" category="cell">AFF A700 AFF C800, ASA C800, AFF A800 AFF A900, ASA A900</block>
   <block id="97686b663fd0ef0bfb1351a275bd7837" category="inline-xref">Attributions de ports de plate-forme de commutateur partagé Cisco 9336C-FX2 (groupe 2)</block>
   <block id="c476b4dbd1c1a1575bd0cb7b9b6cee78" category="cell"><block ref="72d365170c1b13f78ac51fd21ca790fe" category="inline-xref-macro-rx"></block></block>
-  <block id="c297b27e164f9fd07153033bee6aaf14" category="cell">AFF A90 AFF A70 AFF A1K *Remarque :* ces systèmes nécessitent ONTAP 9.15.1 ou une version ultérieure.</block>
   <block id="48d80fb496b1141bc0d1f4a4840501c2" category="inline-xref">Attributions de ports de plate-forme de commutateur partagé Cisco 9336C-FX2 (groupe 3)</block>
   <block id="a294de1141d085225e66991a6734d64b" category="cell"><block ref="8e3178499467cafbbfb2609edfa411f5" category="inline-xref-macro-rx"></block></block>
   <block id="e4880392f55e1cdd66933d586afaff9b" category="paragraph-title">Attributions de ports de plate-forme de commutateur partagé Cisco 9336C-FX2 (groupe 1)</block>
@@ -13348,16 +13270,12 @@ L'exemple suivant montre que vous utilisez SCP pour télécharger le fichier<blo
   <block id="4ba16f9ec1ea989c0867b1ad14e3e091" category="paragraph-title">Attributions de ports de plate-forme de commutateur partagé Cisco 9336C-FX2 (groupe 2)</block>
   <block id="c20e08f5a68ee9f336acc3f80791cdce" category="paragraph">Passez en revue les affectations des ports de plateforme pour câbler un AFF A700, AFF C800, ASA C800, AFF A800, AFF A900, ou le système ASA A900 qui connecte des tiroirs NSS24 reliés par commutateur à un commutateur partagé Cisco 9336C-FX2 :</block>
   <block id="b9fb7e19d674be0780dc144fff0db677" category="paragraph-title">Attributions de ports de plate-forme de commutateur partagé Cisco 9336C-FX2 (groupe 3)</block>
-  <block id="d6e68f55f351c47669a81d202281bc62" category="paragraph">Vérifiez les attributions de ports de la plateforme pour câbler un système AFF A90, AFF A70 ou AFF A1K qui connecte des tiroirs NSS24 reliés par commutateur à un commutateur partagé Cisco 9336C-FX2 :</block>
-  <block id="2132d8564677098806bf7e79d1419f3a" category="paragraph">Dans le cas d'un cluster connecté par commutateur, les ports de cluster identiques des nœuds AFF A90 ou AFF A70 doivent être sur le même commutateur. Par exemple, e1a sur le nœud 1 et e1a sur le nœud 2 doivent être connectés à un commutateur de cluster. De même, le second port de cluster des deux nœuds doit être connecté au second commutateur de cluster. La connexion croisée des ports HA du cluster partagé, où e1a du nœud 1 est connecté à IP_Switch_x_1 et e1a du nœud 2 est connecté à IP_Switch_x_2, empêche les défaillances de communication HA.</block>
   <block id="78de8bf922780f385bf681428e5b091b" category="section-title">Contrôleurs ne se connectant pas aux tiroirs NS224 reliés par un commutateur</block>
   <block id="b75c967687ccfedfdc9af6a7cf47fb61" category="paragraph">Déterminez le tableau d'affectation des ports à suivre pour les contrôleurs qui ne se connectent pas aux tiroirs NS224 reliés par un commutateur.</block>
   <block id="f767a875f72b50f5b4ba095c00dd1361" category="cell">AFF A150, ASA A150 FAS2750, AFF A220</block>
   <block id="320197c44c5a2bfa0ef4783c1891047b" category="inline-xref">Attributions de ports de plate-forme de commutateur partagé Cisco 9336C-FX2 (groupe 4)</block>
-  <block id="819461ccb150f80740e4b719f03fb5a4" category="cell"><block ref="45c8171ea8358d622e0f29ed63cf68ee" category="inline-xref-macro-rx"></block></block>
   <block id="c4a769675a2e89fcb65e84a2b2c8e6c1" category="cell">FAS500f AFF C250, ASA C250 AFF A250, ASA A250</block>
   <block id="598cde4c76afa98039e2123bffe9a9e0" category="inline-xref">Attributions de ports de plate-forme de commutateur partagé Cisco 9336C-FX2 (groupe 5)</block>
-  <block id="c3e9cb3ab828df155f62b05cf84026de" category="cell"><block ref="2a5db636fcd422105bb7d2120d9ab60f" category="inline-xref-macro-rx"></block></block>
   <block id="b3d39e1de10317a22681104f98025f7c" category="inline-xref">Attributions de ports de plate-forme de commutateur partagé Cisco 9336C-FX2 (groupe 6)</block>
   <block id="1d3c4364253180c31aadc7e665f06be3" category="cell"><block ref="fb232079a476121800e01709dcbcc120" category="inline-xref-macro-rx"></block></block>
   <block id="69ecd98e97e7a9e1d19f24f861c7f0f2" category="inline-xref">Attributions de ports de plate-forme de commutateur partagé Cisco 9336C-FX2 (groupe 7)</block>
@@ -13371,7 +13289,6 @@ L'exemple suivant montre que vous utilisez SCP pour télécharger le fichier<blo
   <block id="8418c0c9975450b9880acd41079c06de" category="paragraph">Vérifiez les affectations des ports de la plateforme pour câbler un système FAS500f, AFF C250, ASA C250, AFF A250 ou ASA A250 qui ne connecte pas les tiroirs NSS24 reliés par commutateur à un commutateur partagé Cisco 9336C-FX2 :</block>
   <block id="a1b0f4d668ec59f7dde1f302ecf91dd8" category="paragraph">Vérifiez les attributions de ports de la plateforme pour connecter un système FAS8200 ou AFF A300 qui ne connecte pas les tiroirs NSS24 reliés par commutateur à un commutateur partagé Cisco 9336C-FX2 :</block>
   <block id="6ece60b094d75c94ab49d4300d236c1e" category="paragraph">Consultez les affectations des ports de plateforme pour connecter les câbles des systèmes FAS9000, AFF A700, AFF C800, ASA C800, AFF A800, système ASA A800, FAS9500, AFF A900 ou ASA A900 ne connectant pas les tiroirs NSS24 reliés par commutateur à un commutateur partagé Cisco 9336C-FX2 :</block>
-  <block id="d54985a1df7bc0a159fa1afcc15f305e" category="paragraph">Vérifiez les attributions de ports de la plateforme pour câbler un système AFF A70, AFF A90 ou AFF A1K qui ne connecte pas de tiroirs NSS24 reliés par commutateur à un commutateur partagé Cisco 9336C-FX2 :</block>
   <block id="e3703245932789dbe7c10cc1431475fa" category="paragraph">AFF A150, ASA A150</block>
   <block id="d8e09f41a0140bcadce2023c9fc846c8" category="inline-xref">Attributions de port de la plate-forme Broadcom BES-53248 (groupe 1)</block>
   <block id="76e892ed2593b2d95aee4f548fdf5623" category="cell"><block ref="7a1d34aae389c65629b6ff5d8aa067cc" category="inline-xref-macro-rx"></block></block>
@@ -13408,7 +13325,6 @@ L'exemple suivant montre que vous utilisez SCP pour télécharger le fichier<blo
   <block id="5169dd4952c3ed61fc8c586565b6f671" category="image-alt">Affiche les attributions de port de la plate-forme NVIDIA SN2100</block>
   <block id="8c0dfd424cf2846a6c5d57af4d4c1c67" category="paragraph">Consultez les affectations des ports de la plateforme pour connecter un système FAS8300, AFF C400, ASA C400, AFF A400, ASA A400, système FAS8700, FAS9000 ou AFF A700 vers un commutateur NVIDIA SN2100 :</block>
   <block id="359054a58638f835e3a1aabcead61be2" category="paragraph">Passez en revue les affectations des ports de la plateforme pour câbler un AFF C800, ASA C800, AFF A800, ASA A800, FAS9500, système AFF A900 ou ASA A900 vers un commutateur NVIDIA SN2100 :</block>
-  <block id="8aa8fb06f3ec29afe8a9aeb09f780eac" category="paragraph">Passez en revue les attributions de port de la plate-forme pour connecter un système AFF A90, AFF A70 ou AFF A1K à un commutateur NVIDIA SN2100 :</block>
   <block id="d3b56d16ca05e3f25ef1d8c401cfa7c7" category="admonition">Les systèmes IP MetroCluster ne disposent pas de ports dédiés à haute disponibilité (HA). Selon votre plateforme, le trafic haute disponibilité est desservi par le MetroCluster, le cluster local ou l'interface cluster/MetroCluster partagée. Lorsque vous utilisez _ONTAP Hardware Systems Documentation_ pour installer votre plate-forme, vous ne devez pas suivre les instructions de câblage du cluster et des ports HA.</block>
   <block id="829170dbc66398be3778968ebb183d6b" category="section-title">Définissez la vitesse du port de commutateur pour les interfaces IP MetroCluster</block>
   <block id="6a0285e4a2b9116faf78c0ce3f22b522" category="paragraph">Utilisez cette procédure pour régler la vitesse du port de commutation sur 100 G pour les systèmes suivants :</block>
@@ -13424,13 +13340,10 @@ L'exemple suivant montre que vous utilisez SCP pour télécharger le fichier<blo
   <block id="fc028e3a959d5040cb2c7b0ceac73cf8" category="paragraph">AFF A300, FAS8200</block>
   <block id="28cf84e4b9c7d19ba37159218fdea6f0" category="section-title">Mises à niveau de contrôleurs prises en charge</block>
   <block id="00422b8712ec5454364e6489bb81ba29" category="list-text">Lorsque vous effectuez une mise à niveau du contrôleur, l'ancien et le nouveau type de plate-forme *doivent* correspondre :</block>
-  <block id="ea246a6495df1b87df40d7c322d23942" category="list-text">Tous les nœuds (anciens et nouveaux) de la configuration MetroCluster doivent exécuter la même version de ONTAP.</block>
   <block id="5505f24f1b03305d31aacdd035c7f251" category="paragraph-title">Mises à niveau des contrôleurs IP AFF et FAS MetroCluster prises en charge</block>
-  <block id="7b8670a76cf1dc8cbe357ce34cc11736" category="image-alt">mise à niveau ip MetroCluster so sb AFF FAS</block>
   <block id="ae189029f72cc261fbad1afff41d9552" category="list-text">Remarque 3 : la plateforme cible ne peut pas avoir de disques internes tant que la mise à niveau du contrôleur n'est pas terminée. Vous pouvez ajouter les lecteurs internes après la mise à niveau.</block>
   <block id="39eb8422a5f49fae94f0335febb78701" category="list-text">Remarque 4 : nécessite le remplacement des modules de contrôleur.</block>
   <block id="2d5d2a9ece12ce430adc9f20c9e9464d" category="paragraph-title">Mises à niveau du contrôleur IP ASA MetroCluster prises en charge</block>
-  <block id="6d340f03110b449d466e554ef5a4a7af" category="image-alt">mise à niveau ip MetroCluster so sb ASA FAS</block>
   <block id="9311605dda14c8d475dd817b196dbe33" category="list-text">Remarque 1 : les mises à niveau des contrôleurs sont prises en charge sur les systèmes exécutant ONTAP 9.13.1 ou version ultérieure.</block>
   <block id="e201b3063a835c6ab815286f4d0dc126" category="paragraph-title">Prise en charge des mises à niveau des contrôleurs FC AFF et FAS MetroCluster</block>
   <block id="9226549359438ca0927aca7ed11e792d" category="paragraph">Le tableau suivant présente les combinaisons de plateformes prises en charge pour la mise à niveau d'un système AFF ou FAS dans une configuration FC MetroCluster :</block>
@@ -13476,13 +13389,9 @@ L'exemple suivant montre que vous utilisez SCP pour télécharger le fichier<blo
   <block id="1d54ab78a8d8a5d4636ecd98bafaa94c" category="list-text">Voir le plan de mappage de port que vous avez créé dans <block ref="9c46692563a7a73a73f8ba6108f40e8e" category="inline-xref-macro-rx"></block></block>
   <block id="4588d3b79e3f8ce0a7e6076cf876c211" category="list-text">Répétez les étapes pour mettre à niveau les nœuds sur site_A, en commençant par <block ref="7fa78a877decced6b84ff8ffe1fa85ad" category="inline-xref-macro-rx"></block>.</block>
   <block id="6ba7fae9c91de06a7a5516b00fcb41ba" category="list-text">Les commutateurs IP MetroCluster (type de commutateur, fournisseur et modèle) et la version du firmware doivent être pris en charge sur les contrôleurs existants et nouveaux de votre configuration de mise à niveau.</block>
-  <block id="a1dc413e9196fca73e67e1bc8dc0d617" category="paragraph">Reportez-vous <block ref="43b42c26c42f7c6fe4ef77f9f2ed17ff" category="inline-link-macro-rx"></block> au ou au <block ref="4bda12a91fa486a6aaeafafb55098b01" category="inline-link-macro-rx"></block> pour connaître les versions de micrologiciel et les commutateurs pris en charge.</block>
   <block id="cb2b71f7328cfbc51d68290fdef5e64a" category="inline-link-macro">désactivez le chiffrement de bout en bout</block>
   <block id="2843a33605079ab99cc2f26a41a2bcbb" category="list-text">S'il est activé sur votre système, <block ref="7a9d12e6dbd7c75c145032be8c2b8549" category="inline-link-macro-rx"></block> avant d'effectuer la mise à niveau.</block>
   <block id="973338f6a10e6b7ac7c39f19d7b492b2" category="list-text">Vous réutilisez les adresses IP, les masques de réseau et les passerelles des plates-formes d'origine sur les nouvelles plates-formes.</block>
-  <block id="728081f5343425576647f8cdc1547b4f" category="section-title">Définissez le démarrage requis sur le système existant</block>
-  <block id="b497fddd1b7ae2c734d492c373d8a31d" category="paragraph">Si vous effectuez une mise à niveau vers un système AFF A70, AFF A90 ou AFF A1K, suivez les étapes pour définir le<block ref="b4317656058abaf147d385d72f465e96" prefix=" " category="inline-code"></block> démarrage.</block>
-  <block id="eab65329b52feb70202b3b63019614c9" category="admonition">Si vous effectuez une mise à niveau vers un système AFF A70, AFF A90 ou AFF A1K, vous *devez* effectuer cette tâche avant d'effectuer la mise à niveau. Cette tâche *uniquement* s'applique aux mises à niveau vers un système AFF A70, AFF A90 ou AFF A1K à partir d'un système pris en charge. Pour toutes les autres mises à niveau, vous pouvez ignorer cette tâche et accéder directement à <block ref="0433885c96c3661856ac21abb470fe33" category="inline-xref-macro-rx"></block>.</block>
   <block id="77cd2bc0bfe264cad96e3619cb8678b1" category="list-text">Arrêtez un nœud sur chaque site et permettez à son partenaire haute disponibilité d'effectuer une prise de contrôle du stockage du nœud :</block>
   <block id="8b0fde7ba026b4e4de5c975b52e10b78" category="paragraph"><block ref="fc0e5e4abc6e1b590b3364b384105526" prefix="" category="inline-code"></block></block>
   <block id="807f12cb6d4e38b470996608263f29ac" category="list-text">À<block ref="82b8350d28f0a14e36de1958b3be9205" prefix=" " category="inline-code"></block> l'invite du nœud interrompu, entrez les informations suivantes :</block>
@@ -13505,7 +13414,6 @@ L'exemple suivant montre que vous utilisez SCP pour télécharger le fichier<blo
   <block id="eb7ead4ebc1b8fb1973480e7ff4df23a" category="list-text"><block ref="dcb54aa5c6e1195dc43cf43c7130da89" prefix="" category="inline-code"></block></block>
   <block id="21abd3e611a550d5b10a01fcf5ca52e4" category="list-text"><block ref="d0e63dc99f0f9ab0cd3804cc52f2f14d" prefix="" category="inline-code"></block></block>
   <block id="d9014ee527061be66eca52c07922ed61" category="section-title">Supprimez les configurations d'interface et désinstallez les anciens contrôleurs</block>
-  <block id="d2d52925cbd8484ff94ad34530b8e39e" category="list-text">Voir les informations que vous avez recueillies dans <block ref="00db6c743ab233bbb7a0f2af5426c89f" category="inline-link-macro-rx"></block>.</block>
   <block id="adb5e3c9ae1ad5b6f24674dd9ebfd089" category="list-text">Modifier toutes les LIFS de données pour utiliser le port commun comme port de home : +<block ref="0fb328b10f563b95b74bd7f9f7c1dff8" prefix=" " category="inline-code"></block></block>
   <block id="80525b50d6d20908e1237b7fcfb33f33" category="paragraph"><block ref="d49e4d90611cfe958eb08579bdba1a56" prefix="" category="inline-code"></block></block>
   <block id="73d1f75273a2727c2821ff6d3dad9a15" category="list-text">Supprimer les ports VLAN : +<block ref="5663bc15ef357125573b62d1575462ad" prefix=" " category="inline-code"></block></block>
@@ -13514,18 +13422,12 @@ L'exemple suivant montre que vous utilisez SCP pour télécharger le fichier<blo
   <block id="9527b7e6d25fbd673c7aa986d53e3613" category="list-text">Modifiez les ports de groupe d'interface pour utiliser d'autres ports physiques comme membres, selon les besoins :</block>
   <block id="3ee1dd792a8a0d98f869dbe20e9b97fd" category="paragraph"><block ref="3aff4c494709a6fa57ba8e7f89683ca4" prefix="" category="inline-code"></block></block>
   <block id="5a3861a411bc9378f869f34214613778" category="section-title">Configurer les nouveaux contrôleurs</block>
-  <block id="e7c47d238f75412631a564557da2bc71" category="list-text">Si votre mise à niveau nécessite le remplacement des modules de contrôleur, par exemple la mise à niveau d'un système AFF 800 vers un système AFF A90, vous devez retirer le module de contrôleur du châssis lorsque vous remplacez le module de contrôleur. Pour toutes les autres mises à niveau, passez à <block ref="24265808136e02e671f66c0cb3dc4c8f" category="inline-xref-macro-rx"></block>.</block>
   <block id="e0db71ee18c918b2fb9cf7bb7bc22103" category="paragraph">À l'avant du châssis, enfoncez fermement chaque disque jusqu'à ce que vous sentiez un arrêt positif. Cela permet de vérifier que les disques sont fermement installés contre le fond de panier central du châssis.</block>
   <block id="cfbaa04507f429235b91aeb8a2e58b69" category="image-alt">La illustre le retrait du module de contrôleur du châssis</block>
   <block id="5c022366b2db3d6cabc706b5adfd5d02" category="list-text">[[ip_upgrades_so_sb_4]] installez les modules de contrôleur.</block>
-  <block id="5096ae3aa61d737563ca50af57b6a84c" category="admonition">Les étapes d'installation que vous suivez dépendent si votre mise à niveau nécessite le remplacement des modules de contrôleur, comme une mise à niveau d'un système AFF 800 vers un système AFF A90.</block>
-  <block id="17382e6c05506fde2286b2e5dae91856" category="open-title">Remplacement des modules de contrôleur</block>
-  <block id="6b50d38047bdebbcc32c9ca6b9323732" category="paragraph">L'installation séparée des nouveaux contrôleurs n'est pas applicable pour la mise à niveau des systèmes intégrés avec des disques et des contrôleurs dans le même châssis, par exemple d'un système AFF A800 vers un système AFF A90. Les nouveaux modules de contrôleur et les nouvelles cartes d'E/S doivent être échangés après la mise hors tension des anciens contrôleurs, comme illustré dans l'image ci-dessous.</block>
   <block id="4037df45fcdc21d8082737fa6a5f619c" category="paragraph">L'exemple d'image ci-dessous est représenté uniquement. Les modules de contrôleur et les cartes d'E/S peuvent varier d'un système à l'autre.</block>
   <block id="ae5b8daa970b204d0926f573edfb5cfc" category="image-alt">Affiche le remplacement du module de contrôleur</block>
   <block id="6792e24f226516b977ca3032c72dc9c0" category="open-title">Toutes les autres mises à niveau</block>
-  <block id="1bedc0026c41c72d7a7aa8b440ef5bef" category="inline-link-macro">Câblage des commutateurs IP MetroCluster</block>
-  <block id="b2e5e44e032ff888908bf30a6d1363e9" category="list-text">Reliez l'alimentation, la console série et les connexions de gestion des contrôleurs, comme décrit dans la section <block ref="372cb7466d83d18a80a5c66f3e7de0d7" category="inline-link-macro-rx"></block></block>
   <block id="7bcb5422335c0a99341ce4ca865d4d51" category="paragraph"><block ref="a9d89a967736a4739d72a512b1135fdc" prefix="" category="inline-code"></block></block>
   <block id="799d4aa3e6d958764f8d2ce8e3acbe7b" category="paragraph"><block ref="baffa317cbf489e351762c96e205eda3" prefix="" category="inline-code"></block></block>
   <block id="2c49372dd5cdc60d281c7eb567cf96ae" category="paragraph"><block ref="62e24a463974fe4c20f07377ffc9a58b" prefix="" category="inline-code"></block></block>
@@ -13538,11 +13440,8 @@ L'exemple suivant montre que vous utilisez SCP pour télécharger le fichier<blo
   <block id="81eeab9506186e2dca8faefa78d54067" category="paragraph">Exemple :</block>
   <block id="2b12e1cd88a050cc4ef4573b7b8ed185" category="admonition">Ce paramètre doit être défini sur tous les ports concernés pour que la mise à niveau soit réussie.</block>
   <block id="4674a3884dbcf3d07ba55d73b36083ff" category="paragraph">Les disques des tiroirs connectés aux ports Ethernet sont indiqués dans la<block ref="7939c23e48e62d500cafffa3ef074000" prefix=" " category="inline-code"></block> sortie.</block>
-  <block id="ee0313699461965bf1b1ef53c7a817b7" category="paragraph">Pour plus d'informations sur les ports de stockage du système vers lequel vous effectuez la mise à niveau, reportez-vous <block ref="43b42c26c42f7c6fe4ef77f9f2ed17ff" category="inline-link-macro-rx"></block> au.</block>
   <block id="4b679e72a63d0449bb929b4db3f51f3e" category="list-text">Vérifier que<block ref="ddecebdea58b5f264d27f1f7909bab74" prefix=" " category="inline-code"></block> le mode est défini et vérifier que les ports sont à l'état online :</block>
   <block id="ef53a1465284a8eba202285b88ef0eb2" category="section-title">Mettre à jour les CFR du commutateur pour les adapter aux nouvelles plates-formes</block>
-  <block id="8aedcbe06dc4ee85bfbfe46c6a62713c" category="paragraph">Vous pouvez effectuer cette tâche sur le site contenant les contrôleurs en cours de mise à niveau. Dans les exemples présentés dans cette procédure, nous mettons d'abord à niveau site_B.</block>
-  <block id="097b5e4a3935e7904f9e57e130711c8b" category="inline-link-macro">Téléchargez et installez les fichiers RCF des switchs NVIDIA IP SN2100</block>
   <block id="080c153c3d5c3f5a7519058826d07cb8" category="paragraph"><block ref="579363eabf2a70eb9e6c8d9b1bca9609" prefix="" category="inline-code"></block></block>
   <block id="ba2a7c5e352255c376b6b0d315a1ffc1" category="paragraph"><block ref="3edfeb45325920fedac6b21b22c6872d" prefix="" category="inline-code"></block></block>
   <block id="53eeb8487a1b47736074a390cc992c92" category="paragraph"><block ref="cce414ec64a9c4e23a2e870045abf8dc" prefix="" category="inline-code"></block></block>
@@ -13555,7 +13454,6 @@ L'exemple suivant montre que vous utilisez SCP pour télécharger le fichier<blo
   <block id="75820e0601a3c59aad8a8dceec394bd6" category="list-text">Si les systèmes d'origine ont été configurés avec des disques partitionnés pour ADP, activez-les à l'<block ref="82b8350d28f0a14e36de1958b3be9205" prefix=" " category="inline-code"></block> invite pour chaque nœud de remplacement :</block>
   <block id="8022cf4f701be252369cf100dd5baa7b" category="paragraph"><block ref="e0d0774e240e04e4dbb4273a2eaee9f6" prefix="" category="inline-code"></block></block>
   <block id="9ebcad9e46018b72734aa9fbbdfa219b" category="paragraph"><block ref="fbd3e774e33f59804bebcd92ab2a4244" prefix="" category="inline-code"></block></block>
-  <block id="3ae0893018c6b1f91afe11d7988c558d" category="admonition">Avant de procéder à la réaffectation des disques, vous devez vérifier que les disques pool0 et pool1 appartenant à l'agrégat racine du nœud sont affichés dans la<block ref="63328c72194085e2f8ff497b866f6d24" prefix=" " category="inline-code"></block> sortie. Dans l'exemple suivant, le résultat répertorie les disques pool0 et pool1 appartenant à node_B_1-Old.</block>
   <block id="f4c6f29ba66b2f3a6e2464ffa195af0e" category="paragraph"><block ref="787c105d1c5bfa1b8d60ab9af669c3a8" prefix="" category="inline-code"></block></block>
   <block id="696c94c37fce23292aa92ad48ca067a6" category="paragraph"><block ref="1e939dd587f894b1b60a5423d23202c2" prefix="" category="inline-code"></block></block>
   <block id="9245451042eaae2bfd411dd23d891968" category="paragraph"><block ref="ae2fc05183e1e2ad0194df7ea8b55230" prefix="" category="inline-code"></block></block>
@@ -13565,24 +13463,19 @@ L'exemple suivant montre que vous utilisez SCP pour télécharger le fichier<blo
   <block id="81c0cfa4d81a326f65d742ed4d1ee46b" category="paragraph"><block ref="ab36db401b8d98490b7c51ef5a618243" prefix="" category="inline-code"></block></block>
   <block id="fdf8e4fe9b3e05181cd8befb0c17897f" category="paragraph"><block ref="a8dfa60f338d6757ce57f0b05c861249" prefix="" category="inline-code"></block></block>
   <block id="fb0d5feb3def76f90b6408f32f99f4b7" category="list-text">Si un nouveau broadcast domain est créé pour les ports de données sur les nouveaux contrôleurs mis à niveau, supprimez le broadcast domain :</block>
-  <block id="3ab5e50e5fd6dc477690730212c6785f" category="admonition">Supprimez uniquement le nouveau domaine de diffusion. Ne supprimez aucun des domaines de diffusion existants avant de démarrer la mise à niveau.</block>
   <block id="8cb8d05546274856c8c2cb56b7cd62ac" category="paragraph"><block ref="7bbb7f17a19e67be5ebaaa8410749ad2" prefix="" category="inline-code"></block></block>
   <block id="a51de836d51a26774e16aa7066519185" category="paragraph"><block ref="6a6db1083e2f8c53b07cc196dec3cafb" prefix="" category="inline-code"></block></block>
   <block id="641cba091515001a3bb48d030bddd608" category="section-title">Mettre à niveau les nœuds sur cluster_A</block>
   <block id="2ce39beb4bd7e0662d271e0be20e56c4" category="paragraph">Avant de commencer la mise à niveau, vérifiez les points suivants afin de vous assurer que votre configuration est prise en charge.</block>
-  <block id="43b1f641e5f77402602790aae4de8aa8" category="image-alt">le contrôleur du système mcc ip remplace AFF FAS</block>
   <block id="a63b5e3f602b86fc07da490951d07b9f" category="list-text">Remarque 2 : la plateforme cible ne peut pas avoir de disques internes tant que la mise à niveau du contrôleur n'est pas terminée. Vous pouvez ajouter les lecteurs internes après la mise à niveau.</block>
   <block id="3b2d91208084a85415d107e904b61128" category="list-text">Remarque 3 : nécessite le remplacement des modules de contrôleur.</block>
   <block id="15301c23263e749022234eacd3de3300" category="paragraph">La mise à niveau des contrôleurs à l'aide de<block ref="616743bfa4fd61d558c556fe614cb2e9" prefix=" " category="inline-code"></block> commandes sur les systèmes ASA n'est pas prise en charge.</block>
   <block id="8f93576e78d28328ad0cf696ed0604e4" category="list-text">Les commutateurs IP MetroCluster (type de commutateur, fournisseur et modèle) et la version du micrologiciel doivent être pris en charge sur les contrôleurs existants et nouveaux de votre configuration de mise à niveau.</block>
-  <block id="65fecbe73cb3b9a9e0cbd9f4bbf96d31" category="admonition">Si vous effectuez une mise à niveau vers un système AFF A70, AFF A90 ou AFF A1K, vous *devez* effectuer cette tâche avant d'effectuer la mise à niveau. Cette tâche *uniquement* s'applique aux mises à niveau vers un système AFF A70, AFF A90 ou AFF A1K à partir d'un système pris en charge. Pour toutes les autres mises à niveau, vous pouvez ignorer cette tâche et accéder directement à <block ref="02f6e5eb3c922d029954da501f60e8dc" category="inline-xref-macro-rx"></block>.</block>
   <block id="1df73bda435b5d96d663aead5cdd3220" category="list-text"><block ref="d6f593c128c20b2b477999ba1d624969" prefix="" category="inline-code"></block></block>
   <block id="b9e74339cddf2376c4fcf457d7d9967e" category="list-text"><block ref="ed3509e3e823bae2ba10a9a7ec8eaff4" prefix="" category="inline-code"></block></block>
   <block id="a96df66ebe1c662a8a888ba2287dfdeb" category="list-text"><block ref="e787e952889da363af52a21e43548b99" prefix="" category="inline-code"></block></block>
   <block id="821ecda5b12a4ae913a41ee4e1c8f69d" category="list-text"><block ref="1538762b856ca2c2223e05fc9fec0cea" prefix="" category="inline-code"></block></block>
-  <block id="05c698302b9abd36f7cf0a1dc90a86d3" category="section-title">Remplacez les anciens contrôleurs et démarrez les nouveaux contrôleurs</block>
   <block id="2dfa544e322fc5325af38a1322229fbf" category="section-title">Préparer la configuration réseau des anciens contrôleurs</block>
-  <block id="fc5dda3d1f939197b1b70fd3a5d0a9d2" category="list-text">Vous utiliserez les informations recueillies dans <block ref="02f6e5eb3c922d029954da501f60e8dc" category="inline-xref-macro-rx"></block>.</block>
   <block id="3e455a613e5c171ec2e4181d0ad70184" category="paragraph"><block ref="0fb328b10f563b95b74bd7f9f7c1dff8" prefix="" category="inline-code"></block></block>
   <block id="55dbcede861ea070999275166b475f91" category="paragraph"><block ref="69175deff8fb24f558ddfe600d2027fd" prefix="" category="inline-code"></block></block>
   <block id="87e5d57130567bbc85fc6eb99a2cedc9" category="paragraph"><block ref="7ecace99fc10588df8f1c6ed5522cef4" prefix="" category="inline-code"></block></block>
@@ -13591,17 +13484,11 @@ L'exemple suivant montre que vous utilisez SCP pour télécharger le fichier<blo
   <block id="36f35af4019cb5c58ee0704181d060cb" category="paragraph"><block ref="6a09bfab96d691e097c0193857bfe613" prefix="" category="inline-code"></block></block>
   <block id="ac2ed3241e44a82e5e64c36b76836980" category="paragraph"><block ref="ec6fcea2c4874df3647526f88e0bcc1c" prefix="" category="inline-code"></block></block>
   <block id="9e638affbbd1393718538967090cf19b" category="paragraph"><block ref="7f982816e7f246ae34f4204aca737000" prefix="" category="inline-code"></block></block>
-  <block id="c9d109c912be03296cc2456120162642" category="list-text">Vérifiez que les nœuds se trouvent à<block ref="82b8350d28f0a14e36de1958b3be9205" prefix=" " category="inline-code"></block> l'invite et collectez et conservez les variables d'environnement actuelles.</block>
   <block id="df6f7543a4649f72632e2cd4f87e78a9" category="list-text">Mettez les nœuds et les tiroirs hors tension sur le site de mise à niveau du contrôleur.</block>
-  <block id="a3ead214eb8bf55a0be2a34576e9b461" category="list-text">Si votre mise à niveau nécessite le remplacement des modules de contrôleur, par exemple la mise à niveau d'un système AFF 800 vers un système AFF A90, vous devez retirer le module de contrôleur du châssis lorsque vous remplacez le module de contrôleur. Pour toutes les autres mises à niveau, passez à <block ref="4ee00eba6649125448d979c5e5c0a049" category="inline-xref-macro-rx"></block>.</block>
   <block id="4bd95e3200fc7290c93acc7331fe6ab7" category="list-text">[[ip_upgrades_replace_4]] installez les modules de contrôleur.</block>
-  <block id="7b4b195a48028efcfbd1e629573dc6ce" category="open-title">Mises à niveau nécessitant le remplacement du module de contrôleur</block>
   <block id="58d7ca4c8c3e89d8d921fc52e28adc1c" category="list-text">Mettez les nouveaux nœuds sous tension et appuyez sur Ctrl-C lorsque vous êtes invité à afficher l'<block ref="82b8350d28f0a14e36de1958b3be9205" prefix=" " category="inline-code"></block> invite.</block>
   <block id="b18f9742d77912f838f8a0bc859bbf11" category="list-text">À<block ref="82b8350d28f0a14e36de1958b3be9205" prefix=" " category="inline-code"></block> l'invite, configurer la connexion netboot pour une LIF de gestion :</block>
   <block id="7c9dbc13c4af0588948dc0974ad07931" category="paragraph">Après avoir exécuté la commande, attendez que le nœud s'arrête à l'<block ref="82b8350d28f0a14e36de1958b3be9205" prefix=" " category="inline-code"></block> invite.</block>
-  <block id="6efdcf657072c6d286d4dff5b0919f19" category="list-text">Si les systèmes d'origine ont été configurés pour ADP, à l'invite de chacun des nœuds de remplacement<block ref="82b8350d28f0a14e36de1958b3be9205" prefix=" " category="inline-code"></block> , activez ADP :</block>
-  <block id="2a881aa88a35b35de21b4af29f7c41a7" category="paragraph">Les anciens ID système ont été identifiés dans <block ref="315917271da740413467f609180e49f8" category="inline-xref-macro-rx"></block>.</block>
-  <block id="b2d1a6a95156d238b86f82d812e29748" category="admonition">Avant de procéder à la réaffectation des disques, vous devez vérifier que les disques pool0 et pool1 appartenant à l'agrégat racine du nœud sont affichés dans le<block ref="63328c72194085e2f8ff497b866f6d24" prefix=" " category="inline-code"></block> résultat. Dans l'exemple suivant, le résultat répertorie les disques pool0 et pool1 appartenant à node_B_1-Old.</block>
   <block id="c200b51f243e6499b1e4aff027683496" category="paragraph"><block ref="4ce4e1d2d83eceacd4a0a0cf1bad8e14" prefix="" category="inline-code"></block></block>
   <block id="c848af1101f629db69baafb2b08b9915" category="paragraph"><block ref="ce889b95687da5aee0c3d9ec48e819b4" prefix="" category="inline-code"></block></block>
   <block id="2d425665af37b9989f89179649650990" category="section-title">Terminez la mise à niveau</block>
@@ -13715,12 +13602,10 @@ L'exemple suivant montre que vous utilisez SCP pour télécharger le fichier<blo
   <block id="f17f69c6edf98777a15cba11703ecfa4" category="paragraph"><block ref="3e67c1f4fcc76e1369016e8e183fdf3b" prefix="" category="inline-code"></block></block>
   <block id="0f137b9473f8c1720c69f6c82c079dba" category="paragraph"><block ref="3b297593c0c2375482cbced8777ea2a8" prefix="" category="inline-code"></block></block>
   <block id="df0de59a7d82bfac9aeb4c3a4d0ff3d5" category="paragraph"><block ref="593e2b872fdc863863b3175980b503ee" prefix="" category="inline-code"></block></block>
-  <block id="ce4d776f761276cab4718597907e9b25" category="paragraph"><block ref="ce4d776f761276cab4718597907e9b25" category="inline-image-macro-rx" type="image"></block></block>
   <block id="4bbabfb39bdaa67802b5f83f085672a9" category="image-alt">Affiche les combinaisons de plateformes prises en charge pour la transition IP vers FC</block>
   <block id="5a4027b63d6ed294211392e256667c2c" category="list-text">Modifier les LIFs intercluster sur les anciens contrôleurs de manière à utiliser un port home différent de celui des ports utilisés pour l'interconnexion haute disponibilité ou l'interconnexion MetroCluster IP DR sur les nouveaux contrôleurs.</block>
   <block id="931a74601edef3262a75c3d8d8e6acda" category="admonition">Cette étape est requise pour une mise à niveau réussie.</block>
   <block id="f7f8cd16da4423b24e25a4d21cb4bc83" category="paragraph">Les LIF intercluster des anciens contrôleurs doivent utiliser un port home différent de celui des ports utilisés pour l'interconnexion haute disponibilité ou l'interconnexion MetroCluster IP DR sur les nouveaux contrôleurs. Par exemple, lorsque vous effectuez une mise à niveau vers des contrôleurs AFF A90, les ports d'interconnexion haute disponibilité sont e1a et e7a et les ports d'interconnexion pour la reprise après incident IP MetroCluster sont e2b et e3b. Vous devez déplacer les LIFs intercluster sur les anciens contrôleurs s'ils sont hébergés sur les ports e1a, e7a, e2b ou e3b.</block>
-  <block id="8a09de643687f0a8327c0493bea75cfb" category="paragraph">Pour la distribution et l'allocation des ports sur les nouveaux nœuds, reportez-vous à la<block ref="ed4326c3351d8ac0e334b8b4d9b37c82" category="inline-link-rx"></block>.</block>
   <block id="898c71cbc0947646bf37a832e77fa31f" category="list-text">Sur les anciens contrôleurs, afficher les LIFs intercluster :</block>
   <block id="ebaeb89c15e72f7de931e5d21d67c21b" category="paragraph"><block ref="a8ef5efd140dbfca42670e5d3b15ccff" prefix="" category="inline-code"></block></block>
   <block id="1e81235f7b13b0f2e88bd765d2e46a34" category="paragraph">Effectuez l'une des actions suivantes si les LIF intercluster des anciens contrôleurs utilisent les mêmes ports que les ports utilisés pour l'interconnexion haute disponibilité ou l'interconnexion MetroCluster IP DR sur les nouveaux contrôleurs.</block>
@@ -13735,7 +13620,6 @@ L'exemple suivant montre que vous utilisez SCP pour télécharger le fichier<blo
   <block id="67feed2eb0a24db24a92109ddf08b1d3" category="list-text">Vérifier que toutes les LIFs intercluster se trouvent sur leurs nouveaux ports home :</block>
   <block id="eceba4f3e0b4a9871c405b2a29588160" category="paragraph"><block ref="e4179081ff1589282042af635786a6a1" prefix="" category="inline-code"></block></block>
   <block id="e053c6b6612e1badd81926ae9048a6d0" category="paragraph">La sortie de la commande doit être vide, ce qui indique que toutes les LIFs intercluster se trouvent sur leurs ports home respectifs.</block>
-  <block id="424031e17e88451da4f8822abbe10ecc" category="list-text">S'il existe des LIFs qui ne se trouvent pas sur leurs ports home, les redeviennent à l'aide de la commande suivante :</block>
   <block id="85c3f52ae5c990518a32da157e1d43de" category="paragraph"><block ref="7f926cf3edf705b92de0cde858fac3c8" prefix="" category="inline-code"></block></block>
   <block id="39b8c0f5fb5a1532d766cc2a0500ae92" category="paragraph">Répéter la commande pour chaque LIF intercluster qui ne se trouve pas sur le home port.</block>
   <block id="270f1324a7b7f1a7e5f85816e9ee67a1" category="list-text">[[Controller_Manual_upgrade_prepare_network_ports_3]]affectez le port de base de toutes les LIFs de données de l'ancien contrôleur à un port commun identique sur l'ancien et le nouveau module de contrôleur.</block>
@@ -13788,9 +13672,6 @@ L'exemple suivant montre que vous utilisez SCP pour télécharger le fichier<blo
   <block id="17c7cb78cf2f2286d3034a3959bc800e" category="paragraph">Trouvez votre plate-forme *Source* dans les tableaux de mise à niveau du contrôleur MetroCluster de cette section. Si l'intersection de la ligne de plate-forme *Source* et de la colonne de plate-forme *Target* est vide, la mise à niveau n'est pas prise en charge.</block>
   <block id="ece07deebff7293937869fc01fd521f0" category="paragraph">Le tableau suivant présente les combinaisons de plates-formes prises en charge pour la mise à niveau manuelle d'un système AFF ou FAS dans une configuration IP MetroCluster :</block>
   <block id="8430e377fbc83f194587bd875ac99b4b" category="paragraph">Le tableau suivant présente les combinaisons de plates-formes prises en charge pour la mise à niveau manuelle d'un système ASA dans une configuration MetroCluster IP :</block>
-  <block id="13457800bf31e25265b68e75f49b98c7" category="inline-link-macro">[Réinitialisez les paramètres par défaut du commutateur IP Broadcom</block>
-  <block id="0f664d89fa7312c24449004d102db687" category="list-text"><block ref="0f664d89fa7312c24449004d102db687" category="inline-link-macro-rx"></block></block>
-  <block id="8a97a528989bc12cbf81ee0102a889dc" category="list-text"><block ref="8a97a528989bc12cbf81ee0102a889dc" category="inline-link-macro-rx"></block></block>
   <block id="5517f0f4079cbe32b861155b72575d78" category="paragraph">Le tableau suivant présente les combinaisons de plateformes prises en charge pour la mise à niveau d'un système AFF ou FAS dans une configuration IP MetroCluster à l'aide des commandes « system Controller replace » :</block>
   <block id="0ef5c60e365bf027441cd538ad7f03c9" category="paragraph"><block ref="0ef5c60e365bf027441cd538ad7f03c9" category="inline-link-rx"></block></block>
   <block id="218202ab36e31b93dc4b302be0cb5ac3" category="paragraph">NetApp vous recommande vivement d'activer la journalisation de la console sur les périphériques que vous utilisez et d'effectuer les actions suivantes lors de l'exécution de cette procédure :</block>
@@ -14148,7 +14029,6 @@ L'exemple suivant montre que vous utilisez SCP pour télécharger le fichier<blo
   <block id="bcaee96b0ab793907da56767503991e2" category="admonition">L'adresse IP MetroCluster et les ports de commutateur connectés ne sont pas mis en ligne avant la création des interfaces IP MetroCluster.</block>
   <block id="6db27f68adde7b6578b513891108402f" category="paragraph">BES-53248</block>
   <block id="c71b2061a1720b5d01c7a9a079938384" category="paragraph">Quatre ou huit nœuds</block>
-  <block id="be0859f362012838e5040b2ef44bc04b" category="paragraph"><block ref="bacc4dbebf17d22c9a0361ded0994067" category="inline-link-macro-rx"></block>.</block>
   <block id="04615ba020125ab8e6efd72006cee7b6" category="sidebar">Installez et configurez MetroCluster Tiebreaker</block>
   <block id="f292b4f87450c271c690d67e1d3a03e8" category="paragraph">16 ISL utilisant 10 Gbits/s ou 25 Gbits/s.</block>
   <block id="d20d5c9d070e6369690ed4a79cf3c4bd" category="admonition">Vous n'avez pas besoin de redémarrer les nœuds dans un ordre spécifique, mais vous devez attendre qu'un nœud soit entièrement démarré et que toutes les connexions soient établies avant de redémarrer le nœud suivant.</block>
@@ -14163,7 +14043,6 @@ L'exemple suivant montre que vous utilisez SCP pour télécharger le fichier<blo
   <block id="52e06a42c952a2b1bdb77dfc0f6f90ff" category="paragraph"><block ref="a51df89c214b1838fdbc8273e8704555" prefix="" category="inline-code"></block></block>
   <block id="968258a4c4370a9f6fe8b87ce4255cca" category="paragraph"><block ref="6604a22a7f45489dfc4b36fa6c37c036" prefix="" category="inline-code"></block></block>
   <block id="afdf08fe53823e29ce4e277959c64b1e" category="paragraph">Prise en charge de la mobilité des données SVM pour la migration des configurations MetroCluster</block>
-  <block id="61576ee193ce4ae8f8a1aea237cc4781" category="paragraph">ONTAP prend en charge la migration d'un SVM d'une paire haute disponibilité non MetroCluster vers une configuration MetroCluster ou d'une configuration MetroCluster vers une paire haute disponibilité non MetroCluster. Il n'est pas possible de migrer un SVM entre plusieurs configurations MetroCluster.</block>
   <block id="aeaa758085c5e2389b9072b1ced2dc57" category="inline-link-macro">Mobilité des données des SVM</block>
   <block id="deff601e347d3753345e223f0dece2ac" category="paragraph"><block ref="deff601e347d3753345e223f0dece2ac" category="inline-link-macro-rx"></block></block>
   <block id="31272abf1c9209ab4acd0bf10f129338" category="paragraph">ONTAP 9.16.1</block>
@@ -14283,7 +14162,6 @@ L'exemple suivant montre que vous utilisez SCP pour télécharger le fichier<blo
   <block id="1225fe0de146a130add7eeefae9e0925" category="list-text">Vérifier que les SVM source sync sur le cluster Disaster sont bien exécutés :</block>
   <block id="ad29c49a8377862a59f9aae0ab4431cd" category="paragraph">Vérifier le bon positionnement du LIF. Supprimez ensuite les VLAN et les groupes d'interface des anciens contrôleurs et désinstallez physiquement les contrôleurs.</block>
   <block id="253982549e381b6f58f66b3e289a0a83" category="admonition">Si les anciens et les nouveaux contrôleurs ne disposent pas de port commun, il n'est pas nécessaire de modifier les LIFs data. Ignorez cette étape et passez directement à <block ref="45cc57eb3654a2ae89efabc6fb9d271a" category="inline-xref-macro-rx"></block>.</block>
-  <block id="ba20cbe478ea7b912f1d044734df2884" category="list-text">[[upgrades_Manual_without_matching_ports]] modifiez les domaines de diffusion pour supprimer le VLAN et les ports physiques qui doivent être supprimés :</block>
   <block id="ae359c5763df3f6130f697d17d090551" category="admonition">Vous devez vérifier que l'emplacement des LIFs de données est correct sur les nouveaux nœuds avant d'effectuer un rétablissement. Lorsque vous rétablissez la configuration, ONTAP tente de reprendre le trafic sur le port d'attache utilisé par les LIFs. Une panne d'E/S peut se produire lorsque la connexion du port d'accueil au port du commutateur et au VLAN est incorrecte.</block>
   <block id="1c780702501fd89538731057505e0a04" category="list-text">Vérifiez que les LIFs sont hébergées sur le nœud et les ports appropriés avant le rétablissement.</block>
   <block id="bc12d3bc2a2c1526b655930b56efc183" category="list-text">Afficher les LIFs et vérifier que chaque LIF de données utilise le bon port home :</block>
@@ -14291,13 +14169,11 @@ L'exemple suivant montre que vous utilisez SCP pour télécharger le fichier<blo
   <block id="823bc5ae6e724dd8994efcc4dbeb49d2" category="paragraph">Si la commande renvoie une erreur, vous pouvez remplacer la configuration des ports :</block>
   <block id="ec14487a214982a1ea6572636724761f" category="paragraph"><block ref="afdc229346561af3e5aba3a6d67eea09" prefix="" category="inline-code"></block></block>
   <block id="c9ba655979127851f6a6f01489815e47" category="list-text">Vérifier que toutes les LIFs data se trouvent sur le bon port de home :</block>
-  <block id="fd7b222b3cb6aff1e0aef0b1e7a16998" category="paragraph">Pour que la mise en réseau puisse reprendre proprement sur les nouveaux contrôleurs, vérifiez que le placement des LIF est correct et supprimez la configuration réseau des anciens contrôleurs.</block>
   <block id="ef1038ce81a2c9d70181057dd381a59a" category="admonition">Si les anciens et les nouveaux contrôleurs ne disposent pas de port commun, il n'est pas nécessaire de modifier les LIFs data. Ignorez cette étape et passez directement à <block ref="186451ebe57c46550834233237ebac90" category="inline-xref-macro-rx"></block>.</block>
   <block id="3432abc562d1049e115fc0bcb6f569ab" category="list-text">[[upgrades_Assisted_without_matching_ports]] modifiez les domaines de diffusion pour supprimer le VLAN et les ports physiques qui doivent être supprimés :</block>
   <block id="07bfa9093a8ef293dfd6099e38fde255" category="list-text">Vérifiez que le MetroCluster est correctement configuré. Vérifier l'état du nœud :</block>
   <block id="d64694bac02c7b4eea890e175a53a0c7" category="paragraph">Vérifiez que les LIF sont hébergées sur les nœuds appropriés avant de procéder à l'opération de rétablissement automatisé.</block>
   <block id="db85d3fd5e7d7beaa319d4ebe299145b" category="sidebar">Restrictions lors du basculement du système</block>
-  <block id="e2b04aa38f9463877227eab80f2afa55" category="list-text">Vous avez besoin des UID et des ID système identifiés précédemment dans la procédure de mise à niveau de <block ref="a74b37b1135e46e1745610d5ef77ba43" category="inline-xref-macro-rx"></block>.</block>
   <block id="1ee9e9c6e0682332b92cf414d56216e5" category="list-text">Selon le modèle de votre plate-forme, vous pouvez spécifier l'ID VLAN à l'aide du<block ref="6790c40b1680557da1f80536ae186301" prefix=" " category="inline-code"></block> paramètre. Les plates-formes suivantes ne prennent pas en charge le<block ref="6790c40b1680557da1f80536ae186301" prefix=" " category="inline-code"></block> paramètre :</block>
   <block id="2c17b709cf340ae9f4b202df67582f0d" category="list-text">AFF C800, ASA C800, AFF A800 et ASA A800</block>
   <block id="9a7bf3cb6e6fcf5bc8021ad8b24c709d" category="list-text">Les valeurs de démarrage MetroCluster que vous avez définies dépendent du fait que votre nouveau système utilise des ports cluster/haute disponibilité partagés ou des ports MetroCluster/haute disponibilité partagés.</block>
@@ -14321,8 +14197,6 @@ L'exemple suivant montre que vous utilisez SCP pour télécharger le fichier<blo
   <block id="a1909236f08f260f2b52aebf539344be" category="paragraph">L'exemple suivant définit les valeurs de node_B_1-New en utilisant des VLAN par défaut pour toutes les connexions MetroCluster IP DR :</block>
   <block id="a0436481bda3531d4a5eda5dac0e5608" category="paragraph">L'exemple suivant définit les valeurs de node_B_2-New en utilisant des VLAN par défaut pour toutes les connexions MetroCluster IP DR :</block>
   <block id="1a5991cd222add52b1f5aa51350d470e" category="list-title">Les systèmes qui utilisent des ports MetroCluster/HA partagés</block>
-  <block id="f4c0383379a5ae93d0b5e4c4f8586e47" category="open-title">Systèmes utilisant des ports partagés de cluster/haute disponibilité</block>
-  <block id="fce1683696c48d3d34e98e19d634ae19" category="open-title">Systèmes utilisant des ports MetroCluster/HA partagés</block>
   <block id="eabf799ca909dc7fa9808c3abb476773" category="paragraph">Entrez le mot de passe d'authentification lorsque vous y êtes invité.</block>
   <block id="8c62b33499e87d946c3be674c109e802" category="inline-link-macro">Étendez votre système à une configuration IP MetroCluster à huit nœuds</block>
   <block id="d3f54bf5e1d7bcb93c8d615f71713d7f" category="paragraph">Si vous utilisez des commutateurs MetroCluster de stockage partagé, vous pouvez uniquement passer à une configuration IP MetroCluster à quatre nœuds. La transition vers une configuration IP MetroCluster à huit nœuds via des commutateurs MetroCluster de stockage partagé n'est pas prise en charge. Une fois la transition vers une configuration IP MetroCluster à quatre nœuds terminée, vous pouvez <block ref="6dee49609367b51155e32a3a9526bace" category="inline-link-macro-rx"></block>.</block>
@@ -14336,4 +14210,417 @@ L'exemple suivant montre que vous utilisez SCP pour télécharger le fichier<blo
   <block id="ec4312d0db3bce928129e7e5c3a58d73" category="paragraph"><block ref="ec4312d0db3bce928129e7e5c3a58d73" category="inline-link-rx"></block></block>
   <block id="c42a1c17fcba2c3f1c614f6d301144e6" category="paragraph">Si vous utilisez des commutateurs MetroCluster de stockage partagé, vous pouvez uniquement passer à une configuration IP MetroCluster à quatre nœuds. La transition vers une configuration IP MetroCluster à huit nœuds via des commutateurs MetroCluster de stockage partagé n'est pas prise en charge. Une fois la transition vers une configuration IP MetroCluster à quatre nœuds terminée, vous pouvez <block ref="6dee49609367b51155e32a3a9526bace" category="inline-link-macro-rx"></block>.</block>
   <block id="fb9168c2e293c1ba8ecd781a9f35d00f" category="list-text">Votre configuration répond à toutes les exigences et est câblée comme décrit dans les procédures _MetroCluster installation and Configuration_ suivantes.</block>
+  <block id="49ccc6dd1b64d1680fb90a6e9f6f0bba" category="list-text">Si nécessaire, arrêtez le nœud pour afficher l'<block ref="82b8350d28f0a14e36de1958b3be9205" prefix=" " category="inline-code"></block>invite :</block>
+  <block id="33d82cc8277c510a8d328f8f56447200" category="list-text">À l'<block ref="82b8350d28f0a14e36de1958b3be9205" prefix=" " category="inline-code"></block>invite, définissez les variables d'environnement sur les valeurs par défaut :</block>
+  <block id="e4f7024fd43ad3a1e792d2420b7f19ea" category="list-text">À l'<block ref="82b8350d28f0a14e36de1958b3be9205" prefix=" " category="inline-code"></block>invite, lancez le menu de démarrage :</block>
+  <block id="a3b2cb8aa6b7d60a651d6aa33a91f9ae" category="list-text">Préparer les commutateurs IP pour l'application des nouveaux RCF.</block>
+  <block id="e5e9500d80a24a955b0b888ac13dc7df" category="list-text">Téléchargez et installez les fichiers RCF.</block>
+  <block id="5050b5bbebd5e57841ab34ceb0bb5b80" category="inline-link-macro">Téléchargez et installez les cartes RCF Broadcom</block>
+  <block id="a8742a7ed915dbf436a1468be619398d" category="list-text"><block ref="a8742a7ed915dbf436a1468be619398d" category="inline-link-macro-rx"></block></block>
+  <block id="51b7523f6d489586220f89e6a87ff0bb" category="inline-link-macro">Téléchargez et installez les Cisco IP RCF</block>
+  <block id="5a242666138c5c7e9c4d2facda243c69" category="list-text"><block ref="5a242666138c5c7e9c4d2facda243c69" category="inline-link-macro-rx"></block></block>
+  <block id="d220a64cb2cd81dfbeab831c88a1e91d" category="inline-link-macro">Téléchargez et installez les NVIDIA IP RCF</block>
+  <block id="cae1b37282b7f5677f3224d10650f07f" category="list-text"><block ref="cae1b37282b7f5677f3224d10650f07f" category="inline-link-macro-rx"></block></block>
+  <block id="8186a6f3c6857ac00360d47ac04a1203" category="paragraph"><block ref="8186a6f3c6857ac00360d47ac04a1203" category="inline-image-macro-rx" type="image"></block></block>
+  <block id="17354808febb5791d3c64764c271fc5b" category="paragraph">Les partitions sur chaque tiroir sont utilisées pour créer l'agrégat racine. Chacun des deux plexes de l'agrégat racine inclut les partitions suivantes :</block>
+  <block id="4b38b69284009d5af792544d8b0be650" category="paragraph">*Remarque :* la moitié des lecteurs internes restent non affectés avant la configuration de MetroCluster.</block>
+  <block id="dcf482ebabd734e754ede4590987cfb5" category="section-title">Affectation des disques et de l'ADP sur les systèmes AFF A250, AFF C250, ASA A250, ASA C250, FAS500f, AFF A20, AFF A30 et AFF C30</block>
+  <block id="ac754ee1e551645a6db1392cbe6546c9" category="paragraph">48 disques (disques externes uniquement, pas de disques internes)</block>
+  <block id="6634a8c56506159fbd87caadfa2bb1c0" category="paragraph">48 disques (disques externes et internes)</block>
+  <block id="6c1db89bd0ceda01b95e84451e63deaa" category="paragraph">Les partitions internes sont divisées en quatre groupes égaux (quarts). Chaque trimestre est attribué automatiquement à un pool distinct. Les disques des tiroirs externes sont divisés en quatre groupes égaux (trimestres). Chaque trimestre est attribué automatiquement à un pool distinct.</block>
+  <block id="560b7cb44949466818bcf1ce98e6f01a" category="section-title">ADP et affectation des disques sur les systèmes AFF A50 et AFF C60</block>
+  <block id="d1501f0cbc9e2d325ef6e1725a424549" category="paragraph">La paire haute disponibilité locale utilise un tiroir. La paire haute disponibilité distante utilise le second tiroir.</block>
+  <block id="ce18baa4e98793cae29bac3255df9775" category="section-title">ADP et affectation des disques sur les systèmes AFF C800, ASA C800, ASA A800 et AFF A800</block>
+  <block id="bedc0d1dd130c2b1659e835e86201315" category="paragraph">*Note:* l'agrégat racine est créé avec 12 partitions racine sur le shelf interne.</block>
+  <block id="d31a1f5cad351cb7b22068350f8211d3" category="section-title">Affectation des disques et des ADP sur les systèmes AFF A70, AFF A90 et AFF C80</block>
+  <block id="18d6e0751db8b96d97053bf7cd9ad014" category="paragraph">Les partitions internes sont divisées en quatre groupes égaux (quarts). Chaque trimestre est attribué automatiquement à un pool distinct. Les disques des tiroirs externes sont automatiquement affectés selon le tiroir par tiroir, tous les disques de chaque tiroir étant affectés à l'un des quatre nœuds de la configuration MetroCluster.</block>
+  <block id="18ee6168fcb42f4cbb19836787e6aa0c" category="section-title">Affectation des disques sur les systèmes FAS9000, FAS9500, FAS70 et FAS90</block>
+  <block id="2d1fe013e868579afa18af7cb56220c2" category="paragraph">AFF A70, FAS70</block>
+  <block id="03e4e34912e74f99bcc188842b2088d2" category="paragraph">AFF A90, AFF A1K, FAS90, AFF C80</block>
+  <block id="cc6089132b9a5e4af29a76834480cc1a" category="paragraph">AFF A50</block>
+  <block id="b4f15258765c83a1223f6ad33f797dbd" category="paragraph">X60134A</block>
+  <block id="1cb4f6c34cb1af85680c6d9e63b2a86d" category="paragraph">AFF A30, AFF C30, AFF C60</block>
+  <block id="9d9de1698f7e401c78687204de906ee5" category="paragraph">AFF A20</block>
+  <block id="764552ebb0f871bc4b68c98b31d746d0" category="paragraph">X60132A</block>
+  <block id="6fa048cd3558a7c8e85c121dd6b53c9c" category="paragraph">Emplacement 4, emplacement 2</block>
+  <block id="e3ff124e75bf3d8e6a3ed71982b4a775" category="paragraph">e2b, e4b</block>
+  <block id="3c1618b255b11d5961631276508d6713" category="paragraph">Consultez les considérations suivantes avant d'utiliser les tableaux de configuration :</block>
+  <block id="2d6d56b43e4a834788f26c1cd6e48426" category="cell">AFF A150, ASA A150, FAS2750, AFF A220 FAS500f, AFF C250, ASA C250, AFF A250, ASA A250</block>
+  <block id="1c6bff44c8cb48ef51ded46c607872c5" category="cell">AFF A30, AFF C30 AFF C60</block>
+  <block id="1e152cfb71fc591846d262cbd9c05737" category="inline-xref">Attributions de ports de la plateforme Cisco 3232C ou Cisco 9336C (groupe 6)</block>
+  <block id="cf7225c2369f8007e72d8f26a60c7547" category="cell"><block ref="fa098c30ae489e9ffb1312675247b796" category="inline-xref-macro-rx"></block></block>
+  <block id="b70c12944934893c90b896af1d842e59" category="inline-xref">Attributions de ports de la plateforme Cisco 3232C ou Cisco 9336C (groupe 7)</block>
+  <block id="1f4c9e06210f9e72c2b6974a8d201b1e" category="cell"><block ref="23f0031045d4c5a6d0a31d66a4414eaa" category="inline-xref-macro-rx"></block></block>
+  <block id="cef91d9ca2107b217772ee91bf4476b2" category="cell">FAS70, AFF A70 AFF C80 FAS90, AFF A90 AFF A1K</block>
+  <block id="de34f03873cad278e1b5cd4034a7ed03" category="inline-xref">Attributions de ports de la plateforme Cisco 3232C ou Cisco 9336C (groupe 8)</block>
+  <block id="f17bf6b1d2e916bc883701ca762c7d31" category="cell"><block ref="4ae0459daad462bd8cb96fe95602c48c" category="inline-xref-macro-rx"></block></block>
+  <block id="9e741c4a3ec9010708b84c50ab61cf6e" category="paragraph"><block ref="9e741c4a3ec9010708b84c50ab61cf6e" category="inline-image-macro-rx" type="image"></block></block>
+  <block id="b55dcdcc0e907408a3a25b6bcf0040c8" category="paragraph">Vérifier les attributions de ports de plateforme pour relier un système AFF A20 à un switch Cisco 3232C ou 9336C : <block ref="cc80c8cbafd505af3cd79f69a7bd10e3" category="inline-image-macro-rx" type="image"></block></block>
+  <block id="85f49e412a48aec206a5bcf559b8fb51" category="paragraph">Vérifiez les attributions de ports de plateforme pour câbler un système AFF A30, AFF C30 ou AFF C60 à un switch Cisco 3232C ou 9336C :</block>
+  <block id="4ddd72f5e814500908f0ff1c734ddaf1" category="paragraph"><block ref="4ddd72f5e814500908f0ff1c734ddaf1" category="inline-image-macro-rx" type="image"></block></block>
+  <block id="267e30226a55e10038a24c84fc6de6d0" category="paragraph">Vérifier les attributions de ports de plateforme pour relier un système AFF A50 à un switch Cisco 3232C ou 9336C :</block>
+  <block id="ca69a76035ac5f2a63eff361c33eb7c2" category="paragraph">*Remarque 1* : utilisez les ports e4a et e4e ou e4a et e8a si vous utilisez un adaptateur X91440A (40 Gbit/s). Utilisez les ports e4a et e4b ou e4a et e8a si vous utilisez un adaptateur X91153A (100 Gbit/s).</block>
+  <block id="5e579c5398f759c591e5b8c0846adbb0" category="paragraph">Vérifier les attributions de ports de plateforme pour connecter un système AFF A70, FAS70, AFF C80, FAS90, AFF A90 ou AFF A1K à un switch Cisco 3232C ou 9336C :</block>
+  <block id="f9bdd6da8ab810967faa5779c97025ed" category="paragraph"><block ref="f9bdd6da8ab810967faa5779c97025ed" category="inline-image-macro-rx" type="image"></block></block>
+  <block id="da0acefbf33111de9e67d3fee11be371" category="cell">AFF C30, AFF A30 AFF C60</block>
+  <block id="c13a6988988f63fb2f0783cdb7f3480a" category="inline-xref">Attributions de ports de plate-forme de commutateur partagé Cisco 9336C-FX2 (groupe 4)</block>
+  <block id="80013ebf782c405ff60125a0a3b79606" category="cell"><block ref="9ad543bbe652f0e404a3df2b4a4d1b1f" category="inline-xref-macro-rx"></block></block>
+  <block id="44d35f94e4a501d55fdfa6b53538e69c" category="cell">AFF A90 AFF A1K AFF A70 AFF C80</block>
+  <block id="0eafd073bf4026904c5daafe661c747c" category="inline-xref">Attributions de ports de plate-forme de commutateur partagé Cisco 9336C-FX2 (groupe 5)</block>
+  <block id="7a1eb95696daac0dca1551d649074117" category="cell"><block ref="ee60950f7332a78c3b30312d3652b3ef" category="inline-xref-macro-rx"></block></block>
+  <block id="507ea3ef945286961cf543c4f96379f1" category="paragraph">Vérifiez les attributions de ports de la plateforme pour câbler un système AFF C30, AFF A30 ou AFF C60 qui connecte des tiroirs NSS24 reliés par commutateur à un commutateur partagé Cisco 9336C-FX2 :</block>
+  <block id="65afbc35a986d1cfa9a50f2cb2f5c44d" category="paragraph">Vérifiez les attributions de ports de la plateforme pour câbler un système AFF A50 qui connecte des tiroirs NSS24 reliés par un commutateur partagé Cisco 9336C-FX2 :</block>
+  <block id="2891ff907bd9a2918aeaefa751bd8b7e" category="paragraph"><block ref="2891ff907bd9a2918aeaefa751bd8b7e" category="inline-image-macro-rx" type="image"></block></block>
+  <block id="84db7c71380402803e5d913e48b35f9a" category="paragraph"><block ref="84db7c71380402803e5d913e48b35f9a" category="inline-image-macro-rx" type="image"></block></block>
+  <block id="68976b911135d6d243ebf110e9f88265" category="paragraph">Vérifiez les attributions de ports de la plateforme pour connecter un système AFF A70, AFF C80, AFF A90 ou AFF A1K qui connecte des tiroirs NSS24 reliés par commutateur à un commutateur partagé Cisco 9336C-FX2 :</block>
+  <block id="4fd79b147d352f14562f4c5d7e89f964" category="inline-xref">Attributions de ports de plate-forme de commutateur partagé Cisco 9336C-FX2 (groupe 10)</block>
+  <block id="c7d921dc9f69695e913778aed6fb550a" category="cell"><block ref="cf3df2d950f3000c56f3761e778688b1" category="inline-xref-macro-rx"></block></block>
+  <block id="12879b167ec75cedd2db08e4e1e21f30" category="inline-xref">Attributions de ports de plate-forme de commutateur partagé Cisco 9336C-FX2 (groupe 11)</block>
+  <block id="449215cbb598b048f38ac62a19edaccc" category="cell"><block ref="f346d8d091e3e8c5429e3c222db57782" category="inline-xref-macro-rx"></block></block>
+  <block id="69274cffd982cace552cf08333fd2197" category="inline-xref">Attributions de ports de plate-forme de commutateur partagé Cisco 9336C-FX2 (groupe 12)</block>
+  <block id="fcdb378438479c3a2b9f59a508a7c5dd" category="cell"><block ref="fcc464a5306b3b14bb86df291d905ee3" category="inline-xref-macro-rx"></block></block>
+  <block id="286f9d0abf2865761c8318556c3ce84b" category="inline-xref">Attributions de ports de plate-forme de commutateur partagé Cisco 9336C-FX2 (groupe 13)</block>
+  <block id="6d12b70b56483f7a9a17d9c9246b0486" category="cell"><block ref="905d9f873e6d338924d7e00318dbac8e" category="inline-xref-macro-rx"></block></block>
+  <block id="8d1cfa543fa92c144d23d144a2d727f3" category="inline-xref">Attributions de ports de plate-forme de commutateur partagé Cisco 9336C-FX2 (groupe 14)</block>
+  <block id="e89910d5913faa95f696c756b3e7db34" category="cell"><block ref="b35ee61663441f30da82bb8ec139d4c5" category="inline-xref-macro-rx"></block></block>
+  <block id="ce88107e356865e8486d9e02f7bb585b" category="paragraph">Vérifiez les attributions de ports de la plateforme pour câbler un système AFF A20 qui ne connecte pas les tiroirs NSS24 reliés par un commutateur partagé Cisco 9336C-FX2 :</block>
+  <block id="81b5cc186cb1dd31d7bddf749a59442b" category="paragraph"><block ref="81b5cc186cb1dd31d7bddf749a59442b" category="inline-image-macro-rx" type="image"></block></block>
+  <block id="a212a7a5cb7dccf83a8209b64b53ce39" category="paragraph">Vérifiez les attributions de ports de la plateforme pour câbler un système AFF A30, AFF C30 ou AFF C60 qui ne connecte pas de tiroirs NSS24 reliés par commutateur à un commutateur partagé Cisco 9336C-FX2 :</block>
+  <block id="3d8a9d7f8aa09c53731690f8feed0d87" category="paragraph"><block ref="3d8a9d7f8aa09c53731690f8feed0d87" category="inline-image-macro-rx" type="image"></block></block>
+  <block id="7df7474e58c19dd78cdaa94db11e8aa2" category="paragraph">Vérifiez les attributions de ports de la plateforme pour câbler un système AFF A50 qui ne connecte pas les tiroirs NSS24 reliés par un commutateur partagé Cisco 9336C-FX2 :</block>
+  <block id="bc7ed33551532e8e8d306161aa5071b6" category="paragraph">Vérifiez les attributions de ports de la plateforme pour câbler un système AFF A70, FAS70, AFF C80, FAS90, AFF A90 ou AFF A1K qui ne connecte pas les tiroirs NSS24 reliés par commutateur à un commutateur partagé Cisco 9336C-FX2 :</block>
+  <block id="d092f23abfbbe763c64b549b968de1d8" category="list-text">Vous ne pouvez pas utiliser les switchs avec des ports ISL distants de différentes vitesses (par exemple, un port 25 Gbit/s connecté à un port ISL de 10 Gbit/s).</block>
+  <block id="99cd6147dd59c5abb2b297eb370705fd" category="cell">AFF A20 AFF C30, AFF A30 AFF C60</block>
+  <block id="42abd6d583788764c25c15490505431f" category="inline-xref">Attributions des ports de la plate-forme Broadcom BES-53248 (groupe 6)</block>
+  <block id="0f0bfb73ae173d3403dfb828e3b70090" category="cell"><block ref="9b5811314abfca1bd43a24f4e0adf3bc" category="inline-xref-macro-rx"></block></block>
+  <block id="88f4a3e621c1e03d3874437f6fd99649" category="paragraph">Passez en revue les attributions de port de la plate-forme pour connecter un système AFF A20, AFF C30, AFF A30 ou AFF C60 à un commutateur Broadcom BES-53248 :</block>
+  <block id="12e60ca81eb494c1b5e0d457d7d02e5e" category="paragraph"><block ref="12e60ca81eb494c1b5e0d457d7d02e5e" category="inline-image-macro-rx" type="image"></block></block>
+  <block id="0249844e1f636ba2a87d5274987756b9" category="inline-xref">Affectations des ports de la plate-forme NVIDIA SN2100 (groupe 5)</block>
+  <block id="d7ec8f712b0287990517bca50b922dd2" category="cell"><block ref="8a9b949124695689f864f9f14f50eeaa" category="inline-xref-macro-rx"></block></block>
+  <block id="efde678a43c998c7a8714fa732aeef5c" category="inline-xref">Affectations des ports de la plate-forme NVIDIA SN2100 (groupe 6)</block>
+  <block id="0c842c8cfa0977316ec48eb73a6e8c65" category="cell"><block ref="c902f072c35742409c62fc6312fe330d" category="inline-xref-macro-rx"></block></block>
+  <block id="392dc7f33e7aa7683783fda67e23d99a" category="inline-xref">Affectations des ports de la plate-forme NVIDIA SN2100 (groupe 7)</block>
+  <block id="1b9fa75426bc9ea5a3e240768f7a5026" category="cell"><block ref="061897057bd63bf85fce438fefe1968e" category="inline-xref-macro-rx"></block></block>
+  <block id="b8daabd197dd8e2bc7a41f393d355429" category="paragraph">Passez en revue les affectations de port de plate-forme pour relier un système AFF A20 à un commutateur NVIDIA SN2100 :</block>
+  <block id="8b744dad2482b2535e39efca18cba426" category="paragraph">Passez en revue les attributions de port de la plate-forme pour connecter un système AFF C30, AFF A30 ou AFF C60 à un commutateur NVIDIA SN2100 :</block>
+  <block id="84c81745f11cf4b9dd01463dfef9dbc3" category="paragraph">Passez en revue les affectations de port de plate-forme pour connecter un système AFF A50 à un commutateur NVIDIA SN2100 :</block>
+  <block id="035caab2257a510c9564c10c61d3be85" category="paragraph">Vérifiez les affectations des ports de la plate-forme pour connecter un système FAS70, AFF A70, AFF C80, FAS90, AFF A90 ou AFF A1K à un commutateur NVIDIA SN2100 :</block>
+  <block id="831ac3266017b395cbffe218fe03bd88" category="list-text">Vous devez câbler tous les nœuds de la même manière. Si différentes options de combinaison de ports sont disponibles pour câbler les nœuds, tous les nœuds doivent utiliser les mêmes combinaisons de ports. Par exemple, e1a sur le nœud 1 et e1a sur le nœud 2 doivent être connectés à un commutateur. De même, le second port des deux nœuds doit être connecté au second switch.</block>
+  <block id="7e045fcc35aa6e7b8247a2404c520e67" category="list-text">Le<block ref="b3f8a8564bd91efeacbc3b6197426c6e" category="inline-link-rx"></block> fournit également une vue d'ensemble du câblage par port pour chaque commutateur. Utilisez cette présentation du câblage pour vérifier votre câblage.</block>
+  <block id="df37dda7d3f4fd0dda442a98ec30d071" category="paragraph">ONTAP prend en charge les migrations SVM MetroCluster suivantes :</block>
+  <block id="1066b653c05c9422872505d252585c67" category="list-text">Migration d'un SVM entre une paire haute disponibilité non MetroCluster et une configuration MetroCluster IP</block>
+  <block id="5816bf9644a6b97b7fab54df8e6d7b87" category="list-text">Migration d'un SVM entre deux configurations MetroCluster IP</block>
+  <block id="f2e68eb15ce94074c593f47c4551c279" category="list-text">Migration d'un SVM entre une configuration FC MetroCluster et une configuration IP MetroCluster</block>
+  <block id="3216bae762aaea90ccbe2d5d66257bd4" category="paragraph"><block ref="3216bae762aaea90ccbe2d5d66257bd4" category="inline-link-rx"></block></block>
+  <block id="880eaa973bb0ff52dbc4df4784ed8c3c" category="paragraph"><block ref="880eaa973bb0ff52dbc4df4784ed8c3c" category="inline-link-rx"></block></block>
+  <block id="6b4b294441005b502ad66f4e60a001a3" category="paragraph"><block ref="6b4b294441005b502ad66f4e60a001a3" category="inline-link-rx"></block></block>
+  <block id="9bebdd73a8a23cb6bb096e8f8b057db5" category="paragraph"><block ref="9bebdd73a8a23cb6bb096e8f8b057db5" category="inline-link-rx"></block></block>
+  <block id="3ced15298365cc7265357bcef11cbe1f" category="paragraph">AFF A20, AFF A30, AFF A50, AFF C30, AFF C60, AFF C80</block>
+  <block id="8643f1ec20c68bd9122a5e9c431fe6fe" category="paragraph">FAS70, FAS90</block>
+  <block id="cf937098cb61f15ebce14d9fb043e796" category="paragraph">ONTAP 9.15.1P3</block>
+  <block id="913f5a631a4dd475cc429d73f4eb5562" category="list-text">Tous les nœuds de la configuration MetroCluster doivent exécuter la même version de ONTAP. Par exemple, si vous avez une configuration à huit nœuds, les huit nœuds doivent exécuter la même version de ONTAP. Reportez-vous au <block ref="b733b3de6818a363ac85112743571bca" category="inline-link-macro-rx"></block>pour connaître la version minimale de ONTAP prise en charge pour votre combinaison.</block>
+  <block id="acbf04eb6bf5b13ddd4c3b937f1a2977" category="admonition">Si la migration d'un SVM est en cours, attendez que tous les processus de migration soient terminés avant de lancer les procédures de mise à niveau du contrôleur ou de mise à jour du système. Ne démarrez pas de nouvelles opérations de migration de SVM pendant les processus de mise à niveau ou de mise à jour.</block>
+  <block id="796c8474326dba1b1854d83dffa10f16" category="list-text">Tous les nœuds (anciens et nouveaux) de la configuration MetroCluster doivent exécuter la même version de ONTAP. Reportez-vous au <block ref="b733b3de6818a363ac85112743571bca" category="inline-link-macro-rx"></block>pour connaître la version minimale de ONTAP prise en charge pour votre combinaison.</block>
+  <block id="0c8cc583e1b78e7d1f1c2177a5d48391" category="inline-image-macro">La présente les plateformes AFF et FAS prises en charge pour la mise à niveau manuelle des contrôleurs via le basculement et le rétablissement</block>
+  <block id="ab2fd3384da8987a5d6b168cf98589bc" category="paragraph"><block ref="ab2fd3384da8987a5d6b168cf98589bc" category="inline-image-macro-rx" type="image"></block></block>
+  <block id="06eb0e84d2d75da0fab3f5ad095287d5" category="list-text">Remarque 5 : requiert des modules IOM pour convertir les anciens contrôleurs en tiroir SAS externe. Pour connaître les modules IOM pris en charge, reportez-vous au<block ref="cbfe825e8e02458e2eef3cd048612d7d" category="inline-link-macro-rx"></block>.</block>
+  <block id="fd62dc6a841ff0a9f6159888bf7d8458" category="inline-image-macro">La présente les combinaisons de plates-formes de mise à niveau de contrôleur IP MetroCluster prises en charge par ASA</block>
+  <block id="d7aa961bff867be5607fff47afcc1269" category="paragraph"><block ref="d7aa961bff867be5607fff47afcc1269" category="inline-image-macro-rx" type="image"></block></block>
+  <block id="48b9a403e4a45281e156e3aab3850410" category="list-text">Tous les nœuds de la configuration MetroCluster doivent exécuter la même version de ONTAP. Par exemple, si vous avez une configuration à huit nœuds, les huit nœuds doivent exécuter la même version de ONTAP. Reportez-vous au <block ref="b733b3de6818a363ac85112743571bca" category="inline-link-macro-rx"></block>pour connaître la version minimale de ONTAP prise en charge pour votre combinaison.</block>
+  <block id="b994a29eaf12e18a7cce3c9305a59fad" category="paragraph">Aucun port correspondant. Après la mise à niveau, recréez les ports du cluster. <block ref="2305a256def4f5c38d82352fac177e1d" category="inline-link-macro-rx"></block></block>
+  <block id="31234814056be4e15bcffbd10fa0cd65" category="summary">Mettez à jour les fichiers RCF des switchs pour les nouvelles plateformes et définissez les valeurs de démarrage IP MetroCluster sur les modules de contrôleur.</block>
+  <block id="572d3ffeed6df6220869d4a086c5f363" category="doc">Mettez à jour les CFR du commutateur et définissez les valeurs de démarrage IP MetroCluster</block>
+  <block id="5787d7fabbad5b870fc2724fd3a9ecef" category="paragraph">Mettez à jour les fichiers de configuration de référence de commutateur (CFR) pour les nouvelles plates-formes et définissez les valeurs de démarrage IP MetroCluster sur les modules de contrôleur.</block>
+  <block id="6acdeb3c60892cae30d3f8e304029e2b" category="paragraph">Vous devez configurer certaines valeurs de démarrage IP MetroCluster sur les nouveaux modules de contrôleur. Les valeurs de démarrage doivent correspondre à celles configurées sur les anciens modules de contrôleur.</block>
+  <block id="ccd564b924782d18bcc01f309876c8fb" category="list-text">Vous utilisez les UID et les ID système identifiés précédemment dans la procédure de mise à niveau de <block ref="386f6ebd60fa6e17417ac4602f500fee" category="inline-link-macro-rx"></block>.</block>
+  <block id="4ec20de17dc6c2b3d48c9a7bfde35dbe" category="paragraph">Les étapes à suivre dépendent des ports utilisés par le nouveau modèle de plate-forme.</block>
+  <block id="b3197481b1ab681ae7bf6f0cd3e101c8" category="list-text">Définissez les UUID sur node_B_1-New :</block>
+  <block id="86d25e073b1fede02ba642654ae4ff4a" category="inline-link-macro">Réaffectez les disques de l'agrégat racine</block>
+  <block id="63d8e1399245a06cee0d856d0b7b85d2" category="paragraph"><block ref="512b0051487212671853eb4b1fc70afa" category="inline-link-macro-rx"></block>.</block>
+  <block id="3d147d29cc4d9f667048bad28a6a87cc" category="summary">Démarrez les nouveaux contrôleurs et vérifiez que les LIF sont hébergées sur les nœuds et les ports appropriés.</block>
+  <block id="6a8e2de76c8d950bd5c6cdd123f13722" category="doc">Démarrer les nouveaux contrôleurs IP MetroCluster et restaurer la configuration LIF</block>
+  <block id="74ce24f26f26a2970f58e105c862798d" category="section-title">Démarrez les nouveaux contrôleurs</block>
+  <block id="468dcab00b5c47edccdf62261920b18f" category="admonition">L'option 6 redémarre le nœud deux fois avant la fin du processus.</block>
+  <block id="b25d3c6a0d21aecae94214a7f781a85c" category="paragraph">Répondez avec « y » aux invites de changement d'ID système. Attendez les deuxième messages de redémarrage :</block>
+  <block id="ba17cc181b5f6d0b03e12015e8fe880c" category="list-text">À l'<block ref="82b8350d28f0a14e36de1958b3be9205" prefix=" " category="inline-code"></block>invite, vérifiez les valeurs de bootarg et mettez à jour les valeurs si nécessaire.</block>
+  <block id="ba12c3eba43f6492ea9583caec9621d5" category="paragraph">Suivez les étapes de la section <block ref="06c3fdcb6cd8d64a7d2e8bffb99c9b80" category="inline-link-macro-rx"></block>.</block>
+  <block id="fe2206a1db4a7041c6f41cab92c92fdb" category="list-text">Vérifiez que le partenaire-sysid est correct :</block>
+  <block id="5ac26ea9e60117dcd636c320bce09041" category="list-text">Attendez que les nœuds remplacés démarrent.</block>
+  <block id="7b5b637cc082477a9dd4c129c225152e" category="inline-link">Restaurez les clés de chiffrement intégrées de gestion des clés</block>
+  <block id="0c0444533bc17d6a1dca6ae2f45c21cd" category="paragraph">Pour plus d'informations, voir<block ref="e62bea146b06f19dbbb70e4e5ed98859" category="inline-link-rx"></block>.</block>
+  <block id="1ee623098df2f7856a034824be882999" category="inline-link">Restaurez les clés de chiffrement externes pour la gestion des clés</block>
+  <block id="4f19dfda9dc16be72272d4a9057514fa" category="paragraph">Pour plus d'informations, voir<block ref="094017ff0202ed61957e49060c847f6d" category="inline-link-rx"></block>.</block>
+  <block id="d4277e86fb561a84c70306fd74133038" category="admonition">Supprimez uniquement le nouveau domaine de diffusion. Ne supprimez aucun des domaines de diffusion existants avant de démarrer la mise à niveau.</block>
+  <block id="d971ef7b809aea8ad29277e39947e282" category="list-text">Ajoutez des ports à un domaine de diffusion si nécessaire.</block>
+  <block id="7f20d60ce675674d56ced7a249309d4b" category="paragraph"><block ref="7f20d60ce675674d56ced7a249309d4b" category="inline-link-rx"></block></block>
+  <block id="dbcc6a0ce0d05e46a1646e5173caa478" category="paragraph">L'appartenance au VLAN et au groupe d'interface peut différer de l'ancien nœud.</block>
+  <block id="afbd27ae71fcfac624980e215bb4ae35" category="inline-link">Créer un VLAN</block>
+  <block id="a927b4a9cd36e6a9611de8779c28544e" category="paragraph"><block ref="a927b4a9cd36e6a9611de8779c28544e" category="inline-link-rx"></block></block>
+  <block id="8ac76f8d63bdd9f33127acd62a88b8d3" category="inline-link">Combinine les ports physiques pour créer des groupes d'interfaces</block>
+  <block id="1c754d7b45168982fb58ef395c44a466" category="paragraph"><block ref="1c754d7b45168982fb58ef395c44a466" category="inline-link-rx"></block></block>
+  <block id="b03b1b6cc6ccb369bd1170d895fc73be" category="list-text">Voir le plan de mappage de port que vous avez créé dans <block ref="8720acbe29768fbbc9ec27340c363459" category="inline-link-macro-rx"></block>.</block>
+  <block id="bee636015f5bf9aec647b848d93e58c5" category="inline-link-macro">Rétablissement de la configuration MetroCluster</block>
+  <block id="80236810516b8f0c4d3577692f6d368e" category="paragraph"><block ref="e8e19bf2d561e49f93602fa595e74a48" category="inline-link-macro-rx"></block>.</block>
+  <block id="3330337d33366bc29e1ad8701247ed43" category="summary">Après la mise à niveau des modules de contrôleur, effectuez les tâches nécessaires pour terminer la mise à niveau du contrôleur.</block>
+  <block id="1a8a68405249829d7c103fff5d38f958" category="doc">Terminez la mise à niveau du contrôleur IP MetroCluster</block>
+  <block id="75bbd650c002272bab8aee5b5d6588e0" category="paragraph">Vous pouvez effectuer cette tâche sur n'importe quel nœud de la configuration MetroCluster.</block>
+  <block id="92f5715a55706897a1d8dd41533ea2ad" category="paragraph">Vous devez répéter les tâches de mise à niveau pour mettre à niveau les nœuds sur le cluster_A sur le site A.</block>
+  <block id="c0d421f4948fca7693af31b81667650d" category="list-text">Répétez les étapes pour mettre à niveau les nœuds sur cluster_A, en commençant par <block ref="fdc81b8422a2d3a4dc8579b364ffd7ac" category="inline-link-macro-rx"></block>.</block>
+  <block id="9708813a6edf75a072848cc8c19d1d0b" category="inline-link-macro">Ajouter des configurations MetroCluster</block>
+  <block id="1452de87b0c5b157dc8a7594223b5265" category="paragraph"><block ref="9b8797650089db2aa56d22b65e4ec45b" category="inline-link-macro-rx"></block>.</block>
+  <block id="448025dd8ef817882b16f81c3c2c401f" category="paragraph"><block ref="65a4078ac1b82a84ce7a38a387b8b31c" category="inline-link-macro-rx"></block>.</block>
+  <block id="337d2ccc4953efb0209e4bf2012ca1be" category="summary">Activez la journalisation de la console sur vos périphériques avant d'effectuer la mise à niveau du contrôleur.</block>
+  <block id="ec75a12b665b34d0cdc8d12746fc8cfa" category="doc">Activez la journalisation de la console avant la mise à niveau du contrôleur IP MetroCluster</block>
+  <block id="f31a964269837fa383f7baad3584db47" category="inline-link-macro">Définir le démarrage requis (pour les mises à niveau vers les systèmes introduits dans la version 9.15.1 ou ultérieure)</block>
+  <block id="df1a5689b1950da5f94321b90393b1dc" category="paragraph">Consultez les informations de la section <block ref="2498528fe56bae6c8b4f34c34587ac02" category="inline-link-macro-rx"></block> pour vérifier si vous devez définir un démarrage requis sur le système existant.</block>
+  <block id="b665e6673f7c6f79f5b7bd74d4529fc0" category="summary">Configurez les cartes HBA dans le module de contrôleur, puis vérifiez et définissez l'état haute disponibilité du contrôleur et du châssis.</block>
+  <block id="c3aa9da1524917943d5c4fc825572ad8" category="doc">Restaurez la configuration du HBA et définissez l'état haute disponibilité du contrôleur IP et du châssis MetroCluster</block>
+  <block id="e8235ba5b8b549fdd6b720227b5486f3" category="paragraph">En fonction de la présence et de la configuration des cartes HBA dans le module de contrôleur, vous devez les configurer correctement pour votre site.</block>
+  <block id="cb2b2de240ea8ecebe1a6f6aee92c043" category="list-text">En mode Maintenance, configurez les paramètres des HBA du système :</block>
+  <block id="dd14766d881405d86219496a398759b4" category="list-text">Redémarrez le nœud en mode Maintenance pour appliquer les modifications de configuration :</block>
+  <block id="e2354fafc5a0b8d2c45509b30201b525" category="list-text">Vérifiez les modifications :</block>
+  <block id="9820621814c515f5849a0d5cfb428863" category="list-text">Si l'état système affiché du contrôleur ou du châssis est incorrect, définissez l'état de haute disponibilité :</block>
+  <block id="649d0478fa9717c67f3c5f7e85dda738" category="paragraph">Pour plus d'informations sur les ports de stockage du système vers lequel vous effectuez la mise à niveau, reportez-vous <block ref="9c839fcdfb8699a63c787254d7b1ae03" category="inline-link-macro-rx"></block> au.</block>
+  <block id="8f24dbaf533511f782fcbc02b546e56e" category="paragraph"><block ref="ae10eb53c75e6634989db7c220c52bfd" category="inline-link-macro-rx"></block>.</block>
+  <block id="97ec803fec0ffe7f0d1dfac02cc24f7b" category="summary">Réaffectez les disques de l'agrégat racine au nouveau module de contrôleur, en utilisant les ID système que vous avez collectés précédemment.</block>
+  <block id="68f7a5b61351531f8821d347873b1a7b" category="doc">Réaffectez les disques d'agrégat racine au nouveau module de contrôleur IP MetroCluster</block>
+  <block id="bcad2682de4382232b01bb2cc72df554" category="paragraph">Réaffectez les disques de l'agrégat racine au nouveau module de contrôleur à l'aide des ID système que vous avez collectés précédemment.</block>
+  <block id="efa041469859edff24019ccf400f4934" category="paragraph">Les anciens ID système ont été identifiés dans <block ref="386f6ebd60fa6e17417ac4602f500fee" category="inline-link-macro-rx"></block>.</block>
+  <block id="b5dd5b7586a816d36a746e2886b45a30" category="paragraph">Vous effectuez les étapes en mode Maintenance.</block>
+  <block id="e858a88baed197f0640f2b247ac9ae3a" category="admonition">Avant de procéder à la réaffectation des disques, vérifiez que les disques pool0 et pool1 appartenant à l'agrégat racine du nœud sont affichés dans la<block ref="63328c72194085e2f8ff497b866f6d24" prefix=" " category="inline-code"></block> sortie. Dans l'exemple suivant, le résultat répertorie les disques pool0 et pool1 appartenant à node_B_1-Old.</block>
+  <block id="8882938a559cd1cc01b2a755a4e5507f" category="paragraph">Le résultat de la commande affiche l'ID système du nouveau module de contrôleur (1574774970). Cependant, l'ancien ID système (537403322) possède toujours les disques de l'agrégat racine. Cet exemple n'affiche pas les disques appartenant à d'autres nœuds dans la configuration MetroCluster.</block>
+  <block id="5a3712e89200b04baeccf98a09fece58" category="list-text">Vérifier que les disques de l'agrégat racine sont correctement réaffectés :</block>
+  <block id="05a68831292c395345439b837ba5dc6c" category="inline-link-macro">Démarrer les nouveaux contrôleurs et restaurer la configuration LIF</block>
+  <block id="51fd44c59805171ee429c9a8a7467789" category="paragraph"><block ref="52d0c98e53a297315b347a6378a8bd50" category="inline-link-macro-rx"></block>.</block>
+  <block id="092dbfab1a4385bfef7e3b497957bdd4" category="summary">Vérifiez que votre système répond à toutes les exigences avant d'effectuer la mise à niveau du contrôleur.</block>
+  <block id="19ad3c72e2594ceb9c300eb26b1ca5b6" category="doc">Configuration requise pour l'utilisation de cette procédure de mise à niveau MetroCluster IP</block>
+  <block id="a874d121d30ef8578b609fd6d3c977dd" category="paragraph">Vérifiez que votre système répond à toutes les exigences avant d'effectuer la mise à niveau du contrôleur.</block>
+  <block id="9dce7419ee3cb74caefd7c2519d4d0c2" category="list-text">Pour plus d'informations sur les combinaisons de mise à niveau de plate-forme prises en charge, consultez le tableau de mise à niveau IP MetroCluster dans <block ref="a934c7831e4c0e5d9741460d2b55f4b9" category="inline-link-macro-rx"></block>.</block>
+  <block id="171bdebca93ae21307df67a82a60faeb" category="list-text">Les systèmes IP MetroCluster doivent exécuter la même version de ONTAP sur les deux sites.</block>
+  <block id="8b1ccf5fd9359b98ead86c2d488f978e" category="paragraph">Reportez-vous <block ref="9c839fcdfb8699a63c787254d7b1ae03" category="inline-link-macro-rx"></block> au ou au <block ref="4bda12a91fa486a6aaeafafb55098b01" category="inline-link-macro-rx"></block> pour connaître les versions de micrologiciel et les commutateurs pris en charge.</block>
+  <block id="76449e8c940f275d7de02a6e01270abe" category="list-text">Lorsque vous effectuez une mise à niveau à partir de systèmes disposant de plus de slots ou de ports que le nouveau système, vous devez vérifier qu'il y a suffisamment de slots et de ports sur le nouveau système.</block>
+  <block id="1ac39e5d37e2f177b8ec8535d378b98d" category="paragraph">Avant de commencer la mise à niveau, reportez-vous au <block ref="9c839fcdfb8699a63c787254d7b1ae03" category="inline-link-macro-rx"></block>pour vérifier le nombre de slots et de ports sur le nouveau système.</block>
+  <block id="85ba24554ef457741ae00adfb30303f5" category="list-text">S'il est activé sur votre système, <block ref="7a9d12e6dbd7c75c145032be8c2b8549" category="inline-link-macro-rx"></block> avant d'effectuer la mise à niveau.</block>
+  <block id="3d8c3985ef8f7b9c50308a5dfab923c4" category="paragraph"><block ref="f85c62a3a981a8b83a61b1dc7959165b" category="inline-link-macro-rx"></block>.</block>
+  <block id="ed1dd620ec6ed4baac7e1208e4a9d25d" category="summary">Les mises à niveau de systèmes introduites dans ONTAP 9.15.1 ou version ultérieure nécessitent la définition d'un amorçage avant de pouvoir procéder à la mise à niveau du contrôleur.</block>
+  <block id="496db1855de52190cc06d85f972a650b" category="doc">Définir le démarrage requis (pour les mises à niveau MetroCluster IP vers les systèmes introduits dans ONTAP 9.15.1 ou version ultérieure)</block>
+  <block id="46e4bb8c59f161cfa278e9cc00ce227a" category="paragraph">Les mises à niveau du contrôleur vers les systèmes introduits dans ONTAP 9.15.1 ou version ultérieure nécessitent que vous mettiez un amorçage avant de pouvoir démarrer la mise à niveau.</block>
+  <block id="59b020257dd689cba5d5780a512943fd" category="section-title">Étape 1 : déterminez le démarrage que vous devez définir sur les anciens contrôleurs</block>
+  <block id="6e9eadf85899a23a56a99cb9a6df7652" category="paragraph">Pour toutes les mises à niveau prises en charge vers les systèmes suivants, vous devez définir un amorçage sur les anciens contrôleurs avant d'effectuer la mise à niveau du contrôleur :</block>
+  <block id="724bf3ae18d86521a5b9d77a13fcfddb" category="list-text">AFF C80</block>
+  <block id="bf35733b2711515e1aa7614ca7dd1ef0" category="list-text">AFF A50, AFF A20, AFF A30</block>
+  <block id="b1a7d02f89c62c97fedf60bb09caa4bc" category="list-text">AFF C30, AFF C60</block>
+  <block id="55aa8632230fb0a23186560320c2411c" category="inline-link-macro">Préparez le système pour la mise à niveau</block>
+  <block id="f5c6ae4b822813aea6f2b6fda7d434b4" category="admonition">Si vous effectuez une mise à niveau vers l'un des systèmes répertoriés, vous *devez* définir un démarrage requis sur le système existant avant d'effectuer la mise à niveau. Pour toutes les autres mises à niveau, vous pouvez ignorer cette tâche et accéder directement à <block ref="727f54dda0b5a83234ee2910d3353f77" category="inline-link-macro-rx"></block>.</block>
+  <block id="05c6aa6eca73dc8505cf4bcf7e51677a" category="paragraph">La plupart des mises à niveau de systèmes introduites dans ONTAP 9.15.1 ou version ultérieure nécessitent que vous définissez le<block ref="ee06f9ce95f0e4407845e7566ca3219e" prefix=" " category="inline-code"></block> démarrage sur les anciens contrôleurs. Cependant, certains chemins de mise à niveau nécessitent que vous mettiez le<block ref="547c6b727c1ad89e0e0a9fab4efaf59d" prefix=" " category="inline-code"></block> bootarg à la place.</block>
+  <block id="ffe782ee595f504f732429ce74813c9c" category="paragraph">Utilisez le tableau suivant pour déterminer quel bootarg vous devez définir pour votre combinaison de mise à niveau spécifique.</block>
+  <block id="9a5481a4499f03b428516e1e655b2247" category="cell">Pour cette mise à niveau...</block>
+  <block id="2960c7c521e801666250bc33502b1481" category="cell">Définir le bootarg...</block>
+  <block id="4d272531f47fb35f917318ca6d72fcbd" category="cell">De AFF A250 à AFF A30</block>
+  <block id="a66e9459957720c55aa25deae5fbc49f" category="cell"><block ref="547c6b727c1ad89e0e0a9fab4efaf59d" prefix="" category="inline-code"></block></block>
+  <block id="744cbc5aaac839f431e460a5364441e5" category="cell">De AFF C250 à AFF C30</block>
+  <block id="1587ade3a80eae494164e86cb2dd5734" category="cell">De AFF A150 à AFF A20</block>
+  <block id="66d5b6c0a5d29009937264288b2bed0e" category="cell">De AFF A220 à AFF A20</block>
+  <block id="98dc42b6205c2e3f5114dc1e108cea47" category="cell">Toutes les autres mises à niveau prises en charge vers les systèmes AFF A70, AFF A90, AFF A1K, FAS70, FAS90, AFF C80, AFF A50, AFF A20, AFF A30, AFF C30 ou AFF C60</block>
+  <block id="3ea751f5e7ad018c7a1c4ebe22608ee6" category="cell"><block ref="ee06f9ce95f0e4407845e7566ca3219e" prefix="" category="inline-code"></block></block>
+  <block id="4e154455580c2924ab538f717efce366" category="section-title">Étape 2 : définissez le démarrage requis sur les anciens contrôleurs</block>
+  <block id="2b8367c2b0fd32c8f7c396289d11179f" category="paragraph">Cette tâche est *uniquement* requise lorsque vous effectuez une mise à niveau vers un système AFF A70, AFF A90, AFF A1K, FAS70, FAS90, AFF C80, AFF A50, AFF A20, AFF A30, AFF C30 ou AFF C60.</block>
+  <block id="31bb07ea477e7a663bf099ca3ed9b374" category="inline-xref">déterminez le bootarg à définir</block>
+  <block id="b0eddbd28deec4566b9a1e2f57d34c8f" category="list-text">Définissez le démarrage requis pour votre combinaison de mise à niveau. Vous avez déjà déterminé le bootarg que vous devez définir en utilisant la table dans <block ref="092a73eeb155f2a0de79637a5ae185e0" category="inline-xref-macro-rx"></block>.</block>
+  <block id="ee06f9ce95f0e4407845e7566ca3219e" category="open-title">hw.cxgbe.tep_keepalive_disable</block>
+  <block id="547c6b727c1ad89e0e0a9fab4efaf59d" category="open-title">bootarg.siw.interop_enabled</block>
+  <block id="de35b336a143e486699a86372016a748" category="paragraph"><block ref="efeb32226eba442b449980c3cc3a59eb" prefix="" category="inline-code"></block></block>
+  <block id="5d1bcdb8cc9a99bad295f5980c3d8f32" category="paragraph"><block ref="92c4600f17ef6b0912309104bda27fd5" prefix="" category="inline-code"></block></block>
+  <block id="378140461414afa0e47bca089223ba18" category="paragraph"><block ref="727f54dda0b5a83234ee2910d3353f77" category="inline-link-macro-rx"></block>.</block>
+  <block id="b2026c6aa91ea681e3c71a722fc33d1d" category="summary">Installez et câblez les nouveaux contrôleurs IP MetroCluster.</block>
+  <block id="e4fac3584ae1aa47cf5625367b734935" category="doc">Configurez les nouveaux contrôleurs IP MetroCluster</block>
+  <block id="a298136c2902b0d160837ca8e28c65cc" category="list-text">Si votre mise à niveau nécessite le remplacement des modules de contrôleur, par exemple la mise à niveau d'un AFF A800 vers un système AFF A90 ou d'un AFF C800 vers un système AFF C80, vous devez retirer le module de contrôleur du châssis lorsque vous remplacez le module de contrôleur. Pour toutes les autres mises à niveau, passez à <block ref="24265808136e02e671f66c0cb3dc4c8f" category="inline-xref-macro-rx"></block>.</block>
+  <block id="e81179c7b41d0d2f839b6bd0b1f06e8a" category="paragraph">La procédure d'installation suivante varie selon que la mise à niveau nécessite le remplacement des modules de contrôleur ou si les modules IOM sont nécessaires pour convertir les anciens contrôleurs en tiroir externe.</block>
+  <block id="81d414842f970a8b10fba94dddf79fd9" category="cell">Si vous effectuez une mise à niveau...</block>
+  <block id="b9e8d0d6724995270e7fd196f817b6a0" category="cell">Suivez les étapes pour ...</block>
+  <block id="d029eea43b6141a148b7e4f708df36cc" category="list-text">D'un système AFF A150 à un système AFF A20</block>
+  <block id="9ac8fb9b2fc9fb9acb65314e07a3fc75" category="list-text">D'un système AFF A220 à un système AFF A20</block>
+  <block id="bab257db1e9528dc1b531f2927e2d7f3" category="cell">Conversion contrôleur en tiroir externe</block>
+  <block id="f0ecc85a47250eb431d70facc1b0f391" category="list-text">D'un AFF A800 vers un système AFF A90</block>
+  <block id="ddc8448f70002b17b2400cae6b9c48e9" category="list-text">D'un système AFF C800 vers un système AFF C80</block>
+  <block id="38d05e1fec0218209e5efe97b6e65f0b" category="cell">Remplacement du module de contrôleur</block>
+  <block id="b8ef6a3a829fa4c460a700df908603c3" category="cell">Toute autre combinaison de mise à niveau du contrôleur</block>
+  <block id="8fed2e91fbb6c5683d39102b9ba23da4" category="paragraph">Si vos contrôleurs IP MetroCluster d'origine sont des modèles AFF A150 ou AFF A220, vous pouvez convertir la paire haute disponibilité AFF A150 ou AFF A220 en tiroir de disque DS224C, puis la connecter aux nouveaux nœuds.</block>
+  <block id="dc7e359f1094a814c0918c6712903e32" category="paragraph">Par exemple, lors de la mise à niveau d'un système AFF A150 ou AFF A220 vers un système AFF A20, vous pouvez convertir la paire haute disponibilité AFF A150 ou AFF A220 en tiroir DS224C en remplaçant les modules de contrôleur AFF A150 ou AFF A220 par des modules IOM12.</block>
+  <block id="792da7ae6f10b0a538b7c8126371f6b3" category="list-text">Remplacez les modules de contrôleur dans le nœud que vous convertissez avec des modules de tiroir IOM12.</block>
+  <block id="e420822bb33a20469fdc3f065d3d63ca" category="list-text">Définissez l'ID de tiroir disque.</block>
+  <block id="e3a1e42d336af98f7116d009f256cff5" category="paragraph">Chaque tiroir disque, châssis compris, requiert un ID unique.</block>
+  <block id="bf4f5599e53150e46e0e54293db42d76" category="list-text">Réinitialise les autres ID de tiroir disque selon vos besoins.</block>
+  <block id="807ab2bf66297dc418f10fd561479666" category="list-text">Mettez les tiroirs hors tension.</block>
+  <block id="3c3916219a878033fa2aaddd792ed605" category="list-text">Reliez le tiroir disque converti à un port SAS du nouveau système et, si vous utilisez un câblage ACP hors bande, au port ACP du nouveau nœud.</block>
+  <block id="28391dfe8511b351c91dba3094b1ba03" category="list-text">Mettez le système sous tension afin que le tiroir disque converti et tous les autres tiroirs disques reliés aux nouveaux nœuds.</block>
+  <block id="c2f0cd821e5ee148eb1900a96d516f19" category="list-text">Mettez les nouveaux nœuds sous tension, puis interrompez le processus de démarrage de chaque nœud en appuyant sur Ctrl-C pour accéder à l'invite de l'environnement de démarrage.</block>
+  <block id="a873eb4fd00094f4922d6dbbbcac22c8" category="paragraph">L'installation séparée des nouveaux contrôleurs n'est pas applicable pour la mise à niveau des systèmes intégrés avec des disques et des contrôleurs dans le même châssis, par exemple d'un système AFF A800 vers un système AFF A90. Vous devez remplacer les nouveaux modules de contrôleur et les nouvelles cartes d'E/S après avoir mis les anciens contrôleurs hors tension, comme indiqué dans l'image ci-dessous.</block>
+  <block id="94d70a7bf1715ed12e11a9d10a22a3da" category="list-text">Reliez l'alimentation, la console série et les connexions de gestion des contrôleurs, comme décrit à la section <block ref="7176836221733e9bf6fcbaccc1aa9ffd" category="inline-link-macro-rx"></block>.</block>
+  <block id="697e6df255668d1e50ec4f1cecdcb640" category="paragraph">Ne connectez pas d'autres câbles débranchés des anciens contrôleurs pour le moment.</block>
+  <block id="cab03c56bcbe5f0a4a06249fb9b47222" category="inline-link-macro">Restaurez la configuration du HBA et définissez l'état de haute disponibilité</block>
+  <block id="e0ae736ed8185e0a40d5a4d8a8bc5607" category="paragraph"><block ref="48f91d84b066a3d0371b8fede70c72d0" category="inline-link-macro-rx"></block>.</block>
+  <block id="a17e1793c60a266571d24f52d0f0a985" category="summary">Effectuez l'opération de rétablissement pour rétablir le fonctionnement normal de la configuration MetroCluster. Les nœuds du site_A sont toujours en attente de mise à niveau.</block>
+  <block id="fea594ef91e674c46b201435a45a39cd" category="doc">Rétablir la configuration IP MetroCluster</block>
+  <block id="421121dfd8b43beac0d485be366616a3" category="paragraph"><block ref="0fd9e0ef024074cec9e787b45185e421" category="inline-link-macro-rx"></block>.</block>
+  <block id="1f0f2309cd21b29eea4a5d1331553671" category="summary">Vous basculez la configuration sur site_A pour que les plates-formes sur site_B puissent être mises à niveau.</block>
+  <block id="0ae501b723b7514026e2b4b99be2aa5a" category="doc">Basculer la configuration IP MetroCluster</block>
+  <block id="2a5ecf0bfff946ccae253aba8f2e4419" category="paragraph">Une fois cette tâche terminée :</block>
+  <block id="ff2d4b02b6d126a6cd716b062b750906" category="list-text">Cluster_A est actif et assure le service des données pour les deux sites.</block>
+  <block id="7178372d1ce96780aa2cc00ee39c9f53" category="list-text">Cluster_B est inactif et prêt à commencer le processus de mise à niveau.</block>
+  <block id="6df83f985659f62ff0b661bce0fec248" category="image-alt">La présente cluster_A est prêt pour la mise à niveau et cluster_B est en mode de basculement</block>
+  <block id="a4767539443cd0b8facd6dde840d58c4" category="paragraph">La fonctionnalité de correction automatique des agrégats après le basculement négocié est désactivée lors d'une mise à niveau du contrôleur.</block>
+  <block id="982d6ff8ebf96c899c25ee9534386f53" category="paragraph"><block ref="909db924b30ea3c39cf2e7063d49160f" category="inline-link-macro-rx"></block>.</block>
+  <block id="7becbe2ac4a2a23dde7c16c3e23d77af" category="summary">Déplacez les LIF de données vers un port commun, supprimez les VLAN et les groupes d'interface sur les anciens contrôleurs, puis désinstallez physiquement les contrôleurs.</block>
+  <block id="df659d3c538f0a4dbd702fd9590b16a6" category="doc">Supprimez les configurations d'interface et désinstallez les anciens contrôleurs IP MetroCluster</block>
+  <block id="e7fa6b8df7c104823307a6177ea39a64" category="list-text">Vous effectuez ces étapes sur les anciens contrôleurs (node_B_1-Old, node_B_2-Old).</block>
+  <block id="14b524dac669666576229b9b289062f6" category="list-text">Vous avez besoin des informations que vous avez recueillies pour les utiliser dans <block ref="8720acbe29768fbbc9ec27340c363459" category="inline-link-macro-rx"></block>cette procédure.</block>
+  <block id="cd171858353ac5afefcde1a10ecc4d2b" category="paragraph">Pour la distribution et l'allocation des ports sur les nouveaux nœuds, reportez-vous à la<block ref="e8018b6e740a667345f4bcc94e4023fc" category="inline-link-rx"></block>.</block>
+  <block id="609705d960d3eb8865688141bee64514" category="list-text">Reconvertir toutes les LIF qui ne se trouvent pas sur leur port de base :</block>
+  <block id="2c33fd0cf23bb7e3394bbefc985bb336" category="paragraph">Répéter la commande pour chaque LIF intercluster qui ne se trouve pas sur le home port.</block>
+  <block id="5d017d18dffe9ea2002cf58c5028e761" category="paragraph">Toutes les LIF DE données, y compris SAN et NAS, sont administratives et opérationnelles, car elles fonctionnent sur le site de basculement (cluster_A).</block>
+  <block id="6f4692f84dcb13549704950c86285bed" category="paragraph">Pour l'utilisation des ports pour les modèles de plate-forme, voir<block ref="5e0886f1b46d76ea4adb1e1719b4ddb5" category="inline-link-rx"></block></block>
+  <block id="404849d025b51f7a9b000948be830642" category="list-text">[[upgrades_Manual_without_matching_ports]]modifiez les domaines de diffusion pour supprimer le VLAN et les ports physiques qui doivent être supprimés :</block>
+  <block id="b5232e117010c63512e6646cdcc5b782" category="list-text">Arrêtez les nœuds à l'<block ref="82b8350d28f0a14e36de1958b3be9205" prefix=" " category="inline-code"></block>invite :</block>
+  <block id="8678abfcaeb1b4e7b04802e25402ccf6" category="list-text">Connectez-vous à la console série des anciens contrôleurs (node_B_1-Old et node_B_2-Old) sur site_B et vérifiez que l'invite s'affiche<block ref="82b8350d28f0a14e36de1958b3be9205" prefix=" " category="inline-code"></block>.</block>
+  <block id="5d77b80fe38db1f45d5d09f27dcd0e59" category="list-text">Déconnectez les connexions de stockage et réseau sur les nœuds_B_1-Old et node_B_2-Old. Etiquetez les câbles afin de pouvoir les reconnecter aux nouveaux nœuds.</block>
+  <block id="babccc809b9a10912d9d8a4de927ba3c" category="paragraph"><block ref="0c4ac37e524073d6c973003f56f3fc6c" category="inline-link-macro-rx"></block>.</block>
+  <block id="26574f9e2197dc37d66e8e0dad63c6ca" category="summary">Depuis ONTAP 9.8, vous pouvez utiliser le processus de basculement MetroCluster pour fournir aux clients un service sans interruption pendant la mise à niveau des modules de contrôleur sur le cluster partenaire.</block>
+  <block id="8958d0af9b9ce2023eb6669c72fdac02" category="doc">Workflow de mise à niveau du contrôleur IP MetroCluster avec basculement et rétablissement (ONTAP 9.8 et versions ultérieures)</block>
+  <block id="5e37747995982979fde1e791f10c1ccd" category="paragraph">Ce workflow peut être utilisé pour mettre à niveau les contrôleurs IP MetroCluster à l'aide du basculement et de la reprise sur les systèmes exécutant ONTAP 9.8 ou version ultérieure.</block>
+  <block id="82107b1d3adefdea392b36f7697a120d" category="inline-link-macro">Préparation à la mise à niveau</block>
+  <block id="c240e88598326f9699f8db139f25d673" category="paragraph-title"><block ref="58f667aaf05f87159670e12bd9bc076b" category="inline-image-macro-rx" type="image"></block><block ref="bdad88c10e021b717a14ac2abd1ce700" category="inline-link-macro-rx"></block></block>
+  <block id="141a2f25dc2c490b7e4938e522c74714" category="paragraph">Vérifiez les combinaisons de mises à niveau et la configuration requise prises en charge, puis effectuez les tâches requises pour préparer votre système à la mise à niveau du contrôleur.</block>
+  <block id="1d2721feb5212f6ecee441581bfac06c" category="inline-link-macro">Mettez à niveau vos contrôleurs</block>
+  <block id="55fd8e266a61a047ef281919387159f3" category="paragraph-title"><block ref="54f425ce8d89f4ed6b8a546561af5d60" category="inline-image-macro-rx" type="image"></block><block ref="854326e7cf2bbddea748bafc02951127" category="inline-link-macro-rx"></block></block>
+  <block id="d63296cf1970dbebe3fdbc235a090595" category="paragraph">Basculer la configuration MetroCluster afin de supprimer la configuration des anciens contrôleurs, mettre en rack et installer les nouveaux contrôleurs, réaffecter les disques de l'agrégat racine et démarrer les nouveaux contrôleurs avant d'effectuer un rétablissement.</block>
+  <block id="ca8a2087e5557e317599344687a57391" category="inline-image-macro">Trois</block>
+  <block id="7d603a7e3254c4bd0e81652af6b886ad" category="paragraph-title"><block ref="05b2444faffd66d76e88602ea7dd353f" category="inline-image-macro-rx" type="image"></block><block ref="0fd9e0ef024074cec9e787b45185e421" category="inline-link-macro-rx"></block></block>
+  <block id="41cb0fd6e8dace24229a952aff1b1d0c" category="paragraph">Terminez la mise à niveau du contrôleur en répétant les tâches de mise à niveau sur le second site et en restaurant toute configuration de contrôle.</block>
+  <block id="3c98ffbe5d744028e41fa1471641dc43" category="doc">Préparez le système IP MetroCluster pour la mise à niveau</block>
+  <block id="71e4a8bf257a07bf7ecdc859973f4cb4" category="paragraph">Avant d'apporter des modifications à la configuration MetroCluster existante, vérifiez l'état de santé de la configuration, préparez les nouvelles plates-formes et effectuez d'autres tâches diverses.</block>
+  <block id="6e6e0fb236cdc03dc93e1e5208bd4177" category="section-title">Mettre à jour les contrôleurs MetroCluster switch RCF avant de mettre à niveau les contrôleurs</block>
+  <block id="821b7ee3ab084a4c1cb4aacbc8490711" category="paragraph">Selon l'ancien et le nouveau modèle de plate-forme, il se peut que vous deviez mettre à jour les fichiers de configuration de référence du commutateur MetroCluster avant de mettre à niveau les contrôleurs.</block>
+  <block id="ecc0c0067302a2cab8e48568d6aa3d14" category="paragraph">Effectuez cette tâche dans les circonstances suivantes :</block>
+  <block id="5d573e48cb48ae7a461c21264443ea79" category="list-text">La configuration du RCF des switchs n'est pas disponible dans la version minimale.</block>
+  <block id="9a2fe7775fd869cec26fe4fb94d21a70" category="list-text">Vous devez modifier les ID de VLAN utilisés par les connexions MetroCluster back-end.</block>
+  <block id="a35fe4efc635d0d7bcc082e45d7960b1" category="paragraph">Déterminez si vous devez mettre à jour les contrôleurs RCF avant de mettre à niveau vos contrôleurs :</block>
+  <block id="244070638cfeb58d571009aca0145142" category="list-text">Si la configuration du switch n'a pas été configurée avec la version minimale des fichiers RCF prise en charge, vous devez mettre à jour ces fichiers avant de mettre à niveau les contrôleurs :</block>
+  <block id="9eb583b6acdc2b5e19e78b3f3c82122f" category="cell">Version RCF requise</block>
+  <block id="0b46cc265817697812b9625109c89c9a" category="paragraph">2.0 ou ultérieure</block>
+  <block id="bf9a01b246043f83aa128ae30e25612a" category="list-text">Si vos anciens et nouveaux modèles de plate-forme figurent dans la liste suivante, *pas* vous devez mettre à jour l'ID VLAN avant de mettre à niveau les contrôleurs :</block>
+  <block id="14a82d4aca6a5abb724d6196464cc879" category="list-text">FAS8200 ou AFF A300</block>
+  <block id="ef14d222f7c72bb44cf5c71ce439930e" category="list-text">FAS9000 ou AFF A700</block>
+  <block id="7007169941c9fdfbb00da3f003acbe3d" category="list-text">AFF A800, AFF C800, ASA A800 ou ASA C800</block>
+  <block id="dc77dc9abccbb87eac0650f7b2423680" category="paragraph">Si l'un de vos anciens ou nouveaux modèles de plate-forme n'est pas répertorié ci-dessus, vous devez vérifier que les interfaces MetroCluster utilisent un ID VLAN pris en charge. Les ID VLAN pris en charge pour les interfaces MetroCluster sont : 10, 20 ou compris entre 101 et 4096.</block>
+  <block id="0817f4611c0ed330aa92c7e57c87d562" category="list-text">Si l'ID de VLAN n'est pas 10, 20 ou compris entre 101 et 4096, vous devez mettre à niveau le RCF de switchs avant de mettre à niveau les contrôleurs.</block>
+  <block id="c161c6c1c89a525fc357732467253475" category="list-text">Les connexions de cluster locales peuvent utiliser n'importe quel VLAN, il n'est pas nécessaire qu'elles se trouvent dans la plage spécifiée.</block>
+  <block id="6e734dc996cb4ccb983b69acf7b09ed2" category="list-text">Le nouveau RCF vers lequel vous effectuez la mise à niveau doit utiliser les VLAN 10, 20 ou être compris entre 101 et 4096. Ne modifiez pas le VLAN du cluster local sauf si cela est nécessaire.</block>
+  <block id="35876e862caa9e22507177b3603679ae" category="admonition">Vous devez mettre à jour les commutateurs dans l'ordre suivant : Switch_A_1, switch_B_1, switch_A_2, switch_B_2.</block>
+  <block id="f2b11c5207eaad83377af1bdfcd548dd" category="paragraph">Vous devez vérifier que les ports physiques du nœud_A_1-Old correspondent correctement aux ports physiques du nœud_A_1-New. Cela permet à node_A_1-New de communiquer avec les autres nœuds du cluster et avec le réseau après la mise à niveau.</block>
+  <block id="64c6cb0305ddeb8c2751f478d0dd512f" category="paragraph">Lorsque le nouveau nœud démarre pour la première fois lors de la mise à niveau, il lit la configuration la plus récente de l'ancien nœud qu'il remplace. Lorsque vous démarrez node_A_1-New, ONTAP tente d'héberger les LIFs sur les mêmes ports qui ont été utilisés sur node_A_1-Old. Cela signifie que vous devez ajuster la configuration des ports et des LIF dans le cadre de la mise à niveau afin qu'elle soit compatible avec la configuration de l'ancien nœud. Durant la procédure de mise à niveau, vous effectuez toutes les étapes sur l'ancien et le nouveau nœuds afin de garantir une configuration correcte du cluster, de la gestion et des LIF de données</block>
+  <block id="f59bb1c88c6077619a5706968dbeebbc" category="paragraph">Aucun port correspondant. Après la mise à niveau, vous devez recréer les ports du cluster.</block>
+  <block id="e2c7c578642aed12a7ba3fc1b702afeb" category="paragraph">e0c et e0d sont des ports correspondants. Il n'est pas nécessaire de modifier la configuration, mais après la mise à niveau, vous pouvez répartir les LIF de cluster sur les ports disponibles du cluster.</block>
+  <block id="3cfe914b28d9b06fab728475928cc9b8" category="paragraph">L'utilisation des ports du contrôleur dépend du module de plate-forme et des commutateurs que vous utiliserez dans la configuration IP de MetroCluster. Vous pouvez collecter l'utilisation des ports des nouvelles plates-formes à partir de <block ref="9c839fcdfb8699a63c787254d7b1ae03" category="inline-link-macro-rx"></block>.</block>
+  <block id="6d168bef84b6a3328128dae36215329a" category="paragraph">Vous n'avez pas besoin d'extraire le<block ref="51654457d77e7151c919912e5b745ae2" prefix=" " category="inline-code"></block> fichier.</block>
+  <block id="694e80fb957523fc4d9e2cd89de01703" category="paragraph">Exécutez cette commande pour chaque nœud de la configuration MetroCluster.</block>
+  <block id="ac67d8294302a95bff318b5ac264e96f" category="paragraph">Exécutez cette commande sur chaque nœud de la configuration MetroCluster.</block>
+  <block id="886efe444af6918654bc4ab978418f6f" category="paragraph">Exécutez cette commande sur chaque cluster.</block>
+  <block id="8cc920f2fe957b537e32556ab19fc2d6" category="paragraph">Exécutez cette commande sur chaque cluster. Vous pouvez utiliser les<block ref="98d08184a8d3d7b486b1a774622f7675" prefix=" " category="inline-code"></block> commandes pour configurer l'heure et le fuseau horaire.</block>
+  <block id="d717838e07a3238809a337e757ad545e" category="list-text">Collectez les informations relatives à l'interconnexion, au port et à la LIF pour chaque nœud.</block>
+  <block id="2bd6f53f70717822994364eab0bf6cbb" category="paragraph">Ces valeurs doivent être configurées avec précision sur les nouveaux modules de contrôleur site_B pour garantir la réussite de la mise à niveau. Copiez les valeurs dans un fichier afin de pouvoir les copier dans les commandes plus tard dans le processus de mise à niveau.</block>
+  <block id="ed2b77aa370645814dafbf5dd8aef15f" category="paragraph">NetApp recommande d'enregistrer les UUID dans un tableau similaire à celui ci-dessous :</block>
+  <block id="6bfdd861df764d52de7823dd5958fab3" category="paragraph">Collectez le résultat des commandes suivantes :</block>
+  <block id="f3f4fd8fb847fe1a5ad11aacd71b5fad" category="list-text">Si le volume racine est chiffré, collectez et enregistrez la phrase de passe utilisée pour le gestionnaire de clés :</block>
+  <block id="3c3a3838848890665c5d4969e896b405" category="inline-link">Sauvegardez manuellement les informations intégrées de gestion des clés</block>
+  <block id="a99b2b056456bd0991317c897eb6b8b6" category="paragraph">Pour plus d'informations, voir<block ref="3c8480dc65ec7d91021d4d612b6bf420" category="inline-link-rx"></block>.</block>
+  <block id="a1f17dd5bd9c97697b58a9f90f8bfe7d" category="paragraph">Vous avez besoin de la phrase de passe plus tard dans la procédure de mise à niveau.</block>
+  <block id="e6790e163decf815ae94c9137d60eb13" category="paragraph"><block ref="766cba2090a16f1ed1bcf4bf4dada91b" category="inline-link-macro-rx"></block>.</block>
+  <block id="b52a41eb513dc979f4cf2a4a13686ecd" category="summary">Mettre à jour les CFR de commutateur pour les nouvelles plates-formes et définir les valeurs de démarrage IP MetroCluster sur les modules de contrôleur.</block>
+  <block id="bad868fbc306571d732100a7612b6381" category="list-text">Vous avez besoin des UID et des ID système identifiés précédemment dans la procédure de mise à niveau de <block ref="aacd1fc1f619acd6603cbd45ee223ad9" category="inline-link-macro-rx"></block>.</block>
+  <block id="2f7475e5d10323798c907dce394ba254" category="paragraph"><block ref="cd86f597b1843cd46dca1a45b8d833bb" category="inline-link-macro-rx"></block>.</block>
+  <block id="48fc0b783fa78b7d13c355f64927a3be" category="summary">Redémarrez les contrôleurs à partir du menu de démarrage pour mettre à jour l'image flash du contrôleur. Des étapes supplémentaires sont nécessaires si le chiffrement est configuré.</block>
+  <block id="c0b1dbf234cdf7b3f03c6d52170d19ac" category="paragraph">Démarrez les nouveaux contrôleurs et vérifiez que les LIF sont hébergées sur les nœuds et les ports appropriés avant de reprendre l'opération à l'aide de la<block ref="73226fabfade9b9a2472baed8321894c" prefix=" " category="inline-code"></block> commande.</block>
+  <block id="1c03e17896e23037622d3bf9a7ef5905" category="paragraph">Démarrez les nouveaux contrôleurs, vérifiez que les variables bootarg sont correctes et, si nécessaire, effectuez les étapes de récupération de cryptage.</block>
+  <block id="9ba1750339ef5d849eebfaf000508762" category="admonition">L'option « 6 » redémarre le nœud deux fois avant la fin du processus.</block>
+  <block id="433a25ed1de0abd9caa3a0a9c6b97b4f" category="admonition">Supprimez uniquement le nouveau domaine de diffusion. Ne supprimez aucun des domaines de diffusion existants avant de démarrer la mise à niveau.</block>
+  <block id="72a7cb3bbba56280bfb0dbf79f420147" category="inline-link-macro">Créer une relation entre clusters</block>
+  <block id="8f65f393817703ba6500e9440cba0af1" category="paragraph"><block ref="8f65f393817703ba6500e9440cba0af1" category="inline-link-macro-rx"></block></block>
+  <block id="a51cd3bd8dc9efabd4808d4faa54cb85" category="inline-link">Combinaison de ports physiques pour créer des groupes d'interfaces</block>
+  <block id="68e69b7b0e7a0b539632ccdbabb31e7d" category="paragraph"><block ref="68e69b7b0e7a0b539632ccdbabb31e7d" category="inline-link-rx"></block></block>
+  <block id="d996dbe2f4ba96e844468e9c625b01f0" category="inline-link-macro">Terminez la mise à niveau du contrôleur</block>
+  <block id="6d46f278d01e8305ac7185886c002984" category="paragraph"><block ref="ae947831c3d070a4eb9e8092c2682d0e" category="inline-link-macro-rx"></block>.</block>
+  <block id="0060ba87094261e8c011d7b8419677ed" category="summary">Terminez le processus de mise à niveau automatique du contrôleur en vérifiant l'accessibilité du réseau et en restaurant toute configuration de surveillance.</block>
+  <block id="4653682314828cb5425dae789da06002" category="section-title">Vérifiez l'accessibilité du réseau</block>
+  <block id="2f7033d68b421f3c87221d29b6075017" category="paragraph">Si les vérifications post-mise à niveau n'ont pas signalé d'erreurs, la mise à niveau est terminée.</block>
+  <block id="37c813460b2b0635d69e528d1110fffc" category="list-text">Répétez les étapes pour mettre à niveau les nœuds sur cluster_A, en commençant par <block ref="2e9e222a79bc86deb25c4111d82b6614" category="inline-link-macro-rx"></block>.</block>
+  <block id="e21d56847dfd42d679e8b2e0c0314d6e" category="paragraph">Au fur et à mesure que vous effectuez les tâches, toutes les références aux clusters et aux nœuds sont inversées.</block>
+  <block id="6055a0810b2c2df62e85dfcb8b447c2e" category="list-text">Suivez les étapes de la section<block ref="9dc3875c163144dba4e47010e217fce8" category="inline-link-rx"></block>.</block>
+  <block id="83162cb24e71760f89d5962835905ed0" category="doc">Activez la journalisation de la console avant la mise à niveau de l'adresse IP MetroCluster</block>
+  <block id="bab0338cc638de785269282fe0b4df1e" category="paragraph">Consultez les informations de la section <block ref="e0071a426543185e159ab522bd36850e" category="inline-link-macro-rx"></block> pour vérifier si vous devez définir un démarrage requis sur le système existant.</block>
+  <block id="cb990f25bc5eb8215bf8eb74c16807f3" category="summary">Pour préparer la mise à niveau du contrôleur, vous effectuez des contrôles préalables du système et collectez les informations de configuration.</block>
+  <block id="c458b5225672f84c61d5b9931863ae60" category="paragraph">Pour préparer la mise à niveau du contrôleur, vous devrez peut-être mettre à niveau les fichiers de configuration de référence du commutateur (CFR) en fonction de l'ancien et du nouveau modèle de plate-forme. Vous effectuez ensuite des contrôles préalables du système, collectez les informations de configuration et supprimez le logiciel de surveillance existant.</block>
+  <block id="0c21b75966b293902f32e19c44cfee40" category="list-text">La configuration du RCF des switchs n'est pas disponible dans la version minimale.</block>
+  <block id="cbde96365d4f8077bc47cc3245bf5730" category="section-title">Effectuer des contrôles préalables du système</block>
+  <block id="b5fe45c4891c6d19896e92fee5883a19" category="inline-link-macro">Reconfigurez le service ONTAP Mediator</block>
+  <block id="be523ee24c95ff3261d845514671c9b1" category="paragraph">Avant le démarrage des contrôles préalables, si le Mediator ONTAP est installé, il est automatiquement détecté et supprimé. Pour confirmer la suppression, vous êtes invité à entrer un nom d'utilisateur et un mot de passe. Lorsque vous terminez la mise à niveau, ou si les contrôles préalables échouent ou si vous choisissez de ne pas poursuivre la mise à niveau, vous devez manuellement <block ref="059689c27028be05419054623185eb12" category="inline-link-macro-rx"></block>.</block>
+  <block id="2592dc8685229c73a77e91741c837a63" category="paragraph">Pour plus d'informations, voir<block ref="8d2708bcc3f1eaf7281ec3a4227ab734" category="inline-link-rx"></block>.</block>
+  <block id="0db7751284ee845ba2b1c67a8d8704db" category="section-title">Supprimez la configuration existante de Tiebreaker ou d'un autre logiciel de surveillance</block>
+  <block id="0cd4dc9ba4eb47708afdb2049d98c13a" category="paragraph">Avant de commencer la mise à niveau, supprimez la configuration existante du Tiebreaker ou d'un autre logiciel de surveillance.</block>
+  <block id="63176d27bda1b994565a28492ed02e97" category="paragraph"><block ref="209008f8360496ff2e8d9d6e8b8625cb" category="inline-link-macro-rx"></block>.</block>
+  <block id="b6d5a1b988920561660edfbb59c8b381" category="summary">Une fois que vous avez recueilli les informations et repris l'opération, l'opération d'automatisation effectue le basculement.</block>
+  <block id="a4a7a1e3ac3667680b4a5e6ab2b9dc12" category="doc">Préparer la configuration réseau des anciens contrôleurs IP MetroCluster</block>
+  <block id="b28e3b943a6b1bc331fc8f6307558058" category="paragraph">L'opération d'automatisation lance les opérations de basculement. Une fois ces opérations terminées, l'opération s'interrompt à *interrompu pour l'intervention de l'utilisateur*. Vous pouvez ainsi installer les contrôleurs, démarrer les contrôleurs partenaires et réaffecter les disques d'agrégat racine au nouveau module de contrôleur à partir de la sauvegarde flash à l'aide de la<block ref="5fb641c5977b93de82b81e36db0454cf" prefix=" " category="inline-code"></block> précédente.</block>
+  <block id="3bd449656c8f9918efa0c6a3ffb67f35" category="list-text">Vous utilisez les informations collectées dans <block ref="aacd1fc1f619acd6603cbd45ee223ad9" category="inline-link-macro-rx"></block>.</block>
+  <block id="cb1d34c3507ba01d2cb2d80efb952c46" category="list-text">Reconvertir toutes les LIF qui ne se trouvent pas sur leur port de base :</block>
+  <block id="aa982af7072275376390d3bbb6688cf7" category="paragraph">Reportez-vous <block ref="cbfe825e8e02458e2eef3cd048612d7d" category="inline-link-macro-rx"></block>au pour connaître l'utilisation des ports de chaque modèle de plate-forme.</block>
+  <block id="ca2d894726ab5d6f98b54a8f5a9a68f1" category="list-text">Modifiez les ports de groupe d'interface pour utiliser d'autres ports physiques comme membres, selon les besoins :</block>
+  <block id="c2fec5501e10273100f9b9b6fbc3167d" category="list-text">Vérifiez que les nœuds se trouvent à<block ref="82b8350d28f0a14e36de1958b3be9205" prefix=" " category="inline-code"></block> l'invite et collectez et conservez les variables d'environnement actuelles.</block>
+  <block id="badf169d1e3a98e87ec699a27e36973e" category="inline-link-macro">Configurez et netboot des nouveaux contrôleurs</block>
+  <block id="ef981c1c63c22e1055257ab17c228d0d" category="paragraph"><block ref="31bf2e2f0c56e7a2af110bee4998f2d7" category="inline-link-macro-rx"></block>.</block>
+  <block id="2d6c2faa1510a1abbf511186d036a809" category="paragraph">Les anciens ID système ont été identifiés dans <block ref="aacd1fc1f619acd6603cbd45ee223ad9" category="inline-link-macro-rx"></block>.</block>
+  <block id="b81de37a349498d964469c412909f544" category="list-text">Reliez toutes les autres connexions aux nouveaux modules de contrôleur (FC-VI, stockage, interconnexion de cluster, etc.).</block>
+  <block id="c030f6772f3af36940b46d4c256dc6c7" category="paragraph">Le résultat de la commande affiche l'ID système du nouveau module de contrôleur (1574774970). Cependant, les disques de l'agrégat racine appartiennent toujours à l'ancien ID système (4068741254). Cet exemple n'affiche pas les disques appartenant à d'autres nœuds dans la configuration MetroCluster.</block>
+  <block id="cd3645f6babaf4e4c1171003b3d056f5" category="admonition">Si votre système MetroCluster IP est configuré avec le partitionnement de disque avancé, vous devez inclure l'ID système du partenaire de reprise sur incident en exécutant<block ref="1d9572d24113365244a97e4cb81d5a77" prefix=" " category="inline-code"></block> la commande.</block>
+  <block id="ef5358bea095b88966697d1cef9aca78" category="paragraph"><block ref="92e7e14dad7d6c754e49f694366186c6" category="inline-link-macro-rx"></block>.</block>
+  <block id="a0d27186cb018d5b511664786fa7702e" category="admonition">Une mise à niveau avec transfert d'agrégats (ARL) avec des commandes de remplacement des contrôleurs de systèmes n'est pas prise en charge dans une configuration IP MetroCluster à quatre nœuds.</block>
+  <block id="7301cea1f280c9b34a93ad98d0996c01" category="paragraph"><block ref="550153a4a6a617ac81f98d9353eb3610" category="inline-link-macro-rx"></block>.</block>
+  <block id="7f94b8f9b32c8613afa8a7a6723c5502" category="inline-link-macro">Mettez à jour les fichiers RCF des switchs et définissez les valeurs de démarrage IP MetroCluster</block>
+  <block id="95a0dc0cefe38a8a65f4b4857599a767" category="paragraph"><block ref="7540bef2d37c83ab15db307604964774" category="inline-link-macro-rx"></block>.</block>
+  <block id="471b1d5bf7b9020a821b9612fad3ac61" category="summary">Les mises à niveau de systèmes introduites dans ONTAP 9.15.1 ou version ultérieure nécessitent que vous mettiez un bootarg avant de pouvoir procéder à la mise à niveau.</block>
+  <block id="867034ce824c06d2ae20a2782eada4c4" category="list-text">AFF A70, AFF A90, AFF A1K</block>
+  <block id="e13c96308702af19fbafc3aa4886ae41" category="admonition">Si vous effectuez une mise à niveau vers l'un des systèmes répertoriés, vous *devez* définir un démarrage requis sur le système existant avant d'effectuer la mise à niveau. Pour toutes les autres mises à niveau, vous pouvez ignorer cette tâche et accéder directement à <block ref="7316c75eb3c5ee7c2327a2b6a0fcc53b" category="inline-link-macro-rx"></block>.</block>
+  <block id="f05c544454e5ae504161071bcf104914" category="list-text">Définissez le démarrage requis pour votre combinaison de mise à niveau. Vous avez déjà déterminé le bootarg que vous devez définir en utilisant la table dans <block ref="4e6a8a5f8b225717259653d744f685bb" category="inline-xref-macro-rx"></block>.</block>
+  <block id="01e12de62fa77fda2815719aed8ff892" category="paragraph-title">Et la suite</block>
+  <block id="9a24b7f06d5ef108e1e9e3a9b9635840" category="paragraph"><block ref="7316c75eb3c5ee7c2327a2b6a0fcc53b" category="inline-link-macro-rx"></block>.</block>
+  <block id="93f8500ac24198be47183091f57b31d0" category="summary">Configurez les nouveaux contrôleurs avant de démarrer en réseau les contrôleurs pour vérifier que les nouveaux nœuds exécutent la même version de ONTAP que les nœuds d'origine.</block>
+  <block id="d73d8b1608960d6e496ea29a17610f41" category="doc">Configurez et netboot des nouveaux contrôleurs IP MetroCluster</block>
+  <block id="bfc582b530d6f8e1a6179a19e7c24e66" category="list-text">Si votre mise à niveau nécessite le remplacement des modules de contrôleur, par exemple la mise à niveau d'un AFF A800 vers un système AFF A90 ou d'un AFF C800 vers un système AFF C80, vous devez retirer le module de contrôleur du châssis lorsque vous remplacez le module de contrôleur. Pour toutes les autres mises à niveau, passez à <block ref="4ee00eba6649125448d979c5e5c0a049" category="inline-xref-macro-rx"></block>.</block>
+  <block id="d96b5430d0f962c1eb59e8c50c79e603" category="list-text">Reliez l'alimentation, la console série et les connexions de gestion des contrôleurs, comme décrit dans la section <block ref="7176836221733e9bf6fcbaccc1aa9ffd" category="inline-link-macro-rx"></block></block>
+  <block id="d327ebd5e8d98adf66c42d588ef640d1" category="paragraph">Votre liste de répertoires doit contenir un dossier netboot avec un fichier noyau :<block ref="24f58b52875ae0cf9e2f71f5f4715aba" prefix=" " category="inline-code"></block></block>
+  <block id="15d63e3040229aa69f2bacf54450c8aa" category="paragraph">Il n'est pas nécessaire d'extraire le<block ref="24f58b52875ae0cf9e2f71f5f4715aba" prefix=" " category="inline-code"></block> fichier.</block>
+  <block id="553c80eee3874db37c74026e9cd54f1c" category="paragraph"><block ref="669980a1306854f119900d6a8876f53d" category="inline-link-macro-rx"></block>.</block>
+  <block id="1134c88b3e27b3208779089225a7548e" category="summary">Avant de commencer la mise à niveau du contrôleur IP MetroCluster, vous devez vérifier que votre combinaison de mise à niveau est prise en charge.</block>
+  <block id="7624bf7be4ed54fdaaf6abd264ec56f1" category="inline-image-macro">Le présente les combinaisons de plateformes prises en charge pour les mises à niveau IP MetroCluster à l'aide des commandes de remplacement du contrôleur système.</block>
+  <block id="eea98b077c7972fc76313c08c73fcd8d" category="paragraph"><block ref="eea98b077c7972fc76313c08c73fcd8d" category="inline-image-macro-rx" type="image"></block></block>
+  <block id="3bd44928438eecd88373e90938479338" category="list-text">Remarque 4 : requiert des modules IOM pour convertir les anciens contrôleurs en tiroir SAS externe. Pour connaître les modules IOM pris en charge, reportez-vous au<block ref="cbfe825e8e02458e2eef3cd048612d7d" category="inline-link-macro-rx"></block>.</block>
+  <block id="fd82efb2b9fc7033a2ee19efb493d464" category="inline-link-macro">Choisissez une méthode de mise à niveau ou d'actualisation</block>
+  <block id="cbbc95c0b1d7c5d8feea0d31eafa9a28" category="paragraph">Reportez-vous <block ref="1547bd533de8078ec6c6f72dc3468122" category="inline-link-macro-rx"></block>à pour connaître les procédures supplémentaires.</block>
+  <block id="a397b8fc1d64d0e666558911201a9d53" category="inline-link-macro">conditions requises pour utiliser cette procédure de mise à niveau</block>
+  <block id="97fd50265456f865138d015468645cb7" category="paragraph">Examinez le <block ref="b26a80311d05e322b17b954a108f547a" category="inline-link-macro-rx"></block>.</block>
+  <block id="e716ba8afd7707b81c0012ca2d240899" category="doc">Workflow de mise à niveau des contrôleurs IP MetroCluster à l'aide des commandes « System Controller replace » (ONTAP 9.13.1 ou version ultérieure)</block>
+  <block id="c5b6e762a71a6bb5ff91cfa8e00a4f28" category="paragraph">Vous pouvez utiliser cette opération de basculement automatisé MetroCluster guidée pour effectuer une mise à niveau sans interruption du contrôleur sur une configuration IP MetroCluster à quatre nœuds exécutant ONTAP 9.13.1 version ultérieure. Dans le cadre de cette procédure, d'autres composants (tels que des tiroirs de stockage ou des commutateurs) ne peuvent pas être mis à niveau.</block>
+  <block id="6bae23f4c16096f75936d03d366e6ca8" category="paragraph">Ce workflow vous permet de mettre à niveau les contrôleurs IP MetroCluster exécutant ONTAP 9.13.1 ou version ultérieure à l'aide de la fonction switchover and switchback avec des<block ref="616743bfa4fd61d558c556fe614cb2e9" prefix=" " category="inline-code"></block> commandes.</block>
+  <block id="95f189c9c3198eedfd091c1c5a66a3ef" category="paragraph-title"><block ref="58f667aaf05f87159670e12bd9bc076b" category="inline-image-macro-rx" type="image"></block><block ref="9f3c427d5d3af6ef2473cbb7eb6963ff" category="inline-link-macro-rx"></block></block>
+  <block id="fd59b1a35af432acc6cfe409da3cdc0b" category="paragraph">Vérifiez les combinaisons de mises à niveau et la configuration requise prises en charge, puis effectuez les tâches requises pour préparer votre système à la mise à niveau du contrôleur. Le processus de mise à niveau automatisée du contrôleur commence par une série de contrôles préalables avant de collecter les informations de configuration et de supprimer tout logiciel de surveillance existant.</block>
+  <block id="cdd6d962f7c1157b5ba9a2c43f2e3bc8" category="paragraph-title"><block ref="54f425ce8d89f4ed6b8a546561af5d60" category="inline-image-macro-rx" type="image"></block><block ref="44742bdd1705b3cb66d4b2036598983b" category="inline-link-macro-rx"></block></block>
+  <block id="534ad9cbf8e7037fccd0ac62e82e1266" category="paragraph">L'opération d'automatisation lance les opérations de basculement. Une fois ces opérations terminées, l'opération s'interrompt pour vous permettre de préparer la configuration réseau des anciens contrôleurs, de monter en rack et d'installer les nouveaux contrôleurs, de réaffecter les disques de l'agrégat racine et de démarrer les nouveaux contrôleurs.</block>
+  <block id="1a36f27e528182104ced1c09ac758a02" category="paragraph-title"><block ref="05b2444faffd66d76e88602ea7dd353f" category="inline-image-macro-rx" type="image"></block><block ref="e0a16c6d634174c8e45507db2ae1af5a" category="inline-link-macro-rx"></block></block>
+  <block id="6f76e096cb208964d821ba05d162651f" category="paragraph">Terminez la mise à niveau automatique du contrôleur en vérifiant l'accessibilité du réseau, en répétant les tâches de mise à niveau sur le second site et en restaurant la configuration de la surveillance.</block>
+  <block id="5b416e1633d16aad217a2e0fc2d097f8" category="sidebar">Mise à niveau du workflow</block>
+  <block id="77ad3860f6eb24d1f2e8b5e88ed38c11" category="sidebar">Conditions requises pour utiliser cette procédure de mise à niveau</block>
+  <block id="2121d804f7506346a64be149284a7f4e" category="sidebar">Définir le démarrage requis (pour les mises à niveau vers les systèmes introduits dans ONTAP 9.15.1 ou version ultérieure)</block>
+  <block id="17c2940e7b2cfcc2faa4d1ef00e56d9e" category="sidebar">Revenir à la configuration</block>
+  <block id="11174a5afd588b4b0362df983b5f76c6" category="sidebar">Mise à niveau des contrôleurs (AFF A700 vers AFF A900, FAS9000 vers FAS9500) dans MetroCluster IP avec basculement et rétablissement (ONTAP 9.10.1 ou version ultérieure)</block>
+  <block id="9154ca816ab69e291b499f5a2579f66c" category="sidebar">Mise à niveau des contrôleurs (AFF A700 vers AFF A900, FAS9000 vers FAS9500) en configuration MetroCluster FC avec basculement et rétablissement (ONTAP 9.10.1 ou version ultérieure)</block>
 </blocks>

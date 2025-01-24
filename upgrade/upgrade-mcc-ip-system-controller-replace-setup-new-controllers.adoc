@@ -1,0 +1,206 @@
+---
+permalink: upgrade/upgrade-mcc-ip-system-controller-replace-setup-new-controllers.html 
+sidebar: sidebar 
+keywords: metrocluster, upgrade, controllers, switchover, switchback, ip, configuration, net, boot, root, aggregate, system, commands, mcc 
+summary: 'Configurez les nouveaux contrôleurs avant de démarrer en réseau les contrôleurs pour vérifier que les nouveaux nœuds exécutent la même version de ONTAP que les nœuds d"origine.' 
+---
+= Configurez et netboot des nouveaux contrôleurs IP MetroCluster
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Configurez les nouveaux contrôleurs avant de démarrer en réseau les contrôleurs pour vérifier que les nouveaux nœuds exécutent la même version de ONTAP que les nœuds d'origine.
+
+
+
+== Configurer les nouveaux contrôleurs
+
+Vous devez installer et câbler les nouveaux contrôleurs.
+
+.Étapes
+. Planifiez le positionnement des nouveaux modules de contrôleur et tiroirs de stockage en fonction des besoins.
++
+L'espace rack dépend du modèle de plateforme des modules de contrôleur, des types de switchs et du nombre de tiroirs de stockage de votre configuration.
+
+. Mettez-vous à la terre.
+. Si votre mise à niveau nécessite le remplacement des modules de contrôleur, par exemple la mise à niveau d'un AFF A800 vers un système AFF A90 ou d'un AFF C800 vers un système AFF C80, vous devez retirer le module de contrôleur du châssis lorsque vous remplacez le module de contrôleur. Pour toutes les autres mises à niveau, passez à <<ip_upgrades_replace_4,Étape 4>>.
++
+À l'avant du châssis, enfoncez fermement chaque disque jusqu'à ce que vous sentiez un arrêt positif. Cela permet de vérifier que les disques sont fermement installés contre le fond de panier central du châssis.
+
++
+image::../media/drw-a800-drive-seated.png[La illustre le retrait du module de contrôleur du châssis]
+
+. [[ip_upgrades_replace_4]] installez les modules de contrôleur.
++
+La procédure d'installation suivante varie selon que la mise à niveau nécessite le remplacement des modules de contrôleur ou si les modules IOM sont nécessaires pour convertir les anciens contrôleurs en tiroir externe.
+
++
+[cols="2*"]
+|===
+| Si vous effectuez une mise à niveau... | Suivez les étapes pour ... 
+
+
+ a| 
+** D'un système AFF A150 à un système AFF A20
+** D'un système AFF A220 à un système AFF A20
+
+| Conversion contrôleur en tiroir externe 
+
+
+ a| 
+** D'un AFF A800 vers un système AFF A90
+** D'un système AFF C800 vers un système AFF C80
+
+| Remplacement du module de contrôleur 
+
+
+| Toute autre combinaison de mise à niveau du contrôleur | Toutes les autres mises à niveau 
+|===
++
+[role="tabbed-block"]
+====
+.Conversion contrôleur en tiroir externe
+--
+Si vos contrôleurs IP MetroCluster d'origine sont des modèles AFF A150 ou AFF A220, vous pouvez convertir la paire haute disponibilité AFF A150 ou AFF A220 en tiroir de disque DS224C, puis la connecter aux nouveaux nœuds.
+
+Par exemple, lors de la mise à niveau d'un système AFF A150 ou AFF A220 vers un système AFF A20, vous pouvez convertir la paire haute disponibilité AFF A150 ou AFF A220 en tiroir DS224C en remplaçant les modules de contrôleur AFF A150 ou AFF A220 par des modules IOM12.
+
+.Étapes
+.. Remplacez les modules de contrôleur dans le nœud que vous convertissez avec des modules de tiroir IOM12.
++
+https://hwu.netapp.com["Hardware Universe"^]
+
+.. Définissez l'ID de tiroir disque.
++
+Chaque tiroir disque, châssis compris, requiert un ID unique.
+
+.. Réinitialise les autres ID de tiroir disque selon vos besoins.
+.. Mettez les tiroirs hors tension.
+.. Reliez le tiroir disque converti à un port SAS du nouveau système et, si vous utilisez un câblage ACP hors bande, au port ACP du nouveau nœud.
+.. Mettez le système sous tension afin que le tiroir disque converti et tous les autres tiroirs disques reliés aux nouveaux nœuds.
+.. Mettez les nouveaux nœuds sous tension, puis interrompez le processus de démarrage de chaque nœud en appuyant sur Ctrl-C pour accéder à l'invite de l'environnement de démarrage.
+
+
+--
+.Remplacement du module de contrôleur
+--
+L'installation séparée des nouveaux contrôleurs n'est pas applicable pour la mise à niveau des systèmes intégrés avec des disques et des contrôleurs dans le même châssis, par exemple d'un système AFF A800 vers un système AFF A90. Vous devez remplacer les nouveaux modules de contrôleur et les nouvelles cartes d'E/S après avoir mis les anciens contrôleurs hors tension, comme indiqué dans l'image ci-dessous.
+
+L'exemple d'image ci-dessous est représenté uniquement. Les modules de contrôleur et les cartes d'E/S peuvent varier d'un système à l'autre.
+
+image::../media/a90-a70-pcm-swap.png[Affiche le remplacement du module de contrôleur]
+
+--
+.Toutes les autres mises à niveau
+--
+Installez les modules de contrôleur sur le rack ou l'armoire.
+
+--
+====
+. Reliez l'alimentation, la console série et les connexions de gestion des contrôleurs, comme décrit dans la section link:../install-ip/using_rcf_generator.html["Branchez les câbles des commutateurs IP MetroCluster"]
++
+Ne connectez pas d'autres câbles ayant été débranchés des anciens contrôleurs à l'heure actuelle.
+
++
+https://docs.netapp.com/us-en/ontap-systems/index.html["Documentation des systèmes matériels ONTAP"^]
+
+. Mettez les nouveaux nœuds sous tension et appuyez sur Ctrl-C lorsque vous êtes invité à afficher l' `LOADER` invite.
+
+
+
+
+== NetBoot les nouveaux contrôleurs
+
+Une fois les nouveaux nœuds installés, vous devez démarrage sur le réseau pour vous assurer que la version des nouveaux nœuds exécute la même version de ONTAP que les nœuds d'origine. Le terme netboot signifie que vous êtes en cours de démarrage à partir d'une image ONTAP stockée sur un serveur distant. Lorsque vous vous préparez à netboot, vous devez placer une copie de l'image de démarrage ONTAP 9 sur un serveur web auquel le système peut accéder.
+
+Cette tâche est effectuée sur chacun des nouveaux modules de contrôleur.
+
+.Étapes
+. Accédez au link:https://mysupport.netapp.com/site/["Site de support NetApp"^] pour télécharger les fichiers utilisés pour effectuer le démarrage sur le réseau du système.
+. Téléchargez le logiciel ONTAP approprié depuis la section de téléchargement des logiciels du site de support NetApp et stockez le `ontap-version_image.tgz` fichier dans un répertoire accessible sur le web.
+. Accédez au répertoire accessible sur le Web et vérifiez que les fichiers dont vous avez besoin sont disponibles.
++
+Votre liste de répertoires doit contenir un dossier netboot avec un fichier noyau : `ontap-version_image.tgz`
+
++
+Il n'est pas nécessaire d'extraire le `ontap-version_image.tgz` fichier.
+
+. À `LOADER` l'invite, configurer la connexion netboot pour une LIF de gestion :
++
+** Si l'adressage IP est DHCP, configurez la connexion automatique :
++
+`ifconfig e0M -auto`
+
+** Si l'adressage IP est statique, configurez la connexion manuelle :
++
+`ifconfig e0M -addr=ip_addr -mask=netmask` `-gw=gateway`
+
+
+
+. Effectuer la démarrage sur le réseau.
++
+`netboot \http://web_server_ip/path_to_web-accessible_directory/ontap-version_image.tgz`
+
+. Dans le menu de démarrage, sélectionnez l'option *(7) installer le nouveau logiciel en premier* pour télécharger et installer la nouvelle image logicielle sur le périphérique d'amorçage.
++
+ Disregard the following message: "This procedure is not supported for Non-Disruptive Upgrade on an HA pair". It applies to nondisruptive upgrades of software, not to upgrades of controllers.
+. Si vous êtes invité à poursuivre la procédure, entrez `y`, Et lorsque vous êtes invité à saisir l'URL du fichier image : `\http://web_server_ip/path_to_web-accessible_directory/ontap-version_image.tgz`
++
+....
+Enter username/password if applicable, or press Enter to continue.
+....
+. Assurez-vous d'entrer `n` pour ignorer la restauration de la sauvegarde lorsque vous voyez une invite similaire à la suivante :
++
+....
+Do you want to restore the backup configuration now? {y|n}
+....
+. Redémarrez en entrant `y` lorsque vous voyez une invite similaire à la suivante :
++
+....
+The node must be rebooted to start using the newly installed software. Do you want to reboot now? {y|n}
+....
+
+
+
+
+== Effacez la configuration d'un module de contrôleur
+
+Avant d'utiliser un nouveau module de contrôleur dans la configuration MetroCluster, il faut effacer la configuration existante.
+
+.Étapes
+. Si nécessaire, arrêtez le nœud pour afficher l' `LOADER`invite :
++
+`halt`
+
+. À l' `LOADER`invite, définissez les variables d'environnement sur les valeurs par défaut :
++
+`set-defaults`
+
+. Enregistrez l'environnement :
++
+`saveenv`
+
+. À l' `LOADER`invite, lancez le menu de démarrage :
++
+`boot_ontap menu`
+
+. À l'invite du menu de démarrage, effacez la configuration :
++
+`wipeconfig`
+
++
+Répondez `yes` à l'invite de confirmation.
+
++
+Le nœud redémarre et le menu de démarrage s'affiche de nouveau.
+
+. Dans le menu de démarrage, sélectionnez l'option *5* pour démarrer le système en mode Maintenance.
++
+Répondez `yes` à l'invite de confirmation.
+
+
+
+.Et la suite ?
+link:upgrade-mcc-ip-system-controller-replace-restore-hba-set-ha.html["Restaurez la configuration du HBA et définissez l'état de haute disponibilité"].

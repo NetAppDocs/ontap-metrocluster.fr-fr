@@ -1,0 +1,177 @@
+---
+permalink: upgrade/upgrade-mcc-ip-system-controller-replace-prepare-network-configuration.html 
+sidebar: sidebar 
+keywords: metrocluster, upgrade, controllers, switchover, switchback, ip, configuration, net, boot, root, aggregate, system, commands, mcc 
+summary: 'Une fois que vous avez recueilli les informations et repris l"opération, l"opération d"automatisation effectue le basculement.' 
+---
+= Préparer la configuration réseau des anciens contrôleurs IP MetroCluster
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Une fois que vous avez recueilli les informations et repris l'opération, l'opération d'automatisation effectue le basculement.
+
+.Avant de commencer
+Avant de lancer le basculement, l'automatisation s'interrompt pour que vous puissiez vérifier manuellement que toutes les LIF sont « en service » sur le site B. Si nécessaire, apportez toutes les LIF « propres » à « UP » et reprenez l'opération d'automatisation à l'aide du `system controller replace resume` commande.
+
+L'opération d'automatisation lance les opérations de basculement. Une fois ces opérations terminées, l'opération s'interrompt à *interrompu pour l'intervention de l'utilisateur*. Vous pouvez ainsi installer les contrôleurs, démarrer les contrôleurs partenaires et réaffecter les disques d'agrégat racine au nouveau module de contrôleur à partir de la sauvegarde flash à l'aide de la `sysids` précédente.
+
+.Description de la tâche
+* Cette tâche doit être effectuée sur chacun des anciens nœuds.
+* Vous utilisez les informations collectées dans link:upgrade-mcc-ip-system-controller-replace-prechecks.html#gather-information-before-the-upgrade["Recueillez les informations avant la mise à niveau"].
+
+
+.Étapes
+. Démarrez les anciens nœuds, puis connectez-vous aux nœuds :
++
+`boot_ontap`
+
+. Modifier les LIFs intercluster sur les anciens contrôleurs de manière à utiliser un port home différent de celui des ports utilisés pour l'interconnexion haute disponibilité ou l'interconnexion MetroCluster IP DR sur les nouveaux contrôleurs.
++
+
+NOTE: Cette étape est requise pour une mise à niveau réussie.
+
++
+Les LIF intercluster des anciens contrôleurs doivent utiliser un port home différent de celui des ports utilisés pour l'interconnexion haute disponibilité ou l'interconnexion MetroCluster IP DR sur les nouveaux contrôleurs. Par exemple, lorsque vous effectuez une mise à niveau vers des contrôleurs AFF A90, les ports d'interconnexion haute disponibilité sont e1a et e7a et les ports d'interconnexion pour la reprise après incident IP MetroCluster sont e2b et e3b. Vous devez déplacer les LIFs intercluster sur les anciens contrôleurs s'ils sont hébergés sur les ports e1a, e7a, e2b ou e3b.
+
++
+Pour la distribution et l'allocation des ports sur les nouveaux nœuds, reportez-vous à la https://hwu.netapp.com["Hardware Universe"].
+
++
+.. Sur les anciens contrôleurs, afficher les LIFs intercluster :
++
+`network interface show  -role intercluster`
+
++
+Effectuez l'une des actions suivantes si les LIF intercluster des anciens contrôleurs utilisent les mêmes ports que les ports utilisés pour l'interconnexion haute disponibilité ou l'interconnexion MetroCluster IP DR sur les nouveaux contrôleurs.
+
++
+[cols="2*"]
+|===
+| Si les LIFs intercluster... | Aller à... 
+
+
+| Utilisez le même port de base | <<controller_replace_upgrade_prepare_network_ports_2b,Sous-étape b>> 
+
+
+| Utilisez un autre port de base | <<controller_replace_upgrade_prepare_network_ports_3,Étape 3>> 
+|===
+.. [[Controller_replace_upgrade_prepare_network_ports_2b]]modifiez les LIFs intercluster pour utiliser un autre port home :
++
+`network interface modify -vserver <vserver> -lif <intercluster_lif> -home-port <port-not-used-for-ha-interconnect-or-mcc-ip-dr-interconnect-on-new-nodes>`
+
+.. Vérifier que toutes les LIFs intercluster se trouvent sur leurs nouveaux ports home :
++
+`network interface show -role intercluster -is-home  false`
+
++
+La sortie de la commande doit être vide, ce qui indique que toutes les LIFs intercluster se trouvent sur leurs ports home respectifs.
+
+.. Reconvertir toutes les LIF qui ne se trouvent pas sur leur port de base :
++
+`network interface revert -lif <intercluster_lif>`
+
++
+Répéter la commande pour chaque LIF intercluster qui ne se trouve pas sur le home port.
+
+
+
+. [[Controller_replace_upgrade_prepare_network_ports_3]]affectez le port home de toutes les LIFs de données de l'ancien contrôleur à un port commun identique sur l'ancien et le nouveau module de contrôleur.
++
+
+CAUTION: Si les anciens et les nouveaux contrôleurs ne disposent pas de port commun, il n'est pas nécessaire de modifier les LIFs data. Ignorez cette étape et passez directement à <<upgrades_assisted_without_matching_ports,Étape 4>>.
+
++
+.. Afficher les LIFs :
++
+`network interface show`
+
++
+Toutes LES LIF de données, y compris SAN et NAS, seront admin « up » et « possède » des opérations, car celles-ci se trouvent sur le site de basculement (cluster_A).
+
+.. Vérifiez le résultat de cette commande pour trouver un port réseau physique commun identique sur l'ancien et le nouveau contrôleur qui n'est pas utilisé comme port du cluster.
++
+Par exemple, « e0d » est un port physique des anciens contrôleurs et est également présent sur les nouveaux contrôleurs. « e0d » n'est pas utilisé comme port de cluster ou autre sur les nouveaux contrôleurs.
+
++
+Reportez-vous link:https://hwu.netapp.com/["Hardware Universe"^]au pour connaître l'utilisation des ports de chaque modèle de plate-forme.
+
+.. Modifier toutes LES LIFS de données pour utiliser le port commun comme port de base :
++
+`network interface modify -vserver <svm-name> -lif <data-lif> -home-port <port-id>`
+
++
+Dans l'exemple suivant, il s'agit de ""e0d"".
+
++
+Par exemple :
+
++
+[listing]
+----
+network interface modify -vserver vs0 -lif datalif1 -home-port e0d
+----
+
+
+. [[upgrades_Assisted_without_matching_ports]] modifiez les domaines de diffusion pour supprimer le VLAN et les ports physiques qui doivent être supprimés :
++
+`broadcast-domain remove-ports -broadcast-domain <broadcast-domain-name>-ports <node-name:port-id>`
+
++
+Répétez cette étape pour tous les réseaux VLAN et les ports physiques.
+
+. Supprimez tous les ports VLAN utilisant des ports de cluster comme ports membres et groupes d'interfaces utilisant des ports de cluster comme ports membres.
++
+.. Supprimer les ports VLAN :
++
+`network port vlan delete -node <node-name> -vlan-name <portid-vlandid>`
+
++
+Par exemple :
+
++
+[listing]
+----
+network port vlan delete -node node1 -vlan-name e1c-80
+----
+.. Supprimez les ports physiques des groupes d'interface :
++
+`network port ifgrp remove-port -node <node-name> -ifgrp <interface-group-name> -port <portid>`
+
++
+Par exemple :
+
++
+[listing]
+----
+network port ifgrp remove-port -node node1 -ifgrp a1a -port e0d
+----
+.. Supprimez les ports VLAN et de groupe d'interfaces du broadcast domain :
++
+`network port broadcast-domain remove-ports -ipspace <ipspace> -broadcast-domain <broadcast-domain-name>-ports <nodename:portname,nodename:portname>,..`
+
+.. Modifiez les ports de groupe d'interface pour utiliser d'autres ports physiques comme membres, selon les besoins :
++
+`ifgrp add-port -node <node-name> -ifgrp <interface-group-name> -port <port-id>`
+
+
+
+. Arrêter les nœuds :
++
+`halt -inhibit-takeover true -node <node-name>`
+
++
+Cette étape doit être effectuée sur les deux nœuds.
+
+. Vérifiez que les nœuds se trouvent à `LOADER` l'invite et collectez et conservez les variables d'environnement actuelles.
+. Rassemblez les valeurs de bootarg :
++
+`printenv`
+
+. Mettez les nœuds et les tiroirs hors tension sur le site de mise à niveau du contrôleur.
+
+
+.Et la suite ?
+link:upgrade-mcc-ip-system-controller-replace-setup-new-controllers.html["Configurez et netboot des nouveaux contrôleurs"].

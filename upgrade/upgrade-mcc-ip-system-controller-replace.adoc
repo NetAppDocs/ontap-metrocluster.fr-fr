@@ -1,0 +1,29 @@
+---
+permalink: upgrade/upgrade-mcc-ip-system-controller-replace.html 
+sidebar: sidebar 
+keywords: metrocluster, upgrade, controllers, switchover, switchback, ip, configuration, net, boot, root, aggregate, system, commands, mcc 
+summary: 'Vous pouvez utiliser cette opération de basculement automatisé MetroCluster guidée pour effectuer une mise à niveau sans interruption du contrôleur dans le cas d"une configuration IP MetroCluster à quatre nœuds.' 
+---
+= Workflow de mise à niveau des contrôleurs IP MetroCluster à l'aide des commandes « System Controller replace » (ONTAP 9.13.1 ou version ultérieure)
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous pouvez utiliser cette opération de basculement automatisé MetroCluster guidée pour effectuer une mise à niveau sans interruption du contrôleur sur une configuration IP MetroCluster à quatre nœuds exécutant ONTAP 9.13.1 version ultérieure. Dans le cadre de cette procédure, d'autres composants (tels que des tiroirs de stockage ou des commutateurs) ne peuvent pas être mis à niveau.
+
+.A propos de ce flux de travail
+Ce workflow vous permet de mettre à niveau les contrôleurs IP MetroCluster exécutant ONTAP 9.13.1 ou version ultérieure à l'aide de la fonction switchover and switchback avec des `system controller replace` commandes.
+
+.image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-1.png["Une seule"]link:upgrade-mcc-ip-system-controller-replace-supported-platforms.html["Préparation à la mise à niveau"]
+[role="quick-margin-para"]
+Vérifiez les combinaisons de mises à niveau et la configuration requise prises en charge, puis effectuez les tâches requises pour préparer votre système à la mise à niveau du contrôleur. Le processus de mise à niveau automatisée du contrôleur commence par une série de contrôles préalables avant de collecter les informations de configuration et de supprimer tout logiciel de surveillance existant.
+
+.image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-2.png["Deux"]link:upgrade-mcc-ip-system-controller-replace-prepare-network-configuration.html["Mettez à niveau vos contrôleurs"]
+[role="quick-margin-para"]
+L'opération d'automatisation lance les opérations de basculement. Une fois ces opérations terminées, l'opération s'interrompt pour vous permettre de préparer la configuration réseau des anciens contrôleurs, de monter en rack et d'installer les nouveaux contrôleurs, de réaffecter les disques de l'agrégat racine et de démarrer les nouveaux contrôleurs.
+
+.image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-3.png["Trois"]link:upgrade-mcc-ip-system-controller-replace-complete-upgrade.html["Terminez la mise à niveau"]
+[role="quick-margin-para"]
+Terminez la mise à niveau automatique du contrôleur en vérifiant l'accessibilité du réseau, en répétant les tâches de mise à niveau sur le second site et en restaurant la configuration de la surveillance.

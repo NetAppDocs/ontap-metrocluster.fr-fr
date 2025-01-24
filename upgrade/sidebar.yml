@@ -16,24 +16,93 @@ entries:
 - title: Mise à niveau des contrôleurs dans une configuration MetroCluster IP à quatre
     nœuds via le basculement et le rétablissement à l'aide des commandes « system
     Controller replace » (ONTAP 9.13.1 et versions ultérieures)
-  url: "/upgrade/task_upgrade_controllers_system_control_commands_in_a_four_node_mcc_ip.html"
+  entries:
+  - title: Mise à niveau du workflow
+    url: "/upgrade/upgrade-mcc-ip-system-controller-replace.html"
+  - title: Préparation à la mise à niveau
+    entries:
+    - title: Mises à niveau de contrôleurs IP MetroCluster prises en charge à l'aide
+        de commandes « system Controller replace »
+      url: "/upgrade/upgrade-mcc-ip-system-controller-replace-supported-platforms.html"
+    - title: Conditions requises pour utiliser cette procédure de mise à niveau
+      url: "/upgrade/upgrade-mcc-ip-system-controller-replace-requirements.html"
+    - title: Activer la journalisation de la console
+      url: "/upgrade/upgrade-mcc-ip-system-controller-replace-console-logging.html"
+    - title: Définir le démarrage requis (pour les mises à niveau vers les systèmes
+        introduits dans ONTAP 9.15.1 ou version ultérieure)
+      url: "/upgrade/upgrade-mcc-ip-system-controller-replace-set-bootarg.html"
+    - title: Préparez le système pour la mise à niveau
+      url: "/upgrade/upgrade-mcc-ip-system-controller-replace-prechecks.html"
+  - title: Mettez à niveau vos contrôleurs
+    entries:
+    - title: Préparer la configuration réseau des anciens contrôleurs
+      url: "/upgrade/upgrade-mcc-ip-system-controller-replace-prepare-network-configuration.html"
+    - title: Configurez et netboot des nouveaux contrôleurs
+      url: "/upgrade/upgrade-mcc-ip-system-controller-replace-setup-new-controllers.html"
+    - title: Restaurez la configuration du HBA et définissez l'état de haute disponibilité
+      url: "/upgrade/upgrade-mcc-ip-system-controller-replace-restore-hba-set-ha.html"
+    - title: Mettez à jour les fichiers RCF des switchs et définissez les valeurs
+        de démarrage IP MetroCluster
+      url: "/upgrade/upgrade-mcc-ip-system-controller-replace-apply-rcf-set-bootarg.html"
+    - title: Réallouer les disques racine de l'agrégat
+      url: "/upgrade/upgrade-mcc-ip-system-controller-replace-reassign-root-agg.html"
+    - title: Démarrer les nouveaux contrôleurs et restaurer la configuration LIF
+      url: "/upgrade/upgrade-mcc-ip-system-controller-replace-boot-new-controllers.html"
+  - title: Terminez la mise à niveau
+    url: "/upgrade/upgrade-mcc-ip-system-controller-replace-complete-upgrade.html"
+- title: Mise à niveau des contrôleurs dans MetroCluster IP à l'aide du basculement
+    et du rétablissement (ONTAP 9.8 et versions ultérieures)
+  entries:
+  - title: Mise à niveau du workflow
+    url: "/upgrade/upgrade-mcc-ip-manual.html"
+  - title: Préparation à la mise à niveau
+    entries:
+    - title: Conditions requises pour utiliser cette procédure de mise à niveau
+      url: "/upgrade/upgrade-mcc-ip-manual-requirements.html"
+    - title: Activer la journalisation de la console
+      url: "/upgrade/upgrade-mcc-ip-manual-console-logging.html"
+    - title: Définir le démarrage requis (pour les mises à niveau vers les systèmes
+        introduits dans ONTAP 9.15.1 ou version ultérieure)
+      url: "/upgrade/upgrade-mcc-ip-manual-set-bootarg.html"
+    - title: Préparez le système pour la mise à niveau
+      url: "/upgrade/upgrade-mcc-ip-prepare-system.html"
+  - title: Mettez à niveau vos contrôleurs
+    entries:
+    - title: Basculer la configuration MetroCluster
+      url: "/upgrade/upgrade-mcc-ip-manual-switchover.html"
+    - title: Supprimez les configurations d'interface et désinstallez les anciens
+        contrôleurs
+      url: "/upgrade/upgrade-mcc-ip-manual-uninstall-controllers.html"
+    - title: Configurer les nouveaux contrôleurs
+      url: "/upgrade/upgrade-mcc-ip-manual-setup-controllers.html"
+    - title: Restaurez la configuration du HBA et définissez l'état de haute disponibilité
+      url: "/upgrade/upgrade-mcc-ip-manual-hba-set-ha.html"
+    - title: Mettez à jour les fichiers RCF des switchs et définissez les valeurs
+        de démarrage IP MetroCluster
+      url: "/upgrade/upgrade-mcc-ip-manual-apply-rcf-set-bootarg.html"
+    - title: Réallouer les disques racine de l'agrégat
+      url: "/upgrade/upgrade-mcc-ip-manual-reassign-root-agg.html"
+    - title: Démarrer les nouveaux contrôleurs et restaurer la configuration LIF
+      url: "/upgrade/upgrade-mcc-ip-manual-boot-new-controllers.html"
+    - title: Revenir à la configuration
+      url: "/upgrade/upgrade-mcc-ip-manual-switchback.html"
+  - title: Terminez la mise à niveau
+    url: "/upgrade/upgrade-mcc-ip-manual-complete-upgrade.html"
+- title: Mise à niveau des contrôleurs (AFF A700 vers AFF A900, FAS9000 vers FAS9500)
+    dans MetroCluster IP avec basculement et rétablissement (ONTAP 9.10.1 ou version
+    ultérieure)
+  url: "/upgrade/task_upgrade_A700_to_A900_in_a_four_node_mcc_ip_us_switchover_and_switchback.html"
 - title: Mise à niveau des contrôleurs dans le système MetroCluster FC à l'aide du
     basculement et du rétablissement
   url: "/upgrade/task_upgrade_controllers_in_a_four_node_fc_mcc_us_switchover_and_switchback_mcc_fc_4n_cu.html"
-- title: Mise à niveau des contrôleurs (AFF A700/FAS9000 vers AFF A900/FAS9500) en
-    configuration FC MetroCluster via le basculement et le rétablissement (ONTAP 9.10.1
+- title: Mise à niveau des contrôleurs (AFF A700 vers AFF A900, FAS9000 vers FAS9500)
+    en configuration MetroCluster FC avec basculement et rétablissement (ONTAP 9.10.1
     ou version ultérieure)
   url: "/upgrade/task_upgrade_A700_to_A900_in_a_four_node_mcc_fc_us_switchover_and_switchback.html"
 - title: Mise à niveau des contrôleurs sur le FC MetroCluster à quatre nœuds via le
     basculement et le rétablissement avec des commandes « remplacement du contrôleur
     système » (ONTAP 9.10.1 et versions ultérieures)
   url: "/upgrade/task_upgrade_controllers_system_control_commands_in_a_four_node_mcc_fc.html"
-- title: Mise à niveau des contrôleurs dans MetroCluster IP à l'aide du basculement
-    et du rétablissement (ONTAP 9.8 et versions ultérieures)
-  url: "/upgrade/task_upgrade_controllers_in_a_four_node_ip_mcc_us_switchover_and_switchback_mcc_ip.html"
-- title: Mise à niveau des contrôleurs (AFF A700/FAS9000 vers AFF A900/FAS9500) dans
-    MetroCluster IP avec basculement et rétablissement (ONTAP 9.10.1 ou version ultérieure)
-  url: "/upgrade/task_upgrade_A700_to_A900_in_a_four_node_mcc_ip_us_switchover_and_switchback.html"
 - title: Actualisez une configuration FC MetroCluster à quatre nœuds
   url: "/upgrade/task_refresh_4n_mcc_fc.html"
 - title: Actualisation d'une configuration IP MetroCluster à quatre ou huit nœuds
