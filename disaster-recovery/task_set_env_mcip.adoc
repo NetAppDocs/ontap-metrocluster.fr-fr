@@ -230,6 +230,44 @@ Nœud_A_1
 
 
 |===
+* Les valeurs de démarrage MetroCluster que vous avez définies dépendent du fait que votre nouveau système utilise des ports cluster/haute disponibilité partagés ou des ports MetroCluster/haute disponibilité partagés. Utilisez les informations suivantes pour déterminer les ports de votre système.
++
+Les systèmes répertoriés dans le tableau suivant utilisent *les ports MetroCluster/HA partagés*.
+
++
+Tous les autres systèmes utilisent *des ports de cluster/haute disponibilité partagés*.
+
++
+[cols="2*"]
+|===
+| Les systèmes AFF et ASA utilisant des ports MetroCluster/HA partagés | Les systèmes FAS utilisant des ports MetroCluster/HA partagés 
+
+
+ a| 
+** AFF A150, ASA A150
+** AVEC AFF A220
+** AFF C250, ASA C250
+** AFF A250, ASA A250
+** AFF A300
+** AFF A320
+** AFF C400, ASA C400
+** AFF A400, ASA A400
+** AFF A700
+** AFF C800, ASA C800
+** AFF A800, ASA A800
+** AFF A900, ASA A900
+
+ a| 
+** FAS2750
+** FAS500f
+** FAS8200
+** FAS8300
+** FAS8700
+** FAS9000
+** FAS9500
+
+
+|===
 
 
 .Étapes
@@ -241,15 +279,13 @@ Nœud_A_1
 Les adresses requises sont les adresses du partenaire DR affichées dans la colonne *adresse réseau de destination*.
 
 +
-Le résultat de la commande varie en fonction du modèle de plateforme.
+Le résultat de la commande varie selon que votre modèle de plateforme utilise des ports cluster/haute disponibilité partagés ou des ports MetroCluster/haute disponibilité partagés.
 
 +
 [role="tabbed-block"]
 ====
-.Systèmes introduits dans ONTAP 9.15.1 ou version ultérieure
+.Systèmes utilisant des ports partagés de cluster/haute disponibilité
 --
-Les systèmes introduits dans ONTAP 9.15.1 ou version ultérieure (AFF A70, AFF A90 et AFF A1K) possèdent des ports distincts pour la haute disponibilité et la reprise après incident, comme illustré dans l'exemple de sortie suivant :
-
 [listing]
 ----
 cluster_B::*> metrocluster configuration-settings connection show
@@ -279,7 +315,7 @@ Group Cluster Node    Network Address Network Address Partner Type Config State
 12 entries were displayed.
 ----
 --
-.Tous les autres systèmes
+.Systèmes utilisant des ports MetroCluster/HA partagés
 --
 Le résultat suivant montre les adresses IP d'une configuration avec les systèmes AFF A700 et FAS9000 dotés des interfaces IP MetroCluster sur les ports e5a et e5b. Les interfaces peuvent varier en fonction du type de plate-forme.
 
@@ -351,7 +387,7 @@ Group Cluster Node     Network Address Netmask         Gateway         State
 ----
 
 
-. À l'invite DU CHARGEUR pour chacun des nœuds du site d'incident, définissez la valeur de démarrage en fonction du modèle de plateforme :
+. À l' `LOADER`invite pour chacun des nœuds du site d'incident, définissez la valeur de démarrage selon que votre modèle de plateforme utilise des ports cluster/haute disponibilité partagés ou des ports MetroCluster/haute disponibilité partagés :
 +
 [NOTE]
 ====
@@ -363,17 +399,15 @@ Group Cluster Node     Network Address Netmask         Gateway         State
 +
 [role="tabbed-block"]
 ====
-.Systèmes introduits dans ONTAP 9.15.1 ou version ultérieure
+.Systèmes utilisant des ports partagés de cluster/haute disponibilité
 --
-La valeur de _HA-Partner-IP-address_ doit être définie sur *0* (zéro) sur les systèmes introduits dans ONTAP 9.15.1 ou version ultérieure car ils ont des ports distincts pour DR et HA.
-
 Définissez le démarrage suivant :
 
 [listing]
 ----
-setenv bootarg.mcc.port_a_ip_config local-IP-address/local-IP-mask,gateway-IP-address,HA-partner-IP-address,DR-partner-IP-address,DR-aux-partnerIP-address,vlan-id
+setenv bootarg.mcc.port_a_ip_config local-IP-address/local-IP-mask,0,0,DR-partner-IP-address,DR-aux-partnerIP-address,vlan-id
 
-setenv bootarg.mcc.port_b_ip_config local-IP-address/local-IP-mask,gateway-IP-address,HA-partner-IP-address,DR-partner-IP-address,DR-aux-partnerIP-address,vlan-id
+setenv bootarg.mcc.port_b_ip_config local-IP-address/local-IP-mask,0,0,DR-partner-IP-address,DR-aux-partnerIP-address,vlan-id
 ----
 Les commandes suivantes définissent les valeurs pour node_A_1 en utilisant VLAN 120 pour le premier réseau et VLAN 130 pour le second réseau :
 
@@ -391,14 +425,14 @@ setenv bootarg.mcc.port_a_ip_config 172.17.26.10/23,0,0,172.17.26.13,172.17.26.1
 setenv bootarg.mcc.port_b_ip_config 172.17.27.10/23,0,0,172.17.27.13,172.17.27.12
 ----
 --
-.Tous les autres systèmes
+.Systèmes utilisant des ports MetroCluster/HA partagés
 --
 Définissez le démarrage suivant :
 
 ....
-setenv bootarg.mcc.port_a_ip_config local-IP-address/local-IP-mask,gateway-IP-address,HA-partner-IP-address,DR-partner-IP-address,DR-aux-partnerIP-address,vlan-id
+setenv bootarg.mcc.port_a_ip_config local-IP-address/local-IP-mask,0,HA-partner-IP-address,DR-partner-IP-address,DR-aux-partnerIP-address,vlan-id
 
-setenv bootarg.mcc.port_b_ip_config local-IP-address/local-IP-mask,gateway-IP-address,HA-partner-IP-address,DR-partner-IP-address,DR-aux-partnerIP-address,vlan-id
+setenv bootarg.mcc.port_b_ip_config local-IP-address/local-IP-mask,0,HA-partner-IP-address,DR-partner-IP-address,DR-aux-partnerIP-address,vlan-id
 ....
 Les commandes suivantes définissent les valeurs pour node_A_1 en utilisant VLAN 120 pour le premier réseau et VLAN 130 pour le second réseau :
 

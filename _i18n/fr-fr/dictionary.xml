@@ -86,7 +86,6 @@
   <block id="1d3341e7be6e06b23e20e2501177f02e" category="paragraph">Vérifier l'état de santé général de la configuration. Si le système ne semble pas en bon état, commencez par résoudre le problème avant de continuer.</block>
   <block id="776259e77c1e67fef13df14be8a5ad8e" category="list-text">Depuis les deux clusters, offline de tous les plexes avec disques sur la pile de tiroirs affectée :</block>
   <block id="1590893d0510686df21eee9955ff2b29" category="paragraph"><block ref="38758defd45a8d80197584573d94684a" prefix="" category="inline-code"></block></block>
-  <block id="e7b29b3d771c4dde26a00503e0f4bccf" category="paragraph">L'exemple montre les commandes pour les plexes en ligne pour un contrôleur exécutant clustered OTNAP.</block>
   <block id="901bf599127fc5e5f378a91c41a6e7f4" category="list-text">Vérifiez que les plexes sont hors ligne :</block>
   <block id="1ed890744eec3126bbb25e9377ed2123" category="paragraph"><block ref="e3a5d3011561dd012ac46f3c31a6ec5c" prefix="" category="inline-code"></block></block>
   <block id="8a6a5908684ff060e64e57e3561d66f0" category="paragraph">L'exemple montre les commandes permettant de vérifier que les agrégats sont hors ligne pour un contrôleur exécutant Cmode.</block>
@@ -968,7 +967,6 @@
   <block id="f4761f37bd40b125eed6852317322784" category="list-text">Sur les commutateurs Brocade, le premier port est numéroté 0.</block>
   <block id="db20382966fd63b8be7c9d7a472e152f" category="list-text">Sur les commutateurs Cisco, le premier port est numéroté 1.</block>
   <block id="1f7b281ef3cc2c4d33df1c4ab4725a50" category="list-text">Le câblage est le même pour chaque commutateur FC dans la structure du commutateur.</block>
-  <block id="fa15cd6e7a73a7cac602236af691b901" category="list-text">Les systèmes de stockage AFF A300 et FAS8200 peuvent être commandés avec l'une des deux options de connectivité FC-VI :</block>
   <block id="f8ead55cd533754df60e1d996c261dcc" category="list-text">Ports intégrés 0e et 0f configurés en mode FC-VI.</block>
   <block id="f39eec234d6cdc6ec6c13fbe95529ebe" category="list-text">Ports 1a et 1b sur une carte FC-VI dans l'emplacement 1.</block>
   <block id="9bf4e8720024939a31910559506487e8" category="cell">controller_x_3</block>
@@ -1015,7 +1013,6 @@
   <block id="eccbc87e4b5ce2fe28308fd9f2a7baf3" category="cell">3</block>
   <block id="a87ff679a2f3e71d9181a67b7542122c" category="cell">4</block>
   <block id="e4da3b7fbbce2345d7772b0674a318d5" category="cell">5</block>
-  <block id="1d8dd340273647eae3a36eff43fc547e" category="paragraph">Des ponts supplémentaires peuvent être connectés à l'aide des ports 25 à 48 en suivant le même modèle.</block>
   <block id="84a71a9e63ead8784cd365088a3be8c4" category="cell">Ports ISL</block>
   <block id="1ff1de774005f8da13f42943881c655f" category="cell">24</block>
   <block id="19ca14e7ea6328a42e0eb13d585e4c22" category="cell">36</block>
@@ -1653,11 +1650,6 @@
   <block id="cc7661e50a302a4dca954cd3d5b1345e" category="paragraph">Les tableaux suivants indiquent l'utilisation des ports sur les commutateurs Brocade. Les tableaux présentent la configuration maximale prise en charge, avec huit modules de contrôleur dans deux groupes DR. Pour les configurations plus petites, ignorez les lignes des modules de contrôleur supplémentaires. Notez que huit liens ISL sont pris en charge uniquement sur les commutateurs Brocade 6510, Brocade DCX 8510-8, G620, G630, G620-1, Commutateurs G630-1 et G720.</block>
   <block id="fcfaf6ac87b8961e0ed64190d5d0371a" category="list-text">L'utilisation des ports pour les commutateurs Brocade 6505 et Brocade G610 dans une configuration MetroCluster à huit nœuds n'est pas illustrée. En raison du nombre limité de ports, les attributions de ports doivent être effectuées site par site, selon le modèle de module de contrôleur et le nombre de liens ISL et de paires de ponts utilisés.</block>
   <block id="e9b5c48d343ae71e6b37dc8ebad61866" category="list-text">Le commutateur Brocade DCX 8510-8 peut utiliser la même disposition de port que le commutateur 6510 *_ou_* le commutateur 7840.</block>
-  <block id="bb349429f6224b4b4899cca4143d00a3" category="cell">Modèles de commutateurs Brocade 6505, 6510, 6520, 7810, 7840, G610, G620, G620-1, G630, G630-1 ET DCX 8510-8</block>
-  <block id="b4559ed331225a2442a15ec2c2b78e38" category="cell">Commutateur Brocade modèle G720</block>
-  <block id="d4fbd23b7658d01598df05d6bfd31a84" category="list-text">Sur les commutateurs G620, G630, G620-1 et G630-1, des ponts supplémentaires peuvent être câblés aux ports 12 - 17, 20 et 21.</block>
-  <block id="b5724498433d204fa7a87a5aa56bdb5b" category="list-text">Sur les commutateurs G610, des ponts supplémentaires peuvent être reliés aux ports 12 à 19.</block>
-  <block id="f9218b899a7f952d28deaa191d54faaa" category="list-text">Sur les commutateurs G720, des ponts supplémentaires peuvent être câblés sur les ports 16 - 17, 20 et 21.</block>
   <block id="36fc2959d3a1c97d86b1331aa7ad751f" category="cell">MetroCluster 2 ou DR Groupe 2</block>
   <block id="dd8bf985111cb958a0114d6fab888dfb" category="cell">Modèle de commutateur Brocade</block>
   <block id="28eb6ba701b729e5df3fbc86e28c4f9a" category="cell">Se connecte au commutateur FC...</block>
@@ -1676,15 +1668,12 @@
   <block id="d82c8d1619ad8176d665453cfb2e55f0" category="paragraph">53</block>
   <block id="a684eceee76fc522773286a895bc8436" category="paragraph">54</block>
   <block id="b53b3a3d6ab90ce0268229151c9bde11" category="paragraph">55</block>
-  <block id="b71713ca01ebff14cbc13bd7cfcb2b05" category="list-text">Sur les commutateurs G720, des ponts supplémentaires peuvent être câblés sur les ports 36-39.</block>
   <block id="f5ab0ecfb91169073465c75b07499fce" category="cell">Modèles de commutateurs Brocade 6505, 6510, 6520, 7810, 7840, G610, G620, G620-1, G630, G630-1, Et DCX 8510-8</block>
   <block id="d67bdc8865becf65979a7e07c7541fe7" category="cell">Commutateur Brocade G720</block>
   <block id="b662e152b43011e1e0296b8084a2d147" category="paragraph">12*</block>
   <block id="4fcb10feecff8bf153e2155f987003d3" category="paragraph">13*</block>
   <block id="6d8c2a2025c082966f6b8171ae6d840e" category="paragraph">14*</block>
   <block id="f5edf414716a52037ee3226c67a63760" category="paragraph">15*</block>
-  <block id="58a6d226fae48ef8f89925466eabd9b3" category="admonition">Des ponts supplémentaires peuvent être câblés sur les ports 16, 17, 20 et 21 des commutateurs G620, G630, G620-1 et G630-1.</block>
-  <block id="b7cb27e7b76aef35eeb752371e5bd6b8" category="admonition">Des ponts supplémentaires peuvent être câblés sur les ports 36 à 39 des commutateurs G620, G630, G620-1 et G630-1.</block>
   <block id="f140d3cb033a0d8cb337abc8ffd37e35" category="section-title">Utilisation du port Brocade pour les liaisons ISL dans une configuration MetroCluster exécutant ONTAP 9.1 ou une version ultérieure</block>
   <block id="31140865c6da8bd64c2cc352591fd97f" category="paragraph">Le tableau suivant montre l'utilisation des ports ISL pour les commutateurs Brocade.</block>
   <block id="16efd6bef533569cdadd01e7d8f034c9" category="admonition">Les systèmes AFF A700 ou FAS9000 prennent en charge jusqu'à huit liens ISL pour de meilleures performances. Huit liens ISL sont pris en charge sur les commutateurs Brocade 6510 et G620.</block>
@@ -1727,11 +1716,8 @@
   <block id="14f265c9ad9a81b21c667b4042fc7575" category="admonition">Le tableau suivant montre les systèmes équipés de deux ports FC-VI. Les systèmes AFF A700 et FAS9000 disposent de quatre ports FC-VI (a, b, c et d). Si vous utilisez un système AFF A700 ou FAS9000, les attributions de ports se déplacent d'une position à l'autre. Par exemple, les ports FC-VI c et d passent au port de commutateur 2 et aux ports d'adaptateur HBA a et b, puis au port de commutateur 3.</block>
   <block id="cab785737f7e01bc6cf334a3297e22c3" category="cell">Cisco 9250i Remarque : le commutateur Cisco 9250i n'est pas pris en charge pour les configurations MetroCluster à huit nœuds.</block>
   <block id="7454ecd5190b690ccf9ee77f2e438c0c" category="section-title">Utilisation des ports Cisco pour ponts FC-SAS dans une configuration MetroCluster exécutant ONTAP 9.1 ou une version ultérieure</block>
-  <block id="89eaf3610015ecc12505a2408ff9fda6" category="paragraph">Des ponts supplémentaires peuvent être connectés à l'aide des ports 17 à 40 et 57 à 88 en suivant le même modèle.</block>
-  <block id="a1d4f21ed73518b99dbbab05134b5c9a" category="paragraph">Des ponts supplémentaires pour un deuxième groupe de reprise sur incident ou une deuxième configuration MetroCluster peuvent être connectés en utilisant les ports 33 à 40 suivant le même modèle.</block>
   <block id="bbc155fb2b111bf61c4f5ff892915e6b" category="cell">Commutateur</block>
   <block id="f656d69f7bbae519056da03a8e9e50d0" category="cell">Cisco 9250i</block>
-  <block id="a6bd250708a75e43f157a7b657e654c5" category="paragraph">Des ponts supplémentaires pour un deuxième groupe de reprise sur incident ou une deuxième configuration MetroCluster peuvent être connectés en utilisant les ports 25 à 48 suivant le même modèle.</block>
   <block id="4968e1c4a92e0df27646933918f92be2" category="section-title">L'utilisation des ports Cisco pour ISL dans une configuration à huit nœuds dans une configuration MetroCluster exécutant ONTAP 9.1 ou une version ultérieure</block>
   <block id="81cc761cd2e2757421a8e9242e8e12cc" category="paragraph">Le tableau suivant montre l'utilisation des ports ISL. L'utilisation des ports ISL est identique sur tous les commutateurs de la configuration.</block>
   <block id="10ca333ef19b78048d2fedd61c4432e9" category="paragraph">ISL 1</block>
@@ -8467,8 +8453,6 @@
   <block id="eca7334e4ced3e1626aa264456a4abf0" category="paragraph"><block ref="32762e78cfa49b07513c4f60c2b0a741" prefix="" category="inline-code"></block></block>
   <block id="04008409e45af76f1283ce88932da449" category="inline-link-macro">Comment supprimer des entrées d'agrégats non mis en miroir obsolètes dans un MetroCluster après un incident où le stockage a été perdu.</block>
   <block id="d903b046ad4e23192a38f289cf8b3677" category="paragraph">Si le site de secours contenait des agrégats non mis en miroir et que les agrégats non mis en miroir ne sont plus présents, l'agrégat peut afficher un état « inconnu » dans le résultat de la commande Storage aggry show. Contactez le support technique pour supprimer les entrées obsolètes des agrégats non mis en miroir, consultez l'article de la base de connaissances <block ref="5f58a40bfe898f128ca76e4a4e4715d4" category="inline-link-macro-rx"></block></block>
-  <block id="aa22b9d198bd6a038b670437eee9be3f" category="list-text">Assurez-vous que tous les SVM de destination synchrone du cluster survivant sont inactifs (en affichant un état d'administration de « `spart') et que les SVM source de synchronisation sur le cluster de secours sont opérationnels :</block>
-  <block id="a657e2ecdb4e6ab9790d126a51b552c5" category="paragraph">Les agrégats de destination de synchronisation dans la configuration MetroCluster ont automatiquement ajouté le suffixe « -mc » à leur nom pour les identifier.</block>
   <block id="a9bd61a08929690c5b3458df476bbff6" category="paragraph">Exécutez la correction suggérée indiquée dans la sortie de la commande MetroCluster opération show.</block>
   <block id="bf4320a9c5f6e686dc6a38472f775205" category="section-title">Mise en miroir des agrégats racine des nœuds de remplacement</block>
   <block id="74b3e412510bc78ef4798cbd387482a0" category="paragraph">Si des disques ont été remplacés, vous devez mettre en miroir les agrégats racine des nouveaux nœuds sur le site de secours.</block>
@@ -8562,7 +8546,6 @@
   <block id="747e6cc5087e3d574b31df917e61f51d" category="list-text">Exécutez le rétablissement en exécutant la commande suivante à partir de n'importe quel nœud du cluster survivant.</block>
   <block id="838e866ece9701e5a58755a132b144d0" category="paragraph">Si un rétablissement prend un certain temps, vous pouvez vérifier l'état des lignes de base en cours en utilisant la commande suivante au niveau des privilèges avancés.</block>
   <block id="2acb95fae93eb0a712fe18af796439f5" category="paragraph">Si le site de secours contenait des agrégats non mis en miroir et que les agrégats sans miroir ne sont plus présents, l'agrégat peut afficher un état « inconnu » dans la sortie du<block ref="773df797e06568bea1288447c8921502" prefix=" " category="inline-code"></block> commande. Contactez le support technique pour supprimer les entrées obsolètes des agrégats non mis en miroir et consultez l'article de la base de connaissances <block ref="5f58a40bfe898f128ca76e4a4e4715d4" category="inline-link-macro-rx"></block></block>
-  <block id="8d90a1ad74872449b69dcbc9a1230a79" category="list-text">Vérifier que tous les SVM de destination synchrone du cluster survivant sont inactifs (et affichent l'état d'administration « stopped ») et que les SVM source synchrone sur le cluster de reprise après incident sont en cours d'exécution :</block>
   <block id="702f8c89c26d6cb5eb222b0149dcf136" category="list-text">Vérifiez que les opérations de rétablissement ont abouti :</block>
   <block id="de5c9351bdabfd381218bfd88e214584" category="paragraph">Que l'opération de rétablissement ou<block ref="304407e084227ccad94a3fb309747b8e" prefix=" " category="inline-code"></block> l'opération a partiellement réussi.</block>
   <block id="228beadb7c8c11135c8c21668f220c81" category="section-title">Suppression des listes d'agrégats obsolètes après le rétablissement</block>
@@ -9946,9 +9929,7 @@
   <block id="0216568f67e5d703868ec3f45bbaaa79" category="paragraph">La structure 7-mode MetroCluster existante peut rester connectée aux ports via des SFP 8 Gbits/s ou 16 Gbits/s.</block>
   <block id="05d631d42f259bf07f58147a7f7c98d4" category="list-text">Sur chacun des quatre commutateurs Brocade 6510, les ports 24 à 45 doivent être disponibles pour connecter les ports des nouveaux composants MetroCluster.</block>
   <block id="a009195558b1c4cd3b61cdf61cb6fb25" category="list-text">Vérifiez que les liaisons interswitch existantes (ISL) sont dans les ports 46 et 47.</block>
-  <block id="ceacc62e7a4eaa1af37396810acfd3ae" category="list-text">Les commutateurs Brocade 6510 doivent exécuter une version de firmware FOS prise en charge par la configuration 7-mode Fabric MetroCluster et clustered ONTAP MetroCluster.</block>
   <block id="121789800a2a17c2b44944d1aba6cec3" category="paragraph">Une fois la structure partagée et la configuration MetroCluster terminée, vous pouvez effectuer la transition des données depuis la configuration 7-mode Fabric MetroCluster.</block>
-  <block id="516b14cf2c8d48e0d3bc843b88989702" category="paragraph">Après la transition des données, vous pouvez supprimer le câblage MetroCluster de structure 7-mode et, si vous le souhaitez, transférer le câblage clustered ONTAP MetroCluster vers les ports aux numéros inférieurs précédemment utilisés pour le câblage MetroCluster 7-mode. Les ports sont illustrés dans la section « examen des affectations de ports de commutateurs FC pour un MetroCluster à quatre nœuds ». Vous devez régler le zoning pour les ports réorganisés.</block>
   <block id="7808905132392bd0ce5a445469e4132d" category="summary">Chaque switch Cisco de la configuration MetroCluster doit être configuré de manière appropriée pour les connexions ISL et de stockage.</block>
   <block id="e5d68dba728fb2d82fcd5253e45d2606" category="paragraph">Les exigences suivantes s'appliquent aux commutateurs FC Cisco :</block>
   <block id="f59e44c66a463087eb80b00cc5e7867c" category="list-text">Vous devez utiliser quatre commutateurs Cisco pris en charge du même modèle avec la même version NX-OS et la même licence.</block>
@@ -12056,7 +12037,6 @@
   <block id="d278aad9be542d15b42d2b30e3ac0701" category="section-title">Matrice de prise en charge du se</block>
   <block id="bc66e40e6d2b679666709d4696a3e3a0" category="cell">Version Tiebreaker</block>
   <block id="2ff01ce7887ede183a0dcb4bf579a040" category="cell">CentOS 7 - 7.9</block>
-  <block id="e409cbaf30133c40afd8ba79b71e06ee" category="paragraph">#42 ; les ports 12 à 15 sont réservés au deuxième groupe MetroCluster ou DR sur le commutateur Brocade 7840.</block>
   <block id="99d7ea00899cf98fde6ae4bd7a763fe6" category="list-text">Vérification de l'état du domaine de défaillance du basculement automatique non planifié (AUSO) :</block>
   <block id="914c0f805af7b6a979c9b14a8fca637d" category="admonition">L'exemple de sortie suivant s'applique à ONTAP 9.13.1 et versions ultérieures. Pour ONTAP 9.12.1 et les versions antérieures, l'état du domaine de défaillance AUSO doit être<block ref="8371e13c4fc64771e634f39be50ec198" prefix=" " category="inline-code"></block>.</block>
   <block id="1d2738c61f2ddb3b312cabca3378259b" category="list-text">Vous pouvez également configurer le basculement automatique forcé de MetroCluster.</block>
@@ -12712,7 +12692,6 @@ S'applique à toutes les configurations MetroCluster.</block>
   <block id="7e95951a529361ac1e326cd54359d011" category="paragraph"><block ref="7e95951a529361ac1e326cd54359d011" category="inline-link-macro-rx"></block></block>
   <block id="4c79922838c9f8d530f20efcd3382822" category="cell">Configurations utilisant FibreBridge 7500N ou 7600N avec un port FC (FC1 ou FC2) uniquement</block>
   <block id="3a4842c9952a7c657d04e55a3d69b1a4" category="cell">FibreBridge 7500N ou 7600N à l'aide de deux ports FC</block>
-  <block id="f9805d94598bd6a841fddbff1c6ddc7b" category="paragraph">Les tableaux suivants indiquent l'utilisation des ports de pont lors de l'utilisation de ponts FibreBridge 7500N ou 7600N utilisant un seul port FC (FC1 ou FC2). Pour les ponts FibreBridge 7500N ou 7600N utilisant un port FC, FC1 ou FC2 peut être câblé au port indiqué comme FC1. Des ponts supplémentaires peuvent être connectés à l'aide des ports 25-48.</block>
   <block id="126b9e3a8501d897a2356aba96828af6" category="cell">Ponts FibreBridge 7500N ou 7600N utilisant un port FC</block>
   <block id="69abf6cf7deeba7ace2f747f7661208f" category="cell">FibreBridge 7500N ou 7600N à l'aide d'un port FC</block>
   <block id="0351289236b3260f9d0c35b64f62689c" category="paragraph">Vous pouvez suivre le câblage du pont FibreBridge 7500N ou 7600N en utilisant un seul port FC (FC1 ou FC2). Au lieu d'utiliser quatre initiateurs, connectez uniquement deux initiateurs et laissez les deux autres connectés au port du commutateur vides.</block>
@@ -13175,7 +13154,6 @@ L'exemple suivant montre que vous utilisez SCP pour télécharger le fichier<blo
   <block id="0ab751f551b18333e82474f5ca9b4122" category="list-text">Vérifiez que le port de l'interface IP MetroCluster est en ligne.</block>
   <block id="124ba57298a92342f8aec06ebcfb6415" category="inline-link-macro">Déterminez les ID système des anciens modules de contrôleur</block>
   <block id="3ac27de4b4347c98785ff06870fe7221" category="paragraph"><block ref="3ac27de4b4347c98785ff06870fe7221" category="inline-link-macro-rx"></block></block>
-  <block id="478093bd7e01c5abe587038bf808af00" category="paragraph">Les tableaux suivants indiquent l'utilisation des ports sur un commutateur Cisco 9132T. Les tableaux présentent le nombre maximum de configurations prises en charge avec quatre et huit modules de contrôleur dans deux groupes de reprise sur incident.</block>
   <block id="9e667988f536ce55f0a4c5cf0908d042" category="cell">Cisco 9132T avec 2 LEM et un MetroCluster ou un groupe DR à quatre nœuds</block>
   <block id="7d83eb0736445dbf18519e99146d2fff" category="cell">Cisco 9132T avec deux MetroCluster à quatre nœuds ou un MetroCluster à huit nœuds avec deux groupes de reprise après incident</block>
   <block id="a786547181c9c8f446791420d2be691f" category="paragraph">Votre version de ONTAP doit prendre en charge le mélange des tiroirs. Reportez-vous à la<block ref="f93341e63c1888be05256ff042174623" category="inline-link-rx"></block> Pour vérifier si votre version de ONTAP prend en charge la combinaison de tiroirs.</block>
@@ -13196,12 +13174,7 @@ L'exemple suivant montre que vous utilisez SCP pour télécharger le fichier<blo
   <block id="c61e96543ff55077f64d8dd03940c2c6" category="list-text">AFF A70</block>
   <block id="50c089c00eacadfe94238545067e1673" category="list-text">AFF A90</block>
   <block id="0be7ecaeb710959e64858a36fa1f8783" category="list-text">AFF A1K</block>
-  <block id="5304f5c74d3938f229fd289a3a4c7335" category="paragraph">Le résultat de la commande varie en fonction du modèle de plateforme.</block>
-  <block id="a5742dd38006c09197d0e488bba89bf7" category="open-title">Systèmes introduits dans ONTAP 9.15.1 ou version ultérieure</block>
-  <block id="566a13604e83a8fff73bdf14020a980a" category="paragraph">Les systèmes introduits dans ONTAP 9.15.1 ou version ultérieure (AFF A70, AFF A90 et AFF A1K) possèdent des ports distincts pour la haute disponibilité et la reprise après incident, comme illustré dans l'exemple de sortie suivant :</block>
   <block id="5703319e138fc00c827014acd16d0376" category="paragraph">Le résultat suivant montre les adresses IP d'une configuration avec les systèmes AFF A700 et FAS9000 dotés des interfaces IP MetroCluster sur les ports e5a et e5b. Les interfaces peuvent varier en fonction du type de plate-forme.</block>
-  <block id="e2974b23926ca4d7d377fe83a01893cc" category="list-text">À l'invite DU CHARGEUR pour chacun des nœuds du site d'incident, définissez la valeur de démarrage en fonction du modèle de plateforme :</block>
-  <block id="7e9ada96e6c7ea5b82a0e953f38fc85c" category="paragraph">La valeur de _HA-Partner-IP-address_ doit être définie sur *0* (zéro) sur les systèmes introduits dans ONTAP 9.15.1 ou version ultérieure car ils ont des ports distincts pour DR et HA.</block>
   <block id="fd053f45281bc461c7ff13c80dc7a0ef" category="paragraph">Définissez le démarrage suivant :</block>
   <block id="9f4ca92781c17387aacdcaad01922666" category="section-title">Affectation des disques et ADP sur les systèmes AFF A900, ASA A900 et AFF A1K</block>
   <block id="855e77b312a37887818fdd759e02e635" category="paragraph">X50132A</block>
@@ -14253,13 +14226,11 @@ L'exemple suivant montre que vous utilisez SCP pour télécharger le fichier<blo
   <block id="de34f03873cad278e1b5cd4034a7ed03" category="inline-xref">Attributions de ports de la plateforme Cisco 3232C ou Cisco 9336C (groupe 8)</block>
   <block id="f17bf6b1d2e916bc883701ca762c7d31" category="cell"><block ref="4ae0459daad462bd8cb96fe95602c48c" category="inline-xref-macro-rx"></block></block>
   <block id="9e741c4a3ec9010708b84c50ab61cf6e" category="paragraph"><block ref="9e741c4a3ec9010708b84c50ab61cf6e" category="inline-image-macro-rx" type="image"></block></block>
-  <block id="b55dcdcc0e907408a3a25b6bcf0040c8" category="paragraph">Vérifier les attributions de ports de plateforme pour relier un système AFF A20 à un switch Cisco 3232C ou 9336C : <block ref="cc80c8cbafd505af3cd79f69a7bd10e3" category="inline-image-macro-rx" type="image"></block></block>
   <block id="85f49e412a48aec206a5bcf559b8fb51" category="paragraph">Vérifiez les attributions de ports de plateforme pour câbler un système AFF A30, AFF C30 ou AFF C60 à un switch Cisco 3232C ou 9336C :</block>
   <block id="4ddd72f5e814500908f0ff1c734ddaf1" category="paragraph"><block ref="4ddd72f5e814500908f0ff1c734ddaf1" category="inline-image-macro-rx" type="image"></block></block>
   <block id="267e30226a55e10038a24c84fc6de6d0" category="paragraph">Vérifier les attributions de ports de plateforme pour relier un système AFF A50 à un switch Cisco 3232C ou 9336C :</block>
   <block id="ca69a76035ac5f2a63eff361c33eb7c2" category="paragraph">*Remarque 1* : utilisez les ports e4a et e4e ou e4a et e8a si vous utilisez un adaptateur X91440A (40 Gbit/s). Utilisez les ports e4a et e4b ou e4a et e8a si vous utilisez un adaptateur X91153A (100 Gbit/s).</block>
   <block id="5e579c5398f759c591e5b8c0846adbb0" category="paragraph">Vérifier les attributions de ports de plateforme pour connecter un système AFF A70, FAS70, AFF C80, FAS90, AFF A90 ou AFF A1K à un switch Cisco 3232C ou 9336C :</block>
-  <block id="f9bdd6da8ab810967faa5779c97025ed" category="paragraph"><block ref="f9bdd6da8ab810967faa5779c97025ed" category="inline-image-macro-rx" type="image"></block></block>
   <block id="da0acefbf33111de9e67d3fee11be371" category="cell">AFF C30, AFF A30 AFF C60</block>
   <block id="c13a6988988f63fb2f0783cdb7f3480a" category="inline-xref">Attributions de ports de plate-forme de commutateur partagé Cisco 9336C-FX2 (groupe 4)</block>
   <block id="80013ebf782c405ff60125a0a3b79606" category="cell"><block ref="9ad543bbe652f0e404a3df2b4a4d1b1f" category="inline-xref-macro-rx"></block></block>
@@ -14625,4 +14596,57 @@ L'exemple suivant montre que vous utilisez SCP pour télécharger le fichier<blo
   <block id="661221d64894eb71f90ac5ef75331837" category="paragraph">Si vous le souhaitez, suivez <block ref="d3ee677e2efae042d4f3199a44815074" category="inline-link-macro-rx"></block>les étapes à .</block>
   <block id="3931310703263c726d52a1768504781f" category="list-text">Configurez le nouveau commutateur en suivant les procédures Brocade de la section <block ref="8891b6de7b2070c584bdeb67b522b51b" category="inline-link-macro-rx"></block>.</block>
   <block id="a01a953cf57a4a3591be7c4dd9dd14fa" category="list-text">Pour activer le cryptage ISL, reportez-vous à <block ref="fb6e086ddbfd6d800d2c601996554df4" category="inline-link-macro-rx"></block>la section .</block>
+  <block id="180e0613653267779e5c48b1089eec2b" category="paragraph">Vous pouvez reconfigurer les ports qui ne sont pas utilisés pour connecter des ports initiateurs, des ports FC-VI ou des liens ISL afin qu'ils agissent comme des ports de stockage. Toutefois, si les CFR pris en charge sont utilisés, vous devez modifier le zonage en conséquence.</block>
+  <block id="29c89e3d0b280775787b67d96a4087d3" category="list-text">Vous pouvez commander des systèmes de stockage AFF A300 et FAS8200 avec l'une des deux options suivantes pour la connectivité FC-VI :</block>
+  <block id="731feab1fd0d4fca6b5d978a166b21f9" category="section-title">Configurations de contrôleur utilisant des ponts FibreBridge 7500N ou 7600N</block>
+  <block id="e840d63b8d91be60055156853f6cb3c0" category="paragraph">Le tableau suivant indique l'utilisation des ports Brocade pour les contrôleurs utilisant des ponts FibreBridge 7500N ou 7600N.</block>
+  <block id="0dae6454bb8066f80d3cee1de6e36505" category="cell">Connexion du port du modèle de commutateur Brocade</block>
+  <block id="536d2d681b1289cbeefda0c9fdcc09f3" category="cell">G720, G730</block>
+  <block id="3aeb504465245afd2f26ab0917c07244" category="section-title">Configurations de tiroirs utilisant FibreBridge 7500N ou 7600N avec un port FC (FC1 ou FC2) uniquement</block>
+  <block id="50c0f59cb89ba3dd0b9b105da94810f5" category="paragraph-title">MetroCluster 1 ou groupe DR 1</block>
+  <block id="d7628d9cfe849878c0b1b626bda3e165" category="paragraph">Le tableau suivant présente les configurations de tiroirs prises en charge dans MetroCluster 1 ou DR Groupe 1 avec FibreBridge 7500N ou 7600N et un seul port FC (FC1 ou FC2). Lorsque vous utilisez ce tableau de configuration, vous devez connaître les points suivants :</block>
+  <block id="9fc34d6bbec9982b1e0510d6a6fef0a1" category="list-text">Sur les commutateurs 6510 et DCX 8510-8, vous pouvez connecter des ponts supplémentaires aux ports 16-19.</block>
+  <block id="9678df63e5e138898c1a3a9d745f250a" category="list-text">Sur les commutateurs 6520, vous pouvez relier des ponts supplémentaires aux ports 16-21 et 24-45.</block>
+  <block id="1938afd24289f82f1eccb1f5fc03bee0" category="paragraph">Pile 4</block>
+  <block id="b02ceda2473562359e0f31ddee5b9fd7" category="paragraph">Pile 5</block>
+  <block id="d6dc0baaa910da78635865e2a526300a" category="paragraph">Pile 6</block>
+  <block id="384b8992b8f33d81d1be8af75815ce43" category="paragraph">Pile 7</block>
+  <block id="d711b8d9ad84315aa5329b39f947dedd" category="paragraph">Pile 8</block>
+  <block id="3692c9ba1350a63df24145cf798b7a8d" category="paragraph-title">MetroCluster 2 ou groupe DR 2</block>
+  <block id="3931538ae618e65321b4b3317e9b03d1" category="paragraph">Le tableau suivant présente les configurations de tiroirs prises en charge dans MetroCluster 2 ou DR Groupe 2 pour les ponts FibreBridge 7500N ou 7600N utilisant un port FC (FC1 ou FC2) uniquement. Lorsque vous utilisez ce tableau de configuration, vous devez connaître les points suivants :</block>
+  <block id="2903ceed0cbc44b8b559bfff7873b906" category="list-text">Sur les commutateurs 6520, vous pouvez relier des ponts supplémentaires aux ports 64-69 et 72-93.</block>
+  <block id="38429f80adfb1ee89a7fbf6f07f19fd5" category="section-title">Configuration des tiroirs avec FibreBridge 7500N ou 7600N utilisant les deux ports FC (FC1 ou FC2)</block>
+  <block id="6a72af091f5308d35341ed6e94d995c3" category="paragraph">Le tableau suivant présente les configurations de tiroirs prises en charge dans MetroCluster 1 ou DR Groupe 1 pour les ponts FibreBridge 7500N ou 7600N utilisant les deux ports FC (FC1 ou FC2). Lorsque vous utilisez ce tableau de configuration, vous devez connaître les points suivants :</block>
+  <block id="90630a6ca649afd90e4b45c9af3d157d" category="paragraph">Le tableau suivant présente les configurations de tiroirs prises en charge dans MetroCluster 2 ou DR Groupe 2 pour les ponts FibreBridge 7500N ou 7600N utilisant les deux ports FC (FC1 ou FC2). Lorsque vous utilisez ce tableau de configuration, vous devez connaître les points suivants :</block>
+  <block id="742bcddd5d6452c898c549e1b60cd513" category="paragraph">Vous pouvez fixer des ponts supplémentaires à l'aide des ports 17 à 40 et 57 à 88 en suivant le même schéma.</block>
+  <block id="391ee14bc6581827dc4f2d88ff91afcf" category="paragraph">Vous pouvez attacher des ponts supplémentaires pour un deuxième groupe DR ou une deuxième configuration MetroCluster en utilisant les ports 33 à 40 selon le même schéma.</block>
+  <block id="785ca789cd5d47a1b40d11e4fa3a608a" category="paragraph">Vous pouvez attacher des ponts supplémentaires pour un deuxième groupe DR ou une deuxième configuration MetroCluster en utilisant les ports 25 à 48 selon le même schéma.</block>
+  <block id="3914736797bebae05c8e9387dd6727f0" category="paragraph">Les tableaux suivants indiquent l'utilisation des ports de pont lors de l'utilisation de ponts FibreBridge 7500N ou 7600N utilisant un seul port FC (FC1 ou FC2). Pour les ponts FibreBridge 7500N ou 7600N utilisant un port FC, vous pouvez raccorder FC1 ou FC2 au port indiqué comme FC1. Vous pouvez également fixer des ponts supplémentaires à l'aide des ports 25-48.</block>
+  <block id="8e92988c7461b180dbee8d97f92e6742" category="paragraph">Vous pouvez fixer des ponts supplémentaires à l'aide des ports 25 à 48 en suivant le même schéma.</block>
+  <block id="23a48f21ed38a9e3df523f469f325385" category="paragraph">Les tableaux suivants indiquent l'utilisation des ports sur un commutateur Cisco 9132T.</block>
+  <block id="b38a704e8751bf228cfb309f0668b3e1" category="section-title">Configurations de contrôleur utilisant FibreBridge 7500N ou 7600N avec les deux ports FC (FC1 et FC2)</block>
+  <block id="2d98516f0953aef9ad21de45b1d6ed89" category="paragraph">Le tableau suivant présente les configurations de contrôleur utilisant FibreBridge 7500N ou 7600N utilisant les deux ports FC (FC1 et FC2). Les tableaux présentent le nombre maximum de configurations prises en charge avec quatre et huit modules de contrôleur dans deux groupes de reprise sur incident.</block>
+  <block id="24ce95dff7cdbe82f47d82b0c5e3c3bd" category="paragraph">LEM2-5</block>
+  <block id="d1219ba7b45f6028da9ef53dc1d962dc" category="paragraph">LEM2-6</block>
+  <block id="d72635ed8e78c8bf248888485d54fefc" category="paragraph">LEM2-7</block>
+  <block id="bf56acff15a22deda5e2b827afffd42e" category="paragraph">LEM2-8</block>
+  <block id="ebbda15a69930ca8edcac4149ee0cd6b" category="section-title">Cisco 9132T avec 1 LEM et un groupe MetroCluster ou DR à quatre nœuds</block>
+  <block id="d1d3effcd2e3b543a6d69f1de82ab93f" category="paragraph">Les tableaux suivants indiquent l'utilisation des ports pour un commutateur Cisco 9132T avec 1 LEM et un groupe MetroCluster ou DR à quatre nœuds.</block>
+  <block id="59bea19cbabb48065c7357317b97432c" category="paragraph">Le tableau suivant indique l'utilisation des ports pour un commutateur Cisco 9132T avec 2 LEM et un groupe MetroCluster ou DR à quatre nœuds.</block>
+  <block id="71b8d98cdcca6f6c9703e8e704b1bc15" category="paragraph">Le tableau suivant présente l'utilisation des ports pour un commutateur Cisco 9132T avec deux MetroCluster à quatre nœuds ou un MetroCluster à huit nœuds avec deux groupes DR.</block>
+  <block id="401f98cd1747471e0821c98c1d0564ff" category="paragraph">+ tous les autres systèmes utilisent *les ports partagés cluster/haute disponibilité*.</block>
+  <block id="9fc6290b0188dfeebf0e0bc3aa659923" category="list-text">Les valeurs de démarrage MetroCluster que vous avez définies dépendent du fait que votre nouveau système utilise des ports cluster/haute disponibilité partagés ou des ports MetroCluster/haute disponibilité partagés. Utilisez les informations suivantes pour déterminer les ports de votre système.</block>
+  <block id="9e6ae12e9968c12ca89b65cbfc98c1a6" category="paragraph">Le résultat de la commande varie selon que votre modèle de plateforme utilise des ports cluster/haute disponibilité partagés ou des ports MetroCluster/haute disponibilité partagés.</block>
+  <block id="f4c0383379a5ae93d0b5e4c4f8586e47" category="open-title">Systèmes utilisant des ports partagés de cluster/haute disponibilité</block>
+  <block id="fce1683696c48d3d34e98e19d634ae19" category="open-title">Systèmes utilisant des ports MetroCluster/HA partagés</block>
+  <block id="d28dfcbdf9345468d87d930393f61e28" category="list-text">À l'<block ref="82b8350d28f0a14e36de1958b3be9205" prefix=" " category="inline-code"></block>invite pour chacun des nœuds du site d'incident, définissez la valeur de démarrage selon que votre modèle de plateforme utilise des ports cluster/haute disponibilité partagés ou des ports MetroCluster/haute disponibilité partagés :</block>
+  <block id="e29199cddef5792300b3b221f3ce1de2" category="paragraph">Sur chaque contrôleur de la configuration ONTAP MetroCluster, l'adaptateur FC-VI et les HBA doivent être câblés sur des ports spécifiques des commutateurs FC existants.</block>
+  <block id="7c18898ad95897990e485c3e2e9a3d5a" category="list-text">Les commutateurs Brocade 6510 doivent exécuter une version du firmware du système d'exploitation pris en charge sur les configurations Fabric MetroCluster et ONTAP MetroCluster 7-mode.</block>
+  <block id="f408004d3c0a89f19911c0f8ff32d59b" category="paragraph">Une fois les données transférées, vous pouvez retirer le câblage MetroCluster de la structure 7-mode et, si vous le souhaitez, déplacer le câblage ONTAP MetroCluster vers les ports avec le numéro inférieur précédemment utilisés pour le câblage MetroCluster 7-mode. Les ports sont indiqués dans la section « examen des affectations de ports de commutateur FC pour un MetroCluster à quatre nœuds ». Vous devez ajuster la segmentation pour les ports réorganisés.</block>
+  <block id="ca7159868d1e601ba93c3e1c51f92171" category="paragraph">Vérifier les attributions de ports de plateforme pour relier un système AFF A20 à un switch Cisco 3232C ou 9336C :</block>
+  <block id="cc80c8cbafd505af3cd79f69a7bd10e3" category="paragraph"><block ref="cc80c8cbafd505af3cd79f69a7bd10e3" category="inline-image-macro-rx" type="image"></block></block>
+  <block id="ae95cdcb11c16af71b2c54420e47f0dd" category="paragraph"><block ref="ae95cdcb11c16af71b2c54420e47f0dd" category="inline-image-macro-rx" type="image"></block></block>
+  <block id="f6c5a69060b62d046efbd190570cf383" category="admonition">Cet exemple montre les informations minimales requises pour configurer la FCR. Des options supplémentaires peuvent être configurées une fois la FCR appliquée. Par exemple, vous pouvez configurer SNMPv3, NTP ou SCP/SFTP après avoir appliqué le RCF.</block>
+  <block id="6ca034f6a518722187e6a10bfc2df9e6" category="admonition">Ne mettez pas les tiroirs sous tension avant les contrôleurs. Cela évite un démarrage involontaire des contrôleurs dans ONTAP.</block>
+  <block id="604b473cd250fb4d83bbbab434f091fb" category="paragraph">L'exemple montre les commandes de mise hors ligne des plexes pour un contrôleur exécutant ONTAP.</block>
 </blocks>

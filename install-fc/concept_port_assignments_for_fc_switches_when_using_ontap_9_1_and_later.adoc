@@ -13,7 +13,7 @@ summary: 'Vous devez vérifier que vous utilisez les affectations de ports spéc
 [role="lead"]
 Vous devez vérifier que vous utilisez les attributions de ports spécifiées lorsque vous câconnectez les commutateurs FC à l'aide de ONTAP 9.1 et versions ultérieures.
 
-Les ports qui ne sont pas utilisés pour la connexion de ports d'initiateur, de ports FC-VI ou de liens ISL peuvent être reconfigurés pour agir en tant que ports de stockage. Toutefois, si les CFR soutenus sont utilisés, le zonage doit être modifié en conséquence.
+Vous pouvez reconfigurer les ports qui ne sont pas utilisés pour connecter des ports initiateurs, des ports FC-VI ou des liens ISL afin qu'ils agissent comme des ports de stockage. Toutefois, si les CFR pris en charge sont utilisés, vous devez modifier le zonage en conséquence.
 
 Si les FC pris en charge sont utilisés, il se peut que les ports ISL ne se connectent pas aux mêmes ports indiqués et qu'ils doivent être reconfigurés manuellement.
 
@@ -32,7 +32,7 @@ Lors de l'utilisation des tables de câblage, il est important de connaître les
 
 
 * Le câblage est le même pour chaque commutateur FC dans la structure du commutateur.
-* Les systèmes de stockage AFF A300 et FAS8200 peuvent être commandés avec l'une des deux options de connectivité FC-VI :
+* Vous pouvez commander des systèmes de stockage AFF A300 et FAS8200 avec l'une des deux options suivantes pour la connectivité FC-VI :
 +
 ** Ports intégrés 0e et 0f configurés en mode FC-VI.
 ** Ports 1a et 1b sur une carte FC-VI dans l'emplacement 1.
@@ -68,19 +68,22 @@ Les tableaux suivants indiquent l'utilisation des ports sur les commutateurs Bro
 
 
 ====
+
+
+=== Configurations de contrôleur utilisant des ponts FibreBridge 7500N ou 7600N
+
+Le tableau suivant indique l'utilisation des ports Brocade pour les contrôleurs utilisant des ponts FibreBridge 7500N ou 7600N.
+
 |===
 
 
-5+| Configurations utilisant FibreBridge 7500N ou 7600N avec un port FC (FC1 ou FC2) uniquement 
+9+| MetroCluster 1 ou DR Groupe 1 
 
 
-5+| MetroCluster 1 ou DR Groupe 1 
+.2+| Composant .2+| Port 7+| Connexion du port du modèle de commutateur Brocade 
 
 
-.2+| Composant .2+| Port 2+| Modèles de commutateurs Brocade 6505, 6510, 6520, 7810, 7840, G610, G620, G620-1, G630, G630-1 ET DCX 8510-8 | Commutateur Brocade modèle G720 
-
-
-| Connexion au commutateur FC... | Se connecte au port du commutateur... | Se connecte au port du commutateur... 
+| Connexion au commutateur FC... | 6505, G610 | 6510, DCX 8510-8 | 6520 | 7840, DCX 8510-8 | G620, G620-1, G630, G630-1 | G720, G730 
 
 
  a| 
@@ -89,6 +92,14 @@ controller_x_1
 Port FC-VI a
  a| 
 1
+ a| 
+0
+ a| 
+0
+ a| 
+0
+ a| 
+0
  a| 
 0
  a| 
@@ -104,11 +115,27 @@ Port FC-VI b
 0
  a| 
 0
+ a| 
+0
+ a| 
+0
+ a| 
+0
+ a| 
+0
 
 
 
  a| 
 Port c FC-VI
+ a| 
+1
+ a| 
+1
+ a| 
+1
+ a| 
+1
  a| 
 1
  a| 
@@ -126,6 +153,14 @@ Port FC-VI d
 1
  a| 
 1
+ a| 
+1
+ a| 
+1
+ a| 
+1
+ a| 
+1
 
 
 
@@ -136,12 +171,28 @@ Port a du HBA
  a| 
 2
  a| 
+2
+ a| 
+2
+ a| 
+2
+ a| 
+2
+ a| 
 8
 
 
 
  a| 
 Port b de l'adaptateur HBA
+ a| 
+2
+ a| 
+2
+ a| 
+2
+ a| 
+2
  a| 
 2
  a| 
@@ -158,6 +209,14 @@ Port c de l'adaptateur HBA
  a| 
 3
  a| 
+3
+ a| 
+3
+ a| 
+3
+ a| 
+3
+ a| 
 9
 
 
@@ -166,6 +225,14 @@ Port c de l'adaptateur HBA
 Port d de l'adaptateur HBA
  a| 
 2
+ a| 
+3
+ a| 
+3
+ a| 
+3
+ a| 
+3
  a| 
 3
  a| 
@@ -183,6 +250,14 @@ Port FC-VI a
 4
  a| 
 4
+ a| 
+4
+ a| 
+4
+ a| 
+4
+ a| 
+4
 
 
 
@@ -190,6 +265,14 @@ Port FC-VI a
 Port FC-VI b
  a| 
 2
+ a| 
+4
+ a| 
+4
+ a| 
+4
+ a| 
+4
  a| 
 4
  a| 
@@ -205,6 +288,14 @@ Port c FC-VI
 5
  a| 
 5
+ a| 
+5
+ a| 
+5
+ a| 
+5
+ a| 
+5
 
 
 
@@ -212,6 +303,14 @@ Port c FC-VI
 Port FC-VI d
  a| 
 2
+ a| 
+5
+ a| 
+5
+ a| 
+5
+ a| 
+5
  a| 
 5
  a| 
@@ -226,6 +325,14 @@ Port a du HBA
  a| 
 6
  a| 
+6
+ a| 
+6
+ a| 
+6
+ a| 
+6
+ a| 
 12
 
 
@@ -234,6 +341,14 @@ Port a du HBA
 Port b de l'adaptateur HBA
  a| 
 2
+ a| 
+6
+ a| 
+6
+ a| 
+6
+ a| 
+6
  a| 
 6
  a| 
@@ -248,6 +363,14 @@ Port c de l'adaptateur HBA
  a| 
 7
  a| 
+7
+ a| 
+7
+ a| 
+7
+ a| 
+7
+ a| 
 13
 
 
@@ -259,22 +382,357 @@ Port d de l'adaptateur HBA
  a| 
 7
  a| 
+7
+ a| 
+7
+ a| 
+7
+ a| 
+7
+ a| 
 13
 
 |===
 |===
 
 
-5+| Configurations utilisant FibreBridge 7500N ou 7600N avec un port FC (FC1 ou FC2) uniquement 
+9+| MetroCluster 2 ou DR Groupe 2 
 
 
-5+| MetroCluster 1 ou DR Groupe 1 
+.2+| Composant .2+| Port 7+| Connexion du port du modèle de commutateur Brocade 
 
 
-.2+| Composant .2+| Port 2+| Modèles de commutateurs Brocade 6505, 6510, 6520, 7810, 7840, G610, G620, G620-1, G630, G630-1 ET DCX 8510-8 | Commutateur Brocade modèle G720 
+| Connexion au commutateur FC... | 6505, G610 | 6510, DCX 8510-8 | 6520 | 7840, DCX 8510-8 | G620, G620-1, G630, G630-1 | G720, G730 
 
 
-| Connexion au commutateur FC... | Se connecte au port du commutateur... | Se connecte au port du commutateur... 
+ a| 
+controller_x_3
+ a| 
+Port FC-VI a
+ a| 
+1
+ a| 
+Sans objet
+ a| 
+24
+ a| 
+48
+ a| 
+12
+ a| 
+18
+ a| 
+18
+
+
+
+ a| 
+Port FC-VI b
+ a| 
+2
+ a| 
+Sans objet
+ a| 
+24
+ a| 
+48
+ a| 
+12
+ a| 
+18
+ a| 
+18
+
+
+
+ a| 
+Port c FC-VI
+ a| 
+1
+ a| 
+Sans objet
+ a| 
+25
+ a| 
+49
+ a| 
+13
+ a| 
+19
+ a| 
+19
+
+
+
+ a| 
+Port FC-VI d
+ a| 
+2
+ a| 
+Sans objet
+ a| 
+25
+ a| 
+49
+ a| 
+13
+ a| 
+19
+ a| 
+19
+
+
+
+ a| 
+Port a du HBA
+ a| 
+1
+ a| 
+Sans objet
+ a| 
+26
+ a| 
+50
+ a| 
+14
+ a| 
+24
+ a| 
+26
+
+
+
+ a| 
+Port b de l'adaptateur HBA
+ a| 
+2
+ a| 
+Sans objet
+ a| 
+26
+ a| 
+50
+ a| 
+14
+ a| 
+24
+ a| 
+26
+
+
+
+ a| 
+Port c de l'adaptateur HBA
+ a| 
+1
+ a| 
+Sans objet
+ a| 
+27
+ a| 
+51
+ a| 
+15
+ a| 
+25
+ a| 
+27
+
+
+
+ a| 
+Port d de l'adaptateur HBA
+ a| 
+2
+ a| 
+Sans objet
+ a| 
+27
+ a| 
+51
+ a| 
+15
+ a| 
+25
+ a| 
+27
+
+
+
+ a| 
+controller_x_4
+ a| 
+Port FC-VI a
+ a| 
+1
+ a| 
+Sans objet
+ a| 
+28
+ a| 
+52
+ a| 
+16
+ a| 
+22
+ a| 
+22
+
+
+
+ a| 
+Port FC-VI b
+ a| 
+2
+ a| 
+Sans objet
+ a| 
+28
+ a| 
+52
+ a| 
+16
+ a| 
+22
+ a| 
+22
+
+
+
+ a| 
+Port c FC-VI
+ a| 
+1
+ a| 
+Sans objet
+ a| 
+29
+ a| 
+53
+ a| 
+17
+ a| 
+23
+ a| 
+23
+
+
+
+ a| 
+Port FC-VI d
+ a| 
+2
+ a| 
+Sans objet
+ a| 
+29
+ a| 
+53
+ a| 
+17
+ a| 
+23
+ a| 
+23
+
+
+
+ a| 
+Port a du HBA
+ a| 
+1
+ a| 
+Sans objet
+ a| 
+30
+ a| 
+54
+ a| 
+18
+ a| 
+28
+ a| 
+30
+
+
+
+ a| 
+Port b de l'adaptateur HBA
+ a| 
+2
+ a| 
+Sans objet
+ a| 
+30
+ a| 
+54
+ a| 
+18
+ a| 
+28
+ a| 
+30
+
+
+
+ a| 
+Port c de l'adaptateur HBA
+ a| 
+1
+ a| 
+Sans objet
+ a| 
+31
+ a| 
+55
+ a| 
+19
+ a| 
+29
+ a| 
+31
+
+
+
+ a| 
+Port d de l'adaptateur HBA
+ a| 
+2
+ a| 
+Sans objet
+ a| 
+31
+ a| 
+55
+ a| 
+19
+ a| 
+29
+ a| 
+31
+
+|===
+
+
+=== Configurations de tiroirs utilisant FibreBridge 7500N ou 7600N avec un port FC (FC1 ou FC2) uniquement
+
+.MetroCluster 1 ou groupe DR 1
+Le tableau suivant présente les configurations de tiroirs prises en charge dans MetroCluster 1 ou DR Groupe 1 avec FibreBridge 7500N ou 7600N et un seul port FC (FC1 ou FC2). Lorsque vous utilisez ce tableau de configuration, vous devez connaître les points suivants :
+
+* Sur les commutateurs 6510 et DCX 8510-8, vous pouvez connecter des ponts supplémentaires aux ports 16-19.
+* Sur les commutateurs 6520, vous pouvez relier des ponts supplémentaires aux ports 16-21 et 24-45.
+
+
+|===
+
+
+9+| MetroCluster 1 ou DR Groupe 1 
+
+
+.2+| Composant .2+| Port 7+| Connexion du port du modèle de commutateur Brocade 
+
+
+| Connexion au commutateur FC... | 6505, G610 | 6510, DCX 8510-8 | 6520 | 7840, DCX 8510-8 | G620, G620-1, G630, G630-1 | G720, G730 
 
 
  a| 
@@ -283,6 +741,14 @@ Pile 1
 bridge_x_1a
  a| 
 1
+ a| 
+8
+ a| 
+8
+ a| 
+8
+ a| 
+8
  a| 
 8
  a| 
@@ -297,6 +763,14 @@ bridge_x_1b
  a| 
 8
  a| 
+8
+ a| 
+8
+ a| 
+8
+ a| 
+8
+ a| 
 10
 
 
@@ -307,6 +781,14 @@ Pile 2
 bridge_x_2a
  a| 
 1
+ a| 
+9
+ a| 
+9
+ a| 
+9
+ a| 
+9
  a| 
 9
  a| 
@@ -321,6 +803,14 @@ bridge_x_2b
  a| 
 9
  a| 
+9
+ a| 
+9
+ a| 
+9
+ a| 
+9
+ a| 
 11
 
 
@@ -331,6 +821,14 @@ Pile 3
 bridge_x_3a
  a| 
 1
+ a| 
+10
+ a| 
+10
+ a| 
+10
+ a| 
+10
  a| 
 10
  a| 
@@ -345,16 +843,32 @@ bridge_x_4b
  a| 
 10
  a| 
+10
+ a| 
+10
+ a| 
+10
+ a| 
+10
+ a| 
 14
 
 
 
  a| 
-Pile y
+Pile 4
  a| 
-pont_x_ya
+bridge_x_4a
  a| 
 1
+ a| 
+11
+ a| 
+11
+ a| 
+11
+ a| 
+11
  a| 
 11
  a| 
@@ -363,9 +877,17 @@ pont_x_ya
 
 
  a| 
-bridge_x_yb
+bridge_x_4b
  a| 
 2
+ a| 
+11
+ a| 
+11
+ a| 
+11
+ a| 
+11
  a| 
 11
  a| 
@@ -374,318 +896,196 @@ bridge_x_yb
 
 
  a| 
-[NOTE]
-====
-* Sur les commutateurs G620, G630, G620-1 et G630-1, des ponts supplémentaires peuvent être câblés aux ports 12 - 17, 20 et 21.
-* Sur les commutateurs G610, des ponts supplémentaires peuvent être reliés aux ports 12 à 19.
-* Sur les commutateurs G720, des ponts supplémentaires peuvent être câblés sur les ports 16 - 17, 20 et 21.
-
-
-====
-|===
-|===
-
-
-8+| Configurations utilisant FibreBridge 7500N ou 7600N avec un port FC (FC1 ou FC2) uniquement 
-
-
-8+| MetroCluster 2 ou DR Groupe 2 
-
-
-3+|  5+| Modèle de commutateur Brocade 
-
-
-| Composant | Port | Se connecte au commutateur FC... | 6510, DCX 8510-8 | 6520 | 7840, DCX 8510-8 | G620, G620-1, G630, G630-1 | G720 
-
-
+Pile 5
  a| 
-controller_x_3
- a| 
-Port FC-VI a
+bridge_x_5a
  a| 
 1
- a| 
-24
- a| 
-48
  a| 
 12
  a| 
-18
- a| 
-18
-
-
-
- a| 
-Port FC-VI b
- a| 
-2
- a| 
-24
- a| 
-48
+12
  a| 
 12
  a| 
-18
+Sans objet
  a| 
-18
+12
+ a| 
+16
 
 
 
  a| 
-Port c FC-VI
+bridge_x_5b
+ a| 
+2
+ a| 
+12
+ a| 
+12
+ a| 
+12
+ a| 
+Sans objet
+ a| 
+12
+ a| 
+16
+
+
+
+ a| 
+Pile 6
+ a| 
+bridge_x_6a
  a| 
 1
- a| 
-25
- a| 
-49
  a| 
 13
  a| 
-19
- a| 
-19
-
-
-
- a| 
-Port FC-VI d
- a| 
-2
- a| 
-25
- a| 
-49
+13
  a| 
 13
  a| 
-19
+Sans objet
  a| 
-19
+13
+ a| 
+17
 
 
 
  a| 
-Port a du HBA
+bridge_x_6b
+ a| 
+2
+ a| 
+13
+ a| 
+13
+ a| 
+13
+ a| 
+Sans objet
+ a| 
+13
+ a| 
+17
+
+
+
+ a| 
+Pile 7
+ a| 
+bridge_x_7a
  a| 
 1
- a| 
-26
- a| 
-50
  a| 
 14
  a| 
-24
- a| 
-26
-
-
-
- a| 
-Port b de l'adaptateur HBA
- a| 
-2
- a| 
-26
- a| 
-50
+14
  a| 
 14
  a| 
-24
+Sans objet
  a| 
-26
+14
+ a| 
+20
 
 
 
  a| 
-Port c de l'adaptateur HBA
+bridge_x_7b
+ a| 
+2
+ a| 
+14
+ a| 
+14
+ a| 
+14
+ a| 
+Sans objet
+ a| 
+14
+ a| 
+20
+
+
+
+ a| 
+Pile 8
+ a| 
+bridge_x_8a
  a| 
 1
- a| 
-27
- a| 
-51
  a| 
 15
  a| 
-25
- a| 
-27
-
-
-
- a| 
-Port d de l'adaptateur HBA
- a| 
-2
- a| 
-27
- a| 
-51
+15
  a| 
 15
  a| 
-25
+Sans objet
  a| 
-27
+15
+ a| 
+21
 
 
 
  a| 
-controller_x_4
- a| 
-Port FC-VI a
- a| 
-1
- a| 
-28
- a| 
-52
- a| 
-16
- a| 
-22
- a| 
-22
-
-
-
- a| 
-Port FC-VI b
+bridge_x_8b
  a| 
 2
  a| 
-28
+15
  a| 
-52
+15
  a| 
-16
+15
  a| 
-22
+Sans objet
  a| 
-22
+15
+ a| 
+21
+
+|===
+.MetroCluster 2 ou groupe DR 2
+Le tableau suivant présente les configurations de tiroirs prises en charge dans MetroCluster 2 ou DR Groupe 2 pour les ponts FibreBridge 7500N ou 7600N utilisant un port FC (FC1 ou FC2) uniquement. Lorsque vous utilisez ce tableau de configuration, vous devez connaître les points suivants :
+
+* Sur les commutateurs 6520, vous pouvez relier des ponts supplémentaires aux ports 64-69 et 72-93.
 
 
-
- a| 
-Port c FC-VI
- a| 
-1
- a| 
-29
- a| 
-53
- a| 
-17
- a| 
-23
- a| 
-23
+|===
 
 
-
- a| 
-Port FC-VI d
- a| 
-2
- a| 
-29
- a| 
-53
- a| 
-17
- a| 
-23
- a| 
-23
+9+| MetroCluster 2 ou DR Groupe 2 
 
 
-
- a| 
-Port a du HBA
- a| 
-1
- a| 
-30
- a| 
-54
- a| 
-18
- a| 
-28
- a| 
-30
+.2+| Composant .2+| Port 7+| Connexion du port du modèle de commutateur Brocade 
 
 
-
- a| 
-Port b de l'adaptateur HBA
- a| 
-2
- a| 
-30
- a| 
-54
- a| 
-18
- a| 
-28
- a| 
-30
-
-
-
- a| 
-Port c de l'adaptateur HBA
- a| 
-1
- a| 
-31
- a| 
-55
- a| 
-19
- a| 
-29
- a| 
-31
-
-
-
- a| 
-Port d de l'adaptateur HBA
- a| 
-2
- a| 
-32
- a| 
-55
- a| 
-19
- a| 
-29
- a| 
-31
-
+| Connexion au commutateur FC... | 6505, G610 | 6510, DCX 8510-8 | 6520 | 7840, DCX 8510-8 | G620, G620-1, G630, G630-1 | G720, G730 
 
 
  a| 
 Pile 1
  a| 
-bridge_x_51a
+bridge_x_1a
  a| 
 1
+ a| 
+Sans objet
  a| 
 32
  a| 
 56
  a| 
-20
+29
  a| 
 26
  a| 
@@ -694,15 +1094,17 @@ bridge_x_51a
 
 
  a| 
-bridge_x_51b
+bridge_x_1b
  a| 
 2
+ a| 
+Sans objet
  a| 
 32
  a| 
 56
  a| 
-20
+29
  a| 
 26
  a| 
@@ -713,9 +1115,11 @@ bridge_x_51b
  a| 
 Pile 2
  a| 
-bridge_x_52a
+bridge_x_2a
  a| 
 1
+ a| 
+Sans objet
  a| 
 33
  a| 
@@ -730,9 +1134,11 @@ bridge_x_52a
 
 
  a| 
-bridge_x_52b
+bridge_x_2b
  a| 
 2
+ a| 
+Sans objet
  a| 
 33
  a| 
@@ -749,9 +1155,11 @@ bridge_x_52b
  a| 
 Pile 3
  a| 
-bridge_x_53a
+bridge_x_3a
  a| 
 1
+ a| 
+Sans objet
  a| 
 34
  a| 
@@ -766,9 +1174,11 @@ bridge_x_53a
 
 
  a| 
-bridge_x_54b
+bridge_x_4b
  a| 
 2
+ a| 
+Sans objet
  a| 
 34
  a| 
@@ -783,12 +1193,14 @@ bridge_x_54b
 
 
  a| 
-Pile y
+Pile 4
  a| 
-pont_x_ya
+bridge_x_4a
  a| 
 1
  a| 
+Sans objet
+ a| 
 35
  a| 
 59
@@ -802,10 +1214,12 @@ pont_x_ya
 
 
  a| 
-bridge_x_yb
+bridge_x_4b
  a| 
 2
  a| 
+Sans objet
+ a| 
 35
  a| 
 59
@@ -819,26 +1233,185 @@ bridge_x_yb
 
 
  a| 
-[NOTE]
-====
-* Sur les commutateurs G720, des ponts supplémentaires peuvent être câblés sur les ports 36-39.
+Pile 5
+ a| 
+bridge_x_5a
+ a| 
+1
+ a| 
+Sans objet
+ a| 
+Sans objet
+ a| 
+60
+ a| 
+Sans objet
+ a| 
+32
+ a| 
+36
 
 
-====
+
+ a| 
+bridge_x_5b
+ a| 
+2
+ a| 
+Sans objet
+ a| 
+Sans objet
+ a| 
+60
+ a| 
+Sans objet
+ a| 
+32
+ a| 
+36
+
+
+
+ a| 
+Pile 6
+ a| 
+bridge_x_6a
+ a| 
+1
+ a| 
+Sans objet
+ a| 
+Sans objet
+ a| 
+61
+ a| 
+Sans objet
+ a| 
+33
+ a| 
+37
+
+
+
+ a| 
+bridge_x_6b
+ a| 
+2
+ a| 
+Sans objet
+ a| 
+Sans objet
+ a| 
+61
+ a| 
+Sans objet
+ a| 
+33
+ a| 
+37
+
+
+
+ a| 
+Pile 7
+ a| 
+bridge_x_7a
+ a| 
+1
+ a| 
+Sans objet
+ a| 
+Sans objet
+ a| 
+62
+ a| 
+Sans objet
+ a| 
+34
+ a| 
+38
+
+
+
+ a| 
+bridge_x_7b
+ a| 
+2
+ a| 
+Sans objet
+ a| 
+Sans objet
+ a| 
+62
+ a| 
+Sans objet
+ a| 
+34
+ a| 
+38
+
+
+
+ a| 
+Pile 8
+ a| 
+bridge_x_8a
+ a| 
+1
+ a| 
+Sans objet
+ a| 
+Sans objet
+ a| 
+63
+ a| 
+Sans objet
+ a| 
+35
+ a| 
+39
+
+
+
+ a| 
+bridge_x_8b
+ a| 
+2
+ a| 
+Sans objet
+ a| 
+Sans objet
+ a| 
+63
+ a| 
+Sans objet
+ a| 
+35
+ a| 
+39
+
 |===
+
+
+=== Configuration des tiroirs avec FibreBridge 7500N ou 7600N utilisant les deux ports FC (FC1 ou FC2)
+
+.MetroCluster 1 ou groupe DR 1
+Le tableau suivant présente les configurations de tiroirs prises en charge dans MetroCluster 1 ou DR Groupe 1 pour les ponts FibreBridge 7500N ou 7600N utilisant les deux ports FC (FC1 ou FC2). Lorsque vous utilisez ce tableau de configuration, vous devez connaître les points suivants :
+
+* Sur les commutateurs 6510 et DCX 8510-8, vous pouvez connecter des ponts supplémentaires aux ports 16-19.
+* Sur les commutateurs 6520, vous pouvez relier des ponts supplémentaires aux ports 16-21 et 24-45.
+
+
 |===
 
 
-6+| Configurations utilisant FibreBridge 7500N ou 7600N utilisant les deux ports FC (FC1 et FC2) 
+10+| MetroCluster 1 ou DR Groupe 1 
 
 
-6+| MetroCluster 1 ou DR Groupe 1 
+2.2+| Composant .2+| Port 7+| Connexion du port du modèle de commutateur Brocade 
 
 
-2.2+| Composant .2+| Port 2+| Modèles de commutateurs Brocade 6505, 6510, 6520, 7810, 7840, G610, G620, G620-1, G630, G630-1, Et DCX 8510-8 | Commutateur Brocade G720 
-
-
-| Se connecte au commutateur FC... | Se connecte au port du commutateur... | Se connecte au port du commutateur... 
+| Connexion au commutateur FC... | 6505, G610 | 6510, DCX 8510-8 | 6520 | 7840, DCX 8510-8 | G620, G620-1, G630, G630-1 | G720, G730 
 
 
  a| 
@@ -852,6 +1425,14 @@ FC1
  a| 
 8
  a| 
+8
+ a| 
+8
+ a| 
+8
+ a| 
+8
+ a| 
 10
 
 
@@ -863,16 +1444,32 @@ FC2
  a| 
 8
  a| 
+8
+ a| 
+8
+ a| 
+8
+ a| 
+8
+ a| 
 10
 
 
 
  a| 
-Bridge_x_1B
+bridge_x_1b
  a| 
 FC1
  a| 
 1
+ a| 
+9
+ a| 
+9
+ a| 
+9
+ a| 
+9
  a| 
 9
  a| 
@@ -884,6 +1481,14 @@ FC1
 FC2
  a| 
 2
+ a| 
+9
+ a| 
+9
+ a| 
+9
+ a| 
+9
  a| 
 9
  a| 
@@ -902,6 +1507,14 @@ FC1
  a| 
 10
  a| 
+10
+ a| 
+10
+ a| 
+10
+ a| 
+10
+ a| 
 14
 
 
@@ -913,16 +1526,32 @@ FC2
  a| 
 10
  a| 
+10
+ a| 
+10
+ a| 
+10
+ a| 
+10
+ a| 
 14
 
 
 
  a| 
-Bridge_x_2B
+bridge_x_2b
  a| 
 FC1
  a| 
 1
+ a| 
+11
+ a| 
+11
+ a| 
+11
+ a| 
+11
  a| 
 11
  a| 
@@ -934,6 +1563,14 @@ FC1
 FC2
  a| 
 2
+ a| 
+11
+ a| 
+11
+ a| 
+11
+ a| 
+11
  a| 
 11
  a| 
@@ -950,7 +1587,15 @@ FC1
  a| 
 1
  a| 
-12*
+12
+ a| 
+12
+ a| 
+12
+ a| 
+Sans objet
+ a| 
+12
  a| 
 16
 
@@ -961,20 +1606,36 @@ FC2
  a| 
 2
  a| 
-12*
+12
+ a| 
+12
+ a| 
+12
+ a| 
+Sans objet
+ a| 
+12
  a| 
 16
 
 
 
  a| 
-Bridge_x_3B
+bridge_x_3b
  a| 
 FC1
  a| 
 1
  a| 
-13*
+13
+ a| 
+13
+ a| 
+13
+ a| 
+Sans objet
+ a| 
+13
  a| 
 17
 
@@ -985,22 +1646,38 @@ FC2
  a| 
 2
  a| 
-13*
+13
+ a| 
+13
+ a| 
+13
+ a| 
+Sans objet
+ a| 
+13
  a| 
 17
 
 
 
  a| 
-Pile y
+Pile 4
  a| 
-pont_x_ya
+bridge_x_4a
  a| 
 FC1
  a| 
 1
  a| 
-14*
+14
+ a| 
+14
+ a| 
+14
+ a| 
+Sans objet
+ a| 
+14
  a| 
 20
 
@@ -1011,20 +1688,36 @@ FC2
  a| 
 2
  a| 
-14*
+14
+ a| 
+14
+ a| 
+14
+ a| 
+Sans objet
+ a| 
+14
  a| 
 20
 
 
 
  a| 
-bridge_x_yb
+bridge_x_4b
  a| 
 FC1
  a| 
 1
  a| 
-15*
+15
+ a| 
+15
+ a| 
+15
+ a| 
+Sans objet
+ a| 
+15
  a| 
 21
 
@@ -1035,318 +1728,47 @@ FC2
  a| 
 2
  a| 
-15*
+15
+ a| 
+15
+ a| 
+15
+ a| 
+Sans objet
+ a| 
+15
  a| 
 21
 
-
-
- a| 
-#42 ; les ports 12 à 15 sont réservés au deuxième groupe MetroCluster ou DR sur le commutateur Brocade 7840.
-
-
-NOTE: Des ponts supplémentaires peuvent être câblés sur les ports 16, 17, 20 et 21 des commutateurs G620, G630, G620-1 et G630-1.
-
 |===
+.MetroCluster 2 ou groupe DR 2
+Le tableau suivant présente les configurations de tiroirs prises en charge dans MetroCluster 2 ou DR Groupe 2 pour les ponts FibreBridge 7500N ou 7600N utilisant les deux ports FC (FC1 ou FC2). Lorsque vous utilisez ce tableau de configuration, vous devez connaître les points suivants :
+
+* Sur les commutateurs 6520, vous pouvez relier des ponts supplémentaires aux ports 64-69 et 72-93.
+
+
 |===
 
 
-9+| Configurations utilisant FibreBridge 7500N ou 7600N utilisant les deux ports FC (FC1 et FC2) 
+10+| MetroCluster 2 ou DR Groupe 2 
 
 
-9+| MetroCluster 2 ou DR Groupe 2 
+2.2+| Composant .2+| Port 7+| Connexion du port du modèle de commutateur Brocade 
 
 
-2.2+| Composant .2+| Port 6+| Modèle de commutateur Brocade 
-
-
-| Se connecte au commutateur FC... | 6510, DCX 8510-8 | 6520 | 7840, DCX 8510-8 | G620, G620-1, G630, G630-1 | G720 
-
-
- a| 
-controller_x_3
- a| 
-Port FC-VI a
- a| 
-1
- a| 
-24
- a| 
-48
- a| 
-12
- a| 
-18
- a| 
-18
-
-
-
- a| 
-Port FC-VI b
- a| 
-2
- a| 
-24
- a| 
-48
- a| 
-12
- a| 
-18
- a| 
-18
-
-
-
- a| 
-Port c FC-VI
- a| 
-1
- a| 
-25
- a| 
-49
- a| 
-13
- a| 
-19
- a| 
-19
-
-
-
- a| 
-Port FC-VI d
- a| 
-2
- a| 
-25
- a| 
-49
- a| 
-13
- a| 
-19
- a| 
-19
-
-
-
- a| 
-Port a du HBA
- a| 
-1
- a| 
-26
- a| 
-50
- a| 
-14
- a| 
-24
- a| 
-26
-
-
-
- a| 
-Port b de l'adaptateur HBA
- a| 
-2
- a| 
-26
- a| 
-50
- a| 
-14
- a| 
-24
- a| 
-26
-
-
-
- a| 
-Port c de l'adaptateur HBA
- a| 
-1
- a| 
-27
- a| 
-51
- a| 
-15
- a| 
-25
- a| 
-27
-
-
-
- a| 
-Port d de l'adaptateur HBA
- a| 
-2
- a| 
-27
- a| 
-51
- a| 
-15
- a| 
-25
- a| 
-27
-
-
-
- a| 
-controller_x_4
- a| 
-Port FC-VI a
- a| 
-1
- a| 
-28
- a| 
-52
- a| 
-16
- a| 
-22
- a| 
-22
-
-
-
- a| 
-Port FC-VI b
- a| 
-2
- a| 
-28
- a| 
-52
- a| 
-16
- a| 
-22
- a| 
-22
-
-
-
- a| 
-Port c FC-VI
- a| 
-1
- a| 
-29
- a| 
-53
- a| 
-17
- a| 
-23
- a| 
-23
-
-
-
- a| 
-Port FC-VI d
- a| 
-2
- a| 
-29
- a| 
-53
- a| 
-17
- a| 
-23
- a| 
-23
-
-
-
- a| 
-Port a du HBA
- a| 
-1
- a| 
-30
- a| 
-54
- a| 
-18
- a| 
-28
- a| 
-30
-
-
-
- a| 
-Port b de l'adaptateur HBA
- a| 
-2
- a| 
-30
- a| 
-54
- a| 
-18
- a| 
-28
- a| 
-30
-
-
-
- a| 
-Port c de l'adaptateur HBA
- a| 
-1
- a| 
-31
- a| 
-55
- a| 
-19
- a| 
-29
- a| 
-31
-
-
-
- a| 
-Port d de l'adaptateur HBA
- a| 
-2
- a| 
-31
- a| 
-55
- a| 
-19
- a| 
-29
- a| 
-31
-
+| Connexion au commutateur FC... | 6505, G610 | 6510, DCX 8510-8 | 6520 | 7840, DCX 8510-8 | G620, G620-1, G630, G630-1 | G720, G730 
 
 
  a| 
 Pile 1
  a| 
-bridge_x_51a
+bridge_x_1a
  a| 
 FC1
  a| 
 1
+ a| 
+Sans objet
  a| 
 32
  a| 
@@ -1365,6 +1787,8 @@ FC2
  a| 
 2
  a| 
+Sans objet
+ a| 
 32
  a| 
 56
@@ -1378,11 +1802,13 @@ FC2
 
 
  a| 
-bridge_x_51b
+bridge_x_1b
  a| 
 FC1
  a| 
 1
+ a| 
+Sans objet
  a| 
 33
  a| 
@@ -1400,6 +1826,8 @@ FC1
 FC2
  a| 
 2
+ a| 
+Sans objet
  a| 
 33
  a| 
@@ -1416,11 +1844,13 @@ FC2
  a| 
 Pile 2
  a| 
-bridge_x_52a
+bridge_x_2a
  a| 
 FC1
  a| 
 1
+ a| 
+Sans objet
  a| 
 34
  a| 
@@ -1439,6 +1869,8 @@ FC2
  a| 
 2
  a| 
+Sans objet
+ a| 
 34
  a| 
 58
@@ -1452,11 +1884,13 @@ FC2
 
 
  a| 
-bridge_x_52b
+bridge_x_2b
  a| 
 FC1
  a| 
 1
+ a| 
+Sans objet
  a| 
 35
  a| 
@@ -1474,6 +1908,8 @@ FC1
 FC2
  a| 
 2
+ a| 
+Sans objet
  a| 
 35
  a| 
@@ -1490,17 +1926,19 @@ FC2
  a| 
 Pile 3
  a| 
-bridge_x_53a
+bridge_x_3a
  a| 
 FC1
  a| 
 1
  a| 
-36
+Sans objet
+ a| 
+Sans objet
  a| 
 60
  a| 
--
+Sans objet
  a| 
 32
  a| 
@@ -1513,11 +1951,13 @@ FC2
  a| 
 2
  a| 
-36
+Sans objet
+ a| 
+Sans objet
  a| 
 60
  a| 
--
+Sans objet
  a| 
 32
  a| 
@@ -1526,19 +1966,21 @@ FC2
 
 
  a| 
-bridge_x_53b
+bridge_x_3b
  a| 
 FC1
  a| 
 1
  a| 
-37
+Sans objet
+ a| 
+Sans objet
  a| 
 61
  a| 
--
+Sans objet
  a| 
-33
+32
  a| 
 37
 
@@ -1549,32 +1991,36 @@ FC2
  a| 
 2
  a| 
-37
+Sans objet
+ a| 
+Sans objet
  a| 
 61
  a| 
--
+Sans objet
  a| 
-33
+32
  a| 
 37
 
 
 
  a| 
-Pile y
+Pile 4
  a| 
-bridge_x_5ya
+bridge_x_4a
  a| 
 FC1
  a| 
 1
  a| 
-38
+Sans objet
+ a| 
+Sans objet
  a| 
 62
  a| 
--
+Sans objet
  a| 
 34
  a| 
@@ -1587,11 +2033,13 @@ FC2
  a| 
 2
  a| 
-38
+Sans objet
+ a| 
+Sans objet
  a| 
 62
  a| 
--
+Sans objet
  a| 
 34
  a| 
@@ -1600,17 +2048,19 @@ FC2
 
 
  a| 
-bridge_x_5yb
+bridge_x_4b
  a| 
 FC1
  a| 
 1
  a| 
-39
+Sans objet
+ a| 
+Sans objet
  a| 
 63
  a| 
--
+Sans objet
  a| 
 35
  a| 
@@ -1623,22 +2073,17 @@ FC2
  a| 
 2
  a| 
-39
+Sans objet
+ a| 
+Sans objet
  a| 
 63
  a| 
--
+Sans objet
  a| 
 35
  a| 
 39
-
-
-
- a| 
-
-NOTE: Des ponts supplémentaires peuvent être câblés sur les ports 36 à 39 des commutateurs G620, G630, G620-1 et G630-1.
- a| 
 
 |===
 
@@ -2956,7 +3401,7 @@ FC2
 16
 
 |===
-Des ponts supplémentaires peuvent être connectés à l'aide des ports 17 à 40 et 57 à 88 en suivant le même modèle.
+Vous pouvez fixer des ponts supplémentaires à l'aide des ports 17 à 40 et 57 à 88 en suivant le même schéma.
 
 |===
 
@@ -3126,7 +3571,7 @@ FC2
 16
 
 |===
-Des ponts supplémentaires pour un deuxième groupe de reprise sur incident ou une deuxième configuration MetroCluster peuvent être connectés en utilisant les ports 33 à 40 suivant le même modèle.
+Vous pouvez attacher des ponts supplémentaires pour un deuxième groupe DR ou une deuxième configuration MetroCluster en utilisant les ports 33 à 40 selon le même schéma.
 
 |===
 
@@ -3296,9 +3741,9 @@ FC2
 23
 
 |===
-Des ponts supplémentaires pour un deuxième groupe de reprise sur incident ou une deuxième configuration MetroCluster peuvent être connectés en utilisant les ports 25 à 48 suivant le même modèle.
+Vous pouvez attacher des ponts supplémentaires pour un deuxième groupe DR ou une deuxième configuration MetroCluster en utilisant les ports 25 à 48 selon le même schéma.
 
-Les tableaux suivants indiquent l'utilisation des ports de pont lors de l'utilisation de ponts FibreBridge 7500N ou 7600N utilisant un seul port FC (FC1 ou FC2). Pour les ponts FibreBridge 7500N ou 7600N utilisant un port FC, FC1 ou FC2 peut être câblé au port indiqué comme FC1. Des ponts supplémentaires peuvent être connectés à l'aide des ports 25-48.
+Les tableaux suivants indiquent l'utilisation des ports de pont lors de l'utilisation de ponts FibreBridge 7500N ou 7600N utilisant un seul port FC (FC1 ou FC2). Pour les ponts FibreBridge 7500N ou 7600N utilisant un port FC, vous pouvez raccorder FC1 ou FC2 au port indiqué comme FC1. Vous pouvez également fixer des ponts supplémentaires à l'aide des ports 25-48.
 
 |===
 
@@ -3487,7 +3932,7 @@ FC1
 16
 
 |===
-Des ponts supplémentaires peuvent être connectés à l'aide des ports 17 à 40 et 57 à 88 en suivant le même modèle.
+Vous pouvez fixer des ponts supplémentaires à l'aide des ports 17 à 40 et 57 à 88 en suivant le même schéma.
 
 |===
 
@@ -3676,7 +4121,7 @@ FC1
 16
 
 |===
-Des ponts supplémentaires pour un deuxième groupe de reprise sur incident ou une deuxième configuration MetroCluster peuvent être connectés en utilisant les ports 25 à 48 suivant le même modèle.
+Vous pouvez attacher des ponts supplémentaires pour un deuxième groupe DR ou une deuxième configuration MetroCluster en utilisant les ports 25 à 48 selon le même schéma.
 
 |===
 
@@ -3862,7 +4307,7 @@ FC1
 23
 
 |===
-Des ponts supplémentaires peuvent être connectés à l'aide des ports 25 à 48 en suivant le même modèle.
+Vous pouvez fixer des ponts supplémentaires à l'aide des ports 25 à 48 en suivant le même schéma.
 
 
 
@@ -3972,10 +4417,399 @@ ISL 4
 
 == Utilisation des ports Cisco 9132T dans des configurations MetroCluster à quatre et huit nœuds exécutant ONTAP 9.4 et versions ultérieures
 
-Les tableaux suivants indiquent l'utilisation des ports sur un commutateur Cisco 9132T. Les tableaux présentent le nombre maximum de configurations prises en charge avec quatre et huit modules de contrôleur dans deux groupes de reprise sur incident.
+Les tableaux suivants indiquent l'utilisation des ports sur un commutateur Cisco 9132T.
+
+
+
+=== Configurations de contrôleur utilisant FibreBridge 7500N ou 7600N avec les deux ports FC (FC1 et FC2)
+
+Le tableau suivant présente les configurations de contrôleur utilisant FibreBridge 7500N ou 7600N utilisant les deux ports FC (FC1 et FC2). Les tableaux présentent le nombre maximum de configurations prises en charge avec quatre et huit modules de contrôleur dans deux groupes de reprise sur incident.
 
 
 NOTE: Pour les configurations à huit nœuds, vous devez effectuer la segmentation manuellement, car les CFR ne sont pas fournis.
+
+|===
+
+
+7+| MetroCluster 1 ou DR Groupe 1 
+
+
+4+|  2+| Quatre nœuds | Huit nœuds 
+
+
+2+| Composant | Port | Se connecte au commutateur FC... | 9132T (1 LEM) | 9132T (2 LEM) | 9132T (2 LEM) 
+
+
+ a| 
+controller_x_1
+ a| 
+Port FC-VI a
+ a| 
+1
+ a| 
+LEM1-1
+ a| 
+LEM1-1
+ a| 
+LEM1-1
+
+
+
+ a| 
+Port FC-VI b
+ a| 
+2
+ a| 
+LEM1-1
+ a| 
+LEM1-1
+ a| 
+LEM1-1
+
+
+
+ a| 
+Port c FC-VI
+ a| 
+1
+ a| 
+LEM1-2
+ a| 
+LEM1-2
+ a| 
+LEM1-2
+
+
+
+ a| 
+Port FC-VI d
+ a| 
+2
+ a| 
+LEM1-2
+ a| 
+LEM1-2
+ a| 
+LEM1-2
+
+
+
+ a| 
+Port a du HBA
+ a| 
+1
+ a| 
+LEM1-5
+ a| 
+LEM1-5
+ a| 
+LEM1-3
+
+
+
+ a| 
+Port b de l'adaptateur HBA
+ a| 
+2
+ a| 
+LEM1-5
+ a| 
+LEM1-5
+ a| 
+LEM1-3
+
+
+
+ a| 
+Port c de l'adaptateur HBA
+ a| 
+1
+ a| 
+LEM1-6
+ a| 
+LEM1-6
+ a| 
+LEM1-4
+
+
+
+ a| 
+Port d de l'adaptateur HBA
+ a| 
+2
+ a| 
+LEM1-6
+ a| 
+LEM1-6
+ a| 
+LEM1-4
+
+
+
+ a| 
+controller_x_2
+ a| 
+Port FC-VI a
+ a| 
+1
+ a| 
+LEM1-7
+ a| 
+LEM1-7
+ a| 
+LEM1-5
+
+
+
+ a| 
+Port FC-VI b
+ a| 
+2
+ a| 
+LEM1-7
+ a| 
+LEM1-7
+ a| 
+LEM1-5
+
+
+
+ a| 
+Port c FC-VI
+ a| 
+1
+ a| 
+LEM1-8
+ a| 
+LEM1-8
+ a| 
+LEM1-6
+
+
+
+ a| 
+Port FC-VI d
+ a| 
+2
+ a| 
+LEM1-8
+ a| 
+LEM1-8
+ a| 
+LEM1-6
+
+
+
+ a| 
+Port a du HBA
+ a| 
+1
+ a| 
+LEM1-11
+ a| 
+LEM1-11
+ a| 
+LEM1-7
+
+
+
+ a| 
+Port b de l'adaptateur HBA
+ a| 
+2
+ a| 
+LEM1-11
+ a| 
+LEM1-11
+ a| 
+LEM1-7
+
+
+
+ a| 
+Port c de l'adaptateur HBA
+ a| 
+1
+ a| 
+LEM1-12
+ a| 
+LEM1-12
+ a| 
+LEM1-8
+
+
+
+ a| 
+Port d de l'adaptateur HBA
+ a| 
+2
+ a| 
+LEM1-12
+ a| 
+LEM1-12
+ a| 
+LEM1-8
+
+
+
+7+| MetroCluster 2 ou DR Groupe 2 
+
+
+ a| 
+controller_x_3
+ a| 
+Port FC-VI a
+ a| 
+1
+| - | -  a| 
+LEM2-1
+
+
+
+ a| 
+Port FC-VI b
+ a| 
+2
+| - | -  a| 
+LEM2-1
+
+
+
+ a| 
+Port c FC-VI
+ a| 
+1
+| - | -  a| 
+LEM2-2
+
+
+
+ a| 
+Port FC-VI d
+ a| 
+2
+| - | -  a| 
+LEM2-2
+
+
+
+ a| 
+Port a du HBA
+ a| 
+1
+| - | -  a| 
+LEM2-3
+
+
+
+ a| 
+Port b de l'adaptateur HBA
+ a| 
+2
+| - | -  a| 
+LEM2-3
+
+
+
+ a| 
+Port c de l'adaptateur HBA
+ a| 
+1
+| - | -  a| 
+LEM2-4
+
+
+
+ a| 
+Port d de l'adaptateur HBA
+ a| 
+2
+| - | -  a| 
+LEM2-4
+
+
+
+ a| 
+controller_x_4
+ a| 
+Port a du FC-VI-1
+ a| 
+1
+| - | -  a| 
+LEM2-5
+
+
+
+ a| 
+Port b FC-VI-1
+ a| 
+2
+| - | -  a| 
+LEM2-5
+
+
+
+ a| 
+Port c FC-VI-1
+ a| 
+1
+| - | -  a| 
+LEM2-6
+
+
+
+ a| 
+Port d FC-VI-1
+ a| 
+2
+| - | -  a| 
+LEM2-6
+
+
+
+ a| 
+Port a du HBA
+ a| 
+1
+| - | -  a| 
+LEM2-7
+
+
+
+ a| 
+Port b de l'adaptateur HBA
+ a| 
+2
+| - | -  a| 
+LEM2-7
+
+
+
+ a| 
+Port c de l'adaptateur HBA
+ a| 
+1
+| - | -  a| 
+LEM2-8
+
+
+
+ a| 
+Port d de l'adaptateur HBA
+ a| 
+2
+| - | -  a| 
+LEM2-8
+
+|===
+
+
+=== Cisco 9132T avec 1 LEM et un groupe MetroCluster ou DR à quatre nœuds
+
+Les tableaux suivants indiquent l'utilisation des ports pour un commutateur Cisco 9132T avec 1 LEM et un groupe MetroCluster ou DR à quatre nœuds.
+
+
+NOTE: Une seule (1) pile de ponts est prise en charge avec les commutateurs 9132T et un module LEM.
 
 |===
 
@@ -4032,12 +4866,15 @@ LEM1-14
 
 |===
 
-NOTE: Une seule (1) pile de ponts est prise en charge avec les commutateurs 9132T et un module LEM.
+
+=== Cisco 9132T avec 2 LEM et un MetroCluster ou un groupe DR à quatre nœuds
+
+Le tableau suivant indique l'utilisation des ports pour un commutateur Cisco 9132T avec 2 LEM et un groupe MetroCluster ou DR à quatre nœuds.
+
+
+NOTE: Dans les configurations à quatre nœuds, vous pouvez câbler des ponts supplémentaires aux ports LEM2-5 via LEM2-8 dans les commutateurs 9132T avec 2 plis.
 
 |===
-
-
-4+| Cisco 9132T avec 2 LEM et un MetroCluster ou un groupe DR à quatre nœuds 
 
 
 4+| MetroCluster 1 ou DR Groupe 1 
@@ -4209,12 +5046,15 @@ LEM2-4
 
 |===
 
-NOTE: Dans les configurations à quatre nœuds, vous pouvez câbler des ponts supplémentaires aux ports LEM2-5 via LEM2-8 dans les commutateurs 9132T avec 2 plis.
+
+=== Cisco 9132T avec deux MetroCluster à quatre nœuds ou un MetroCluster à huit nœuds avec deux groupes de reprise après incident
+
+Le tableau suivant présente l'utilisation des ports pour un commutateur Cisco 9132T avec deux MetroCluster à quatre nœuds ou un MetroCluster à huit nœuds avec deux groupes DR.
+
+
+NOTE: Dans des configurations à huit nœuds, vous pouvez câbler des ponts supplémentaires aux ports LEM2-13 via LEM2-16 dans des commutateurs 9132T avec 2 plis.
 
 |===
-
-
-4+| Cisco 9132T avec deux MetroCluster à quatre nœuds ou un MetroCluster à huit nœuds avec deux groupes de reprise après incident 
 
 
 4+| MetroCluster 1 ou DR Groupe 1 
@@ -4389,9 +5229,6 @@ LEM2-12
 
 |===
 
-NOTE: Dans des configurations à huit nœuds, vous pouvez câbler des ponts supplémentaires aux ports LEM2-13 via LEM2-16 dans des commutateurs 9132T avec 2 plis.
-
-
 
 == Utilisation du port Cisco 9132T pour les liens ISL dans des configurations à quatre et huit nœuds dans une configuration MetroCluster exécutant ONTAP 9.1 ou une version ultérieure
 
@@ -4415,20 +5252,20 @@ Le tableau suivant présente l'utilisation du port ISL pour un commutateur Cisco
 | ISL2 | LEM1-16 | LEM2-10 | LEM1-14 
 
 
-| ISL3 |  | LEM2-11 | LEM1-15 
+| ISL3 | - | LEM2-11 | LEM1-15 
 
 
-| ISL4 |  | LEM2-12 | LEM1-16 
+| ISL4 | - | LEM2-12 | LEM1-16 
 
 
-| ISL5 |  | LEM2-13 |  
+| ISL5 | - | LEM2-13 | - 
 
 
-| ISL6 |  | LEM2-14 |  
+| ISL6 | - | LEM2-14 | - 
 
 
-| ISL7 |  | LEM2-15 |  
+| ISL7 | - | LEM2-15 | - 
 
 
-| ISL8 |  | LEM2-16 |  
+| ISL8 | - | LEM2-16 | - 
 |===
