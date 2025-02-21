@@ -336,6 +336,10 @@ Group Cluster Node               State          Mirroring Mode
 ....
 . Configurez les interfaces IP MetroCluster pour les nœuds IP MetroCluster nouvellement rejoints :
 +
+
+CAUTION: N'utilisez pas d'adresses IP 169.254.17.x ou 169.254.18.x lorsque vous créez des interfaces IP MetroCluster pour éviter les conflits avec les adresses IP d'interface générées automatiquement par le système dans la même plage.
+
++
 `metrocluster configuration-settings interface create -cluster-name`
 
 +

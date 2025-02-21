@@ -2286,7 +2286,6 @@
   <block id="64977ab6a02737ff27944bb4e643f9a9" category="paragraph">Utilisez les liens suivants pour installer et configurer le logiciel disjoncteur d'attache ou le médiateur :</block>
   <block id="416e335daad496ad8619dd5e0873c083" category="inline-link-macro">Installer et configurer le logiciel MetroCluster Tiebreaker</block>
   <block id="3e124f4767179cdcf91533c7d87b883f" category="list-text"><block ref="3e124f4767179cdcf91533c7d87b883f" category="inline-link-macro-rx"></block></block>
-  <block id="353f64efd56caa103dcbf2b9e24c3129" category="list-text">lien :./install-ip/concept_mediator_requirements.html</block>
   <block id="4d60f545ef2535cd524505ef40a30ea5" category="section-title">Comment le logiciel NetApp MetroCluster Tiebreaker détecte les défaillances</block>
   <block id="8bb8a47d0f557ce75d9484e1324aa470" category="paragraph">Il réside sur un hôte Linux Vous n'avez besoin du logiciel disjoncteur d'attache que si vous voulez surveiller deux clusters et connaître l'état de connectivité entre eux depuis un troisième site. Dans un cluster, ceci permet à chaque partenaire de distinguer une panne de liaison ISL ou de liaison intersite d'une panne de site.</block>
   <block id="6db2de186870408fb9893140f8fb90e7" category="paragraph">Après avoir installé le logiciel disjoncteur d'attache sur un hôte Linux, vous pouvez configurer les clusters dans une configuration MetroCluster afin de surveiller les incidents.</block>
@@ -3392,16 +3391,6 @@
   <block id="158cb58d37ae471e855a50eebdf79050" category="list-text">Appliquer le script RCF :</block>
   <block id="3c0c5e88db6d4b3741126778351471ec" category="paragraph"><block ref="a3b51a11425b2e2e727375b543ea1877" prefix="" category="inline-code"></block></block>
   <block id="8dbef93c578a2dd1a148ce7a8e7ed428" category="list-text">Répétez les étapes précédentes pour chacun des trois autres commutateurs en veillant à copier le fichier RCF correspondant sur le commutateur correspondant.</block>
-  <block id="09cb6984bdf1b82c9749906ba1a69331" category="summary">Vous pouvez modifier les propriétés suivantes d'une interface IP MetroCluster, d'une adresse IP, d'un masque et d'une passerelle. Vous pouvez utiliser n'importe quelle combinaison de paramètres pour la mise à jour.</block>
-  <block id="d7fffb0ac95f2fd216c5e3fd04365cca" category="paragraph">Vous devrez peut-être mettre à jour ces propriétés, par exemple si une adresse IP dupliquée est détectée ou si une passerelle doit changer dans le cas d'un réseau de couche 3 en raison de modifications de configuration du routeur.</block>
-  <block id="383d9b07e1ef0cfcfa9ec36fecccfe02" category="paragraph">Vous ne pouvez modifier qu'une interface à la fois. Cette interface entraînera une perturbation du trafic jusqu'à ce que les autres interfaces soient mises à jour et que les connexions soient reétablies.</block>
-  <block id="8450a359c3efc774857fe0f3189456e0" category="paragraph">Utilisez le<block ref="a7c7bfc3508e315ba41d4dc6412930eb" prefix=" " category="inline-code"></block> Commande permettant de modifier toute propriété d'interface IP MetroCluster.</block>
-  <block id="700215bf58e5cc6edce60155aeb7c44a" category="section-title">Modifiez l'adresse IP, le masque de réseau et la passerelle</block>
-  <block id="2747f7ff86cce509295bfb4ba2b1c4fa" category="list-text">Mettez à jour l'adresse IP, le masque de réseau et la passerelle pour un seul nœud et une seule interface :<block ref="a7c7bfc3508e315ba41d4dc6412930eb" prefix=" " category="inline-code"></block></block>
-  <block id="2f545dcb650b5848061814c5ce3b4cf4" category="paragraph">La commande suivante indique comment mettre à jour l'adresse IP, le masque de réseau et la passerelle :</block>
-  <block id="c8a08760312508ec804450cb7fad4702" category="list-text">[[step2]]Vérifiez que toute la connectivité fonctionne pour toutes les interfaces :<block ref="0dea99cd92a8ce54e8bf65bd553a3e89" prefix=" " category="inline-code"></block></block>
-  <block id="3fc201ecdcbc7e37cc8a9b91bd0c01b3" category="paragraph">La commande suivante indique comment vérifier que toute la connectivité fonctionne pour toutes les interfaces :</block>
-  <block id="1a8c6f33d0bdd54f26272fc3c497ec01" category="paragraph">La commande suivante indique comment vérifier que toutes les connexions fonctionnent :</block>
   <block id="a88a3ffd094ac9c3e4781378daf727b2" category="summary">Lors de la planification de votre configuration IP MetroCluster, vous devez connaître les composants matériels et les interconnexions.</block>
   <block id="131a1d95b4315c0e5bb2b356dc23edb5" category="doc">Composants d'une configuration MetroCluster IP</block>
   <block id="1b80b97dc5d058d798af4c2b50efe299" category="section-title">Principaux éléments matériels</block>
@@ -3962,7 +3951,6 @@
   <block id="237e9199acfc2099c6fdb2422149d307" category="cell">*Connexion pont à deux noeuds*</block>
   <block id="6154b5bc195e8c515f02ba57209f1335" category="cell">*Connexion directe à deux nœuds*</block>
   <block id="e5e45159e2d2510782860c93c2e99b08" category="paragraph">Nombre de contrôleurs</block>
-  <block id="ea90d32d257870c8f91747a3c4a8f0d5" category="paragraph">Quatre ou huit*</block>
   <block id="7e3e02d13212719c3d8773beef5f7abe" category="paragraph">Quatre ou huit</block>
   <block id="aada29daee1d64ed0fe907043855cb7e" category="paragraph">Deux</block>
   <block id="242a70418ad236145729860e4eb9b40d" category="paragraph">Utilise une structure de stockage avec commutateur FC</block>
@@ -3982,13 +3970,9 @@
   <block id="f002a8ca79e81570742f83664f1ef8c0" category="paragraph">Oui (pas en combinaison avec le médiateur ONTAP)</block>
   <block id="531b50f22671e8795591ed8a4dc6f932" category="inline-xref">Toutes les baies SAN</block>
   <block id="fac065b7050351a30490ea7f2e2b6ef4" category="cell">Supports <block ref="695031be3524d896e2d9482b9b2c38c3" category="inline-xref-macro-rx"></block></block>
-  <block id="2dc54bb9a28c3c1cdc37fbc81153563b" category="paragraph">*Important*</block>
-  <block id="c01b9d68c1a553405e5fe6d96621e245" category="paragraph">Notez les éléments suivants pour les configurations IP MetroCluster à 8 nœuds :</block>
   <block id="b9afd1726285b60db7d467ad0820e411" category="list-text">Les configurations à huit nœuds sont prises en charge à partir de ONTAP 9.9.1.</block>
   <block id="1f6f2e3f30d4f600718cbbaa7e3ab6f1" category="list-text">Seuls les commutateurs MetroCluster validés par NetApp (commandés auprès de NetApp) sont pris en charge.</block>
   <block id="defba62f473a0ece29de1061c423edbd" category="list-text">Les configurations utilisant des connexions back-end routées par IP (couche 3) ne sont pas prises en charge.</block>
-  <block id="9a4e34d604d657bc7d946d4a0a4e96e4" category="list-text">Les configurations utilisant des réseaux privés partagés de couche 2 ne sont pas prises en charge.</block>
-  <block id="8fdea79aece0ad1322e81be87031775a" category="list-text">Les configurations utilisant un commutateur partagé Cisco 9336C-FX2 ne sont pas prises en charge.</block>
   <block id="392719c196c4e0847676792f7c332ab2" category="section-title">Prise en charge de toutes les baies SAN dans les configurations MetroCluster</block>
   <block id="21cdd63bb00e685a661edb2068282e6e" category="paragraph">Certaines baies SAN (ASAS) sont prises en charge dans les configurations MetroCluster. Dans la documentation MetroCluster, les informations relatives aux modèles AFF s'appliquent au système ASA correspondant. Par exemple, tous les câbles et autres informations du système AFF A400 s'appliquent également au système ASA AFF A400.</block>
   <block id="b61b723aeb336bf526bd087862b1716a" category="summary">Vous devez rassembler les adresses IP requises pour les modules de contrôleur avant de commencer le processus de configuration.</block>
@@ -12397,8 +12381,6 @@
   <block id="83401bd8eb751fc79a9ff9e2e69be029" category="paragraph"><block ref="ff41f8886897126f1b4109a0b09cd291" category="inline-link-macro-rx"></block>.</block>
   <block id="09e34111ef8649a5302b1889e0c7d303" category="list-text">JRE 8</block>
   <block id="b3c0f57dcdb05faa9fbc38832a492a4e" category="admonition">Certains messages d'avertissement s'affichent lors de l'application de la configuration. Les messages d'erreur ne sont généralement pas attendus. Toutefois, si vous êtes connecté à l'aide de SSH, vous pouvez recevoir l'erreur suivante :<block ref="f6ffe33fb36eb714adf6f81147c665f6" prefix=" " category="inline-code"></block></block>
-  <block id="907d0a00eecf52dcc4562775faad470a" category="paragraph">Depuis ONTAP 9.10.1, vous pouvez modifier les propriétés suivantes d'une interface IP MetroCluster : adresse IP et masque, et passerelle. Vous pouvez utiliser n'importe quelle combinaison de paramètres pour la mise à jour.</block>
-  <block id="5e1f7c325aa2c4eb9ee527a8279eb798" category="list-text">[[étape3]]Vérifiez que toutes les connexions fonctionnent :</block>
   <block id="cf07fc29a0bf48b43804bd5e97849449" category="summary">Si vous utilisez des commutateurs compatibles MetroCluster, vous devez connaître les vitesses réseau spécifiques à la plate-forme et les conditions requises pour le mode des ports de commutation.</block>
   <block id="b6c12395a961cf95058c6e4d4412ac09" category="paragraph">Le tableau suivant indique les vitesses réseau spécifiques à la plateforme et les modes de port de commutation pour les switchs compatibles MetroCluster. Vous devez configurer le mode de port du commutateur conformément au tableau.</block>
   <block id="8c425f952493015588fb91113b5b2dd8" category="summary">Cette section contient les conditions requises pour les liens inter-commutateurs (ISL) transportant le trafic MetroCluster sur toutes les configurations IP MetroCluster et topologies réseau.</block>
@@ -13501,8 +13483,6 @@ L'exemple suivant montre que vous utilisez SCP pour télécharger le fichier<blo
   <block id="80dcc4edac2d765045f64b4c38d1d603" category="paragraph"><block ref="8e2d8ef88fdca0c2d84f0bc37a725a61" prefix="" category="inline-code"></block></block>
   <block id="51f368c2c1d8b5478b6282cb7c1d5750" category="paragraph"><block ref="d80e7838e2fc707884fbff7e375981c9" prefix="" category="inline-code"></block></block>
   <block id="4ae2f4a2aef26662b47c70763eb4279d" category="paragraph"><block ref="90a8f7d7f597974a89c88091d170056f" prefix="" category="inline-code"></block></block>
-  <block id="ddf0bc53a0486fe472c9c2802cb8a024" category="inline-link-macro">Modifiez les propriétés d'une interface IP MetroCluster</block>
-  <block id="c2101bcd2959ec896c34ad3ac441e668" category="list-text">Selon votre version de ONTAP, vous pouvez modifier certaines propriétés de l'interface IP de MetroCluster après la configuration initiale. Reportez-vous <block ref="b5882dba0d9962f87b1ec9d2a9ef135c" category="inline-link-macro-rx"></block> à pour plus de détails sur ce qui est pris en charge.</block>
   <block id="fdc2f9c59b3906cedb6920c830ed095c" category="paragraph">Si elle est prise en charge, vous pouvez également spécifier un VLAN différent (non par défaut) supérieur à 100 (entre 101 et 4095) en utilisant le<block ref="6790c40b1680557da1f80536ae186301" prefix=" " category="inline-code"></block> paramètre de la<block ref="f2986433c79fe84ff207e72d4ed9fd6f" prefix=" " category="inline-code"></block> commande.</block>
   <block id="eb2b66b1668ae6b216f98bedcd551ca7" category="paragraph">Les plates-formes suivantes ne prennent pas en charge le<block ref="6790c40b1680557da1f80536ae186301" prefix=" " category="inline-code"></block> paramètre :</block>
   <block id="b98986071c014fdcc3eb14230209b05d" category="paragraph">Toutes les autres plates-formes prennent en charge le<block ref="6790c40b1680557da1f80536ae186301" prefix=" " category="inline-code"></block> paramètre.</block>
@@ -13532,7 +13512,6 @@ L'exemple suivant montre que vous utilisez SCP pour télécharger le fichier<blo
   <block id="a7ecf6e9de3b493515ff606fc0532227" category="list-text">Téléchargez le<block ref="b3f8a8564bd91efeacbc3b6197426c6e" category="inline-link-rx"></block></block>
   <block id="b0e1fb1b9093a23db84f9fe9ec414a05" category="paragraph">Vous devez générer et installer le fichier RCF sur chaque switch de configuration MetroCluster IP.</block>
   <block id="5f6300d6cef757d6670c2170d0ee50fb" category="list-text">Générez les fichiers RCF Cisco pour MetroCluster IP.</block>
-  <block id="f0af72ee7b95606742238881f6d3d746" category="list-text">Utilisez les<block ref="0dea99cd92a8ce54e8bf65bd553a3e89" prefix=" " category="inline-code"></block>commandes ,<block ref="05f7f2ea3536c78a494ee9ec91b6fef9" prefix=" " category="inline-code"></block>et<block ref="1fb1e9c05efc96eb745333b035ce6d59" prefix=" " category="inline-code"></block> pour vérifier que toutes les connexions fonctionnent dans toutes les interfaces.</block>
   <block id="164748ab1cab79cb53ebb8d067fb41df" category="paragraph"><block ref="3b73cc9aa0167fa80aa8a786a4871e88" prefix="" category="inline-code"></block></block>
   <block id="8c8de216c09126479bba8f0a636ceac7" category="paragraph"><block ref="34b1158d44c89ca8031563bdf424ba84" prefix="" category="inline-code"></block></block>
   <block id="711aa9967b438e020ee72c9773739e5d" category="paragraph"><block ref="c7462aa9b4e3acfeadac46864ab81636" prefix="" category="inline-code"></block></block>
@@ -13585,7 +13564,6 @@ L'exemple suivant montre que vous utilisez SCP pour télécharger le fichier<blo
   <block id="ed8c1f612253f0c38c2a68c1be34ff71" category="inline-xref">Sous-étape b</block>
   <block id="27efb084ea8cfb0b1acbce0b33637bf2" category="cell"><block ref="310c42a30486c061e617f12669b1cb31" category="inline-xref-macro-rx"></block></block>
   <block id="667c8b04e1c765d2ac10d6029d6c4a67" category="cell">Utilisez un autre port de base</block>
-  <block id="97508d4e4a3b7631b6c05c3f42e9f3c7" category="cell"><block ref="177a8a15f5f4315b71d3ece7c721a178" category="inline-xref-macro-rx"></block></block>
   <block id="d19c71c5a36e79bee005548e97a3430a" category="list-text">[[Controller_Manual_upgrade_prepare_network_ports_2b]]modifiez les LIFs intercluster pour utiliser un autre port home :</block>
   <block id="ecc099ad90b879286453572c6448dca3" category="paragraph"><block ref="7d49fda2e15c7e56a195e4a13068da53" prefix="" category="inline-code"></block></block>
   <block id="67feed2eb0a24db24a92109ddf08b1d3" category="list-text">Vérifier que toutes les LIFs intercluster se trouvent sur leurs nouveaux ports home :</block>
@@ -13595,7 +13573,6 @@ L'exemple suivant montre que vous utilisez SCP pour télécharger le fichier<blo
   <block id="39b8c0f5fb5a1532d766cc2a0500ae92" category="paragraph">Répéter la commande pour chaque LIF intercluster qui ne se trouve pas sur le home port.</block>
   <block id="270f1324a7b7f1a7e5f85816e9ee67a1" category="list-text">[[Controller_Manual_upgrade_prepare_network_ports_3]]affectez le port de base de toutes les LIFs de données de l'ancien contrôleur à un port commun identique sur l'ancien et le nouveau module de contrôleur.</block>
   <block id="fc655e61a175b85fccd1c37c00f3ccaa" category="cell"><block ref="ea90f75ed68d4ddf4266e92157cc0fae" category="inline-xref-macro-rx"></block></block>
-  <block id="b0b6d9c342452ad19a9b24e1caf2ff35" category="cell"><block ref="e7896f2437c8c50a74bfea383fc26eb3" category="inline-xref-macro-rx"></block></block>
   <block id="3872acc735c86484cf5289e6f36d9d09" category="list-text">[[Controller_replace_upgrade_prepare_network_ports_2b]]modifiez les LIFs intercluster pour utiliser un autre port home :</block>
   <block id="bd14e125f8f9035fe1f7a46be559035d" category="list-text">[[Controller_replace_upgrade_prepare_network_ports_3]]affectez le port home de toutes les LIFs de données de l'ancien contrôleur à un port commun identique sur l'ancien et le nouveau module de contrôleur.</block>
   <block id="bf8ab32fb11672e6514cae71dc5fafe7" category="paragraph">À partir de ONTAP 9.6, les configurations IP MetroCluster avec commutateurs pris en charge peuvent partager des réseaux existants pour des liaisons inter-commutateurs (ISL) au lieu d'utiliser des liens MetroCluster dédiés. Cette topologie est appelée _réseaux de couche 2 partagés_.</block>
@@ -13884,13 +13861,7 @@ L'exemple suivant montre que vous utilisez SCP pour télécharger le fichier<blo
   <block id="95232b2668851dd7e6d065abeee1ed20" category="inline-link-macro">Utilisez System Manager pour effectuer le basculement et le rétablissement (configurations MetroCluster IP uniquement)</block>
   <block id="94728a8f449ff84b5ac878653ab4ad67" category="paragraph">Effectuez les étapes de la section <block ref="5b3a204b8bc535419d3d88f0ef6f3046" category="inline-link-macro-rx"></block>.</block>
   <block id="a4d7653998b91da503a24fc71e65ad4f" category="list-text">Vérifiez que la fonction de basculement automatique est activée :</block>
-  <block id="b03614d885f56be6dafeebbbaa010a5f" category="paragraph">La procédure à suivre dépend de l'utilisation de ONTAP System Manager ou de l'interface de ligne de commandes.</block>
-  <block id="26ed02718973e705cd69ee6e109400e0" category="open-title">System Manager</block>
-  <block id="a8f22e0a130b300278ead25d693a43d5" category="paragraph">Utilisez System Manager pour modifier l'adresse IP, le masque de réseau et les propriétés de la passerelle.</block>
-  <block id="7cdf282c18fa11c6df4d9d55af90d450" category="paragraph">Mettez à jour l'adresse IP, le masque de réseau et la passerelle pour chaque nœud et interface.</block>
   <block id="91af5705f16502125e8b2187e64202c0" category="open-title">CLI</block>
-  <block id="f9a65892b48ad466104ac3eb33403881" category="paragraph">Utilisez l'interface de ligne de commande pour modifier l'adresse IP, le masque de réseau et les propriétés de la passerelle.</block>
-  <block id="0efcd0c9061820674001fdd91f087bf1" category="admonition">Ces commandes permettent de modifier la configuration d'un nœud spécifique pour un port particulier. Pour restaurer la connectivité réseau complète, des commandes similaires sont nécessaires sur d'autres ports. De même, les commutateurs réseau doivent également mettre à jour leur configuration. Par exemple, si la passerelle est mise à jour, elle est idéalement modifiée sur les deux nœuds d'une paire haute disponibilité, car ils sont identiques. Le commutateur connecté à ces nœuds doit également mettre à jour sa passerelle.</block>
   <block id="1e7bea8d62062fd522d5f5c2523a3c72" category="summary">Découvrez comment vérifier que les composants MetroCluster fonctionnent correctement.</block>
   <block id="f505230c63d40beb8fbcb47fba267ed7" category="list-text">Dans les configurations MetroCluster IP et FC, vous pouvez utiliser l'interface de ligne de commandes pour exécuter des commandes de vérification de l'état des composants MetroCluster.</block>
   <block id="8b0de0e20dd0b02520681f56e79ebae0" category="list-text">Dans les configurations MetroCluster IP exécutant ONTAP 9.8 ou une version ultérieure, vous pouvez également utiliser ONTAP System Manager pour surveiller et dépanner les alertes de vérification de l'état de santé.</block>
@@ -13928,12 +13899,6 @@ L'exemple suivant montre que vous utilisez SCP pour télécharger le fichier<blo
   <block id="7ee58ef1472684aca1fe0fe874b6d592" category="paragraph">Dans certains cas, lorsqu'un cluster MetroCluster est en panne ou que les connexions entre les clusters sont en panne, ONTAP lance automatiquement un basculement afin que le cluster en cours d'exécution gère les responsabilités de traitement des données en panne.</block>
   <block id="97ea4ec8c53cbd7aa2f77e41af35214d" category="paragraph">Parfois, lorsque ONTAP ne peut pas déterminer l'état de l'un des clusters, l'administrateur système du site en cours de fonctionnement lance le basculement pour prendre le contrôle des responsabilités de gestion des données de l'autre site.</block>
   <block id="b04fc1c1a947340b6295bca4e15296fa" category="paragraph">Pour tout type de procédure de basculement, la fonctionnalité de service de données est renvoyée au cluster au moyen d'un processus _rétablissement_.</block>
-  <block id="3a6a5031743305019642718d6b386a76" category="paragraph">Plusieurs processus de basculement et de rétablissement sont exécutés pour ONTAP 9.7 et 9.8 :</block>
-  <block id="e6930e280c751418022003bf9fa97d63" category="inline-xref">Utilisez System Manager dans ONTAP 9.7 pour le basculement et le rétablissement</block>
-  <block id="fbb89290a9f0639df9fd99dd91afccee" category="list-text"><block ref="256c277ba57abb095e4dc34a115bfd87" category="inline-xref-macro-rx"></block></block>
-  <block id="90984242656b59b4ec4bc8b2dc652b47" category="inline-xref">Utilisez System Manager dans ONTAP 9.8 pour le basculement et le rétablissement</block>
-  <block id="7bf20936df7319e027dcb25cf3be240e" category="list-text"><block ref="b26721d6058aa62e04e032c9956f0274" category="inline-xref-macro-rx"></block></block>
-  <block id="84e994bcb8ec0880899d43da827eb4f8" category="list-text">Connectez-vous au Gestionnaire système dans ONTAP 9.7.</block>
   <block id="ef676a956a1111a97c4b6d5a5313ec0c" category="list-text">Cliquez sur * (revenir à la version classique)*.</block>
   <block id="c6b17260f6c04748cb3b263e07841d9c" category="list-text">Cliquez sur *Configuration &gt; MetroCluster*.</block>
   <block id="9512c15d06f8ebc094a9ff5468e46042" category="paragraph">System Manager vérifie si un basculement négocié est possible.</block>
@@ -13945,24 +13910,19 @@ L'exemple suivant montre que vous utilisez SCP pour télécharger le fichier<blo
   <block id="47cb9ca4992d157c03e7725803af8e2a" category="list-text">Si la validation échoue et que le site B est en panne, il y a probablement un problème de connexion. Vérifiez que le site B est en panne, puis effectuez les étapes de la section <block ref="fb6c16196bc2d21511884d5617718b51" category="inline-link-macro-rx"></block>.</block>
   <block id="f40d6676f14af4f7006dc55f7866a8cc" category="list-text">Cliquez sur *basculer du site B vers le site A* pour lancer le processus de basculement.</block>
   <block id="3fa63b2ebfe34a52015afed9c4be0676" category="list-text">Cliquez sur *basculer vers la nouvelle expérience*.</block>
-  <block id="a0bbb21498df4682785de3ad118d2112" category="section-title">Exécution d'un basculement planifié (ONTAP 9.8)</block>
-  <block id="7032cb0fb8b2c734e0b3330b170287a8" category="list-text">Connectez-vous au Gestionnaire système dans ONTAP 9.8.</block>
   <block id="d86b98757fa72a3091b65699a17b3724" category="list-text">Sélectionnez *Tableau de bord*. Dans la section *MetroCluster*, les deux clusters sont affichés avec une connexion.</block>
   <block id="b7833a52299d966f41b82417259c5239" category="inline-image-macro">icône kebab</block>
   <block id="6b466076a02d34c371b188caa9b5a5ea" category="list-text">Dans le cluster local (illustré à gauche), cliquez sur <block ref="2f6e127087f9ef4b927e204474c5d0b2" category="inline-image-macro-rx" type="image"></block>, puis sélectionnez *switchover les services de données distants vers le site local*.</block>
   <block id="aa0bfd6a3a3db9e5b0409213f48708d9" category="paragraph">Une fois la demande de basculement validée, le contrôle est transféré du site distant au site local. Le site local exécute les demandes de service de données pour les deux clusters.</block>
   <block id="3c8328130d9ea4793e2bc9f3551b90e0" category="paragraph">Le cluster distant redémarre, mais les composants de stockage ne sont pas actifs et le cluster ne répond pas aux demandes de données. Elle est maintenant disponible pour la maintenance planifiée.</block>
   <block id="6f83354e8ce958bae1f9ffca3c39c278" category="admonition">Le cluster distant ne doit pas être utilisé pour la maintenance des données tant que vous n'avez pas effectué de rétablissement.</block>
-  <block id="defaf88320e88f259a284fdbcd5986c2" category="section-title">Exécution d'un basculement non planifié (ONTAP 9.8)</block>
   <block id="ef7ccb5f4ce99dc2e349e8c6c47a3d17" category="paragraph">Un basculement non planifié peut être initié automatiquement par ONTAP. Si ONTAP ne peut pas déterminer s'il est nécessaire de procéder au rétablissement, l'administrateur système du site MetroCluster en cours d'exécution lance le basculement. Pour ce faire, procédez comme suit :</block>
   <block id="612770839809215b203a58fa260be49e" category="list-text">Sélectionnez *Tableau de bord*.</block>
   <block id="940768454917470cad252dfa341a9bae" category="paragraph">Dans la section *MetroCluster*, la connexion entre les deux clusters est indiquée par un "X". Cela signifie qu'une connexion ne peut pas être détectée et que le cluster ou les connexions sont en panne.</block>
   <block id="0b85c3b32c8fd95dfef8906dc740c0b2" category="paragraph">Si le basculement échoue par erreur, cliquez sur le lien « Afficher les détails » dans le message d'erreur et confirmez le basculement non planifié.</block>
   <block id="b2a8c150e46a4d6da48aa21c7035a5ec" category="paragraph">Le cluster doit être réparé avant de pouvoir être remis en ligne.</block>
   <block id="dacd599c11508c590c3afe8309bc777e" category="admonition">Une fois le cluster distant mis en ligne, il ne doit pas être utilisé pour le service de données tant que vous n'avez pas effectué de rétablissement.</block>
-  <block id="b7066bce35bcdc9bde30393cfe83bbdd" category="section-title">Exécution d'un rétablissement (ONTAP 9.8)</block>
   <block id="83d20468f433e569baf2f41de2670745" category="paragraph">Si le cluster distant était en panne en raison d'une maintenance planifiée ou en raison d'un incident, il devrait maintenant être opérationnel et en attente du rétablissement.</block>
-  <block id="a91ed0fc67b86b9a97667032dc887550" category="list-text">Sur le cluster local, connectez-vous à System Manager dans ONTAP 9.8.</block>
   <block id="e722eda52729a565e292380da3b9cd9e" category="paragraph">Dans la section *MetroCluster*, les deux clusters sont affichés.</block>
   <block id="3964a12029e4869f90c22d4b7b86e4d7" category="list-text">Dans le cluster local (illustré à gauche), cliquez sur <block ref="2f6e127087f9ef4b927e204474c5d0b2" category="inline-image-macro-rx" type="image"></block>, puis sélectionnez *reprendre le contrôle*.</block>
   <block id="9650db837519c6f15dca6f446f677c65" category="paragraph">Les données sont _ajustées_ en premier, pour vérifier que les données sont synchronisées et mises en miroir entre les deux clusters.</block>
@@ -14132,7 +14092,6 @@ L'exemple suivant montre que vous utilisez SCP pour télécharger le fichier<blo
   <block id="5dfed22feb54647dbd9e9ae827290f6b" category="paragraph"><block ref="67611e9f528c6078257c414670af6b52" prefix="" category="inline-code"></block></block>
   <block id="1225fe0de146a130add7eeefae9e0925" category="list-text">Vérifier que les SVM source sync sur le cluster Disaster sont bien exécutés :</block>
   <block id="ad29c49a8377862a59f9aae0ab4431cd" category="paragraph">Vérifier le bon positionnement du LIF. Supprimez ensuite les VLAN et les groupes d'interface des anciens contrôleurs et désinstallez physiquement les contrôleurs.</block>
-  <block id="253982549e381b6f58f66b3e289a0a83" category="admonition">Si les anciens et les nouveaux contrôleurs ne disposent pas de port commun, il n'est pas nécessaire de modifier les LIFs data. Ignorez cette étape et passez directement à <block ref="45cc57eb3654a2ae89efabc6fb9d271a" category="inline-xref-macro-rx"></block>.</block>
   <block id="ae359c5763df3f6130f697d17d090551" category="admonition">Vous devez vérifier que l'emplacement des LIFs de données est correct sur les nouveaux nœuds avant d'effectuer un rétablissement. Lorsque vous rétablissez la configuration, ONTAP tente de reprendre le trafic sur le port d'attache utilisé par les LIFs. Une panne d'E/S peut se produire lorsque la connexion du port d'accueil au port du commutateur et au VLAN est incorrecte.</block>
   <block id="1c780702501fd89538731057505e0a04" category="list-text">Vérifiez que les LIFs sont hébergées sur le nœud et les ports appropriés avant le rétablissement.</block>
   <block id="bc12d3bc2a2c1526b655930b56efc183" category="list-text">Afficher les LIFs et vérifier que chaque LIF de données utilise le bon port home :</block>
@@ -14140,7 +14099,6 @@ L'exemple suivant montre que vous utilisez SCP pour télécharger le fichier<blo
   <block id="823bc5ae6e724dd8994efcc4dbeb49d2" category="paragraph">Si la commande renvoie une erreur, vous pouvez remplacer la configuration des ports :</block>
   <block id="ec14487a214982a1ea6572636724761f" category="paragraph"><block ref="afdc229346561af3e5aba3a6d67eea09" prefix="" category="inline-code"></block></block>
   <block id="c9ba655979127851f6a6f01489815e47" category="list-text">Vérifier que toutes les LIFs data se trouvent sur le bon port de home :</block>
-  <block id="ef1038ce81a2c9d70181057dd381a59a" category="admonition">Si les anciens et les nouveaux contrôleurs ne disposent pas de port commun, il n'est pas nécessaire de modifier les LIFs data. Ignorez cette étape et passez directement à <block ref="186451ebe57c46550834233237ebac90" category="inline-xref-macro-rx"></block>.</block>
   <block id="3432abc562d1049e115fc0bcb6f569ab" category="list-text">[[upgrades_Assisted_without_matching_ports]] modifiez les domaines de diffusion pour supprimer le VLAN et les ports physiques qui doivent être supprimés :</block>
   <block id="07bfa9093a8ef293dfd6099e38fde255" category="list-text">Vérifiez que le MetroCluster est correctement configuré. Vérifier l'état du nœud :</block>
   <block id="d64694bac02c7b4eea890e175a53a0c7" category="paragraph">Vérifiez que les LIF sont hébergées sur les nœuds appropriés avant de procéder à l'opération de rétablissement automatisé.</block>
@@ -14447,7 +14405,6 @@ L'exemple suivant montre que vous utilisez SCP pour télécharger le fichier<blo
   <block id="cd171858353ac5afefcde1a10ecc4d2b" category="paragraph">Pour la distribution et l'allocation des ports sur les nouveaux nœuds, reportez-vous à la<block ref="e8018b6e740a667345f4bcc94e4023fc" category="inline-link-rx"></block>.</block>
   <block id="609705d960d3eb8865688141bee64514" category="list-text">Reconvertir toutes les LIF qui ne se trouvent pas sur leur port de base :</block>
   <block id="2c33fd0cf23bb7e3394bbefc985bb336" category="paragraph">Répéter la commande pour chaque LIF intercluster qui ne se trouve pas sur le home port.</block>
-  <block id="5d017d18dffe9ea2002cf58c5028e761" category="paragraph">Toutes les LIF DE données, y compris SAN et NAS, sont administratives et opérationnelles, car elles fonctionnent sur le site de basculement (cluster_A).</block>
   <block id="6f4692f84dcb13549704950c86285bed" category="paragraph">Pour l'utilisation des ports pour les modèles de plate-forme, voir<block ref="5e0886f1b46d76ea4adb1e1719b4ddb5" category="inline-link-rx"></block></block>
   <block id="404849d025b51f7a9b000948be830642" category="list-text">[[upgrades_Manual_without_matching_ports]]modifiez les domaines de diffusion pour supprimer le VLAN et les ports physiques qui doivent être supprimés :</block>
   <block id="b5232e117010c63512e6646cdcc5b782" category="list-text">Arrêtez les nœuds à l'<block ref="82b8350d28f0a14e36de1958b3be9205" prefix=" " category="inline-code"></block>invite :</block>
@@ -14649,4 +14606,33 @@ L'exemple suivant montre que vous utilisez SCP pour télécharger le fichier<blo
   <block id="f6c5a69060b62d046efbd190570cf383" category="admonition">Cet exemple montre les informations minimales requises pour configurer la FCR. Des options supplémentaires peuvent être configurées une fois la FCR appliquée. Par exemple, vous pouvez configurer SNMPv3, NTP ou SCP/SFTP après avoir appliqué le RCF.</block>
   <block id="6ca034f6a518722187e6a10bfc2df9e6" category="admonition">Ne mettez pas les tiroirs sous tension avant les contrôleurs. Cela évite un démarrage involontaire des contrôleurs dans ONTAP.</block>
   <block id="604b473cd250fb4d83bbbab434f091fb" category="paragraph">L'exemple montre les commandes de mise hors ligne des plexes pour un contrôleur exécutant ONTAP.</block>
+  <block id="936bfa47a2c0392f1aef9da55dad3561" category="paragraph">Quatre ou huit^1^</block>
+  <block id="28f44037af103f0c930309365629f8ef" category="paragraph">*Notes*</block>
+  <block id="a4bfae8e34cf1d1bbf19c5b03ef542b9" category="list-text">Vérifiez les points suivants pour les configurations IP MetroCluster à 8 nœuds :</block>
+  <block id="b00f9fea7b2da4a95f4ab93fed2362de" category="admonition">N'utilisez pas d'adresses IP 169.254.17.x ou 169.254.18.x lorsque vous créez des interfaces IP MetroCluster pour éviter les conflits avec les adresses IP d'interface générées automatiquement par le système dans la même plage.</block>
+  <block id="bd9583bc7d13557a4fd4255bd92c14c6" category="paragraph">Le processus de basculement et de rétablissement que vous suivez dépend de votre version de ONTAP :</block>
+  <block id="701536f308a46b56b600117d2f954760" category="inline-xref">Utilisez le gestionnaire système dans ONTAP 9.6 ou 9.7 pour le basculement et le rétablissement</block>
+  <block id="c5ae21487220da0e90bc5df3979248c6" category="list-text"><block ref="40e2b7a5ccaae357ec2a83e7dbfc7121" category="inline-xref-macro-rx"></block></block>
+  <block id="a5d16be6688eb5e01f6f153d46483384" category="inline-xref">Utilisez le gestionnaire système dans ONTAP 9.8 ou version ultérieure pour le basculement et le rétablissement</block>
+  <block id="96d0b994840dcc9602e98d75b1d7dc37" category="list-text"><block ref="d169c24aedb9d9132bec54ece222a51c" category="inline-xref-macro-rx"></block></block>
+  <block id="6aafb5589dbe30793ebafd1bf5623b9f" category="list-text">Connectez-vous au Gestionnaire système sous ONTAP 9.6 ou 9.7.</block>
+  <block id="988579e6530038a6bc87a8dffa9be811" category="section-title">Basculement planifié (ONTAP 9.8 ou version ultérieure)</block>
+  <block id="33fef937840ce57f6a4070e352228fd4" category="list-text">Connectez-vous au Gestionnaire système sous ONTAP 9.8 ou version ultérieure.</block>
+  <block id="70de6eed617bf2598c428ab602bacd20" category="section-title">Basculement non planifié (ONTAP 9.8 ou version ultérieure)</block>
+  <block id="2441e03051d41aa2f6f9d9e39c577a3e" category="section-title">Effectuer un rétablissement (ONTAP 9.8 ou version ultérieure)</block>
+  <block id="2a6e3f78c9b73af2855a7bc5191bf5b1" category="list-text">Sur le cluster local, connectez-vous au gestionnaire système dans ONTAP 9.8 ou une version ultérieure.</block>
+  <block id="22049fef22b0ddad50caf9ded819a4f1" category="paragraph"><block ref="22049fef22b0ddad50caf9ded819a4f1" category="inline-link-macro-rx"></block></block>
+  <block id="a6a86c7d4711a3d450ec4121102de402" category="list-text">Si le système vers lequel vous effectuez la mise à niveau NE figure PAS dans le tableau suivant, vérifiez que les interfaces IP MetroCluster utilisent des adresses IP prises en charge.</block>
+  <block id="8210c1e569b4a7f0d685a838881f7f66" category="cell">AFF et ASA</block>
+  <block id="d5d4923aa83e46af2152de920946ba41" category="cell">Systèmes FAS</block>
+  <block id="fa8ce860967d0ec751385e3e150d223a" category="list-text">Vérifiez les adresses IP des interfaces MetroCluster sur les anciens contrôleurs :</block>
+  <block id="09542928ac9f09905359ce0cdc32a079" category="inline-link-macro">Article de la base de connaissances « modification des propriétés d'une interface IP MetroCluster »</block>
+  <block id="f80e9f0a9fba665f77ab307a250b7fd3" category="list-text">Si les interfaces MetroCluster utilisent des adresses IP 169.254.17.x ou 169.254.18.x, reportez-vous à  la section <block ref="d1c038803b45479df32bbfd628b2e8b5" category="inline-link-macro-rx"></block> pour modifier les adresses IP de l'interface avant de procéder à la mise à niveau.</block>
+  <block id="400bb3d32423e6384fb4cfe6867b0ccc" category="admonition">La mise à niveau vers un système qui n'est pas répertorié dans le tableau n'est pas prise en charge si les interfaces MetroCluster sont configurées avec des adresses IP 169.254.17.x ou 169.254.18.x.</block>
+  <block id="e7997597817a3facf42bc030e3a35309" category="cell"><block ref="92a96fa95be44bd76fa573ac0e371c6f" category="inline-xref-macro-rx"></block></block>
+  <block id="6165ea79c58238b8f7f4d2edcab21f29" category="admonition">Si les anciens et les nouveaux contrôleurs ne disposent pas de port commun, il n'est pas nécessaire de modifier les LIFs data. Ignorez cette étape et passez directement à <block ref="19d16029d22befc9cf5c2bffaac61331" category="inline-xref-macro-rx"></block>.</block>
+  <block id="abcdb4b4b1872daf29ecc9031115f937" category="paragraph">Toutes les LIF de données, y compris SAN et NAS, sont administratives et opérationnelles, car elles fonctionnent sur le site de basculement (cluster_A).</block>
+  <block id="6750be268fde99a8fc70da3cae96763b" category="cell"><block ref="dc13cd459e510658615266395ba927b0" category="inline-xref-macro-rx"></block></block>
+  <block id="3485285ca38e1ca4c0a680f9bcf47989" category="admonition">Si les anciens et les nouveaux contrôleurs ne disposent pas de port commun, il n'est pas nécessaire de modifier les LIFs data. Ignorez cette étape et passez directement à <block ref="d2fd743661c244ff041df8d51a55b2b7" category="inline-xref-macro-rx"></block>.</block>
+  <block id="57e1aa86ef1214c6b5a618674a806136" category="paragraph">Toutes les LIF de données, y compris SAN et NAS, seront « up » d'administration et « does » d'exploitation, car elles fonctionnent sur le site de basculement (cluster_A).</block>
 </blocks>

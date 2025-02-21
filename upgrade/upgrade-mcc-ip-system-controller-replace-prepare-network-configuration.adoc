@@ -28,6 +28,51 @@ L'opération d'automatisation lance les opérations de basculement. Une fois ces
 +
 `boot_ontap`
 
+. Si le système vers lequel vous effectuez la mise à niveau NE figure PAS dans le tableau suivant, vérifiez que les interfaces IP MetroCluster utilisent des adresses IP prises en charge.
++
+|===
+
+
+| AFF et ASA | Systèmes FAS 
+
+
+ a| 
+** AFF A150, ASA A150
+** AVEC AFF A220
+** AFF C250, ASA C250
+** AFF A250, ASA A250
+** AFF A300
+** AFF A320
+** AFF C400, ASA C400
+** AFF A400, ASA A400
+** AFF A700
+** AFF C800, ASA C800
+** AFF A800, ASA A800
+** AFF A900, ASA A900
+
+ a| 
+** FAS2750
+** FAS500f
+** FAS8200
+** FAS8300
+** FAS8700
+** FAS9000
+** FAS9500
+
+
+|===
++
+.. Vérifiez les adresses IP des interfaces MetroCluster sur les anciens contrôleurs :
++
+`metrocluster configuration-settings interface show`
+
+.. Si les interfaces MetroCluster utilisent des adresses IP 169.254.17.x ou 169.254.18.x, reportez-vous à  la section link:https://kb.netapp.com/on-prem/ontap/mc/MC-KBs/How_to_modify_the_properties_of_a_MetroCluster_IP_interface["Article de la base de connaissances « modification des propriétés d'une interface IP MetroCluster »"^] pour modifier les adresses IP de l'interface avant de procéder à la mise à niveau.
++
+
+CAUTION: La mise à niveau vers un système qui n'est pas répertorié dans le tableau n'est pas prise en charge si les interfaces MetroCluster sont configurées avec des adresses IP 169.254.17.x ou 169.254.18.x.
+
+
+
 . Modifier les LIFs intercluster sur les anciens contrôleurs de manière à utiliser un port home différent de celui des ports utilisés pour l'interconnexion haute disponibilité ou l'interconnexion MetroCluster IP DR sur les nouveaux contrôleurs.
 +
 
@@ -56,7 +101,7 @@ Effectuez l'une des actions suivantes si les LIF intercluster des anciens contr�
 | Utilisez le même port de base | <<controller_replace_upgrade_prepare_network_ports_2b,Sous-étape b>> 
 
 
-| Utilisez un autre port de base | <<controller_replace_upgrade_prepare_network_ports_3,Étape 3>> 
+| Utilisez un autre port de base | <<controller_replace_upgrade_prepare_network_ports_3,Étape 4>> 
 |===
 .. [[Controller_replace_upgrade_prepare_network_ports_2b]]modifiez les LIFs intercluster pour utiliser un autre port home :
 +
@@ -81,7 +126,7 @@ Répéter la commande pour chaque LIF intercluster qui ne se trouve pas sur le h
 . [[Controller_replace_upgrade_prepare_network_ports_3]]affectez le port home de toutes les LIFs de données de l'ancien contrôleur à un port commun identique sur l'ancien et le nouveau module de contrôleur.
 +
 
-CAUTION: Si les anciens et les nouveaux contrôleurs ne disposent pas de port commun, il n'est pas nécessaire de modifier les LIFs data. Ignorez cette étape et passez directement à <<upgrades_assisted_without_matching_ports,Étape 4>>.
+CAUTION: Si les anciens et les nouveaux contrôleurs ne disposent pas de port commun, il n'est pas nécessaire de modifier les LIFs data. Ignorez cette étape et passez directement à <<upgrades_assisted_without_matching_ports,Étape 5>>.
 
 +
 .. Afficher les LIFs :
@@ -89,7 +134,7 @@ CAUTION: Si les anciens et les nouveaux contrôleurs ne disposent pas de port co
 `network interface show`
 
 +
-Toutes LES LIF de données, y compris SAN et NAS, seront admin « up » et « possède » des opérations, car celles-ci se trouvent sur le site de basculement (cluster_A).
+Toutes les LIF de données, y compris SAN et NAS, seront « up » d'administration et « does » d'exploitation, car elles fonctionnent sur le site de basculement (cluster_A).
 
 .. Vérifiez le résultat de cette commande pour trouver un port réseau physique commun identique sur l'ancien et le nouveau contrôleur qui n'est pas utilisé comme port du cluster.
 +
