@@ -232,9 +232,6 @@
   <block id="135b308ed83c53f1516b7c754566d1c4" category="list-title">Avant de commencer</block>
   <block id="0f03e15eba6bd2b5d72c3bf12b9e6464" category="summary">Vous pouvez ajouter à chaud un tiroir disque pour augmenter le stockage sans réduire les performances.</block>
   <block id="c7c3f6690f29780dcaae9a3466cbb181" category="doc">Ajout à chaud d'un tiroir disque</block>
-  <block id="85c019b69442635697fc1b5b3f6cfad3" category="inline-link-macro">Préparation à l'ajout à chaud de tiroirs disques SAS</block>
-  <block id="e57ca4b3df83a88b6254675613163df0" category="list-text">Le système doit répondre à toutes les exigences de la section <block ref="08d6c3cbf42a81a0c26843f87c874545" category="inline-link-macro-rx"></block>.</block>
-  <block id="5c96ab4a94ce2c03e50e3170dc50e8be" category="list-text">Votre environnement doit répondre à l'un des scénarios suivants pour ajouter à chaud un tiroir :</block>
   <block id="dc7e96665a67891a688cad5299c9216d" category="list-text">Deux ponts FibreBridge 7500N sont connectés à une pile de tiroirs disques SAS.</block>
   <block id="bbe46ae98258b21267300cd00fda2d33" category="list-text">Cette procédure consiste à ajouter à chaud un tiroir disque au dernier tiroir disque d'une pile.</block>
   <block id="de765cbcb90d504e6ac736ad12d5610f" category="paragraph">Cette procédure est écrite en supposant que le dernier tiroir disque d'une pile est connecté à partir de l'IOM A pour Bridge A et de l'IOM B pour le pont B.</block>
@@ -246,20 +243,12 @@
   <block id="15fe2b61bbdb206c7e56441ae3b5eecc" category="admonition">Si vous insérez un câble SAS dans le mauvais port, lorsque vous retirez le câble d'un port SAS, vous devez attendre au moins 120 secondes avant de brancher le câble sur un autre port SAS. Si vous ne le faites pas, le système ne reconnaîtra pas que le câble a été déplacé vers un autre port.</block>
   <block id="42fceed144d93d382eb9bdcc9b1254d2" category="list-text">Mettez-vous à la terre.</block>
   <block id="6cf82bfa742937a27072b88c527e1707" category="list-text">Vérifiez la connectivité des tiroirs disques depuis la console système d'un contrôleur :</block>
-  <block id="14eed54cda8c3aab4e76c858751a1903" category="paragraph"><block ref="b69a08e3a245ecaded81bdc0df023669" prefix="" category="inline-code"></block></block>
   <block id="e9a0680136bcf6c65f2b08336c359725" category="paragraph">Le résultat est similaire à ce qui suit :</block>
   <block id="71acbd7b99f4163d9bdf49cc4896c1d8" category="list-text">Chaque pont sur une ligne distincte et sous chaque port FC auquel il est visible ; par exemple, l'ajout à chaud d'un tiroir disque à un ensemble de ponts FibreBridge 7500N produit les résultats suivants :</block>
   <block id="ee60b9bc622c703e1065f07dcdc02e73" category="list-text">Chaque tiroir disque sur une ligne distincte sous chaque port FC auquel il est visible :</block>
   <block id="4f4cc17134e7a0dec2fd6c91d9961c0e" category="list-text">Chaque disque sur une ligne distincte sous chaque port FC auquel il est visible :</block>
-  <block id="12c600f2f4991508e5f17240b49e8493" category="list-text">Vérifiez si l'autoassignation des disques est activée sur votre système depuis la console de l'un des contrôleurs :</block>
-  <block id="128d6bb86b0214622ee2f48931f27dc8" category="paragraph"><block ref="d657fc9a7a565dff61fc29c4771341b5" prefix="" category="inline-code"></block></block>
-  <block id="3afff8040872589b8f259af1b1b02113" category="paragraph">La stratégie d'affectation automatique est affichée dans la colonne affectation automatique.</block>
-  <block id="37ecabf9d8255c1ef714fdd4b6878eb6" category="list-text">Si l'affectation automatique des disques n'est pas activée sur votre système ou si les disques d'une même pile appartiennent aux deux contrôleurs, affectez les disques aux pools appropriés.</block>
   <block id="9c92896894a8fe3d79aeae61fe2ddf98" category="inline-link">Gestion des disques et des agrégats</block>
   <block id="15bfd3af526ded4faf305774a07ed419" category="paragraph"><block ref="15bfd3af526ded4faf305774a07ed419" category="inline-link-rx"></block></block>
-  <block id="21dc7cf52756619aa7572059edd48927" category="paragraph">Si vous sélectionnez une pile unique de tiroirs disques entre deux contrôleurs, l'affectation automatique des disques doit être désactivée avant d'affecter la propriété des disques. Sinon, lorsque vous attribuez un seul disque, les disques restants peuvent être automatiquement affectés au même contrôleur et au même pool.</block>
-  <block id="c6a74b565a0bfaf4ae27e4430afa45d3" category="paragraph">Le<block ref="288479a9c6226aa028a286d1be971626" prefix=" " category="inline-code"></block> la commande désactive l'affectation automatique des disques.</block>
-  <block id="5b63e4a9bc611666d00f442d845ec5c6" category="admonition">Les disques ne doivent pas être ajoutés aux agrégats ou aux volumes tant que le firmware des tiroirs disques et des disques n'a pas été mis à jour.</block>
   <block id="8a58a56b38ad1b914e9565360ad9f6b0" category="list-text">Mettez à jour le firmware du tiroir disque vers la version la plus récente en utilisant les instructions du firmware téléchargé.</block>
   <block id="03aa0e95dbfb628416dcdc56332bc6b4" category="paragraph">Vous pouvez exécuter les commandes en cours depuis la console système d'un contrôleur.</block>
   <block id="6805cea5c8147284b27002a3dfc8e4af" category="inline-link">Téléchargements NetApp : firmware des tiroirs disques</block>
@@ -276,10 +265,7 @@
   <block id="345e380efa5afa2a2afb3abe3096922a" category="list-text">Mettez à jour le firmware du disque vers la version la plus récente à partir de la console système.</block>
   <block id="9b862d0c04151d954efe49c5341a3541" category="inline-link">Téléchargements NetApp : firmware de disque</block>
   <block id="6d8db2137b9e061e374fe522ee024f3c" category="paragraph"><block ref="6d8db2137b9e061e374fe522ee024f3c" category="inline-link-rx"></block></block>
-  <block id="7c4d248493f91032503b9fa1ff16b78a" category="list-text">Passez au niveau de privilège avancé : +<block ref="69cfa26d6e6345bb4eef9a298daa32f3" prefix=" " category="inline-code"></block></block>
   <block id="f20ec4a663953b8413f93cdcbc65817b" category="paragraph">Vous devez répondre avec<block ref="13a9c4ec1810b3cc11a9e77c220f41c9" prefix=" " category="inline-code"></block> lorsque vous êtes invité à passer en mode avancé et à afficher l'invite du mode avancé (*&gt;).</block>
-  <block id="0ffb0a1b769b7a5cb0f4a4adc97d95ff" category="list-text">Mettez à jour le firmware du disque dur vers la version la plus récente à partir de la console système : +<block ref="b7f15bbb562e83813b06727133789742" prefix=" " category="inline-code"></block></block>
-  <block id="87576e79d18b52132e5cb37d09d7cf8b" category="list-text">Revenir au niveau de privilège admin : +<block ref="d5ca624cb3a7e6be13a829c838df3f7b" prefix=" " category="inline-code"></block></block>
   <block id="06157b5d60c5ad595acb6690d509af40" category="list-text">Répétez les sous-étapes précédentes sur l'autre contrôleur.</block>
   <block id="ec11092b67907b66d4042a24bc8b71b3" category="list-text">Vérifier si le système est multipathed :</block>
   <block id="fa634ad56afbbccc6627976c9b99f372" category="paragraph"><block ref="980128e66cbc950381050e9f0f63328d" prefix="" category="inline-code"></block></block>
@@ -287,7 +273,6 @@
   <block id="72fef016a314fe19829bf53a238ef0d5" category="paragraph"><block ref="4a17c7fe0d64ac54ba1ec5e6a7dcbaa9" prefix="" category="inline-code"></block></block>
   <block id="aceb21053b1dbe01f756b4609f49187c" category="list-text">Vérifier la présence d'alertes d'intégrité sur les commutateurs (le cas échéant) :</block>
   <block id="4ee78dd22a95c5815f5b6e1e4acc364b" category="paragraph"><block ref="3e23026a2bd29e421f319572a9111881" prefix="" category="inline-code"></block></block>
-  <block id="b6c8d49615b2216ec73c49f38815ee2b" category="list-text">Si vous ajoutez plusieurs tiroirs disques à chaud, répétez les étapes précédentes pour chaque tiroir disque que vous ajoutez à chaud.</block>
   <block id="6016a2b341113bf496b719905398ecd2" category="doc">Droits d'auteur</block>
   <block id="1fe9ee738ca0e6e9e3aeec4c7902cb67" category="paragraph">Le schéma suivant présente une configuration MetroCluster. Cluster_B est hors tension pour des raisons de maintenance.</block>
   <block id="13453110a818269a21fc3929d2514208" category="image-alt">mettez le data center hors tension</block>
@@ -1152,7 +1137,6 @@
   <block id="0b451ef20b97f230d00ccd951ed449c1" category="list-text">Connectez le NSM-B, e0b au commutateur (commutateur A2 ou commutateur B2)</block>
   <block id="6479a6c19128ccb1ed55ac097ef1e1e7" category="list-text">Utilisez la disposition des câbles générée à partir de l'outil **RcfFileGenerator** pour raccorder le shelf aux ports appropriés.</block>
   <block id="3dc0d5b9eac0c50a790964bb3a643fa3" category="paragraph">Une fois le nouveau tiroir correctement câblé, ONTAP le détecte automatiquement sur le réseau.</block>
-  <block id="5cb7ce670094889d3c954b543759f688" category="summary">La préparation à l'ajout à chaud d'un tiroir disque SAS implique le téléchargement des documents ainsi que le firmware du disque et du tiroir disque.</block>
   <block id="98f4bbee1fe7223d4a878a15a9e719ad" category="list-text">Votre système doit être une configuration prise en charge et doit exécuter une version prise en charge de ONTAP.</block>
   <block id="79fb12280740c382675b2f2b02401b80" category="list-text">Tous les disques et tiroirs disques du système doivent exécuter la dernière version du firmware.</block>
   <block id="623d27fb1a71775c853589b6aa232fcb" category="paragraph">Vous pouvez mettre à jour le firmware des disques et des tiroirs dans la configuration MetroCluster avant d'ajouter des tiroirs.</block>
@@ -1163,7 +1147,6 @@
   <block id="8e916218cb72668e639a5859eade4041" category="list-text">Le _Guide d'installation_ pour votre modèle de tiroir disque.</block>
   <block id="55276018e99703958158b6e0fb364ef6" category="list-text">Vérifiez que le tiroir disque que vous ajoutez à chaud est pris en charge.</block>
   <block id="a1ea1902849dc9b29d8207ac18e4b9be" category="list-text">Téléchargez les derniers firmwares des tiroirs disques et disques :</block>
-  <block id="680f2c91c58cc6532106b87cb564cc68" category="admonition">Dans cette étape, vous ne remplissez que la partie de téléchargement des instructions fournies dans les liens. Vous devez suivre les étapes indiquées dans le <block ref="47adb28a466429763b049bd78d160e0f" category="inline-link-macro-rx"></block> section relative à l'installation du tiroir disque.</block>
   <block id="a2624d2fcb6a24cb4e50b81563b7fea1" category="list-text">Téléchargez le micrologiciel du disque et faites une copie des instructions du micrologiciel du disque pour vous y référer ultérieurement.</block>
   <block id="dc4e77926f5cef0f0ad064c20c5a7d0e" category="list-text">Téléchargez le firmware du tiroir disque et effectuez une copie des instructions du firmware du tiroir disque pour vous y référer ultérieurement.</block>
   <block id="a9733891a1b8160bc2f571546823514c" category="summary">Vous devrez peut-être renommer un commutateur FC Brocade pour obtenir une appellation cohérente dans toute votre configuration.</block>
@@ -1718,7 +1701,6 @@
   <block id="7454ecd5190b690ccf9ee77f2e438c0c" category="section-title">Utilisation des ports Cisco pour ponts FC-SAS dans une configuration MetroCluster exécutant ONTAP 9.1 ou une version ultérieure</block>
   <block id="bbc155fb2b111bf61c4f5ff892915e6b" category="cell">Commutateur</block>
   <block id="f656d69f7bbae519056da03a8e9e50d0" category="cell">Cisco 9250i</block>
-  <block id="4968e1c4a92e0df27646933918f92be2" category="section-title">L'utilisation des ports Cisco pour ISL dans une configuration à huit nœuds dans une configuration MetroCluster exécutant ONTAP 9.1 ou une version ultérieure</block>
   <block id="81cc761cd2e2757421a8e9242e8e12cc" category="paragraph">Le tableau suivant montre l'utilisation des ports ISL. L'utilisation des ports ISL est identique sur tous les commutateurs de la configuration.</block>
   <block id="10ca333ef19b78048d2fedd61c4432e9" category="paragraph">ISL 1</block>
   <block id="d13ad1889e4cd054285464f94de707e7" category="paragraph">ISL 2</block>
@@ -9421,7 +9403,6 @@
   <block id="7271fe2deb2377f6fe3e360239e1a3ff" category="list-text">Si vous utilisez un réseau dédié pour la surveillance de l'état de santé, chaque nœud doit disposer d'une LIF de node-management sur ce réseau dédié.</block>
   <block id="9245afe84f46306a811d61036f2f5698" category="section-title">Configuration des commutateurs MetroCluster FC pour le contrôle de l'état du système</block>
   <block id="6d8346a61b76a8b57a9dd1d8b8188d3f" category="paragraph">Dans une configuration MetroCluster Fabric-Attached, vous devez effectuer des étapes de configuration supplémentaires pour surveiller les commutateurs FC.</block>
-  <block id="51070538b9cde5e5b54a8cbc07f43009" category="admonition">Avec ONTAP 9.8, le<block ref="688266bc53c9ead911ef4b45027ac96a" prefix=" " category="inline-code"></block> la commande est remplacée par<block ref="de1f6d32042385fcaa11b87930ec5f53" prefix=" " category="inline-code"></block>. Les étapes suivantes présentent le<block ref="688266bc53c9ead911ef4b45027ac96a" prefix=" " category="inline-code"></block> Mais si vous exécutez ONTAP 9.8 ou version ultérieure, le<block ref="de1f6d32042385fcaa11b87930ec5f53" prefix=" " category="inline-code"></block> commande recommandée.</block>
   <block id="2699745f7ba3417d015d2b62691bd3b8" category="list-text">Ajouter un commutateur avec une adresse IP à chaque nœud MetroCluster :</block>
   <block id="6efb794ecca356d1adc84930ec9dbd7a" category="paragraph"><block ref="68b9e7d8919ec973a35f33ae6c5c28a1" prefix="" category="inline-code"></block></block>
   <block id="04759fd0dd941282c27fc50325811bf9" category="paragraph">Cette commande doit être répétée sur les quatre commutateurs de la configuration MetroCluster.</block>
@@ -11208,7 +11189,6 @@
   <block id="8d07a21c40606b1098d1a2ff5a5b5f1c" category="sidebar">Ajoutez à chaud une pile de tiroirs disques SAS à une paire existante de ponts FiberBridge 7500N</block>
   <block id="8780e2c60443de7cb84cd78e41b4b572" category="sidebar">Ajoutez à chaud une pile de tiroirs disques SAS et une passerelle vers un système MetroCluster</block>
   <block id="404bb11b70239a316af681095fbdeff7" category="sidebar">Ajoutez à chaud un tiroir disque SAS à une pile de tiroirs disques SAS</block>
-  <block id="46738ba3e846392ff7b6408dfb3589f6" category="sidebar">Ajout à chaud d'un tiroir disque</block>
   <block id="26efac9be7856206ad935a9151a6a64c" category="sidebar">Ajoutez à chaud un tiroir disque IOM12 à une pile de tiroirs disques IOM6 dans une configuration MetroCluster connectée à un pont</block>
   <block id="cabfdbae66cbee4984c63ed2d5544390" category="sidebar">Stockage à chaud hors configuration FC MetroCluster</block>
   <block id="40a09e232a862af1f1a00bbe4b0defb8" category="sidebar">Remplacement d'un tiroir sans interruption dans une configuration MetroCluster extensible</block>
@@ -13145,7 +13125,6 @@ L'exemple suivant montre que vous utilisez SCP pour télécharger le fichier<blo
   <block id="bc8be72fdc9d6054f356bb2b7f80fd12" category="inline-link">Matrice d'interopérabilité NetApp</block>
   <block id="769db6797bc8c70f9ceb0ea238fcfef2" category="list-text"><block ref="769db6797bc8c70f9ceb0ea238fcfef2" category="inline-link-rx"></block></block>
   <block id="c9dd6bad4c7d561872f2e2d498a990bf" category="inline-link-macro">Matrice d'interopérabilité (IMT)</block>
-  <block id="520ac91f29d97371c4fac829efc70617" category="admonition">Si votre système exécute une version prise en charge de ONTAP, vous pouvez utiliser plusieurs modules IOM12 et IOM6 au sein de la même pile. Pour savoir si votre version de ONTAP prend en charge la combinaison de tiroirs, reportez-vous au <block ref="cd3982462c40dc1b1a511ada7c72bab9" category="inline-link-macro-rx"></block>. Si votre version de ONTAP n'est pas prise en charge et que vous ne pouvez pas mettre à niveau ou rétrograder les modules IOM de la pile existante ou du nouveau tiroir à ajouter à une combinaison de modules IOM prise en charge, vous devez effectuer l'une des opérations suivantes :</block>
   <block id="c5dcd35af16918a17ee9c3a5c153f0af" category="inline-link">IMT</block>
   <block id="24d65add9a27d74b80e9a9cebdfc8e56" category="paragraph">Votre version de ONTAP doit prendre en charge le mélange des tiroirs. Consultez la matrice d'interopérabilité (IMT) pour savoir si votre version de ONTAP prend en charge la combinaison de tiroirs.<block ref="30796bf173a80af0dc9c120f98ffaed6" category="inline-link-rx"></block></block>
   <block id="8872b0d09737dfd9b6fcafd4e8c2356b" category="list-text"><block ref="8872b0d09737dfd9b6fcafd4e8c2356b" category="inline-link-rx"></block></block>
@@ -13604,7 +13583,6 @@ L'exemple suivant montre que vous utilisez SCP pour télécharger le fichier<blo
   <block id="f411a218519aacec5088cc5a3d23eb64" category="paragraph">Les anciens et nouveaux ID système ont été identifiés dans <block ref="372daca62ea6308294fd70c00fcc8af2" category="inline-link-macro-rx"></block>.</block>
   <block id="04e334293a29a0fcdf98b56004e27edc" category="section-title">Switchs compatibles MetroCluster par rapport aux switchs validés NetApp</block>
   <block id="5c5c34d5e7843e9424f3ca2380ae18ea" category="list-text"><block ref="5c5c34d5e7843e9424f3ca2380ae18ea" category="inline-link-macro-rx"></block></block>
-  <block id="a629fe794ff2e51df541a99e4468ebb2" category="paragraph">Si vous devez démarrer en réseau les nouveaux contrôleurs, reportez-vous à la section <block ref="a7e3b7fa9390de21e9e66df9d4048c53" category="inline-link-macro-rx"></block>.</block>
   <block id="910d0f6661c3968f4e7402c808d31b3f" category="list-text"><block ref="910d0f6661c3968f4e7402c808d31b3f" category="inline-link-macro-rx"></block></block>
   <block id="740c0d0f6d37afa212fad2bd272a4212" category="list-text">Tiebreaker 1.6 prend uniquement en charge SNMPv3.</block>
   <block id="a98720fe58fe46f2a22c59d172b69fbf" category="list-text">Bien que Tiebreaker 1.5 et 1.4 prennent en charge SNMPv1 et SNMPv3, NetApp vous recommande fortement de configurer SNMPv3 pour une sécurité optimale.</block>
@@ -14579,7 +14557,6 @@ L'exemple suivant montre que vous utilisez SCP pour télécharger le fichier<blo
   <block id="391ee14bc6581827dc4f2d88ff91afcf" category="paragraph">Vous pouvez attacher des ponts supplémentaires pour un deuxième groupe DR ou une deuxième configuration MetroCluster en utilisant les ports 33 à 40 selon le même schéma.</block>
   <block id="785ca789cd5d47a1b40d11e4fa3a608a" category="paragraph">Vous pouvez attacher des ponts supplémentaires pour un deuxième groupe DR ou une deuxième configuration MetroCluster en utilisant les ports 25 à 48 selon le même schéma.</block>
   <block id="3914736797bebae05c8e9387dd6727f0" category="paragraph">Les tableaux suivants indiquent l'utilisation des ports de pont lors de l'utilisation de ponts FibreBridge 7500N ou 7600N utilisant un seul port FC (FC1 ou FC2). Pour les ponts FibreBridge 7500N ou 7600N utilisant un port FC, vous pouvez raccorder FC1 ou FC2 au port indiqué comme FC1. Vous pouvez également fixer des ponts supplémentaires à l'aide des ports 25-48.</block>
-  <block id="8e92988c7461b180dbee8d97f92e6742" category="paragraph">Vous pouvez fixer des ponts supplémentaires à l'aide des ports 25 à 48 en suivant le même schéma.</block>
   <block id="23a48f21ed38a9e3df523f469f325385" category="paragraph">Les tableaux suivants indiquent l'utilisation des ports sur un commutateur Cisco 9132T.</block>
   <block id="b38a704e8751bf228cfb309f0668b3e1" category="section-title">Configurations de contrôleur utilisant FibreBridge 7500N ou 7600N avec les deux ports FC (FC1 et FC2)</block>
   <block id="2d98516f0953aef9ad21de45b1d6ed89" category="paragraph">Le tableau suivant présente les configurations de contrôleur utilisant FibreBridge 7500N ou 7600N utilisant les deux ports FC (FC1 et FC2). Les tableaux présentent le nombre maximum de configurations prises en charge avec quatre et huit modules de contrôleur dans deux groupes de reprise sur incident.</block>
@@ -14635,4 +14612,36 @@ L'exemple suivant montre que vous utilisez SCP pour télécharger le fichier<blo
   <block id="6750be268fde99a8fc70da3cae96763b" category="cell"><block ref="dc13cd459e510658615266395ba927b0" category="inline-xref-macro-rx"></block></block>
   <block id="3485285ca38e1ca4c0a680f9bcf47989" category="admonition">Si les anciens et les nouveaux contrôleurs ne disposent pas de port commun, il n'est pas nécessaire de modifier les LIFs data. Ignorez cette étape et passez directement à <block ref="d2fd743661c244ff041df8d51a55b2b7" category="inline-xref-macro-rx"></block>.</block>
   <block id="57e1aa86ef1214c6b5a618674a806136" category="paragraph">Toutes les LIF de données, y compris SAN et NAS, seront « up » d'administration et « does » d'exploitation, car elles fonctionnent sur le site de basculement (cluster_A).</block>
+  <block id="10a71a5f735ab2b1b550a2d004b57ffb" category="paragraph">Vous pouvez attacher des ponts supplémentaires à l'aide des ports 25 à 48 en suivant le même schéma.</block>
+  <block id="937a8da9d8c2c67fd94deda08131bfdd" category="section-title">Utilisation des ports Cisco pour les liens ISL dans une configuration MetroCluster à huit nœuds exécutant ONTAP 9.1 ou une version ultérieure</block>
+  <block id="3940782c6ee1e8e37bce75ab000a6d7d" category="admonition">Pour améliorer la sécurité, NetApp vous recommande de configurer SNMPv2 ou SNMPv3 pour surveiller l'état de santé du commutateur.</block>
+  <block id="0d81f0b5554e85bb5f4956551639b630" category="admonition">A partir de ONTAP 9.8, la<block ref="688266bc53c9ead911ef4b45027ac96a" prefix=" " category="inline-code"></block> commande est remplacée par<block ref="07a3b9d70f925392ee8d0581b56ebc10" prefix=" " category="inline-code"></block>. Les étapes suivantes montrent la<block ref="688266bc53c9ead911ef4b45027ac96a" prefix=" " category="inline-code"></block> commande, mais si vous exécutez ONTAP 9.8 ou une version ultérieure, la<block ref="07a3b9d70f925392ee8d0581b56ebc10" prefix=" " category="inline-code"></block> commande est préférable.</block>
+  <block id="c8b1f4f0bee22e8e9a9aaaca29899782" category="paragraph">Si vous devez démarrer en réseau les nouveaux contrôleurs, reportez-vous à la section <block ref="afb88e8c89f7c0d7fb7d1ebfbdc283e2" category="inline-link-macro-rx"></block>.</block>
+  <block id="a6aee16f598d71d2363e2ad405b96904" category="section-title">Étape 1 : préparez l'ajout à chaud d'un tiroir disque SAS</block>
+  <block id="cd4905b4e7a5872ce137a31e09bec11f" category="paragraph">Pour préparer l'ajout à chaud d'un tiroir disque SAS, vous devez télécharger des documents ainsi que les firmwares des disques et tiroirs disques.</block>
+  <block id="1078b9b6fada180d5d2977e8dc4eb310" category="list-text">Vérifiez que votre système est une configuration prise en charge et qu'il exécute une version prise en charge de ONTAP.</block>
+  <block id="a68f0e2c7746e4949e616e09deefa430" category="list-text">Vérifiez que tous les disques et tiroirs disques du système exécutent la dernière version de firmware.</block>
+  <block id="658991cef9031aff484b78a0f664f5f0" category="paragraph">Avant d'ajouter des tiroirs, vous pouvez mettre à jour le firmware des disques et des tiroirs tout au long de la configuration MetroCluster.</block>
+  <block id="7cbe99d38a9a2492f41bfc34788b6fac" category="paragraph">Une combinaison de modules IOM12 et IOM6 est prise en charge au sein de la même pile si votre système exécute une version ONTAP prise en charge. Pour savoir si votre version de ONTAP prend en charge la combinaison de tiroirs, reportez-vous au <block ref="cd3982462c40dc1b1a511ada7c72bab9" category="inline-link-macro-rx"></block>. Si votre version de ONTAP n'est pas prise en charge et que vous ne pouvez pas mettre à niveau ou rétrograder les modules IOM de la pile existante ou du nouveau tiroir à ajouter à une combinaison de modules IOM prise en charge, vous devez effectuer l'une des opérations suivantes :</block>
+  <block id="918d32b75f0ab883abba3a8dc0c3ae8d" category="inline-link">Matrice d'interopérabilité</block>
+  <block id="5ea32bc696ea7fb5909f26eb6fb24417" category="list-text"><block ref="5ea32bc696ea7fb5909f26eb6fb24417" category="inline-link-rx"></block></block>
+  <block id="0f0f148d21dd2972977d97fb2e7ff5e9" category="paragraph"><block ref="0f0f148d21dd2972977d97fb2e7ff5e9" category="inline-link-rx"></block></block>
+  <block id="8645e21bfe6e4af4b86dc7f347ff1ad6" category="inline-xref">ajoutez un tiroir disque à chaud</block>
+  <block id="b3394ffae831094f34a567e6f5658dfb" category="admonition">Dans cette étape, vous ne remplissez que la partie de téléchargement des instructions. Suivez les étapes de la section <block ref="bd373ad10590b532f39995f449879640" category="inline-xref-macro-rx"></block> pour installer le tiroir disque.</block>
+  <block id="cbeb50ea11dcfbcf2a36bc8effcd7514" category="section-title">Étape 2 : ajoutez un tiroir disque à chaud</block>
+  <block id="c206cf1f63422466bcc0a56ffa34123c" category="paragraph">Pour ajouter un tiroir disque à une pile, procédez comme suit :</block>
+  <block id="d465e46678961f39056474479053b77c" category="inline-xref">Préparez l'ajout à chaud de tiroirs disques SAS</block>
+  <block id="28c3aa6a67e1038d45e0f61906e2d210" category="list-text">Vérifiez que le système répond à toutes les exigences de la section <block ref="c0573ce1dde2ba325b85f674f143ecea" category="inline-xref-macro-rx"></block>.</block>
+  <block id="0c91ecf1246b9e97873b4360209bb137" category="list-text">Avant d'ajouter un tiroir, vérifiez que votre environnement répond à l'un des scénarios suivants :</block>
+  <block id="9fec734595e2181d9080ae32be062c8e" category="paragraph">Si vous insérez un câble SAS dans le mauvais port, après avoir retiré le câble d'un port SAS, vous devez patienter au moins 120 secondes avant de brancher le câble sur un autre port SAS. Si vous ne le faites pas, le système ne reconnaîtra pas que vous avez déplacé le câble vers un autre port.</block>
+  <block id="6d23583b72982551e4b1285062f3285d" category="list-text">Vérifiez que l'affectation automatique des disques est activée sur votre système depuis la console de l'un des contrôleurs :</block>
+  <block id="109bce5ec1f0d60b99a07c70667f9ec6" category="paragraph">La règle d'affectation automatique s'affiche dans la colonne affectation automatique.</block>
+  <block id="d34edb1bb0aabf3ee05da705ddbc6721" category="list-text">Si l'affectation automatique des disques n'est pas activée sur votre système ou si les disques d'une même pile appartiennent aux deux contrôleurs, attribuez-leur des disques.</block>
+  <block id="d5d63af17881e8ca258c6181c1cfda6f" category="list-text">Si vous scindiez une seule pile de tiroirs disques entre deux contrôleurs, l'affectation automatique des disques doit être désactivée avant d'attribuer la propriété des disques. Dans le cas contraire, lorsque vous attribuez un disque, les disques restants peuvent être automatiquement affectés au même contrôleur et au même pool.</block>
+  <block id="dbde8ddb53b3da1d0f1fca94208162fb" category="paragraph"><block ref="525fe6a472b1a0c1313c938f9357b6f3" prefix=" " category="inline-code"></block>La commande désactive l'auto-assignation des disques.</block>
+  <block id="f8133ef8bfee82369ae5763e817990e8" category="list-text">Vous ne pouvez pas ajouter de disques à des agrégats ou des volumes avant d'avoir mis à jour le firmware des tiroirs disques et des disques.</block>
+  <block id="13985cb259a6148e54b3c766e90f12d3" category="list-text">Passage au niveau de privilège avancé : +<block ref="0581d0d071ad835f74bf419081ce5d75" prefix=" " category="inline-code"></block></block>
+  <block id="1925007e066bed6950af241a5bb2641e" category="list-text">Mettez à jour le micrologiciel du lecteur de disque à la version la plus récente à partir de la console système : +<block ref="da6a6b7cd3f4972b2a5426b567597f96" prefix=" " category="inline-code"></block></block>
+  <block id="0dfe9ec4ea6b3d29900dd8df5b21179e" category="list-text">Exécutez Active IQ Config Advisor.</block>
+  <block id="c4d48c87201e87b08fdc19bd686fd707" category="list-text">Si vous ajoutez plusieurs tiroirs disques à chaud, répétez les étapes précédentes pour chaque tiroir disque que vous ajoutez à chaud.</block>
 </blocks>

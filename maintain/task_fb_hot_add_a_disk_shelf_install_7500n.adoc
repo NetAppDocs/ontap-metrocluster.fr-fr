@@ -4,7 +4,7 @@ sidebar: sidebar
 keywords: metrocluster, maintain, service, hot, add, disk, shelf 
 summary: Vous pouvez ajouter à chaud un tiroir disque pour augmenter le stockage sans réduire les performances. 
 ---
-= Ajout à chaud d'un tiroir disque
+= Ajoutez à chaud un tiroir disque SAS à une pile de tiroirs disques SAS
 :allow-uri-read: 
 :icons: font
 :imagesdir: ../media/
@@ -13,14 +13,79 @@ summary: Vous pouvez ajouter à chaud un tiroir disque pour augmenter le stockag
 [role="lead"]
 Vous pouvez ajouter à chaud un tiroir disque pour augmenter le stockage sans réduire les performances.
 
-* Le système doit répondre à toutes les exigences de la section link:task_fb_hot_add_shelf_prepare_7500n.html["Préparation à l'ajout à chaud de tiroirs disques SAS"].
-* Votre environnement doit répondre à l'un des scénarios suivants pour ajouter à chaud un tiroir :
+
+
+== Étape 1 : préparez l'ajout à chaud d'un tiroir disque SAS
+
+Pour préparer l'ajout à chaud d'un tiroir disque SAS, vous devez télécharger des documents ainsi que les firmwares des disques et tiroirs disques.
+
+.Avant de commencer
+* Vérifiez que votre système est une configuration prise en charge et qu'il exécute une version prise en charge de ONTAP.
+* Vérifiez que tous les disques et tiroirs disques du système exécutent la dernière version de firmware.
++
+Avant d'ajouter des tiroirs, vous pouvez mettre à jour le firmware des disques et des tiroirs tout au long de la configuration MetroCluster.
+
++
+https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-ug-rdg/home.html["Mise à niveau, rétablissement ou mise à niveau vers une version antérieure"]
+
+
+
+[NOTE]
+====
+Une combinaison de modules IOM12 et IOM6 est prise en charge au sein de la même pile si votre système exécute une version ONTAP prise en charge. Pour savoir si votre version de ONTAP prend en charge la combinaison de tiroirs, reportez-vous au link:https://imt.netapp.com/matrix/["Matrice d'interopérabilité (IMT)"^]. Si votre version de ONTAP n'est pas prise en charge et que vous ne pouvez pas mettre à niveau ou rétrograder les modules IOM de la pile existante ou du nouveau tiroir à ajouter à une combinaison de modules IOM prise en charge, vous devez effectuer l'une des opérations suivantes :
+
+* Démarrez une nouvelle pile sur un nouveau port SAS (si elle est prise en charge par la paire de ponts).
+* Démarrer une nouvelle pile sur une paire de ponts supplémentaire.
+
+
+====
+.Étapes
+. Téléchargez ou consultez les documents suivants depuis le site de support NetApp :
++
+** https://mysupport.netapp.com/matrix["Matrice d'interopérabilité"]
+** Le _Guide d'installation_ pour votre modèle de tiroir disque.
+
+
+. Vérifiez que le tiroir disque que vous ajoutez à chaud est pris en charge.
++
+https://mysupport.netapp.com/matrix["Matrice d'interopérabilité"^]
+
+. Téléchargez les derniers firmwares des tiroirs disques et disques :
++
+
+NOTE: Dans cette étape, vous ne remplissez que la partie de téléchargement des instructions. Suivez les étapes de la section <<step_2_hot_add_shelf,ajoutez un tiroir disque à chaud>> pour installer le tiroir disque.
+
++
+.. Téléchargez le micrologiciel du disque et faites une copie des instructions du micrologiciel du disque pour vous y référer ultérieurement.
++
+https://mysupport.netapp.com/site/downloads/firmware/disk-drive-firmware["Téléchargements NetApp : firmware de disque"^]
+
+.. Téléchargez le firmware du tiroir disque et effectuez une copie des instructions du firmware du tiroir disque pour vous y référer ultérieurement.
++
+https://mysupport.netapp.com/site/downloads/firmware/disk-shelf-firmware["Téléchargements NetApp : firmware des tiroirs disques"^]
+
+
+
+
+
+
+
+== Étape 2 : ajoutez un tiroir disque à chaud
+
+Pour ajouter un tiroir disque à une pile, procédez comme suit :
+
+.Avant de commencer
+* Vérifiez que le système répond à toutes les exigences de la section <<prepare_to_hot_add_disk,Préparez l'ajout à chaud de tiroirs disques SAS>>.
+* Avant d'ajouter un tiroir, vérifiez que votre environnement répond à l'un des scénarios suivants :
 +
 ** Deux ponts FibreBridge 7500N sont connectés à une pile de tiroirs disques SAS.
 ** Deux ponts FibreBridge 7600N sont connectés à une pile de tiroirs disques SAS.
 ** Vous disposez d'un pont FibreBridge 7500N et d'un pont FibreBridge 7600N connectés à une pile de tiroirs disques SAS.
 
 
+
+
+.Description de la tâche
 * Cette procédure consiste à ajouter à chaud un tiroir disque au dernier tiroir disque d'une pile.
 +
 Cette procédure est écrite en supposant que le dernier tiroir disque d'une pile est connecté à partir de l'IOM A pour Bridge A et de l'IOM B pour le pont B.
@@ -29,22 +94,22 @@ Cette procédure est écrite en supposant que le dernier tiroir disque d'une pil
 * Vous devez ajouter à chaud un nombre identique de tiroirs disques sur chaque site.
 * Si vous ajoutez plusieurs tiroirs disques à chaud, vous devez ajouter un tiroir disque à la fois.
 +
-
-NOTE: Chaque paire de ponts FiberBridge 7500N ou 7600N peut prendre en charge jusqu'à quatre piles.
-
+Chaque paire de ponts FiberBridge 7500N ou 7600N peut prendre en charge jusqu'à quatre piles.
 
 
 
-IMPORTANT: Pour ajouter à chaud un tiroir disque, vous devez mettre à jour le firmware de ce dernier sur le tiroir disque ajouté à chaud en exécutant le `storage disk firmware update` commande en mode avancé. L'exécution de cette commande peut entraîner une interruption de service si la version du firmware des disques existants du système est antérieure.
+[CAUTION]
+====
+Pour ajouter à chaud un tiroir disque, vous devez mettre à jour le firmware de ce dernier sur le tiroir disque ajouté à chaud en exécutant le `storage disk firmware update` commande en mode avancé. L'exécution de cette commande peut entraîner une interruption de service si la version du firmware des disques existants du système est antérieure.
 
+Si vous insérez un câble SAS dans le mauvais port, après avoir retiré le câble d'un port SAS, vous devez patienter au moins 120 secondes avant de brancher le câble sur un autre port SAS. Si vous ne le faites pas, le système ne reconnaîtra pas que vous avez déplacé le câble vers un autre port.
 
-IMPORTANT: Si vous insérez un câble SAS dans le mauvais port, lorsque vous retirez le câble d'un port SAS, vous devez attendre au moins 120 secondes avant de brancher le câble sur un autre port SAS. Si vous ne le faites pas, le système ne reconnaîtra pas que le câble a été déplacé vers un autre port.
-
+====
 .Étapes
 . Mettez-vous à la terre.
 . Vérifiez la connectivité des tiroirs disques depuis la console système d'un contrôleur :
 +
-`*sysconfig -v*`
+`sysconfig -v`
 
 +
 Le résultat est similaire à ce qui suit :
@@ -74,12 +139,12 @@ cisco_A_1-1:9.126L2   : NETAPP   X421_HCOBD450A10 NA01 418.0GB (879097968 520B/s
 ----
 
 
-. Vérifiez si l'autoassignation des disques est activée sur votre système depuis la console de l'un des contrôleurs :
+. Vérifiez que l'affectation automatique des disques est activée sur votre système depuis la console de l'un des contrôleurs :
 +
-`*storage disk option show*`
+`storage disk option show`
 
 +
-La stratégie d'affectation automatique est affichée dans la colonne affectation automatique.
+La règle d'affectation automatique s'affiche dans la colonne affectation automatique.
 
 +
 [listing]
@@ -91,22 +156,21 @@ node_A_1             on           on           on           default
 node_A_2             on           on           on           default
 2 entries were displayed.
 ----
-. Si l'affectation automatique des disques n'est pas activée sur votre système ou si les disques d'une même pile appartiennent aux deux contrôleurs, affectez les disques aux pools appropriés.
+. Si l'affectation automatique des disques n'est pas activée sur votre système ou si les disques d'une même pile appartiennent aux deux contrôleurs, attribuez-leur des disques.
 +
 https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-psmg/home.html["Gestion des disques et des agrégats"]
 
 +
 [NOTE]
 ====
-Si vous sélectionnez une pile unique de tiroirs disques entre deux contrôleurs, l'affectation automatique des disques doit être désactivée avant d'affecter la propriété des disques. Sinon, lorsque vous attribuez un seul disque, les disques restants peuvent être automatiquement affectés au même contrôleur et au même pool.
+** Si vous scindiez une seule pile de tiroirs disques entre deux contrôleurs, l'affectation automatique des disques doit être désactivée avant d'attribuer la propriété des disques. Dans le cas contraire, lorsque vous attribuez un disque, les disques restants peuvent être automatiquement affectés au même contrôleur et au même pool.
++
+ `storage disk option modify -node <node-name> -autoassign off`La commande désactive l'auto-assignation des disques.
 
-Le `storage disk option modify -node _node-name_ -autoassign off` la commande désactive l'affectation automatique des disques.
+** Vous ne pouvez pas ajouter de disques à des agrégats ou des volumes avant d'avoir mis à jour le firmware des tiroirs disques et des disques.
+
 
 ====
-+
-
-NOTE: Les disques ne doivent pas être ajoutés aux agrégats ou aux volumes tant que le firmware des tiroirs disques et des disques n'a pas été mis à jour.
-
 . Mettez à jour le firmware du tiroir disque vers la version la plus récente en utilisant les instructions du firmware téléchargé.
 +
 Vous pouvez exécuter les commandes en cours depuis la console système d'un contrôleur.
@@ -143,15 +207,15 @@ Le _Guide d'installation_ de votre modèle de tiroir disque fournit des informat
 https://mysupport.netapp.com/site/downloads/firmware/disk-drive-firmware["Téléchargements NetApp : firmware de disque"]
 
 +
-.. Passez au niveau de privilège avancé : +
-`*set -privilege advanced*`
+.. Passage au niveau de privilège avancé : +
+`set -privilege advanced`
 +
 Vous devez répondre avec `*y*` lorsque vous êtes invité à passer en mode avancé et à afficher l'invite du mode avancé (*>).
 
-.. Mettez à jour le firmware du disque dur vers la version la plus récente à partir de la console système : +
-`*storage disk firmware update*`
+.. Mettez à jour le micrologiciel du lecteur de disque à la version la plus récente à partir de la console système : +
+`storage disk firmware update`
 .. Revenir au niveau de privilège admin : +
-`*set -privilege admin*`
+`set -privilege admin`
 .. Répétez les sous-étapes précédentes sur l'autre contrôleur.
 
 
@@ -159,23 +223,23 @@ Vous devez répondre avec `*y*` lorsque vous êtes invité à passer en mode ava
 +
 .. Vérifier si le système est multipathed :
 +
-`*node run -node _node-name_ sysconfig -a*`
+`node run -node <node-name> sysconfig -a`
 
 .. Vérifier si les alertes d'intégrité des deux clusters sont disponibles : +
-`*system health alert show*`
+`system health alert show`
 .. Vérifier la configuration MetroCluster et que le mode opérationnel est normal : +
-`*metrocluster show*`
+`metrocluster show`
 .. Effectuer une vérification MetroCluster : +
-`*metrocluster check run*`
+`metrocluster check run`
 .. Afficher les résultats de la vérification MetroCluster :
 +
-`*metrocluster check show*`
+`metrocluster check show`
 
 .. Vérifier la présence d'alertes d'intégrité sur les commutateurs (le cas échéant) :
 +
-`*storage switch show*`
+`storage switch show`
 
-.. Exécutez Config Advisor.
+.. Exécutez Active IQ Config Advisor.
 +
 https://mysupport.netapp.com/site/tools/tool-eula/activeiq-configadvisor["Téléchargement NetApp : Config Advisor"]
 
