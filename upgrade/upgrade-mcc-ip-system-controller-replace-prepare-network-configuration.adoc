@@ -28,11 +28,46 @@ L'opération d'automatisation lance les opérations de basculement. Une fois ces
 +
 `boot_ontap`
 
-. Si le système vers lequel vous effectuez la mise à niveau NE figure PAS dans le tableau suivant, vérifiez que les interfaces IP MetroCluster utilisent des adresses IP prises en charge.
+. Si le système que vous effectuez la mise à niveau utilise *les ports partagés cluster/haute disponibilité*, vérifiez que les interfaces IP MetroCluster utilisent les adresses IP prises en charge.
 +
+Utilisez les informations suivantes pour déterminer si le nouveau système utilise des ports cluster/haute disponibilité partagés :
+
++
+[role="tabbed-block"]
+====
+.Ports partagés en cluster/haute disponibilité
+--
+Les systèmes répertoriés dans le tableau suivant utilisent des ports cluster/haute disponibilité partagés :
+
+[cols="2*"]
 |===
+| AFF et ASA | Systèmes FAS 
 
 
+ a| 
+** AFF A20
+** AFF A30
+** AFF C30
+** AFF A50
+** AFF C60
+** AFF C80
+** AFF A70
+** AFF A90
+** AFF A1K
+
+ a| 
+** FAS70
+** FAS90
+
+
+|===
+--
+.Ports MetroCluster/HA partagés
+--
+Les systèmes répertoriés dans le tableau suivant utilisent des ports MetroCluster/HA partagés :
+
+[cols="2*"]
+|===
 | AFF et ASA | Systèmes FAS 
 
 
@@ -61,6 +96,8 @@ L'opération d'automatisation lance les opérations de basculement. Une fois ces
 
 
 |===
+--
+====
 +
 .. Vérifiez les adresses IP des interfaces MetroCluster sur les anciens contrôleurs :
 +
@@ -69,7 +106,7 @@ L'opération d'automatisation lance les opérations de basculement. Une fois ces
 .. Si les interfaces MetroCluster utilisent des adresses IP 169.254.17.x ou 169.254.18.x, reportez-vous à  la section link:https://kb.netapp.com/on-prem/ontap/mc/MC-KBs/How_to_modify_the_properties_of_a_MetroCluster_IP_interface["Article de la base de connaissances « modification des propriétés d'une interface IP MetroCluster »"^] pour modifier les adresses IP de l'interface avant de procéder à la mise à niveau.
 +
 
-CAUTION: La mise à niveau vers un système qui n'est pas répertorié dans le tableau n'est pas prise en charge si les interfaces MetroCluster sont configurées avec des adresses IP 169.254.17.x ou 169.254.18.x.
+CAUTION: La mise à niveau vers tout système utilisant des *ports partagés cluster/haute disponibilité* n'est pas prise en charge si les interfaces MetroCluster sont configurées avec des adresses IP 169.254.17.x ou 169.254.18.x.
 
 
 

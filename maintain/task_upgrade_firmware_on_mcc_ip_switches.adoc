@@ -13,6 +13,62 @@ summary: Mise à niveau du micrologiciel sur les commutateurs IP MetroCluster.
 [role="lead"]
 Vous devrez peut-être mettre à niveau le micrologiciel d'un commutateur IP MetroCluster.
 
+
+
+== Vérifiez que la FCR est prise en charge
+
+Lorsque vous modifiez la version de ONTAP ou de firmware du commutateur, vérifiez que vous disposez d'un fichier RCF pris en charge pour cette version. Si vous utilisez link:https://mysupport.netapp.com/site/tools/tool-eula/rcffilegenerator["RcfFileGenerator"^]l'outil, le fichier RCF correct est généré pour votre configuration.
+
+.Étapes
+. Utilisez les commandes suivantes des switchs pour vérifier la version du fichier RCF :
++
+[cols="30,70"]
+|===
+
+
+| À partir de ce commutateur... | Exécutez cette commande... 
+
+
+ a| 
+Commutateur Broadcom
+ a| 
+`(IP_switch_A_1) # show clibanner`
+
+
+
+ a| 
+Commutateur Cisco
+ a| 
+`IP_switch_A_1# show banner motd`
+
+
+
+ a| 
+Commutateur NVIDIA SN2100
+ a| 
+`cumulus@mcc1:mgmt:~$ nv config find message`
+
+|===
++
+Recherchez la ligne dans la sortie de la commande qui indique la version RCF. Par exemple, la sortie suivante d'un commutateur Cisco indique que la version RCF est « v1.80 ».
+
++
+....
+Filename : NX3232_v1.80_Switch-A2.txt
+....
+. Pour vérifier quels fichiers sont pris en charge pour une version, un commutateur et une plate-forme ONTAP spécifiques, utilisez le link:https://mysupport.netapp.com/site/tools/tool-eula/rcffilegenerator["RcfFileGenerator pour MetroCluster IP"^]. Si vous pouvez générer le fichier RCF correspondant à la configuration dont vous disposez ou que vous souhaitez mettre à niveau, il est pris en charge.
+. Pour vérifier que le micrologiciel du commutateur est pris en charge, reportez-vous aux sections suivantes :
++
+** https://hwu.netapp.com["Hardware Universe"]
+** https://imt.netapp.com/matrix/["Matrice d'interopérabilité NetApp"^]
+
+
+
+
+
+
+== Mettez à niveau le micrologiciel du commutateur
+
 .Description de la tâche
 Vous devez répéter cette tâche sur chacun des commutateurs successivement.
 

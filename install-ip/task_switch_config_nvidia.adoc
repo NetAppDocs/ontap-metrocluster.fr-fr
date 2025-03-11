@@ -404,14 +404,37 @@ NOTE: Lorsque vous définissez l'option DAC pour plusieurs ports de commutateur,
 
 
 
+== Définissez la correction d'erreur de transfert pour les systèmes utilisant une connectivité de 25 Gbit/s.
+
+Si votre système est configuré avec une connectivité de 25 Gbit/s, définissez manuellement le paramètre correction d'erreur de transfert (fec) sur Désactivé après l'application de la FCR. La FCR n'applique pas ce paramètre.
+
+.Description de la tâche
+* Cette tâche s'applique uniquement aux plates-formes utilisant une connectivité 25 Gbit/s. Reportez-vous à la link:../install-ip/port_usage_sn2100.html["Affectations des ports de plateforme pour les switchs IP SN2100 pris en charge par NVIDIA"].
+* Cette tâche doit être effectuée sur les quatre commutateurs de la configuration IP MetroCluster.
+* Vous devez mettre à jour chaque port de commutateur individuellement. Vous ne pouvez pas spécifier plusieurs ports ou plages de ports dans la commande.
+
+
+.Étapes
+. Définissez le `fec` paramètre sur Off pour le premier port de commutateur qui utilise une connectivité 25 Gbit/s :
++
+`sudo python3 SN2100_v2.0_Switch-A1.py runCmd <switchport> fec off`
+
+. Répétez l'étape pour chaque port de commutateur 25 Gbit/s connecté à un module de contrôleur.
+
+
+
+
 == Définissez la vitesse du port de commutateur pour les interfaces IP MetroCluster
 
 .Description de la tâche
-Utilisez cette procédure pour régler la vitesse du port de commutation sur 100 G pour les systèmes suivants :
+* Utilisez cette procédure pour régler la vitesse du port de commutation sur 100 G pour les systèmes suivants :
++
+** AFF A70
+** AFF A90
+** AFF A1K
 
-* AFF A70
-* AFF A90
-* AFF A1K
+
+* Vous devez mettre à jour chaque port de commutateur individuellement. Vous ne pouvez pas spécifier plusieurs ports ou plages de ports dans la commande.
 
 
 .Étape
@@ -452,8 +475,9 @@ cumulus@Switch-A-1:mgmt:~$
 
 == Désactivez les ports ISL et les canaux de port inutilisés
 
-NetApp recommande de désactiver les ports ISL et les canaux de port inutilisés afin d'éviter les alertes d'intégrité inutiles.
+NetApp recommande de désactiver les ports ISL et les canaux de port inutilisés afin d'éviter les alertes d'intégrité inutiles. Vous devez désactiver chaque port ou canal de port individuellement. Vous ne pouvez pas spécifier plusieurs ports ou plages de ports dans la commande.
 
+.Étapes
 . Identifiez les ports ISL et les canaux de port inutilisés à l'aide de la bannière du fichier RCF :
 +
 

@@ -11,63 +11,17 @@ summary: Il peut être nécessaire de mettre à niveau un fichier RCF sur un com
 
 
 [role="lead"]
-Il peut être nécessaire de mettre à niveau un fichier RCF sur un commutateur IP MetroCluster. Par exemple, si la version du fichier RCF exécutée sur les switchs n'est pas prise en charge par la version ONTAP, la version du firmware du switch ou les deux.
+Vous devrez peut-être mettre à niveau un fichier RCF (Reference Configuration File) sur un commutateur IP MetroCluster. Par exemple, si la version du fichier RCF exécutée sur les switchs n'est pas prise en charge par la version ONTAP, la version du firmware du switch ou les deux.
 
+.Avant de commencer
+* Si vous installez un nouveau firmware du commutateur, vous devez installer le micrologiciel du commutateur avant de mettre à niveau le fichier RCF.
+* Avant de mettre à niveau le fichier RCFlink:task_upgrade_firmware_on_mcc_ip_switches.html["Vérifiez que la FCR est prise en charge"], .
+* link:enable-console-logging-before-maintenance.html["Activer la journalisation de la console"] avant d'effectuer cette tâche.
 
-
-== Vérifiez que le fichier RCF est pris en charge
-
-Si vous modifiez la version de ONTAP ou la version du firmware du commutateur, vérifiez que vous disposez d'un fichier RCF pris en charge par cette version. Si vous utilisez le générateur FCR, le fichier RCF approprié sera généré pour vous.
-
-.Étapes
-. Utiliser les commandes suivantes des commutateurs pour vérifier la version du fichier RCF :
-+
-[cols="30,70"]
-|===
-
-
-| À partir de ce commutateur... | Exécutez cette commande... 
-
-
- a| 
-Commutateur Broadcom
- a| 
-`(IP_switch_A_1) # show clibanner`
-
-
-
- a| 
-Commutateur Cisco
- a| 
-`IP_switch_A_1# show banner motd`
-
-|===
-+
-Pour l'un ou l'autre commutateur, recherchez la ligne du résultat indiquant la version du fichier RCF. Par exemple, le résultat suivant provient d'un commutateur Cisco, qui indique que la version du fichier RCF est « v1.80 ».
-
-+
-....
-Filename : NX3232_v1.80_Switch-A2.txt
-....
-. Pour vérifier quels fichiers sont pris en charge pour une version, un commutateur et une plate-forme ONTAP spécifiques, utilisez le générateur de fichiers RcfFileGenerator. Si vous pouvez générer le fichier RCF pour la configuration dont vous disposez ou vers laquelle vous souhaitez procéder à la mise à niveau, ce fichier est pris en charge.
-. Pour vérifier que le micrologiciel du commutateur est pris en charge, reportez-vous aux sections suivantes :
-+
-** https://hwu.netapp.com["Hardware Universe"]
-** https://imt.netapp.com/matrix/["Matrice d'interopérabilité NetApp"^]
-
-
-
-
-
-
-== Mettre à niveau les fichiers RCF
-
-Si vous installez un nouveau firmware du commutateur, vous devez installer le micrologiciel du commutateur avant de mettre à niveau le fichier RCF.
 
 .Description de la tâche
 * Cette procédure perturbe le trafic sur le commutateur où le fichier RCF est mis à niveau. Le trafic reprend lorsque le nouveau fichier RCF est appliqué.
 * Effectuer les étapes sur un commutateur à la fois, dans l'ordre suivant : Switch_A_1, Switch_B_1, Switch_A_2, Switch_B_2.
-* link:enable-console-logging-before-maintenance.html["Activer la journalisation de la console"] avant d'effectuer cette tâche.
 
 
 .Étapes
