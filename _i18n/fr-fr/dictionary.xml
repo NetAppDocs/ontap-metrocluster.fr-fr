@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <blocks>
   <block id="e5fe800fef736c2c8af1453a59683d3c" category="summary">Pour mettre à niveau ou rétrograder le micrologiciel sur un commutateur FC Brocade, vous devez utiliser les commandes spécifiques à Brocade pour désactiver le commutateur, effectuer et vérifier la modification du micrologiciel, puis redémarrer et réactiver le commutateur.</block>
-  <block id="1ab0f1fa27ba43bfea0e9de2529316c8" category="doc">Mise à niveau ou rétrogradation du micrologiciel sur un commutateur Brocade FC</block>
   <block id="168f20b249437abf8c684700d798efa2" category="list-text">Vous devez disposer des fichiers de micrologiciel.</block>
   <block id="db6e0c8057b108f77da141b83e047b8d" category="paragraph">La structure des commutateurs est désactivée lors d'une mise à niveau ou d'une mise à niveau vers une version antérieure du firmware, et la configuration MetroCluster s'appuie sur la deuxième structure pour continuer le fonctionnement.</block>
   <block id="6751765455c440079966f9a59475b0bc" category="paragraph">Cette tâche doit être effectuée successivement sur chaque structure de commutation afin que tous les commutateurs exécutent la même version de micrologiciel.</block>
@@ -2764,7 +2763,6 @@
   <block id="cb2882d39ecc345874a2172a679345a0" category="list-text">Les clusters doivent disposer de licences FabricPool correspondant aux limites de capacité.</block>
   <block id="da1d8a158d031df0c087914bc717f807" category="list-text">Les clusters doivent disposer d'IPspaces avec des noms correspondant.</block>
   <block id="84225993604927d7b2805e680fc6afb7" category="paragraph">Il peut s'agir de l'IPspace par défaut, ou un espace IP qu'un administrateur a créé. Cet IPspace sera utilisé pour les configurations de magasin d'objets FabricPool.</block>
-  <block id="eadb8b792e9f449e89ae54e27988217b" category="list-text">Pour l'IPspace sélectionné, chaque cluster doit avoir une LIF intercluster définie qui peut atteindre le magasin d'objets externe</block>
   <block id="b6f8b39e7216b4698097318b7db733fa" category="section-title">Configuration d'un agrégat à utiliser dans une FabricPool en miroir</block>
   <block id="d3478949021db31ee899464708ca14ab" category="admonition">Avant de configurer l'agrégat, vous devez configurer des magasins d'objets comme décrit dans la section « Configuration des magasins d'objets pour FabricPool dans une configuration MetroCluster » du<block ref="46a180d322a34c1f2719942dadd3e4fb" category="inline-link-rx"></block>.</block>
   <block id="8d0251be64ec85684b5dfb469e20ba1c" category="paragraph">Pour configurer un agrégat afin de l'utiliser dans une FabricPool :</block>
@@ -3061,7 +3059,6 @@
   <block id="12007e1d59f4d09c87dbe2c438256244" category="cell">Destination</block>
   <block id="261addf78c7b2c961032b3dd08ba0b1f" category="cell">Objectif</block>
   <block id="5946d090ccc9cc4eb9c55cf3e9e8d35a" category="paragraph">31784/tcp</block>
-  <block id="39af2fc562277654190ca9b83e431189" category="paragraph">Interfaces ONTAP de gestion du cluster</block>
   <block id="47c5e6a166f9432ff96681fa2a62c791" category="paragraph">Serveur web du médiateur ONTAP</block>
   <block id="8cf15eeaee2b3382338ecab30027c48b" category="paragraph">API REST (HTTPS)</block>
   <block id="5395ab3ceab5345ee4a1117e436bec89" category="paragraph">3260/tcp</block>
@@ -11502,7 +11499,6 @@
   <block id="690f8ff3b8b65da4f1bc779fb507da9d" category="sidebar">Fichiers journaux d'événements MetroCluster Tiebreaker</block>
   <block id="fd8a65566a0bac859d93882f20cc0c7d" category="paragraph"><block ref="fd8a65566a0bac859d93882f20cc0c7d" category="inline-link-macro-rx"></block></block>
   <block id="43119522ff803c1f1fa88bdbaffe20b7" category="admonition">Le port iSCSI n'est requis que dans une configuration IP MetroCluster.</block>
-  <block id="4026cb63b92cdc28e17e39a79de589f7" category="paragraph">Cluster ONTAP (LIF de données ou LIF de gestion de données)</block>
   <block id="fd9b3eaeebb236fdcf40b5456ccc900e" category="admonition">Les systèmes AFF A900 et FAS9500 prennent en charge huit liens ISL. Huit liens ISL sont pris en charge sur les systèmes Brocade 6510, G620, G620-1, G630, G630-1, Et commutateurs G720.</block>
   <block id="81d4bf20c117cfe06c727511dd63382b" category="paragraph">6510, G620, G620-1, G630, G630-1, G720</block>
   <block id="64cdec386f8cc50c2a2ec9316633b629" category="paragraph">Avant de courir<block ref="3b3242ced99842a6c2c16f489b78e773" prefix=" " category="inline-code"></block>, Le mode HA et la mise en miroir DR ne sont pas activés et un message d'erreur peut s'afficher concernant ce comportement attendu. Vous activez le mode HA et la mise en miroir de reprise après incident plus tard lors de l'exécution de la commande<block ref="3b3242ced99842a6c2c16f489b78e773" prefix=" " category="inline-code"></block> pour implémenter la configuration.</block>
@@ -14681,4 +14677,31 @@ L'exemple suivant montre que vous utilisez SCP pour télécharger le fichier<blo
   <block id="11f90eb1d0dccabe5ea84d5795fc2ef7" category="paragraph">Utilisez les informations suivantes pour déterminer si le nouveau système utilise des ports cluster/haute disponibilité partagés :</block>
   <block id="fb1ce5d087cc4c4bd39c43bc3af7058b" category="admonition">La mise à niveau vers tout système utilisant des *ports partagés cluster/haute disponibilité* n'est pas prise en charge si les interfaces MetroCluster sont configurées avec des adresses IP 169.254.17.x ou 169.254.18.x.</block>
   <block id="25b129509e36ff88d2beb94d08667a62" category="sidebar">Modifiez les propriétés ISL ou la configuration IOD/OOD sur un commutateur FC Cisco</block>
+  <block id="8b578a27fe20d5a32a06b05afeaa5b16" category="list-text">Pour l'IPspace sélectionné, chaque cluster doit avoir une LIF intercluster définie qui peut atteindre le magasin d'objets externe.</block>
+  <block id="d98545518df18c073a4a75d72759ddfe" category="list-text">La migration des SVM n'est pas prise en charge avec FabricPool lorsque la source ou la destination est un cluster MetroCluster.</block>
+  <block id="de60962ea114e8e20b41343aa7431cbf" category="inline-link-macro">En savoir plus sur la mobilité des données des SVM</block>
+  <block id="cb692d9778a8fa1464d6b442ab90722f" category="paragraph"><block ref="53c488ccbc80272b509e45a126fd033b" category="inline-link-macro-rx"></block>.</block>
+  <block id="b4911e786bbd878f489a84835fcee570" category="list-text">IPv6 n'est pas pris en charge par le médiateur ONTAP.</block>
+  <block id="d247a27201590148c4ea6bf493729fd1" category="list-text">Le port 22/tcp n'est pas nécessaire pour un fonctionnement normal, mais vous pouvez l'activer temporairement pour la maintenance et le désactiver une fois la session de maintenance terminée.</block>
+  <block id="02674a4ef33e11c879283629996c8ff8" category="cell">Direction</block>
+  <block id="c5df47f9068f6d11f238ec77908abf18" category="paragraph">22/tcp</block>
+  <block id="6c7e3200049198face0d2648e9d1a27d" category="paragraph">Entrant</block>
+  <block id="58dc7db50a2e11a9de9e6cc092c59d4d" category="paragraph">Médiateur de ONTAP</block>
+  <block id="348d25e332990b97eda5823a9561cd76" category="paragraph">Gestion du médiateur SSH/ONTAP</block>
+  <block id="abd4328c725637aabedbd02d3b7ffd40" category="paragraph">Bidirectionnel</block>
+  <block id="7df18ff4393ac59f9af7b68478828591" category="inline-link-macro">Guide de mise à niveau du logiciel Brocade Fabric OS, 9.2.x</block>
+  <block id="81095da37e6499e1af51ce2d0316b8c1" category="paragraph">Si vous effectuez une mise à niveau vers Fabric OS version 9.2.x ou ultérieure, vous devez avoir installé un certificat Brocade TruFOS. Pour plus d'informations, reportez-vous à la section<block ref="0c25af31b20d46ca79e55fb8f6beb4c9" category="inline-link-macro-rx"></block>.</block>
+  <block id="b2fe7ec3c609e490e177268be9c6a2c7" category="open-title">Retirez les ponts FC-SAS</block>
+  <block id="1c5eaf0274c09872a2287c430ed75a60" category="list-text">Identifier les ponts :</block>
+  <block id="4d100b8e119ce2e8a98e720e612260d2" category="paragraph"><block ref="5c2aa4362fb9d40ad679411e69f26e74" prefix="" category="inline-code"></block></block>
+  <block id="679425df5c12f3f894799666283b2fcd" category="list-text">Déposer les ponts :</block>
+  <block id="ee90b235e787cdea487ac811b405275d" category="paragraph"><block ref="6ecfba135a48bcb7f43c03b5132edab0" prefix="" category="inline-code"></block></block>
+  <block id="2d3a681bfca3f3afa13da28bbcb3d157" category="list-text">Vérifiez que les ponts sont retirés :</block>
+  <block id="457c5fa19fe4bf31989022bf10e2133b" category="paragraph">L'exemple suivant montre que les ponts sont supprimés :</block>
+  <block id="9a752ae21c1569c1e94c2b3c0c4ec816" category="open-title">Retirez les commutateurs FC</block>
+  <block id="07c2ed77d8d4a66a9da7bc64642f43ac" category="list-text">Identifier les commutateurs :</block>
+  <block id="6ac0707c59f9a8bac7c112671ebed890" category="paragraph"><block ref="2fb4e63397068939776b11238421ef0d" prefix="" category="inline-code"></block></block>
+  <block id="a7bb11a2d517e74f775b8aefe3c16638" category="list-text">Déposer les contacteurs :</block>
+  <block id="027e94eee8bf21f30bcb532977a993c1" category="paragraph"><block ref="4f1415de9c82b1c8c8506139320b0115" prefix="" category="inline-code"></block></block>
+  <block id="fdb1649f24689923739f1476888a8957" category="list-text">Vérifier que les interrupteurs sont retirés :</block>
 </blocks>

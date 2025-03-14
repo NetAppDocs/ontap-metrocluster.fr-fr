@@ -366,6 +366,118 @@ Run "debug vreport show" to address remaining aggregate or volume issues.
 
 cluster_B::>
 ....
+. Si la configuration utilise des ponts FC-SAS ou des commutateurs internes FC, déconnectez et retirez-les.
++
+[role="tabbed-block"]
+====
+.Retirez les ponts FC-SAS
+--
+.. Identifier les ponts :
++
+`system bridge show`
+
+.. Déposer les ponts :
++
+`system bridge remove -name <bridge_name>`
+
+.. Vérifiez que les ponts sont retirés :
++
+`system bridge show`
+
+
+
+L'exemple suivant montre que les ponts sont supprimés :
+
+.Exemple
+[%collapsible]
+=====
+[listing]
+----
+cluster1::> system bridge remove -name ATTO_10.226.197.16
+cluster1::> system bridge show
+                                                                Is        Monitor
+    Bridge     Symbolic Name Vendor  Model     Bridge WWN       Monitored Status
+    ---------- ------------- ------- --------- ---------------- --------- -------
+    ATTO_FibreBridge6500N_1
+               Bridge Number 16
+                             Atto    FibreBridge 6500N
+                                               2000001086603824 false     -
+    ATTO_FibreBridge6500N_2
+               Not Set       Atto    FibreBridge 6500N
+                                               20000010866037e8 false     -
+    ATTO_FibreBridge6500N_3
+               Not Set       Atto    FibreBridge 6500N
+                                               2000001086609e0e false     -
+    ATTO_FibreBridge6500N_4
+               Not Set       Atto    FibreBridge 6500N
+                                               2000001086609c06 false     -
+    4 entries were displayed.
+----
+=====
+--
+.Retirez les commutateurs FC
+--
+.. Identifier les commutateurs :
++
+`system switch fibre-channel show`
+
+.. Déposer les contacteurs :
++
+`system switch fibre-channel remove -switch-name <switch_name>`
+
+.. Vérifier que les interrupteurs sont retirés :
++
+`system switch fibre-channel show`
+
+
+
+.Exemple
+[%collapsible]
+=====
+[listing]
+----
+cluster1::> system switch fibre-channel show
+                Symbolic                                     Is        Monitor
+    Switch      Name     Vendor  Model      Switch WWN       Monitored Status
+    ----------- -------- ------- ---------- ---------------- --------- -------
+    Cisco_10.226.197.34
+                mcc-cisco-8Gb-fab-4
+                         Cisco   DS-C9148-16P-K9
+                                            2000547fee78f088 true      ok
+    mcc-cisco-8Gb-fab-1
+                mcc-cisco-8Gb-fab-1
+                         Cisco   -          -                false     -
+    mcc-cisco-8Gb-fab-2
+                mcc-cisco-8Gb-fab-2
+                         Cisco   -          -                false     -
+    mcc-cisco-8Gb-fab-3
+                mcc-cisco-8Gb-fab-3
+                         Cisco   -          -                false     -
+    4 entries were displayed.
+cluster1::> system switch fibre-channel remove -switch-name Cisco_10.226.197.34
+cluster1::> system switch fibre-channel show
+                Symbolic                                     Is        Monitor
+    Switch      Name     Vendor  Model      Switch WWN       Monitored Status
+    ----------- -------- ------- ---------- ---------------- --------- -------
+    mcc-cisco-8Gb-fab-4
+                mcc-cisco-8Gb-fab-4
+                         Cisco
+                                 -          -                false     -
+    mcc-cisco-8Gb-fab-1
+                mcc-cisco-8Gb-fab-1
+                         Cisco   -          -                false     -
+    mcc-cisco-8Gb-fab-2
+                mcc-cisco-8Gb-fab-2
+                         Cisco   -          -                false     -
+    mcc-cisco-8Gb-fab-3
+                mcc-cisco-8Gb-fab-3
+                         Cisco   -          -                false     -
+    4 entries were displayed
+cluster1::>
+----
+=====
+--
+====
 . Mettez les modules de contrôleur FC MetroCluster et les tiroirs de stockage hors tension.
 . Déconnecter et retirer les modules de contrôleur FC MetroCluster et les tiroirs de stockage.
 
