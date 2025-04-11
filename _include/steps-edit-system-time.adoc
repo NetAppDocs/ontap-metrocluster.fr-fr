@@ -1,0 +1,48 @@
+= 
+:allow-uri-read: 
+
+
+Selon votre version de ONTAP, vous pouvez configurer le NTP à partir de l'onglet *Cluster* ou *Insights* de l'interface utilisateur du Gestionnaire système.
+
+[role="tabbed-block"]
+====
+.Cluster
+--
+Dans le Gestionnaire système, vous pouvez configurer le protocole NTP à partir de l'onglet *Cluster* en utilisant deux options différentes, selon votre version de ONTAP :
+
+.ONTAP 9.8 ou version ultérieure :
+Procédez comme suit pour synchroniser le NTP à partir de l'onglet *Cluster* de ONTAP 9.8 ou version ultérieure.
+
+.Étapes
+. Accédez à *Cluster > Présentation*
+. Sélectionnez ensuite l'image:icon-more-kebab-blue-bg.jpg["Plus encore"]option et sélectionnez *Modifier*.
+. Dans la fenêtre *Modifier les détails du cluster*, sélectionnez l'option *+Ajouter* sous serveurs NTP.
+. Ajoutez le nom, l'emplacement et spécifiez l'adresse IP du serveur de temps.
+. Sélectionnez ensuite *Enregistrer*.
+. Répétez les étapes pour tous les autres serveurs de temps.
+
+
+.ONTAP 9.11.1 ou version ultérieure :
+Procédez comme suit pour synchroniser le NTP à partir de la fenêtre *Insights* de l'onglet *Cluster* de ONTAP 9.11.1 ou version ultérieure.
+
+.Étapes
+. Accédez à *Cluster > Présentation*
+. Faites défiler jusqu'à la fenêtre *Insights* de la page, localisez *trop peu de serveurs NTP sont configurés*, puis sélectionnez *Fix it*.
+. Spécifiez l'adresse IP du serveur de temps, puis sélectionnez *Enregistrer*.
+. Répétez l'étape précédente pour tout autre serveur de temps.
+
+
+--
+.Visibilité
+--
+Dans ONTAP 9.11.1 ou version ultérieure, vous pouvez également configurer le NTP à l'aide de l'onglet *Insights* du Gestionnaire système :
+
+.Étapes
+. Accédez à l'onglet *Insights* de l'interface utilisateur de System Manager.
+. Faites défiler jusqu'à *trop peu de serveurs NTP sont configurés* et sélectionnez *Fix it*.
+. Spécifiez l'adresse IP du serveur de temps, puis sélectionnez *Enregistrer*.
+. Répétez l'étape précédente pour tout autre serveur de temps.
+
+
+--
+====

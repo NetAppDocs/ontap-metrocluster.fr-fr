@@ -40,7 +40,7 @@ Les sections suivantes décrivent le schéma de câblage physique. Vous pouvez �
 
 Utilisez le tableau suivant pour déterminer la table de câblage que vous devez suivre.
 
-[cols="2*"]
+[cols="25,75"]
 |===
 | Si votre système est... | Utilisez ce tableau de câblage... 
 
@@ -59,7 +59,13 @@ AFF A250, ASA A250
 | AFF A20 | <<table_2_nvidia_sn2100,Affectations des ports de la plate-forme NVIDIA SN2100 (groupe 2)>> 
 
 
-| AFF C30, AFF A30 AFF C60 | <<table_3_nvidia_sn2100,Affectations des ports de la plate-forme NVIDIA SN2100 (groupe 3)>> 
+| AFF C30, AFF A30 FAS50 AFF C60  a| 
+Le tableau suivant dépend de l'utilisation d'une carte Ethernet 25G (groupe 3a) ou 100G (groupe 3b).
+
+* <<table_3a_nvidia_sn2100,Affectations des ports de la plate-forme NVIDIA SN2100 (groupe 3a -25G)>>
+* <<table_3b_nvidia_sn2100,Affectations des ports de la plate-forme NVIDIA SN2100 (groupe 3b -100G)>>
+
+
 
 
 | FAS8300 AFF C400, ASA C400 AFF A400, ASA A400 FAS8700 FAS9000, AFF A700 | <<table_4_nvidia_sn2100,Affectations des ports de la plate-forme NVIDIA SN2100 (groupe 4)>> 
@@ -83,13 +89,25 @@ image::../media/mcc-ip-cabling-aff-asa-a150-fas500f-a25-c250-MSN2100.png[Affiche
 Passez en revue les affectations de port de plate-forme pour relier un système AFF A20 à un commutateur NVIDIA SN2100 :
 
 [#table_2_nvidia_sn2100]
-image::../media/mccip-cabling-aff-a20-nvidia-sn2100.png[Affiche les attributions de port de la plate-forme NVIDIA SN2100]
+image::../media/mccip-cabling-nvidia-a20-updated.png[Affiche les attributions de port de la plate-forme NVIDIA SN2100]
 
-.Affectations des ports de la plate-forme NVIDIA SN2100 (groupe 3)
-Passez en revue les attributions de port de la plate-forme pour connecter un système AFF C30, AFF A30 ou AFF C60 à un commutateur NVIDIA SN2100 :
+.Affectations des ports de la plate-forme NVIDIA SN2100 (groupe 3a)
+Passez en revue les attributions de port de la plate-forme pour connecter un système AFF A30, AFF C30, AFF C60 ou FAS50 à un commutateur NVIDIA SN2100 à l'aide d'une carte Ethernet 25G à quatre ports :
 
-[#table_3_nvidia_sn2100]
-image::../media/mccip-cabling-aff-a30-c30-c60-nvidia-sn2100.png[Affiche les attributions de port de la plate-forme NVIDIA SN2100]
+
+NOTE: Cette configuration nécessite une carte Ethernet 25G à quatre ports dans le logement 4 pour connecter le cluster local et les interfaces haute disponibilité.
+
+[#table_3a_nvidia_sn2100]
+image::../media/mccip-cabling-nvidia-a30-c30-fas50-c60-25G.png[Affiche les attributions de port de la plate-forme NVIDIA SN2100]
+
+.Affectations des ports de la plate-forme NVIDIA SN2100 (groupe 3b)
+Passez en revue les attributions de port de la plate-forme pour connecter un système AFF A30, AFF C30, AFF C60 ou FAS50 à un commutateur NVIDIA SN2100 à l'aide d'une carte Ethernet 100G à deux ports :
+
+
+NOTE: Cette configuration nécessite une carte Ethernet 100G à deux ports dans le logement 4 pour connecter le cluster local et les interfaces haute disponibilité.
+
+[#table_3b_nvidia_sn2100]
+image::../media/mccip-cabling-nvidia-a30-c30-fas50-c60-100G.png[Affiche les attributions de port de la plate-forme NVIDIA SN2100]
 
 .Affectations des ports de la plate-forme NVIDIA SN2100 (groupe 4)
 Consultez les affectations des ports de la plateforme pour connecter un système FAS8300, AFF C400, ASA C400, AFF A400, ASA A400, système FAS8700, FAS9000 ou AFF A700 vers un commutateur NVIDIA SN2100 :
@@ -114,4 +132,4 @@ image::../media/mcc_ip_cabling_fas8300_aff_asa_a800_a900_fas9500_MSN2100.png[Aff
 .Affectations des ports de la plate-forme NVIDIA SN2100 (groupe 7)
 Vérifiez les affectations des ports de la plate-forme pour connecter un système FAS70, AFF A70, AFF C80, FAS90, AFF A90 ou AFF A1K à un commutateur NVIDIA SN2100 :
 
-image::../media/mccip-cabling-fas90-fas70-aff-a70--a90-c80-a1k-nvidia-sn2100-updated.png[Affiche les attributions de port de la plate-forme NVIDIA SN2100]
+image::../media/mccip-cabling-nvidia-a70-c80-fas90-fas70-a1k.png[Affiche les attributions de port de la plate-forme NVIDIA SN2100]

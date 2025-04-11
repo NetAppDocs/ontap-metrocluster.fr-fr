@@ -46,7 +46,7 @@ Toute configuration ou fonctionnalité qui nécessite la connexion du cluster lo
 
 Utilisez le tableau suivant pour déterminer la table de câblage que vous devez suivre.
 
-[cols="2*"]
+[cols="25,75"]
 |===
 | Si votre système est... | Utilisez ce tableau de câblage... 
 
@@ -63,16 +63,19 @@ AVEC AFF A220
 | FAS500f AFF C250, ASA C250 AFF A250, ASA A250 | <<table_2_bes_53248,Attributions de port de la plate-forme Broadcom BES-53248 (groupe 2)>> 
 
 
-| AFF A20 AFF C30, AFF A30 AFF C60 | <<table_3_bes_53248,Attributions des ports de la plate-forme Broadcom BES-53248 (groupe 3)>> 
+| AFF A20 | <<table_3_bes_53248,Attributions des ports de la plate-forme Broadcom BES-53248 (groupe 3)>> 
 
 
-| FAS8200, AFF A300 | <<table_4_bes_53248,Attributions des ports de la plate-forme Broadcom BES-53248 (groupe 4)>> 
+| AFF C30, AFF A30 FAS50 AFF C60 | <<table_4_bes_53248,Attributions des ports de la plate-forme Broadcom BES-53248 (groupe 4)>> 
 
 
-| AFF A320 | <<table_5_bes_53248,Attributions des ports de la plate-forme Broadcom BES-53248 (groupe 5)>> 
+| FAS8200, AFF A300 | <<table_5_bes_53248,Attributions des ports de la plate-forme Broadcom BES-53248 (groupe 5)>> 
 
 
-| FAS8300 AFF C400, ASA C400 AFF A400, ASA A400 FAS8700 | <<table_6_bes_53248,Attributions des ports de la plate-forme Broadcom BES-53248 (groupe 6)>> 
+| AFF A320 | <<table_6_bes_53248,Attributions des ports de la plate-forme Broadcom BES-53248 (groupe 6)>> 
+
+
+| FAS8300 AFF C400, ASA C400 AFF A400, ASA A400 FAS8700 | <<table_7_bes_53248,Attributions des ports de la plate-forme Broadcom BES-53248 (groupe 7)>> 
 |===
 .Attributions de port de la plate-forme Broadcom BES-53248 (groupe 1)
 Vérifiez les attributions de port de la plate-forme pour connecter un système AFF A150, ASA A150, FAS2750 ou AFF A220 à un commutateur Broadcom BES-53248 :
@@ -93,14 +96,29 @@ image::../media/mcc_ip_cabling_a_aff_asa_c250_a250_fas500f_to_a_broadcom_bes_532
 
 
 .Attributions des ports de la plate-forme Broadcom BES-53248 (groupe 3)
-Passez en revue les attributions de port de la plate-forme pour connecter un système AFF A20, AFF C30, AFF A30 ou AFF C60 à un commutateur Broadcom BES-53248 :
+Vérifiez les attributions de port de la plate-forme pour connecter un système AFF A20 à un commutateur Broadcom BES-53248 :
 
-image:../media/mcc-ip-cabling-aff-a20-a30-c30-c60-to-a-broadcom-bes-53248-switch.png["Affiche les attributions de port de la plate-forme BES-53248 de Broadcom"]
+image:../media/mccip-cabling-bes-a20-updated.png["Affiche les attributions de port de la plate-forme BES-53248 de Broadcom"]
 
 * *Remarque 1* : l'utilisation de ces ports nécessite une licence supplémentaire.
 
 
 .Attributions des ports de la plate-forme Broadcom BES-53248 (groupe 4)
+Passez en revue les attributions de port de la plate-forme pour connecter un système AFF A30, AFF C30, AFF C60 ou FAS50 à un commutateur Broadcom BES-53248 à l'aide d'une carte Ethernet 25G à quatre ports.
+
+[NOTE]
+====
+* Cette configuration nécessite une carte Ethernet 25G à quatre ports dans le logement 4 pour connecter le cluster local et les interfaces haute disponibilité.
+* Cette configuration nécessite un adaptateur QSFP-to-SFP+ dans la carte du contrôleur pour prendre en charge une vitesse de réseau de 25 Gbit/s.
+
+
+====
+image:../media/mccip-cabling-bes-a30-c30-fas50-c60-25G.png["Affiche les attributions de port de la plate-forme BES-53248 de Broadcom"]
+
+* *Remarque 1* : l'utilisation de ces ports nécessite une licence supplémentaire.
+
+
+.Attributions des ports de la plate-forme Broadcom BES-53248 (groupe 5)
 Vérifiez les attributions de ports de plateforme pour connecter un système FAS8200 ou AFF A300 à un commutateur Broadcom BES-53248 :
 
 image::../media/mcc-ip-cabling-a-aff-a300-or-fas8200-to-a-broadcom-bes-53248-switch-9161.png[Affiche les attributions de port de la plate-forme BES-53248 de Broadcom]
@@ -108,7 +126,7 @@ image::../media/mcc-ip-cabling-a-aff-a300-or-fas8200-to-a-broadcom-bes-53248-swi
 * *Remarque 1* : l'utilisation de ces ports nécessite une licence supplémentaire.
 
 
-.Attributions des ports de la plate-forme Broadcom BES-53248 (groupe 5)
+.Attributions des ports de la plate-forme Broadcom BES-53248 (groupe 6)
 Vérifiez les attributions de port de la plate-forme pour connecter un système AFF A320 à un commutateur Broadcom BES-53248 :
 
 image::../media/mcc-ip-cabling-a-aff-a320-to-a-broadcom-bes-53248-switch.png[Affiche les attributions de port de la plate-forme BES-53248 de Broadcom]
@@ -120,7 +138,7 @@ Les fonctionnalités nécessitant un cluster commuté ne sont pas prises en char
 
 
 
-.Attributions des ports de la plate-forme Broadcom BES-53248 (groupe 6)
+.Attributions des ports de la plate-forme Broadcom BES-53248 (groupe 7)
 Consultez les affectations des ports de la plateforme pour connecter un système FAS8300, AFF C400, ASA C400, AFF A400, ASA A400, ou le système FAS8700 vers un commutateur Broadcom BES-53248 :
 
 image::../media/mcc-ip-cabling-a-fas8300-a400-c400-or-fas8700-to-a-broadcom-bes-53248-switch.png[Affiche les attributions de port de la plate-forme BES-53248 de Broadcom]

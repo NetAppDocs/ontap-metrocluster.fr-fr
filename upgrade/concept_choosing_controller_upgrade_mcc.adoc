@@ -50,10 +50,17 @@ Par exemple, si la plateforme que vous souhaitez mettre à niveau est un systèm
 * Tous les nœuds (anciens et nouveaux) de la configuration MetroCluster doivent exécuter la même version de ONTAP. Reportez-vous au link:https://hwu.netapp.com["Hardware Universe"^]pour connaître la version minimale de ONTAP prise en charge pour votre combinaison.
 
 
-.Mises à niveau des contrôleurs IP AFF et FAS MetroCluster prises en charge
-Le tableau suivant présente les combinaisons de plates-formes prises en charge pour la mise à niveau manuelle d'un système AFF ou FAS dans une configuration IP MetroCluster :
 
-image:../media/mccip_manual_controller_upgrade_comb.png["La présente les plateformes AFF et FAS prises en charge pour la mise à niveau manuelle des contrôleurs via le basculement et le rétablissement"]
+
+==== Mises à niveau des contrôleurs IP AFF et FAS MetroCluster prises en charge
+
+Les tableaux suivants présentent les combinaisons de plates-formes prises en charge pour la mise à niveau manuelle d'un système AFF ou FAS dans une configuration IP MetroCluster, réparties en deux groupes.
+
+* *Le Groupe 1* présente des combinaisons de mises à niveau vers les systèmes AFF A150, FAS500f A20, AFF C250, FAS8300, AFF, FAS2750, AFF A250, FAS50, AFF C30, AFF A30, FAS8200, AFF A300, AFF A320, AFF A220, AFF C400, AFF A400 et FAS8700.
+* *Le Groupe 2* présente des combinaisons de mises à niveau vers les systèmes AFF C60, AFF A50, FAS70, AFF C800, AFF A800, AFF A70, FAS9000, AFF A700, FAS9500, AFF A900, AFF C80, FAS90, AFF A90 et AFF A1K.
+
+
+Les remarques suivantes s'appliquent aux deux groupes :
 
 * Remarque 1 : pour cette mise à niveau, utilisez la procédure link:task_upgrade_A700_to_A900_in_a_four_node_mcc_ip_us_switchover_and_switchback.html["Mise à niveau des contrôleurs AFF A700/FAS9000 vers AFF A900/FAS9500 dans une configuration IP MetroCluster avec basculement et rétablissement (ONTAP 9.10.1 ou version ultérieure)"]
 * Remarque 2 : les mises à niveau des contrôleurs sont prises en charge sur les systèmes exécutant ONTAP 9.13.1 ou version ultérieure.
@@ -62,7 +69,27 @@ image:../media/mccip_manual_controller_upgrade_comb.png["La présente les platef
 * Remarque 5 : requiert des modules IOM pour convertir les anciens contrôleurs en tiroir SAS externe. Pour connaître les modules IOM pris en charge, reportez-vous aulink:https://hwu.netapp.com/["Hardware Universe"^].
 
 
-.Mises à niveau du contrôleur IP ASA MetroCluster prises en charge
+[role="tabbed-block"]
+====
+.Combinaisons AFF et FAS groupe 1
+--
+Consultez les combinaisons de mises à niveau prises en charge pour les systèmes AFF A150, FAS500f A20, AFF C250, FAS8300, AFF, FAS2750, AFF A250, FAS50, AFF C30, AFF A30, FAS8200, AFF A300, AFF A320, AFF A220, AFF C400, AFF A400 et FAS8700.
+
+image:../media/manual-upgrade-combination-group-1.png["La présente les combinaisons de mise à niveau prises en charge pour les plates-formes du groupe 1"]
+
+--
+.Combinaisons AFF et FAS groupe 2
+--
+Consultez les combinaisons de mises à niveau prises en charge pour les systèmes AFF C60, AFF A50, FAS70, AFF C800, AFF A800, FAS9500, FAS9000, AFF A700, AFF A70, AFF A900, AFF C80, FAS90, AFF A90 et AFF A1K.
+
+image:../media/manual-upgrade-combination-group-2.png["La présente les combinaisons de mise à niveau prises en charge pour les plates-formes du groupe 2"]
+
+--
+====
+
+
+==== Mises à niveau du contrôleur IP ASA MetroCluster prises en charge
+
 Le tableau suivant présente les combinaisons de plates-formes prises en charge pour la mise à niveau manuelle d'un système ASA dans une configuration MetroCluster IP :
 
 image:../media/mcc-ip-upgrade-asa-comb-9161.png["La présente les combinaisons de plates-formes de mise à niveau de contrôleur IP MetroCluster prises en charge par ASA"]
@@ -89,7 +116,10 @@ Par exemple, si la plateforme que vous souhaitez mettre à niveau est un systèm
 * Tous les nœuds (anciens et nouveaux) de la configuration MetroCluster doivent exécuter la même version de ONTAP. Reportez-vous au link:https://hwu.netapp.com["Hardware Universe"^]pour connaître la version minimale de ONTAP prise en charge pour votre combinaison.
 
 
-.Prise en charge des mises à niveau des contrôleurs FC AFF et FAS MetroCluster
+
+
+==== Prise en charge des mises à niveau des contrôleurs FC AFF et FAS MetroCluster
+
 Le tableau suivant présente les combinaisons de plateformes prises en charge pour la mise à niveau d'un système AFF ou FAS dans une configuration FC MetroCluster :
 
 image::../media/metrocluster_fc_upgrade_table_aff_fas.png[MetroCluster fc table de mise à niveau AFF FAS]
@@ -111,7 +141,10 @@ Pour plus d'informations, consultez la link:https://mysupport.netapp.com/site/bu
 * Remarque 4 : les mises à niveau des contrôleurs sont prises en charge sur les systèmes exécutant ONTAP 9.13.1 ou version ultérieure.
 
 
-.Mises à niveau du contrôleur FC ASA MetroCluster prises en charge
+
+
+==== Mises à niveau du contrôleur FC ASA MetroCluster prises en charge
+
 Le tableau suivant présente les combinaisons de plateformes prises en charge pour la mise à niveau d'un système ASA dans une configuration MetroCluster FC :
 
 [cols="3*"]

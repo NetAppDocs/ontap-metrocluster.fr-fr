@@ -31,19 +31,48 @@ Vous devez également vous assurer que la plateforme IP MetroCluster est une tai
 
 
 ====
-.Prise en charge des combinaisons de transition AFF et FAS
-Le tableau suivant présente les combinaisons de plates-formes prises en charge. Vous pouvez passer des plates-formes de la colonne de gauche à des plates-formes répertoriées comme pris en charge dans les colonnes de droite, comme indiqué par les cellules de tableau colorées.
+
+
+=== Prise en charge des combinaisons de transition AFF et FAS
+
+Les tableaux suivants présentent les combinaisons de plates-formes prises en charge. Vous pouvez passer des plates-formes de la première colonne aux plates-formes répertoriées comme prises en charge dans les colonnes de droite, comme indiqué par les cellules de table colorées.
 
 Par exemple, le passage d'une configuration FC MetroCluster composée de modules de contrôleur AFF8060 à une configuration IP composée de modules de contrôleur AFF A400 est pris en charge.
 
-image::../media/mcc_transition_comb_9161-updated.png[Affiche les combinaisons de plateformes prises en charge pour la transition IP vers FC]
+Les tables sont divisées en deux groupes :
+
+* *Le Groupe 1* présente des combinaisons pour les transitions vers les systèmes AFF A150, AFF A20, FAS2750, FAS8300, FAS500f, AFF C250, AFF A250, FAS50, AFF C30, AFF A30, FAS8200, AFF A300, AFF A320, AFF A220, AFF C400, AFF A400 et FAS8700.
+* *Le Groupe 2* présente des combinaisons pour les transitions vers les systèmes AFF C60, AFF A50, FAS70, AFF C800, AFF A800, AFF A70, FAS9000, AFF A700, FAS9500, AFF A900, AFF C80, FAS90, AFF A90 et AFF A1K.
+
+
+Les remarques suivantes s'appliquent aux deux groupes :
 
 * Remarque 1 : cette combinaison de plateformes nécessite ONTAP 9.11.1 ou une version ultérieure.
 * Remarque 2 : vous devez disposer d'une interface 40 GbE pour les interfaces de cluster locales sur les nœuds FC.
 * Remarque 3 : une interface de 100 GbE est nécessaire pour les interfaces de cluster locales sur les nœuds FC.
 
 
-.Prise en charge de combinaisons de plateformes de transition ASA
+[role="tabbed-block"]
+====
+.Combinaisons AFF et FAS groupe 1
+--
+Consultez les combinaisons prises en charge pour les transitions vers les systèmes AFF A150, AFF A20, FAS2750, FAS8300, FAS500f, AFF C250, AFF A250, FAS50, AFF C30, AFF A30, FAS8200, AFF A300, AFF A400, AFF A220, AFF C400, AFF A320 et FAS8700.
+
+image:../media/transition-combinations-group-1.png["Affiche les transitions prises en charge pour les plates-formes du groupe 1"]
+
+--
+.Combinaisons AFF et FAS groupe 2
+--
+Consultez les combinaisons prises en charge pour les transitions vers les systèmes AFF C60, AFF A50, FAS70, AFF C800, AFF A800, AFF A70, FAS9000, AFF A700, FAS9500, AFF A900, AFF C80, FAS90, AFF A90 et AFF A1K.
+
+image:../media/transition-combinations-group-2.png["Affiche les transitions prises en charge pour les plates-formes du groupe 2"]
+
+--
+====
+
+
+=== Prise en charge de combinaisons de plateformes de transition ASA
+
 Le tableau suivant présente les combinaisons de plateformes prises en charge par les systèmes ASA.
 
 [cols="3*"]
