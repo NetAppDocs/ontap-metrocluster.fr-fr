@@ -11,7 +11,10 @@ summary: Les mises à niveau de systèmes introduites dans ONTAP 9.15.1 ou versi
 
 
 [role="lead"]
-Les mises à niveau de systèmes introduites dans ONTAP 9.15.1 ou version ultérieure nécessitent que vous mettiez un bootarg avant de pouvoir procéder à la mise à niveau.
+Les mises à niveau de systèmes introduites dans ONTAP 9.15.1 ou version ultérieure nécessitent que vous mettiez un amorçage sur les anciens contrôleurs avant de pouvoir démarrer la mise à niveau.
+
+
+NOTE: Vous devez définir le démarrage requis sur tous les anciens nœuds des deux sites avant de démarrer la mise à niveau.
 
 
 
@@ -60,7 +63,7 @@ Utilisez le tableau suivant pour déterminer quel bootarg vous devez définir po
 Cette tâche est *uniquement* requise lorsque vous effectuez une mise à niveau vers un système AFF A70, AFF A90, AFF A1K, FAS70, FAS90, AFF C80, AFF A50, AFF A20, AFF A30, AFF C30, AFF C60 ou FAS50.
 
 .Étapes
-. Arrêtez un nœud sur chaque site et permettez à son partenaire haute disponibilité d'effectuer une prise de contrôle du stockage du nœud :
+. Arrêtez un nœud sur les deux sites et permettez à son partenaire haute disponibilité d'effectuer une prise de contrôle du stockage du nœud :
 +
 `halt  -node <node_name>`
 
@@ -107,7 +110,7 @@ Cette tâche est *uniquement* requise lorsque vous effectuez une mise à niveau 
 +
 `storage failover giveback -ofnode <node_name>`
 
-. Répétez les étapes pour chaque nœud du groupe de reprise sur incident en cours de mise à niveau.
+. Répétez les étapes pour les quatre nœuds du groupe DR que vous mettez à niveau.
 
 
 .Et la suite
