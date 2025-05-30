@@ -1,0 +1,24 @@
+---
+permalink: install-ip/configure-cshm-mccip.html 
+sidebar: sidebar 
+keywords: ip, switch, connection, configuring, configure, snmp, health, monitoring 
+summary: 'Vous pouvez configurer les commutateurs IP pour qu"ils utilisent SNMPv3 pour la surveillance de l"état de santé.' 
+---
+= Présentation de la surveillance de l'état du commutateur dans une configuration IP MetroCluster
+:allow-uri-read: 
+
+
+[role="lead"]
+Le moniteur d'état des commutateurs Ethernet (CSHM) est chargé de garantir l'intégrité opérationnelle des commutateurs du réseau Cluster et Storage et de collecter les journaux des commutateurs à des fins de débogage.
+
+
+
+== Remarques importantes pour la configuration de CSHM dans une configuration IP MetroCluster
+
+Cette section présente les étapes générales de configuration de SNMPv3 et de collecte de journaux sur les commutateurs Cisco, Broadcom et NVIDIA SN2100. Vous devez suivre les étapes correspondant à la version du firmware du commutateur prise en charge dans une configuration IP MetroCluster. Consultez le link:https://hwu.netapp.com/["Hardware Universe"^] pour vérifier les versions de firmware prises en charge.
+
+Dans une configuration MetroCluster, vous configurez la surveillance de l’état sur les commutateurs de cluster locaux uniquement.
+
+Pour la collecte des journaux avec les commutateurs Broadcom et Cisco, un nouvel utilisateur doit être créé sur le commutateur pour chaque cluster dont la collecte des journaux est activée. Dans une configuration MetroCluster, cela signifie que MetroCluster 1, MetroCluster 2, MetroCluster 3 et MetroCluster 4 nécessitent tous la configuration d'un utilisateur distinct sur les commutateurs. Ces commutateurs ne prennent pas en charge plusieurs clés SSH pour le même utilisateur. Toute configuration de collecte de journaux supplémentaire effectuée remplace toute clé SSH préexistante pour l'utilisateur.
+
+Avant de configurer le CSHM, vous devez désactiver les ISL inutilisés pour éviter toute alerte ISL inutile.

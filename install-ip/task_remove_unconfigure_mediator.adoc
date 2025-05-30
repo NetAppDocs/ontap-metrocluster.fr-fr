@@ -1,23 +1,23 @@
 ---
 permalink: install-ip/task_remove_unconfigure_mediator.html 
 sidebar: sidebar 
-keywords: ontap, mediator, service, assist, remove, unconfigure, requirements, mediator requirements 
-summary: Vous pouvez supprimer le service médiateur ONTAP de la configuration IP de MetroCluster. 
+keywords: ontap, mediator, assist, remove, unconfigure, requirements, mediator requirements 
+summary: Vous pouvez supprimer le médiateur ONTAP de la configuration IP MetroCluster. 
 ---
-= Déconfigurez le service Mediator ONTAP à partir de la configuration IP de MetroCluster
+= Annuler la configuration du médiateur ONTAP à partir de la configuration IP MetroCluster
 :allow-uri-read: 
 :icons: font
 :imagesdir: ../media/
 
 
 [role="lead"]
-Vous pouvez déconfigurer le service Mediator ONTAP à partir de la configuration IP de MetroCluster.
+Vous pouvez déconfigurer ONTAP Mediator à partir de la configuration IP MetroCluster.
 
 .Avant de commencer
-Vous devez avoir installé et configuré avec succès le médiateur ONTAP sur un emplacement réseau pouvant être atteint par les deux sites MetroCluster.
+Vous devez avoir installé et configuré avec succès ONTAP Mediator sur un emplacement réseau accessible par les deux sites MetroCluster.
 
 .Étapes
-. Déconfigurez le service Mediator ONTAP à l'aide de la commande suivante :
+. Annulez la configuration d'ONTAP Mediator à l'aide de la commande suivante :
 +
 `metrocluster configuration-settings mediator remove`
 
@@ -26,7 +26,7 @@ Vous êtes invité à entrer le nom d'utilisateur et le mot de passe du compte d
 
 +
 
-NOTE: Si le médiateur ONTAP est arrêté, le `metrocluster configuration-settings mediator remove` La commande vous invite toujours à saisir le nom d'utilisateur et le mot de passe du compte utilisateur admin du Mediator ONTAP et supprime le service ONTAP Mediator de la configuration MetroCluster.
+NOTE: Si le médiateur ONTAP est en panne, le  `metrocluster configuration-settings mediator remove` La commande vous invite toujours à saisir le nom d'utilisateur et le mot de passe du compte d'utilisateur administrateur ONTAP Mediator et supprime ONTAP Mediator de la configuration MetroCluster.
 
 +
 .. Vérifier s'il y a des disques cassés en utilisant la commande suivante :
@@ -42,7 +42,7 @@ There are no entries matching your query.
 ....
 
 
-. Vérifiez que le service médiateur ONTAP a été supprimé de la configuration MetroCluster en exécutant les commandes suivantes sur les deux clusters :
+. Confirmez que ONTAP Mediator a été supprimé de la configuration MetroCluster en exécutant les commandes suivantes sur les deux clusters :
 +
 .. `metrocluster configuration-settings mediator show`
 +

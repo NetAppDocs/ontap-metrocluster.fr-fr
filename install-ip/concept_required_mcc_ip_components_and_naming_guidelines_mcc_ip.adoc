@@ -122,7 +122,17 @@ NOTE: Les ports intégrés sont intégrés au matériel du contrôleur (slot 0) 
 | Modèle de plateforme | Adaptateur Gigabit Ethernet requis | Logement requis pour l'adaptateur | Ports 
 
 
-| AFF A900, ASA A900 et FAS9500 | X91146A | Emplacement 5, emplacement 7 | e5b, e7b 
+ a| 
+AFF A900, ASA A900 et FAS9500
+ a| 
+X91146A
+ a| 
+Emplacement 5, emplacement 7
+ a| 
+e5b, e7b
+
+*Remarque :* les ports e5a et e7a ne peuvent être utilisés que pour les LIF interclusters. Ils ne peuvent pas être utilisés pour une LIF de données.
+
 
 
  a| 
@@ -284,7 +294,10 @@ Dans une configuration minimale prise en charge, chaque pool dispose de la dispo
 
 Dans une configuration minimale prise en charge, au moins un tiroir est requis par site.
 
-Les configurations MetroCluster prennent en charge RAID-DP et RAID4
+Les configurations MetroCluster prennent en charge RAID-DP, RAID4 et RAID-TEC.
+
+
+NOTE: Depuis ONTAP 9.4, les configurations IP de MetroCluster prennent en charge les nouvelles installations à l'aide d'un partitionnement de disque avancé et d'une affectation automatique des disques. Pour plus d'informations, reportez-vous à la section link:../install-ip/concept_considerations_drive_assignment.html["Considérations relatives à l'affectation automatique des lecteurs et aux systèmes ADP"] .
 
 
 

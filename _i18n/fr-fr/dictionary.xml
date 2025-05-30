@@ -394,12 +394,9 @@
   <block id="ec4d7a4fea778584666b7963923e3cf1" category="list-text">Préparez les commutateurs IP pour l'application des nouveaux fichiers RCF.</block>
   <block id="c58c2c8b494a438765beae02806faf3a" category="paragraph">Suivez les étapes pour votre fournisseur de commutateur :</block>
   <block id="2ebb906b498ab8a5d2a34e709577d28e" category="inline-link-macro">Réinitialisation des paramètres d'usine du commutateur IP Broadcom</block>
-  <block id="680a4f630b21eab8e23842ce1e77c536" category="list-text"><block ref="680a4f630b21eab8e23842ce1e77c536" category="inline-link-macro-rx"></block></block>
   <block id="2c59a5fac27581359d001c6a429618fa" category="inline-link-macro">Réinitialisation des paramètres d'usine du commutateur IP Cisco</block>
-  <block id="fe829dd203a0238e92149d6e50fe01a3" category="list-text"><block ref="fe829dd203a0238e92149d6e50fe01a3" category="inline-link-macro-rx"></block></block>
   <block id="44489e59a236bf582156026d721d7300" category="list-text">Téléchargez et installez le fichier RCF IP, selon votre fournisseur de commutateur.</block>
   <block id="d2038b70348bcc50135596de145913db" category="admonition">Mettre à jour les interrupteurs dans l'ordre suivant : Switch_A_1, Switch_B_1, Switch_A_2, Switch_B_2</block>
-  <block id="97a377942f4f2e5cbecdba36cbfb77ea" category="inline-link-macro">Téléchargement et installation des fichiers RCF IP de Broadcom</block>
   <block id="11a5f8de5dc8fd3561b2b849e4277433" category="inline-link-macro">Téléchargement et installation des fichiers Cisco IP RCF</block>
   <block id="a208547a21e1dc907c538b655cfee7c1" category="admonition">Si vous disposez d'une configuration réseau L2 partagée ou L3, il se peut que vous deviez ajuster les ports ISL sur les commutateurs intermédiaire/client. Le mode de port de commutateur peut passer du mode « accès » au mode « réseau ». Ne procédez à la mise à niveau de la deuxième paire de commutateurs (A_2, B_2) que si la connectivité réseau entre les commutateurs A_1 et B_1 est pleinement opérationnelle et que le réseau fonctionne correctement.</block>
   <block id="f323ad60392fa7c75997f3419493d6c3" category="summary">Vous devez mettre hors tension la totalité de la configuration IP d'MetroCluster et de tout l'équipement avant le début des opérations de maintenance ou de relocalisation.</block>
@@ -1990,8 +1987,6 @@
   <block id="ed7a4b5d0c8cfc6aae771a5fca62c9d8" category="cell">Suivre cette procédure</block>
   <block id="0c3de4f48f152830cf54a3c7110e5b3e" category="inline-link-macro">Ajout des configurations MetroCluster</block>
   <block id="0c429b26fd1db8d4b7bb104d284c1cea" category="paragraph"><block ref="7efa6fc838c006d396e42638b4ff25d1" category="inline-link-macro-rx"></block> Dans la section _MetroCluster Tiebreaker installation and Configuration_.</block>
-  <block id="be2b988a9bd1cbe3fb5a48e44bcd446d" category="inline-link-macro">Configuration du service médiateur ONTAP à partir d'une configuration IP MetroCluster</block>
-  <block id="688f019e2f851b28c81904e0acd0c450" category="paragraph"><block ref="6f99ee259693716af238b16f6b3287d3" category="inline-link-macro-rx"></block> Dans la section _MetroCluster IP installation and Configuration_.</block>
   <block id="e1af59c4560e3899befd23783e6a3c93" category="summary">Le pont FibreBridge 7600N est pris en charge sur ONTAP 9.5 et versions ultérieures en remplacement du pont FibreBridge 7500N ou 6500N ou en ajoutant un nouveau stockage à la configuration MetroCluster. Les exigences de zonage et les restrictions relatives à l'utilisation des ports FC du pont sont les mêmes que celles du pont FiberBridge 7500N.</block>
   <block id="0a0b2f8493bfc4e7fb3cb00d79943c6b" category="doc">Prise en charge des ponts FiberBridge 7600N dans les configurations MetroCluster</block>
   <block id="d996c9171711ede1bccddd47d17c5a7c" category="paragraph">Le pont FibreBridge 7600N est pris en charge sur ONTAP 9.5 et versions ultérieures en remplacement du pont FibreBridge 7500N ou 6500N ou en ajoutant un nouveau stockage à la configuration MetroCluster. Les exigences de zoning et les restrictions relatives à l'utilisation des ports FC du pont sont les mêmes que celles du pont FibreBridge 7500N.</block>
@@ -2684,7 +2679,6 @@
   <block id="0a5c3ac0f47ed8e3d45c2e4219d97b00" category="paragraph">Les différentes configurations MetroCluster effectuent un basculement automatique dans plusieurs cas :</block>
   <block id="aaa4db48fe39708ddc84c0b74e004845" category="list-text">*Configurations FC MetroCluster utilisant la capacité AUSO (non présentes dans les configurations IP MetroCluster)*</block>
   <block id="54b00572b4fb9c96346da414c5a1780b" category="paragraph">Dans ces configurations, AUSO est lancé en cas de défaillance des contrôleurs, mais le stockage (et les ponts, le cas échéant) reste opérationnel.</block>
-  <block id="f25509e4a4010e30eda740d9ef693bf9" category="list-text">*Configurations IP MetroCluster utilisant le service ONTAP Mediator (ONTAP 9.7 et versions ultérieures)*</block>
   <block id="8a15f9f5afd6ffb27ec4a9af854624f7" category="paragraph">Dans ces configurations, MAUSO est lancé dans les mêmes circonstances que AUSO, comme décrit ci-dessus, ainsi qu'après une panne complète du site (contrôleurs, stockage et commutateurs).</block>
   <block id="e5edd8dd9b2717b8f0d5e2c5e9c4563d" category="list-text">*Configurations IP ou FC MetroCluster utilisant le logiciel disjoncteur d'attache en mode actif*</block>
   <block id="d252bbe03c515e14d80ddc7cae716a23" category="paragraph">Dans ces configurations, il procède au basculement non planifié après une défaillance complète du site.</block>
@@ -3016,19 +3010,11 @@
   <block id="b8aadb18f76b6dce21460aec77a1d7ad" category="paragraph">10006 / TCP et UDP</block>
   <block id="72a8be4c477bcb998202c426a16c5f77" category="paragraph">Assistance matérielle</block>
   <block id="35e1ae865b96af2cda109734752c7983" category="paragraph">4444 / TCP</block>
-  <block id="c92c490b97a94b8ad700c26b41c33c18" category="summary">À partir de ONTAP 9.7, le service médiateur ONTAP peut aider la configuration IP de MetroCluster à effectuer un basculement automatique non planifié en fournissant un référentiel physiquement distinct pour les informations d'état.</block>
-  <block id="a9ff5216cd4c113510a74e308ff5a81d" category="doc">Préparez-vous à installer le service ONTAP Mediator</block>
   <block id="b88bf0c809fffc695990879900c60d29" category="paragraph">Votre environnement doit répondre à certaines exigences.</block>
   <block id="360264088f5b0d4a8993fa7a8e15856d" category="inline-link-macro">Groupes de reprise sur incident</block>
   <block id="a624bf1cb8ea6541888d2e3bfed29f37" category="paragraph">Les exigences suivantes s'appliquent à un seul groupe de reprise d'activité (DR Group). En savoir plus sur <block ref="0244a225d1215475caa277f136d50b4a" category="inline-link-macro-rx"></block>.</block>
-  <block id="c5cd3d887ef507cadc249c592410542a" category="list-text">Si vous prévoyez de mettre à jour votre version de Linux, faites-le avant d'installer le service Mediator ONTAP le plus récent.</block>
-  <block id="d7bc3e4699ceee82586454b661f07889" category="list-text">Le service ONTAP Mediator et le logiciel MetroCluster Tiebreaker ne doivent pas être utilisés tous les deux avec la même configuration MetroCluster.</block>
-  <block id="8b0f66b1cb7f0a192803547cc01ef5c4" category="list-text">Le médiateur ONTAP doit être installé sur un hôte LINUX à un emplacement distinct des sites MetroCluster.</block>
   <block id="9f6204fe619ab6c1e9a1fcd03de81cb5" category="paragraph">La connectivité entre le médiateur ONTAP et chaque site doit être composée de deux domaines de panne distincts.</block>
-  <block id="965fd53f15f7bf99e2336c9a442ebb53" category="list-text">Le service médiateur ONTAP peut prendre en charge jusqu'à cinq configurations MetroCluster simultanément.</block>
   <block id="c1444ba460cdd9b59c8ecf988ca907c4" category="list-text">Le basculement non planifié automatique est pris en charge dans ONTAP 9.7 et versions ultérieures.</block>
-  <block id="927ed696d98572bdb5039cbffcfdb480" category="section-title">Configuration requise pour l'utilisation du médiateur dans une configuration MetroCluster</block>
-  <block id="5030719f4c55271135b32bdf9c634c88" category="paragraph">Pour installer le service médiateur ONTAP dans une configuration MetroCluster, vous devez vous assurer que la configuration répond à plusieurs exigences réseau.</block>
   <block id="26ae7bdd1d6fb8c4886e6fde8d12601c" category="list-text">Latence</block>
   <block id="ceeccb67c4ca8801e51075063d898307" category="paragraph">Latence maximale inférieure à 75 ms (RTT).</block>
   <block id="2c66766b3cbb0e01db3809a4370c911e" category="paragraph">La gigue ne doit pas dépasser 5 ms.</block>
@@ -3037,10 +3023,8 @@
   <block id="64ddceb2cbf941d1fc93373ce9219a1f" category="list-text">Perte de paquets</block>
   <block id="192e68ef3df9e07712be5cfbedf63575" category="paragraph">Pour le trafic ICMP (Internet Control message Protocol) et TCP, la perte de paquets doit être inférieure à 0.01 %.</block>
   <block id="7d724e4bd163fe8323200b15500517f9" category="list-text">La bande passante</block>
-  <block id="918d95987e6cf19fe89998499e6e9348" category="paragraph">La liaison entre le service Mediator et un groupe DR doit avoir au moins 20 Mbit/s de bande passante.</block>
   <block id="4f1f2bb1718b231428cfd539cdbe7657" category="list-text">Connectivité indépendante</block>
   <block id="d4fda9bf787c3a38a379763f5d621600" category="paragraph">Une connectivité indépendante entre chaque site et le médiateur ONTAP est requise. Une défaillance sur un site ne doit pas interrompre la connectivité IP entre les deux autres sites non affectés.</block>
-  <block id="f743e29bd73cf3b477b5b3c15fcf6ec1" category="section-title">Configuration requise de l'hôte pour le médiateur ONTAP dans une configuration MetroCluster</block>
   <block id="fec21bcdc858f42f1c942fd943d09de4" category="paragraph">Vous devez vous assurer que la configuration répond à plusieurs exigences d'hôte.</block>
   <block id="aecf60a0046b893cbed6332405eb3aa3" category="list-text">Le médiateur ONTAP doit être installé sur un site externe qui est physiquement séparé des deux clusters ONTAP.</block>
   <block id="6f044e53b0f973c21b9f45e9f29dd890" category="list-text">Le médiateur ONTAP prend en charge un nombre maximum de cinq configurations MetroCluster.</block>
@@ -3063,12 +3047,7 @@
   <block id="5395ab3ceab5345ee4a1117e436bec89" category="paragraph">3260/tcp</block>
   <block id="1c44912242a1c1688be9805f25a62dbd" category="paragraph">Cibles iSCSI du médiateur ONTAP</block>
   <block id="a3993ea912c0ecd6926aed69b72fd59a" category="paragraph">Connexion de données iSCSI pour les boîtes aux lettres</block>
-  <block id="63639615515d028231f302c56bab6ad7" category="section-title">Instructions de mise à niveau du médiateur ONTAP dans une configuration MetroCluster</block>
-  <block id="2eb1029cd264d9f182cfb37b0492ad43" category="paragraph">Si vous mettez à niveau le médiateur ONTAP, vous devez respecter la configuration requise pour la version Linux et suivre les instructions de la mise à niveau.</block>
-  <block id="5981ded82c976bff5c9a73686842655a" category="list-text">Le service Mediator peut être mis à niveau à partir d'une version antérieure immédiate vers la version actuelle.</block>
   <block id="80f0fa63ac735fb302ee06c9c1c515ae" category="list-text">Toutes les versions de Mediator sont prises en charge sur les configurations IP de MetroCluster exécutant ONTAP 9.7 ou version ultérieure.</block>
-  <block id="71a38375f76a7ed87f8e28fa9645d356" category="inline-link-macro">Installez ou mettez à niveau le service ONTAP Mediator</block>
-  <block id="70fef59fffa5df67d10b024d11f37399" category="paragraph"><block ref="70fef59fffa5df67d10b024d11f37399" category="inline-link-macro-rx"></block></block>
   <block id="fe8f2bed933b5baccdaadbe566f09126" category="section-title">Après la mise à niveau</block>
   <block id="ed92588fcdb50fce92fb0e01fb8449b0" category="paragraph">Une fois la mise à niveau du Mediator et du système d'exploitation terminée, vous devez émettre le<block ref="b537069c8a5aec356a63851186f912fe" prefix=" " category="inline-code"></block> Commande pour confirmer que les connexions du médiateur sont en cours.</block>
   <block id="52ad3b024ecc6eae02e8415cef1140ba" category="summary">Vous devez configurer les switchs IP pour assurer la connectivité IP MetroCluster back-end.</block>
@@ -3209,17 +3188,12 @@
   <block id="b1d3a32a00e7d497fcf31c70542c202e" category="summary">Vous pouvez télécharger et installer sur un troisième site le logiciel MetroCluster Tiebreaker ou, à partir de ONTAP 9.7, le médiateur ONTAP.</block>
   <block id="89e65a2d93c278fd151107cff24c1e27" category="doc">Configuration du logiciel MetroCluster Tiebreaker ou ONTAP Mediator</block>
   <block id="860e1e683db2fc2e67aeec00dc74b357" category="paragraph">Vous devez disposer d'un hôte Linux disponible qui dispose d'une connectivité réseau aux deux clusters de la configuration MetroCluster. Les exigences spécifiques sont décrites dans la documentation du logiciel MetroCluster Tiebreaker ou du programme ONTAP Mediator.</block>
-  <block id="ffd76385e89b64e24fcfe106dc5b4533" category="paragraph">Si vous vous connectez à une instance existante du logiciel disjoncteur d'attache ou du médiateur ONTAP, vous avez besoin du nom d'utilisateur, du mot de passe et de l'adresse IP du service de ce logiciel.</block>
   <block id="9d4b44162692abd2769e8e0a1c1f0155" category="paragraph">Si vous devez installer une nouvelle instance du médiateur ONTAP, suivez les instructions pour installer et configurer le logiciel.</block>
-  <block id="6d83b3cc0c5c986a38aa0e7f75c60a63" category="inline-link-macro">Configuration du service médiateur ONTAP pour un basculement automatique non planifié</block>
-  <block id="156878e33ba2293bd900b486f895c7ae" category="paragraph"><block ref="156878e33ba2293bd900b486f895c7ae" category="inline-link-macro-rx"></block></block>
   <block id="d605b9788bd8c2e1d6694fb74ab24c77" category="inline-link-macro">instructions d'installation et de configuration du logiciel</block>
   <block id="cc65b45d9cd6a58be27baf40866d52dc" category="paragraph">Si vous devez installer une nouvelle instance du logiciel disjoncteur d'attache, suivez le <block ref="41bac20da3e04dcec3e43f3b27170310" category="inline-link-macro-rx"></block>.</block>
   <block id="9a044a9c813dcf5d075c67eae7c4ec7c" category="paragraph">Vous ne pouvez pas utiliser à la fois le logiciel MetroCluster Tiebreaker et le Mediator ONTAP avec la même configuration MetroCluster.</block>
   <block id="9cb623298dd6b51e66fbc2bbb1086057" category="inline-link-macro">Considérations relatives à l'utilisation du médiateur ONTAP ou d'un logiciel MetroCluster Tiebreaker</block>
   <block id="3390d4f6bfc1502eb6b943d94b2ccf81" category="paragraph"><block ref="3390d4f6bfc1502eb6b943d94b2ccf81" category="inline-link-macro-rx"></block></block>
-  <block id="8e57e18da9d7e1ec40a754e3453835ac" category="list-text">Configurez le service médiateur ONTAP ou le logiciel Tiebreaker :</block>
-  <block id="fb2c0ebeb18b9e1080333a65b192bdc3" category="list-text">Si vous utilisez une instance existante du médiateur ONTAP, ajoutez le service médiateur ONTAP à ONTAP :</block>
   <block id="2df82e698bfc14af74dd0684edfa8af0" category="paragraph"><block ref="575fd39cbb80111166b3781e068f47f7" prefix="" category="inline-code"></block></block>
   <block id="18d0853d5e7ac8e89859a9c8915979f9" category="inline-link-macro">Documentation Tiebreaker</block>
   <block id="b268877da374fd4b7e106d3ffa6da9f8" category="list-text">Si vous utilisez le logiciel disjoncteur d'attache, reportez-vous au <block ref="62330c976dd51c7f2d31efa54ddec6c7" category="inline-link-macro-rx"></block>.</block>
@@ -3249,7 +3223,6 @@
   <block id="1a6a0860d4f85d812a58145da3c63dd2" category="list-text">Vérifiez que le port de service est correctement configuré :</block>
   <block id="054f736f28a6918e0571caad3b5d1440" category="paragraph"><block ref="16e8f72947d7ec600259a2f0b5896bd0" prefix="" category="inline-code"></block></block>
   <block id="3f0f3a6fe3831ca46e275019ef0c0976" category="paragraph">L'exemple suivant indique que le port est activé et que les adresses correctes ont été attribuées :</block>
-  <block id="f279cda33d8658b285d1ba4a42773651" category="list-text">Si vous le souhaitez, configurez le serveur SSH.</block>
   <block id="f0630dda98a33b3b99be916ac28603b0" category="admonition">Le fichier RCF désactive le protocole Telnet. Si vous ne configurez pas le serveur SSH, vous pouvez uniquement accéder au pont à l'aide de la connexion du port série.</block>
   <block id="4cbd2061568d423e0fdf461dfa55b473" category="list-text">Générer des clés RSA.</block>
   <block id="bb618b144b7c6895aa5a8818fa66c1b2" category="list-text">Générer des clés DSA (facultatif)</block>
@@ -3444,17 +3417,10 @@
   <block id="33d85c30487ab45d9d74c20ce219e9ee" category="paragraph">Vous devez effectuer cette étape sur un nœud avant de passer au nœud suivant.</block>
   <block id="e95cf3aef5a080c0def37ff65465786d" category="list-text">Sélectionnez l'option 4 dans le menu de démarrage et continuez.</block>
   <block id="52239e8f1ddb4afa2e6bacb01bd05eb6" category="list-text">Démarrez chaque nœud sur le site B, en utilisant l'option 4 du menu de démarrage :</block>
-  <block id="c3294642ebc4a24320ba23b1a71d691f" category="summary">Le service Mediator ONTAP doit être configuré sur le nœud ONTAP pour être utilisé dans une configuration IP MetroCluster.</block>
-  <block id="4a013e1601591220c48257d9b4f85901" category="doc">Configurez le service Mediator ONTAP à partir d'une configuration IP MetroCluster</block>
-  <block id="e1e93a7a154af533c59fc4dcfb6cd4d3" category="list-text">Le médiateur ONTAP doit avoir été installé avec succès sur un emplacement réseau pouvant être atteint par les deux sites MetroCluster.</block>
-  <block id="7e2df0de08c4c32c4dc448510aced1c2" category="list-text">Vous devez avoir l'adresse IP de l'hôte exécutant le service ONTAP Mediator.</block>
-  <block id="76fa3c63020c0f7cc5ffedb4c90cbdcb" category="list-text">Vous devez disposer du nom d'utilisateur et du mot de passe pour le service Mediator de ONTAP.</block>
   <block id="a21b356af516769ddf9586489a22e6f8" category="list-text">Tous les nœuds de la configuration IP de MetroCluster doivent être en ligne.</block>
   <block id="dda33fc9a3cc083db08123f7d7e692a8" category="inline-link-macro">Risques et limitations liés à l'utilisation du basculement automatique forcé de MetroCluster</block>
   <block id="5213788f29292b96ef1a650e5fce6938" category="list-text">Cette tâche permet le basculement automatique non planifié par défaut.</block>
   <block id="ada003c5d7b06ea1b392045334928823" category="list-text">Cette tâche peut être effectuée sur l'interface ONTAP de n'importe quel nœud de la configuration IP de MetroCluster.</block>
-  <block id="8011c86f99772e8ed45b9d5da11cfad0" category="list-text">Une seule installation du service Mediator ONTAP peut être configurée avec jusqu'à cinq configurations IP MetroCluster.</block>
-  <block id="22ad9a689b8447af0ecfb5eb5b5495b3" category="list-text">Ajoutez le service médiateur ONTAP à ONTAP :</block>
   <block id="1645e08f0bfdf72de9dd9cf2ec8208de" category="admonition">Vous êtes invité à entrer le nom d'utilisateur et le mot de passe du compte d'utilisateur Mediator admin.</block>
   <block id="5c0eb063c7de9ced4fcf06367dc8cf49" category="list-text">Vérifiez que le médiateur est en cours d'exécution.</block>
   <block id="241c04bf46a427ee9559a37db9cfc64c" category="list-text">Afficher les disques virtuels du médiateur :</block>
@@ -3890,11 +3856,6 @@
   <block id="38325ef6d268e93ab480af3cd0b3bd5f" category="list-text">Générez le fichier RCF pour votre configuration à l'aide de RcfFileGenerator pour MetroCluster IP.</block>
   <block id="7332a56dad899da7a26afe16c9ca077a" category="list-text">Accédez à votre répertoire personnel. Si vous êtes enregistré en tant que 'culus', le chemin du fichier est<block ref="9d362de3398c48301fdfe2532d762eb6" prefix=" " category="inline-code"></block>.</block>
   <block id="59c778d760eb930375b77337b3ee45b9" category="list-text">Exécutez le fichier RCF. Le fichier RCF requiert une option permettant d'appliquer une ou plusieurs étapes. Sauf instruction contraire du support technique, exécutez le fichier RCF sans l'option de ligne de commande. Pour vérifier l'état d'achèvement des différentes étapes du fichier RCF, utilisez l'option '-1' ou 'All' pour appliquer toutes les étapes (en attente).</block>
-  <block id="0f6663ce923ab095e111674a6a00e20f" category="summary">Vous pouvez supprimer le service médiateur ONTAP de la configuration IP de MetroCluster.</block>
-  <block id="dbef88bf7072abf7cb1500b76c098158" category="doc">Déconfigurez le service Mediator ONTAP à partir de la configuration IP de MetroCluster</block>
-  <block id="b265dc310dca1d74417a4715e46c4168" category="paragraph">Vous pouvez déconfigurer le service Mediator ONTAP à partir de la configuration IP de MetroCluster.</block>
-  <block id="db31f506e34352cf979355688abceeac" category="paragraph">Vous devez avoir installé et configuré avec succès le médiateur ONTAP sur un emplacement réseau pouvant être atteint par les deux sites MetroCluster.</block>
-  <block id="c8dd54fd6141594c239adba6bd3401ff" category="list-text">Déconfigurez le service Mediator ONTAP à l'aide de la commande suivante :</block>
   <block id="0c87e171b9e1156bebc0a65b722d174d" category="list-text">Vérifier s'il y a des disques cassés en utilisant la commande suivante :</block>
   <block id="27bf55792722dd4b16925981ef8953b4" category="paragraph"><block ref="e9217e8ee416dcd845e40119dbc7e359" prefix="" category="inline-code"></block></block>
   <block id="938f1047c15f00fdd0cbfc8e4cfa15e1" category="paragraph">*Exemple*</block>
@@ -5874,8 +5835,6 @@
   <block id="b067bba924382be152ed8c5aa50a5c90" category="paragraph">Pour plus d'informations sur le câblage, reportez-vous aux procédures d'installation et de configuration du contrôleur correspondant à votre modèle.</block>
   <block id="193f278cd32752a5f564fc960a536905" category="list-text">Reliez les contrôleurs aux commutateurs IP, comme décrit dans la <block ref="657bcb6c51639854c4fdede551507755" category="inline-link-macro-rx"></block>.</block>
   <block id="d93b7c25b0652bbfad8e295f71218dcb" category="list-text">Téléchargez et installez les fichiers RCF.</block>
-  <block id="87c6a5076eda134fab631a4899bd23d4" category="list-text"><block ref="87c6a5076eda134fab631a4899bd23d4" category="inline-link-macro-rx"></block></block>
-  <block id="9b2c056caaa39d420a60a6eafd686719" category="list-text"><block ref="9b2c056caaa39d420a60a6eafd686719" category="inline-link-macro-rx"></block></block>
   <block id="bde9ebaa7c950a13b09b06e96ed3656c" category="list-text">Mettez le premier contrôleur sous tension (node_A_1-IP) et appuyez sur Ctrl-C pour interrompre le processus de démarrage et afficher l'invite DU CHARGEUR.</block>
   <block id="f74172bb9d58dd38ffa6bfc2172eb845" category="list-text">Démarrer le contrôleur en mode maintenance :</block>
   <block id="7f56c174bc95b1de6a8c8628a40a7314" category="paragraph"><block ref="0365a63221b169b7609fd8aa7d33ed40" prefix="" category="inline-code"></block></block>
@@ -6090,12 +6049,9 @@
   <block id="bc3a9e61d9aac8c49e720b685b62e3d1" category="inline-link-macro">Déplacement des connexions locales du cluster</block>
   <block id="b0f85a0199d1b83b2b8a32a5f34bdd8d" category="paragraph">Si vous utilisez des commutateurs existants, passer à <block ref="4da30401760153ceb5481ac559dbe601" category="inline-link-macro-rx"></block>.</block>
   <block id="3c53e5775877727336cb67e854c78a79" category="list-text">Installez et installez les nouveaux commutateurs IP dans leur rack.</block>
-  <block id="b1ef007668b1430e7bb2daaf954e2579" category="paragraph">Suivez les étapes de la section correspondant au fournisseur de votre commutateur du <block ref="14be4efa102104b75024e48b7a0a89f8" category="inline-link-macro-rx"></block></block>
   <block id="bc4f214d80008718500b069cac10f107" category="list-text">Mettez à jour le micrologiciel du commutateur vers une version prise en charge, si nécessaire.</block>
   <block id="0031dbc1afe1c2ec91d4c02136da5eb6" category="list-text">Utilisez l'outil FCR Generator pour créer le fichier RCF en fonction de votre fournisseur de commutateur et des modèles de plateforme, puis mettez à jour les switchs avec le fichier.</block>
-  <block id="0297e6ce2162b2f01b03b57027b0de3f" category="paragraph">Suivez les étapes de la section correspondant à votre fournisseur de commutateur dans _MetroCluster IP installation and Configuration_.</block>
   <block id="4ab496c462bc9a729fe703221c683545" category="paragraph"><block ref="4ab496c462bc9a729fe703221c683545" category="inline-link-macro-rx"></block></block>
-  <block id="9ce923539fb1123fe118101d429941ae" category="list-text"><block ref="9ce923539fb1123fe118101d429941ae" category="inline-link-macro-rx"></block></block>
   <block id="9cc3a2a2e8c24fe291907c539aa19b26" category="summary">Une fois la transition terminée, vous devez envoyer un message AutoSupport indiquant la fin de la maintenance. La création automatique de dossier peut ainsi reprendre.</block>
   <block id="d60c50580eca8ffa48386ace1436021b" category="doc">Envoi d'un message AutoSupport personnalisé après maintenance</block>
   <block id="a9b1d4be69539e9b95a2c6672035550c" category="summary">Cette procédure utilise des exemples de noms au cours de l'ensemble pour identifier les groupes de reprise sur incident, les nœuds et les commutateurs impliqués.</block>
@@ -6286,7 +6242,6 @@
   <block id="57ab4d65e05ba7805256e178468b7043" category="cell">Modèle de nœud IP MetroCluster</block>
   <block id="dcf4881a93cea43ae1634b2f0f7939ac" category="cell">Port(s) du commutateur</block>
   <block id="5cf0603a9cc38118a92d6f62afbc27ad" category="cell">Se connecte à</block>
-  <block id="9e9a93655547f7858baef5194a909e2c" category="cell">Cisco 3132Q-V, 3232C ou 9336C-FX2</block>
   <block id="ed36a1ef76a59ee3f15180e0441188ad" category="cell">Toutes</block>
   <block id="a825d9b135e0604b1a8244aa950f4952" category="paragraph">Interface de cluster locale sur un nœud FC</block>
   <block id="4dd13a124f96d89e0fd6c36f6d82e131" category="cell">Broadcom BES-53248</block>
@@ -6320,9 +6275,6 @@
   <block id="6ac37c1e4002ef5cd117acd818874c0f" category="paragraph">Suivez les étapes de la procédure pour votre fournisseur de commutateur à partir de _MetroCluster IP installation and Configuration_:</block>
   <block id="99707115a113f625cec106ca47592425" category="list-text">Si nécessaire, téléchargez et installez le nouveau micrologiciel du commutateur.</block>
   <block id="30fb5638808aa1cf88e688e78e820b58" category="paragraph">Vous devez utiliser le dernier firmware pris en charge par les nœuds IP MetroCluster.</block>
-  <block id="ffaeaa66271f98acd0156b9dadf03b5b" category="list-text"><block ref="ffaeaa66271f98acd0156b9dadf03b5b" category="inline-link-macro-rx"></block></block>
-  <block id="1a031f58441757494134fdebb9c1beb1" category="list-text"><block ref="1a031f58441757494134fdebb9c1beb1" category="inline-link-macro-rx"></block></block>
-  <block id="343c2d0dbf210b79686912b38bd4f45d" category="list-text"><block ref="680a4f630b21eab8e23842ce1e77c536" category="inline-link-macro-rx"></block> **</block>
   <block id="b9fc40955441f593ff27513c0973dab6" category="list-text">Téléchargez et installez le fichier RCF IP selon votre fournisseur de commutateur.</block>
   <block id="9ef17a3f10f59d77a32bb5649c8cc21a" category="list-text">Reconnectez les ports du groupe A à switch_A_1_IP.</block>
   <block id="2e3c0afc2d193f3727d220d4c952e88c" category="list-text">Vérifiez que toutes les interfaces se trouvent sur leur port de départ :</block>
@@ -6858,7 +6810,6 @@
   <block id="4a73711f675c6d654d190ca9589e5da1" category="section-title">Restaurer la surveillance du disjoncteur d'attache ou du médiateur</block>
   <block id="19c6ec23fb83ad84775f1d2419c27ab9" category="paragraph">Après avoir effectué la mise à niveau de la configuration MetroCluster, vous pouvez reprendre la surveillance avec l'utilitaire Tiebreaker ou Mediator.</block>
   <block id="b8f4d9367862f5c87fb645221621118e" category="list-text">Restaurer la surveillance si nécessaire, en suivant la procédure de configuration.</block>
-  <block id="d267ad4b716836a6875d9be23fc81c21" category="paragraph"><block ref="bacc4dbebf17d22c9a0361ded0994067" category="inline-link-macro-rx"></block> Dans la section _MetroCluster IP installation and Configuration_.</block>
   <block id="26eeb9c2ed8ad703fd7436c1c5091b0b" category="section-title">Envoyez un message AutoSupport personnalisé après la maintenance</block>
   <block id="a00b322f5fbb0ab63d64eb15f5fd23e9" category="paragraph">Une fois la mise à niveau terminée, envoyer un message AutoSupport indiquant la fin de la maintenance. La création automatique de dossier peut reprendre.</block>
   <block id="38327b7824e5a35266d03145c15c04f9" category="list-text">Lancer la commande suivante : +<block ref="a0502e9e767995ecf84f499d84740634" prefix=" " category="inline-code"></block></block>
@@ -8304,7 +8255,6 @@
   <block id="0e1d41be551b6f86ae2030be358827f1" category="paragraph">Les disques appartenant aux anciens modules de contrôleur possèdent toujours ces ID système.</block>
   <block id="1315b8e97bb6745adcb67f2fc72c2557" category="paragraph">Dans cet exemple de configuration MetroCluster à deux nœuds, l'ancien ID système suivant est récupéré :</block>
   <block id="3e549b591bbba6cbf6756b33b34f68fe" category="paragraph">Les disques appartenant à l'ancien module de contrôleur possèdent toujours cet ID système.</block>
-  <block id="e3e61f7dd475a76c42d1d59900653255" category="list-text">Pour les configurations IP MetroCluster utilisant le service ONTAP Mediator, obtenez l'adresse IP du service ONTAP Mediator :</block>
   <block id="659363869c399765c0ca11454433fd36" category="paragraph"><block ref="3733cf2518d784a67af47b7a44ac8019" prefix="" category="inline-code"></block></block>
   <block id="c4f544053cff7408e816016df0403a9a" category="list-text">Si les systèmes sont des modèles AFF A220, AFF A400, FAS2750, FAS8300 ou FAS8700, Déterminez les ID VLAN :</block>
   <block id="a299904397c0c53d0dff20464bb5a6fb" category="paragraph">Les ID VLAN sont inclus dans le nom de la carte affiché dans la colonne adapter de la sortie.</block>
@@ -8388,14 +8338,9 @@
   <block id="d40a957fa3e93ed5d5f356b1d7f5672b" category="paragraph">L'exemple suivant montre que les agrégats racine sont mis en miroir.</block>
   <block id="e9c063d9bb3c8e2aec36505fc1d417d7" category="list-text">Répétez cette procédure pour les autres agrégats racine.</block>
   <block id="ad135407afbeef1d508888cf6fde2d7a" category="paragraph">Tout agrégat racine qui n'est pas à l'état mis en miroir doit être mis en miroir.</block>
-  <block id="ac156973f0c5652ffc5768a0a0cb6e91" category="section-title">Reconfiguration du service ONTAP Mediator (configurations MetroCluster IP)</block>
-  <block id="2e987e1db02c7e6de720b2d7a135fffa" category="paragraph">Si vous disposez d'une configuration IP MetroCluster configurée avec le service médiateur ONTAP, vous devez supprimer et reconfigurer l'association avec le médiateur.</block>
-  <block id="96b411dfba94dc262934c26a2e256ab9" category="list-text">Vous devez disposer de l'adresse IP, du nom d'utilisateur et du mot de passe pour le service Mediator de ONTAP.</block>
-  <block id="fe396bc9ed401ba34109f9d641f9bfcc" category="list-text">Le service Mediator ONTAP doit être configuré et exécuté sur l'hôte Linux.</block>
   <block id="65dced407d70b84632e5546dc4c5a806" category="list-text">Supprimez la configuration du médiateur ONTAP existante :</block>
   <block id="19b5c269cad57490a0fce25bc6b54d85" category="list-text">Reconfigurez la configuration du médiateur ONTAP :</block>
   <block id="ea68a78317b0e56b996bf3edfcb88e02" category="paragraph"><block ref="c744a422fcd93004ace908fb39114014" prefix="" category="inline-code"></block></block>
-  <block id="a9db7bbf9222d08712b683e237d0e9c6" category="list-text">Pour les configurations IP MetroCluster utilisant le service ONTAP Mediator, vérifiez que le service Mediator est opérationnel.</block>
   <block id="e7dd8552505ef5a78c36791abf769764" category="list-text">Vérifiez que les disques du médiateur sont visibles par le système :</block>
   <block id="f9954f099782de6889367e8b36f704d8" category="paragraph"><block ref="4c7e4bc7e76550feaf2424947a04a9f8" prefix="" category="inline-code"></block></block>
   <block id="b0e33d9e8081b3bc1757198d90404342" category="paragraph">L'exemple suivant montre que les disques de boîte aux lettres ont été reconnus.</block>
@@ -8812,7 +8757,6 @@
   <block id="8adae693d3240e468a2042cfca460ce7" category="inline-link">Architecture et conception de la solution NetApp MetroCluster, TR-4705</block>
   <block id="f515fca759b029639b19b471d7a2c1ed" category="inline-link">Architecture et conception de la solution IP MetroCluster, TR-4689</block>
   <block id="8d4727f84fc5ba727eb23a4ce93c87c2" category="list-text">Présentation technique de la configuration et du fonctionnement IP de MetroCluster.</block>
-  <block id="dd6ee1233d0e34b47648ba9732a67411" category="list-text">Meilleures pratiques pour la configuration MetroCluster IP.</block>
   <block id="8aec6a2bcfb78af1fffa4f2c52dfe49d" category="paragraph">Documentation du conseiller digital Active IQ</block>
   <block id="2afcc48289d48527e519adacbd3a8bce" category="paragraph"><block ref="2afcc48289d48527e519adacbd3a8bce" category="inline-link-rx"></block></block>
   <block id="5fbb52ab0ccc2914c72b1ce04d94f538" category="summary">Chaque structure de commutation comprend des liaisons \(ISL\) intercommutateurs qui relient les sites. Les données sont répliquées de site à site via le système ISL. Chaque switch doit se trouver sur des chemins physiques différents pour assurer la redondance.</block>
@@ -11183,7 +11127,6 @@
   <block id="4497ab40f5579cccfc00e6aed35cdae9" category="sidebar">Vérifiez l'état des composants HA-config</block>
   <block id="aa9c71b40476a8ccda9213b9a9416d55" category="sidebar">Configurer les clusters dans une configuration MetroCluster</block>
   <block id="899561732a5d01981ad7459377a19442" category="sidebar">Configurez le logiciel MetroCluster Tiebreaker ou ONTAP Mediator</block>
-  <block id="4eb00e76349103bb49f834540fdce720" category="sidebar">Configurez le service médiateur ONTAP pour un basculement automatique non planifié</block>
   <block id="f49bd82ec28b5ed1e86bb99d8be7e44e" category="sidebar">Connectez une configuration MetroCluster à une instance de médiateur ONTAP différente</block>
   <block id="38484792ce18e1ac90df07df1cbe4040" category="sidebar">Installer le logiciel disjoncteur d'attache</block>
   <block id="77d873129b2551d3791bd53918453706" category="sidebar">Configurer le logiciel disjoncteur d'attache</block>
@@ -11336,7 +11279,6 @@
   <block id="625658dcf56e073788050ba3b314f569" category="sidebar">Implémentez une configuration MetroCluster avec des disques et des LUN de baies</block>
   <block id="8b3aeec8c25c17c966b0b882195c6050" category="sidebar">Synchronisez l'heure du système à l'aide du protocole NTP</block>
   <block id="80f6a6e12e6ca0304707e7a67581f248" category="paragraph">Commutateur Broadcom</block>
-  <block id="530dbe55cb10e603b69b517d0cb2f4bc" category="list-text">Vérifiez que le service médiateur ONTAP a été supprimé de la configuration MetroCluster en exécutant les commandes suivantes sur les deux clusters :</block>
   <block id="49b7410e94a7ca7d1c674a14241ebe49" category="list-text"><block ref="7200673afad174d0ff258c801fbb9def" prefix="" category="inline-code"></block></block>
   <block id="f85af53e3d7c278ec6cd756cf3365359" category="list-text">Pas de pièces de rechange</block>
   <block id="385f02022cf6cb2f3cfc0aa026b7c3d7" category="list-text">Sélectionnez l'option qui correspond à votre configuration et exécutez la commande appropriée sur cluster_A :</block>
@@ -11478,7 +11420,6 @@
   <block id="fd9b3eaeebb236fdcf40b5456ccc900e" category="admonition">Les systèmes AFF A900 et FAS9500 prennent en charge huit liens ISL. Huit liens ISL sont pris en charge sur les systèmes Brocade 6510, G620, G620-1, G630, G630-1, Et commutateurs G720.</block>
   <block id="81d4bf20c117cfe06c727511dd63382b" category="paragraph">6510, G620, G620-1, G630, G630-1, G720</block>
   <block id="64cdec386f8cc50c2a2ec9316633b629" category="paragraph">Avant de courir<block ref="3b3242ced99842a6c2c16f489b78e773" prefix=" " category="inline-code"></block>, Le mode HA et la mise en miroir DR ne sont pas activés et un message d'erreur peut s'afficher concernant ce comportement attendu. Vous activez le mode HA et la mise en miroir de reprise après incident plus tard lors de l'exécution de la commande<block ref="3b3242ced99842a6c2c16f489b78e773" prefix=" " category="inline-code"></block> pour implémenter la configuration.</block>
-  <block id="929a405a00082b7cddc01ac6b47159f6" category="list-text">Configurer le MetroCluster selon qu'il dispose d'un ou plusieurs agrégats de données :</block>
   <block id="5ffd33f8dea25274cffabd9b7ab1c36e" category="paragraph">Vous devez répondre avec<block ref="415290769594460e2e485922904f345d" prefix=" " category="inline-code"></block> lorsque vous êtes invité à continuer en mode avancé et que vous voyez l'invite du mode avancé (*).</block>
   <block id="1fd3081a4bf2b2b1ccafeb89c824a5d2" category="admonition">Il est recommandé d'avoir plusieurs agrégats de données en miroir. En effet, lorsqu'il n'existe qu'un seul agrégat en miroir, la protection est moindre, car les volumes de métadonnées sont situés sur le même agrégat plutôt que sur des agrégats distincts.</block>
   <block id="3a02d8d4d0c731efe2550cb0db8b9626" category="inline-link-macro">Scénarios de panne du module de contrôleur lors de l'installation de MetroCluster</block>
@@ -11667,7 +11608,6 @@
   <block id="9d278f0716d4f0b8bdeaa91150592096" category="list-text">L'opération d'automatisation est effectuée<block ref="f62e58c376725d0e22a9e8040934124c" prefix=" " category="inline-code"></block>,<block ref="f71080a9d0eed0afac5e99d0ac5f5781" prefix=" " category="inline-code"></block>, Et les opérations de rétablissement sur le site A, et les vérifications post-mise à niveau. Lorsque l'opération s'interrompt, vérifier manuellement le statut LIF SAN et vérifier la configuration du réseau en suivant le message de la console.</block>
   <block id="7058a4e91dbbbe7dcf2fde3987421db0" category="section-title">Reconfigurer le médiateur ONTAP</block>
   <block id="37a1beb7755a7b8722d2585dbc965263" category="paragraph">Configurez manuellement le médiateur ONTAP qui a été automatiquement supprimé avant de commencer la mise à niveau.</block>
-  <block id="72912b568eb3bd0af2dc6a3ba324a1c9" category="list-text">Suivez les étapes de la section <block ref="f90e9d8e118936cdbb24903820a79eb3" category="inline-link-macro-rx"></block>.</block>
   <block id="eae1d6e5dc6115799413390aecfa0c7c" category="paragraph">L'opération d'automatisation entraîne le basculement,<block ref="4bc031ebd90e06c679bed249595b6c90" prefix=" " category="inline-code"></block>, et<block ref="a233091efff166ee24ee5a89d344dcdf" prefix=" " category="inline-code"></block> exploitation. Une fois ces opérations terminées, l'opération s'interrompt à *interrompu pour l'intervention de l'utilisateur*. Vous pouvez ainsi installer les contrôleurs, démarrer les contrôleurs partenaires et réaffecter les disques d'agrégat racine au nouveau module de contrôleur à partir de la sauvegarde flash à l'aide de<block ref="5fb641c5977b93de82b81e36db0454cf" prefix=" " category="inline-code"></block> rassemblés plus tôt.</block>
   <block id="3d296dee09f5acd9721e7bd1f885a1ff" category="doc">Développement d'une configuration IP MetroCluster</block>
   <block id="f7ebd0c3919ed1a579352a95f757a9e6" category="paragraph">Selon votre version de ONTAP, vous pouvez étendre votre configuration MetroCluster IP en ajoutant quatre nouveaux nœuds en tant que nouveau groupe de reprise sur incident.</block>
@@ -11702,7 +11642,6 @@
   <block id="e50b66bedcb52077182d77c650db0ca0" category="paragraph">Après avoir supprimé l'ancien groupe DR, la configuration s'affiche comme illustré dans les images suivantes :</block>
   <block id="47468b9007c8d1b64ee8a7229933b739" category="image-title">Configuration à huit nœuds</block>
   <block id="e73093705babe6125a16df08eedb00cc" category="image-alt">mcc dr groupe c5</block>
-  <block id="68f99a795ff5a89f522232c02dc3bdef" category="paragraph"><block ref="ded257afb157d474a6461a3bc1b48d84" category="inline-link-macro-rx"></block> Dans _MetroCluster IP installation and Configuration_.</block>
   <block id="d64734f1819a8d6339e74ffe37dc5430" category="paragraph">Si votre plate-forme n'est pas répertoriée, aucune combinaison de mise à niveau du contrôleur n'est prise en charge.</block>
   <block id="183ffd679adb1c9e843df285f2b91466" category="list-text">Remarque 2 : les mises à niveau des contrôleurs sont prises en charge sur les systèmes exécutant ONTAP 9.13.1 ou version ultérieure.</block>
   <block id="5abae7190ce598d45fe390e44304cde0" category="paragraph">9.13.1 et versions ultérieures</block>
@@ -11877,7 +11816,6 @@
   <block id="2d27e76da02804de2afe9d209e5cbb1c" category="admonition">Pour optimiser les performances et la disponibilité du stockage, il est recommandé de conserver au moins 20 % d'espace libre pour les agrégats en miroir. Bien que la recommandation soit de 10 % pour les agrégats non mis en miroir, le système de fichiers peut utiliser 10 % d'espace supplémentaire pour absorber les modifications incrémentielles. Les modifications incrémentielles augmentent l'utilisation de l'espace pour les agrégats en miroir grâce à l'architecture Snapshot d'ONTAP basée sur la copie en écriture. Le non-respect de ces meilleures pratiques peut avoir un impact négatif sur les performances.</block>
   <block id="0e5e2d82a1039e41c19d2248f3b64787" category="admonition">Vous pouvez configurer les interfaces IP MetroCluster depuis n'importe quel cluster.</block>
   <block id="6212a1ad66c5ad9d3c50380aa91aab6a" category="list-text">Aucune panne matérielle</block>
-  <block id="050dafe962829ef847f34f7607e36eb3" category="list-text"><block ref="050dafe962829ef847f34f7607e36eb3" category="inline-link-macro-rx"></block></block>
   <block id="2af958a8143c65676390b5e251abe90a" category="list-text">Vérifiez que le<block ref="a78608714add699f555f2a66df0ee249" prefix=" " category="inline-code"></block> Le package est installé sur l'hôte Linux. Cela permet d'éviter un<block ref="b0c94f1494e22d963244e235719a2582" prefix=" " category="inline-code"></block> Erreur lors de la nouvelle analyse de l'hôte Linux pour les LUN nouvellement mappées à l'aide du<block ref="685ca42026debec2f3691cc5faae67d5" prefix=" " category="inline-code"></block> commande.</block>
   <block id="1f52bd2314f9805b0a0098b0f56a0dc4" category="paragraph">Cela peut nécessiter un redémarrage des nœuds.</block>
   <block id="ab85fd4f549c390675df901a8ef3f78e" category="list-text">Créez des LIF/interfaces FC sur des nœuds IP pour tous les SVM SAN. Vérifiez éventuellement que les WWPN des LIF FC nouvellement créées sont connectés au commutateur FC SAN</block>
@@ -12092,7 +12030,6 @@
   <block id="82d98fe86a7b6dbc49abc0913b83f2ac" category="paragraph">ADP est exécuté automatiquement lors de la configuration initiale du système.</block>
   <block id="2d183ed725bd043df73111a219fb4c10" category="list-text">Tous les composants MetroCluster doivent être pris en charge.</block>
   <block id="9f4a5b5c7a3f862c1d0ff77f72d3eea0" category="paragraph">Vous êtes invité à entrer le nom d'utilisateur et le mot de passe du compte d'utilisateur admin du Mediator ONTAP.</block>
-  <block id="c471c44c2f26c78f9327863d90427cb7" category="admonition">Si le médiateur ONTAP est arrêté, le<block ref="1eafb93bfc40f298e60cf17e8a8c598c" prefix=" " category="inline-code"></block> La commande vous invite toujours à saisir le nom d'utilisateur et le mot de passe du compte utilisateur admin du Mediator ONTAP et supprime le service ONTAP Mediator de la configuration MetroCluster.</block>
   <block id="646d7d5f93b4a6d7bbbc65acf5ac1077" category="inline-link">Documentation des systèmes matériels ONTAP</block>
   <block id="a6060d4587fc5fc5f841d3287d08316c" category="paragraph"><block ref="a6060d4587fc5fc5f841d3287d08316c" category="inline-link-rx"></block></block>
   <block id="777cc85682fbb64f0c41aa09dccf0ca4" category="paragraph"><block ref="777cc85682fbb64f0c41aa09dccf0ca4" category="inline-link-rx"></block></block>
@@ -12171,7 +12108,6 @@
   <block id="6106648cc4773cdde37c48ca810022c0" category="cell">Red Hat 7 - 7.9</block>
   <block id="7d04b9af5dfbfc78c7040183f68afdc4" category="cell">Red Hat 8.1 - 8.7</block>
   <block id="003d136e5089a4f9ae0f1df3f6fc37fa" category="cell">Rocky Linux 9.0</block>
-  <block id="9d0101bb262cf2b07ff8dcfa1f6cf004" category="list-text">Vous avez besoin du mot de passe admin et de l'accès à un serveur HTTP, FTP, SFTP ou Trivial File Transfer Protocol (TFTP).</block>
   <block id="c422062a1c7b3d9ed9b2282378699dc7" category="paragraph"><block ref="c422062a1c7b3d9ed9b2282378699dc7" category="inline-link-macro-rx"></block></block>
   <block id="f54824b249675e35c90a450877126d13" category="inline-link-macro">Configurez manuellement les commutateurs Brocade FC</block>
   <block id="94d0fc55d9356d3d18534836cae75c1d" category="doc">Présentation de la configuration des commutateurs FC</block>
@@ -12179,33 +12115,7 @@
   <block id="02d80d458a48a16bd927a203d6bb2c73" category="list-text">Vérifiez la configuration de zoning :</block>
   <block id="62c870995fe52ce6aa5f9fc71ef4da98" category="paragraph"><block ref="ed3badb92af3298762df5a811de2da80" prefix="" category="inline-code"></block></block>
   <block id="79787dbf023f957de1bd4970858b26be" category="summary">Vous pouvez configurer les commutateurs IP pour qu'ils utilisent SNMPv3 pour la surveillance de l'état de santé.</block>
-  <block id="3a4aa5b142f66d14a43abf77cc49c599" category="doc">Configurer les commutateurs MetroCluster IP pour le contrôle de l'état</block>
   <block id="877caefa8e802eac248e66b46636c94b" category="paragraph">Dans les configurations MetroCluster IP, vous pouvez configurer SNMPv3 pour surveiller l'état des commutateurs IP.</block>
-  <block id="b3d73929ddf74bb4c7d3cac6eeda8684" category="section-title">Étape 1 : configurer l'utilisateur SNMPv3 sur les commutateurs IP MetroCluster</block>
-  <block id="038fbd2fc792b1165c5e88791a09113a" category="paragraph">Procédez comme suit pour configurer l'utilisateur SNMPv3 sur les commutateurs IP MetroCluster.</block>
-  <block id="f1407eaef69e4aa9948574be11c0a49b" category="admonition">Vous devez utiliser les protocoles d'authentification et de confidentialité dans les commandes. L'utilisation de l'authentification sans confidentialité n'est pas prise en charge.</block>
-  <block id="165237cf57452c2427f247f1c6589434" category="open-title">Pour les commutateurs IP Broadcom</block>
-  <block id="8d09188a2cfea4cc57e0f38750b68c97" category="list-text">Si le groupe d'utilisateurs 'network-admin' n'existe pas déjà, créez-le :</block>
-  <block id="0f3a15963e4657a9c97ab6b3db322d27" category="paragraph"><block ref="173ceda524dbc87af297f813b0f50cd8" prefix="" category="inline-code"></block></block>
-  <block id="ec714ba3bea7bae033524709c8ddb144" category="list-text">Vérifiez que le groupe 'network-admin' a été créé :</block>
-  <block id="a24bdf92e7d1dc2d2e5714305a56e0eb" category="paragraph"><block ref="77aa57f376fe73c9581fb729ddeb38eb" prefix="" category="inline-code"></block></block>
-  <block id="6697365f2e46593a5513af21ee61a084" category="list-text">Configurez l'utilisateur SNMPv3 sur les commutateurs IP Broadcom :</block>
-  <block id="9253168d7e5e9b3b8152a8ff1870743f" category="open-title">Pour les commutateurs IP Cisco</block>
-  <block id="4a2ec710ab28d8f45e2fdabacdc2dfc6" category="list-text">Exécutez les commandes suivantes pour configurer l'utilisateur SNMPv3 sur un commutateur IP Cisco :</block>
-  <block id="a8b5c32b456efe8e0fcb23cd218c6b6c" category="list-text">Vérifiez que l'utilisateur SNMPv3 est configuré sur le commutateur :</block>
-  <block id="dcc1c100b3f25557081f2e0b39235331" category="paragraph"><block ref="b74f60eeed5179550ade1e96ba13e2f9" prefix="" category="inline-code"></block></block>
-  <block id="82551d68c685b978ef7462fc2759040f" category="paragraph">L'exemple de résultat suivant indique que l'utilisateur<block ref="21232f297a57a5a743894a0e4a801fc3" prefix=" " category="inline-code"></block> Est configuré pour SNMPv3 :</block>
-  <block id="54095e9794a9fd93e475a7911543f88e" category="section-title">Étape 2 : configurer l'utilisateur SNMPv3 dans ONTAP</block>
-  <block id="584b7eab2aafafcbe01855419f896b21" category="paragraph">Procédez comme suit pour configurer l'utilisateur SNMPv3 dans ONTAP.</block>
-  <block id="1bff762b431027892d402682570d40ac" category="list-text">Configurez l'utilisateur SNMPv3 dans ONTAP :</block>
-  <block id="ddc11f6ac980cbb07f08bef9febcc0e7" category="paragraph"><block ref="d122104842549610cab7a5c1c6e791ab" prefix="" category="inline-code"></block></block>
-  <block id="c74135dc000c228de7018358eaf099e5" category="list-text">Configurer la surveillance de l'état du commutateur pour surveiller le commutateur à l'aide du nouvel utilisateur SNMPv3 :</block>
-  <block id="19acda7cb8d15af8dcf62dcf74bcbe00" category="paragraph"><block ref="536a54b756351ba8978169ff37fc419d" prefix="" category="inline-code"></block></block>
-  <block id="102bc61adb74b49384536c35a485dea4" category="list-text">Vérifiez que le numéro de série du périphérique qui sera surveillé avec l'utilisateur SNMPv3 nouvellement créé est correct :</block>
-  <block id="189afc0f727c57bbef41f18728ebe44a" category="list-text">Afficher la période d'interrogation du contrôle de l'état du commutateur :</block>
-  <block id="4e8c2092c0a2bb40fde077763873c66c" category="paragraph"><block ref="c9e6cd6140c9d8677df821c7cce2aac1" prefix="" category="inline-code"></block></block>
-  <block id="b9035c5f27542cbf7fb14fced8e330ba" category="list-text">Exécutez la commande suivante une fois le délai d'interrogation écoulé :</block>
-  <block id="20c4c39b07a94d810605541c0137f531" category="paragraph"><block ref="9214d4fe696fff6386a131ecee126bc4" prefix="" category="inline-code"></block></block>
   <block id="e389e5759cd93883cfbee1a000ab0c47" category="list-text">Vous devez répéter ces étapes sur chacun des commutateurs FC Brocade dans la configuration de la structure MetroCluster.</block>
   <block id="9dc72cfc812a43dbca6ba4e6357b2b04" category="paragraph">À partir de ONTAP 9.13.1, vous pouvez développer temporairement une configuration MetroCluster à huit nœuds pour actualiser les contrôleurs et le stockage. Voir <block ref="df5e6373f54c9330727709bb1055a079" category="inline-link-macro-rx"></block> pour en savoir plus.</block>
   <block id="e6f19b92e0e69fc5d74e94088b442a26" category="inline-link-macro">Actualisation d'une configuration IP MetroCluster à quatre ou huit nœuds</block>
@@ -12273,7 +12183,6 @@
   <block id="62dab2247ca5697a261fd865abf3712d" category="paragraph">Trimestre 4 : baies 36-47</block>
   <block id="c81d9f1aaf4df29053805f321b5b089d" category="section-title">Affectation des disques et ADP sur les systèmes AFF A150, ASA A150 et AFF A220</block>
   <block id="6a0fb9ba6a0c02751fb5fc909455894f" category="section-title">Affectation des disques et des données sur les systèmes AFF C400, AFF A400, ASA C400 et ASA A400</block>
-  <block id="fd659a09a0244eaf6b3f61e3ca61a14d" category="paragraph">Le médiateur ONTAP fournit des LUN de boîte aux lettres pour stocker des informations d'état sur les nœuds IP MetroCluster. Ces LUN sont co-localisés avec le médiateur ONTAP, qui s'exécute sur un hôte Linux physiquement séparé des sites MetroCluster. Les nœuds IP MetroCluster peuvent utiliser les informations de la boîte aux lettres pour surveiller l'état de leurs partenaires de reprise après incident et mettre en œuvre un basculement non planifié assisté par Mediator (MAUSO) en cas d'incident.</block>
   <block id="30340ec1ae42c7ca90b5fdd7fab0a4a3" category="paragraph">Lorsqu'un nœud détecte une défaillance de site nécessitant un basculement, il prend des mesures pour confirmer que le basculement est approprié et effectue le basculement. Par défaut, un MAUSO est lancé pour les scénarios suivants :</block>
   <block id="44c6a8e31f1720ca268816c13cea4bb0" category="list-text">En cas d'incident sur site. Un incident de site est une défaillance de _tous_ nœuds sur le même site.</block>
   <block id="b33abe56d950c95329c1ac6ab46d5bdc" category="paragraph">Un MAUSO est _non_ initié dans les scénarios d'arrêt suivants :</block>
@@ -12836,7 +12745,6 @@ L'exemple suivant montre que vous utilisez SCP pour télécharger le fichier<blo
   <block id="3fb697436dcc4f2ae2cdd29dc91fd043" category="paragraph">Les groupes de cohérence sont pris en charge dans les configurations MetroCluster.</block>
   <block id="47d81ac708cab22da7ea952550b6f757" category="summary">De nouvelles fonctionnalités du médiateur ONTAP sont fournies avec chaque version.  Voici les nouveautés.</block>
   <block id="3261bd656e2112e78b0313c87c039420" category="doc">Nouveautés de la prise en charge du médiateur ONTAP</block>
-  <block id="9d01d502466559c8d4ff8682b3e00d92" category="paragraph">De nouvelles améliorations du médiateur ONTAP sont fournies avec chaque version.  Voici les nouveautés.</block>
   <block id="e8467e9b509c4924668c01eb7ab2adde" category="cell">Version ONTAP</block>
   <block id="63b6c1d0d10ce89604932c62d9b6f4d7" category="doc">Nouveautés des fonctionnalités MetroCluster</block>
   <block id="3100460fa3d7ba2ea001abefda93f3bc" category="cell">Description et où en savoir plus</block>
@@ -12898,10 +12806,8 @@ L'exemple suivant montre que vous utilisez SCP pour télécharger le fichier<blo
   <block id="4d8d9056b62fc01f5cd3f0898c551fde" category="section-title">Prise en charge de la plateforme</block>
   <block id="9b6c50e7cbf80c446a0078ceb63104d0" category="section-title">Support de commutateur</block>
   <block id="9342c35c4399c8e6faf7c07d8bae26c5" category="paragraph">Pour plus d'informations sur les problèmes connus, les limites et les mises en garde de mise à niveau affectant les configurations ONTAP MetroCluster, reportez-vous au<block ref="6e7f74aa9001f0524a965144f528bbc2" category="inline-link-rx"></block>. Vous devez vous connecter avec votre compte NetApp ou créer un compte pour accéder aux notes de version.</block>
-  <block id="542203888545c733d7713856ba607788" category="paragraph">Pour plus de détails sur l'installation ou la mise à niveau du médiateur ONTAP dans votre configuration MetroCluster, rendez-vous sur <block ref="98d8e0da2148573045cbd111c9373b18" category="inline-link-macro-rx"></block>.</block>
   <block id="ab67c4c2b9b0f6070e68d79d3a0b6c63" category="cell">Capacité du médiateur ONTAP</block>
   <block id="5793a46a4020e2b9d210afaa14008d67" category="paragraph">Le basculement automatique non planifié (MAUSO) assisté par un médiateur est pris en charge en cas d'arrêt de l'environnement.</block>
-  <block id="4765407452f01930deae2b9481b69e36" category="paragraph">Prise en charge initiale du service Mediator ONTAP dans les configurations IP MetroCluster</block>
   <block id="de09b0e8b75c62ac84c620713e05647b" category="paragraph">Vous pouvez passer d'une configuration FC MetroCluster à une configuration IP MetroCluster sans interruption grâce à un commutateur de stockage partagé.</block>
   <block id="76a27f1dad18a5de567d4849d3e76b69" category="doc">Nouveautés de la prise en charge des switchs et de la plateforme FC MetroCluster</block>
   <block id="2dfc17cf61c3aebedc1a1f7f467baa26" category="paragraph">Suivez les étapes d'installation du logiciel du commutateur dans la rubrique correspondante selon que le type de commutateur est Broadcom, Cisco ou NVIDIA :</block>
@@ -13011,7 +12917,6 @@ L'exemple suivant montre que vous utilisez SCP pour télécharger le fichier<blo
   <block id="a786547181c9c8f446791420d2be691f" category="paragraph">Votre version de ONTAP doit prendre en charge le mélange des tiroirs. Reportez-vous à la<block ref="f93341e63c1888be05256ff042174623" category="inline-link-rx"></block> Pour vérifier si votre version de ONTAP prend en charge la combinaison de tiroirs.</block>
   <block id="27211cf5d485f8491ca9b566aefe2d6d" category="paragraph">Depuis ONTAP 9.4, les configurations IP de MetroCluster prennent en charge les nouvelles installations à l'aide d'un partitionnement de disque avancé et d'une affectation automatique des disques.</block>
   <block id="e528d26e96f91b34e70a35c4661d620d" category="list-text">ONTAP 9.4 et versions ultérieures sont nécessaires pour utiliser ADP avec les configurations IP MetroCluster sur les systèmes AFF et ASA.</block>
-  <block id="bacc4dbebf17d22c9a0361ded0994067" category="paragraph"><block ref="bacc4dbebf17d22c9a0361ded0994067" category="inline-link-macro-rx"></block></block>
   <block id="bc8be72fdc9d6054f356bb2b7f80fd12" category="inline-link">Matrice d'interopérabilité NetApp</block>
   <block id="769db6797bc8c70f9ceb0ea238fcfef2" category="list-text"><block ref="769db6797bc8c70f9ceb0ea238fcfef2" category="inline-link-rx"></block></block>
   <block id="c9dd6bad4c7d561872f2e2d498a990bf" category="inline-link-macro">Matrice d'interopérabilité (IMT)</block>
@@ -13568,8 +13473,6 @@ L'exemple suivant montre que vous utilisez SCP pour télécharger le fichier<blo
   <block id="d3ab8079aafa01dd2443858e1958cde3" category="paragraph">Dans la section *MetroCluster*, le graphique montre les deux clusters que vous avez configurés et associés pour les sites MetroCluster. Le cluster depuis lequel vous travaillez (cluster local) s'affiche sur la gauche.</block>
   <block id="4dbd519ea68e9fdd1535b92dd4afd5fb" category="list-text">Cliquez sur *configurer MetroCluster*. Dans cette fenêtre, effectuez les opérations suivantes :</block>
   <block id="1786426d5d80efd6c5165d556166c28b" category="list-text">Les nœuds de chaque cluster de la configuration MetroCluster sont affichés. Utilisez les listes déroulantes pour sélectionner les nœuds du cluster local qui seront associés à la reprise sur incident avec les nœuds du cluster distant.</block>
-  <block id="5b4f1da4fd53e0370a93b132cee09135" category="inline-link-macro">Configurez le service Mediator ONTAP</block>
-  <block id="79929ab5271f1ea472573389b4d83491" category="list-text">Cochez la case si vous souhaitez configurer le service ONTAP Mediator. Voir <block ref="5f1311c68626dc6800182a56591c319d" category="inline-link-macro-rx"></block>.</block>
   <block id="2e04b49bb4e33ec691ac2f426d41203d" category="list-text">Si les deux clusters disposent d'une licence pour activer le chiffrement, la section *Encryption* s'affiche.</block>
   <block id="12d02fba21726eafac4f9ce09b0d1801" category="paragraph">Pour activer le chiffrement, entrez une phrase de passe.</block>
   <block id="39391d3e9d1021130d7922046a90931b" category="list-text">Cochez la case si vous souhaitez configurer MetroCluster avec un réseau de couche 3 partagé.</block>
@@ -13628,24 +13531,16 @@ L'exemple suivant montre que vous utilisez SCP pour télécharger le fichier<blo
   <block id="d385f8f7be7049af17b707b814da972d" category="paragraph">Lorsque vous cliquez sur *Submit*, attendez que le cluster soit créé et configuré. Ensuite, un processus de validation a lieu.</block>
   <block id="e66cf0363da426ff5fc40b5dff923ee7" category="paragraph-title">Et la suite ?</block>
   <block id="5a8cb11351ec1c2ae0f6ece191a675b3" category="section-title">Configurez ONTAP sur une nouvelle vidéo de cluster</block>
-  <block id="de87e59d2852e752153034440b599942" category="summary">À l'aide de System Manager, vous pouvez effectuer des tâches de gestion du Mediator.</block>
-  <block id="4a75c782083d91f8442fa0793b7cfbf5" category="doc">Gérer le médiateur ONTAP avec le Gestionnaire système</block>
-  <block id="a92f4998e6033fa7b4c91230afa4eb31" category="paragraph">Dans le Gestionnaire système, vous pouvez effectuer des tâches pour gérer le médiateur ONTAP.</block>
   <block id="58d9a382438a6ccf3362b70996f2217e" category="paragraph-title">À propos de ces tâches</block>
   <block id="06d19fcd882f22629288f03ed5b7cdbf" category="paragraph">À partir de ONTAP 9.8, vous pouvez utiliser System Manager comme interface simplifiée pour gérer une configuration IP MetroCluster à quatre nœuds, qui peut inclure un médiateur ONTAP installé à un troisième emplacement.</block>
   <block id="7cd65d7812b2b9ccfca9369428e81afc" category="paragraph">Depuis ONTAP 9.14.1, vous pouvez utiliser System Manager pour effectuer ces opérations sur un site IP MetroCluster à huit nœuds. Bien que vous ne puissiez pas configurer ou développer un système à huit nœuds avec System Manager, si vous avez déjà configuré un système IP MetroCluster à huit nœuds, vous pouvez effectuer ces opérations.</block>
-  <block id="cf5d5c60759eb97116f97dba2f94928f" category="paragraph">Effectuez les tâches suivantes pour gérer le médiateur ONTAP.</block>
   <block id="34c30a40821bf0600cbb66a443eaa256" category="cell">Pour effectuer cette tâche...</block>
   <block id="ed48cbb0bf6ff16f983dee37b0fa56db" category="cell">Prenez ces mesures...</block>
-  <block id="fbdb3c4696d4af3abdd40a7c4d39dff1" category="paragraph">Configurez le service Mediator</block>
   <block id="5887ba6bb1083b1733f935c989ce8798" category="paragraph">Les deux clusters des sites MetroCluster doivent être up et associés.</block>
   <block id="e41b8f6d50b100db120f723ab2d80b55" category="list-text">Dans System Manager sous ONTAP 9.8, sélectionnez *Cluster &gt; Paramètres*.</block>
   <block id="5ad3e303fff11348579be9fa7186a3bf" category="inline-image-macro">Icône actions</block>
   <block id="91137d8840d5756932cbbe95191ebef9" category="list-text">Dans la section *Mediator*, cliquez sur le <block ref="7d54718dbc3f6ea214f7c0852ad5f778" category="inline-image-macro-rx" type="image"></block>.</block>
   <block id="08e18262fd4a21acec4d96a4a34ce874" category="list-text">Dans la fenêtre *Configure Mediator*, cliquez sur *Add+*.</block>
-  <block id="7106fd9d66839587984098b5b110af62" category="list-text">Entrez les détails de configuration du médiateur ONTAP.</block>
-  <block id="4454fd0f209c519ab968807065d1d63d" category="paragraph">Vous pouvez entrer les détails suivants lors de la configuration d'un médiateur ONTAP avec le Gestionnaire système.</block>
-  <block id="2396a51918b19da4a570bb6eeefaf733" category="list-text">Adresse IP du Mediator.</block>
   <block id="bf3c0dfedfed52264992478ab75c11ab" category="list-text">Nom d'utilisateur.</block>
   <block id="818e503323563216b4a9556e8c414a99" category="list-text">Le mot de passe.</block>
   <block id="db76a646cbffaec942b46f13ae610cdf" category="paragraph">Activer ou désactiver la commutation automatique assistée par Mediator (MAUSO)</block>
@@ -13655,11 +13550,8 @@ L'exemple suivant montre que vous utilisez SCP pour télécharger le fichier<blo
   <block id="8048f4b95111b36ae736e0db22032afc" category="list-text">Cliquez sur <block ref="fc003bdefc684d1fa6047f466b3a4572" category="inline-image-macro-rx" type="image"></block> en regard du nom du site MetroCluster.</block>
   <block id="5451b90704453cd0f976a20853b71515" category="list-text">Sélectionnez *Activer* ou *Désactiver*.</block>
   <block id="e7d8532df0bf3db8251352a8238be289" category="list-text">Entrez le nom d'utilisateur et le mot de passe de l'administrateur, puis cliquez sur *Activer* ou *Désactiver*.</block>
-  <block id="1f48f2b275c8a8c7c346ee84a099bf8d" category="admonition">Vous pouvez activer ou désactiver le Mediator lorsqu'il est accessible et que les deux sites sont en mode « Normal ». Le médiateur est toujours accessible lorsque MAUSO est activé ou désactivé si le système MetroCluster est en bon état.</block>
-  <block id="7f4fa61d4e9b9b925c8fb71469e17d9d" category="paragraph">Retirez le Mediator de la configuration MetroCluster</block>
   <block id="90e2fb7737ff30cfb4976eadc47866a4" category="list-text">Sélectionnez *Supprimer le médiateur*.</block>
   <block id="08c3fe5d52a59ab36d7b3b7acab670d1" category="list-text">Entrez le nom d'utilisateur et le mot de passe de l'administrateur, puis cliquez sur *Supprimer*.</block>
-  <block id="7f4010553b429e7c90d3b1f0da9fa64b" category="paragraph">Vérifiez l'état de santé du Mediator</block>
   <block id="88696f657e6e364490e66c4462936660" category="inline-link-macro">Vérifiez l'état de santé d'une configuration MetroCluster</block>
   <block id="b01e706bfb46755bbdbe42d170a1b23a" category="paragraph">Effectuez les étapes spécifiques à System Manager dans <block ref="1dc6f14de17f840d44d583754a4c8527" category="inline-link-macro-rx"></block>.</block>
   <block id="d643e31d547d643afdddd05a8a4f7112" category="paragraph">Effectuer un basculement et un rétablissement</block>
@@ -13760,7 +13652,6 @@ L'exemple suivant montre que vous utilisez SCP pour télécharger le fichier<blo
   <block id="4e04b2ebfeef2f344cfa9299a14a7f15" category="sidebar">Protection des données avec MetroCluster</block>
   <block id="eb2ce2e6e8dd207e0722c727b11bf523" category="sidebar">Configurez le logiciel MetroCluster à l'aide de l'interface de ligne de commandes</block>
   <block id="ae58261cc60a8a566f51001fa9647cc8" category="sidebar">Configurez le logiciel MetroCluster à l'aide de System Manager</block>
-  <block id="7dbb00295563db0482d1cd647c85ce79" category="sidebar">Gérez le médiateur ONTAP avec System Manager</block>
   <block id="08df7de62062ac541a6aa573389a0bff" category="sidebar">Vérifiez l'état de santé d'une configuration MetroCluster</block>
   <block id="bcaee96b0ab793907da56767503991e2" category="admonition">L'adresse IP MetroCluster et les ports de commutateur connectés ne sont pas mis en ligne avant la création des interfaces IP MetroCluster.</block>
   <block id="6db27f68adde7b6578b513891108402f" category="paragraph">BES-53248</block>
@@ -13927,7 +13818,6 @@ L'exemple suivant montre que vous utilisez SCP pour télécharger le fichier<blo
   <block id="a1909236f08f260f2b52aebf539344be" category="paragraph">L'exemple suivant définit les valeurs de node_B_1-New en utilisant des VLAN par défaut pour toutes les connexions MetroCluster IP DR :</block>
   <block id="a0436481bda3531d4a5eda5dac0e5608" category="paragraph">L'exemple suivant définit les valeurs de node_B_2-New en utilisant des VLAN par défaut pour toutes les connexions MetroCluster IP DR :</block>
   <block id="1a5991cd222add52b1f5aa51350d470e" category="list-title">Les systèmes qui utilisent des ports MetroCluster/HA partagés</block>
-  <block id="eabf799ca909dc7fa9808c3abb476773" category="paragraph">Entrez le mot de passe d'authentification lorsque vous y êtes invité.</block>
   <block id="8c62b33499e87d946c3be674c109e802" category="inline-link-macro">Étendez votre système à une configuration IP MetroCluster à huit nœuds</block>
   <block id="d3f54bf5e1d7bcb93c8d615f71713d7f" category="paragraph">Si vous utilisez des commutateurs MetroCluster de stockage partagé, vous pouvez uniquement passer à une configuration IP MetroCluster à quatre nœuds. La transition vers une configuration IP MetroCluster à huit nœuds via des commutateurs MetroCluster de stockage partagé n'est pas prise en charge. Une fois la transition vers une configuration IP MetroCluster à quatre nœuds terminée, vous pouvez <block ref="6dee49609367b51155e32a3a9526bace" category="inline-link-macro-rx"></block>.</block>
   <block id="2e6fac9e7be327118126470b28ac80e9" category="paragraph">Voir<block ref="16a6d09025d51cb8dd3516798b3fee8a" category="inline-link-rx"></block> pour plus d'informations sur les modèles de plate-forme et la prise en charge des commutateurs.</block>
@@ -14046,7 +13936,6 @@ L'exemple suivant montre que vous utilisez SCP pour télécharger le fichier<blo
   <block id="c0d421f4948fca7693af31b81667650d" category="list-text">Répétez les étapes pour mettre à niveau les nœuds sur cluster_A, en commençant par <block ref="fdc81b8422a2d3a4dc8579b364ffd7ac" category="inline-link-macro-rx"></block>.</block>
   <block id="9708813a6edf75a072848cc8c19d1d0b" category="inline-link-macro">Ajouter des configurations MetroCluster</block>
   <block id="1452de87b0c5b157dc8a7594223b5265" category="paragraph"><block ref="9b8797650089db2aa56d22b65e4ec45b" category="inline-link-macro-rx"></block>.</block>
-  <block id="448025dd8ef817882b16f81c3c2c401f" category="paragraph"><block ref="65a4078ac1b82a84ce7a38a387b8b31c" category="inline-link-macro-rx"></block>.</block>
   <block id="337d2ccc4953efb0209e4bf2012ca1be" category="summary">Activez la journalisation de la console sur vos périphériques avant d'effectuer la mise à niveau du contrôleur.</block>
   <block id="ec75a12b665b34d0cdc8d12746fc8cfa" category="doc">Activez la journalisation de la console avant la mise à niveau du contrôleur IP MetroCluster</block>
   <block id="f31a964269837fa383f7baad3584db47" category="inline-link-macro">Définir le démarrage requis (pour les mises à niveau vers les systèmes introduits dans la version 9.15.1 ou ultérieure)</block>
@@ -14236,8 +14125,6 @@ L'exemple suivant montre que vous utilisez SCP pour télécharger le fichier<blo
   <block id="c458b5225672f84c61d5b9931863ae60" category="paragraph">Pour préparer la mise à niveau du contrôleur, vous devrez peut-être mettre à niveau les fichiers de configuration de référence du commutateur (CFR) en fonction de l'ancien et du nouveau modèle de plate-forme. Vous effectuez ensuite des contrôles préalables du système, collectez les informations de configuration et supprimez le logiciel de surveillance existant.</block>
   <block id="0c21b75966b293902f32e19c44cfee40" category="list-text">La configuration du RCF des switchs n'est pas disponible dans la version minimale.</block>
   <block id="cbde96365d4f8077bc47cc3245bf5730" category="section-title">Effectuer des contrôles préalables du système</block>
-  <block id="b5fe45c4891c6d19896e92fee5883a19" category="inline-link-macro">Reconfigurez le service ONTAP Mediator</block>
-  <block id="be523ee24c95ff3261d845514671c9b1" category="paragraph">Avant le démarrage des contrôles préalables, si le Mediator ONTAP est installé, il est automatiquement détecté et supprimé. Pour confirmer la suppression, vous êtes invité à entrer un nom d'utilisateur et un mot de passe. Lorsque vous terminez la mise à niveau, ou si les contrôles préalables échouent ou si vous choisissez de ne pas poursuivre la mise à niveau, vous devez manuellement <block ref="059689c27028be05419054623185eb12" category="inline-link-macro-rx"></block>.</block>
   <block id="2592dc8685229c73a77e91741c837a63" category="paragraph">Pour plus d'informations, voir<block ref="8d2708bcc3f1eaf7281ec3a4227ab734" category="inline-link-rx"></block>.</block>
   <block id="0db7751284ee845ba2b1c67a8d8704db" category="section-title">Supprimez la configuration existante de Tiebreaker ou d'un autre logiciel de surveillance</block>
   <block id="0cd4dc9ba4eb47708afdb2049d98c13a" category="paragraph">Avant de commencer la mise à niveau, supprimez la configuration existante du Tiebreaker ou d'un autre logiciel de surveillance.</block>
@@ -14295,8 +14182,6 @@ L'exemple suivant montre que vous utilisez SCP pour télécharger le fichier<blo
   <block id="17c2940e7b2cfcc2faa4d1ef00e56d9e" category="sidebar">Revenir à la configuration</block>
   <block id="11174a5afd588b4b0362df983b5f76c6" category="sidebar">Mise à niveau des contrôleurs (AFF A700 vers AFF A900, FAS9000 vers FAS9500) dans MetroCluster IP avec basculement et rétablissement (ONTAP 9.10.1 ou version ultérieure)</block>
   <block id="9154ca816ab69e291b499f5a2579f66c" category="sidebar">Mise à niveau des contrôleurs (AFF A700 vers AFF A900, FAS9000 vers FAS9500) en configuration MetroCluster FC avec basculement et rétablissement (ONTAP 9.10.1 ou version ultérieure)</block>
-  <block id="cb037476ec4486d51b86d5dbeede8008" category="inline-link-macro">Configurer la collecte des journaux</block>
-  <block id="661221d64894eb71f90ac5ef75331837" category="paragraph">Si vous le souhaitez, suivez <block ref="d3ee677e2efae042d4f3199a44815074" category="inline-link-macro-rx"></block>les étapes à .</block>
   <block id="3931310703263c726d52a1768504781f" category="list-text">Configurez le nouveau commutateur en suivant les procédures Brocade de la section <block ref="8891b6de7b2070c584bdeb67b522b51b" category="inline-link-macro-rx"></block>.</block>
   <block id="a01a953cf57a4a3591be7c4dd9dd14fa" category="list-text">Pour activer le cryptage ISL, reportez-vous à <block ref="fb6e086ddbfd6d800d2c601996554df4" category="inline-link-macro-rx"></block>la section .</block>
   <block id="180e0613653267779e5c48b1089eec2b" category="paragraph">Vous pouvez reconfigurer les ports qui ne sont pas utilisés pour connecter des ports initiateurs, des ports FC-VI ou des liens ISL afin qu'ils agissent comme des ports de stockage. Toutefois, si les CFR pris en charge sont utilisés, vous devez modifier le zonage en conséquence.</block>
@@ -14360,7 +14245,6 @@ L'exemple suivant montre que vous utilisez SCP pour télécharger le fichier<blo
   <block id="70de6eed617bf2598c428ab602bacd20" category="section-title">Basculement non planifié (ONTAP 9.8 ou version ultérieure)</block>
   <block id="2441e03051d41aa2f6f9d9e39c577a3e" category="section-title">Effectuer un rétablissement (ONTAP 9.8 ou version ultérieure)</block>
   <block id="2a6e3f78c9b73af2855a7bc5191bf5b1" category="list-text">Sur le cluster local, connectez-vous au gestionnaire système dans ONTAP 9.8 ou une version ultérieure.</block>
-  <block id="22049fef22b0ddad50caf9ded819a4f1" category="paragraph"><block ref="22049fef22b0ddad50caf9ded819a4f1" category="inline-link-macro-rx"></block></block>
   <block id="8210c1e569b4a7f0d685a838881f7f66" category="cell">AFF et ASA</block>
   <block id="d5d4923aa83e46af2152de920946ba41" category="cell">Systèmes FAS</block>
   <block id="fa8ce860967d0ec751385e3e150d223a" category="list-text">Vérifiez les adresses IP des interfaces MetroCluster sur les anciens contrôleurs :</block>
@@ -14700,7 +14584,6 @@ L'exemple suivant montre que vous utilisez SCP pour télécharger le fichier<blo
   <block id="b33459fffe46ec3b9d80f18bbf0ca86f" category="paragraph"><block ref="b33459fffe46ec3b9d80f18bbf0ca86f" category="inline-image-macro-rx" type="image"></block></block>
   <block id="9e37fc850a66f0dca0578ede62cb8799" category="paragraph">Consultez les combinaisons de mises à niveau prises en charge pour les systèmes AFF C60, AFF A50, FAS70, AFF C800, AFF A800, FAS9500, FAS9000, AFF A700, AFF A70, AFF A900, AFF C80, FAS90, AFF A90 et AFF A1K.</block>
   <block id="de3a07c0dc84d4fdfe71adee21062ff1" category="inline-image-macro">La présente les combinaisons de mise à niveau prises en charge pour les plates-formes du groupe 2</block>
-  <block id="f1b4dd0636035b92daabcb6740a8afb2" category="paragraph"><block ref="f1b4dd0636035b92daabcb6740a8afb2" category="inline-image-macro-rx" type="image"></block></block>
   <block id="9f6b95a9493d80d4878ea6a3d8899475" category="paragraph">Le tableau suivant présente les combinaisons de plates-formes prises en charge pour l'actualisation d'un système AFF ou FAS dans une configuration IP MetroCluster. Les tables sont divisées en deux groupes :</block>
   <block id="76677d2a7baa40ca594e96f3789575f2" category="list-text">*Le Groupe 1* présente des combinaisons pour les systèmes AFF A150, AFF A20, FAS2750, FAS8300, FAS500f, AFF C250, AFF A250, FAS50, AFF C30, AFF A30, FAS8200, AFF A300, AFF A400, AFF A220, AFF C400, AFF A320 et FAS8700.</block>
   <block id="507731d894d9ee976f7066af87b9f8dd" category="list-text">*Le Groupe 2* présente des combinaisons pour les systèmes AFF C60, AFF A50, FAS70, FAS9000, AFF A700, AFF A70, AFF C800, AFF A800, FAS9500, AFF A900, AFF C80, FAS90, AFF A90 et AFF A1K.</block>
@@ -14719,8 +14602,6 @@ L'exemple suivant montre que vous utilisez SCP pour télécharger le fichier<blo
   <block id="5667d434150380e4826a9c5749e3611d" category="cell">Toutes les autres mises à niveau prises en charge vers les systèmes AFF A70, AFF A90, AFF A1K, FAS70, FAS90, AFF C80, AFF A50, AFF A20, AFF A30, AFF C30, AFF C60 ou FAS50</block>
   <block id="1f33c4b21d6c848bec5712e27807c50a" category="paragraph">Cette tâche est *uniquement* requise lorsque vous effectuez une mise à niveau vers un système AFF A70, AFF A90, AFF A1K, FAS70, FAS90, AFF C80, AFF A50, AFF A20, AFF A30, AFF C30, AFF C60 ou FAS50.</block>
   <block id="63856cfb46890240aad0d97a958b298b" category="paragraph">Le tableau suivant présente les combinaisons de plates-formes prises en charge pour la mise à niveau d'un système AFF ou FAS dans une configuration IP MetroCluster à l'aide de commandes « System Controller replace » réparties en deux groupes.</block>
-  <block id="c21a199bc091a4db6d90366971734cf9" category="paragraph"><block ref="c21a199bc091a4db6d90366971734cf9" category="inline-image-macro-rx" type="image"></block></block>
-  <block id="4d4e0d3e34b6b8a05aa28d2f8e68fab4" category="paragraph"><block ref="4d4e0d3e34b6b8a05aa28d2f8e68fab4" category="inline-image-macro-rx" type="image"></block></block>
   <block id="e94f3a81af196da788fa0f158f9d57fc" category="sidebar">Découvrez comment utiliser Active IQ Unified Manager et System Manager pour une configuration et un contrôle supplémentaires</block>
   <block id="5c1f1ec5000a0efcdda7a9cf624dafe7" category="paragraph">Les mises à niveau du contrôleur vers les systèmes introduits dans ONTAP 9.15.1 ou version ultérieure nécessitent la configuration d'un amorçage sur les anciens contrôleurs avant de pouvoir démarrer la mise à niveau.</block>
   <block id="d7aa339b18c7637dfafa2ace54386b6c" category="admonition">Vous devez définir le démarrage requis sur tous les anciens nœuds des deux sites avant de démarrer la mise à niveau.</block>
@@ -14753,4 +14634,267 @@ L'exemple suivant montre que vous utilisez SCP pour télécharger le fichier<blo
   <block id="47c5dc57c727f22af1ac884b3169ca06" category="paragraph">Prise en charge des configurations MetroCluster à 8 nœuds</block>
   <block id="61c5b898fb73fa93fc5e839741da576e" category="paragraph">Les clusters permanents à huit nœuds sont pris en charge dans les configurations IP et MetroCluster FAS.</block>
   <block id="0f58a32a1bffeb9bb247bbf5ce1a2f3f" category="paragraph"><block ref="0f58a32a1bffeb9bb247bbf5ce1a2f3f" category="inline-link-rx"></block></block>
+  <block id="62e327d2b6ddff400e7d504d270e8f37" category="paragraph"><block ref="62e327d2b6ddff400e7d504d270e8f37" category="inline-link-macro-rx"></block></block>
+  <block id="97c5969afb75d5f5fcf94bd41d9aa879" category="list-text">Bonnes pratiques pour une configuration IP MetroCluster.</block>
+  <block id="f14613b83e9dfb7ecf4d15a3e8d4ce71" category="section-title">Reconfiguration du médiateur ONTAP (configurations IP MetroCluster)</block>
+  <block id="16b859a14f691774ca3d8870b4291e5a" category="paragraph">Si vous disposez d'une configuration IP MetroCluster configurée avec ONTAP Mediator, vous devez supprimer et reconfigurer l'association avec ONTAP Mediator.</block>
+  <block id="d9378f13dfa9cc55384c198d6ed26792" category="list-text">Vous devez disposer de l'adresse IP, du nom d'utilisateur et du mot de passe pour ONTAP Mediator.</block>
+  <block id="4909f94e68644f4b8929d502b5ecffad" category="list-text">ONTAP Mediator doit être configuré et fonctionner sur l'hôte Linux.</block>
+  <block id="5a48f707e19c36416ef6eff0f5d83d11" category="list-text">Pour les configurations IP MetroCluster utilisant ONTAP Mediator, vérifiez que ONTAP Mediator est opérationnel.</block>
+  <block id="7f35eaed1f76b042a28d0b2d509e2d06" category="list-text">Pour les configurations IP MetroCluster utilisant ONTAP Mediator, obtenez l'adresse IP d'ONTAP Mediator :</block>
+  <block id="39c789871bbddfdfff37230e0c6aa461" category="admonition">Pour EngineID, appuyez sur *ENTRÉE* pour attribuer la valeur par défaut.</block>
+  <block id="0fc80f14ab8b45ef10e0e44892619d77" category="doc">Comment ONTAP Mediator prend en charge le basculement automatique non planifié</block>
+  <block id="1d3879377158a3eb01f004df2464ce87" category="paragraph">ONTAP Mediator fournit des LUN de boîte aux lettres pour stocker les informations d'état des nœuds IP MetroCluster. Ces LUN sont colocalisés avec ONTAP Mediator, qui s'exécute sur un hôte Linux physiquement distinct des sites MetroCluster. Les nœuds IP MetroCluster peuvent utiliser les informations de la boîte aux lettres pour surveiller l'état de leurs partenaires de reprise après incident et mettre en œuvre un basculement non planifié assisté par Mediator (MAUSO) en cas d'incident.</block>
+  <block id="2d65375dfa4df44be16a94af9f9abf58" category="list-text">*Configurations IP MetroCluster utilisant ONTAP Mediator (ONTAP 9.7 et versions ultérieures)*</block>
+  <block id="b87375524e9177103b13d71483ba0693" category="summary">À partir d'ONTAP 9.7, ONTAP Mediator peut aider la configuration IP MetroCluster à effectuer un basculement automatique non planifié en fournissant un référentiel physiquement séparé pour les informations d'état.</block>
+  <block id="dfcddace895e6d15eaa29a365e239546" category="doc">Préparez-vous à installer ONTAP Mediator</block>
+  <block id="a02702c70aea42098864f08e7416a2d3" category="list-text">Si vous prévoyez de mettre à jour votre version Linux, faites-le avant d'installer la version la plus récente d'ONTAP Mediator.</block>
+  <block id="c53d5657445f71b92e34d86103a86f85" category="list-text">Les logiciels ONTAP Mediator et MetroCluster Tiebreaker ne doivent pas être utilisés tous les deux avec la même configuration MetroCluster.</block>
+  <block id="059b37c83fb6387899a2deb16d02458f" category="list-text">ONTAP Mediator doit être installé sur un hôte Linux à un emplacement distinct des sites MetroCluster.</block>
+  <block id="857725e43c3ed86c03193f33f6382417" category="list-text">ONTAP Mediator peut prendre en charge jusqu'à cinq configurations MetroCluster simultanément.</block>
+  <block id="c9ffad835642fcae631d9df1be00fc38" category="section-title">Configuration réseau requise pour l'utilisation d'ONTAP Mediator dans une configuration MetroCluster</block>
+  <block id="4f7415d27a43620353acfcd34858e996" category="paragraph">Pour installer ONTAP Mediator dans une configuration MetroCluster, vous devez vous assurer que la configuration répond à plusieurs exigences réseau.</block>
+  <block id="f96926f4c01d2573af8b25445cc69961" category="paragraph">Le lien entre ONTAP Mediator et un groupe DR doit avoir au moins 20 Mbps de bande passante.</block>
+  <block id="3e7704befa86eb1c7abc5636dc751c2d" category="section-title">Exigences de l'hôte pour ONTAP Mediator dans une configuration MetroCluster</block>
+  <block id="25b9f376929fe7dbe0cb4b7eaa33fd68" category="section-title">Directives pour la mise à niveau d'ONTAP Mediator dans une configuration MetroCluster</block>
+  <block id="df091e4083ea919fc3a0a8939d1edf09" category="paragraph">Si vous mettez à niveau ONTAP Mediator, vous devez respecter les exigences de version Linux et suivre les instructions pour la mise à niveau.</block>
+  <block id="2a3e7adab0cb4c934f05558fd4b11142" category="list-text">ONTAP Mediator peut être mis à niveau d'une version immédiatement antérieure à la version actuelle.</block>
+  <block id="931e10d7f833f6006078c296b8f49e42" category="inline-link-macro">Installer ou mettre à niveau ONTAP Mediator</block>
+  <block id="e4fc8483908a1fd217bb07557b043e20" category="paragraph"><block ref="e4fc8483908a1fd217bb07557b043e20" category="inline-link-macro-rx"></block></block>
+  <block id="c2f5dea80e3ceaa485bfe3b7ffaf114f" category="paragraph">*Remarque :* les ports e5a et e7a ne peuvent être utilisés que pour les LIF interclusters. Ils ne peuvent pas être utilisés pour une LIF de données.</block>
+  <block id="dfcad5a3f6729276e992c858459078cf" category="paragraph">Les configurations MetroCluster prennent en charge RAID-DP, RAID4 et RAID-TEC.</block>
+  <block id="c452f245605b541913c8927f2fb39f4b" category="inline-link-macro">Considérations relatives à l'affectation automatique des lecteurs et aux systèmes ADP</block>
+  <block id="9648215f493ab7d57f334a1db39291f3" category="admonition">Depuis ONTAP 9.4, les configurations IP de MetroCluster prennent en charge les nouvelles installations à l'aide d'un partitionnement de disque avancé et d'une affectation automatique des disques. Pour plus d'informations, reportez-vous à la section <block ref="b265df9824eecc73bbbf36d6341665a3" category="inline-link-macro-rx"></block> .</block>
+  <block id="cbeca2fa89a3ea8f375e96b634c42759" category="doc">Configurer SNMPv3 sur les commutateurs IP MetroCluster</block>
+  <block id="630f606ab1d9cdb74f5fddde24450385" category="paragraph">Cette tâche présente les étapes génériques de configuration de SNMPv3 sur un commutateur. Certaines versions du micrologiciel du commutateur répertoriées peuvent ne pas être prises en charge dans une configuration IP MetroCluster.</block>
+  <block id="578f5e3d8693dd5b8f97c29bf9aec80b" category="paragraph">Vous devez suivre les étapes correspondant à la version du micrologiciel du commutateur prise en charge dans une configuration IP MetroCluster. Consultez le <block ref="9c839fcdfb8699a63c787254d7b1ae03" category="inline-link-macro-rx"></block> pour vérifier les versions de firmware prises en charge.</block>
+  <block id="1451684986f1c945fdb4e4f2a8b904be" category="list-text">SNMPv3 n'est pris en charge que sur ONTAP 9.12.1 et versions ultérieures.</block>
+  <block id="e43f0bacec59589637fec825db76ae04" category="list-text">ONTAP 9.13.1P12, 9.14.1P9, 9.15.1P5, 9.16.1 et les versions ultérieures corrigent ces deux problèmes :</block>
+  <block id="b0dd8ee150ec6ec9cbd4e76f7441983f" category="inline-link-macro">Pour la surveillance de l'état ONTAP des commutateurs Cisco, le trafic SNMPv2 peut toujours être visible après le passage à SNMPv3 pour la surveillance</block>
+  <block id="f51d6ba5c14f0f9f7e1e94040870b36a" category="list-text"><block ref="f51d6ba5c14f0f9f7e1e94040870b36a" category="inline-link-macro-rx"></block></block>
+  <block id="703ad3e359e69f75421f8e8fdf1c4374" category="inline-link-macro">Alertes de ventilateur et d'alimentation de commutateur faussement positives en cas de pannes SNMP</block>
+  <block id="972989a7e914db02b9462470b520ed9e" category="list-text"><block ref="972989a7e914db02b9462470b520ed9e" category="inline-link-macro-rx"></block></block>
+  <block id="5fb3828593766d454e79a0dcf52fed9d" category="paragraph">Les commandes suivantes sont utilisées pour configurer un nom d'utilisateur SNMPv3 sur les commutateurs *Broadcom*, *Cisco* et *NVIDIA* :</block>
+  <block id="77f3beca20fcd78f77236507e8d9b4af" category="open-title">Commutateurs Broadcom</block>
+  <block id="89fe808c6ef5fe301085b5abe4406d35" category="paragraph">Configurez un nom d'utilisateur SNMPv3 OPÉRATEUR RÉSEAU sur les commutateurs Broadcom BES-53248.</block>
+  <block id="c59df2c71925eefec8dc03aa685125c8" category="list-text">Pour *pas d'authentification* :</block>
+  <block id="4c58055d9b16c25c354c591188cb27ae" category="list-text">Pour l'authentification *MD5/SHA* :</block>
+  <block id="b00500f501ccb5c8ab2313d810b6ff29" category="list-text">Pour l'authentification *MD5/SHA avec cryptage AES/DES* :</block>
+  <block id="ce23d8cb44ce288570eb2dcc49f1f2f7" category="paragraph">La commande suivante configure un nom d'utilisateur SNMPv3 côté ONTAP :</block>
+  <block id="760c6e9b6b587e6f977e0e7116b69f45" category="paragraph">La commande suivante établit le nom d'utilisateur SNMPv3 avec CSHM :</block>
+  <block id="d3280214c17ea96ca13a6e79765d0b3c" category="list-text">Configurez l'utilisateur SNMPv3 sur le commutateur pour utiliser l'authentification et le cryptage :</block>
+  <block id="8379e83fc1ad68bfb1ad877f1b7fda6b" category="list-text">Configurez l'utilisateur SNMPv3 sur le côté ONTAP :</block>
+  <block id="6b9f542dd155c40aa5e4484b5ff61711" category="list-text">Configurez CSHM pour qu'il surveille avec le nouvel utilisateur SNMPv3 :</block>
+  <block id="f1d85c8d2abe8fba947527035ed0f381" category="list-text">Après avoir attendu la période d’interrogation CSHM, vérifiez que le numéro de série est renseigné pour le commutateur Ethernet.</block>
+  <block id="0fdfed50bdfb7a964741d7f6016dd332" category="paragraph">Configurer un nom d'utilisateur SNMPv3 SNMPv3_USER sur les commutateurs Cisco 9336C-FX2 :</block>
+  <block id="d4d693d9dd779d0daf149c2e448b60b2" category="list-text">Vérifiez que le numéro de série à interroger avec l'utilisateur SNMPv3 nouvellement créé est le même que celui décrit à l'étape précédente après la fin de la période d'interrogation CSHM.</block>
+  <block id="05918726f836c344025fecbcf0275f1b" category="open-title">NVIDIA - CL 5.4.0</block>
+  <block id="c19095c0c8945d1d4e4e73ec7a11354c" category="paragraph">Configurer un nom d'utilisateur SNMPv3 SNMPv3_USER sur les commutateurs NVIDIA SN2100 exécutant CLI 5.4.0 :</block>
+  <block id="cd12738ab621b27db86ca1b02e9d118c" category="open-title">NVIDIA - CL 5.11.0</block>
+  <block id="1d478fc1ce1613a790d5d77707c188f6" category="paragraph">Configurez un nom d'utilisateur SNMPv3 SNMPv3_USER sur les commutateurs NVIDIA SN2100 exécutant CLI 5.11.0 :</block>
+  <block id="8ec049d1fe155ff0c4df415c3d4691e2" category="doc">Présentation de la surveillance de l'état du commutateur dans une configuration IP MetroCluster</block>
+  <block id="8ae4eeaa7baed19106cc30ea02483c5e" category="paragraph">Le moniteur d'état des commutateurs Ethernet (CSHM) est chargé de garantir l'intégrité opérationnelle des commutateurs du réseau Cluster et Storage et de collecter les journaux des commutateurs à des fins de débogage.</block>
+  <block id="4ae61f4d1ec2f0efafd8ee4274e49ccf" category="section-title">Remarques importantes pour la configuration de CSHM dans une configuration IP MetroCluster</block>
+  <block id="b38569be2d36a20e8902840c1ea976fe" category="paragraph">Cette section présente les étapes générales de configuration de SNMPv3 et de collecte de journaux sur les commutateurs Cisco, Broadcom et NVIDIA SN2100. Vous devez suivre les étapes correspondant à la version du firmware du commutateur prise en charge dans une configuration IP MetroCluster. Consultez le <block ref="cbfe825e8e02458e2eef3cd048612d7d" category="inline-link-macro-rx"></block> pour vérifier les versions de firmware prises en charge.</block>
+  <block id="f75a60c3cd68bf003c2bb72becccc57d" category="paragraph">Dans une configuration MetroCluster, vous configurez la surveillance de l’état sur les commutateurs de cluster locaux uniquement.</block>
+  <block id="84a426c437e5bc752203a8e9a402890b" category="paragraph">Pour la collecte des journaux avec les commutateurs Broadcom et Cisco, un nouvel utilisateur doit être créé sur le commutateur pour chaque cluster dont la collecte des journaux est activée. Dans une configuration MetroCluster, cela signifie que MetroCluster 1, MetroCluster 2, MetroCluster 3 et MetroCluster 4 nécessitent tous la configuration d'un utilisateur distinct sur les commutateurs. Ces commutateurs ne prennent pas en charge plusieurs clés SSH pour le même utilisateur. Toute configuration de collecte de journaux supplémentaire effectuée remplace toute clé SSH préexistante pour l'utilisateur.</block>
+  <block id="feed060dbea766c7d4e1b26f14b08e82" category="paragraph">Avant de configurer le CSHM, vous devez désactiver les ISL inutilisés pour éviter toute alerte ISL inutile.</block>
+  <block id="61ef80ea8d9e92d0a652bb75148884d3" category="inline-link-macro">Configurer ONTAP Mediator</block>
+  <block id="05381b1a498b05222c00536e559ed905" category="list-text">Cochez la case si vous souhaitez configurer ONTAP Mediator. Voir <block ref="c84fb84e87e58e2bf063235733828347" category="inline-link-macro-rx"></block>.</block>
+  <block id="ca1ebe89fe0d391a3c3924e2b6fa0066" category="summary">Dans la plupart des cas, les commutateurs Ethernet sont automatiquement détectés par ONTAP et surveillés par CSHM. Le fichier de configuration de référence (RCF) appliqué au commutateur, entre autres, active le protocole CDP (Cisco Discovery Protocol) et/ou le protocole LLDP (Link Layer Discovery Protocol).</block>
+  <block id="ea9baff86b324b08aa0d9f60e5d09833" category="doc">Gérer la surveillance des commutateurs Ethernet dans une configuration IP MetroCluster</block>
+  <block id="a1c2fc220383716c158399e227f0b34f" category="paragraph">Dans la plupart des cas, les commutateurs Ethernet sont automatiquement détectés par ONTAP et surveillés par CSHM. Le fichier de configuration de référence (RCF) appliqué au commutateur, entre autres, active le protocole CDP (Cisco Discovery Protocol) et/ou le protocole LLDP (Link Layer Discovery Protocol). Cependant, vous devrez peut-être ajouter manuellement un commutateur qui n'est pas détecté ou supprimer un commutateur qui n'est plus utilisé. Vous pouvez également arrêter la surveillance active tout en maintenant le commutateur dans la configuration, par exemple pendant la maintenance.</block>
+  <block id="2b77bb88cf2794536ac9c658ce053c6b" category="section-title">Créez une entrée de commutateur afin que ONTAP puisse la surveiller</block>
+  <block id="4aa02798c2feea1f87e6fb5301e10d30" category="paragraph">Utilisez<block ref="e59cde6e921a1b23eb9bf8c1c9068aca" prefix=" " category="inline-code"></block> la commande pour configurer et activer manuellement la surveillance d'un commutateur Ethernet spécifié. Ceci est utile si ONTAP n'ajoute pas automatiquement le commutateur, ou si vous avez précédemment supprimé le commutateur et souhaitez le rajouter.</block>
+  <block id="82b694a75e07a035b8cd3b7aae86fdb8" category="paragraph">Un exemple type est l'ajout d'un commutateur nommé [DeviceName], avec l'adresse IP 1.2.3.4, et les informations d'identification SNMPv2c définies sur *cshm1!*. Utilisez<block ref="0fa5a8d20ad4f199ce4bb17e333f0a4a" prefix=" " category="inline-code"></block> plutôt que<block ref="0f3e90baa25250f9896e5ad67dd9d1f6" prefix=" " category="inline-code"></block> si vous configurez un commutateur de stockage.</block>
+  <block id="9e2f728fd093bf40641895bd7ab81ffc" category="section-title">Désactiver la surveillance sans supprimer le commutateur</block>
+  <block id="71ea82a6a71bd6b5e0857ef4469e6824" category="paragraph">Si vous souhaitez mettre en pause ou arrêter la surveillance d'un certain commutateur, mais le conserver pour une surveillance future, modifiez son<block ref="a95032ab49a61ccce65cbef4bf991ebd" prefix=" " category="inline-code"></block> paramètre au lieu de le supprimer.</block>
+  <block id="254dbd09c58880fcc321f2394e42803d" category="paragraph">Cela vous permet de préserver les détails et la configuration du commutateur sans générer de nouvelles alertes ou de nouvelles découvertes.</block>
+  <block id="5c87ebc68b8545e621c4293650f66e8e" category="section-title">Retirez un commutateur dont vous n'avez plus besoin</block>
+  <block id="c68359f3f21922e686e683f2b1fb2d69" category="paragraph">Utiliser<block ref="72fd318795f4bf274ff150d0a09106e1" prefix=" " category="inline-code"></block> pour supprimer un commutateur qui a été déconnecté ou n'est plus nécessaire :</block>
+  <block id="0dcda35c85e27aa3498fa4ab30cb7dae" category="paragraph">Par défaut, cette commande réussit uniquement si ONTAP ne détecte pas actuellement le commutateur via CDP ou LLDP. Pour supprimer un commutateur découvert, utilisez le<block ref="02e554f8f135bc49b80e8fc45a341757" prefix=" " category="inline-code"></block> paramètre :</block>
+  <block id="6625e054d05a0ea2ca1ae3049f75717e" category="paragraph">Lorsque<block ref="02e554f8f135bc49b80e8fc45a341757" prefix=" " category="inline-code"></block> est utilisé, le commutateur peut être ajouté automatiquement si ONTAP le détecte à nouveau.</block>
+  <block id="4e4facc560c88d40d47ce2b1369d5552" category="doc">Configurer la collecte de journaux sur un commutateur IP MetroCluster</block>
+  <block id="d5a5c9619599da12d87af6daeab1ece6" category="paragraph">Dans une configuration IP MetroCluster, vous pouvez configurer la collecte de journaux pour collecter les journaux de commutation à des fins de débogage.</block>
+  <block id="7c51c84110459cf460a444094be133c4" category="admonition">Sur les commutateurs Broadcom et Cisco, un nouvel utilisateur est requis pour chaque cluster avec collecte de journaux. Par exemple, MetroCluster 1, MetroCluster 2, MetroCluster 3 et MetroCluster 4 nécessitent tous la configuration d'un utilisateur distinct sur les commutateurs. L'utilisation de plusieurs clés SSH pour un même utilisateur n'est pas prise en charge.</block>
+  <block id="8ac20e3719b6b58e94e5a4385e87b52e" category="paragraph">Le moniteur d'état des commutateurs Ethernet (CSHM) est chargé de garantir l'intégrité opérationnelle des commutateurs du réseau Cluster et Storage et de collecter les journaux des commutateurs à des fins de débogage. Cette procédure vous guide tout au long du processus de configuration de la collecte, de demande de journaux *support* détaillés et d'activation d'une collecte horaire de données *périodiques* collectées par AutoSupport.</block>
+  <block id="2ded3ff3862adfc6f54d2a2f3ebf1147" category="paragraph">*REMARQUE :* si vous activez le mode FIPS, vous devez effectuer les opérations suivantes :</block>
+  <block id="81f0d5b127adfd87f50ce10bc85e1e65" category="list-text">Régénérer les clés SSH sur le commutateur en suivant les instructions du fournisseur.</block>
+  <block id="a60a00967db7342947b326a8f7618f52" category="list-text">Régénérer les clés SSH dans ONTAP à l'aide de<block ref="c079360670e0f4f9441a54ac1d262788" prefix=" " category="inline-code"></block></block>
+  <block id="fe85427bc017f31f0f2b913e65e8d888" category="list-text">Réexécutez la routine de configuration de la collecte des journaux à l'aide de la<block ref="36ac3c1f3bae8142b5d110fb906ba03e" prefix=" " category="inline-code"></block> commande</block>
+  <block id="ca243f374acfb56a77236e0d30935f7f" category="list-text">L'utilisateur doit avoir accès aux commandes du commutateur<block ref="a7dd12b1dab17d25467b0b0a4c8d4a92" prefix=" " category="inline-code"></block> . S'ils ne sont pas disponibles, créez un nouvel utilisateur et accordez les autorisations nécessaires à l'utilisateur.</block>
+  <block id="8d36506446d5ad8477c75d9150e6528f" category="list-text">La surveillance de l'état du commutateur doit être activée pour le commutateur. Vérifiez cela en vous assurant que <block ref="83bb5774e6e4dc96959b12bfa4334f18" prefix=" " category="inline-code"></block> le champ est défini sur *true* dans la sortie du <block ref="db3929a8e897b02a87f7f4bc42f38fc1" prefix=" " category="inline-code"></block> commande.</block>
+  <block id="40b03f9635c63b20aade0ff8145eafb8" category="list-text">Pour la collecte de journaux avec les commutateurs Broadcom et Cisco :</block>
+  <block id="89f1dd995a5c07ea1e13abc5993d9d59" category="list-text">Les utilisateurs doivent disposer d'un Privileges d'administration réseau.</block>
+  <block id="60f743043272b873831b17c5e7290445" category="list-text">Un nouvel utilisateur doit être créé sur le commutateur pour chaque configuration de cluster avec la collecte des journaux activée. Ces commutateurs ne prennent pas en charge plusieurs clés SSH pour le même utilisateur. Toute configuration de collecte de journaux supplémentaire effectuée remplace toute clé SSH préexistante pour l'utilisateur.</block>
+  <block id="c1433b541d8d99faed86a93460cb0bad" category="list-text">Pour la prise en charge de la collecte de journaux avec les commutateurs NVIDIA, _user_ pour la collecte de journaux doit être autorisé à exécuter la<block ref="c85737d6a0d20328583b59ea7320a5ef" prefix=" " category="inline-code"></block> commande sans avoir à fournir de mot de passe. Pour autoriser cette utilisation, lancer la commande :</block>
+  <block id="a0379ee208b1ca86b0ce11e60c0e73eb" category="paragraph"><block ref="83e3f80a08612b0113ac48e3b9a3432e" prefix="" category="inline-code"></block></block>
+  <block id="4b96de8aec25594d2021f91d86aa38cb" category="open-title">ONTAP 9.15.1 et versions ultérieures</block>
+  <block id="09a5c8e72e479c23dfcdb0045312203a" category="list-text">Pour configurer la collecte des journaux, exécutez la commande suivante pour chaque commutateur. Vous êtes invité à entrer le nom du commutateur, le nom d'utilisateur et le mot de passe pour la collecte des journaux.</block>
+  <block id="8922abf783ebcd2485e871d83f810001" category="paragraph">*REMARQUE :* Si vous répondez *y* à l'invite de spécification de l'utilisateur, assurez-vous que l'utilisateur dispose des autorisations nécessaires comme indiqué dans <block ref="c36e4b8d8c2789dd7986c4af4bd3d942" category="inline-xref-macro-rx"></block> .</block>
+  <block id="0af41f793380f36203c150e88680ae0d" category="admonition">Pour CL 5.11.1, créez l'utilisateur *cumulus* et répondez *y* à l'invite suivante : Souhaitez-vous spécifier un utilisateur autre qu'admin pour la collecte des journaux ? {y|n} : *y*</block>
+  <block id="9516895d06a737348108b47f990aebff" category="list-text">[[step2]]Activer la collecte périodique des journaux :</block>
+  <block id="679c69dadfb9ebf6a73c6cb1e48f610e" category="list-text">Demander la collecte du journal de support :</block>
+  <block id="9c7ca9d82e20f27a701fcb23071651ef" category="list-text">Pour afficher tous les détails de la collecte des journaux, y compris l'activation, le message d'état, l'horodatage précédent et le nom de fichier de la collecte périodique, l'état de la demande, le message d'état, ainsi que l'horodatage précédent et le nom de fichier de la collection de support, utilisez les éléments suivants :</block>
+  <block id="098a6be90d7d0f41999537981c29585d" category="open-title">ONTAP 9.14.1 et versions antérieures</block>
+  <block id="921a23933bb7a508423ca6a0ad00bfd3" category="paragraph">*REMARQUE :* si vous répondez à<block ref="415290769594460e2e485922904f345d" prefix=" " category="inline-code"></block> l'invite de spécification de l'utilisateur, assurez-vous que l'utilisateur dispose des autorisations nécessaires<block ref="c36e4b8d8c2789dd7986c4af4bd3d942" category="inline-xref-macro-rx"></block>, comme indiqué dans .</block>
+  <block id="86433b1c6cd2dfe18ff408f3c045d2d1" category="list-text">[[step2]] Pour demander la collecte des journaux d’assistance et activer la collecte périodique, exécutez la commande suivante. Ceci lance les deux types de collecte de journaux : les journaux détaillés<block ref="db5eb84117d06047c97c9a0191b5fffe" prefix=" " category="inline-code"></block> et une collecte de données toutes les heures<block ref="cdcc32a064503184053bd2018d1c0e7e" prefix=" " category="inline-code"></block> .</block>
+  <block id="aae263170b5a7f23d3045f8a2b09091f" category="paragraph">Attendez 10 minutes, puis vérifiez que la collecte des journaux se termine :</block>
+  <block id="da28641e557d1527788801659dc81fd5" category="inline-link-macro">Dépannage de la collecte des journaux</block>
+  <block id="b55b60679cb3be6b758030b014704077" category="admonition">Si des États d'erreur sont signalés par la fonction de collecte de journaux (visible dans la sortie de<block ref="88354d538ba5d4e1746193ec5949ab4b" prefix=" " category="inline-code"></block>), voir <block ref="59a5019a80938ff66a962755304e5efc" category="inline-link-macro-rx"></block> pour plus de détails.</block>
+  <block id="0d967557c644a46919d28917c9e20c81" category="doc">Vérifier la surveillance du commutateur Ethernet dans une configuration IP MetroCluster</block>
+  <block id="7d446387be9f1d7a1583327a693c81a1" category="paragraph">Le moniteur d'état du commutateur Ethernet (CSHM) tente automatiquement de surveiller les commutateurs qu'il découvre ; cependant, la surveillance peut ne pas se produire automatiquement si les commutateurs ne sont pas configurés correctement. Vérifiez que le contrôle de l'état est correctement configuré pour surveiller les commutateurs.</block>
+  <block id="25784bbce13fd0c509a0fd1c5f248f3d" category="section-title">Confirmez la surveillance des commutateurs Ethernet connectés</block>
+  <block id="570122e6553f3a17e7188a6ca23d70d9" category="paragraph">Pour vérifier que les commutateurs Ethernet connectés sont surveillés, exécutez :</block>
+  <block id="7eaabdc7d2364e9a43feeb5cf07593dc" category="paragraph">Si la colonne affiche *OTHER* ou si<block ref="a559b87068921eec05086ce5485e9784" prefix=" " category="inline-code"></block> le<block ref="7a19db03ac26c54be196969b77d657a6" prefix=" " category="inline-code"></block> champ affiche *FALSE*, ONTAP ne peut pas surveiller le commutateur. Une valeur de *AUTRE* indique généralement que ONTAP ne prend pas en charge ce commutateur pour la surveillance de l'intégrité.</block>
+  <block id="8d86e89da688f620dafbc70269059388" category="paragraph">Le<block ref="7a19db03ac26c54be196969b77d657a6" prefix=" " category="inline-code"></block> champ est défini sur *FALSE* pour la raison spécifiée dans le<block ref="fffcb4d1e12c96b2f571f77ad25878b8" prefix=" " category="inline-code"></block> champ.</block>
+  <block id="f9f5c952edf43434e02a625f00102b19" category="inline-link-macro">Gérer la surveillance des commutateurs Ethernet</block>
+  <block id="f6ec6bfa57123a9616038a55e7f332a5" category="paragraph">Si un commutateur n'est pas répertorié dans la sortie de la commande, ONTAP ne l'a probablement pas détecté. Vérifiez que le commutateur est correctement câblé. Si nécessaire, vous pouvez ajouter le commutateur manuellement. Voir <block ref="ee7db2a0a5f0654c3c81941bc38adb11" category="inline-link-macro-rx"></block> pour plus de détails.</block>
+  <block id="ed7061b9b8f8c50684797c64a5576941" category="section-title">Vérifiez que les versions du firmware et des fichiers RCF sont à jour</block>
+  <block id="43558d02214bf83729998ce237b6cdea" category="inline-link">Page des téléchargements du support NetApp</block>
+  <block id="9be0ccf5f4aae992d69ea7f079f6d048" category="paragraph">Assurez-vous que le commutateur exécute le micrologiciel le plus récent pris en charge et qu'un fichier RCF compatible a été appliqué. Plus d'informations sont disponibles sur le <block ref="49046ae6b122d9765935bb9b378618a5" category="inline-link-rx"></block>.</block>
+  <block id="14bb00b56dfdaad98ccaf9d2ff1c1eb5" category="paragraph">Par défaut, le moniteur d'intégrité utilise SNMPv2c avec la chaîne de communauté *cshm1!* pour la surveillance, mais SNMPv3 peut également être configuré.</block>
+  <block id="35011d870229aa144aa6a66350d2279e" category="paragraph">Si vous devez modifier la chaîne de communauté SNMPv2c par défaut, assurez-vous que la chaîne de communauté SNMPv2c souhaitée a été configurée sur le commutateur.</block>
+  <block id="2ae26c52de113e0592fc26619e9e73d1" category="inline-link-macro">Facultatif : configurer SNMPv3</block>
+  <block id="3d8bd273ce46782520a3a188e037f316" category="admonition">Pour plus d'informations sur la configuration de SNMPv3 pour utilisation, reportez-vous à la section<block ref="ec5440e4cc2d261dc76dac84e641c0ab" category="inline-link-macro-rx"></block>.</block>
+  <block id="f97512ee27e4fc37982423d301b8b2cd" category="section-title">Confirmez la connexion au réseau de gestion</block>
+  <block id="4c3dc933dd2f14499a5b966f0d0f1242" category="paragraph">Vérifiez que le port de gestion du commutateur est connecté au réseau de gestion.</block>
+  <block id="7be780b96e93a50316d019e9c7358c89" category="paragraph">Une connexion de port de gestion correcte est requise pour que ONTAP puisse effectuer des requêtes SNMP et collecter des journaux.</block>
+  <block id="6e86085a8f5bd83a0c4b0ef8d4280d0c" category="inline-link-macro">Résolution des alertes</block>
+  <block id="b51f053f94d5176ca18b8272d64010f0" category="list-text"><block ref="b51f053f94d5176ca18b8272d64010f0" category="inline-link-macro-rx"></block></block>
+  <block id="c2f363b557f11042735dbadbfbd534d3" category="summary">Vous pouvez utiliser cette procédure pour installer le fichier de configuration applicable pour la surveillance de l'état des commutateurs de cluster NVIDIA SN2100.</block>
+  <block id="1972298f5ec1d5e6b5fe96dd4ba6f4d3" category="doc">Installez le fichier de configuration du moniteur d'état du commutateur Ethernet</block>
+  <block id="5e702c967ba07c588e80787874b7d19d" category="paragraph">Pour configurer la surveillance de l’état du commutateur Ethernet sur les commutateurs Ethernet NVIDIA, suivez cette procédure.</block>
+  <block id="4d6e856387f9dc1d4c04534d7e8abc6b" category="paragraph">Ces instructions s'appliquent si les commutateurs NVIDIA X190006-PE et X190006-PI ne sont pas détectés correctement, ce qui peut être confirmé en exécutant <block ref="db3929a8e897b02a87f7f4bc42f38fc1" prefix=" " category="inline-code"></block> et vérifiez si *AUTRE* est affiché pour votre modèle. Pour identifier votre modèle de commutateur NVIDIA, recherchez sa référence à l'aide de la commande <block ref="eca133854d2cdb8697246596d25a5eb3" prefix=" " category="inline-code"></block> pour NVIDIA CL 5.8 et versions antérieures ou <block ref="28b95eb6cef78e03af3129f8108edf3e" prefix=" " category="inline-code"></block> pour les versions ultérieures.</block>
+  <block id="d63c11f73a289e709f02f89a7fd9bc50" category="paragraph">Ces étapes sont également recommandées si vous souhaitez que la surveillance de l'intégrité et la collecte des journaux fonctionnent correctement lors de l'utilisation de NVIDIA CL 5.11.x avec les versions ONTAP suivantes. Bien que la surveillance de l'intégrité et la collecte des journaux puissent fonctionner sans ces étapes, leur respect garantit le bon fonctionnement de l'ensemble.</block>
+  <block id="22ade9a0f286817cb6e7960fb4e222fa" category="list-text">9.10.1P20, 9.11.1P18, 9.12.1P16, 9.13.1P8, 9.14.1, 9.15.1 et versions ultérieures des correctifs</block>
+  <block id="294206f940bbd4f3ec7f79996b76c616" category="list-text">Assurez-vous que le cluster ONTAP est opérationnel.</block>
+  <block id="486e5bfc1a37635afcdd9af389c406cc" category="list-text">Activez SSH sur le commutateur pour utiliser toutes les fonctionnalités disponibles dans CSHM.</block>
+  <block id="0a7c753e8699d579b1dd4105b9e6b566" category="list-text">Effacez le<block ref="8be5dd683a73b3d7c1a85aa778b3c099" prefix=" " category="inline-code"></block> répertoire sur tous les nœuds :</block>
+  <block id="ccbc1b6fe0fb2c14a182936d44b7998a" category="list-text">Entrez le nodeshell :</block>
+  <block id="fbae52a4debd6c92af11b0063f9a23d8" category="paragraph"><block ref="ce0584b63a66ddeac8919682fc93ce1a" prefix="" category="inline-code"></block></block>
+  <block id="efe7a477280f5bfdffb85faa6e94d148" category="list-text">Passer au privilège avancé :</block>
+  <block id="04f8c8c881d9c66c4b51ab93a42ab746" category="paragraph"><block ref="37c965129cc09840500d7671b0accef3" prefix="" category="inline-code"></block></block>
+  <block id="771d6c6c56d83746eaa82bd62e11363c" category="list-text">Répertoriez les fichiers de configuration dans le<block ref="e4b3e6938bc5f3e3c811cf46ae8b7d53" prefix=" " category="inline-code"></block> répertoire. Si le répertoire existe et contient des fichiers de configuration, il répertorie les noms des fichiers.</block>
+  <block id="6e89d35fb8a737baae7064c5ba2d6485" category="paragraph"><block ref="47f0187f585158fcdf3257a96c5d4bab" prefix="" category="inline-code"></block></block>
+  <block id="cefefc2081d40fa592f23faffcb8f1e0" category="list-text">Supprimez tous les fichiers de configuration correspondant à vos modèles de commutateurs connectés.</block>
+  <block id="90842b83190886e90bf2403d6e93be1b" category="paragraph">Si vous n'êtes pas sûr, supprimez tous les fichiers de configuration pour les modèles pris en charge répertoriés ci-dessus, puis téléchargez et installez les derniers fichiers de configuration pour ces mêmes modèles.</block>
+  <block id="ff9495347e1ccb9f937f04b4bbdd58bb" category="paragraph"><block ref="529be1cf6940ca38f1fda287a22c9fda" prefix="" category="inline-code"></block></block>
+  <block id="77dab6429e3fe4aca5fa3d7f0cd46d71" category="list-text">Vérifiez que les fichiers de configuration supprimés ne se trouvent plus dans le répertoire :</block>
+  <block id="0cfea6e2910f570cd17c24fb74c90378" category="inline-link">Switchs Ethernet NVIDIA</block>
+  <block id="363c0c7cf08dfd2752b66f1fc2506a0a" category="list-text">Téléchargez le fichier zip de configuration du moniteur d'état du commutateur Ethernet basé sur la version ONTAP correspondante. Ce fichier est disponible à partir de la<block ref="308b26f7678235b6ac179b42eaa22162" category="inline-link-rx"></block> page.</block>
+  <block id="68de66680b1bf357acb893d8dfe0f0bc" category="list-text">Sur la page de téléchargement du logiciel NVIDIA SN2100, sélectionnez *Nvidia CSHM File*.</block>
+  <block id="6b98b47c20b7ca9e9919fa3a77bf7814" category="list-text">Sur la page attention/doit lire, cochez la case pour accepter.</block>
+  <block id="c36caaf00f9a67804cb39871b93b4fb1" category="list-text">Sur la page Contrat de licence utilisateur final, cochez la case accepter et cliquez sur *accepter et continuer*.</block>
+  <block id="e5e0b87b73538c14eb1223ba2685b479" category="list-text">Sur la page Nvidia CSHM File - Download, sélectionnez le fichier de configuration applicable. Les fichiers suivants sont disponibles :</block>
+  <block id="76bde9294ef84452f21b2745228ae290" category="list-text">MSN2100-CB2FC-v1.4.zip</block>
+  <block id="85c07a49f236d7b33a2e8b48d076ed48" category="list-text">MSN2100-CB2RC-v1.4.zip</block>
+  <block id="ae5e87300b042b85bdd2853f386265e7" category="list-text">X190006-PE-v1.4.zip</block>
+  <block id="ab58ebe2dd50e3692c204585184a34f7" category="list-text">X190006-PI-v1.4.zip</block>
+  <block id="9fc9e8ea7a5cdfe68b4528fb16936bf1" category="open-title">ONTAP 9.11.1 à 9.14.1</block>
+  <block id="c3a1ef8a44fcace6af948f51ef4d8258" category="list-text">MSN2100-CB2FC_PRIOR_R9.15.1-v1.4.zip</block>
+  <block id="11ef8d241b319efa4a76430a0c6a78dd" category="list-text">MSN2100-CB2RC_PRIOR_R9.15.1-v1.4.zip</block>
+  <block id="0179c8f8dd0b9cba4199d46bd95ddd3b" category="list-text">X190006-PE_PRIOR_9.15.1-v1.4.zip</block>
+  <block id="3dd005cf004a39e1cb3e400094afa4c6" category="list-text">X190006-PI_PRIOR_9.15.1-v1.4.zip</block>
+  <block id="3e5315d19591c6790a6c062127cf9a8e" category="list-text">[[step2]]chargez le fichier zip applicable sur votre serveur Web interne.</block>
+  <block id="e319ecf1cb942a0710da7d0d525af1db" category="list-text">Accédez au paramètre de mode avancé à partir d'un des systèmes ONTAP du cluster.</block>
+  <block id="4072831dc74599297a173c0e1d86b538" category="list-text">Exécutez la commande switch Health Monitor configure.</block>
+  <block id="bdfd509ce621aa984c1f0a9cdf92ae88" category="list-text">Vérifiez que le résultat de la commande se termine par le texte suivant pour votre version de ONTAP :</block>
+  <block id="ff62e28086747c31b6e4bbd897aaaf54" category="paragraph">La surveillance de l'état du commutateur Ethernet a installé le fichier de configuration.</block>
+  <block id="3f54ec95c3fc7563a38988f9c2a7a823" category="paragraph">SHM a installé le fichier de configuration.</block>
+  <block id="74d14036e96594d67869316b84c6d566" category="paragraph">Le package CSHM téléchargé a été traité avec succès.</block>
+  <block id="89c6b3e5f896b8d329ae4e4fe91cc812" category="paragraph">En cas d'erreur, contactez le support NetApp.</block>
+  <block id="a6fd16052b19595c024aa4e5bcb0b366" category="list-text">[[step6]]attendez jusqu'à deux fois l'intervalle d'interrogation du moniteur d'état du commutateur Ethernet, détecté en exécutant<block ref="c9e6cd6140c9d8677df821c7cce2aac1" prefix=" " category="inline-code"></block>, avant de terminer l'étape suivante.</block>
+  <block id="c947c5faccdddd0a9a87be7895f50511" category="list-text">Exécutez la commande<block ref="db3929a8e897b02a87f7f4bc42f38fc1" prefix=" " category="inline-code"></block> sur le système ONTAP et assurez-vous que les commutateurs de cluster sont détectés avec le champ surveillé défini sur *vrai* et que le champ du numéro de série n'affiche pas *Inconnu*.</block>
+  <block id="d57382f230671f8cd52f47dc80838934" category="admonition">Si votre modèle affiche toujours *OTHER* après avoir appliqué le fichier de configuration, contactez le support NetApp.</block>
+  <block id="58a19c530e54f6364edd838f35b1830e" category="inline-link-macro">Configurer la surveillance de l'état des commutateurs</block>
+  <block id="d47e3b820b4e0ef60cfed3bd03049a46" category="paragraph"><block ref="402ba92b413c133107b7e0b0a0255bc4" category="inline-link-macro-rx"></block>.</block>
+  <block id="39bebc7717e889c1a699f7a132be15d1" category="summary">À l’aide du Gestionnaire système, vous pouvez effectuer des tâches pour gérer Mediator.</block>
+  <block id="10a30b2f347ad83646f6f7b416a1789f" category="doc">Gérer ONTAP Mediator avec System Manager</block>
+  <block id="b8766a9191a865e2bcc649bcb60af9b0" category="paragraph">À l’aide du Gestionnaire système, vous pouvez effectuer des tâches pour gérer ONTAP Mediator.</block>
+  <block id="cdd299b559468613a4234f4cea959b86" category="paragraph">Effectuez les tâches suivantes pour gérer ONTAP Mediator.</block>
+  <block id="eabb1e5dafa14c5ff70166177793fa24" category="list-text">Saisissez les détails de configuration pour ONTAP Mediator.</block>
+  <block id="4a0ceb9a29f3d3bad1a2492ea1f4d0ed" category="paragraph">Vous pouvez saisir les détails suivants lors de la configuration d'ONTAP Mediator avec System Manager.</block>
+  <block id="74b8f2c7983019e930256dabc972809b" category="list-text">L'adresse IP d'ONTAP Mediator.</block>
+  <block id="13473e928a938c8e314f2ac9fe84874b" category="admonition">Vous pouvez activer ou désactiver ONTAP Mediator lorsqu'il est accessible et que les deux sites sont en mode « Normal ». ONTAP Mediator reste accessible lorsque MAUSO est activé ou désactivé si le système MetroCluster est sain.</block>
+  <block id="f4cd744e1baeaad2982194e397a1fb70" category="paragraph">Supprimer ONTAP Mediator de la configuration MetroCluster</block>
+  <block id="4714b05ec8f683c0cb2e0b88e87b6126" category="paragraph">Vérifiez l'état de santé d'ONTAP Mediator</block>
+  <block id="0d17bee62349f3938bc17d61ce23f7e3" category="summary">ONTAP Mediator doit être configuré sur le nœud ONTAP pour être utilisé dans une configuration IP MetroCluster.</block>
+  <block id="1870c8477ec97f68d37924256a5873cc" category="doc">Configurer ONTAP Mediator à partir d'une configuration IP MetroCluster</block>
+  <block id="c9c78db1df5763fa1ed9a33d8364ecd6" category="list-text">ONTAP Mediator doit avoir été installé avec succès sur un emplacement réseau accessible par les deux sites MetroCluster.</block>
+  <block id="f3a4ed516d3573c05bec448b098ee829" category="list-text">Vous devez disposer de l'adresse IP de l'hôte exécutant ONTAP Mediator.</block>
+  <block id="81526f6b8e9033c7824d444ad8950ae4" category="list-text">Vous devez disposer du nom d'utilisateur et du mot de passe pour ONTAP Mediator.</block>
+  <block id="c69fdc77c5b94d40ff8bd9d1129290c3" category="list-text">Une seule installation d'ONTAP Mediator peut être configurée avec jusqu'à cinq configurations IP MetroCluster.</block>
+  <block id="5954e0574dae3d22be232db113f0f328" category="list-text">Ajouter ONTAP Mediator à ONTAP :</block>
+  <block id="fffcc6d8d0cf061a4a3bb3e984bed6a4" category="summary">Vous pouvez supprimer le médiateur ONTAP de la configuration IP MetroCluster.</block>
+  <block id="7f0eed44b544654d8519a5ce7f8a8e69" category="doc">Annuler la configuration du médiateur ONTAP à partir de la configuration IP MetroCluster</block>
+  <block id="0ca0841611aff3d2fa5059343e27e7fa" category="paragraph">Vous pouvez déconfigurer ONTAP Mediator à partir de la configuration IP MetroCluster.</block>
+  <block id="b1819878894f9631db397400afc8a1f3" category="paragraph">Vous devez avoir installé et configuré avec succès ONTAP Mediator sur un emplacement réseau accessible par les deux sites MetroCluster.</block>
+  <block id="856c17a21ae1d7e96d1d4e67f8404cd2" category="list-text">Annulez la configuration d'ONTAP Mediator à l'aide de la commande suivante :</block>
+  <block id="a568c1157fa9b77a182f5a050b86df43" category="admonition">Si le médiateur ONTAP est en panne, le <block ref="1eafb93bfc40f298e60cf17e8a8c598c" prefix=" " category="inline-code"></block> La commande vous invite toujours à saisir le nom d'utilisateur et le mot de passe du compte d'utilisateur administrateur ONTAP Mediator et supprime ONTAP Mediator de la configuration MetroCluster.</block>
+  <block id="66e992bd34634b96ff376561bcfc2e28" category="list-text">Confirmez que ONTAP Mediator a été supprimé de la configuration MetroCluster en exécutant les commandes suivantes sur les deux clusters :</block>
+  <block id="d7815b39229175e9cef8440d269e9083" category="paragraph">Si vous vous connectez à une instance Tiebreaker ou ONTAP Mediator existante, vous avez besoin du nom d'utilisateur, du mot de passe et de l'adresse IP du Tiebreaker ou du Mediator.</block>
+  <block id="cb9e9645bca58c43f581c94e79f865c6" category="inline-link-macro">Configurer ONTAP Mediator pour un basculement automatique non planifié</block>
+  <block id="ef4d5dbb54aab5ddc81d5a09c43fd638" category="paragraph"><block ref="ef4d5dbb54aab5ddc81d5a09c43fd638" category="inline-link-macro-rx"></block></block>
+  <block id="ec27e6e598b1a296a852caf789607b06" category="list-text">Configurer ONTAP Mediator ou le logiciel Tiebreaker :</block>
+  <block id="277ce71d2845b1d818a8dfb7a570dee5" category="list-text">Si vous utilisez une instance existante d'ONTAP Mediator, ajoutez ONTAP Mediator à ONTAP :</block>
+  <block id="28dbef8bf8bfa7a533967cae561dd5e4" category="list-text">Configurez le serveur SSH.</block>
+  <block id="70231bf92659b36f9fbf0d3c7eebc754" category="list-text">Vous devez configurer le serveur SSH afin d'utiliser la collecte de journaux et d'autres outils externes.</block>
+  <block id="21f1152f9e753501bbaf5dee2e85bff5" category="paragraph">Dans cet exemple, le fichier nxos.7.0.3.I4.6.bin et l'image EPLD sont copiés du serveur SFTP 10.10.99.99 vers le bootflash local :</block>
+  <block id="3e59b0e11242ccaa0aa06829a5a285e1" category="list-text">Mettre à niveau l'image EPLD et redémarrer le commutateur.</block>
+  <block id="f3bf0508f81cb16d8f1183a5babd44ab" category="list-text">[[step8]]après le redémarrage du commutateur, reconnectez-vous et vérifiez que la nouvelle version de EPLD a été chargée avec succès.</block>
+  <block id="5658313bc2d771ddd3aa8b49a8989c97" category="paragraph"><block ref="d74cfd95066d6ba37eb0991341ab588b" prefix="" category="inline-code"></block></block>
+  <block id="088e2dfc579975f8f02f060463f1c6b6" category="paragraph"><block ref="b57db2992c51195e5ea40f358db2287c" category="inline-link-macro-rx"></block> dans la section _Installation et configuration IP MetroCluster_.</block>
+  <block id="11e389769edd0ffd96bc52520e736666" category="paragraph">Si vous renommez les deux commutateurs du réseau, utilisez la même commande sur chaque commutateur.</block>
+  <block id="daf179095240111942b292cddbac4271" category="list-text">Vous avez besoin du mot de passe administrateur et d'un accès à un serveur HTTP, FTP ou Trivial File Transfer Protocol (TFTP).</block>
+  <block id="dfd2868dd5a4b44891e23870faf6ecda" category="list-text"><block ref="dfd2868dd5a4b44891e23870faf6ecda" category="inline-link-macro-rx"></block></block>
+  <block id="54485326fb6c0b4a273ca75c003d6a9d" category="paragraph">De nouvelles améliorations d’ONTAP Mediator sont fournies avec chaque version. Voici les nouveautés.</block>
+  <block id="0294813eff3958ef43f353e390bb4729" category="paragraph">Pour plus de détails sur l'installation ou la mise à niveau d'ONTAP Mediator dans votre configuration MetroCluster, vous pouvez accéder à <block ref="f7ab7b3d6222d761ab5a933510823b89" category="inline-link-macro-rx"></block> .</block>
+  <block id="3114aeea55539bf595af1665b8572d3a" category="paragraph"><block ref="3114aeea55539bf595af1665b8572d3a" category="inline-link-rx"></block></block>
+  <block id="f818e428c62e3fad315884b1e49da0dc" category="paragraph">Prise en charge initiale d'ONTAP Mediator dans les configurations IP MetroCluster</block>
+  <block id="8fa6539999f2d3aff134c30600c80e41" category="inline-link-macro">Téléchargez et installez les fichiers NVIDIA RCF</block>
+  <block id="132de37afb8814bbaa7f373ed2768fe7" category="list-text"><block ref="132de37afb8814bbaa7f373ed2768fe7" category="inline-link-macro-rx"></block></block>
+  <block id="4d543daf001aece3c0f679d1c47e50c7" category="list-text">Configurez le MetroCluster selon qu'il existe un ou plusieurs agrégats de données sur les deux clusters :</block>
+  <block id="4bb0a0fe5f7512432807833d24660b3c" category="paragraph">Plusieurs agrégats de données sur les deux clusters</block>
+  <block id="cea15dc4611e6036f3dd9fe7aea7cfc4" category="paragraph">Un seul agrégat de données en miroir sur les deux clusters</block>
+  <block id="04afdd621fe01bc52800f10af27a7c2a" category="list-text"><block ref="2812633e4be142ea6fef81aa2fc3b357" category="inline-link-macro-rx"></block> ]</block>
+  <block id="1fec7b2b0af82b649786a3fafea0cceb" category="paragraph">5, 6</block>
+  <block id="f4206dbe8a14ad08108f277413f07552" category="paragraph">Cisco 3232C ou 9336C-FX2</block>
+  <block id="dd03025041053e9c69b290436fd5dc5d" category="paragraph">5, 6 ou 13, 14</block>
+  <block id="4a1b19255812edcb60c6c44b6d7a5e9a" category="paragraph">*Remarque :* les ports de commutation 13 et 14 ne peuvent être utilisés que lorsque vous sélectionnez deux modes de vitesse.</block>
+  <block id="e4ecc909d465ec5014d76b60d5fb3593" category="paragraph">Cisco 9336C-FX2 partagé</block>
+  <block id="c12aeba3053f31f9a1d1d57376477e54" category="paragraph">3, 4 ou 11, 12</block>
+  <block id="f8997e771791c9a981180a00129637ec" category="paragraph">*Remarque :* les ports de commutation 11 et 12 ne peuvent être utilisés que lorsque vous sélectionnez deux modes de vitesse.</block>
+  <block id="319106ed9ce9f52242209111123407d6" category="paragraph">5, 6 ou 11, 12</block>
+  <block id="b8466cace8606dd997df70d225fbe406" category="list-text"><block ref="b8466cace8606dd997df70d225fbe406" category="inline-link-macro-rx"></block></block>
+  <block id="636e793526fcef1247efd0dcb03d56f1" category="list-text"><block ref="636e793526fcef1247efd0dcb03d56f1" category="inline-link-macro-rx"></block></block>
+  <block id="657069a60f3b73194611d9d1908eb00a" category="inline-link-macro">Téléchargez et installez le logiciel NVIDIA Cumulus</block>
+  <block id="27ee4e40c5f3eb2ea060786d1154f3e6" category="list-text"><block ref="27ee4e40c5f3eb2ea060786d1154f3e6" category="inline-link-macro-rx"></block></block>
+  <block id="3edf268443c9814e0eed5e843a649be0" category="inline-link-macro">Téléchargez et installez les fichiers Broadcom IP RCF</block>
+  <block id="73c8065362066c84bd91ee876292e355" category="list-text"><block ref="73c8065362066c84bd91ee876292e355" category="inline-link-macro-rx"></block></block>
+  <block id="9c3901db21e5ef4b43840d754abbff35" category="inline-link-macro">Téléchargez et installez les fichiers Cisco IP RCF</block>
+  <block id="59f9ba6f0e3ac7d7d39f19d4f7446462" category="list-text"><block ref="59f9ba6f0e3ac7d7d39f19d4f7446462" category="inline-link-macro-rx"></block></block>
+  <block id="2812633e4be142ea6fef81aa2fc3b357" category="list-text"><block ref="2812633e4be142ea6fef81aa2fc3b357" category="inline-link-macro-rx"></block></block>
+  <block id="647ce27315841f29cbbfa6476808aa3a" category="paragraph"><block ref="647ce27315841f29cbbfa6476808aa3a" category="inline-link-macro-rx"></block></block>
+  <block id="36cd648a4936aded88f52937ad165653" category="paragraph"><block ref="36cd648a4936aded88f52937ad165653" category="inline-link-macro-rx"></block></block>
+  <block id="999478e5c5f08d315895f0b8ce0c4f9e" category="paragraph"><block ref="999478e5c5f08d315895f0b8ce0c4f9e" category="inline-image-macro-rx" type="image"></block></block>
+  <block id="8dd25dc01f672f7f9138b09d96be9fc9" category="paragraph"><block ref="eb2e2a96b50d4592c6a439044f60d9a8" category="inline-link-macro-rx"></block> dans _Installation et configuration IP MetroCluster_.</block>
+  <block id="467d42fef84e236db1f47c3587c7d61b" category="paragraph"><block ref="647ce27315841f29cbbfa6476808aa3a" category="inline-link-macro-rx"></block> dans la section _Installation et configuration IP MetroCluster_.</block>
+  <block id="3e85cb460e24d971aa2fdfb16bdd62f2" category="paragraph"><block ref="647ce27315841f29cbbfa6476808aa3a" category="inline-link-macro-rx"></block>.</block>
+  <block id="8c4be7f96d2a221be5676296eb0ed2f9" category="list-text">Suivez les étapes de la section <block ref="b57db2992c51195e5ea40f358db2287c" category="inline-link-macro-rx"></block>.</block>
+  <block id="3a87d2978f2a15ce761167e415fd6848" category="inline-link-macro">reconfigurer ONTAP Mediator</block>
+  <block id="3f8e81dc1fd352800762ed073cd5264a" category="paragraph">Avant le démarrage des contrôles préalables, si le Mediator ONTAP est installé, il est automatiquement détecté et supprimé. Pour confirmer la suppression, vous êtes invité à entrer un nom d'utilisateur et un mot de passe. Lorsque vous terminez la mise à niveau, ou si les contrôles préalables échouent ou si vous choisissez de ne pas poursuivre la mise à niveau, vous devez manuellement <block ref="45ecea135b28343f3e201d1ca7699d4b" category="inline-link-macro-rx"></block>.</block>
+  <block id="90700c1e50cb21bc8204f5e8e63ff08f" category="inline-image-macro">Affiche les combinaisons de mise à niveau AFF et FAS du groupe 1</block>
+  <block id="2b3092608ec3c36288b967b8d2e51cd0" category="paragraph"><block ref="2b3092608ec3c36288b967b8d2e51cd0" category="inline-image-macro-rx" type="image"></block></block>
+  <block id="c86a11671a0682bdfafd478847f74282" category="inline-image-macro">Affiche les combinaisons de mise à niveau AFF et FAS groupe 2</block>
+  <block id="51cfa502e93acea429147cf299cd152c" category="paragraph"><block ref="51cfa502e93acea429147cf299cd152c" category="inline-image-macro-rx" type="image"></block></block>
+  <block id="7ffbff14d15222d12cd1d90edd7e729d" category="sidebar">Configurez le commutateur NVIDIA SN2100</block>
+  <block id="96a5ba855b4ee3dba60ecf722a706b29" category="sidebar">Installez le fichier CSHM</block>
+  <block id="eb4b6887e705dad904287c0e3641b25e" category="sidebar">Surveiller l'état du commutateur IP MetroCluster</block>
+  <block id="114ebfe3afc4e1772fb2a3ff9760e42e" category="sidebar">En savoir plus sur la surveillance de l'état des commutateurs dans une configuration IP MetroCluster</block>
+  <block id="0eaedccc418ca7fe214ff0e2f2fb9d4f" category="sidebar">Configurer la collecte de journaux sur les commutateurs IP MetroCluster</block>
+  <block id="fa19a8bee183bfbc767660e140eae8dc" category="sidebar">Gérer la surveillance des commutateurs Ethernet</block>
+  <block id="eb781ca5db4579a64062bcf161d91cbe" category="sidebar">Vérifier la surveillance du commutateur Ethernet</block>
+  <block id="3ef38a7332e8a3a92f8540dfdb80708d" category="sidebar">Configuration d'ONTAP Mediator à partir d'une configuration IP MetroCluster</block>
+  <block id="84e085c408a358fe4e512066e45c3837" category="sidebar">Gérer ONTAP Mediator avec System Manager</block>
 </blocks>
