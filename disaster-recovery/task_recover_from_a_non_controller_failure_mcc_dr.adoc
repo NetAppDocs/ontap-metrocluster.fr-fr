@@ -186,11 +186,34 @@ Lancer la commande : `boot_ontap`
 ====
 . Une fois le démarrage du nœud terminé, vérifiez que les agrégats racine sont mis en miroir.
 +
-Si les deux plexes s'effectuent automatiquement, toute resynchronisation s'exécute. En cas de défaillance d'un plex, détruisez-le et rétablissez la relation en miroir en utilisant la commande suivante pour recréer le miroir :
+[role="tabbed-block"]
+====
+.Si un plex tombe en panne :
+--
+.. Détruisez le plex défaillant :
++
+`storage aggregate plex delete -aggregate <aggregate_name> -plex <plex_name>`
 
+.. Rétablir la relation miroir en recréant le miroir :
 +
 `storage aggregate mirror -aggregate <aggregate-name>`
 
+
+
+--
+.Si un plex est hors ligne :
+--
+En ligne le plex :
+
+`storage aggregate plex online -aggregate <aggregate_name> -plex <plex_name>`
+
+--
+.Si les deux plex sont présents :
+--
+La resynchronisation démarre automatiquement.
+
+--
+====
 . Simuler l'opération de rétablissement :
 +
 .. Depuis l'invite du nœud survivant, passez au niveau de privilège avancé :

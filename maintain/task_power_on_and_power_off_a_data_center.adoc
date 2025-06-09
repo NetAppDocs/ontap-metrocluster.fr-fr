@@ -278,7 +278,7 @@ Une fois le site hors tension, vous pouvez commencer les travaux de maintenance.
 
 .Étapes
 . Vérifiez que le câblage de tous les composants est soigneusement enregistré afin de pouvoir le reconnecter correctement au nouvel emplacement.
-. Déplacez physiquement l'ensemble du matériel, des contrôleurs de stockage, des commutateurs IP, des FibreBridges et des tiroirs de stockage.
+. Déplacez physiquement tout le matériel, les contrôleurs de stockage, les commutateurs IP et les étagères de stockage.
 . Configurez les ports ISL et vérifiez la connectivité entre les sites.
 +
 .. Mettez les commutateurs IP sous tension.
@@ -325,14 +325,22 @@ Si le démarrage automatique est activé, appuyez sur `Ctrl+C` pour empêcher le
 CAUTION: Ne mettez pas les tiroirs sous tension avant les contrôleurs. Cela évite un démarrage involontaire des contrôleurs dans ONTAP.
 
 . Mettez les tiroirs sous tension, en leur laissant suffisamment de temps pour pouvoir les mettre complètement sous tension.
-. Vérifiez que le stockage est visible.
+. Vérifiez que le stockage est visible depuis le mode maintenance.
 +
-.. Vérifiez que le stockage est visible depuis le site survivant. Remettez les plexes hors ligne en ligne pour redémarrer l'opération de resynchronisation et rétablir la SyncMirror.
-.. Vérifiez que le stockage local est visible depuis le nœud en mode Maintenance :
+.. Démarrage en mode maintenance :
++
+`boot_ontap maint`
+
+.. Vérifiez que le stockage est visible depuis le site survivant.
+.. Vérifiez que le stockage local est visible depuis le nœud en mode maintenance :
 +
 `disk show -v`
 
 
+
+. Arrêter les nœuds :
++
+`halt`
 
 . Rétablir la configuration MetroCluster.
 +
