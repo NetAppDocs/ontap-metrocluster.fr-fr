@@ -4,7 +4,7 @@ sidebar: sidebar
 keywords: cabling, cable, component, link, site, management, network, networks, hardware, component, switch, cluster, connection, management, data, configuring, configure 
 summary: 'L"utilisation du port dans une configuration MetroCluster IP dépend du modèle de commutateur et du type de plate-forme.' 
 ---
-= Affectation des ports de plateforme pour les switchs Cisco 3232C ou Cisco 9336C-FX2
+= Affectations de ports de plate-forme pour les commutateurs Cisco 3232C ou Cisco 9336C-FX2 à 36 ports
 :allow-uri-read: 
 :icons: font
 :imagesdir: ../media/
@@ -15,8 +15,15 @@ L'utilisation du port dans une configuration MetroCluster IP dépend du modèle 
 
 Consultez les considérations suivantes avant d'utiliser les tableaux de configuration :
 
+* Les tableaux de cette section concernent les commutateurs Cisco 3232C ou les commutateurs Cisco 9336C-FX2 à 36 ports qui ne connectent pas le stockage NS224.
++
+Si vous disposez d'un commutateur Cisco 9336C-FX2 à 12 ports, utilisez les tableaux de link:port-usage-9336c-fx-2-12-port.html["Affectations de ports de plate-forme pour les commutateurs Cisco 9336C-FX2 à 12 ports"] .
+
++
+Si vous disposez d'un commutateur Cisco 9336C-FX2 à 36 ports et qu'au moins une configuration MetroCluster ou un groupe DR connecte des étagères NS224 au commutateur MetroCluster, utilisez les tableaux de link:port_usage_9336c_shared.html["Affectations de ports de plate-forme pour un commutateur Cisco 9336C-FX2 à 36 ports connectant un stockage NS224"] .
+
 * Les tableaux suivants indiquent l'utilisation des ports pour le site A. Le même câblage est utilisé pour le site B.
-* Les commutateurs ne peuvent pas être configurés avec des ports de différentes vitesses (par exemple, un mélange de ports 100 Gbit/s et de ports 40 Gbit/s).
+* Vous ne pouvez pas configurer les commutateurs avec des ports de vitesses différentes (par exemple, un mélange de ports 100 Gbit/s et de ports 40 Gbit/s).
 * Si vous configurez un seul MetroCluster avec les commutateurs, utilisez le groupe de ports *MetroCluster 1*.
 +
 Gardez une trace du groupe de ports MetroCluster (MetroCluster 1, MetroCluster 2, MetroCluster 3 ou MetroCluster 4). Vous en aurez besoin lorsque vous utilisez l'outil RcfFileGenerator comme décrit plus loin dans cette procédure de configuration.
@@ -31,12 +38,6 @@ Utilisez cette présentation du câblage pour vérifier votre câblage.
 
 
 NOTE: La version du fichier RCF est différente de celle de l'outil RCFfilegenerator utilisé pour générer le fichier. Par exemple, vous pouvez générer un fichier RCF version 2.00 à l'aide de RCFfilegenerator v1.6c.
-
-
-
-== Câblage de deux configurations MetroCluster aux commutateurs
-
-Lorsque vous câblez plusieurs configurations MetroCluster à un commutateur Cisco 3132Q-V, vous devez câbler chaque MetroCluster selon le tableau approprié. Par exemple, si vous connectez un système FAS2750 et un système AFF A700 au même commutateur Cisco 3132Q-V. Connectez ensuite le système FAS2750 selon la norme « MetroCluster 1 » du Tableau 1 et le système AFF A700 selon la norme « MetroCluster 2 » ou « MetroCluster 3 » du Tableau 2. Vous ne pouvez pas connecter physiquement les systèmes FAS2750 et AFF A700 comme « MetroCluster 1 ».
 
 
 

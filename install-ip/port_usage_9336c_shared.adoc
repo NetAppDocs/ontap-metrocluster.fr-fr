@@ -4,7 +4,7 @@ sidebar: sidebar
 keywords: cabling, cable, component, link, site, management, network, networks, hardware, component, shared, switch, cluster, connection, management, data, configuring, configure 
 summary: 'L"utilisation du port dans une configuration MetroCluster IP dépend du modèle de commutateur et du type de plate-forme.' 
 ---
-= Attributions des ports de la plateforme pour un commutateur Cisco 9336C-FX2 qui connecte le stockage NS224
+= Affectations de ports de plate-forme pour un commutateur Cisco 9336C-FX2 à 36 ports connectant un stockage NS224
 :allow-uri-read: 
 :icons: font
 :imagesdir: ../media/
@@ -15,10 +15,20 @@ L'utilisation du port dans une configuration MetroCluster IP dépend du modèle 
 
 Consultez les considérations suivantes avant d'utiliser les tableaux de configuration :
 
-* Lorsque vous câblez un commutateur Cisco 9336C-FX2 qui connecte un stockage NS224, vous ne pouvez avoir qu'un maximum de deux configurations MetroCluster ou groupes de reprise après incident, au moins une configuration MetroCluster ou un groupe de reprise après incident doit prendre en charge les tiroirs NS224 reliés par commutateur. Les plateformes qui ne prennent pas en charge les tiroirs NS224 reliés par un commutateur peuvent uniquement être connectées comme une deuxième configuration MetroCluster ou comme un second groupe de reprise après incident.
+* Les tableaux de cette section concernent les commutateurs Cisco 9336C-FX2 à 36 ports lorsqu'au moins une configuration MetroCluster ou un groupe DR connecte des étagères NS224 au commutateur MetroCluster.
++
+Si vous disposez d'un commutateur Cisco 9336C-FX2 à 36 ports qui ne connecte pas le stockage NS224, utilisez les tableaux de link:port_usage_3232c_9336c.html["Affectations de ports de plate-forme pour les commutateurs Cisco 3232C ou Cisco 9336C-FX2 à 36 ports"] .
+
++
+Si vous disposez d'un commutateur Cisco 9336C-FX2 à 12 ports, utilisez les tableaux de link:port-usage-9336c-fx-2-12-port.html["Affectations de ports de plate-forme pour les commutateurs Cisco 9336C-FX2 à 12 ports"] .
+
 +
 
-CAUTION: Vous utilisez ces tableaux uniquement lorsqu'au moins une configuration MetroCluster ou un groupe de reprise après incident connecte des tiroirs NS224 au commutateur MetroCluster. Si vous utilisez des commutateurs de stockage dédiés pour connecter les tiroirs NS224, connectez les commutateurs à l'aide des câbles indiqués dans le link:port_usage_3232c_9336c.html["Affectation des ports de plateforme pour les switchs Cisco 3232C ou Cisco 9336C-FX2"].
+NOTE: Le commutateur Cisco 9336C-FX2 à 12 ports ne prend pas en charge la connexion des étagères NS224 au commutateur MetroCluster.
+
+* Lorsque vous connectez un commutateur Cisco 9336C-FX2 à un stockage NS224, vous ne pouvez utiliser que deux configurations MetroCluster ou groupes de reprise après sinistre (DR). Au moins une configuration MetroCluster ou un groupe de reprise après sinistre doit connecter des tiroirs NS224 au commutateur MetroCluster. Vous ne pouvez connecter que des plateformes qui ne connectent pas de tiroirs NS224 connectés au commutateur comme deuxième configuration MetroCluster ou deuxième groupe de reprise après sinistre (DR).
++
+Si votre deuxième groupe MetroCluster ou DR ne connecte pas les étagères NS224 au commutateur MetroCluster, suivez les instructions <<tables_not_connecting_ns224,Tableaux de câblage pour les contrôleurs ne connectant pas les étagères NS224 connectées par commutateur>> .
 
 * Le RcfFileGenerator affiche uniquement les plates-formes éligibles lorsque la première plate-forme est sélectionnée.
 * La connexion d'une configuration MetroCluster à huit ou deux nœuds requiert ONTAP 9.14.1 ou version ultérieure.
