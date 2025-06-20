@@ -4,7 +4,7 @@ sidebar: sidebar
 keywords: metrocluster, upgrade, controllers, switchover, switchback, fc, configuration, net, boot, root, aggregate, system, commands, mcc 
 summary: 'Vous pouvez utiliser ce basculement automatisé MetroCluster dans nos guides pour effectuer une mise à niveau du contrôleur sans interruption dans le cas d"une configuration MetroCluster FC à quatre nœuds.' 
 ---
-= Mise à niveau des contrôleurs en une configuration FC MetroCluster à quatre nœuds via le basculement et le rétablissement avec des commandes « system contrôleur replace » (ONTAP 9.10.1 et versions ultérieures)
+= Mise à niveau des contrôleurs dans une configuration MetroCluster FC à quatre nœuds à l'aide de la commutation et de la rétrocommutation avec les commandes « system controller replace » (ONTAP 9.10.1 et versions ultérieures)
 :allow-uri-read: 
 :icons: font
 :imagesdir: ../media/
@@ -20,7 +20,7 @@ Vous pouvez utiliser ce basculement automatisé MetroCluster dans nos guides pou
 * Pour en savoir plus sur les combinaisons de mise à niveau de plateforme prises en charge, consultez le tableau des mises à niveau FC MetroCluster dans  link:concept_choosing_controller_upgrade_mcc.html#supported-metrocluster-fc-controller-upgrades["Choisir la procédure de mise à niveau du contrôleur"].
 
 
-Reportez-vous à la section link:concept_choosing_an_upgrade_method_mcc.html["Choisissez une méthode de mise à niveau ou de rafraîchissement"] pour les procédures supplémentaires.
+Reportez-vous link:concept_choosing_an_upgrade_method_mcc.html["Choisissez une méthode de mise à niveau ou d'actualisation"]à pour connaître les procédures supplémentaires.
 
 
 
@@ -93,23 +93,32 @@ Consultez l'article de la base de connaissances link:https://kb.netapp.com/Suppo
 
 
 
-== Préparation de la mise à niveau
+== Préparation à la mise à niveau
 
 Pour préparer la mise à niveau du contrôleur, vous devez effectuer des contrôles préalables du système et collecter les informations de configuration.
 
 À n'importe quel stade de la mise à niveau, vous pouvez exécuter le `system controller replace show` ou `system controller replace show-details` Commande du site A pour vérifier le statut. Si les commandes renvoient une sortie vide, attendez quelques minutes et exécutez à nouveau la commande.
 
 .Étapes
-. Lancer la procédure de remplacement automatisé du contrôleur depuis le site A pour remplacer les contrôleurs du site B :
+. Exécutez la commande suivante depuis le site A pour remplacer les contrôleurs du site B :
 +
 `system controller replace start`
 
 +
-L'opération automatisée exécute les contrôles préalables. Si aucun problème n'est trouvé, l'opération s'interrompt pour que vous puissiez collecter manuellement les informations relatives à la configuration.
+[NOTE]
+====
+** Si vous répétez la procédure sur un site après avoir remplacé les contrôleurs sur l'autre, une erreur se produit en raison d'une incompatibilité entre les nœuds de chaque site. Ce comportement est normal lorsque les modèles de plateforme sont différents sur les deux sites.
++
+Si seule l'erreur de non-concordance est renvoyée, vous pouvez utiliser le  `-skip-metrocluster-check true` option avec le  `system controller replace start` commande pour ignorer les vérifications MetroCluster.
+
+
+
+====
++
+L'opération automatisée exécute les contrôles. Si aucun problème n'est trouvé, l'opération s'interrompt pour que vous puissiez collecter manuellement les informations relatives à la configuration.
 
 +
-
-NOTE: Le système source actuel et tous les systèmes cible compatibles sont affichés. Si vous avez remplacé le contrôleur source par un contrôleur possédant une version ONTAP différente ou une plateforme non compatible, l'opération d'automatisation s'arrête et signale une erreur après le démarrage des nouveaux nœuds. Pour rétablir l'état sain du cluster, il est nécessaire de suivre la procédure de restauration manuelle.
+Le système source actuel et tous les systèmes cible compatibles sont affichés. Si vous avez remplacé le contrôleur source par un contrôleur doté d'une version ONTAP différente ou d'une plateforme incompatible, l'automatisation s'interrompt et signale une erreur après le démarrage des nouveaux nœuds. Pour rétablir l'état de santé du cluster, suivez la procédure de récupération manuelle.
 
 +
 Le `system controller replace start` la commande peut signaler l'erreur de vérification préalable suivante :
@@ -130,7 +139,7 @@ Vérifiez si cette erreur s'est produite parce que vous avez des agrégats non m
 
 
 
-=== Collecte des informations avant la mise à niveau
+=== Recueillez les informations avant la mise à niveau
 
 Avant de procéder à la mise à niveau, si le volume racine est chiffré, vous devez vous fournir la clé de sauvegarde ainsi que d'autres informations permettant de démarrer les nouveaux contrôleurs avec les anciens volumes root chiffrés.
 
@@ -250,7 +259,7 @@ Vous aurez besoin de la phrase de passe plus tard dans la procédure de mise à 
 
 
 
-=== Suppression de la configuration existante du logiciel disjoncteur d'attache ou autre logiciel de surveillance
+=== Supprimez la configuration existante du logiciel disjoncteur d'attache ou tout autre logiciel de surveillance
 
 Si la configuration existante est contrôlée avec la configuration MetroCluster Tiebreaker ou d'autres applications tierces (telles que ClusterLion) capables d'effectuer un basculement, vous devez supprimer la configuration MetroCluster du logiciel disjoncteur d'attache ou autre logiciel avant de remplacer l'ancien contrôleur.
 
@@ -264,7 +273,7 @@ Reportez-vous à la documentation de l'application.
 
 
 
-== Remplacement des anciens contrôleurs et démarrage des nouveaux contrôleurs
+== Remplacez les anciens contrôleurs et démarrez les nouveaux contrôleurs
 
 Une fois que vous avez recueilli des informations et que vous reprenez l'opération, l'automatisation procède à l'opération de basculement.
 
@@ -276,13 +285,13 @@ Avant de lancer le basculement, l'automatisation s'interrompt pour que vous puis
 
 
 
-=== Préparation de la configuration réseau des anciens contrôleurs
+=== Préparer la configuration réseau des anciens contrôleurs
 
 Pour assurer la reprise du réseau correctement sur les nouveaux contrôleurs, vous devez déplacer les LIF vers un port commun, puis supprimer la configuration réseau des anciens contrôleurs.
 
 .Description de la tâche
 * Cette tâche doit être effectuée sur chacun des anciens nœuds.
-* Vous utiliserez les informations recueillies dans <<Préparation de la mise à niveau>>.
+* Vous utiliserez les informations recueillies dans <<Préparation à la mise à niveau>>.
 
 
 .Étapes
@@ -377,7 +386,7 @@ Cette étape doit être effectuée sur les deux nœuds.
 
 
 
-=== Configuration des nouveaux contrôleurs
+=== Configurer les nouveaux contrôleurs
 
 Vous devez installer et câbler les nouveaux contrôleurs.
 
@@ -407,7 +416,7 @@ https://docs.netapp.com/platstor/index.jsp["Documentation des systèmes matérie
 
 
 
-=== Démarrage réseau des nouveaux contrôleurs
+=== NetBoot les nouveaux contrôleurs
 
 Une fois les nouveaux nœuds installés, vous devez démarrage sur le réseau pour vous assurer que la version des nouveaux nœuds exécute la même version de ONTAP que les nœuds d'origine. Le terme netboot signifie que vous êtes en cours de démarrage à partir d'une image ONTAP stockée sur un serveur distant. Lorsque vous vous préparez à netboot, vous devez placer une copie de l'image de démarrage ONTAP 9 sur un serveur web auquel le système peut accéder.
 
@@ -475,7 +484,7 @@ The node must be rebooted to start using the newly installed software. Do you wa
 
 
 
-=== Effacement de la configuration sur un module de contrôleur
+=== Effacez la configuration d'un module de contrôleur
 
 Avant d'utiliser un nouveau module de contrôleur dans la configuration MetroCluster, il faut effacer la configuration existante.
 
@@ -514,7 +523,7 @@ Répondez `yes` à l'invite de confirmation.
 
 
 
-=== Restauration de la configuration HBA
+=== Restaurez la configuration HBA
 
 En fonction de la présence et de la configuration des cartes HBA dans le module de contrôleur, vous devez les configurer correctement pour l'utilisation de votre site.
 
@@ -595,14 +604,14 @@ FC
 
 
 
-=== Réaffectation des disques de l'agrégat racine
+=== Réallouer les disques racine de l'agrégat
 
 Réallouer les disques de l'agrégat racine vers le nouveau module de contrôleur, à l'aide du `sysids` rassemblés plus tôt
 
 .Description de la tâche
 Cette tâche est effectuée en mode Maintenance.
 
-Les anciens ID système ont été identifiés dans link:task_upgrade_controllers_system_control_commands_in_a_four_node_mcc_fc.html#gathering-information-before-the-upgrade["Collecte des informations avant la mise à niveau"].
+Les anciens ID système ont été identifiés dans link:task_upgrade_controllers_system_control_commands_in_a_four_node_mcc_fc.html#gather-information-before-the-upgrade["Recueillez les informations avant la mise à niveau"].
 
 Les exemples de cette procédure utilisent des contrôleurs avec les ID système suivants :
 
@@ -710,7 +719,7 @@ aggr0_node_b_1-root        online      raid_dp, aggr    root, nosnap=on,
 
 
 
-=== Démarrage des nouveaux contrôleurs
+=== Démarrer les nouveaux contrôleurs
 
 Vous devez redémarrer les contrôleurs à partir du menu de démarrage pour mettre à jour l'image flash du contrôleur. Des étapes supplémentaires sont nécessaires si le chiffrement est configuré.
 
@@ -836,7 +845,7 @@ Si l'un des nœuds est en mode basculement, exécutez un retour à l'aide du `st
 
 .. Ajoutez n'importe quel port à un broadcast domain si nécessaire.
 +
-https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-nmg/GUID-003BDFCD-58A3-46C9-BF0C-BA1D1D1475F9.html["Ajout ou suppression de ports d'un broadcast domain"^]
+https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-nmg/GUID-003BDFCD-58A3-46C9-BF0C-BA1D1D1475F9.html["Ajouter ou supprimer des ports d'un broadcast domain"^]
 
 .. Ajoutez le port physique qui hébergera les LIFs intercluster sur le broadcast domain correspondant.
 .. Modifier les LIFs intercluster de façon à utiliser le nouveau port physique en tant que port de départ.
@@ -845,14 +854,14 @@ https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-nmg/GUID-003BDFCD-58
 Vous devrez peut-être reconfigurer le peering de cluster.
 
 +
-link:../install-fc/concept_configure_the_mcc_software_in_ontap.html#peering-the-clusters["Création d'une relation entre clusters"]
+link:../install-fc/concept_configure_the_mcc_software_in_ontap.html#peering-the-clusters["Créer une relation entre clusters"]
 
 .. Recréez les VLAN et les groupes d'interfaces selon les besoins.
 +
 L'appartenance au VLAN et aux groupes d'interfaces peut être différente de celle de l'ancien nœud.
 
 +
-https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-nmg/GUID-8929FCE2-5888-4051-B8C0-E27CAF3F2A63.html["Création d'un VLAN"^]
+https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-nmg/GUID-8929FCE2-5888-4051-B8C0-E27CAF3F2A63.html["Créer un VLAN"^]
 
 +
 https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-nmg/GUID-DBC9DEE2-EAB7-430A-A773-4E3420EE2AA1.html["Combinaison de ports physiques pour créer des groupes d'interfaces"^]
@@ -876,7 +885,7 @@ Gestion intégrée des clés
  a| 
 `security key-manager onboard sync`
 
-Pour plus d'informations, voir https://docs.netapp.com/ontap-9/topic/com.netapp.doc.pow-nve/GUID-E4AB2ED4-9227-4974-A311-13036EB43A3D.html["Restauration des clés de chiffrement intégrées de gestion des clés"^].
+Pour plus d'informations, voir https://docs.netapp.com/ontap-9/topic/com.netapp.doc.pow-nve/GUID-E4AB2ED4-9227-4974-A311-13036EB43A3D.html["Restaurez les clés de chiffrement intégrées de gestion des clés"^].
 
 
 
@@ -885,7 +894,7 @@ Gestion externe des clés
  a| 
 `security key-manager external restore -vserver _SVM_ -node _node_ -key-server _host_name|IP_address:port_ -key-id key_id -key-tag key_tag _node-name_`
 
-Pour plus d'informations, voir https://docs.netapp.com/ontap-9/topic/com.netapp.doc.pow-nve/GUID-32DA96C3-9B04-4401-92B8-EAF323C3C863.html["Restauration des clés de chiffrement externes de gestion des clés"^].
+Pour plus d'informations, voir https://docs.netapp.com/ontap-9/topic/com.netapp.doc.pow-nve/GUID-32DA96C3-9B04-4401-92B8-EAF323C3C863.html["Restaurez les clés de chiffrement externes pour la gestion des clés"^].
 
 |===
 . Avant de reprendre l'opération, vérifiez que le MetroCluster est configuré correctement. Vérifier l'état du nœud :
@@ -903,7 +912,7 @@ Vérifiez que les nouveaux nœuds (site_B) sont dans *en attente de l'état de r
 
 
 
-== Fin de la mise à niveau
+== Terminez la mise à niveau
 
 L'automatisation exécute des vérifications du système, puis s'interrompt pour que vous puissiez vérifier la capacité d'accès au réseau. Une fois la vérification terminée, la phase de récupération des ressources est lancée, et l'opération d'automatisation exécute le rétablissement sur le site A et s'interrompt après les vérifications de mise à niveau. Une fois que vous avez rétabli l'opération d'automatisation, il effectue les vérifications post-mise à niveau et, si aucune erreur n'est détectée, marque la mise à niveau comme terminée.
 
@@ -930,9 +939,22 @@ Si les vérifications post-mise à niveau n'ont pas signalé d'erreurs, la mise 
 
 
 
+== Mettre à niveau les nœuds sur cluster_A
+
+Vous devez répéter les tâches de mise à niveau pour mettre à niveau les nœuds sur le cluster_A sur le site A.
+
+.Étapes
+. Répétez les étapes pour mettre à niveau les nœuds sur cluster_A, en commençant par <<fc_controller_replace_prepare,préparer la mise à niveau>>.
++
+Lorsque vous répétez la procédure, toutes les références d’exemple aux clusters et aux nœuds sont inversées.
+
+
+
+
+
 === Restauration du contrôle disjoncteur d'attache
 
 Si le logiciel disjoncteur d'attache a déjà été configuré pour la surveillance de la configuration MetroCluster, vous pouvez restaurer la connexion ce dernier.
 
-. Suivez les étapes de la section http://docs.netapp.com/ontap-9/topic/com.netapp.doc.hw-metrocluster-tiebreaker/GUID-7259BCA4-104C-49C6-BAD0-1068CA2A3DA5.html["Ajout des configurations MetroCluster"].
+. Suivez les étapes de la section http://docs.netapp.com/ontap-9/topic/com.netapp.doc.hw-metrocluster-tiebreaker/GUID-7259BCA4-104C-49C6-BAD0-1068CA2A3DA5.html["Ajouter des configurations MetroCluster"].
 

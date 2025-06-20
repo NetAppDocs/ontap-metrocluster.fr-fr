@@ -115,25 +115,37 @@ Suivez les étapes de la section pour votre fournisseur de commutateurs :
 
 
 
-== Effectuer des contrôles préalables du système
+== Démarrer l'opération de remplacement du contrôleur
 
-Avant le démarrage des contrôles préalables, si le Mediator ONTAP est installé, il est automatiquement détecté et supprimé. Pour confirmer la suppression, vous êtes invité à entrer un nom d'utilisateur et un mot de passe. Lorsque vous terminez la mise à niveau, ou si les contrôles préalables échouent ou si vous choisissez de ne pas poursuivre la mise à niveau, vous devez manuellement link:../install-ip/task_configuring_the_ontap_mediator_service_from_a_metrocluster_ip_configuration.html["reconfigurer ONTAP Mediator"].
+Lorsque vous démarrez l'opération de remplacement automatisé du contrôleur, l'opération émet une série de pré-vérifications, puis s'interrompt afin que vous puissiez collecter manuellement les informations liées à la configuration.
+
+.Description de la tâche
+Avant le début des vérifications de MetroCluster, si ONTAP Mediator est installé, il est automatiquement détecté et supprimé. Pour confirmer la suppression, vous êtes invité à entrer un nom d'utilisateur et un mot de passe. Une fois la mise à niveau terminée, si les vérifications préalables échouent ou si vous choisissez de ne pas poursuivre la mise à niveau, vous devrez l'effectuer manuellement. link:../install-ip/task_configuring_the_ontap_mediator_service_from_a_metrocluster_ip_configuration.html["Reconfigurez le service ONTAP Mediator"] .
 
 À n'importe quel stade de la mise à niveau, vous pouvez exécuter le `system controller replace show` ou `system controller replace show-details` Commande du site A pour vérifier le statut. Si les commandes renvoient une sortie vide, attendez quelques minutes et exécutez à nouveau la commande.
 
 .Étapes
-. Lancer la procédure de remplacement automatisé du contrôleur depuis le site A pour remplacer les contrôleurs du site B :
+. Exécutez la commande suivante depuis le site A pour remplacer les contrôleurs du site B :
 +
 `system controller replace start -nso true`
 
 +
-L'opération automatisée exécute les contrôles préalables. Si aucun problème n'est trouvé, l'opération s'interrompt pour que vous puissiez collecter manuellement les informations relatives à la configuration.
-
-+
 [NOTE]
 ====
-** Si vous n'exécutez pas le `system controller replace start -nso true` La procédure de mise à niveau du contrôleur choisit le basculement et le rétablissement automatisés basés sur NSO comme procédure par défaut sur les systèmes IP MetroCluster.
-** Le système source actuel et tous les systèmes cible compatibles sont affichés. Si vous avez remplacé le contrôleur source par un contrôleur possédant une version ONTAP différente ou une plateforme non compatible, l'opération d'automatisation s'arrête et signale une erreur après le démarrage des nouveaux nœuds. Pour rétablir l'état sain du cluster, il est nécessaire de suivre la procédure de restauration manuelle.
+** Si vous n'utilisez pas le  `-nso true` paramètre dans la commande, la procédure de mise à niveau du contrôleur choisit le basculement et le retour automatiques basés sur NSO comme procédure par défaut sur les systèmes IP MetroCluster.
+** Si vous répétez la procédure sur un site après avoir remplacé les contrôleurs sur l'autre, une erreur se produit en raison d'une incompatibilité entre les nœuds de chaque site. Ce comportement est normal lorsque les modèles de plateforme sont différents sur les deux sites.
++
+Si seule l'erreur de non-concordance est renvoyée, vous pouvez utiliser le  `-skip-metrocluster-check true` option avec le  `system controller replace start` commande pour ignorer les vérifications MetroCluster.
+
+
+
+====
++
+L'opération automatisée exécute les contrôles. Si aucun problème n'est trouvé, l'opération s'interrompt pour que vous puissiez collecter manuellement les informations relatives à la configuration.
+
++
+Le système source actuel et tous les systèmes cible compatibles sont affichés. Si vous avez remplacé le contrôleur source par un contrôleur doté d'une version ONTAP différente ou d'une plateforme incompatible, l'automatisation s'interrompt et signale une erreur après le démarrage des nouveaux nœuds. Pour rétablir l'état de santé du cluster, suivez la procédure de récupération manuelle.
+
 +
 Le `system controller replace start` la commande peut signaler l'erreur de vérification préalable suivante :
 
@@ -148,9 +160,6 @@ Node-A-1    Failed         MetroCluster check failed. Reason : MCC check showed 
 +
 Vérifiez si cette erreur s'est produite parce que vous avez des agrégats non mis en miroir ou en raison d'un autre problème d'agrégat. Vérifiez que tous les agrégats en miroir sont sains et ne sont pas dégradés ou ne sont pas dégradés. Si cette erreur est due uniquement aux agrégats non mis en miroir, vous pouvez annuler cette erreur en sélectionnant le `-skip-metrocluster-check true` sur le `system controller replace start` commande. Si le stockage distant est accessible, les agrégats sans miroir sont connectés après le basculement. En cas de défaillance de la liaison de stockage distante, les agrégats non mis en miroir ne parviennent pas à se mettre en ligne.
 
-
-
-====
 . Collectez manuellement les informations de configuration en se connectant sur le site B et en suivant les commandes répertoriées dans le message de la console sous le `system controller replace show` ou `system controller replace show-details` commande.
 
 

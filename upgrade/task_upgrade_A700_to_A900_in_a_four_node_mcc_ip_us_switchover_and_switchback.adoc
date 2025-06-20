@@ -150,7 +150,10 @@ Lors de la mise à niveau d'un système AFF A700 vers un système AFF A900, ou F
 
 === Vérifier l'état de santé des MetroCluster avant la mise à niveau du site
 
-Vous devez vérifier l'état de santé et la connectivité de la configuration MetroCluster avant d'effectuer la mise à niveau.
+Vous vérifiez l’intégrité et la connectivité de la configuration MetroCluster avant d’effectuer la mise à niveau.
+
+
+CAUTION: Après avoir mis à niveau les contrôleurs sur le premier site et avant de mettre à niveau le second, exécutez  `metrocluster check run` suivi de  `metrocluster check show` renvoie une erreur dans le  `config-replication` Champ. Cette erreur indique une incompatibilité de taille de NVRAM entre les nœuds de chaque site. Il s'agit du comportement attendu lorsque les modèles de plateforme sont différents sur les deux sites. Vous pouvez ignorer cette erreur jusqu'à ce que la mise à niveau du contrôleur soit terminée pour tous les nœuds du groupe DR.
 
 .Étapes
 . Vérifier le fonctionnement de la configuration MetroCluster dans ONTAP :

@@ -11,21 +11,23 @@ summary: 'Après avoir passé en revue toutes les exigences et préparé la tran
 
 
 [role="lead"]
-Vous devez déplacer les interfaces de cluster de la configuration MetroCluster FC vers les commutateurs IP.
+Déplacez les interfaces de cluster de la configuration MetroCluster FC vers les commutateurs IP.
 
 
 
-== Déplacez les connexions du cluster sur les nœuds FC MetroCluster
+== Étape 1 : Déplacer les connexions du cluster sur les nœuds MetroCluster FC
 
-Vous devez déplacer les connexions du cluster sur les nœuds FC MetroCluster vers les commutateurs IP. Les étapes dépendent de l'utilisation des commutateurs IP existants ou de l'utilisation de nouveaux commutateurs IP.
+Déplacez les connexions du cluster des nœuds MetroCluster FC vers les commutateurs IP. La procédure à suivre varie selon que vous utilisez des commutateurs IP existants ou de nouveaux commutateurs IP.
 
-Vous devez effectuer cette tâche sur les deux sites MetroCluster.
+.Description de la tâche
+* Vous effectuez cette tâche sur les deux sites MetroCluster.
+
 
 
 
 === Les connexions à déplacer
 
-La tâche suivante suppose qu'un module de contrôleur utilise deux ports pour les connexions de cluster. Certains modèles de modules de contrôleur utilisent au moins quatre ports pour la connexion en cluster. Dans ce cas, aux fins de cet exemple, les ports sont divisés en deux groupes, alternant les ports entre les deux groupes
+La tâche suivante suppose qu'un module de contrôleur utilise deux ports pour les connexions au cluster. Certains modèles de modules de contrôleur utilisent au moins quatre ports pour la connexion en cluster. Dans cet exemple, les ports sont divisés en deux groupes, alternant entre eux.
 
 Le tableau suivant présente les exemples de ports utilisés dans cette tâche.
 
@@ -68,6 +70,19 @@ Le tableau suivant indique les ports de switch auxquels les nœuds FC se connect
 Toutes
  a| 
 5, 6
+ a| 
+Interface de cluster locale sur un nœud FC
+
+
+
+ a| 
+Cisco 9336C-FX2 (12 ports)
+ a| 
+Toutes
+ a| 
+3, 4 ou 11, 12
+
+*Remarque :* pour utiliser les ports de commutation 11 et 12, vous devez sélectionner deux modes de vitesse.
  a| 
 Interface de cluster locale sur un nœud FC
 
@@ -140,10 +155,11 @@ Interface de cluster locale sur un nœud FC
 |===
 
 
-=== Déplacement des connexions du cluster local lors de l'utilisation de nouveaux commutateurs IP
+=== Déplacer les connexions du cluster local lors de l'utilisation de nouveaux commutateurs IP
 
-Si vous utilisez de nouveaux commutateurs IP, vous devez déplacer physiquement les connexions de cluster des nœuds FC MetroCluster existants vers les nouveaux commutateurs.
+Si vous utilisez de nouveaux commutateurs IP, vous déplacez physiquement les connexions de cluster des nœuds MetroCluster FC existants vers les nouveaux commutateurs.
 
+.Étapes
 . Déplacez les connexions du cluster au groupe de nœuds FC MetroCluster avec les nouveaux commutateurs IP.
 +
 Utilisez les ports décrits dans <<Les connexions à déplacer>>.
@@ -262,12 +278,14 @@ cluster_A::*>
 
 
 
-=== Déplacement des connexions du cluster local lors de la réutilisation des commutateurs IP existants
+=== Déplacer les connexions du cluster local lors de la réutilisation des commutateurs IP existants
 
-Si vous réutilisez des commutateurs IP existants, vous devez mettre à jour le micrologiciel, reconfigurer les commutateurs avec les fichiers de configuration de référence (RCFs) corrects et déplacer les connexions vers les ports corrects un commutateur à la fois.
+Si vous réutilisez des commutateurs IP existants, vous mettez à jour le micrologiciel, reconfigurez les commutateurs avec les fichiers de configuration de référence (RCF) corrects et déplacez les connexions vers les ports corrects, un commutateur à la fois.
 
+.Description de la tâche
 Cette tâche est requise uniquement si les nœuds FC sont connectés à des commutateurs IP existants et que vous réutilisez les commutateurs.
 
+.Étapes
 . Déconnectez les connexions locales du cluster qui se connectent au commutateur_A_1_IP
 +
 .. Déconnectez les ports du groupe A du commutateur IP existant.
@@ -391,10 +409,11 @@ Cluster-A::*>
 
 
 
-== Vérification que les connexions du cluster sont déplacées et que le cluster fonctionne correctement
+== Étape 2 : Vérifiez que les connexions du cluster sont déplacées et que le cluster est sain
 
-Pour s'assurer que la connectivité est appropriée et que la configuration est prête à continuer le processus de transition, vous devez vérifier que les connexions du cluster sont correctement déplacées, que les commutateurs du cluster sont reconnus et que le cluster fonctionne correctement.
+Pour garantir une connectivité adéquate et que la configuration est prête à procéder au processus de transition, vérifiez que les connexions du cluster sont déplacées correctement, que les commutateurs du cluster sont reconnus et que le cluster est sain.
 
+.Étapes
 . Vérifier que tous les ports du cluster sont opérationnels :
 +
 `network port show -ipspace Cluster`

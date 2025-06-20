@@ -15,7 +15,7 @@ Pour terminer la transition, vous devez vérifier le fonctionnement de la nouvel
 
 . Vérifiez la configuration IP de MetroCluster.
 +
-Vous devez effectuer cette étape sur chaque cluster.
+Vous devez effectuer cette étape sur chaque cluster en mode privilège avancé.
 
 +
 L'exemple suivant montre la sortie du cluster_A.
@@ -25,7 +25,7 @@ L'exemple suivant montre la sortie du cluster_A.
 cluster_A::> cluster show
 Node                 Health  Eligibility   Epsilon
 -------------------- ------- ------------  ------------
-node_A_1-IP          true    true          true
+node_A_1-IP          true    true          false
 node_A_2-IP          true    true          false
 2 entries were displayed.
 
@@ -39,7 +39,7 @@ L'exemple suivant montre la sortie du cluster_B.
 cluster_B::> cluster show
 Node                 Health  Eligibility   Epsilon
 -------------------- ------- ------------  ------------
-node_B_1-IP          true    true          true
+node_B_1-IP          true    true          false
 node_B_2-IP          true    true          false
 2 entries were displayed.
 

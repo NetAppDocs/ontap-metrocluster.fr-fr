@@ -132,6 +132,9 @@ La configuration MetroCluster sur un système AFF A900 ou FAS9500 requiert 8 por
 
 Avant de mettre à jour les fichiers RCF et le câblage de la configuration Fabric MetroCluster AFF A900 ou FAS9500, vous devez vérifier l'état et la connectivité de la configuration.
 
+
+CAUTION: Après avoir mis à niveau les contrôleurs sur le premier site et avant de mettre à niveau le second, exécutez  `metrocluster check run` suivi de  `metrocluster check show` renvoie une erreur dans le  `config-replication` Champ. Cette erreur indique une incompatibilité de taille de NVRAM entre les nœuds de chaque site. Il s'agit du comportement attendu lorsque les modèles de plateforme sont différents sur les deux sites. Vous pouvez ignorer cette erreur jusqu'à ce que la mise à niveau du contrôleur soit terminée pour tous les nœuds du groupe DR.
+
 .Étapes
 . Vérifier le fonctionnement de la configuration MetroCluster dans ONTAP :
 +
