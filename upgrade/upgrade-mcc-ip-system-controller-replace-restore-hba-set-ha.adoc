@@ -162,5 +162,18 @@ Le nœud doit s'arrêter au niveau du `LOADER>` à l'invite.
 . Collecter les variables d'environnement : `printenv`
 
 
+
+
+== Retirez les disques internes du châssis sur le nouveau contrôleur
+
+Lorsque vous effectuez une mise à niveau d'un système qui ne dispose que de lecteurs externes vers un système qui dispose de lecteurs externes et internes (disques et contrôleurs dans le même châssis), vous devez retirer ou retirer tous les lecteurs internes du nouveau système jusqu'à ce que vous ayez terminé la mise à niveau.
+
+
+CAUTION: Cette tâche est obligatoire pour une mise à niveau réussie du contrôleur sur les systèmes concernés.
+
+Pour déterminer si votre combinaison de mise à niveau est affectée, reportez-vous au tableau dans link:upgrade-mcc-ip-system-controller-replace-supported-platforms.html["Mises à niveau de contrôleurs IP MetroCluster prises en charge à l'aide de commandes « system Controller replace »"] . Si votre combinaison de mise à niveau est marquée par *Remarque 2*, vous devez retirer ou démonter les lecteurs internes du nouveau système.
+
+Une fois cette tâche terminée, aucun lecteur interne ne devrait être accessible. Vous ajouterez les lecteurs au nouveau contrôleur plus tard dans la procédure.
+
 .Et la suite ?
 link:upgrade-mcc-ip-system-controller-replace-apply-rcf-set-bootarg.html["Mettez à jour les fichiers RCF des switchs et définissez les valeurs de démarrage IP MetroCluster"].
