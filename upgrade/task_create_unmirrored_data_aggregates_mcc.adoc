@@ -14,7 +14,7 @@ summary: Vous pouvez choisir de créer des agrégats de données non mis en miro
 Vous pouvez choisir de créer des agrégats de données non mis en miroir pour des données ne nécessitant pas la mise en miroir redondante fournie par les configurations MetroCluster.
 
 .Description de la tâche
-* Vous devez savoir quels disques ou LUN de baie seront utilisés dans le nouvel agrégat.
+* Vérifiez que vous savez quels lecteurs seront utilisés dans le nouvel agrégat.
 * Si votre système compte plusieurs types de disques (stockage hétérogène), vous devez comprendre comment vous pouvez vérifier que le type de disque approprié est sélectionné.
 
 
@@ -24,7 +24,7 @@ IMPORTANT: Dans les configurations MetroCluster IP, les agrégats distants sans 
 
 NOTE: Les agrégats non mis en miroir doivent être locaux au nœud qu'ils possèdent.
 
-* Les disques et les LUN de baie sont détenus par un nœud spécifique. Lorsque vous créez un agrégat, tous les disques de cet agrégat doivent être détenus par le même nœud, qui devient le nœud de rattachement de cet agrégat.
+* Les disques sont détenus par un nœud spécifique ; lorsque vous créez un agrégat, tous les disques de cet agrégat doivent être détenus par le même nœud, qui devient le nœud de rattachement de cet agrégat.
 * Les noms d'agrégats doivent être conformes au schéma de nommage que vous avez déterminé lors de la planification de votre configuration MetroCluster.
 * _Gestion des disques et des agrégats_ contient plus d'informations sur les agrégats en miroir.
 
@@ -56,14 +56,14 @@ Vous pouvez spécifier les options suivantes :
 
 +
 ** Nœud de rattachement de l'agrégat (c'est-à-dire le nœud qui détient l'agrégat en fonctionnement normal)
-** Liste de disques spécifiques ou de LUN de baies à ajouter à l'agrégat
+** Liste de disques spécifiques à ajouter à l'agrégat
 ** Nombre de disques à inclure
 ** Style de checksum à utiliser pour l'agrégat
 ** Type de disques à utiliser
 ** Taille des disques à utiliser
 ** Vitesse de conduite à utiliser
 ** Type RAID des groupes RAID sur l'agrégat
-** Nombre maximal de disques ou de LUN de baies pouvant être inclus dans un groupe RAID
+** Nombre maximal de disques pouvant être inclus dans un groupe RAID
 ** Indique si les disques à régime différent sont autorisés
 +
 Pour plus d'informations sur ces options, reportez-vous au `storage aggregate create` page de manuel.

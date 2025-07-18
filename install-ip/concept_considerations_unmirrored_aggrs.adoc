@@ -1,10 +1,10 @@
 ---
 permalink: install-ip/concept_considerations_unmirrored_aggrs.html 
 sidebar: sidebar 
-keywords: differences, eight-node, four-node, fabric-attached, stretch, metrocluster ip, storage, bridges, fc-to-sas, atto, fibrebridge, SAS, local HA, auso, automatic unplanned switchover, array luns, mediator, tiebreaker 
+keywords: differences, eight-node, four-node, fabric-attached, stretch, metrocluster ip, storage, bridges, fc-to-sas, atto, fibrebridge, SAS, local HA, auso, automatic unplanned switchover, mediator, tiebreaker 
 summary: 'Si votre configuration inclut des agrégats sans mise en miroir, vous devez connaître les problèmes d"accès potentiels après les opérations de basculement.' 
 ---
-= Avec des agrégats non mis en miroir
+= En savoir plus sur les agrégats non mis en miroir dans les configurations IP MetroCluster
 :allow-uri-read: 
 :icons: font
 :imagesdir: ../media/
@@ -15,34 +15,41 @@ Si votre configuration inclut des agrégats sans mise en miroir, vous devez conn
 
 
 
-== Considérations relatives aux agrégats non mis en miroir et aux espaces de noms hiérarchiques
+== Agrégats non mis en miroir et espaces de noms hiérarchiques
 
 Si vous utilisez des espaces de noms hiérarchiques, vous devez configurer le chemin de jonction de sorte que tous les volumes de ce chemin soient sur des agrégats en miroir uniquement ou sur des agrégats non mis en miroir uniquement. La configuration d'agrégats non mis en miroir et en miroir dans le chemin de jonction peut empêcher l'accès aux agrégats non mis en miroir après le basculement.
 
 
 
-== Considérations relatives aux agrégats non mis en miroir et aux volumes de métadonnées CRS et aux volumes racines des SVM de données
+== Agrégats non mis en miroir et maintenance nécessitant une coupure de courant
 
-Le volume des métadonnées du service de réplication de la configuration (CRS) et les volumes root du SVM de données doivent se trouver sur un agrégat en miroir. Vous ne pouvez pas déplacer ces volumes vers des agrégats non mis en miroir. S'ils sont sur des agrégats sans miroir, les opérations négociées de basculement et de rétablissement sont vetotées. La commande MetroCluster check fournit un avertissement si c'est le cas.
+Si vous effectuez une commutation négociée pour la maintenance qui nécessite une coupure de courant à l'échelle du site, vous devez d'abord mettre hors ligne manuellement tous les agrégats non mis en miroir appartenant au site sinistré.
 
-
-
-== Considérations relatives aux SVM et aux agrégats sans miroir
-
-Les SVM doivent être configurés sur des agrégats en miroir uniquement ou sur des agrégats sans miroir uniquement. La configuration d'une combinaison d'agrégats non mis en miroir et en miroir peut entraîner un basculement supérieur à 120 secondes et entraîner une panne des données en cas d'indisponibilité des agrégats non mis en miroir.
+Si vous ne mettez pas hors ligne les agrégats non mis en miroir appartenant au site sinistré, les nœuds du site survivant risquent de tomber en panne en raison de paniques multidisques. Cela peut se produire si des agrégats non mis en miroir commutés sont hors ligne ou manquants en raison d'une perte de connectivité au stockage du site sinistré suite à une coupure de courant ou à une perte de ISL.
 
 
 
-== Considérations relatives aux agrégats sans miroir et à SAN
+== Agrégats non mis en miroir, volumes de métadonnées CRS et volumes racine SVM de données
 
-Avant la version ONTAP 9.9.1, une LUN ne doit pas être localisée sur un agrégat sans miroir. La configuration d'une LUN sur un agrégat non mis en miroir peut entraîner un basculement supérieur à 120 secondes et une panne de données.
-
-
-
-== Considérations relatives à l'ajout de tiroirs de stockage pour les agrégats non mis en miroir
+Le volume des métadonnées du service de réplication de la configuration (CRS) et les volumes root du SVM de données doivent se trouver sur un agrégat en miroir. Vous ne pouvez pas déplacer ces volumes vers un agrégat non mis en miroir. S'ils se trouvent sur un agrégat non mis en miroir, les opérations de commutation et de retour négociées sont rejetées et le  `metrocluster check` la commande renvoie un avertissement.
 
 
-NOTE: Si vous ajoutez des tiroirs qui seront utilisés pour les agrégats sans miroir dans une configuration MetroCluster IP, vous devez effectuer les opérations suivantes :
+
+== Agrégats et SVM non miroirs
+
+Vous devez configurer les SVM uniquement sur des agrégats en miroir ou non. La configuration de SVM sur une combinaison d'agrégats en miroir et non en miroir peut entraîner une commutation de plus de 120 secondes. Cela peut entraîner une interruption de données si les agrégats non en miroir ne sont pas mis en ligne.
+
+
+
+== Agrégats non mis en miroir et SAN
+
+Avant ONTAP 9.9.1, un LUN ne devait pas être situé sur un agrégat non mis en miroir. La configuration d'une LUN sur un agrégat non mis en miroir peut entraîner un basculement supérieur à 120 secondes et une panne de données.
+
+
+
+== Ajouter des étagères de stockage pour les agrégats non miroirs
+
+Si vous ajoutez des étagères et souhaitez les utiliser pour des agrégats non mis en miroir dans une configuration IP MetroCluster , vous devez procéder comme suit :
 
 . Avant de démarrer la procédure d'ajout des tiroirs, exécutez la commande suivante :
 +
