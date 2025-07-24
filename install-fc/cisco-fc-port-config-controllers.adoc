@@ -1,0 +1,868 @@
+---
+permalink: install-fc/cisco-fc-port-config-controllers.html 
+sidebar: sidebar 
+keywords: ONTAP, FC, Cisco, metrocluster, switch, cabling, controllers, port, 
+summary: Découvrez comment câbler les commutateurs Cisco 9124V, 9148S, 9148V, 9250i et 9396S FC à vos contrôleurs. 
+---
+= Utilisation des ports Cisco pour les contrôleurs dans une configuration MetroCluster FC
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Découvrez les affectations de ports requises pour câbler les commutateurs Cisco 9124V, 9148S, 9148V, 9250i et 9396S FC à vos contrôleurs.
+
+Les tableaux présentent le nombre maximal de configurations prises en charge, avec huit modules de contrôleur dans deux groupes de reprise sur incident. Pour les configurations plus petites, ignorez les lignes des modules de contrôleur supplémentaires.
+
+[NOTE]
+====
+* Pour Cisco 9132T, voir link:cisco-9132t-fc-port-config-controllers.html["Utilisation du port Cisco 9132T pour les contrôleurs dans une configuration MetroCluster FC"] .
+* Les commutateurs Cisco 9124V et 9250i ne sont pas pris en charge dans les configurations MetroCluster à huit nœuds.
+
+
+====
+
+
+== MetroCluster 1 ou groupe DR 1
+
+Le tableau suivant présente les configurations de contrôleur prises en charge dans MetroCluster 1 ou le groupe DR 1 sur les commutateurs Cisco (à l'exception du 9132T).
+
+[cols="2a,2a,2a,2a,2a,2a,2a,2a"]
+|===
+| *Composant* | *Port* | *Se connecte au commutateur FC...* | *Port 9124V* | *Port 9148S* | *Port 9148V* | *Port 9250i* | *Port 9396S* 
+
+
+ a| 
+controller_x_1
+ a| 
+Port FC-VI a
+ a| 
+1
+ a| 
+1
+ a| 
+1
+ a| 
+1
+ a| 
+1
+ a| 
+1
+
+
+
+ a| 
+Port FC-VI b
+ a| 
+2
+ a| 
+1
+ a| 
+1
+ a| 
+1
+ a| 
+1
+ a| 
+1
+
+
+
+ a| 
+Port c FC-VI
+ a| 
+1
+ a| 
+2
+ a| 
+2
+ a| 
+2
+ a| 
+2
+ a| 
+2
+
+
+
+ a| 
+Port FC-VI d
+ a| 
+2
+ a| 
+2
+ a| 
+2
+ a| 
+2
+ a| 
+2
+ a| 
+2
+
+
+
+ a| 
+Port a du FC-VI-2
+ a| 
+1
+ a| 
+3
+ a| 
+n / A
+ a| 
+3
+ a| 
+n / A
+ a| 
+n / A
+
+
+
+ a| 
+Port b FC-VI-2
+ a| 
+2
+ a| 
+3
+ a| 
+n / A
+ a| 
+3
+ a| 
+n / A
+ a| 
+n / A
+
+
+
+ a| 
+Port c FC-VI-2
+ a| 
+1
+ a| 
+4
+ a| 
+n / A
+ a| 
+4
+ a| 
+n / A
+ a| 
+n / A
+
+
+
+ a| 
+Port d FC-VI-2
+ a| 
+2
+ a| 
+4
+ a| 
+n / A
+ a| 
+4
+ a| 
+n / A
+ a| 
+n / A
+
+
+
+ a| 
+Port a du HBA
+ a| 
+1
+ a| 
+13
+ a| 
+3
+ a| 
+13
+ a| 
+3
+ a| 
+3
+
+
+
+ a| 
+Port b de l'adaptateur HBA
+ a| 
+2
+ a| 
+13
+ a| 
+3
+ a| 
+13
+ a| 
+3
+ a| 
+3
+
+
+
+ a| 
+Port c de l'adaptateur HBA
+ a| 
+1
+ a| 
+14
+ a| 
+4
+ a| 
+14
+ a| 
+4
+ a| 
+4
+
+
+
+ a| 
+Port d de l'adaptateur HBA
+ a| 
+2
+ a| 
+14
+ a| 
+4
+ a| 
+14
+ a| 
+4
+ a| 
+4
+
+
+
+ a| 
+controller_x_2
+ a| 
+Port FC-VI a
+ a| 
+1
+ a| 
+5
+ a| 
+5
+ a| 
+5
+ a| 
+5
+ a| 
+5
+
+
+
+ a| 
+Port FC-VI b
+ a| 
+2
+ a| 
+5
+ a| 
+5
+ a| 
+5
+ a| 
+5
+ a| 
+5
+
+
+
+ a| 
+Port c FC-VI
+ a| 
+1
+ a| 
+6
+ a| 
+6
+ a| 
+6
+ a| 
+6
+ a| 
+6
+
+
+
+ a| 
+Port FC-VI d
+ a| 
+2
+ a| 
+6
+ a| 
+6
+ a| 
+6
+ a| 
+6
+ a| 
+6
+
+
+
+ a| 
+Port a du FC-VI-2
+ a| 
+1
+ a| 
+7
+ a| 
+n / A
+ a| 
+7
+ a| 
+n / A
+ a| 
+n / A
+
+
+
+ a| 
+Port b FC-VI-2
+ a| 
+2
+ a| 
+7
+ a| 
+n / A
+ a| 
+7
+ a| 
+n / A
+ a| 
+n / A
+
+
+
+ a| 
+Port c FC-VI-2
+ a| 
+1
+ a| 
+8
+ a| 
+n / A
+ a| 
+8
+ a| 
+n / A
+ a| 
+n / A
+
+
+
+ a| 
+Port d FC-VI-2
+ a| 
+2
+ a| 
+8
+ a| 
+n / A
+ a| 
+8
+ a| 
+n / A
+ a| 
+n / A
+
+
+
+ a| 
+Port a du HBA
+ a| 
+1
+ a| 
+15
+ a| 
+7
+ a| 
+15
+ a| 
+7
+ a| 
+7
+
+
+
+ a| 
+Port b de l'adaptateur HBA
+ a| 
+2
+ a| 
+15
+ a| 
+7
+ a| 
+15
+ a| 
+7
+ a| 
+7
+
+
+
+ a| 
+Port c de l'adaptateur HBA
+ a| 
+1
+ a| 
+16
+ a| 
+8
+ a| 
+16
+ a| 
+8
+ a| 
+8
+
+
+
+ a| 
+Port d de l'adaptateur HBA
+ a| 
+2
+ a| 
+16
+ a| 
+8
+ a| 
+16
+ a| 
+8
+ a| 
+8
+
+|===
+
+
+== MetroCluster 2 ou groupe DR 2
+
+Le tableau suivant présente les configurations de contrôleur prises en charge dans MetroCluster 2 ou le groupe DR 2 sur les commutateurs Cisco (à l'exception du 9132T).
+
+[cols="2a,2a,2a,2a,2a,2a,2a,2a"]
+|===
+| *Composant* | *Port* | *Se connecte au commutateur FC...* | *Port 9124V* | *Port 9148S* | *Port 9148V* | *Port 9250i* | *Port 9396S* 
+
+
+ a| 
+controller_x_3
+ a| 
+Port FC-VI a
+ a| 
+1
+ a| 
+n / A
+ a| 
+25
+ a| 
+25
+ a| 
+n / A
+ a| 
+49
+
+
+
+ a| 
+Port FC-VI b
+ a| 
+2
+ a| 
+n / A
+ a| 
+25
+ a| 
+25
+ a| 
+n / A
+ a| 
+49
+
+
+
+ a| 
+Port c FC-VI
+ a| 
+1
+ a| 
+n / A
+ a| 
+26
+ a| 
+26
+ a| 
+n / A
+ a| 
+50
+
+
+
+ a| 
+Port FC-VI d
+ a| 
+2
+ a| 
+n / A
+ a| 
+26
+ a| 
+26
+ a| 
+n / A
+ a| 
+50
+
+
+
+ a| 
+Port a du FC-VI-2
+ a| 
+1
+ a| 
+n / A
+ a| 
+n / A
+ a| 
+27
+ a| 
+n / A
+ a| 
+n / A
+
+
+
+ a| 
+Port b FC-VI-2
+ a| 
+2
+ a| 
+n / A
+ a| 
+n / A
+ a| 
+27
+ a| 
+n / A
+ a| 
+n / A
+
+
+
+ a| 
+Port c FC-VI-2
+ a| 
+1
+ a| 
+n / A
+ a| 
+n / A
+ a| 
+28
+ a| 
+n / A
+ a| 
+n / A
+
+
+
+ a| 
+Port d FC-VI-2
+ a| 
+2
+ a| 
+n / A
+ a| 
+n / A
+ a| 
+28
+ a| 
+n / A
+ a| 
+n / A
+
+
+
+ a| 
+Port a du HBA
+ a| 
+1
+ a| 
+n / A
+ a| 
+27
+ a| 
+37
+ a| 
+n / A
+ a| 
+51
+
+
+
+ a| 
+Port b de l'adaptateur HBA
+ a| 
+2
+ a| 
+n / A
+ a| 
+27
+ a| 
+37
+ a| 
+n / A
+ a| 
+51
+
+
+
+ a| 
+Port c de l'adaptateur HBA
+ a| 
+1
+ a| 
+n / A
+ a| 
+28
+ a| 
+38
+ a| 
+n / A
+ a| 
+52
+
+
+
+ a| 
+Port d de l'adaptateur HBA
+ a| 
+2
+ a| 
+n / A
+ a| 
+28
+ a| 
+38
+ a| 
+n / A
+ a| 
+52
+
+
+
+ a| 
+controller_x_4
+ a| 
+Port FC-VI a
+ a| 
+1
+ a| 
+n / A
+ a| 
+29
+ a| 
+29
+ a| 
+n / A
+ a| 
+53
+
+
+
+ a| 
+Port FC-VI b
+ a| 
+2
+ a| 
+n / A
+ a| 
+29
+ a| 
+29
+ a| 
+n / A
+ a| 
+53
+
+
+
+ a| 
+Port c FC-VI
+ a| 
+1
+ a| 
+n / A
+ a| 
+30
+ a| 
+30
+ a| 
+n / A
+ a| 
+54
+
+
+
+ a| 
+Port FC-VI d
+ a| 
+2
+ a| 
+n / A
+ a| 
+30
+ a| 
+30
+ a| 
+n / A
+ a| 
+54
+
+
+
+ a| 
+Port a du FC-VI-2
+ a| 
+1
+ a| 
+n / A
+ a| 
+n / A
+ a| 
+31
+ a| 
+n / A
+ a| 
+n / A
+
+
+
+ a| 
+Port b FC-VI-2
+ a| 
+2
+ a| 
+n / A
+ a| 
+n / A
+ a| 
+31
+ a| 
+n / A
+ a| 
+n / A
+
+
+
+ a| 
+Port c FC-VI-2
+ a| 
+1
+ a| 
+n / A
+ a| 
+n / A
+ a| 
+32
+ a| 
+n / A
+ a| 
+n / A
+
+
+
+ a| 
+Port d FC-VI-2
+ a| 
+2
+ a| 
+n / A
+ a| 
+n / A
+ a| 
+32
+ a| 
+n / A
+ a| 
+n / A
+
+
+
+ a| 
+Port a du HBA
+ a| 
+1
+ a| 
+n / A
+ a| 
+31
+ a| 
+39
+ a| 
+n / A
+ a| 
+55
+
+
+
+ a| 
+Port b de l'adaptateur HBA
+ a| 
+2
+ a| 
+n / A
+ a| 
+31
+ a| 
+39
+ a| 
+n / A
+ a| 
+55
+
+
+
+ a| 
+Port c de l'adaptateur HBA
+ a| 
+1
+ a| 
+n / A
+ a| 
+32
+ a| 
+40
+ a| 
+n / A
+ a| 
+56
+
+
+
+ a| 
+Port d de l'adaptateur HBA
+ a| 
+1
+ a| 
+n / A
+ a| 
+32
+ a| 
+40
+ a| 
+n / A
+ a| 
+56
+
+|===

@@ -1,0 +1,680 @@
+---
+permalink: install-fc/cisco-9132t-fc-port-config-controllers.html 
+sidebar: sidebar 
+keywords: ONTAP, FAS, FC, Cisco, metrocluster 
+summary: Découvrez les affectations de ports requises pour câbler les commutateurs Cisco 9132T FC à vos contrôleurs. 
+---
+= Utilisation du port Cisco 9132T pour les contrôleurs dans une configuration MetroCluster FC
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Découvrez les affectations de ports requises pour câbler les commutateurs Cisco 9132T FC à vos contrôleurs.
+
+Le tableau suivant présente les configurations de contrôleur utilisant FibreBridge 7500N ou 7600N utilisant les deux ports FC (FC1 et FC2). Les tableaux présentent le nombre maximum de configurations prises en charge avec quatre et huit modules de contrôleur dans deux groupes de reprise sur incident.
+
+
+NOTE: Pour les configurations à huit nœuds, vous devez effectuer la segmentation manuellement, car les CFR ne sont pas fournis.
+
+
+
+== MetroCluster 1 ou groupe DR 1
+
+Le tableau suivant présente les configurations de contrôleur prises en charge pour MetroCluster 1 ou le groupe DR 1 sur les commutateurs Cisco 9132T. Tenez compte des points suivants lors de l'utilisation de ce tableau de configuration :
+
+* Les systèmes AFF A900 et FAS9500 disposent de huit ports FC-VI (a, b, c et d pour FC-VI-1 et FC-VI-2).
+
+
+[cols="2a,2a,2a,2a,2a,2a,2a"]
+|===
+2+| *Composant* | *Port* | *Se connecte à FC_switch...* | *9132T 1x LEM (quatre nœuds)* | *9132T 2x LEM (quatre nœuds)* | *9132T 2x LEM (huit nœuds)* 
+
+
+ a| 
+controller_x_1
+ a| 
+Port FC-VI a
+ a| 
+1
+ a| 
+LEM1-1
+ a| 
+LEM1-1
+ a| 
+LEM1-1
+
+
+
+ a| 
+Port FC-VI b
+ a| 
+2
+ a| 
+LEM1-1
+ a| 
+LEM1-1
+ a| 
+LEM1-1
+
+
+
+ a| 
+Port c FC-VI
+ a| 
+1
+ a| 
+LEM1-2
+ a| 
+LEM1-2
+ a| 
+LEM1-2
+
+
+
+ a| 
+Port FC-VI d
+ a| 
+2
+ a| 
+LEM1-2
+ a| 
+LEM1-2
+ a| 
+LEM1-2
+
+
+
+ a| 
+Port a du FC-VI-2
+ a| 
+1
+ a| 
+LEM1-3
+ a| 
+LEM1-3
+ a| 
+n / A
+
+
+
+ a| 
+Port b FC-VI-2
+ a| 
+2
+ a| 
+LEM1-3
+ a| 
+LEM1-3
+ a| 
+n / A
+
+
+
+ a| 
+Port c FC-VI-2
+ a| 
+1
+ a| 
+LEM1-4
+ a| 
+LEM1-4
+ a| 
+n / A
+
+
+
+ a| 
+Port d FC-VI-2
+ a| 
+2
+ a| 
+LEM1-4
+ a| 
+LEM1-4
+ a| 
+n / A
+
+
+
+ a| 
+Port a du HBA
+ a| 
+1
+ a| 
+LEM1-5
+ a| 
+LEM1-5
+ a| 
+LEM1-3
+
+
+
+ a| 
+Port b de l'adaptateur HBA
+ a| 
+2
+ a| 
+LEM1-5
+ a| 
+LEM1-5
+ a| 
+LEM1-3
+
+
+
+ a| 
+Port c de l'adaptateur HBA
+ a| 
+1
+ a| 
+LEM1-6
+ a| 
+LEM1-6
+ a| 
+LEM1-4
+
+
+
+ a| 
+Port d de l'adaptateur HBA
+ a| 
+2
+ a| 
+LEM1-6
+ a| 
+LEM1-6
+ a| 
+LEM1-4
+
+
+
+ a| 
+controller_x_2
+ a| 
+Port FC-VI a
+ a| 
+1
+ a| 
+LEM1-7
+ a| 
+LEM1-7
+ a| 
+LEM1-5
+
+
+
+ a| 
+Port FC-VI b
+ a| 
+2
+ a| 
+LEM1-7
+ a| 
+LEM1-7
+ a| 
+LEM1-5
+
+
+
+ a| 
+Port c FC-VI
+ a| 
+1
+ a| 
+LEM1-8
+ a| 
+LEM1-8
+ a| 
+LEM1-6
+
+
+
+ a| 
+Port FC-VI d
+ a| 
+2
+ a| 
+LEM1-8
+ a| 
+LEM1-8
+ a| 
+LEM1-6
+
+
+
+ a| 
+Port a du FC-VI-2
+ a| 
+1
+ a| 
+LEM1-9
+ a| 
+LEM1-9
+ a| 
+n / A
+
+
+
+ a| 
+Port b FC-VI-2
+ a| 
+2
+ a| 
+LEM1-9
+ a| 
+LEM1-9
+ a| 
+n / A
+
+
+
+ a| 
+Port c FC-VI-2
+ a| 
+1
+ a| 
+LEM1-10
+ a| 
+LEM1-10
+ a| 
+n / A
+
+
+
+ a| 
+Port d FC-VI-2
+ a| 
+2
+ a| 
+LEM1-10
+ a| 
+LEM1-10
+ a| 
+n / A
+
+
+
+ a| 
+Port a du HBA
+ a| 
+1
+ a| 
+LEM1-11
+ a| 
+LEM1-11
+ a| 
+LEM1-7
+
+
+
+ a| 
+Port b de l'adaptateur HBA
+ a| 
+2
+ a| 
+LEM1-11
+ a| 
+LEM1-11
+ a| 
+LEM1-7
+
+
+
+ a| 
+Port c de l'adaptateur HBA
+ a| 
+1
+ a| 
+LEM1-12
+ a| 
+LEM1-12
+ a| 
+LEM1-8
+
+
+
+ a| 
+Port d de l'adaptateur HBA
+ a| 
+2
+ a| 
+LEM1-12
+ a| 
+LEM1-12
+ a| 
+LEM1-8
+
+|===
+
+
+== MetroCluster 2 ou groupe DR 2
+
+Le tableau suivant présente les configurations de contrôleur Cisco 9132T prises en charge pour MetroCluster 2 ou le groupe DR 2 sur les commutateurs Cisco 9132T. Tenez compte des points suivants lors de l'utilisation de ce tableau de configuration :
+
+* Les systèmes AFF A900 et FAS9500 disposent de huit ports FC-VI (a, b, c et d pour FC-VI-1 et FC-VI-2).
+* MetroCluster 2 ou DR group 2 n'est pas pris en charge sur les commutateurs Cisco 9132T pour les systèmes AFF A900 et FAS9500 .
+* MetroCluster 2 ou DR group 2 n'est pris en charge que dans les configurations MetroCluster à huit nœuds
+
+
+[cols="2a,2a,2a,2a,2a,2a,2a"]
+|===
+2+| *Composant* | *Port* | *Se connecte à FC_switch...* | *9132T 1x LEM (quatre nœuds)* | *9132T 2x LEM (quatre nœuds)* | *9132T 2x LEM (huit nœuds)* 
+
+
+ a| 
+controller_x_3
+ a| 
+Port FC-VI a
+ a| 
+1
+ a| 
+n / A
+ a| 
+n / A
+ a| 
+LEM2-1
+
+
+
+ a| 
+Port FC-VI b
+ a| 
+2
+ a| 
+n / A
+ a| 
+n / A
+ a| 
+LEM2-1
+
+
+
+ a| 
+Port c FC-VI
+ a| 
+1
+ a| 
+n / A
+ a| 
+n / A
+ a| 
+LEM2-2
+
+
+
+ a| 
+Port FC-VI d
+ a| 
+2
+ a| 
+n / A
+ a| 
+n / A
+ a| 
+LEM2-2
+
+
+
+ a| 
+Port a du FC-VI-2
+ a| 
+1
+ a| 
+n / A
+ a| 
+n / A
+ a| 
+n / A
+
+
+
+ a| 
+Port b FC-VI-2
+ a| 
+2
+ a| 
+n / A
+ a| 
+n / A
+ a| 
+n / A
+
+
+
+ a| 
+Port c FC-VI-2
+ a| 
+1
+ a| 
+n / A
+ a| 
+n / A
+ a| 
+n / A
+
+
+
+ a| 
+Port d FC-VI-2
+ a| 
+2
+ a| 
+n / A
+ a| 
+n / A
+ a| 
+n / A
+
+
+
+ a| 
+Port a du HBA
+ a| 
+1
+ a| 
+n / A
+ a| 
+n / A
+ a| 
+LEM2-3
+
+
+
+ a| 
+Port b de l'adaptateur HBA
+ a| 
+2
+ a| 
+n / A
+ a| 
+n / A
+ a| 
+LEM2-3
+
+
+
+ a| 
+Port c de l'adaptateur HBA
+ a| 
+1
+ a| 
+n / A
+ a| 
+n / A
+ a| 
+LEM2-4
+
+
+
+ a| 
+Port d de l'adaptateur HBA
+ a| 
+2
+ a| 
+n / A
+ a| 
+n / A
+ a| 
+LEM2-4
+
+
+
+ a| 
+controller_x_4
+ a| 
+Port a du FC-VI-1
+ a| 
+1
+ a| 
+n / A
+ a| 
+n / A
+ a| 
+LEM2-5
+
+
+
+ a| 
+Port b FC-VI-1
+ a| 
+2
+ a| 
+n / A
+ a| 
+n / A
+ a| 
+LEM2-5
+
+
+
+ a| 
+Port c FC-VI-1
+ a| 
+1
+ a| 
+n / A
+ a| 
+n / A
+ a| 
+LEM2-6
+
+
+
+ a| 
+Port d FC-VI-1
+ a| 
+2
+ a| 
+n / A
+ a| 
+n / A
+ a| 
+LEM2-6
+
+
+
+ a| 
+Port a du FC-VI-2
+ a| 
+1
+ a| 
+n / A
+ a| 
+n / A
+ a| 
+n / A
+
+
+
+ a| 
+Port b FC-VI-2
+ a| 
+2
+ a| 
+n / A
+ a| 
+n / A
+ a| 
+n / A
+
+
+
+ a| 
+Port c FC-VI-2
+ a| 
+1
+ a| 
+n / A
+ a| 
+n / A
+ a| 
+n / A
+
+
+
+ a| 
+Port d FC-VI-2
+ a| 
+2
+ a| 
+n / A
+ a| 
+n / A
+ a| 
+n / A
+
+
+
+ a| 
+Port a du HBA
+ a| 
+1
+ a| 
+n / A
+ a| 
+n / A
+ a| 
+LEM2-7
+
+
+
+ a| 
+Port b de l'adaptateur HBA
+ a| 
+2
+ a| 
+n / A
+ a| 
+n / A
+ a| 
+LEM2-7
+
+
+
+ a| 
+Port c de l'adaptateur HBA
+ a| 
+1
+ a| 
+n / A
+ a| 
+n / A
+ a| 
+LEM2-8
+
+
+
+ a| 
+Port d de l'adaptateur HBA
+ a| 
+2
+ a| 
+n / A
+ a| 
+n / A
+ a| 
+LEM2-8
+
+|===

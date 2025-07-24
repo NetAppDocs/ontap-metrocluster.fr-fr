@@ -1,0 +1,276 @@
+---
+permalink: install-fc/cisco-9132t-fc-port-config-bridges.html 
+sidebar: sidebar 
+keywords: ONTAP, FAS, FC, Cisco, metrocluster 
+summary: 'Découvrez les affectations de ports requises pour câbler les commutateurs Cisco 9132T FC aux ponts FC vers SAS à l"aide des deux ports FC.' 
+---
+= Utilisation du port Cisco 9132T pour les ponts FC vers SAS dans une configuration MetroCluster FC
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Découvrez les affectations de ports requises pour câbler les commutateurs Cisco 9132T FC aux ponts FC vers SAS à l'aide des deux ports FC.
+
+
+NOTE: Une seule (1) pile de ponts est prise en charge à l'aide des commutateurs Cisco 9132T avec module 1xLEM.
+
+
+
+== MetroCluster 1 ou groupe DR 1
+
+Le tableau suivant présente les configurations de plateaux prises en charge dans MetroCluster 1 ou le groupe DR 1 pour les ponts FibreBridge 7500N ou 7600N utilisant les deux ports FC (FC1 et FC2) sur les commutateurs Cisco 9132T. Tenez compte des points suivants lors de l'utilisation de ce tableau de configuration :
+
+* Dans les configurations à quatre nœuds, vous pouvez câbler des ponts supplémentaires aux ports LEM2-1 à LEM2-8 sur les commutateurs Cisco 9132T avec 2xLEM.
+
+
+[cols="2a,2a,2a,2a,2a,2a,2a"]
+|===
+2+| *Composant* | *Port* | *Se connecte à FC_switch...* | *9132T 1x LEM (quatre nœuds)* | *9132T 2x LEM (quatre nœuds)* | *9132T 2x LEM (huit nœuds)* 
+
+
+ a| 
+Pile 1
+ a| 
+bridge_x_1a
+ a| 
+FC1
+ a| 
+1
+ a| 
+LEM1-13
+ a| 
+LEM1-13
+ a| 
+LEM1-9
+
+
+
+ a| 
+FC2
+ a| 
+2
+ a| 
+LEM1-13
+ a| 
+LEM1-13
+ a| 
+LEM1-9
+
+
+
+ a| 
+bridge_x_1b
+ a| 
+FC1
+ a| 
+1
+ a| 
+LEM1-14
+ a| 
+LEM1-14
+ a| 
+LEM1-10
+
+
+
+ a| 
+FC2
+ a| 
+2
+ a| 
+LEM1-14
+ a| 
+LEM1-14
+ a| 
+LEM1-10
+
+
+
+ a| 
+Pile 2
+ a| 
+bridge_x_2a
+ a| 
+FC1
+ a| 
+1
+ a| 
+n / A
+ a| 
+LEM1-15
+ a| 
+LEM1-11
+
+
+
+ a| 
+FC2
+ a| 
+2
+ a| 
+n / A
+ a| 
+LEM1-15
+ a| 
+LEM1-11
+
+
+
+ a| 
+bridge_x_2b
+ a| 
+FC1
+ a| 
+1
+ a| 
+n / A
+ a| 
+LEM1-16
+ a| 
+LEM1-12
+
+
+
+ a| 
+FC2
+ a| 
+2
+ a| 
+n / A
+ a| 
+LEM1-16
+ a| 
+LEM1-12
+
+|===
+
+
+== MetroCluster 2 ou groupe DR 2
+
+Le tableau suivant présente les configurations de plateaux prises en charge dans MetroCluster 2 ou le groupe DR 2 pour les ponts FibreBridge 7500N ou 7600N utilisant les deux ports FC (FC1 et FC2) sur les commutateurs Cisco 9132T. Tenez compte des points suivants lors de l'utilisation de ce tableau de configuration :
+
+* Dans les configurations à huit nœuds, vous pouvez câbler des ponts supplémentaires aux ports LEM2-13 à LEM2-16 sur les commutateurs Cisco 9132T avec 2 LEM.
+
+
+[cols="2a,2a,2a,2a,2a,2a,2a"]
+|===
+2+| *Composant* | *Port* | *Se connecte à FC_switch...* | *9132T 1x LEM (quatre nœuds)* | *9132T 2x LEM (quatre nœuds)* | *9132T 2x LEM (huit nœuds)* 
+
+
+ a| 
+Pile 1
+ a| 
+bridge_x_1a
+ a| 
+FC1
+ a| 
+1
+ a| 
+n / A
+ a| 
+n / A
+ a| 
+LEM1-9
+
+
+
+ a| 
+FC2
+ a| 
+2
+ a| 
+n / A
+ a| 
+n / A
+ a| 
+LEM1-9
+
+
+
+ a| 
+bridge_x_1b
+ a| 
+FC1
+ a| 
+1
+ a| 
+n / A
+ a| 
+n / A
+ a| 
+LEM1-10
+
+
+
+ a| 
+FC2
+ a| 
+2
+ a| 
+n / A
+ a| 
+n / A
+ a| 
+LEM1-10
+
+
+
+ a| 
+Pile 2
+ a| 
+bridge_x_2a
+ a| 
+FC1
+ a| 
+1
+ a| 
+n / A
+ a| 
+n / A
+ a| 
+LEM1-11
+
+
+
+ a| 
+FC2
+ a| 
+2
+ a| 
+n / A
+ a| 
+n / A
+ a| 
+LEM1-11
+
+
+
+ a| 
+bridge_x_2b
+ a| 
+FC1
+ a| 
+1
+ a| 
+n / A
+ a| 
+n / A
+ a| 
+LEM1-12
+
+
+
+ a| 
+FC2
+ a| 
+2
+ a| 
+n / A
+ a| 
+n / A
+ a| 
+LEM1-12
+
+|===

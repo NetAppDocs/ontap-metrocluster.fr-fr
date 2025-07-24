@@ -21,6 +21,51 @@ Pour plus d'informations sur les problèmes connus, les limites et les mises en 
 
 
  a| 
+Prise en charge de MetroCluster IP pour un chiffrement de bout en bout
+ a| 
+Le chiffrement de bout en bout est pris en charge sur les systèmes suivants pour chiffrer le trafic back-end, tel que les données de réplication NVlog et de stockage, entre les sites d'une configuration IP MetroCluster .
+
+* AFF A800, AFF C800
+* AFF A20, AFF A30, AFF C30, AFF A50, AFF C60
+* AFF A70, AFF A90, AFF A1K, AFF C80
+* FAS50, FAS70, FAS90
+
+
+link:../maintain/task-configure-encryption.html["Configurer le chiffrement de bout en bout dans une configuration MetroCluster IP"]
+ a| 
+ONTAP 9.17.1
+
+
+
+ a| 
+Limiter les modifications pour les configurations IP MetroCluster
+ a| 
+ONTAP 9.17.1 inclut les mises à jour de limites suivantes pour les configurations IP MetroCluster à quatre nœuds :
+
+* Les systèmes AFF C800, AFF A800, AFF A900, AFF A90 et AFF A1K ont les limites mises à jour suivantes :
++
+** Limites de FlexVol volume par nœud : 1 250
+** Limites SVM : 64 SVM par cluster
+** Nombre de LIF : 256 LIF par cluster
+
+
+* Les systèmes AFF A400, AFF C400, ASA A400, ASA C400, AFF C80, AFF A70 et AFF A50 ont les limites mises à jour suivantes :
++
+** Limites de FlexVol volume par agrégat (simple ou multiple) : 625
+** Limites de FlexVol volume par nœud : 1 250
+** Limites de FlexVol volume par paire haute disponibilité (HA) : 2 500
+** Limites de FlexVol volume par cluster MetroCluster : 5 000
+** Limites SVM : 64 SVM par cluster
+** Nombre de LIF : 256 LIF par cluster
+
+
+
+ a| 
+ONTAP 9.17.1
+
+
+
+ a| 
 Mise à jour du micrologiciel FibreBridge à l'aide des informations d'identification
  a| 
 Vous pouvez mettre à jour le micrologiciel sur les ponts Fibrebridge à l'aide des informations d'identification si le serveur les requiert pour télécharger le progiciel.
@@ -76,7 +121,7 @@ Dans les configurations MetroCluster IP à quatre nœuds, les limites de volume 
 
 * Le nombre maximal de volumes FlexVol par agrégat est passé de 200 à 625.
 * Le nombre maximal de volumes FlexVol par nœud est passé de 800 à 1250.
-* Le nombre maximal de volumes FlexVol par paire haute disponibilité est passé de 1600 à 2500.
+* Le nombre maximal de volumes FlexVol par paire HA est passé de 1 600 à 2 500.
 
  a| 
 ONTAP 9.15.1
@@ -101,7 +146,7 @@ Dans les configurations MetroCluster IP à quatre nœuds, les limites de volume 
 
 * Le nombre maximal de volumes FlexVol par agrégat est passé de 200 à 625.
 * Le nombre maximal de volumes FlexVol par nœud est passé de 800 à 1250.
-* Le nombre maximal de volumes FlexVol par paire haute disponibilité est passé de 1600 à 2500.
+* Le nombre maximal de volumes FlexVol par paire HA est passé de 1 600 à 2 500.
 
  a| 
 ONTAP 9.14.1

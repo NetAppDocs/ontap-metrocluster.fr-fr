@@ -4,7 +4,7 @@ sidebar: sidebar
 keywords: MetroCluster configurations 
 summary: Vous devez configurer chacune des structures de commutateurs Brocade dans la configuration MetroCluster. 
 ---
-= Configuration manuelle des commutateurs Brocade FC
+= Configurez manuellement les commutateurs FC Brocade
 :allow-uri-read: 
 :icons: font
 :imagesdir: ../media/
@@ -66,7 +66,7 @@ Metro-E signifie que le cadrage ou la signalisation Ethernet se produit soit de 
 
 
 
-== Révision des besoins en licences Brocade
+== Consultez les exigences de licence Brocade
 
 Vous avez besoin de certaines licences pour les commutateurs dans une configuration MetroCluster. Vous devez installer ces licences sur les quatre commutateurs.
 
@@ -104,7 +104,7 @@ Si vous ne disposez pas de ces licences, contactez votre représentant commercia
 
 
 
-== Définition des valeurs par défaut du commutateur Brocade FC
+== Définissez les valeurs du commutateur Brocade FC sur les valeurs par défaut d'usine
 
 Vous devez définir les paramètres par défaut du commutateur pour garantir la réussite de la configuration. Vous devez également attribuer un nom unique à chaque commutateur.
 
@@ -325,7 +325,7 @@ FC_switch_B_1:admin> reboot
 
 
 
-== Configuration des paramètres de base du commutateur
+== Configurer les paramètres de base du commutateur
 
 Vous devez configurer les paramètres globaux de base, y compris l'ID de domaine, pour les commutateurs Brocade.
 
@@ -473,7 +473,7 @@ FC_switch_A_1:admin> iodshow
 NOTE: Lors de la configuration de ONTAP sur les modules de contrôleur, la commande de surmultipliée doit être explicitement configurée sur chaque module de contrôleur dans la configuration MetroCluster.
 
 +
-https://docs.netapp.com/us-en/ontap-metrocluster/install-fc/concept_configure_the_mcc_software_in_ontap.html#configuring-in-order-delivery-or-out-of-order-delivery-of-frames-on-ontap-software["Configuration de la livraison en commande ou de la livraison hors commande des trames sur le logiciel ONTAP"]
+https://docs.netapp.com/us-en/ontap-metrocluster/install-fc/concept_configure_the_mcc_software_in_ontap.html#configuring-in-order-delivery-or-out-of-order-delivery-of-frames-on-ontap-software["Configurer la livraison dans l'ordre ou la livraison dans le désordre des trames sur le logiciel ONTAP"]
 
 
 
@@ -660,7 +660,7 @@ FC_switch_B_1:admin> switchcfgpersistentenable
 
 
 
-== Configuration des paramètres de commutateur de base sur un commutateur Brocade DCX 8510-8
+== Configurer les paramètres de base du commutateur sur un commutateur Brocade DCX 8510-8
 
 Vous devez configurer les paramètres globaux de base, y compris l'ID de domaine, pour les commutateurs Brocade.
 
@@ -760,7 +760,7 @@ link:concept_prepare_for_the_mcc_installation.html["Conditions requises pour l'u
 
 
 
-== Configuration des E-ports sur les commutateurs Brocade FC à l'aide des ports FC
+== Configurer les ports E sur les commutateurs Brocade FC à l'aide de ports FC
 
 Pour les commutateurs Brocade sur lesquels les liaisons ISL (Inter-Switch Links) sont configurées à l'aide de ports FC, vous devez configurer les ports de switch sur chaque structure de switch reliant l'ISL. Ces ports ISL sont également appelés E-ports.
 
@@ -912,7 +912,7 @@ Ge11 (10 Gbit/s)
 
 
 
-.4+| Brocade G610  a| 
+.4+| Brocade G610, G710  a| 
 Port ISL 1
  a| 
 20
@@ -1259,7 +1259,7 @@ FC_switch_B_1:admin> trunkshow
 
 
 .Informations associées
-link:concept_port_assignments_for_fc_switches_when_using_ontap_9_1_and_later.html["Affectation de ports pour les commutateurs FC lors de l'utilisation de ONTAP 9.1 et versions ultérieures"]
+link:concept_port_assignments_for_fc_switches_when_using_ontap_9_1_and_later.html["Affectations de ports pour les commutateurs FC"]
 
 
 
@@ -1419,7 +1419,7 @@ FC_switch_A_1:root> portshow fcipcircuit all
 
 
 
-== Configuration de ports VE 40 Gbit/s sur les commutateurs Brocade 7810 et 7840 FC
+== Configurer des ports VE 40 Gbit/s sur les commutateurs Brocade 7810 et 7840 FC
 
 Lorsque vous utilisez les deux ports VE 40 GbE (qui utilisent le FCIP) pour ISL, vous devez créer des interfaces IP sur chaque port et configurer des tunnels FCIP et des circuits dans chaque tunnel.
 
@@ -1572,7 +1572,7 @@ FC_switch_A_1:root> portshow fcipcircuit all
 
 
 
-== Configuration des ports non-E sur le commutateur Brocade
+== Configurer les ports non-E sur le commutateur Brocade
 
 Vous devez configurer les non-E-ports sur le commutateur FC. Dans une configuration MetroCluster, il s'agit des ports qui connectent le commutateur aux initiateurs HBA, aux interconnexions FC-VI et aux ponts FC-SAS. Ces étapes doivent être effectuées pour chaque port.
 
@@ -1662,7 +1662,7 @@ Non-DFE                             ..  ..  ..  ..  ..  ..  ..  ..  ..
 
 
 
-== Configuration de la compression sur les ports ISL sur un commutateur Brocade G620
+== Configurer la compression sur les ports ISL sur un commutateur Brocade G620
 
 Si vous utilisez des commutateurs Brocade G620 et que vous activez la compression sur les liens ISL, vous devez la configurer sur chaque port E-Port des commutateurs.
 
@@ -1724,13 +1724,13 @@ Port   Configured    Active   Configured   Active  Speed
 ----
 
 
-== Configuration de la segmentation sur les commutateurs Brocade FC
+== Configurer le zonage sur les commutateurs Brocade FC
 
 Vous devez attribuer les ports de commutateur à des zones distinctes pour séparer le trafic de contrôleur et de stockage.
 
 
 
-=== Segmentation des ports FC-VI
+=== Zonez les ports FC-VI
 
 Pour chaque groupe de reprise après incident dans l'MetroCluster, vous devez configurer deux zones pour les connexions FC-VI permettant le trafic contrôleur à contrôleur. Ces zones contiennent les ports de commutateur FC connectés aux ports FC-VI du module de contrôleur. Ces zones sont des zones de qualité de service (QoS).
 
@@ -1948,7 +1948,7 @@ QOSH2_MC1_FAB_2_FCVI (6520)
 |===
 
 
-=== Segmentation pour les ponts FibreBridge 7500N ou 7600N à l'aide d'un port FC
+=== Ponts Zone FibreBridge 7500N ou 7600N utilisant un port FC
 
 Si vous utilisez des ponts FibreBridge 7500N ou 7600N en utilisant uniquement l'un des deux ports FC, vous devez créer des zones de stockage pour les ports de pont. Avant de configurer les zones, vous devez connaître les zones et les ports associés.
 
@@ -2027,7 +2027,7 @@ Exemples de noms de pont pour un groupe de piles sur chaque site :
 *DRGROUP 1 : MC1_INIT_GRP_1_SITE_A_STK_GRP_1_TOP_FC1:*
 
 |===
-| Commutateur FC | Le site | Domaine des commutateurs | Port de commutation Brocade 6505, 6510, 6520, G620 ou G610 | Se connecte à... 
+| Commutateur FC | Le site | Domaine des commutateurs | Port de commutation Brocade 6505, 6510, 6520, G620, G610 ou G710 | Se connecte à... 
 
 
 | FC_Switch_A_1 | A | 5 | 2 | Port 0A Controller_A_1 
@@ -2067,7 +2067,7 @@ Exemples de noms de pont pour un groupe de piles sur chaque site :
 *DRGROUP 1 : MC1_INIT_GRP_1_SITE_A_STK_GRP_1_BOT_FC1:*
 
 |===
-| Commutateur FC | Le site | Domaine des commutateurs | Port de commutation Brocade 6505, 6510, 6520, G620 ou G610 | Se connecte à... 
+| Commutateur FC | Le site | Domaine des commutateurs | Port de commutation Brocade 6505, 6510, 6520, G620, G610 ou G710 | Se connecte à... 
 
 
 | FC_Switch_A_1 | A | 6 | 2 | Port 0b_a_1 du contrôleur 
@@ -2111,7 +2111,7 @@ Exemples de noms de pont pour un groupe de piles sur chaque site :
 *DRGROUP 1 : MC1_INIT_GRP_1_SITE_A_STK_GRP_2_TOP_FC1:*
 
 |===
-| Commutateur FC | Le site | Domaine des commutateurs | Port de commutation Brocade 6505, 6510, 6520, G620 ou G610 | Se connecte à... 
+| Commutateur FC | Le site | Domaine des commutateurs | Port de commutation Brocade 6505, 6510, 6520, G620, G610 ou G710 | Se connecte à... 
 
 
 | FC_Switch_A_1 | A | 5 | 2 | Port 0A Controller_A_1 
@@ -2151,7 +2151,7 @@ Exemples de noms de pont pour un groupe de piles sur chaque site :
 *DRGROUP 1 : MC1_INIT_GRP_1_SITE_A_STK_GRP_2_BOT_FC1:*
 
 |===
-| Commutateur FC | Le site | Domaine des commutateurs | Port de commutation Brocade 6505, 6510, 6520, G620 ou G610 | Se connecte à... 
+| Commutateur FC | Le site | Domaine des commutateurs | Port de commutation Brocade 6505, 6510, 6520, G620, G610 ou G710 | Se connecte à... 
 
 
 | FC_Switch_A_1 | A | 6 | 2 | Port 0b_a_1 du contrôleur 
@@ -2195,7 +2195,7 @@ Exemples de noms de pont pour un groupe de piles sur chaque site :
 *MC1_INIT_GRP_1_SITE_B_STK_GRP_1_TOP_FC1:*
 
 |===
-| Commutateur FC | Le site | Domaine des commutateurs | Commutateur Brocade 6505, 6510, 6520, G620 ou G610 | Se connecte à... 
+| Commutateur FC | Le site | Domaine des commutateurs | Commutateur Brocade 6505, 6510, 6520, G620, G610 ou G710 | Se connecte à... 
 
 
 | FC_Switch_A_1 | A | 5 | 2 | Port 0A Controller_A_1 
@@ -2235,7 +2235,7 @@ Exemples de noms de pont pour un groupe de piles sur chaque site :
 *DRGROUP 1 : MC1_INIT_GRP_1_SITE_B_STK_GRP_1_BOT_FC1:*
 
 |===
-| Commutateur FC | Le site | Domaine des commutateurs | Commutateur Brocade 6505, 6510, 6520, G620 ou G610 | Se connecte à... 
+| Commutateur FC | Le site | Domaine des commutateurs | Commutateur Brocade 6505, 6510, 6520, G620, G610 ou G710 | Se connecte à... 
 
 
 | FC_Switch_A_1 | A | 6 | 2 | Port 0b_a_1 du contrôleur 
@@ -2279,7 +2279,7 @@ Exemples de noms de pont pour un groupe de piles sur chaque site :
 *DRGROUP 1 : MC1_INIT_GRP_1_SITE_B_STK_GRP_2_TOP_FC1:*
 
 |===
-| Commutateur FC | Le site | Domaine des commutateurs | Port de commutation Brocade 6505, 6510, 6520, G620 ou G610 | Se connecte à... 
+| Commutateur FC | Le site | Domaine des commutateurs | Port de commutation Brocade 6505, 6510, 6520, G620, G610 ou G710 | Se connecte à... 
 
 
 | FC_Switch_A_1 | A | 5 | 2 | Port 0A Controller_A_1 
@@ -2319,7 +2319,7 @@ Exemples de noms de pont pour un groupe de piles sur chaque site :
 *DRGROUP 1 : MC1_INIT_GRP_1_SITE_B_STK_GRP_2_BOT_FC1:*
 
 |===
-| Commutateur FC | Le site | Domaine des commutateurs | Port de commutation Brocade 6505, 6510, 6520, G620 ou G610 | Se connecte à... 
+| Commutateur FC | Le site | Domaine des commutateurs | Port de commutation Brocade 6505, 6510, 6520, G620, G610 ou G710 | Se connecte à... 
 
 
 | FC_Switch_A_1 | A | 6 | 2 | Port 0b_a_1 du contrôleur 
@@ -2391,7 +2391,7 @@ Exemples de noms de pont pour un groupe de piles sur chaque site :
 |===
 
 
-=== Segmentation pour les ponts FiberBridge 7500N utilisant les deux ports FC
+=== Ponts Zone FibreBridge 7500N utilisant les deux ports FC
 
 Si vous utilisez des ponts FibreBridge 7500N avec les deux ports FC, vous devez créer des zones de stockage pour les ports de pont. Avant de configurer les zones, vous devez connaître les zones et les ports associés.
 
@@ -2470,7 +2470,7 @@ Exemples de noms de pont pour un groupe de piles sur chaque site :
 |===
 
 
-| Commutateur FC | Le site | Domaine des commutateurs | Port 6505 / 6510 / G610 / G620 | 6520 orifice | Se connecte à... 
+| Commutateur FC | Le site | Domaine des commutateurs | Ports 6505 / 6510 / G610 / G710 / G620 | 6520 orifice | Se connecte à... 
 
 
  a| 
@@ -2564,7 +2564,7 @@ MC1_INIT_GRP_1_SITE_A_STK_GRP_1_TOP_FC1
 |===
 
 
-| Commutateur FC | Le site | Domaine des commutateurs | Port 6505 / 6510 / G610 | 6520 orifice | Port G620 | Se connecte à... 
+| Commutateur FC | Le site | Domaine des commutateurs | Ports 6505 / 6510 / G610 / G710 | 6520 orifice | Port G620 | Se connecte à... 
 
 
  a| 
@@ -2668,7 +2668,7 @@ MC1_INIT_GRP_2_SITE_A_STK_GRP_1_BOT_FC1
 |===
 
 
-| Commutateur FC | Le site | Domaine des commutateurs | 6505 / 6510 / G610 | 6520 | G620 | Se connecte à... 
+| Commutateur FC | Le site | Domaine des commutateurs | 6505 / 6510 / G610 / G710 | 6520 | G620 | Se connecte à... 
 
 
  a| 
@@ -2772,7 +2772,7 @@ MC1_INIT_GRP_1_SITE_A_STK_GRP_1_TOP_FC2
 |===
 
 
-| Commutateur FC | Le site | Domaine des commutateurs | 6505 / 6510 / G610 | 6520 | G620 | Se connecte à... 
+| Commutateur FC | Le site | Domaine des commutateurs | 6505 / 6510 / G610 / G710 | 6520 | G620 | Se connecte à... 
 
 
  a| 
@@ -2880,7 +2880,7 @@ MC1_INIT_GRP_2_SITE_A_STK_GRP_1_BOT_FC2
 |===
 
 
-| Commutateur FC | Le site | Domaine des commutateurs | Port 6505 / 6510 / G610 | 6520 orifice | Port G620 | Se connecte à... 
+| Commutateur FC | Le site | Domaine des commutateurs | Ports 6505 / 6510 / G610 / G710 | 6520 orifice | Port G620 | Se connecte à... 
 
 
  a| 
@@ -2984,7 +2984,7 @@ MC1_INIT_GRP_1_SITE_A_STK_GRP_2_TOP_FC1
 |===
 
 
-| Commutateur FC | Le site | Domaine des commutateurs | Port 6505 / 6510 / G610 | 6520 orifice | Port G620 | Se connecte à... 
+| Commutateur FC | Le site | Domaine des commutateurs | Ports 6505 / 6510 / G610 / G710 | 6520 orifice | Port G620 | Se connecte à... 
 
 
  a| 
@@ -3084,7 +3084,7 @@ MC1_INIT_GRP_2_SITE_A_STK_GRP_2_BOT_FC1
 |===
 
 
-| Commutateur FC | Le site | Domaine des commutateurs | Port 6505 / 6510 / G610 | 6520 orifice | Port G620 | Se connecte à... 
+| Commutateur FC | Le site | Domaine des commutateurs | Ports 6505 / 6510 / G610 / G710 | 6520 orifice | Port G620 | Se connecte à... 
 
 
  a| 
@@ -3188,7 +3188,7 @@ MC1_INIT_GRP_1_SITE_A_STK_GRP_2_TOP_FC2
 |===
 
 
-| Commutateur FC | Le site | Domaine des commutateurs | Port 6505 / 6510 / G610 | 6520 orifice | Port G620 | Se connecte à... 
+| Commutateur FC | Le site | Domaine des commutateurs | Ports 6505 / 6510 / G610 / G710 | 6520 orifice | Port G620 | Se connecte à... 
 
 
  a| 
@@ -3296,7 +3296,7 @@ MC1_INIT_GRP_2_SITE_A_STK_GRP_2_BOT_FC2
 |===
 
 
-| Commutateur FC | Le site | Domaine des commutateurs | Port 6505 / 6510 / G610 | 6520 orifice | Port G620 | Se connecte à... 
+| Commutateur FC | Le site | Domaine des commutateurs | Ports 6505 / 6510 / G610 / G710 | 6520 orifice | Port G620 | Se connecte à... 
 
 
  a| 
@@ -3400,7 +3400,7 @@ MC1_INIT_GRP_1_SITE_B_STK_GRP_1_TOP_FC1
 |===
 
 
-| Commutateur FC | Le site | Domaine des commutateurs | Port 6505 / 6510 / G610 | 6520 orifice | Port G620 | Se connecte à... 
+| Commutateur FC | Le site | Domaine des commutateurs | Ports 6505 / 6510 / G610 / G710 | 6520 orifice | Port G620 | Se connecte à... 
 
 
  a| 
@@ -3504,7 +3504,7 @@ MC1_INIT_GRP_2_SITE_B_STK_GRP_1_BOT_FC1
 |===
 
 
-| Commutateur FC | Le site | Domaine des commutateurs | Port 6505 / 6510 / G610 | 6520 orifice | Port G620 | Se connecte à... 
+| Commutateur FC | Le site | Domaine des commutateurs | Ports 6505 / 6510 / G610 / G710 | 6520 orifice | Port G620 | Se connecte à... 
 
 
  a| 
@@ -3606,7 +3606,7 @@ MC1_INIT_GRP_1_SITE_B_STK_GRP_1_TOP_FC2
 |===
 
 
-| Commutateur FC | Le site | Domaine des commutateurs | Port 6505 / 6510 / G610 | 6520 orifice | Port G620 | Se connecte à... 
+| Commutateur FC | Le site | Domaine des commutateurs | Ports 6505 / 6510 / G610 / G710 | 6520 orifice | Port G620 | Se connecte à... 
 
 
  a| 
@@ -3714,7 +3714,7 @@ MC1_INIT_GRP_2_SITE_B_STK_GRP_1_BOT_FC2
 |===
 
 
-| Commutateur FC | Le site | Domaine des commutateurs | Port 6505 / 6510 / G610 | 6520 orifice | Port G620 | Se connecte à... 
+| Commutateur FC | Le site | Domaine des commutateurs | Ports 6505 / 6510 / G610 / G710 | 6520 orifice | Port G620 | Se connecte à... 
 
 
  a| 
@@ -3818,7 +3818,7 @@ MC1_INIT_GRP_1_SITE_B_STK_GRP_2_TOP_FC1
 |===
 
 
-| Commutateur FC | Le site | Domaine des commutateurs | Port 6505 / 6510 / G610 | 6520 orifice | Port G620 | Se connecte à... 
+| Commutateur FC | Le site | Domaine des commutateurs | Ports 6505 / 6510 / G610 / G710 | 6520 orifice | Port G620 | Se connecte à... 
 
 
  a| 
@@ -3922,7 +3922,7 @@ MC1_INIT_GRP_2_SITE_B_STK_GRP_2_BOT_FC1
 |===
 
 
-| Commutateur FC | Le site | Domaine des commutateurs | Port 6505 / 6510 / G610 | 6520 orifice | Port G620 | Se connecte à... 
+| Commutateur FC | Le site | Domaine des commutateurs | Ports 6505 / 6510 / G610 / G710 | 6520 orifice | Port G620 | Se connecte à... 
 
 
  a| 
@@ -4026,7 +4026,7 @@ MC1_INIT_GRP_1_SITE_B_STK_GRP_2_TOP_FC2
 |===
 
 
-| Commutateur FC | Le site | Domaine des commutateurs | Port 6505 / 6510 / G610 | 6520 orifice | Port G620 | Se connecte à... 
+| Commutateur FC | Le site | Domaine des commutateurs | Ports 6505 / 6510 / G610 / G710 | 6520 orifice | Port G620 | Se connecte à... 
 
 
  a| 
@@ -4280,7 +4280,7 @@ MC1_INIT_GRP_2_SITE_B_STK_GRP_2_BOT_FC2
 |===
 
 
-=== Configuration de la segmentation sur les commutateurs Brocade FC
+=== Zonez les commutateurs Brocade FC
 
 Vous devez attribuer les ports de commutateur à des zones distinctes pour le trafic du contrôleur et du stockage, avec des zones pour les ports et zones FC-VI pour les ports de stockage.
 
@@ -4399,7 +4399,7 @@ zone: MC1_INIT_GRP_1_SITE_A_STK_GRP_1_TOP_FC1
 
 
 
-== Configuration du cryptage ISL sur les commutateurs Brocade 6510 ou G620
+== Définir le cryptage ISL sur les commutateurs Brocade 6510 ou G620
 
 Sur les commutateurs Brocade 6510 ou G620, vous pouvez utiliser la fonctionnalité de cryptage Brocade sur les connexions ISL. Si vous souhaitez utiliser la fonction de cryptage, vous devez effectuer des étapes de configuration supplémentaires sur chaque commutateur de la configuration MetroCluster.
 
@@ -4418,7 +4418,7 @@ Les étapes doivent être effectuées sur les deux commutateurs de la même stru
 
 
 
-=== Désactivation de la structure virtuelle
+=== Désactiver la structure virtuelle
 
 Pour définir le cryptage ISL, vous devez désactiver la structure virtuelle sur les quatre commutateurs utilisés dans une configuration MetroCluster.
 
@@ -4432,7 +4432,7 @@ Pour définir le cryptage ISL, vous devez désactiver la structure virtuelle sur
 
 
 
-=== Réglage de la charge utile
+=== Régler la charge utile
 
 Après la désactivation de la structure virtuelle, vous devez définir la charge utile ou la taille du champ de données sur les deux commutateurs de la structure.
 
@@ -4459,7 +4459,7 @@ La taille du champ de données ne doit pas dépasser 2048.
 
 
 
-=== Définition de la stratégie d'authentification
+=== Définissez la stratégie d'authentification
 
 Vous devez définir la stratégie d'authentification et les paramètres associés.
 
@@ -4552,7 +4552,7 @@ Auth Policy is set to ON
 
 
 
-=== Activation du cryptage ISL sur les commutateurs Brocade
+=== Activez le cryptage ISL sur les commutateurs Brocade
 
 Après avoir défini la règle d'authentification et le secret d'authentification, vous devez activer le cryptage ISL sur les ports pour qu'il prenne effet.
 

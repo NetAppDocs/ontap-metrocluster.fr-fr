@@ -1,0 +1,62 @@
+---
+permalink: install-fc/fc-switch-port-assignment-overview.html 
+sidebar: sidebar 
+keywords: ONTAP, FAS, FC, Brocade, ISL, Cisco, metrocluster, switch, cabling, port, assignment 
+summary: Vous devez vérifier que vous utilisez les attributions de port spécifiées lorsque vous câblez les commutateurs FC. 
+---
+= Affectations de ports pour les commutateurs MetroCluster FC
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous devez vérifier que vous utilisez les attributions de port spécifiées lorsque vous câblez les commutateurs FC.
+
+Vous pouvez reconfigurer les ports non utilisés pour connecter des ports initiateurs, des ports FC-VI ou des ISL afin qu'ils servent de ports de stockage. Cependant, si vous utilisez les RCF pris en charge, vous devez modifier le zonage en conséquence.
+
+Si vous utilisez les RCF pris en charge, les ports ISL peuvent ne pas se connecter aux mêmes ports affichés et peuvent devoir être reconfigurés manuellement.
+
+Si vous avez configuré vos commutateurs avec les affectations de ports pour ONTAP 9, vous pouvez continuer à utiliser les anciennes affectations. Cependant, les nouvelles configurations exécutant ONTAP 9.1 ou une version ultérieure doivent utiliser les affectations de ports indiquées ici.
+
+
+
+== Instructions générales de câblage
+
+Lors de l'utilisation des tables de câblage, il est important de connaître les consignes suivantes :
+
+* Les commutateurs Brocade et Cisco utilisent une numérotation de port différente :
++
+** Sur les commutateurs Brocade, le premier port est numéroté 0.
+** Sur les commutateurs Cisco, le premier port est numéroté 1.
+
+
+* Le câblage est le même pour chaque commutateur FC dans la structure du commutateur.
+* Vous pouvez commander des systèmes de stockage AFF A300 et FAS8200 avec l'une des deux options suivantes pour la connectivité FC-VI :
++
+** Ports intégrés 0e et 0f configurés en mode FC-VI.
+** Ports 1a et 1b sur une carte FC-VI dans l'emplacement 1.
+
+
+* Les systèmes de stockage AFF A700 et FAS9000 requièrent quatre ports FC-VI. Les tableaux suivants présentent le câblage des commutateurs FC avec quatre ports FC-VI sur chaque contrôleur, à l'exception du commutateur Cisco 9250i.
++
+Pour les autres systèmes de stockage, utilisez le câblage indiqué dans les tableaux, mais ignorez le câblage des ports FC-VI c et d.
+
++
+Vous pouvez laisser ces ports vides.
+
+* Les systèmes de stockage AFF A400 et FAS8300 utilisent les ports 2a et 2b pour la connectivité FC-VI.
+* Si deux configurations MetroCluster partagent des liens ISL, utilisez les mêmes affectations de port que pour un câblage MetroCluster à huit nœuds.
+* Le nombre de ISL que vous câblez peut varier en fonction des exigences du site.
+* Voir la section sur les considérations relatives à ISL.
++
+link:concept_considerations_isls_mcfc.html["Considérations relatives aux liens ISL"]
+
+
+
+
+
+== Directives de câblage AFF A900 et FAS9500
+
+* Les systèmes de stockage AFF A900 ou FAS9500 nécessitent huit ports FC-VI. Si vous utilisez un AFF A900 ou FAS9500, vous devez utiliser la configuration à huit ports. Si la configuration inclut les autres modèles de système de stockage, utilisez le câblage indiqué dans les tableaux, mais ignorez le câblage pour les ports FC-VI inutiles.
+

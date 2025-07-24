@@ -1,0 +1,1617 @@
+---
+permalink: install-fc/brocade-fc-port-config-controllers.html 
+sidebar: sidebar 
+keywords: ONTAP, FAS, FC, Brocade, metrocluster 
+summary: 'Les tableaux suivants présentent l"utilisation des ports sur les commutateurs Brocade . Ils indiquent la configuration maximale prise en charge, avec quatre modules de contrôleur par groupe DR.' 
+---
+= Utilisation du port Brocade pour les contrôleurs dans une configuration MetroCluster FC
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Découvrez les affectations de ports requises pour câbler les commutateurs Brocade FC à vos contrôleurs.
+
+Les tableaux suivants présentent la configuration maximale prise en charge, avec quatre modules de contrôleur par groupe DR. Pour les configurations plus petites, ignorez les lignes correspondant aux modules de contrôleur supplémentaires. Notez que huit ISL sont uniquement pris en charge sur les commutateurs Brocade 6510, Brocade DCX 8510-8, G620, G630, G620-1, G630-1, G720 et G730.
+
+Consultez les informations suivantes avant d’utiliser ces tableaux :
+
+* L'utilisation des ports pour les commutateurs Brocade 6505, G610 et G710 dans une configuration MetroCluster à huit nœuds n'est pas indiquée. En raison du nombre limité de ports, leur attribution doit être effectuée site par site, en fonction du modèle de module de contrôleur et du nombre de liaisons ISL et de paires de ponts utilisés.
+* Le commutateur Brocade DCX 8510-8 peut utiliser la même disposition de port que le commutateur 6510 *_ou_* le commutateur 7840.
+* Les commutateurs Brocade 6520, 7810 et 7840 ne sont pas pris en charge sur les systèmes qui utilisent huit ports FC-VI (systèmes AFF A900 et FAS9500 ).
+* Les commutateurs Brocade 7810 ne prennent en charge qu'un seul groupe DR.
+
+
+
+
+== MetroCluster 1 ou groupe DR 1
+
+Le tableau suivant présente les configurations de contrôleur prises en charge dans MetroCluster 1 ou le groupe DR 1 sur les commutateurs Brocade .
+
+[cols="2a,2a,2a,2a,2a,2a,2a,2a,2a,2a"]
+|===
+| *Composant* | *Port* | *Se connecte au commutateur FC...* | *Ports 6505, G610, G710* | *6510, port DCX 8510-8* | *port 6520* | *Port 7810* | *Port 7840* | *Ports G620, G620-1, G630, G630-1* | *Ports G720, G730* 
+
+
+ a| 
+controller_x_1
+ a| 
+Port FC-VI a
+ a| 
+1
+ a| 
+0
+ a| 
+0
+ a| 
+0
+ a| 
+0
+ a| 
+0
+ a| 
+0
+ a| 
+0
+
+
+
+ a| 
+Port FC-VI b
+ a| 
+2
+ a| 
+0
+ a| 
+0
+ a| 
+0
+ a| 
+0
+ a| 
+0
+ a| 
+0
+ a| 
+0
+
+
+
+ a| 
+Port c FC-VI
+ a| 
+1
+ a| 
+1
+ a| 
+1
+ a| 
+1
+ a| 
+1
+ a| 
+1
+ a| 
+1
+ a| 
+1
+
+
+
+ a| 
+Port FC-VI d
+ a| 
+2
+ a| 
+1
+ a| 
+1
+ a| 
+1
+ a| 
+1
+ a| 
+1
+ a| 
+1
+ a| 
+1
+
+
+
+ a| 
+Port a du FC-VI-2
+ a| 
+1
+ a| 
+16
+ a| 
+20
+ a| 
+n / A
+ a| 
+n / A
+ a| 
+n / A
+ a| 
+16
+ a| 
+2
+
+
+
+ a| 
+Port b FC-VI-2
+ a| 
+2
+ a| 
+16
+ a| 
+20
+ a| 
+n / A
+ a| 
+n / A
+ a| 
+n / A
+ a| 
+16
+ a| 
+2
+
+
+
+ a| 
+Port c FC-VI-2
+ a| 
+1
+ a| 
+17
+ a| 
+21
+ a| 
+n / A
+ a| 
+n / A
+ a| 
+n / A
+ a| 
+17
+ a| 
+3
+
+
+
+ a| 
+Port d FC-VI-2
+ a| 
+2
+ a| 
+17
+ a| 
+21
+ a| 
+n / A
+ a| 
+n / A
+ a| 
+n / A
+ a| 
+17
+ a| 
+3
+
+
+
+ a| 
+Port a du HBA
+ a| 
+1
+ a| 
+2
+ a| 
+2
+ a| 
+2
+ a| 
+2
+ a| 
+2
+ a| 
+2
+ a| 
+8
+
+
+
+ a| 
+Port b de l'adaptateur HBA
+ a| 
+2
+ a| 
+2
+ a| 
+2
+ a| 
+2
+ a| 
+2
+ a| 
+2
+ a| 
+2
+ a| 
+8
+
+
+
+ a| 
+Port c de l'adaptateur HBA
+ a| 
+1
+ a| 
+3
+ a| 
+3
+ a| 
+3
+ a| 
+3
+ a| 
+3
+ a| 
+3
+ a| 
+9
+
+
+
+ a| 
+Port d de l'adaptateur HBA
+ a| 
+2
+ a| 
+3
+ a| 
+3
+ a| 
+3
+ a| 
+3
+ a| 
+3
+ a| 
+3
+ a| 
+9
+
+
+
+ a| 
+controller_x_2
+ a| 
+Port FC-VI a
+ a| 
+1
+ a| 
+4
+ a| 
+4
+ a| 
+4
+ a| 
+4
+ a| 
+4
+ a| 
+4
+ a| 
+4
+
+
+
+ a| 
+Port FC-VI b
+ a| 
+2
+ a| 
+4
+ a| 
+4
+ a| 
+4
+ a| 
+4
+ a| 
+4
+ a| 
+4
+ a| 
+4
+
+
+
+ a| 
+Port c FC-VI
+ a| 
+1
+ a| 
+5
+ a| 
+5
+ a| 
+5
+ a| 
+5
+ a| 
+5
+ a| 
+5
+ a| 
+5
+
+
+
+ a| 
+Port FC-VI d
+ a| 
+2
+ a| 
+5
+ a| 
+5
+ a| 
+5
+ a| 
+5
+ a| 
+5
+ a| 
+5
+ a| 
+5
+
+
+
+ a| 
+Port a du FC-VI-2
+ a| 
+1
+ a| 
+18
+ a| 
+22
+ a| 
+n / A
+ a| 
+n / A
+ a| 
+n / A
+ a| 
+20
+ a| 
+6
+
+
+
+ a| 
+Port b FC-VI-2
+ a| 
+2
+ a| 
+18
+ a| 
+22
+ a| 
+n / A
+ a| 
+n / A
+ a| 
+n / A
+ a| 
+20
+ a| 
+6
+
+
+
+ a| 
+Port c FC-VI-2
+ a| 
+1
+ a| 
+19
+ a| 
+23
+ a| 
+n / A
+ a| 
+n / A
+ a| 
+n / A
+ a| 
+21
+ a| 
+7
+
+
+
+ a| 
+Port d FC-VI-2
+ a| 
+2
+ a| 
+19
+ a| 
+23
+ a| 
+n / A
+ a| 
+n / A
+ a| 
+n / A
+ a| 
+21
+ a| 
+7
+
+
+
+ a| 
+Port a du HBA
+ a| 
+1
+ a| 
+6
+ a| 
+6
+ a| 
+6
+ a| 
+6
+ a| 
+6
+ a| 
+6
+ a| 
+12
+
+
+
+ a| 
+Port b de l'adaptateur HBA
+ a| 
+2
+ a| 
+6
+ a| 
+6
+ a| 
+6
+ a| 
+6
+ a| 
+6
+ a| 
+6
+ a| 
+12
+
+
+
+ a| 
+Port c de l'adaptateur HBA
+ a| 
+1
+ a| 
+7
+ a| 
+7
+ a| 
+7
+ a| 
+7
+ a| 
+7
+ a| 
+7
+ a| 
+13
+
+
+
+ a| 
+Port d de l'adaptateur HBA
+ a| 
+2
+ a| 
+7
+ a| 
+7
+ a| 
+7
+ a| 
+7
+ a| 
+7
+ a| 
+7
+ a| 
+13
+
+|===
+
+
+== MetroCluster 2 ou groupe DR 2
+
+Le tableau suivant présente les configurations de contrôleur prises en charge dans MetroCluster 2 ou le groupe DR 2 sur les commutateurs Brocade .
+
+[cols="10*"]
+|===
+| *Composant* | *Port* | *Se connecte au commutateur FC...* | *Ports 6505, G610, G710* | *6510, port DCX 8510-8* | *port 6520* | *Port 7810* | *Port 7840* | *Ports G620, G620-1, G630, G630-1* | *Ports G720, G730* 
+
+
+ a| 
+controller_x_3
+ a| 
+Port FC-VI a
+ a| 
+1
+ a| 
+n / A
+ a| 
+24
+ a| 
+48
+ a| 
+n / A
+ a| 
+12
+ a| 
+18
+ a| 
+18
+
+
+
+ a| 
+Port FC-VI b
+ a| 
+2
+ a| 
+n / A
+ a| 
+24
+ a| 
+48
+ a| 
+n / A
+ a| 
+12
+ a| 
+18
+ a| 
+18
+
+
+
+ a| 
+Port c FC-VI
+ a| 
+1
+ a| 
+n / A
+ a| 
+25
+ a| 
+49
+ a| 
+n / A
+ a| 
+13
+ a| 
+19
+ a| 
+19
+
+
+
+ a| 
+Port FC-VI d
+ a| 
+2
+ a| 
+n / A
+ a| 
+25
+ a| 
+49
+ a| 
+n / A
+ a| 
+13
+ a| 
+19
+ a| 
+19
+
+
+
+ a| 
+Port a du FC-VI-2
+ a| 
+1
+ a| 
+n / A
+ a| 
+36
+ a| 
+n / A
+ a| 
+n / A
+ a| 
+n / A
+ a| 
+36
+ a| 
+24
+
+
+
+ a| 
+Port b FC-VI-2
+ a| 
+2
+ a| 
+n / A
+ a| 
+36
+ a| 
+n / A
+ a| 
+n / A
+ a| 
+n / A
+ a| 
+36
+ a| 
+24
+
+
+
+ a| 
+Port c FC-VI-2
+ a| 
+1
+ a| 
+n / A
+ a| 
+37
+ a| 
+n / A
+ a| 
+n / A
+ a| 
+n / A
+ a| 
+37
+ a| 
+25
+
+
+
+ a| 
+Port d FC-VI-2
+ a| 
+2
+ a| 
+n / A
+ a| 
+37
+ a| 
+n / A
+ a| 
+n / A
+ a| 
+n / A
+ a| 
+37
+ a| 
+25
+
+
+
+ a| 
+Port a du HBA
+ a| 
+1
+ a| 
+n / A
+ a| 
+26
+ a| 
+50
+ a| 
+n / A
+ a| 
+14
+ a| 
+24
+ a| 
+26
+
+
+
+ a| 
+Port b de l'adaptateur HBA
+ a| 
+2
+ a| 
+n / A
+ a| 
+26
+ a| 
+50
+ a| 
+n / A
+ a| 
+14
+ a| 
+24
+ a| 
+26
+
+
+
+ a| 
+Port c de l'adaptateur HBA
+ a| 
+1
+ a| 
+n / A
+ a| 
+27
+ a| 
+51
+ a| 
+n / A
+ a| 
+15
+ a| 
+25
+ a| 
+27
+
+
+
+ a| 
+Port d de l'adaptateur HBA
+ a| 
+2
+ a| 
+n / A
+ a| 
+27
+ a| 
+51
+ a| 
+n / A
+ a| 
+15
+ a| 
+25
+ a| 
+27
+
+
+
+ a| 
+controller_x_4
+ a| 
+Port FC-VI a
+ a| 
+1
+ a| 
+n / A
+ a| 
+28
+ a| 
+52
+ a| 
+n / A
+ a| 
+16
+ a| 
+22
+ a| 
+22
+
+
+
+ a| 
+Port FC-VI b
+ a| 
+2
+ a| 
+n / A
+ a| 
+28
+ a| 
+52
+ a| 
+n / A
+ a| 
+16
+ a| 
+22
+ a| 
+22
+
+
+
+ a| 
+Port c FC-VI
+ a| 
+1
+ a| 
+n / A
+ a| 
+29
+ a| 
+53
+ a| 
+n / A
+ a| 
+17
+ a| 
+23
+ a| 
+23
+
+
+
+ a| 
+Port FC-VI d
+ a| 
+2
+ a| 
+n / A
+ a| 
+29
+ a| 
+53
+ a| 
+n / A
+ a| 
+17
+ a| 
+23
+ a| 
+23
+
+
+
+ a| 
+Port a du FC-VI-2
+ a| 
+1
+ a| 
+n / A
+ a| 
+38
+ a| 
+n / A
+ a| 
+n / A
+ a| 
+n / A
+ a| 
+38
+ a| 
+28
+
+
+
+ a| 
+Port b FC-VI-2
+ a| 
+2
+ a| 
+n / A
+ a| 
+38
+ a| 
+n / A
+ a| 
+n / A
+ a| 
+n / A
+ a| 
+38
+ a| 
+28
+
+
+
+ a| 
+Port c FC-VI-2
+ a| 
+1
+ a| 
+n / A
+ a| 
+39
+ a| 
+n / A
+ a| 
+n / A
+ a| 
+n / A
+ a| 
+39
+ a| 
+29
+
+
+
+ a| 
+Port d FC-VI-2
+ a| 
+2
+ a| 
+n / A
+ a| 
+39
+ a| 
+n / A
+ a| 
+n / A
+ a| 
+n / A
+ a| 
+39
+ a| 
+29
+
+
+
+ a| 
+Port a du HBA
+ a| 
+1
+ a| 
+n / A
+ a| 
+30
+ a| 
+54
+ a| 
+n / A
+ a| 
+18
+ a| 
+28
+ a| 
+30
+
+
+
+ a| 
+Port b de l'adaptateur HBA
+ a| 
+2
+ a| 
+n / A
+ a| 
+30
+ a| 
+54
+ a| 
+n / A
+ a| 
+18
+ a| 
+28
+ a| 
+30
+
+
+
+ a| 
+Port c de l'adaptateur HBA
+ a| 
+1
+ a| 
+n / A
+ a| 
+31
+ a| 
+55
+ a| 
+n / A
+ a| 
+19
+ a| 
+29
+ a| 
+31
+
+
+
+ a| 
+Port d de l'adaptateur HBA
+ a| 
+2
+ a| 
+n / A
+ a| 
+31
+ a| 
+55
+ a| 
+n / A
+ a| 
+19
+ a| 
+29
+ a| 
+31
+
+|===
+
+
+== MetroCluster 3 ou groupe DR 3
+
+Le tableau suivant présente les configurations de contrôleur prises en charge dans MetroCluster 3 ou le groupe DR 3 sur les commutateurs Brocade .
+
+[cols="2a,2a,2a,2a,2a"]
+|===
+| *Composant* | *Port* | *Se connecte au commutateur FC...* | *Port G630, G630-1* | *Port G730* 
+
+
+ a| 
+controller_x_5
+ a| 
+Port FC-VI a
+ a| 
+1
+ a| 
+48
+ a| 
+48
+
+
+
+ a| 
+Port FC-VI b
+ a| 
+2
+ a| 
+48
+ a| 
+48
+
+
+
+ a| 
+Port c FC-VI
+ a| 
+1
+ a| 
+49
+ a| 
+49
+
+
+
+ a| 
+Port FC-VI d
+ a| 
+2
+ a| 
+49
+ a| 
+49
+
+
+
+ a| 
+Port a du FC-VI-2
+ a| 
+1
+ a| 
+64
+ a| 
+50
+
+
+
+ a| 
+Port b FC-VI-2
+ a| 
+2
+ a| 
+64
+ a| 
+50
+
+
+
+ a| 
+Port c FC-VI-2
+ a| 
+1
+ a| 
+65
+ a| 
+51
+
+
+
+ a| 
+Port d FC-VI-2
+ a| 
+2
+ a| 
+65
+ a| 
+51
+
+
+
+ a| 
+Port a du HBA
+ a| 
+1
+ a| 
+50
+ a| 
+56
+
+
+
+ a| 
+Port b de l'adaptateur HBA
+ a| 
+2
+ a| 
+50
+ a| 
+56
+
+
+
+ a| 
+Port c de l'adaptateur HBA
+ a| 
+1
+ a| 
+51
+ a| 
+57
+
+
+
+ a| 
+Port d de l'adaptateur HBA
+ a| 
+2
+ a| 
+51
+ a| 
+57
+
+
+
+ a| 
+controller_x_6
+ a| 
+Port FC-VI a
+ a| 
+1
+ a| 
+52
+ a| 
+52
+
+
+
+ a| 
+Port FC-VI b
+ a| 
+2
+ a| 
+52
+ a| 
+52
+
+
+
+ a| 
+Port c FC-VI
+ a| 
+1
+ a| 
+53
+ a| 
+53
+
+
+
+ a| 
+Port FC-VI d
+ a| 
+2
+ a| 
+53
+ a| 
+53
+
+
+
+ a| 
+Port a du FC-VI-2
+ a| 
+1
+ a| 
+68
+ a| 
+54
+
+
+
+ a| 
+Port b FC-VI-2
+ a| 
+2
+ a| 
+68
+ a| 
+54
+
+
+
+ a| 
+Port c FC-VI-2
+ a| 
+1
+ a| 
+69
+ a| 
+55
+
+
+
+ a| 
+Port d FC-VI-2
+ a| 
+2
+ a| 
+69
+ a| 
+55
+
+
+
+ a| 
+Port a du HBA
+ a| 
+1
+ a| 
+54
+ a| 
+60
+
+
+
+ a| 
+Port b de l'adaptateur HBA
+ a| 
+2
+ a| 
+54
+ a| 
+60
+
+
+
+ a| 
+Port c de l'adaptateur HBA
+ a| 
+1
+ a| 
+55
+ a| 
+61
+
+
+
+ a| 
+Port d de l'adaptateur HBA
+ a| 
+2
+ a| 
+55
+ a| 
+61
+
+|===
+
+
+== MetroCluster 4 ou groupe DR 4
+
+Le tableau suivant présente les configurations de contrôleur prises en charge dans MetroCluster 4 ou le groupe DR 4 sur les commutateurs Brocade .
+
+[cols="2a,2a,2a,2a,2a"]
+|===
+| *Composant* | *Port* | *Se connecte au commutateur FC...* | *Port G630, G630-1* | *Port G730* 
+
+
+ a| 
+controller_x_7
+ a| 
+Port FC-VI a
+ a| 
+1
+ a| 
+66
+ a| 
+66
+
+
+
+ a| 
+Port FC-VI b
+ a| 
+2
+ a| 
+66
+ a| 
+66
+
+
+
+ a| 
+Port c FC-VI
+ a| 
+1
+ a| 
+67
+ a| 
+67
+
+
+
+ a| 
+Port FC-VI d
+ a| 
+2
+ a| 
+67
+ a| 
+67
+
+
+
+ a| 
+Port a du FC-VI-2
+ a| 
+1
+ a| 
+84
+ a| 
+72
+
+
+
+ a| 
+Port b FC-VI-2
+ a| 
+2
+ a| 
+84
+ a| 
+72
+
+
+
+ a| 
+Port c FC-VI-2
+ a| 
+1
+ a| 
+85
+ a| 
+73
+
+
+
+ a| 
+Port d FC-VI-2
+ a| 
+2
+ a| 
+85
+ a| 
+73
+
+
+
+ a| 
+Port a du HBA
+ a| 
+1
+ a| 
+72
+ a| 
+74
+
+
+
+ a| 
+Port b de l'adaptateur HBA
+ a| 
+2
+ a| 
+72
+ a| 
+74
+
+
+
+ a| 
+Port c de l'adaptateur HBA
+ a| 
+1
+ a| 
+73
+ a| 
+75
+
+
+
+ a| 
+Port d de l'adaptateur HBA
+ a| 
+2
+ a| 
+73
+ a| 
+75
+
+
+
+ a| 
+controller_x_8
+ a| 
+Port FC-VI a
+ a| 
+1
+ a| 
+70
+ a| 
+70
+
+
+
+ a| 
+Port FC-VI b
+ a| 
+2
+ a| 
+70
+ a| 
+70
+
+
+
+ a| 
+Port c FC-VI
+ a| 
+1
+ a| 
+71
+ a| 
+71
+
+
+
+ a| 
+Port FC-VI d
+ a| 
+2
+ a| 
+71
+ a| 
+71
+
+
+
+ a| 
+Port a du FC-VI-2
+ a| 
+1
+ a| 
+86
+ a| 
+76
+
+
+
+ a| 
+Port b FC-VI-2
+ a| 
+2
+ a| 
+86
+ a| 
+76
+
+
+
+ a| 
+Port c FC-VI-2
+ a| 
+1
+ a| 
+87
+ a| 
+77
+
+
+
+ a| 
+Port d FC-VI-2
+ a| 
+2
+ a| 
+87
+ a| 
+77
+
+
+
+ a| 
+Port a du HBA
+ a| 
+1
+ a| 
+76
+ a| 
+78
+
+
+
+ a| 
+Port b de l'adaptateur HBA
+ a| 
+2
+ a| 
+76
+ a| 
+78
+
+
+
+ a| 
+Port c de l'adaptateur HBA
+ a| 
+1
+ a| 
+77
+ a| 
+79
+
+
+
+ a| 
+Port d de l'adaptateur HBA
+ a| 
+2
+ a| 
+77
+ a| 
+79
+
+|===

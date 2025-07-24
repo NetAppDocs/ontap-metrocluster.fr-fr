@@ -1,0 +1,1252 @@
+---
+permalink: install-fc/brocade-fc-port-config-bridges.html 
+sidebar: sidebar 
+keywords: ONTAP, FAS, FC, Brocade, metrocluster 
+summary: Les tableaux suivants montrent l’utilisation des ports sur les commutateurs Brocade . 
+---
+= Utilisation du port Brocade pour les ponts FC vers SAS dans une configuration MetroCluster FC
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Découvrez les affectations de ports nécessaires pour connecter des commutateurs Brocade FC à des ponts FC vers SAS. Les affectations de ports varient selon que les ponts utilisent un ou deux ports FC.
+
+
+NOTE: Les commutateurs Brocade 7810 ne prennent en charge qu'un seul groupe DR.
+
+
+
+== Configurations d'étagères utilisant des ponts FibreBridge 7500N ou 7600N utilisant les deux ports FC (FC1 et FC2)
+
+
+
+=== MetroCluster 1 ou groupe DR 1
+
+Le tableau suivant présente les configurations de plateaux prises en charge dans MetroCluster 1 ou le groupe DR 1 pour les ponts FibreBridge 7500N ou 7600N utilisant les deux ports FC (FC1 et FC2) sur les commutateurs Brocade . Tenez compte des points suivants lors de l'utilisation de ce tableau de configuration :
+
+* Sur les commutateurs Brocade 6505, G610, G710, G620, G620-1, G630 et G630-1, vous pouvez câbler des ponts supplémentaires aux ports 12 à 15.
+* Sur les commutateurs Brocade 6510 et DCX 8510-8, vous pouvez câbler des ponts supplémentaires aux ports 12 à 19.
+* Sur les commutateurs Brocade 6520, vous pouvez câbler des ponts supplémentaires aux ports 12 à 21 et 24 à 45.
+* Sur les commutateurs Brocade 7810 et 7840, MetroCluster 1 ou le groupe DR 1 ne prend en charge que deux piles de ponts.
+* Sur les commutateurs Brocade G720 et G730, vous pouvez câbler des ponts supplémentaires aux ports 16 à 21.
+
+
+[cols="2a,2a,2a,2a,2a,2a,2a,2a,2a,2a,2a"]
+|===
+2+| *Composant* | *Port* | *Se connecte au commutateur FC...* | *Ports 6505, G610, G710* | *6510, port DCX 8510-8* | *port 6520* | *Port 7810* | *Port 7840* | *Ports G620, G620-1, G630, G630-1* | *Ports G720, G730* 
+
+
+ a| 
+Pile 1
+ a| 
+bridge_x_1a
+ a| 
+FC1
+ a| 
+1
+ a| 
+8
+ a| 
+8
+ a| 
+8
+ a| 
+8
+ a| 
+8
+ a| 
+8
+ a| 
+10
+
+
+
+ a| 
+FC2
+ a| 
+2
+ a| 
+8
+ a| 
+8
+ a| 
+8
+ a| 
+8
+ a| 
+8
+ a| 
+8
+ a| 
+10
+
+
+
+ a| 
+bridge_x_1b
+ a| 
+FC1
+ a| 
+1
+ a| 
+9
+ a| 
+9
+ a| 
+9
+ a| 
+9
+ a| 
+9
+ a| 
+9
+ a| 
+11
+
+
+
+ a| 
+FC2
+ a| 
+2
+ a| 
+9
+ a| 
+9
+ a| 
+9
+ a| 
+9
+ a| 
+9
+ a| 
+9
+ a| 
+11
+
+
+
+ a| 
+Pile 2
+ a| 
+bridge_x_2a
+ a| 
+FC1
+ a| 
+1
+ a| 
+10
+ a| 
+10
+ a| 
+10
+ a| 
+10
+ a| 
+10
+ a| 
+10
+ a| 
+14
+
+
+
+ a| 
+FC2
+ a| 
+2
+ a| 
+10
+ a| 
+10
+ a| 
+10
+ a| 
+10
+ a| 
+10
+ a| 
+10
+ a| 
+14
+
+
+
+ a| 
+bridge_x_2b
+ a| 
+FC1
+ a| 
+1
+ a| 
+11
+ a| 
+11
+ a| 
+11
+ a| 
+11
+ a| 
+11
+ a| 
+11
+ a| 
+15
+
+
+
+ a| 
+FC2
+ a| 
+2
+ a| 
+11
+ a| 
+11
+ a| 
+11
+ a| 
+11
+ a| 
+11
+ a| 
+11
+ a| 
+15
+
+|===
+
+
+=== MetroCluster 2 ou groupe DR 2
+
+Le tableau suivant présente les configurations de plateaux prises en charge dans MetroCluster 2 ou le groupe DR 2 pour les ponts FibreBridge 7500N ou 7600N utilisant les deux ports FC (FC1 et FC2) sur les commutateurs Brocade . Tenez compte des points suivants lors de l'utilisation de ce tableau de configuration :
+
+* Sur les commutateurs Brocade 6510, DCX 8510-8 et 7840, MetroCluster 2 ou le groupe DR 2 ne prend en charge que deux piles de ponts.
+* Sur les commutateurs Brocade 6520, vous pouvez câbler des ponts supplémentaires aux ports 60-69 et 72-93.
+* Sur les commutateurs Brocade G620, G620-1, G630 et G630-1, vous pouvez câbler des ponts supplémentaires aux ports 32 à 35.
+* Sur les commutateurs Brocade G720 et G730, vous pouvez câbler des ponts supplémentaires aux ports 36 à 39.
+* L'utilisation des ports pour les commutateurs Brocade 6505, G610 et G710 dans une configuration MetroCluster à huit nœuds n'est pas indiquée. En raison du nombre limité de ports, vous attribuez les ports site par site en fonction du modèle de contrôleur et du nombre de liaisons ISL et de paires de ponts utilisés.
+
+
+[cols="2a,2a,2a,2a,2a,2a,2a,2a,2a,2a,2a"]
+|===
+2+| *Composant* | *Port* | *Se connecte au commutateur FC...* | *Ports 6505, G610, G710* | *6510, port DCX 8510-8* | *port 6520* | *Port 7810* | *Port 7840* | *Ports G620, G620-1, G630, G630-1* | *Ports G720, G730* 
+
+
+ a| 
+Pile 1
+ a| 
+bridge_x_1a
+ a| 
+FC1
+ a| 
+1
+ a| 
+n / A
+ a| 
+32
+ a| 
+56
+ a| 
+n / A
+ a| 
+20
+ a| 
+26
+ a| 
+32
+
+
+
+ a| 
+FC2
+ a| 
+2
+ a| 
+n / A
+ a| 
+32
+ a| 
+56
+ a| 
+n / A
+ a| 
+20
+ a| 
+26
+ a| 
+32
+
+
+
+ a| 
+bridge_x_1b
+ a| 
+FC1
+ a| 
+1
+ a| 
+n / A
+ a| 
+33
+ a| 
+57
+ a| 
+n / A
+ a| 
+21
+ a| 
+27
+ a| 
+33
+
+
+
+ a| 
+FC2
+ a| 
+2
+ a| 
+n / A
+ a| 
+33
+ a| 
+57
+ a| 
+n / A
+ a| 
+21
+ a| 
+27
+ a| 
+33
+
+
+
+ a| 
+Pile 2
+ a| 
+bridge_x_2a
+ a| 
+FC1
+ a| 
+1
+ a| 
+n / A
+ a| 
+34
+ a| 
+58
+ a| 
+n / A
+ a| 
+22
+ a| 
+30
+ a| 
+34
+
+
+
+ a| 
+FC2
+ a| 
+2
+ a| 
+n / A
+ a| 
+34
+ a| 
+58
+ a| 
+n / A
+ a| 
+22
+ a| 
+30
+ a| 
+34
+
+
+
+ a| 
+bridge_x_2b
+ a| 
+FC1
+ a| 
+1
+ a| 
+n / A
+ a| 
+35
+ a| 
+59
+ a| 
+n / A
+ a| 
+23
+ a| 
+31
+ a| 
+35
+
+
+
+ a| 
+FC2
+ a| 
+2
+ a| 
+n / A
+ a| 
+35
+ a| 
+59
+ a| 
+n / A
+ a| 
+23
+ a| 
+31
+ a| 
+35
+
+|===
+
+
+=== MetroCluster 3 ou groupe DR 3
+
+Le tableau suivant présente les configurations de plateaux prises en charge dans MetroCluster 3 ou DR group 3 pour les ponts FibreBridge 7500N ou 7600N utilisant les deux ports FC (FC1 et FC2) sur les commutateurs Brocade . Tenez compte des points suivants lors de l'utilisation de ce tableau de configuration :
+
+* Sur les commutateurs Brocade G630 et G630-1, vous pouvez câbler des ponts supplémentaires aux ports 60 à 63.
+* Sur les commutateurs Brocade G730, vous pouvez câbler des ponts supplémentaires aux ports 64, 65, 68 et 69.
+
+
+[cols="2a,2a,2a,2a,2a,2a"]
+|===
+2+| *Composant* | *Port* | *Se connecte au commutateur FC...* | *Port G630, G630-1* | *Port G730* 
+
+
+ a| 
+Pile 1
+ a| 
+bridge_x_1a
+ a| 
+FC1
+ a| 
+1
+ a| 
+56
+ a| 
+58
+
+
+
+ a| 
+FC2
+ a| 
+2
+ a| 
+56
+ a| 
+58
+
+
+
+ a| 
+bridge_x_1b
+ a| 
+FC1
+ a| 
+1
+ a| 
+57
+ a| 
+59
+
+
+
+ a| 
+FC2
+ a| 
+2
+ a| 
+57
+ a| 
+59
+
+
+
+ a| 
+Pile 2
+ a| 
+bridge_x_2a
+ a| 
+FC1
+ a| 
+1
+ a| 
+58
+ a| 
+62
+
+
+
+ a| 
+FC2
+ a| 
+2
+ a| 
+58
+ a| 
+62
+
+
+
+ a| 
+bridge_x_2b
+ a| 
+FC1
+ a| 
+1
+ a| 
+59
+ a| 
+63
+
+
+
+ a| 
+FC2
+ a| 
+2
+ a| 
+59
+ a| 
+63
+
+|===
+
+
+=== MetroCluster 4 ou groupe DR 4
+
+Le tableau suivant présente les configurations de plateaux prises en charge dans MetroCluster 4 ou DR Group 4 pour les ponts FibreBridge 7500N ou 7600N utilisant les deux ports FC (FC1 et FC2) sur les commutateurs Brocade . Tenez compte des points suivants lors de l'utilisation de ce tableau de configuration :
+
+* Sur les commutateurs Brocade G630 et G630-1, vous pouvez câbler des ponts supplémentaires aux ports 80 à 83.
+* Sur les commutateurs Brocade G730, vous pouvez câbler des ponts supplémentaires aux ports 84 à 95.
+
+
+[cols="2a,2a,2a,2a,2a,2a"]
+|===
+2+| *Composant* | *Port* | *Se connecte au commutateur FC...* | *Port G630, G630-1* | *Port G730* 
+
+
+ a| 
+Pile 1
+ a| 
+bridge_x_1a
+ a| 
+FC1
+ a| 
+1
+ a| 
+74
+ a| 
+80
+
+
+
+ a| 
+FC2
+ a| 
+2
+ a| 
+74
+ a| 
+80
+
+
+
+ a| 
+bridge_x_1b
+ a| 
+FC1
+ a| 
+1
+ a| 
+75
+ a| 
+81
+
+
+
+ a| 
+FC2
+ a| 
+2
+ a| 
+75
+ a| 
+81
+
+
+
+ a| 
+Pile 2
+ a| 
+bridge_x_2a
+ a| 
+FC1
+ a| 
+1
+ a| 
+78
+ a| 
+82
+
+
+
+ a| 
+FC2
+ a| 
+2
+ a| 
+78
+ a| 
+82
+
+
+
+ a| 
+bridge_x_2b
+ a| 
+FC1
+ a| 
+1
+ a| 
+79
+ a| 
+83
+
+
+
+ a| 
+FC2
+ a| 
+2
+ a| 
+79
+ a| 
+83
+
+|===
+
+
+== Configurations de tiroirs utilisant FibreBridge 7500N ou 7600N avec un port FC (FC1 ou FC2) uniquement
+
+
+
+=== MetroCluster 1 ou groupe DR 1
+
+Le tableau suivant présente les configurations de plateaux prises en charge dans MetroCluster 1 ou le groupe DR 1 avec FibreBridge 7500N ou 7600N et un seul port FC (FC1 ou FC2) sur les commutateurs Brocade . Tenez compte des points suivants lors de l'utilisation de ce tableau de configuration :
+
+* Sur les commutateurs Brocade 6505, G610, G710, G620, G620-1, G630 et G630-1, ports de pont supplémentaires 12 à 15.
+* Sur les commutateurs Brocade 6510 et DCX 8510-8, vous pouvez câbler des ponts supplémentaires aux ports 12 à 19.
+* Sur les commutateurs Brocade 6520, vous pouvez câbler des ponts supplémentaires aux ports 16-21 et 24-45.
+* Sur les commutateurs Brocade G720 et G730, vous pouvez câbler des ponts supplémentaires aux ports 16 à 21.
+
+
+[cols="2a,2a,2a,2a,2a,2a,2a,2a,2a,2a"]
+|===
+| *Composant* | *Port* | *Se connecte au commutateur FC...* | *Ports 6505, G610, G710* | *6510, port DCX 8510-8* | *port 6520* | *Port 7810* | *Port 7840* | *Ports G620, G620-1, G630, G630-1* | *Ports G720, G730* 
+
+
+ a| 
+Pile 1
+ a| 
+bridge_x_1a
+ a| 
+1
+ a| 
+8
+ a| 
+8
+ a| 
+8
+ a| 
+8
+ a| 
+8
+ a| 
+8
+ a| 
+10
+
+
+
+ a| 
+bridge_x_1b
+ a| 
+2
+ a| 
+8
+ a| 
+8
+ a| 
+8
+ a| 
+8
+ a| 
+8
+ a| 
+8
+ a| 
+10
+
+
+
+ a| 
+Pile 2
+ a| 
+bridge_x_2a
+ a| 
+1
+ a| 
+9
+ a| 
+9
+ a| 
+9
+ a| 
+9
+ a| 
+9
+ a| 
+9
+ a| 
+11
+
+
+
+ a| 
+bridge_x_2b
+ a| 
+2
+ a| 
+9
+ a| 
+9
+ a| 
+9
+ a| 
+9
+ a| 
+9
+ a| 
+9
+ a| 
+11
+
+
+
+ a| 
+Pile 3
+ a| 
+bridge_x_3a
+ a| 
+1
+ a| 
+10
+ a| 
+10
+ a| 
+10
+ a| 
+10
+ a| 
+10
+ a| 
+10
+ a| 
+14
+
+
+
+ a| 
+bridge_x_3b
+ a| 
+2
+ a| 
+10
+ a| 
+10
+ a| 
+10
+ a| 
+10
+ a| 
+10
+ a| 
+10
+ a| 
+14
+
+
+
+ a| 
+Pile 4
+ a| 
+bridge_x_4a
+ a| 
+1
+ a| 
+11
+ a| 
+11
+ a| 
+11
+ a| 
+11
+ a| 
+11
+ a| 
+11
+ a| 
+15
+
+
+
+ a| 
+bridge_x_4b
+ a| 
+2
+ a| 
+11
+ a| 
+11
+ a| 
+11
+ a| 
+11
+ a| 
+11
+ a| 
+11
+ a| 
+15
+
+|===
+
+
+=== MetroCluster 2 ou groupe DR 2
+
+Le tableau suivant présente les configurations de plateaux prises en charge dans MetroCluster 2 ou le groupe DR 2 pour les ponts FibreBridge 7500N ou 7600N utilisant un port FC (FC1 ou FC2) sur les commutateurs Brocade . Tenez compte des points suivants lors de l'utilisation de ce tableau de configuration :
+
+* Sur les commutateurs Brocade 6520, vous pouvez câbler des ponts supplémentaires aux ports 60-69 et 72-93.
+* Sur les commutateurs Brocade G620, G620-1, G630, G630-1, vous pouvez câbler des ponts supplémentaires aux ports 32 à 35.
+* Sur les commutateurs Brocade G720 et G730, vous pouvez câbler des ponts supplémentaires aux ports 36 à 39.
+* L'utilisation des ports pour les commutateurs Brocade 6505, G610 et G710 dans une configuration MetroCluster à huit nœuds n'est pas indiquée. En raison du nombre limité de ports, vous attribuez les ports site par site en fonction du modèle de contrôleur et du nombre de liaisons ISL et de paires de ponts utilisés.
+
+
+[cols="2a,2a,2a,2a,2a,2a,2a,2a,2a,2a"]
+|===
+| *Composant* | *Port* | *Se connecte au commutateur FC...* | *Ports 6505, G610, G710* | *6510, port DCX 8510-8* | *port 6520* | *Port 7810* | *Port 7840* | *Ports G620, G620-1, G630, G630-1* | *Ports G720, G730* 
+
+
+ a| 
+Pile 1
+ a| 
+bridge_x_1a
+ a| 
+1
+ a| 
+n / A
+ a| 
+32
+ a| 
+56
+ a| 
+n / A
+ a| 
+20
+ a| 
+26
+ a| 
+32
+
+
+
+ a| 
+bridge_x_1b
+ a| 
+2
+ a| 
+n / A
+ a| 
+32
+ a| 
+56
+ a| 
+n / A
+ a| 
+20
+ a| 
+26
+ a| 
+32
+
+
+
+ a| 
+Pile 2
+ a| 
+bridge_x_2a
+ a| 
+1
+ a| 
+n / A
+ a| 
+33
+ a| 
+57
+ a| 
+n / A
+ a| 
+21
+ a| 
+27
+ a| 
+33
+
+
+
+ a| 
+bridge_x_2b
+ a| 
+2
+ a| 
+n / A
+ a| 
+33
+ a| 
+57
+ a| 
+n / A
+ a| 
+21
+ a| 
+27
+ a| 
+33
+
+
+
+ a| 
+Pile 3
+ a| 
+bridge_x_3a
+ a| 
+1
+ a| 
+n / A
+ a| 
+34
+ a| 
+58
+ a| 
+n / A
+ a| 
+22
+ a| 
+30
+ a| 
+34
+
+
+
+ a| 
+bridge_x_3b
+ a| 
+2
+ a| 
+n / A
+ a| 
+34
+ a| 
+58
+ a| 
+n / A
+ a| 
+22
+ a| 
+30
+ a| 
+34
+
+
+
+ a| 
+Pile 4
+ a| 
+bridge_x_4a
+ a| 
+1
+ a| 
+n / A
+ a| 
+35
+ a| 
+59
+ a| 
+n / A
+ a| 
+23
+ a| 
+31
+ a| 
+35
+
+
+
+ a| 
+bridge_x_4b
+ a| 
+2
+ a| 
+n / A
+ a| 
+35
+ a| 
+59
+ a| 
+n / A
+ a| 
+23
+ a| 
+31
+ a| 
+35
+
+|===
+
+
+=== MetroCluster 3 ou groupe DR 3
+
+Le tableau suivant présente les configurations de plateaux prises en charge dans MetroCluster 3 ou DR group 3 pour les ponts FibreBridge 7500N ou 7600N utilisant un port FC (FC1 ou FC2) sur les commutateurs Brocade . Tenez compte des points suivants lors de l'utilisation de ce tableau de configuration :
+
+* Sur les commutateurs Brocade G630 et G630-1, vous pouvez câbler des ponts supplémentaires aux ports 60 à 63.
+* Sur les commutateurs Brocade G730, vous pouvez câbler des ponts supplémentaires aux ports 64, 65, 68, 69.
+
+
+[cols="2a,2a,2a,2a,2a"]
+|===
+| *Composant* | *Port* | *Se connecte au commutateur FC...* | *Port G630, G630-1* | *Port G730* 
+
+
+ a| 
+Pile 1
+ a| 
+bridge_x_1a
+ a| 
+1
+ a| 
+56
+ a| 
+58
+
+
+
+ a| 
+bridge_x_1b
+ a| 
+2
+ a| 
+56
+ a| 
+58
+
+
+
+ a| 
+Pile 2
+ a| 
+bridge_x_2a
+ a| 
+1
+ a| 
+57
+ a| 
+59
+
+
+
+ a| 
+bridge_x_2b
+ a| 
+2
+ a| 
+57
+ a| 
+59
+
+
+
+ a| 
+Pile 3
+ a| 
+bridge_x_3a
+ a| 
+1
+ a| 
+58
+ a| 
+62
+
+
+
+ a| 
+bridge_x_3b
+ a| 
+2
+ a| 
+58
+ a| 
+62
+
+
+
+ a| 
+Pile 4
+ a| 
+bridge_x_4a
+ a| 
+1
+ a| 
+59
+ a| 
+63
+
+
+
+ a| 
+bridge_x_4b
+ a| 
+2
+ a| 
+59
+ a| 
+63
+
+|===
+
+
+=== MetroCluster 4 ou groupe DR 4
+
+Le tableau suivant présente les configurations de plateaux prises en charge dans MetroCluster 4 ou DR group 4 pour les ponts FibreBridge 7500N ou 7600N utilisant un port FC (FC1 ou FC2) sur les commutateurs Brocade . Tenez compte des points suivants lors de l'utilisation de ce tableau de configuration :
+
+* Sur les commutateurs Brocade G630 et G630-1, vous pouvez câbler des ponts supplémentaires aux ports 80 à 83.
+* Sur les commutateurs Brocade G730, vous pouvez câbler des ponts supplémentaires aux ports 84 à 95.
+
+
+[cols="2a,2a,2a,2a,2a"]
+|===
+| *Composant* | *Port* | *Se connecte au commutateur FC...* | *Port G630, G630-1* | *Port G730* 
+
+
+ a| 
+Pile 1
+ a| 
+bridge_x_1a
+ a| 
+1
+ a| 
+74
+ a| 
+80
+
+
+
+ a| 
+bridge_x_1b
+ a| 
+2
+ a| 
+74
+ a| 
+80
+
+
+
+ a| 
+Pile 2
+ a| 
+bridge_x_2a
+ a| 
+1
+ a| 
+75
+ a| 
+81
+
+
+
+ a| 
+bridge_x_2b
+ a| 
+2
+ a| 
+75
+ a| 
+81
+
+
+
+ a| 
+Pile 3
+ a| 
+bridge_x_3a
+ a| 
+1
+ a| 
+78
+ a| 
+82
+
+
+
+ a| 
+bridge_x_3b
+ a| 
+2
+ a| 
+78
+ a| 
+82
+
+
+
+ a| 
+Pile 4
+ a| 
+bridge_x_4a
+ a| 
+1
+ a| 
+79
+ a| 
+83
+
+
+
+ a| 
+bridge_x_4b
+ a| 
+2
+ a| 
+79
+ a| 
+83
+
+|===
