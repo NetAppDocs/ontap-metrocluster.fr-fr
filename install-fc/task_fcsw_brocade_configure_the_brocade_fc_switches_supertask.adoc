@@ -479,23 +479,16 @@ https://docs.netapp.com/us-en/ontap-metrocluster/install-fc/concept_configure_th
 
 
 
-. Vérifiez que le commutateur utilise la méthode de licence de port dynamique.
+. Si vous exécutez une version antérieure à FOS 9.0, vérifiez que le commutateur utilise la méthode de licence dynamique Port on Demand (POD).
++
+
+NOTE: Dans Fabric OS 9.0 et versions ultérieures, la méthode de licence est dynamique par défaut. La méthode de licence statique n'est pas prise en charge.
+
 +
 .. Exécutez la commande license :
 +
-[role="tabbed-block"]
-====
-.Pour Fabric OS 8.2.x et versions antérieures
---
-Lancer la commande `licenseport --show`.
+`licenseport --show`
 
---
-.Pour Fabric OS 9.0 et versions ultérieures
---
-Lancer la commande `license --show -port`.
-
---
-====
 +
 [listing]
 ----
@@ -541,10 +534,6 @@ FC_switch_A_1:admin> licenseport --method dynamic
 The POD method has been changed to dynamic.
 Please reboot the switch now for this change to take effect
 ----
-+
-
-NOTE: Dans Fabric OS 9.0 et versions ultérieures, la méthode de licence est dynamique par défaut. La méthode de licence statique n'est pas prise en charge.
-
 
 
 . Activer le trap T11-FC-ZONE-SERVEUR-MIB pour assurer une surveillance réussie de l'état des commutateurs dans ONTAP :
