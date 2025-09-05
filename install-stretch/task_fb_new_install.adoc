@@ -159,7 +159,6 @@ NOTE: Tous les disques du groupe de reprise après incident doivent utiliser le 
 +
 https://hwu.netapp.com["NetApp Hardware Universe"^]
 
-* Une combinaison de modules IOM12 et de modules IOM3 n'est pas prise en charge au sein de la même pile de stockage. Si votre système exécute une version prise en charge de ONTAP, vous pouvez utiliser plusieurs modules IOM12 et IOM6 au sein de la même pile de stockage.
 
 
 [NOTE]
@@ -489,18 +488,7 @@ link:../maintain/index.html["Gérer les composants MetroCluster"]
 
 
 
-=== Relier les tiroirs disques aux ponts
-
-Vous devez utiliser les ponts FC-SAS appropriés pour le câblage des tiroirs disques.
-
-.Choix
-* <<cabling_fb_7600N_7500N_with_iom12,Reliez un pont FibreBridge 7600N ou 7500N aux tiroirs disques à l'aide de modules IOM12>>
-* <<cabling_fb_7600N_7500N_with_iom6_iom3,Reliez un pont FibreBridge 7600N ou 7500N à des tiroirs disques à l'aide de modules IOM6 ou IOM3>>
-
-
-
-
-==== Reliez un pont FibreBridge 7600N ou 7500N aux tiroirs disques à l'aide de modules IOM12
+=== Reliez un pont FibreBridge 7600N ou 7500N aux tiroirs disques à l'aide de modules IOM12
 
 Après avoir configuré le pont, vous pouvez commencer à câbler votre nouveau système.
 
@@ -528,7 +516,7 @@ Le _Guide d'installation et de maintenance_ de votre modèle de tiroir disque fo
 +
 .. Pour la première pile de tiroirs disques, reliez le module d'E/S Par câble A du premier tiroir au port SAS A du FibreBridge A, et reliez le module d'E/S par câble B du dernier tiroir au port SAS A du FibreBridge B.
 .. Pour les piles de tiroirs supplémentaires, répétez l'étape précédente en utilisant le port SAS suivant disponible sur les ponts FiberBridge, en utilisant le port B pour la deuxième pile, le port C pour la troisième pile et le port D pour la quatrième pile.
-.. Lors du câblage, connectez les piles basées sur des modules IOM12 et IOM3/IOM6 au même pont tant qu'elles sont connectées à des ports SAS distincts.
+.. Lors du câblage, connectez les piles basées sur les modules IOM12 au même pont à condition qu'elles soient connectées à des ports SAS distincts.
 +
 --
 
@@ -540,43 +528,6 @@ image::../media/mcc_cabling_bridge_and_sas3_stack_with_7500n_and_multiple_stacks
 
 --
 
-
-
-
-
-
-==== Câblez un pont FibreBridge 7600N ou 7500N avec des étagères à l'aide de modules IOM6 ou IOM3
-
-Après avoir configuré le pont, vous pouvez commencer à câbler votre nouveau système. Le pont FiberBridge 7600N ou 7500N utilise des connecteurs mini-SAS et prend en charge les tiroirs qui utilisent des modules IOM6 ou IOM3.
-
-.Description de la tâche
-Les modules IOM3 ne sont pas pris en charge avec les ponts FiberBridge 7600N.
-
-Pour les tiroirs disques, vous insérez un connecteur de câble SAS avec la languette de retrait orientée vers le bas (sous le connecteur).
-
-.Étapes
-. Connectez les tiroirs en série de chaque pile.
-+
---
-.. Pour la première pile de tiroirs, reliez le module d'E/S À un port carré du premier shelf au port SAS A du FibreBridge A.
-.. Pour la première pile de tiroirs, reliez le port Circle IOM B du dernier tiroir au port SAS A du FibreBridge B.
-
-
-Le _Guide d'installation et de maintenance_ de votre modèle de tiroir fournit des informations détaillées sur la configuration des tiroirs en série.
-
-https://library.netapp.com/ecm/ecm_download_file/ECMP1119629["Guide d'installation et de maintenance des tiroirs disques SAS pour DS4243, DS2246, DS4486 et DS4246"^]
-
-L'illustration suivante présente un ensemble de ponts câblés à une pile de tiroirs :
-
-image::../media/mcc_cabling_bridge_and_sas_stack_with_7500n_and_single_stack.gif[passerelle de câblage mcc et pile sas avec 7500n et pile unique]
-
---
-. Pour les piles de tiroirs supplémentaires, répétez les étapes précédentes en utilisant le port SAS suivant disponible sur les ponts FiberBridge, en utilisant le port B pour une deuxième pile, le port C pour une troisième pile et le port D pour une quatrième pile.
-+
-L'illustration suivante montre quatre piles connectées à une paire de ponts FiberBridge 7600N ou 7500N.
-
-+
-image::../media/mcc_cabling_bridge_and_sas_stack_with_7500n_four_stacks.gif[pont de câblage mcc et pile sas avec 7500n quatre piles]
 
 
 
@@ -633,7 +584,7 @@ Incorrect
  a| 
 .. Vérifiez que les câbles SAS ne sont pas correctement branchés ou corrigez le câblage SAS en réétiquetage des tiroirs disques aux ponts.
 +
-<<Relier les tiroirs disques aux ponts>>
+<<Reliez un pont FibreBridge 7600N ou 7500N aux tiroirs disques à l'aide de modules IOM12>>
 
 .. Recommencez <<step1-verify-detect,Étape 1>> pour chaque pont restant.
 
