@@ -4126,7 +4126,6 @@
   <block id="89cd18493d151ae11e875d4edf6b6e66" category="list-text">Quatre disques au deuxième trimestre : 6, 7, 8, 9</block>
   <block id="8d48afc2af7642b1eb38cbfe7c3b33d8" category="list-text">Quatre disques au troisième trimestre : 12, 13, 14, 15</block>
   <block id="807910399f003942a09396612760caef" category="list-text">Quatre disques au quatrième trimestre : 18, 19, 20, 21</block>
-  <block id="2ad434ab593fd445c83cdbf1d5d00216" category="section-title">Association de modules IOM12 et IOM 6 dans une pile</block>
   <block id="31c38f64e60770065e856442e98e7930" category="section-title">Limitations de ONTAP</block>
   <block id="d1a4fac9e86db09ae269d00dbc37e4d4" category="section-title">Instructions d'utilisation de cette solution de couche 3 avec une configuration MetroCluster</block>
   <block id="e370314844d959f3bb5699371fb7e06c" category="summary">La configuration des nœuds de chaque cluster dans une configuration MetroCluster est similaire à celle des nœuds d'un cluster standard.</block>
@@ -7359,43 +7358,26 @@
   <block id="6abf8fcf1209a0e61a34ee20748a726e" category="paragraph">Connectez les ports de cluster de chaque contrôleur aux ports des commutateurs de réseau de cluster identifiés à la sous-étape b.</block>
   <block id="ad227e6a4e6deeee2a76bd6b755dad7e" category="summary">Depuis ONTAP 9.8, vous pouvez supprimer un groupe de reprise après incident d'une configuration MetroCluster à huit nœuds pour créer une configuration MetroCluster à quatre nœuds.</block>
   <block id="54c28d1cf3d720cc9297f6c3da2658be" category="doc">Suppression d'un groupe de reprise après incident</block>
-  <block id="8c6cfac074d0567f4c5a941062f42343" category="paragraph">Cette procédure est prise en charge sur ONTAP 9.8 et versions ultérieures. Pour les systèmes qui exécutent ONTAP 9.7 ou une version antérieure, consultez l'article de la base de connaissances</block>
   <block id="d5d6932337b2af2eda1bd96fd5aa3832" category="inline-link-macro">Comment supprimer un groupe de reprise sur incident d'une configuration MetroCluster</block>
-  <block id="44fa5f61d97cbf15ad67ee9c5aedc1c6" category="paragraph"><block ref="44fa5f61d97cbf15ad67ee9c5aedc1c6" category="inline-link-macro-rx"></block></block>
-  <block id="cba784dbb6dad30cadc1fcb2d1b5ee81" category="paragraph"><block ref="cba784dbb6dad30cadc1fcb2d1b5ee81" category="inline-link-rx"></block></block>
   <block id="19df577c80891b37cfa2f1b29c518f6e" category="paragraph">Une configuration à huit nœuds comprend huit nœuds organisés sous forme de deux groupes de reprise après incident à quatre nœuds.</block>
-  <block id="e66e23247af7503f663027daef188754" category="paragraph">En supprimant un groupe de reprise sur incident, quatre nœuds restent dans la configuration.</block>
-  <block id="1c08e40b56822a43e7877e2eb26a97fd" category="section-title">Suppression des nœuds du groupe DR de chaque cluster</block>
   <block id="f2bf546b53e3f6cc54f274876ab2cb36" category="list-text">Le<block ref="4adce10a097546797e77202c6d30906e" prefix=" " category="inline-code"></block> La commande n'est prise en charge que sur ONTAP 9.8 et les versions ultérieures.</block>
-  <block id="cdfb112bdd5ad036d9715bddf30e7912" category="list-text">Préparer la suppression du groupe de reprise après incident, si ce n'est pas déjà le cas.</block>
   <block id="95e7c6b72cfdf5397dbe8a6653bdc7c1" category="list-text">Déplacez tous les volumes de données vers un autre groupe de reprise après incident.</block>
   <block id="25898a6422d7ded47f2936026a1df6c1" category="list-text">Supprimez tous les volumes de métadonnées MDV_aud qui peuvent exister dans le groupe DR à supprimer.</block>
-  <block id="92cccd899142da5e06923ac8991bc5fc" category="list-text">Supprimez tous les agrégats de données du groupe de reprise sur incident à supprimer comme indiqué dans l'exemple suivant :</block>
   <block id="73f68d9b46d6064cae47a18da8004723" category="admonition">Les agrégats racine ne sont pas supprimés.</block>
-  <block id="29771e568737c4148ab90cda182257df" category="list-text">Migrez toutes les LIFs de données vers les nœuds d'un autre groupe de reprise après incident. +<block ref="191a1b4ffe7599d6b279767d21daa9db" prefix=" " category="inline-code"></block></block>
   <block id="4ed819934d8eb4ecfa162dc35324fc32" category="list-text">Migrez la LIF de gestion de cluster vers un nœud de rattachement situé dans un autre groupe de reprise après incident.</block>
   <block id="91f41d8c6028070fa5f4cd7a2c56f7be" category="paragraph"><block ref="253b4100066f0d3983139342730b6b59" prefix="" category="inline-code"></block></block>
-  <block id="0eb68bef79fda0557a1bd86cd43b0afa" category="paragraph">La gestion des nœuds et les LIF inter-cluster ne sont pas migrées.</block>
   <block id="85d38d4ee3b9248e142229cf9e215620" category="list-text">Transférer epsilon vers un nœud dans un autre groupe de reprise après incident si nécessaire.</block>
   <block id="aac7ac3bfa9117ebc1368d396b746e00" category="list-text">Identifier et supprimer le groupe de reprise sur incident.</block>
   <block id="b32745668eaff06c12feb45539c339e0" category="list-text">Identifiez le groupe DR approprié pour la suppression :</block>
   <block id="0373e81430a1cc22dafabd61d4a3cd0e" category="list-text">Supprimer les nœuds du groupe DR : +<block ref="485c31afa19dfe8599f35cc3307033a1" prefix=" " category="inline-code"></block></block>
   <block id="c31e08573cdaea3b8de26a9f74105469" category="paragraph">L'exemple suivant montre la suppression de la configuration du groupe de reprise sur incident sur cluster_A.</block>
   <block id="d9b49bc2577d68e37a84f80273248aee" category="list-text">Répétez l'étape précédente sur le cluster partenaire.</block>
-  <block id="4ed5c490b4a22cb265bc48e25109096a" category="list-text">Si dans une configuration MetroCluster IP, supprimer les connexions MetroCluster sur les nœuds de l'ancien groupe DR.</block>
-  <block id="a64d27abe280b12e33befc92f146357d" category="paragraph">Ces commandes peuvent être émises depuis un cluster et s'appliquer à tout le groupe de reprise sur incident sur les deux clusters.</block>
   <block id="d172777a2cbbb0c3ec9b70dc45780c5f" category="list-text">Débrancher les connexions :</block>
-  <block id="08a665929056fef6a8490b5b0b04f474" category="paragraph"><block ref="afb15fdd6a9dc3aa613a61a4039f0a42" prefix="" category="inline-code"></block></block>
   <block id="e18600ad5da962c033022e8657b0fab3" category="list-text">Supprimez les interfaces MetroCluster sur les nœuds de l'ancien groupe DR :</block>
   <block id="eb5c2cb295b7a9fd5ee2ed559f176f9e" category="paragraph"><block ref="f6dcf8fef0b40f9ec60771b2c98849ae" prefix="" category="inline-code"></block></block>
   <block id="deba5df0dea3cbba9463f219100e5ba4" category="list-text">Supprimez l'ancienne configuration du groupe DR. +<block ref="cd90838db53304393981e5da6c9b9f7e" prefix=" " category="inline-code"></block></block>
   <block id="8d3c998ce16ecd4cdc06e3ddd8c757e6" category="list-text">Dissocier les nœuds de l'ancien groupe DR.</block>
-  <block id="ed2e5c7ebbd6b2c749bdb92415d9787c" category="list-text">Désactiver le basculement du stockage :</block>
-  <block id="f6d453c97574893aee9bca0a4faee686" category="paragraph"><block ref="2272fec77dcd7afc65986085c999a68d" prefix="" category="inline-code"></block></block>
-  <block id="cdab15f9840a783bfc35d8f8baa514e9" category="list-text">Dissocier le nœud : +<block ref="28573907c93cccf42d4d45b792f8aa49" prefix=" " category="inline-code"></block></block>
   <block id="ff6434ad658fa9ed7826817a3f9f0dff" category="paragraph">Répétez cette étape pour l'autre nœud local de l'ancien groupe DR.</block>
-  <block id="06b28530123c83dfb519d35b8e3e11f5" category="list-text">Définissez le niveau de privilège admin : +<block ref="0a654c13d63710f829bc02c4cbec79ee" prefix=" " category="inline-code"></block></block>
-  <block id="47b7f94ac9af47dcafeea8d4a5f0d377" category="list-text">Réactiver la haute disponibilité du cluster dans le nouveau groupe de reprise après incident :</block>
   <block id="8917e80351843363583600f118c2fa84" category="list-text">Arrêtez, mettez hors tension et retirez les anciens modules de contrôleur et tiroirs de stockage.</block>
   <block id="9eacad39f32dfb7a1a6d5e468b030290" category="list-text">Effectuer l'opération de basculement avec le paramètre -Simulate : +<block ref="d7c628cb013f1d72c1a290f5fbf9d231" prefix=" " category="inline-code"></block></block>
   <block id="88577472afb219c41162d2707cb8cbaf" category="summary">Vous devez démarrer le module de contrôleur existant sur ONTAP.</block>
@@ -10405,9 +10387,6 @@
   <block id="a417bfe3b0e85c20658fe71357feb3ef" category="paragraph">Pour connaître la syntaxe complète de la commande, reportez-vous à la page man. L'exemple suivant illustre la création des LIFs intercluster cluster01_icl01 et cluster01_icl02 :</block>
   <block id="0074a60c2f111fa09e324bfc6f086bfd" category="paragraph">Lancer la commande :<block ref="08fd4296d1145ee217b3ba481add0899" prefix=" " category="inline-code"></block></block>
   <block id="bb084c29063404b6611bde28d4ed57d3" category="paragraph">Lancer la commande :<block ref="4686e63f75ecbb5593b9aac27ab89dd7" prefix=" " category="inline-code"></block></block>
-  <block id="3c01c02ef0bb0d39aaf5f9cbc5c8ea4b" category="paragraph"><block ref="6b5ac3bb2bcffd222567cf972f8a2548" prefix="" category="inline-code"></block></block>
-  <block id="f7967c2b46538ede39d7960526ce1fa4" category="list-text">Remettez en ligne les LIF de données.<block ref="c5b63f9c60f25a11e5c1cde65fb540f1" prefix=" " category="inline-code"></block></block>
-  <block id="f677111a20e676139c4a865021fafa0d" category="paragraph"><block ref="850d7b5cf3d569632a8982fc791023b0" prefix="" category="inline-code"></block></block>
   <block id="00b7088169fa7f91ce7c54fd96b41d7b" category="list-text">Ajoutez le port physique qui hébergera les LIFs intercluster sur le broadcast domain correspondant.</block>
   <block id="e64aaeac172dbd7d324ded015d3b620f" category="list-text">Vérifier que le cluster partenaire est accessible et que la configuration a été resynchronisée sur le cluster partenaire :</block>
   <block id="e3c9aa07778be11d3bb374e3a6486e23" category="paragraph"><block ref="982b6fd5e36acd031c5af800a9951ed1" prefix="" category="inline-code"></block></block>
@@ -10534,7 +10513,6 @@
   <block id="6a9c67444d70fbe1484e9983092ffff8" category="admonition">Vous devez vous assurer d'effectuer les étapes de la section <block ref="b6e3e97b1b6ab70165db8088036aef95" category="inline-link-macro-rx"></block> sur chaque contrôleur (y compris le contrôleur de remplacement) pour vérifier que la configuration précédente a été supprimée.</block>
   <block id="779a44ac931df50e9ba3ac26bbca035e" category="list-text">Si le<block ref="3b3242ced99842a6c2c16f489b78e773" prefix=" " category="inline-code"></block> commande terminée avec succès, puis le module de contrôleur a échoué. utilisez le tableau précédent pour déterminer la procédure de récupération correcte.</block>
   <block id="57c5f3148ec34d732973b7f905f1ca84" category="section-title">Scénarios de panne du module de contrôleur lors de la transition MetroCluster FC vers IP</block>
-  <block id="b79001d76282bba800ccc9b5187d2ad4" category="list-text">Déplacez les LIF de données hors ligne.<block ref="58d060d8bc95409e743c7b8e95e72710" prefix=" " category="inline-code"></block></block>
   <block id="467f07382f2568a4248a6dee67437d64" category="paragraph"><block ref="467f07382f2568a4248a6dee67437d64" category="inline-link-macro-rx"></block></block>
   <block id="d570f5d821344a6838aaa260987eafc8" category="inline-link-macro">Gestion des paires haute disponibilité</block>
   <block id="519460f530eb0c6817aeafcaef72fd69" category="paragraph">Dans une configuration MetroCluster à quatre nœuds, cette défaillance peut entraîner un basculement automatique ou négocié du nœud, selon le composant défaillant. La restauration des données est décrite à la section <block ref="098c4bee7c591ea5429ed6be6c4ddd42" category="inline-link-macro-rx"></block> .</block>
@@ -11201,7 +11179,6 @@
   <block id="9dc72cfc812a43dbca6ba4e6357b2b04" category="paragraph">À partir de ONTAP 9.13.1, vous pouvez développer temporairement une configuration MetroCluster à huit nœuds pour actualiser les contrôleurs et le stockage. Voir <block ref="df5e6373f54c9330727709bb1055a079" category="inline-link-macro-rx"></block> pour en savoir plus.</block>
   <block id="e6f19b92e0e69fc5d74e94088b442a26" category="inline-link-macro">Actualisation d'une configuration IP MetroCluster à quatre ou huit nœuds</block>
   <block id="ae236ebe2cd05ce4da7fe73d504f4946" category="list-text">Si vous l'êtes <block ref="54f4a86aff0fc5aba4d6e37b225734c0" category="inline-link-macro-rx"></block>, les nouveaux nœuds doivent disposer d'un espace de stockage suffisant pour prendre en charge les données des anciens nœuds, ainsi que les disques appropriés pour les agrégats racine et les disques de secours.</block>
-  <block id="30db39dffca5d3a3ab759b48303153b1" category="list-text">Si le groupe de reprise après incident à supprimer contient des volumes en miroir de partage de charge, ils ne peuvent pas être déplacés.  Recréez tous les volumes en miroir de partage de charge dans un autre groupe DR, puis supprimez les volumes en miroir de partage de charge dans le groupe DR à supprimer.</block>
   <block id="0108924065f583138162139c8d2325c4" category="list-text">Effectuer les étapes sur un commutateur à la fois, dans l'ordre suivant : Switch_A_1, Switch_B_1, Switch_A_2, Switch_B_2.</block>
   <block id="61cdeb097cfdf5250ae69244ebf01a62" category="list-text">Si vous utilisez une configuration xWDM, vous aurez peut-être besoin de paramètres supplémentaires sur les liens ISL. Pour plus d'informations, reportez-vous à la documentation du fournisseur xWDM.</block>
   <block id="91debec19d39d0379223807f0659efab" category="section-title">Correction de la configuration dans une configuration MetroCluster</block>
@@ -11976,13 +11953,11 @@ L'exemple suivant montre que vous utilisez SCP pour télécharger le fichier<blo
   <block id="0ab751f551b18333e82474f5ca9b4122" category="list-text">Vérifiez que le port de l'interface IP MetroCluster est en ligne.</block>
   <block id="124ba57298a92342f8aec06ebcfb6415" category="inline-link-macro">Déterminez les ID système des anciens modules de contrôleur</block>
   <block id="3ac27de4b4347c98785ff06870fe7221" category="paragraph"><block ref="3ac27de4b4347c98785ff06870fe7221" category="inline-link-macro-rx"></block></block>
-  <block id="a786547181c9c8f446791420d2be691f" category="paragraph">Votre version de ONTAP doit prendre en charge le mélange des tiroirs. Reportez-vous à la<block ref="f93341e63c1888be05256ff042174623" category="inline-link-rx"></block> Pour vérifier si votre version de ONTAP prend en charge la combinaison de tiroirs.</block>
   <block id="27211cf5d485f8491ca9b566aefe2d6d" category="paragraph">Depuis ONTAP 9.4, les configurations IP de MetroCluster prennent en charge les nouvelles installations à l'aide d'un partitionnement de disque avancé et d'une affectation automatique des disques.</block>
   <block id="e528d26e96f91b34e70a35c4661d620d" category="list-text">ONTAP 9.4 et versions ultérieures sont nécessaires pour utiliser ADP avec les configurations IP MetroCluster sur les systèmes AFF et ASA.</block>
   <block id="bc8be72fdc9d6054f356bb2b7f80fd12" category="inline-link">Matrice d'interopérabilité NetApp</block>
   <block id="769db6797bc8c70f9ceb0ea238fcfef2" category="list-text"><block ref="769db6797bc8c70f9ceb0ea238fcfef2" category="inline-link-rx"></block></block>
   <block id="c5dcd35af16918a17ee9c3a5c153f0af" category="inline-link">IMT</block>
-  <block id="24d65add9a27d74b80e9a9cebdfc8e56" category="paragraph">Votre version de ONTAP doit prendre en charge le mélange des tiroirs. Consultez la matrice d'interopérabilité (IMT) pour savoir si votre version de ONTAP prend en charge la combinaison de tiroirs.<block ref="30796bf173a80af0dc9c120f98ffaed6" category="inline-link-rx"></block></block>
   <block id="80d79e74efb3cf7c2ad45e7e1c96223d" category="inline-link-macro">Réinitialisez les paramètres par défaut du commutateur NVIDIA IP SN2100</block>
   <block id="9dce4db3e352a666d92ce25dd5f94a51" category="list-text"><block ref="9dce4db3e352a666d92ce25dd5f94a51" category="inline-link-macro-rx"></block></block>
   <block id="59908dc1540a829f2e5b2241e8bda0cd" category="inline-link-macro">Téléchargez et installez les fichiers RCF IP de NVIDIA</block>
@@ -13975,7 +13950,6 @@ L'exemple suivant montre que vous utilisez SCP pour télécharger le fichier<blo
   <block id="c82f2ff1cbd6e1d62e65daba43978db4" category="paragraph">Cisco 9336C-FX2 partagé (36 ports)</block>
   <block id="d44a3adbc7ddf926ace3174c29e594fe" category="paragraph">*Remarque :* pour utiliser les ports de commutation 11 et 12, vous devez sélectionner deux modes de vitesse.</block>
   <block id="22e6a6026dec5bb5059565b00cc3631c" category="paragraph">Lors des procédures de transition, d'actualisation, d'installation à huit nœuds et d'extension à quatre nœuds, vous pouvez ajouter un nouveau modèle de plateforme à votre configuration MetroCluster. À tout moment de ces procédures, si votre configuration MetroCluster existante contient une plateforme utilisant des ports de cluster/HA partagés, vous ne pouvez pas ajouter de plateforme utilisant des ports de cluster/HA partagés sans mettre à niveau votre version d'ONTAP vers ONTAP 9.15.1P11 ou ONTAP 9.16.1P4 ou une version ultérieure.</block>
-  <block id="29c802ab86e25c329e4ce82ab207d848" category="sidebar">Affectations de ports de plate-forme pour un commutateur Cisco 9336C-FX2 à 12 ports</block>
   <block id="a65cd2f2d334d9927f9c0f2a89dbb2d0" category="paragraph">Découvrez les nouveautés de la plate-forme IP MetroCluster et de la prise en charge des commutateurs.</block>
   <block id="cf42f488bd58e2f8f8819f7c720b93a1" category="paragraph">Vous devez effectuer cette étape sur chaque cluster en mode privilège avancé.</block>
   <block id="c836d30393b0f25c968423f5df80b134" category="paragraph">Déplacez les interfaces de cluster de la configuration MetroCluster FC vers les commutateurs IP.</block>
@@ -14374,4 +14348,56 @@ L'exemple suivant montre que vous utilisez SCP pour télécharger le fichier<blo
   <block id="ada21e32b58b8c3670abec0c9bd43b39" category="paragraph">Après avoir déterminé le bootarg requis pour votre combinaison de mise à niveau, suivez les étapes pour définir le bootarg sur les anciens contrôleurs.  Cette tâche est *uniquement* requise pour les mises à niveau concernées.</block>
   <block id="5c60cc2ba2a9eb0236f0d3ba52d42179" category="admonition">Vous devez définir le bootarg sur tous les anciens nœuds des deux sites avant de démarrer la mise à niveau.</block>
   <block id="51e9ae39fa32c368d27f8e565c6a0512" category="cell">Toutes les autres mises à niveau prises en charge vers les systèmes AFF A70, AFF A90, AFF A1K, FAS70, FAS90, AFF C80, AFF A50, AFF A30, AFF C30, AFF C60 ou FAS50</block>
+  <block id="9f0a4554064856ae78dbf1c08bc876ce" category="doc">Supprimer un groupe DR d'une configuration MetroCluster</block>
+  <block id="2f5075fd2401e26a07990d72f3087874" category="paragraph">À partir d' ONTAP 9.8, vous pouvez supprimer un groupe de reprise après sinistre (DR) d'une configuration MetroCluster à huit nœuds pour créer une configuration MetroCluster à quatre nœuds.</block>
+  <block id="73ac4183b96cb40ebb14a9dc72a13298" category="admonition">Vous utilisez ces étapes pendant les workflows de transition et d’actualisation du système.</block>
+  <block id="a17f6afa75b317e25d154b29624badd3" category="section-title">Supprimez les nœuds du groupe DR de chaque cluster</block>
+  <block id="b928a73ca232c9fc08d935ad673557de" category="paragraph">Cette procédure est prise en charge à partir d' ONTAP 9.8.  Pour les systèmes exécutant ONTAP 9.7 ou une version antérieure, consultez l'article de la base de connaissances :<block ref="806d9b447def65eba3e3e2e790c033b4" category="inline-link-macro-rx"></block> .</block>
+  <block id="622b8cea53ef096337834121912a63f3" category="paragraph">Lorsque vous supprimez un groupe DR, quatre nœuds restent dans la configuration.</block>
+  <block id="c1e5c91114c66e4b9a57d82fcc652acd" category="list-text">Préparez-vous à supprimer le groupe DR si vous ne l’avez pas déjà fait.</block>
+  <block id="8ab89d8f614450ad9b0a76ce08cf67b8" category="list-text">Si le groupe DR à supprimer comporte des volumes miroirs de partage de charge, recréez tous les volumes miroirs de partage de charge dans un autre groupe DR et supprimez-les du groupe DR à supprimer.</block>
+  <block id="a59820a1c3cb9db44ad34809c30b9b83" category="list-text">Supprimer tous les agrégats de données du groupe DR à supprimer :</block>
+  <block id="18fa955273f3f4dcd76a502f9692c60d" category="list-text">Migrez tous les LIF de données NAS que vous utilisez pour NFS et CIFS (SMB) vers des nœuds domestiques dans un autre groupe DR. + <block ref="7317cdd2b96cce163d969aceb2ba0c1d" prefix=" " category="inline-code"></block></block>
+  <block id="8e0e33777ea372d5fe416dcfc835ca44" category="paragraph"><block ref="8eceacf63a83bbfbc3898284abfafa5f" prefix="" category="inline-code"></block></block>
+  <block id="2b3b2e728783f7895871de7434a53e12" category="list-text">Déplacez les LIF de données vers le nouveau nœud d’accueil dans un autre groupe DR.<block ref="80e0d406ea5fcb2ea137507fb844b0fb" prefix=" " category="inline-code"></block></block>
+  <block id="a91858ed54f0d68645cd08be7b25782c" category="paragraph"><block ref="e5bd5c510f2d91722adf52ff19bb0ab9" prefix="" category="inline-code"></block></block>
+  <block id="d92e3b22372c2adfe757906a8734d8f4" category="list-text">La gestion des nœuds et les LIF inter-clusters ne sont pas migrés.  Créez de nouveaux LIF de gestion de nœuds et inter-clusters sur les nœuds du groupe DR selon les besoins.</block>
+  <block id="6a16ef52c4b06b07d8c8d1060e0d49d8" category="list-text">Vous ne pouvez pas migrer ou déplacer les interfaces FCP utilisées pour l'accès aux blocs (SAN) entre les nœuds.  Créez de nouvelles interfaces FCP selon vos besoins.</block>
+  <block id="e4abc9f15e37b97db879c5cf483a2d4b" category="list-text">Les LIF iSCSI SAN doivent être arrêtés avant que le nœud et le port d'origine puissent être mis à jour.</block>
+  <block id="8f13be73804a56335a7ee2724f13e633" category="list-text">Désactiver le basculement de stockage sur les nœuds de l’ancien groupe DR :</block>
+  <block id="696370864f4b1ce13a84661501b202e5" category="paragraph"><block ref="8c709b243402dd4272dff4833554f25c" prefix="" category="inline-code"></block></block>
+  <block id="05b39754e7e99ec7d60818c2d3ef5bba" category="list-text">Si vous êtes dans une configuration IP MetroCluster , procédez comme suit pour supprimer les plex distants des agrégats racines et supprimer la propriété du disque sur les nœuds de l'ancien groupe DR.</block>
+  <block id="fd413373865c0b35424cdf1d99f3c10f" category="paragraph">Ces étapes doivent être effectuées pour les deux nœuds de la paire HA sur chaque site.</block>
+  <block id="84822d6e81d1f35f15b06141981b397f" category="list-text">Afficher les plex distants des agrégats racines sur les nœuds du groupe DR à supprimer :</block>
+  <block id="0bd15b64439187d8dac987c630d7df6d" category="paragraph"><block ref="1bb66b043b34f4120f55cc168b2da3dc" prefix="" category="inline-code"></block></block>
+  <block id="eab2196a69a6fdade5e5bf5d4f300856" category="list-text">Supprimer les plex distants :</block>
+  <block id="7e159c5d7c595db32d7b3fef9000ac19" category="paragraph"><block ref="9f7f42d9161c2d3ca3716315c375f827" prefix="" category="inline-code"></block></block>
+  <block id="fe068f70e1fc61243b2a0632bd6f34cb" category="list-text">Identifiez les disques distants appartenant aux nœuds du groupe DR.</block>
+  <block id="15ce741616536c482daa7a0532c76ca8" category="paragraph">Les commandes que vous utilisez dépendent du fait que vous utilisez des disques partitionnés/partagés ou des disques entiers :</block>
+  <block id="176b8742a87f8e897cb6ea9548977e72" category="admonition">Utilisez une liste séparée par des virgules dans le<block ref="0953dae02add83b063cc8af7a6dbbff8" prefix=" " category="inline-code"></block> champ permettant de spécifier les noms de nœuds dans le groupe DR à supprimer.</block>
+  <block id="4bb92469cfa95bb7785c0e8c0cdc02eb" category="open-title">Disques partitionnés/partagés :</block>
+  <block id="0279e95982eb46292810910c2a4325ef" category="list-text">Afficher les disques distants :</block>
+  <block id="3c1f3ce500e52cec2b93fb29390a174e" category="paragraph"><block ref="749c9bcb383ea88a6558e404e0fa8cb5" prefix="" category="inline-code"></block></block>
+  <block id="52bb09b18cdb1e6dd2fb3324062c1c47" category="open-title">Disques entiers :</block>
+  <block id="0d1726dab779821975a9ad578a9f0677" category="paragraph"><block ref="6e0d34e5eb1c8ece221755c754743354" prefix="" category="inline-code"></block></block>
+  <block id="3e9c37ca50692bcf4d950da60ba31dd1" category="list-text">Désactiver l'attribution automatique du disque :</block>
+  <block id="b2bd91ffa581589b010f7b0cee5b040a" category="paragraph"><block ref="c24efecdd42a886db73de2bcc158cbdc" prefix="" category="inline-code"></block></block>
+  <block id="b06a58f7c6886b9c75c2b66e25e3b03c" category="list-text">Supprimez la propriété des disques pool1 sur chaque nœud de groupe DR à supprimer.  Effectuez ces étapes sur chaque nœud à supprimer.</block>
+  <block id="e352d5e820576fb81acd295d2fa6b382" category="list-text">Accédez au nodeshell :</block>
+  <block id="48b6c5e6c91f5afdf4db95fdce26e45f" category="paragraph"><block ref="1bdb752f72609d817a6beb669061c8b6" prefix="" category="inline-code"></block></block>
+  <block id="0d5dee87e76c9a9f9127dd55f7b1e2eb" category="list-text">Identifiez les disques pool1 :</block>
+  <block id="7cb1b8282d7b16c1d998b3403dc7a91f" category="paragraph"><block ref="978a127cc866f54e1830776b846eb9b8" prefix="" category="inline-code"></block></block>
+  <block id="c0b861216beaceb3d375fd9c6df6e6c3" category="paragraph">Tous les disques de rechange sont affichés, y compris les disques de rechange pool0 et pool1 appartenant au nœud.</block>
+  <block id="6e07f225393b79b609cb8fc3d86279bf" category="list-text">Supprimer la propriété du disque pour chaque disque de rechange du pool1 :</block>
+  <block id="8d0b8b84becd485c7891597b01240458" category="paragraph"><block ref="a2548e43cec4e94df11e259aa9a83a68" prefix="" category="inline-code"></block></block>
+  <block id="c218a756cd011fd52e8951a24e6900e7" category="paragraph">Pour les disques partitionnés, supprimez la propriété de la partition, puis supprimez la propriété du disque conteneur.</block>
+  <block id="096ee0b68ed0c4989612306aa1e3fbb5" category="list-text">Si vous êtes dans une configuration IP MetroCluster , supprimez les connexions MetroCluster sur les nœuds de l'ancien groupe DR.</block>
+  <block id="bac7003f0be2f7c1ffe91ec5e8146e9e" category="paragraph">Ces commandes peuvent être émises à partir de l’un ou l’autre cluster et s’appliquent à l’ensemble du groupe DR couvrant les deux clusters.</block>
+  <block id="d30c3b2671a8fe1038b0b3608133c703" category="paragraph"><block ref="6864950bb23886bbe435bbce576bc0d6" prefix="" category="inline-code"></block></block>
+  <block id="b1bd9ffb7ba04ba41a6ed8fd479dceb1" category="admonition">Cette étape doit être répétée sur chaque nœud du groupe DR.</block>
+  <block id="d321eb0a25003ddc996afe17a7149d6f" category="paragraph">Effectuez cette étape sur chaque cluster.</block>
+  <block id="5dd0fc60033d456ae0a90e5edc267878" category="list-text">Déconnecter le nœud : +<block ref="1f9e5247574dddf29bedc560cf209d11" prefix=" " category="inline-code"></block></block>
+  <block id="e1bde148bbf0582fd279d9a3c915b31a" category="list-text">Définir le niveau de privilège administrateur :</block>
+  <block id="5465fc7f055cf03040fda6f777f9a2da" category="list-text">Vérifiez que le cluster HA est activé dans le nouveau groupe DR.  Si nécessaire, réactivez le cluster HA :</block>
+  <block id="4e7f0491b8337902ce9619e04977796b" category="sidebar">Affectations de ports de plate-forme pour les commutateurs Cisco 9336C-FX2 à 36 ports connectant le stockage NS224</block>
 </blocks>
