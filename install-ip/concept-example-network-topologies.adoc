@@ -24,7 +24,7 @@ NOTE: Si vous partagez un lien ISL avec un trafic non MetroCluster, vous devez v
 
 Dans cette topologie, deux sites distincts sont connectés par des liens directs. Ces liaisons peuvent être entre les périphériques ou commutateurs xWDM et TDM. La capacité des liens ISL n'est pas dédiée au trafic MetroCluster, mais elle est partagée avec un autre trafic non MetroCluster.
 
-image::../media/mcc_ip_networking_with_shared_isls.gif[réseau ip de mcc avec des liens isl partagés]
+image::../media/mcc_ip_networking_with_shared_isls.gif[Exemple de réseau IP MetroCluster avec ISL partagés]
 
 
 
@@ -33,7 +33,7 @@ image::../media/mcc_ip_networking_with_shared_isls.gif[réseau ip de mcc avec de
 Dans cette topologie, les sites MetroCluster ne sont pas directement connectés, mais MetroCluster et le trafic hôte traversent un réseau.
 Le réseau peut se composer d'une série de commutateurs et de commutateurs xWDM et TDM, mais contrairement à la configuration partagée avec des liens ISL directs, les liens ne sont pas directs entre les sites. En fonction de l'infrastructure entre les sites, toute combinaison de configurations réseau est possible.
 
-image::../media/mcc_ip_networking_with_intermediate_private_networks.gif[réseau ip mcc avec réseaux privés intermédiaires]
+image::../media/mcc_ip_networking_with_intermediate_private_networks.gif[Exemple de réseau IP MetroCluster avec réseaux privés intermédiaires]
 
 
 
@@ -44,7 +44,7 @@ Dans cette topologie, deux configurations MetroCluster distinctes partagent le m
 
 NOTE: « MetroCluster One » ou « MetroCluster Two » peut être une configuration MetroCluster à huit nœuds ou deux configurations MetroCluster à quatre nœuds.
 
-image::../media/mcc_ip_two_mccs_sharing_the_same_shared_network_sx.gif[mcc ip deux ccm partageant le même réseau sx partagé]
+image::../media/mcc_ip_two_mccs_sharing_the_same_shared_network_sx.gif[Câblage IP MetroCluster avec deux configurations partageant le même réseau intermédiaire]
 
 
 
@@ -52,4 +52,4 @@ image::../media/mcc_ip_two_mccs_sharing_the_same_shared_network_sx.gif[mcc ip de
 
 Deux configurations MetroCluster distinctes partagent le même commutateur intermédiaire, où un MetroCluster est configuré à l'aide de commutateurs validés NetApp dans une configuration de couche 2 partagée (MetroCluster ONE), et l'autre MetroCluster est configuré à l'aide de commutateurs compatibles MetroCluster qui se connectent directement aux commutateurs intermédiaires (MetroCluster Two).
 
-image::../media/mcc_ip_unsupported_two_mccs_direct_to_shared_switches.png[mcc ip non pris en charge deux ccm directs à commutateurs partagés]
+image::../media/mcc_ip_unsupported_two_mccs_direct_to_shared_switches.png[Exemple de configuration non prise en charge de deux MetroClusters câblés directement à des commutateurs partagés]

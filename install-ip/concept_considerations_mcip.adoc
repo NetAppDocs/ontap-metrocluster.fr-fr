@@ -29,7 +29,7 @@ Il est important de connaître la mise en œuvre des interfaces et des adresses 
 
 Dans une configuration MetroCluster IP, la réplication du stockage et du cache non volatile entre les paires haute disponibilité et les partenaires de reprise après incident s'effectue sur des liaisons dédiées à large bande passante dans la structure MetroCluster IP. Les connexions iSCSI sont utilisées pour la réplication du stockage. Ils sont également utilisés pour l'ensemble du trafic intra-cluster au sein des clusters locaux. Le trafic MetroCluster est conservé séparé du trafic intra-cluster à l'aide de sous-réseaux IP et de VLAN séparés. La structure IP de MetroCluster est distincte et différente du réseau de peering de cluster.
 
-image::../media/mcc_ip_ip_subnets.gif[sous-réseaux ip mcc]
+image::../media/mcc_ip_ip_subnets.gif[Séparation des sous-réseaux IP et des VLAN MetroCluster]
 
 La configuration MetroCluster IP nécessite deux adresses IP sur chaque nœud réservé pour la structure IP MetroCluster back-end. Les adresses IP réservées sont attribuées aux interfaces logiques MetroCluster IP (LIF) lors de la configuration initiale et présentent les exigences suivantes :
 

@@ -18,12 +18,16 @@ Vous pouvez utiliser cette procédure pour mettre à niveau les contrôleurs et 
 À partir de ONTAP 9.8, vous pouvez mettre à niveau les contrôleurs et le stockage d'une configuration IP MetroCluster à quatre nœuds en développant la configuration pour devenir une configuration temporaire à huit nœuds, puis en supprimant l'ancien groupe DR.
 
 .Informations importantes
-Lors des procédures de transition, d'actualisation et d'extension, vous pouvez ajouter un nouveau modèle de plateforme à votre configuration MetroCluster. À tout moment de ces procédures, si votre configuration MetroCluster existante contient une plateforme utilisant des ports de cluster/HA partagés, vous ne pouvez pas ajouter de plateforme utilisant des ports MetroCluster/HA partagés sans mettre à niveau votre version d'ONTAP vers ONTAP 9.15.1P11 ou ONTAP 9.16.1P4 ou une version ultérieure.
+Les conseils suivants concernent un scénario peu courant dans lequel vous devez ajouter un ancien modèle de plate-forme (plates-formes publiées avant ONTAP 9.15.1) à une configuration MetroCluster existante qui contient un modèle de plate-forme plus récent (plates-formes publiées dans ONTAP 9.15.1 ou plus tard).
 
-Avant d'utiliser cette procédure, consultez attentivement les informations du tableau suivant. Si votre plateforme existante est répertoriée dans la première colonne et que la plateforme que vous souhaitez ajouter à la configuration est répertoriée dans la deuxième colonne, tous les nœuds de la configuration doivent exécuter ONTAP 9.15.1P11 ou ONTAP 9.16.1P4 ou une version ultérieure pour prendre en charge cette procédure.
+Si votre configuration MetroCluster existante contient une plate-forme qui utilise des ports *shared cluster/HA* (plates-formes publiées dans ONTAP 9.15.1 ou plus tard), vous ne pouvez pas ajouter une plate-forme qui utilise des ports *shared MetroCluster/HA* (plates-formes publiées avant ONTAP 9.15.1) sans mettre à niveau tous les nœuds de la configuration vers ONTAP 9.15.1P11 ou ONTAP 9.16.1P4 ou plus tard.
 
+[CAUTION]
+====
+L'ajout d'un ancien modèle de plate-forme qui utilise des ports *partagés/MetroCluster HA* à un MetroCluster contenant un modèle de plate-forme plus récent qui utilise des ports *partagés cluster/HA* est un scénario peu courant et la plupart des combinaisons ne sont pas affectées.
 
-CAUTION: La plate-forme existante et la plate-forme que vous souhaitez ajouter à la configuration doivent toutes deux exécuter ONTAP 9.15.1P11 ou ONTAP 9.16.1P4 ou une version ultérieure.
+====
+Utilisez le tableau suivant pour vérifier si votre combinaison est affectée. Si votre plate-forme existante est répertoriée dans la première colonne et que la plate-forme que vous souhaitez ajouter à la configuration est répertoriée dans la deuxième colonne, tous les nœuds de la configuration doivent exécuter ONTAP 9.15.1P11 ou ONTAP 9.16.1P4 ou une version ultérieure pour ajouter le nouveau groupe DR.
 
 [cols="20,20,20,20,20"]
 |===
@@ -85,10 +89,11 @@ Un système FAS utilisant des *ports MetroCluster/HA partagés* :
 * Si vous mettez également à niveau les commutateurs IP, vous devez les mettre à niveau avant d'effectuer cette procédure d'actualisation.
 * Cette procédure décrit les étapes requises pour actualiser un groupe DR à quatre nœuds. Si vous avez une configuration à huit nœuds (deux groupes DR), vous pouvez actualiser l'un des groupes DR, ou les deux.
 +
-Si vous actualisez les deux groupes DR, vous devez actualiser un groupe DR à la fois.
-
-* Les références aux « anciens nœuds » désignent les nœuds que vous souhaitez remplacer.
-* Pour les configurations à huit nœuds, la combinaison de plateformes MetroCluster à huit nœuds source et cible doit être prise en charge.
+....
+ Refresh DR groups one at a time.
+* References to "old nodes" mean the nodes that you intend to replace.
+* For eight-node configurations, the source and target eight-node MetroCluster platform combination must be supported.
+....
 +
 
 NOTE: Si vous actualisez les deux groupes DR, il se peut que la combinaison de plateformes ne soit pas prise en charge après l'actualisation du premier groupe DR. Vous devez actualiser les deux groupes DR pour obtenir une configuration à huit nœuds prise en charge.
@@ -132,20 +137,20 @@ Lorsque vous ajoutez de nouveaux nœuds à un cluster existant sans broadcast do
 À ce stade, la configuration à quatre nœuds apparaît comme illustré sur l'image suivante :
 
 +
-image::../media/mcc_dr_group_a.png[mcc dr groupe a]
+image::../media/mcc_dr_group_a.png[Configuration de MetroCluster IP à quatre nœuds avant extension]
 
 +
 La configuration à huit nœuds s'affiche comme illustré dans l'image suivante :
 
 +
-image::../media/mcc_dr_groups_8_node.gif[mcc dr groups, nœud 8]
+image::../media/mcc_dr_groups_8_node.gif[Configuration MetroCluster IP avec huit nœuds après extension]
 
 . Pour éviter la génération automatique de dossiers de demande de support, envoyez un message AutoSupport pour indiquer que la mise à niveau est en cours.
 +
 .. Lancer la commande suivante : +
 `system node autosupport invoke -node * -type all -message "MAINT=10h Upgrading _old-model_ to _new-model"_`
 +
-L'exemple suivant spécifie une fenêtre de maintenance de 10 heures. Selon votre plan, il est possible que vous souhaitiez accorder plus de temps.
+L'exemple suivant spécifie une fenêtre de maintenance de 10 heures. Prévoyez un délai supplémentaire en fonction de votre plan.
 
 +
 Si la maintenance est terminée avant le temps écoulé, vous pouvez appeler un message AutoSupport indiquant la fin de la période de maintenance :
@@ -213,11 +218,11 @@ Une fois la procédure d'extension terminée, la configuration temporaire s'affi
 
 +
 .Configuration temporaire à huit nœuds
-image::../media/mcc_dr_group_b.png[mcc dr groupe b]
+image::../media/mcc_dr_group_b.png[Configuration de MetroCluster après expansion et migration des volumes CRS]
 
 +
 .Configuration temporaire à douze nœuds
-image::../media/mcc_dr_group_c4.png[mcc dr groupe c4]
+image::../media/mcc_dr_group_c4.png[Configuration temporaire de MetroCluster à douze nœuds]
 
 . Vérifier que le basculement est possible et que les nœuds sont connectés en exécutant la commande suivante sur les deux clusters :
 +
@@ -353,17 +358,17 @@ cluster_B::>
 
 
 . Suivez les étapes de la section link:concept_removing_a_disaster_recovery_group.html["Suppression d'un groupe de reprise après incident"] Pour supprimer l'ancien groupe DR.
-. Si vous souhaitez actualiser les deux groupes DR dans une configuration à huit nœuds, vous devez répéter la procédure complète pour chaque groupe DR.
+. Si vous devez rafraîchir les deux groupes DR dans une configuration à huit nœuds, répétez l'ensemble de la procédure pour chaque groupe DR.
 +
 Après avoir supprimé l'ancien groupe DR, la configuration s'affiche comme illustré dans les images suivantes :
 
 +
 .Configuration à quatre nœuds
-image::../media/mcc_dr_group_d.png[groupe dr mcc d]
+image::../media/mcc_dr_group_d.png[Configuration de MetroCluster après suppression de l'ancien groupe DR]
 
 +
 .Configuration à huit nœuds
-image::../media/mcc_dr_group_c5.png[mcc dr groupe c5]
+image::../media/mcc_dr_group_c5.png[Configuration finale de MetroCluster à huit nœuds]
 
 . Vérifier le mode opérationnel de la configuration MetroCluster et effectuer un contrôle MetroCluster.
 +

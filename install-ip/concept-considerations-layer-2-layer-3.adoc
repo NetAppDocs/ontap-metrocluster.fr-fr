@@ -60,7 +60,7 @@ Les services de partage de liens tels que les liens MPLS (Multi protocole Label 
 
 Les switchs backend MetroCluster sont connectés au réseau du client.
 
-image::../media/MCC_layer2.png[Couche MCC 2]
+image::../media/MCC_layer2.png[Configuration du réseau de couche 2 MetroCluster]
 
 Les commutateurs intermédiaires fournis par le client doivent répondre aux exigences suivantes :
 
@@ -101,7 +101,7 @@ Pour tous les autres systèmes, vous devez configurer le VLAN lorsque vous crée
 
 Les commutateurs back-end MetroCluster sont connectés au réseau IP routé, soit directement aux routeurs (comme indiqué dans l'exemple simplifié suivant), soit via d'autres commutateurs.
 
-image::../media/mcc_layer3_backend.png[mcc layer3 backend]
+image::../media/mcc_layer3_backend.png[Configuration du réseau backend de couche 3 de MetroCluster]
 
 L'environnement MetroCluster est configuré et câblé sous la forme d'une configuration IP MetroCluster standard, comme décrit dans la link:https://docs.netapp.com/us-en/ontap-metrocluster/install-ip/concept_parts_of_an_ip_mcc_configuration_mcc_ip.html["Configurer les composants matériels de MetroCluster"]. Lorsque vous effectuez la procédure d'installation et de câblage, vous devez effectuer les étapes spécifiques à une configuration de couche 3. Ce qui suit s'applique aux configurations de couche 3 :
 
@@ -138,11 +138,11 @@ Lorsque le trafic MetroCluster traverse un lien ISL dans un réseau intermédiai
 
 Le schéma suivant présente les paramètres requis lors de l'utilisation de commutateurs Cisco validés par NetApp :
 
-image::../media/switch_traffic_with_cisco_switches.png[changez de trafic avec des commutateurs cisco]
+image::../media/switch_traffic_with_cisco_switches.png[Paramètres requis lors de l'utilisation de commutateurs Cisco validés par NetApp pour le trafic MetroCluster]
 
 Le diagramme suivant présente les paramètres requis pour un réseau partagé lorsque les commutateurs externes sont des commutateurs IP Broadcom.
 
-image::../media/switch_traffic_with_broadcom_switches.png[changez de trafic avec les commutateurs broadcom]
+image::../media/switch_traffic_with_broadcom_switches.png[Paramètres requis pour le réseau partagé lors de l'utilisation de commutateurs IP Broadcom]
 
 Dans cet exemple, les stratégies et mappages suivants sont créés pour le trafic MetroCluster :
 

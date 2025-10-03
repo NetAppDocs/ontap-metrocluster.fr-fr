@@ -115,7 +115,7 @@ Dans ce cas, vous devez commencer par l'étape ci-dessous pour remplacer à chau
 
 Le schéma suivant présente un exemple de configuration initiale, dans laquelle quatre ponts FibreBridge 6500N connectent deux piles de stockage SAS :
 
-image::../media/consolidating_stacks_before.gif[consolidation des piles auparavant]
+image::../media/consolidating_stacks_before.gif[Consolidation des piles avant le remplacement de FibreBridge]
 
 .Étapes
 . En suivant les instructions suivantes, remplacez à chaud le pont FibreBridge 6500N supérieur par un pont FibreBridge 7600N ou 7500N en suivant la procédure décrite dans link:task_replace_a_sle_fc_to_sas_bridge.html#hot_swap_6500n["Remplacement à chaud d'un pont FibreBridge 6500N avec un pont FibreBridge 7600N ou 7500N"]:
@@ -128,7 +128,7 @@ Il s'agit de la même connexion qui a été établie au port FC1 du pont FibreBr
 
 
 +
-image::../media/consolidating_stacks_1st_7500n_in_place.gif[consolidation des piles du 1er 7500n en place]
+image::../media/consolidating_stacks_1st_7500n_in_place.gif[Consolidation des piles avec le premier FibreBridge 7500N en place]
 
 . Vérifier la connectivité aux disques connectés par pont et que le nouveau FibreBridge 7500N est visible dans la configuration :
 +
@@ -188,7 +188,7 @@ slot 0: FC Host Adapter 0g (QLogic 8324 rev. 2, N-port, <UP>)**<=== Initiator po
 +
 Il s'agit de la même connexion qui a été établie au port FC1 du pont FibreBridge 6500N.
 
-** Ne connectez pas le port FC1 du pont FibreBridge 7600N ou 7500N pour le moment.image:../media/consolidating_stacks_2nd_7500n_in_place.gif[""]
+** Ne connectez pas le port FC1 du pont FibreBridge 7600N ou 7500N pour le moment. image:../media/consolidating_stacks_2nd_7500n_in_place.gif["Consolidation des piles avec le deuxième FibreBridge 7500N en place"]
 
 
 . Vérifiez la connectivité aux disques connectés au pont :
@@ -267,28 +267,28 @@ NOTE: Attendez au moins 10 secondes avant de connecter le port. Les connecteurs 
 Le câble est indiqué en bleu dans l'exemple suivant :
 
 +
-image::../media/consolidating_stacks_sas_top_before.gif[consolidation des piles sas avant]
+image::../media/consolidating_stacks_sas_top_before.gif[Consolidation des piles SAS avant le câblage vers FibreBridge 7500N]
 
 . À l'aide d'un câble équipé d'un connecteur mini-SAS, connectez le même port SAS du shelf de stockage au port SAS B du pont FibreBridge 7600N ou 7500N supérieur.
 +
 Le câble est indiqué en bleu dans l'exemple suivant :
 
 +
-image::../media/consolidating_stacks_sas_top_after.gif[consolidation des piles sas sur la partie supérieure après]
+image::../media/consolidating_stacks_sas_top_after.gif[Câblage supérieur du SAS après consolidation]
 
 . Retirez le câble qui connecte le port SAS A du pont Fibre Bridge 6500N inférieur au tiroir SAS supérieur, en veillant à bien noter le port SAS du tiroir de stockage auquel il est connecté.
 +
 Ce câble s'affiche en vert dans l'exemple suivant :
 
 +
-image::../media/consolidating_stacks_sas_bottom_before.gif[consolidation des piles sas inférieure auparavant]
+image::../media/consolidating_stacks_sas_bottom_before.gif[Câblage SAS vert avant consolidation sur l'étagère inférieure]
 
 . À l'aide d'un câble équipé d'un connecteur mini-SAS, connectez le même port SAS du shelf de stockage au port SAS B du pont Fibre Bridge 7600N ou 7500N inférieur.
 +
 Ce câble s'affiche en vert dans l'exemple suivant :
 
 +
-image::../media/consolidating_stacks_sas_bottom_after.gif[consolidation des piles sas sur la base après]
+image::../media/consolidating_stacks_sas_bottom_after.gif[Câblage inférieur SAS après consolidation]
 
 . Vérifiez la connectivité aux disques connectés au pont :
 +
@@ -351,7 +351,7 @@ slot 0: FC Host Adapter 0g (QLogic 8324 rev. 2, N-port, <UP>)**<=== Initiator po
 Chaque pile SAS doit être connectée au même port SAS sur le pont supérieur et inférieur. Par exemple, si la connexion supérieure de la pile est connectée au port SAS B du pont supérieur, la connexion inférieure doit être connectée au port SAS B du pont inférieur.
 
 +
-image::../media/consolidation_sas_bottom_connection_4_stacks.gif[connexion au fond sas de consolidation 4 piles]
+image::../media/consolidation_sas_bottom_connection_4_stacks.gif[Câblage inférieur SAS pour quatre piles]
 
 
 
@@ -374,7 +374,7 @@ Les modifications de zoning sont requises pour éviter les problèmes avec ONTAP
 
 Le schéma suivant présente la segmentation sur site_A avant les modifications :
 
-image::../media/zoning_consolidation_site_a_before.gif[site de consolidation de zonage a avant]
+image::../media/zoning_consolidation_site_a_before.gif[Consolidation du zonage sur le site A avant les changements de FibreBridge]
 
 .Étapes
 . Mettre à jour les zones de stockage des commutateurs FC en retirant la moitié des ports d'initiateur de chaque zone existante et en créant de nouvelles zones pour les ports FC2 FibreBridge 7500N.
@@ -479,7 +479,7 @@ Marron en pointillés + orange
 |===
 Le schéma suivant montre la segmentation à site_A après la consolidation :
 
-image::../media/zoning_consolidation_site_a_after.gif[site de consolidation de zonage a après]
+image::../media/zoning_consolidation_site_a_after.gif[Consolidation du zonage sur le site A après les changements de FibreBridge]
 
 
 
@@ -519,11 +519,11 @@ La segmentation doit avoir été ajustée afin de fournir des zones pour le seco
 .Étapes
 . Reliez le port FC2 du pont supérieur au port correct du FC_Switch_A_2.
 +
-image::../media/consolidating_stacks_sas_ports_recabled.gif[la consolidation des piles de ports sas a été recâblage]
+image::../media/consolidating_stacks_sas_ports_recabled.gif[Câblage du port FC2 après consolidation vers FC_switch_A_2]
 
 . Reliez le port FC1 du pont inférieur au port correct du FC_Switch_A_1.
 +
-image::../media/consolidating_stacks_final.gif[consolidation finale des piles]
+image::../media/consolidating_stacks_final.gif[Câblage final de consolidation de la pile]
 
 . Vérifiez la connectivité aux disques connectés au pont :
 +

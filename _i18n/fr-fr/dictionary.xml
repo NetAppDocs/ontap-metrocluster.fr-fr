@@ -91,13 +91,11 @@
   <block id="a571ed81b9ac1cd9c96405061a23d824" category="list-text">Désactiver les ports SAS ou les ports switch selon que les ponts qui connectent le tiroir cible connectent une seule pile SAS ou deux piles SAS ou plus :</block>
   <block id="7c8fb940090c835942c37ea413a2583c" category="list-text">Si les ponts connectent une seule pile SAS, désactivez les ports de commutateur auxquels les ponts sont connectés à l'aide de la commande appropriée pour votre commutateur.</block>
   <block id="9b04030412c41c5068d79b2bc6f5fad4" category="paragraph">L'exemple suivant montre une paire de ponts qui connectent une seule pile SAS, qui contient le tiroir cible :</block>
-  <block id="357c450834719fa34cdeaac7e2d2a292" category="image-alt">ponts de remplacement de la tablette mcc avec une seule pile</block>
   <block id="919d888b59981070bf71b6214f4ab443" category="paragraph">Les ports de commutateur 8 et 9 de chaque commutateur connectent les ponts au réseau.</block>
   <block id="702f8bfb0583ba76da1d5453b8963e67" category="paragraph">L'exemple suivant montre que les ports 8 et 9 sont désactivés sur un commutateur Brocade.</block>
   <block id="327a9880f8e0dd44a44e0909f4debaf5" category="paragraph">L'exemple suivant montre que les ports 8 et 9 sont désactivés sur un commutateur Cisco.</block>
   <block id="dad7a4e2db295af2111afd1f4cce2d6a" category="list-text">Si les ponts connectent deux piles SAS ou plus, désactivez les ports SAS connectant les ponts au tiroir cible : +<block ref="a84f5d3ebef16dcafe8f8326fb982bed" prefix=" " category="inline-code"></block></block>
   <block id="4b09ce830b72db5cca9758e1276d7e12" category="paragraph">L'exemple suivant montre une paire de ponts qui connectent quatre piles SAS. La pile SAS 2 contient le tiroir cible :</block>
-  <block id="e64c1d35a465f6a0d896f63a42127c1e" category="image-alt">ponts de remplacement de la tablette mcc avec quatre piles</block>
   <block id="6b968bde345a1af02381409979c014c6" category="paragraph">Le port SAS B connecte les ponts au shelf cible. En désactivant uniquement le port SAS B sur les deux tiroirs, les autres piles SAS continuent à transmettre des données pendant la procédure de remplacement.</block>
   <block id="b27a9ec485949b58ee722075c0af5c2d" category="paragraph">Dans ce cas, désactiver le port SAS connexion du pont au tiroir cible :</block>
   <block id="eb360b25e81d8780844f68ddb94be2c9" category="paragraph"><block ref="a84f5d3ebef16dcafe8f8326fb982bed" prefix="" category="inline-code"></block></block>
@@ -274,7 +272,6 @@
   <block id="4ee78dd22a95c5815f5b6e1e4acc364b" category="paragraph"><block ref="3e23026a2bd29e421f319572a9111881" prefix="" category="inline-code"></block></block>
   <block id="6016a2b341113bf496b719905398ecd2" category="doc">Droits d'auteur</block>
   <block id="1fe9ee738ca0e6e9e3aeec4c7902cb67" category="paragraph">Le schéma suivant présente une configuration MetroCluster. Cluster_B est hors tension pour des raisons de maintenance.</block>
-  <block id="13453110a818269a21fc3929d2514208" category="image-alt">mettez le data center hors tension</block>
   <block id="c72683789a2c53d80a618207766d5e8e" category="paragraph">Vous devez mettre hors tension un site et tous les équipements avant le début de la maintenance ou du transfert du site.</block>
   <block id="4bfd66c37cd5ce244e0dfdd30c499d83" category="list-text">Avant de commencer, vérifiez que tous les agrégats non mis en miroir sur le site sont hors ligne.</block>
   <block id="bb8ad4609bcc62e85b4c9841b8d5f950" category="paragraph"><block ref="9d8e96d9200d45a5b615d425c5e1d7e0" prefix="" category="inline-code"></block></block>
@@ -704,19 +701,15 @@
   <block id="c1858bba9a3921efe5dba366c65f958c" category="list-text">Cette procédure ne génère aucune interruption et peut être effectuée en deux heures environ.</block>
   <block id="293430b0f5f5cec7adb04aaaa924969c" category="paragraph">Les structures du commutateur sont mises à niveau une par une.</block>
   <block id="1a507e2511e156c2bfab6619a223ec66" category="paragraph">À la fin de cette procédure, les quatre commutateurs seront mis à niveau vers de nouveaux commutateurs.</block>
-  <block id="2556a75ea95d28884780bdc5a816be56" category="image-alt">remplacement du commutateur brocade upgr à g620 terminé</block>
   <block id="4b62bee7e413187cdec79defdbadc75d" category="list-text">Désactiver la première structure de commutation :</block>
   <block id="3b87bc702ae97c62b1b8c5d15f4c2778" category="paragraph"><block ref="97e12bcbdbc960f9cec27ad84371d9e5" prefix="" category="inline-code"></block></block>
-  <block id="97b8c9ac51371d27f8fefe0edea8b410" category="image-alt">mise à niveau brocade vers g620 fab 1 down</block>
   <block id="a05893c48424ebbaf65084ab9d2331ab" category="list-text">Remplacer les anciens commutateurs sur un site MetroCluster.</block>
   <block id="e485e2a29b3e88e7af57a872271ec004" category="list-text">Décâbler et retirer le commutateur désactivé.</block>
   <block id="6ab8d2ea7c4ab8de2d0240533675a5ba" category="list-text">Installez le nouveau commutateur dans le rack.</block>
-  <block id="9db38090d74d3c900ffdd688465bb5e8" category="image-alt">brocade upgr à g620 a remplacé un 1</block>
   <block id="4028a8e16d4b841012a85c08963c7c51" category="paragraph"><block ref="623d551c0d177bd117ee216f82e5235b" prefix="" category="inline-code"></block></block>
   <block id="d0ec9e05561bfe12c0306959eddf56c8" category="list-text">Reliez le nouveau commutateur à l'aide des attributions de ports recommandées.</block>
   <block id="98865fdc5c9769318f840c5f626b7ec2" category="list-text">Répétez ces sous-étapes sur le site MetroCluster partenaire pour remplacer le second commutateur de la première structure de commutateur.</block>
   <block id="5a5070abc66ad4ba93c9599236c17675" category="paragraph">Les deux commutateurs de la structure 1 ont été remplacés.</block>
-  <block id="9359b4d4c7ebe7a35b725df2addeaf7b" category="image-alt">la mise à niveau brocade vers g620 a remplacé b 1</block>
   <block id="0fd8560791ae174b08c82bd0ee74f32e" category="list-text">Mettez les nouveaux commutateurs sous tension et laissez-les démarrer.</block>
   <block id="44a651ee20f59b8ff5887857d2eb80dc" category="list-text">Enregistrez la configuration du commutateur :</block>
   <block id="94b65d5fa74397726f3654769576d293" category="paragraph"><block ref="1be72f281210ec23632f03de6cc7c80f" prefix="" category="inline-code"></block></block>
@@ -985,7 +978,6 @@
   <block id="642e92efb79421734881b53e1e1b18b6" category="cell">48</block>
   <block id="0f4890949e646d00de6b9e66bd1b1968" category="summary">Vous devrez peut-être remplacer un commutateur défectueux ou mettre à niveau ou rétrograder un commutateur. Le nouveau commutateur peut être le même que l'ancien commutateur en cas de défaillance d'un commutateur, ou vous pouvez modifier le type de commutateur \(mettre à niveau ou rétrograder le commutateur\).</block>
   <block id="5e2a519a0cc2ae15695c5cf1d46f0cc9" category="doc">Remplacement d'un commutateur IP</block>
-  <block id="8884ae199fd568dc7ca11305cb40b82e" category="image-alt">interconnexion ip de l'architecture matérielle du mcc</block>
   <block id="7fab172697215ab39d868b582f7aa8fc" category="paragraph">Cette procédure s'applique lorsque vous utilisez des commutateurs validés par NetApp. Si vous utilisez des switchs conformes à MetroCluster, reportez-vous au fournisseur du commutateur.</block>
   <block id="ab09caec1407f77495e6c20853fcfd75" category="list-text">Vérifier l'état de santé de la configuration.</block>
   <block id="439912781979c2137b20f407615e78f8" category="list-text">Vérifier que la MetroCluster est configurée et en mode normal sur chaque cluster :<block ref="0a45ea7da7722e7946b8d5a55f1dac66" prefix=" " category="inline-code"></block></block>
@@ -1263,14 +1255,11 @@
   <block id="49304b5a3e77f6b22f9f39b8cf0e1186" category="list-text">Vous remplacez une paire de ponts FibreBridge 6500N reliés à la même pile de stockage SAS.</block>
   <block id="520879137e3e1dd05fc10803bb01fbcd" category="list-text">Vous avez précédemment remplacé un pont FibreBridge 6500N dans la paire, et votre pile de stockage est configurée avec un pont FibreBridge 6500N et un pont FibreBridge 7600N ou 7500N.</block>
   <block id="f9c1933f3b94ffee14ef186b2709352c" category="paragraph">Le schéma suivant présente un exemple de configuration initiale, dans laquelle quatre ponts FibreBridge 6500N connectent deux piles de stockage SAS :</block>
-  <block id="3dcba5083263c26dc21f695136013a58" category="image-alt">consolidation des piles auparavant</block>
   <block id="dc876c7ff2512b544d84916000f3f0d0" category="list-text">Connectez le port FC1 du pont FibreBridge 7600N ou 7500N au commutateur ou au contrôleur.</block>
   <block id="a2ccc9b7cfd6e0b208f2ec5271001e18" category="paragraph">Il s'agit de la même connexion qui a été établie au port FC1 du pont FibreBridge 6500N.</block>
   <block id="5a5847115d5c3eb94f6db3d6e4b75064" category="list-text">Ne connectez pas le port FC2 du pont FibreBridge 7600N ou 7500N à ce stade. Le schéma suivant montre que Bridge_A_1a a été remplacé et qu'il s'agit désormais d'un pont FiberBridge 7600N ou 7500N :</block>
-  <block id="e16af547e6500c2c72cc764eaaaa3831" category="image-alt">consolidation des piles du 1er 7500n en place</block>
   <block id="a3f45edd16a39a61c12d4446071cba63" category="list-text">Vérifier la connectivité aux disques connectés par pont et que le nouveau FibreBridge 7500N est visible dans la configuration :</block>
   <block id="8ff709665460262bbf6007f085751483" category="list-text">Connectez le port FC2 du pont FibreBridge 7600N ou 7500N au commutateur ou au contrôleur.</block>
-  <block id="44f4a4edbfb8c95871fef3eb7d97957a" category="list-text">Ne connectez pas le port FC1 du pont FibreBridge 7600N ou 7500N pour le moment.<block ref="a06c0386e8ef594aee7be854f4de811f" category="inline-image-macro-rx" type="image"></block></block>
   <block id="f02aee1c50fae642922a5499566ecbf9" category="list-text">Vérifiez la connectivité aux disques connectés au pont :</block>
   <block id="7b79919db64c636cae6ed1a1b62315df" category="section-title">Câblage des ports SAS du pont lors de la consolidation du stockage derrière les ponts FiberBridge 7600N ou 7500N</block>
   <block id="de8c76dd9b34c71ddb4d0c479bea44e9" category="paragraph">Si vous consolidez plusieurs piles de stockage SAS derrière une seule paire de ponts FiberBridge 7600N ou 7500N avec les ports SAS disponibles, vous devez déplacer les câbles SAS supérieur et inférieur vers les nouveaux ponts.</block>
@@ -1278,20 +1267,15 @@
   <block id="7dd4f77a1d8a0add44b6d788582b503a" category="admonition">Attendez au moins 10 secondes avant de connecter le port. Les connecteurs de câble SAS sont clavetés ; lorsqu'ils sont orientés correctement dans un port SAS, le connecteur s'enclenche et le voyant LNK du port SAS du tiroir disque s'allume en vert. Pour les tiroirs disques, vous insérez un connecteur de câble SAS avec la languette de retrait orientée vers le bas (sous le connecteur).</block>
   <block id="df93f05d6fbc04d10c796ce6e4e47033" category="list-text">Retirez le câble qui connecte le port SAS A du pont Fibre Bridge 6500N supérieur au tiroir SAS supérieur, en veillant à bien noter le port SAS du tiroir de stockage auquel il est connecté.</block>
   <block id="bf3a8c065d2fd8e45b755fd435472c7d" category="paragraph">Le câble est indiqué en bleu dans l'exemple suivant :</block>
-  <block id="bc29f95d027c122c6c9930e9c3911399" category="image-alt">consolidation des piles sas avant</block>
   <block id="32e4e5cf8222b599ed5e501ed2651bf1" category="list-text">À l'aide d'un câble équipé d'un connecteur mini-SAS, connectez le même port SAS du shelf de stockage au port SAS B du pont FibreBridge 7600N ou 7500N supérieur.</block>
-  <block id="4a4068fd6311da718282cacc94345b38" category="image-alt">consolidation des piles sas sur la partie supérieure après</block>
   <block id="fd97ea11655aa8c8eb8b3f49f780a6fc" category="list-text">Retirez le câble qui connecte le port SAS A du pont Fibre Bridge 6500N inférieur au tiroir SAS supérieur, en veillant à bien noter le port SAS du tiroir de stockage auquel il est connecté.</block>
   <block id="2357551dea4c43621410caea8cc7d422" category="paragraph">Ce câble s'affiche en vert dans l'exemple suivant :</block>
-  <block id="b9b103cdbe2af26f932bd89e200a3e6f" category="image-alt">consolidation des piles sas inférieure auparavant</block>
   <block id="dea0aeec2c532fb1e8c689525a7523a7" category="list-text">À l'aide d'un câble équipé d'un connecteur mini-SAS, connectez le même port SAS du shelf de stockage au port SAS B du pont Fibre Bridge 7600N ou 7500N inférieur.</block>
-  <block id="61f0e2887508ad46722cf2b5b9bcf4bc" category="image-alt">consolidation des piles sas sur la base après</block>
   <block id="c0c9d0f9764f3531d5fcab61d64cc973" category="list-text">Retirez les anciens ponts FiberBridge 6500N qui ne sont plus connectés au stockage SAS.</block>
   <block id="da4e79c2ca2f41412f0f411bdda2acda" category="list-text">Attendez deux minutes pour que le système reconnaisse les modifications.</block>
   <block id="37c8362167e23bbca70c828a9376397b" category="list-text">Si le système n'a pas été correctement câblé, retirez le câble, corrigez le câblage, puis reconnectez le câble approprié.</block>
   <block id="b61d27ae9dac51d1b157fc880185711b" category="list-text">Si nécessaire, répétez les étapes précédentes pour passer jusqu'à deux piles SAS supplémentaires derrière les nouveaux ponts FiberBridge 7600N ou 7500N, à l'aide des ports SAS C, puis D.</block>
   <block id="23043d058a3bf7bcd9d6e3bbae475084" category="paragraph">Chaque pile SAS doit être connectée au même port SAS sur le pont supérieur et inférieur. Par exemple, si la connexion supérieure de la pile est connectée au port SAS B du pont supérieur, la connexion inférieure doit être connectée au port SAS B du pont inférieur.</block>
-  <block id="de0b75953a0e9f87e4b085ac871fe6eb" category="image-alt">connexion au fond sas de consolidation 4 piles</block>
   <block id="f4be9996b192cc446c4ac6c692482967" category="section-title">Mise à jour du zoning lors de l'ajout de ponts FiberBridge 7600N ou 7500N à une configuration</block>
   <block id="740e479c11d308c22560181dc0162569" category="paragraph">La segmentation doit être modifiée lors du remplacement des ponts FiberBridge 6500N par des ponts FiberBridge 7600N ou 7500N et en utilisant les deux ports FC sur les ponts FiberBridge 7600N ou 7500N. Les modifications requises dépendent du fait que vous exécutez une version de ONTAP antérieure à 9.1 ou 9.1 et ultérieure.</block>
   <block id="ec51b49a5536876a602172c73abc763c" category="section-title">Mise à jour de la segmentation lors de l'ajout de ponts FiberBridge 7500N à une configuration (avant ONTAP 9.1)</block>
@@ -1299,7 +1283,6 @@
   <block id="b85fe53db48440a38aeb28b16e81603b" category="paragraph">La segmentation spécifique dans cette tâche concerne les versions de ONTAP antérieures à la version 9.1.</block>
   <block id="12f5de2cc6b15bbf512b9e2d8f0d0961" category="paragraph">Les modifications de zoning sont requises pour éviter les problèmes avec ONTAP, qui nécessite qu'au plus quatre ports FC initiator ne puissent pas disposer d'un chemin d'accès à un disque. Après avoir été rebute pour consolider les tiroirs, le zoning existant entraînerait l'accessibilité de chaque disque par huit ports FC. Vous devez modifier le zoning pour réduire les ports initiateurs de chaque zone à quatre.</block>
   <block id="3a3cdac321242b305a0369399e3116ea" category="paragraph">Le schéma suivant présente la segmentation sur site_A avant les modifications :</block>
-  <block id="4a5b504c4260dae3ce161ab26007ba0c" category="image-alt">site de consolidation de zonage a avant</block>
   <block id="77b9c9582b199021b7d6c587f9f97b10" category="list-text">Mettre à jour les zones de stockage des commutateurs FC en retirant la moitié des ports d'initiateur de chaque zone existante et en créant de nouvelles zones pour les ports FC2 FibreBridge 7500N.</block>
   <block id="5b367b97042c69274587577310be2133" category="paragraph">Les zones des nouveaux ports FC2 contiennent les ports d'initiateur retirés des zones existantes. Dans les schémas, ces zones sont affichées avec des lignes en pointillés.</block>
   <block id="1b08617a7ef3c5fcc662a93b91e986f1" category="inline-link-macro">Installation et configuration d'Stretch MetroCluster</block>
@@ -1338,7 +1321,6 @@
   <block id="9825b19d7218084992f8aecadc228278" category="paragraph">8,2 ; 8,5 ; 6,2 ; 6,5 ; 6,7</block>
   <block id="00276c60999b539a931b7ce74080e81f" category="paragraph">Marron en pointillés + orange</block>
   <block id="72e37f73cbec9008a35b281f12cb33f4" category="paragraph">Le schéma suivant montre la segmentation à site_A après la consolidation :</block>
-  <block id="2feb10d627d0713680927e50b44aca89" category="image-alt">site de consolidation de zonage a après</block>
   <block id="4d1430a18252285b1898944d3edee8cd" category="section-title">Mise à jour de la segmentation lors de l'ajout de ponts FiberBridge 7600N ou 7500N à une configuration (ONTAP 9.1 et versions ultérieures)</block>
   <block id="0d81f964c64dd5d361ff984540bd0735" category="paragraph">La segmentation doit être modifiée lors du remplacement des ponts FiberBridge 6500N par des ponts FiberBridge 7600N ou 7500N et en utilisant les deux ports FC sur les ponts FiberBridge 7600N ou 7500N. Chaque zone ne peut posséder pas plus de quatre ports initiateurs.</block>
   <block id="5565ba8a0540bfaeeb3d6c33367c06eb" category="list-text">Cette tâche s'applique à ONTAP 9.1 et versions ultérieures.</block>
@@ -1353,9 +1335,7 @@
   <block id="e70a5bb43868bd32f22c7db0adfd0d57" category="paragraph">Pour fournir plusieurs chemins vers les piles de stockage, vous pouvez connecter le second port FC à chaque pont FiberBridge 7600N ou 7500N lorsque vous avez ajouté le pont FiberBridge 7600N ou 7500N à votre configuration.</block>
   <block id="d6abcb329cbaaac0b0561ff06dbf5717" category="paragraph">La segmentation doit avoir été ajustée afin de fournir des zones pour le second port FC.</block>
   <block id="4a9ecf5113b5a416b423c0b1b70cf2a6" category="list-text">Reliez le port FC2 du pont supérieur au port correct du FC_Switch_A_2.</block>
-  <block id="65bfdd141b58ca1de08cf86f9d54fb1d" category="image-alt">la consolidation des piles de ports sas a été recâblage</block>
   <block id="ec4295415a2a108a9e6ffe03672f02ea" category="list-text">Reliez le port FC1 du pont inférieur au port correct du FC_Switch_A_1.</block>
-  <block id="e89c68d2b66b34fc7660eece9d55c0dc" category="image-alt">consolidation finale des piles</block>
   <block id="3cf196d2f3a8f52ef3526d5b11c02c31" category="section-title">Désactivation des ports SAS inutilisés sur les ponts FC-SAS</block>
   <block id="53ed200aa72d434c412af23c12e52055" category="paragraph">Une fois les modifications de câblage apportées au pont, désactivez les ports SAS inutilisés sur les ponts FC-SAS pour éviter les alertes du contrôle de l'état liées aux ports inutilisés.</block>
   <block id="7957492d60ae36333e83c1bac6f69ea7" category="list-text">Désactivez les ports SAS inutilisés sur le pont FC-to-SAS supérieur :</block>
@@ -2260,7 +2240,6 @@
   <block id="a3cc1cd7736d1feee271cca081cd94fa" category="list-text">Mettre l'application de base de données en ligne après avoir restauré les LUN</block>
   <block id="57bc2e727ba0490135e6fee8d1534614" category="summary">Si vous souhaitez tester la fonctionnalité MetroCluster ou effectuer une maintenance planifiée, vous pouvez effectuer un basculement négocié qui permet d'basculer correctement un cluster sur le cluster partenaire. Vous pouvez ensuite réparer et revenir à la configuration.</block>
   <block id="6466cdc759d3f24e72db990e82ef2e6e" category="doc">Effectuer un basculement pour les tests ou la maintenance</block>
-  <block id="5771417733c3bf6349722617d5708850" category="image-alt">exécution du workflow nso et rétablissement</block>
   <block id="ab08b90a3ec069f002ca9a306b280075" category="admonition">Depuis ONTAP 9.6, les opérations de basculement et de rétablissement peuvent être effectuées sur les configurations IP de MetroCluster avec ONTAP System Manager.</block>
   <block id="a7b2d6358c9d443da0d732f37dbdb86d" category="summary">MetroCluster vous aide à mieux comprendre comment protéger les données et garantit une restauration transparente en cas de défaillance, afin que vous puissiez gérer facilement et efficacement vos activités de basculement et de rétablissement.</block>
   <block id="48d59ef93e565c1c62d4604f7ddf6561" category="doc">Tout savoir sur la protection des données et la reprise après incident MetroCluster</block>
@@ -2272,7 +2251,6 @@
   <block id="a18662e3fac6ce3e9f58c381eb4afd6c" category="paragraph">Il faut comprendre le fonctionnement des paires haute disponibilité dans la configuration MetroCluster.</block>
   <block id="5ab189294818028870f4513f8a0e0342" category="paragraph">Les deux clusters du réseau peering fournissent la reprise après incident bidirectionnelle, où chaque cluster peut être la source et la sauvegarde de l'autre cluster. Chaque cluster inclut deux nœuds, qui sont configurés en tant que paire haute disponibilité. En cas de défaillance ou de maintenance requise au sein de la configuration d'un nœud unique, le basculement du stockage peut transférer les opérations de ce nœud vers son partenaire haute disponibilité local.</block>
   <block id="97730fe9a08541e432c243803e14fc87" category="paragraph">L'illustration suivante présente une configuration MetroCluster FC. La fonctionnalité de haute disponibilité est identique dans les configurations IP d'MetroCluster, sauf que l'interconnexion haute disponibilité est assurée par les commutateurs du cluster.</block>
-  <block id="aafe8a4ce4016fbab5e120bfc5e08251" category="image-alt">architecture matérielle mcc haute disponibilité locale</block>
   <block id="2fb654e5399843c45685502bcc696315" category="inline-link">Configuration haute disponibilité</block>
   <block id="4a2c464d69fb9288517ee974b525f8a9" category="section-title">Réplication des données et des configurations MetroCluster</block>
   <block id="8a08fc76a4bf535752fb08fa04755908" category="paragraph">Les configurations MetroCluster utilisent plusieurs fonctionnalités ONTAP pour assurer une réplication synchrone des données et une configuration entre les deux sites MetroCluster.</block>
@@ -2292,9 +2270,7 @@
   <block id="13c91d19b50920c18ee3bd3fb1422183" category="paragraph">Dans le cas d'un basculement réussi du cluster B vers le cluster A, SVM_cluster_B est arrêté et SVM_cluster_B-mc est activé et commence à transmettre les données du cluster A.</block>
   <block id="3105b851cc3bf9f48d61918e8b8d40d9" category="list-text">SVM_cluster_A-mc est un SVM de destination synchrone arrêté en fonctionnement normal et sain de la configuration de MetroCluster.</block>
   <block id="15ad31d262a1b77612e8af779f84f5b5" category="paragraph">Dans le cas d'un basculement réussi du cluster A vers le cluster B, SVM_cluster_A est arrêté et SVM_cluster_A-mc est activé et commence à transmettre les données du cluster B.</block>
-  <block id="4b8b67b7e9ddf82ee4d1ffceee0ff7a0" category="image-alt">mise en miroir mcc des svm</block>
   <block id="66744009770d6ba1b1cc8173a0263fcb" category="paragraph">En cas de basculement, le plex distant sur le cluster survivant est mis en ligne et le SVM secondaire commence à transmettre les données.</block>
-  <block id="53816bb938449e50beae292190362f67" category="image-alt">mcc svm après le basculement</block>
   <block id="ac32b283978e84344e3d9032262a62cf" category="paragraph">La disponibilité des plexes distants après basculement dépend du type de configuration MetroCluster :</block>
   <block id="cb3f69b58902d9cb8ad57e3cef2a7baa" category="list-text">Pour les configurations FC MetroCluster, après le basculement, les plexes locaux et distants restent en ligne si le stockage sur le site d'incident est accessible via les liens ISL.</block>
   <block id="2dbfac8612e02f7888ae89b424c8f066" category="paragraph">Si les liens ISL sont défaillants et que le stockage sur le site de reprise d'activité n'est pas disponible, la SVM destination de la synchronisation commence à transmettre les données du site survivant.</block>
@@ -2317,7 +2293,6 @@
   <block id="2063370ab85c6fcebccb497878d43f83" category="admonition">Après un basculement, si l'agrégat sans miroir est au niveau du nœud partenaire de reprise après incident et qu'une panne de lien ISL (Inter-switch Link) se produit, ce nœud local risque d'échouer.</block>
   <block id="a7eb73c5c8982bda3b828be9d24fb457" category="paragraph">L'illustration suivante montre comment les pools de disques sont mis en miroir entre les clusters partenaires. Les données des plexes locaux (dans les domaines distants (dans la pool0) sont répliquées vers des plexes distants (dans la pool1).</block>
   <block id="fa4d286b9c55c406b69b6da8acefd2bc" category="admonition">Si des agrégats hybrides sont utilisés, une dégradation des performances peut se produire après une défaillance SyncMirror plex en raison du remplissage de la couche SSD.</block>
-  <block id="97347dfad9b968e46894b961cbddec7b" category="image-alt">duplication des pools mcc</block>
   <block id="90c2e51a3d52ce8aca76b3a0b1b21483" category="section-title">Fonctionnement de la mise en miroir de cache NVRAM ou NVMEM et de la mise en miroir dynamique dans les configurations MetroCluster</block>
   <block id="0566b3c1e3f4610e5f9c7df1df44ecca" category="paragraph">La mémoire non volatile (NVRAM ou NVMEM, selon le modèle de plateforme) des contrôleurs de stockage est mise en miroir localement vers un partenaire de haute disponibilité locale, et à distance vers un partenaire de reprise sur incident à distance sur le site du partenaire. En cas de basculement ou de basculement local, cette configuration permet de préserver les données du cache non volatile.</block>
   <block id="a5697c4650484fc754b26e8cf3dc82bd" category="paragraph">Dans une paire haute disponibilité qui ne fait pas partie d'une configuration MetroCluster, chaque contrôleur de stockage conserve deux partitions de cache non volatile : une pour elle-même et une pour son partenaire haute disponibilité.</block>
@@ -2325,8 +2300,6 @@
   <block id="57a244ffd31c051dcd8980545f484a56" category="cell">Caches non volatiles pour un contrôleur de stockage</block>
   <block id="fb080041cbf9f6c209c72ed1374d8e18" category="cell">Dans une configuration MetroCluster</block>
   <block id="50161acb3c1d15d2a8992e4232ca41ce" category="cell">Dans une paire HA non MetroCluster</block>
-  <block id="1d1677e82d5ea7ed776295b17721f17e" category="paragraph"><block ref="1d1677e82d5ea7ed776295b17721f17e" category="inline-image-macro-rx" type="image"></block></block>
-  <block id="0bab0f9b2725e02bdb927b4bf8b95ea6" category="paragraph"><block ref="0bab0f9b2725e02bdb927b4bf8b95ea6" category="inline-image-macro-rx" type="image"></block></block>
   <block id="ca8321fa0e2b4d4f32a7d9a1268d64c1" category="paragraph">Les caches non volatiles stockent le contenu suivant :</block>
   <block id="7f4c8256dc69509bd0828f86143dd695" category="list-text">La partition locale contient les données que le contrôleur de stockage n'a pas encore écrites sur le disque.</block>
   <block id="0d0949118382a4aca929d8ab91ed9e03" category="list-text">La partition partenaire haute disponibilité contient une copie du cache local du partenaire haute disponibilité du contrôleur de stockage.</block>
@@ -2337,11 +2310,9 @@
   <block id="6720b1595cf31733ef72e01353f0a174" category="paragraph">Le partenaire auxiliaire de DR est le partenaire de haute disponibilité du nœud local DR. Ce cache est nécessaire en cas de basculement haute disponibilité (lorsque la configuration fonctionne normalement ou après un basculement MetroCluster).</block>
   <block id="47d254a247513be1500ef0169fb751ac" category="paragraph">Dans une configuration MetroCluster à deux nœuds, il n'existe pas de partition partenaire auxiliaire de reprise après incident, car les contrôleurs de stockage ne sont pas configurés comme une paire haute disponibilité.</block>
   <block id="b1992b7cab4ad903705b4b88aac9d7a1" category="paragraph">Par exemple, le cache local d'un nœud (node_A_1) est mis en miroir localement et à distance au niveau des sites MetroCluster. L'illustration suivante montre que le cache local du nœud_A_1 est mis en miroir sur le partenaire HA (nœud_A_2) et sur le partenaire DR (nœud_B_1) :</block>
-  <block id="fe9f8e17b0a3bd08bce785eeb16431de" category="image-alt">exemple de mise en miroir nvram mcc</block>
   <block id="e4bc8ccf93de946a796646ebb264581e" category="section-title">Mise en miroir dynamique en cas de basculement haute disponibilité locale</block>
   <block id="0fa6d3e2649edb09019147f5125ce138" category="paragraph">En cas de basculement haute disponibilité locale dans une configuration MetroCluster à quatre nœuds, le nœud pris en charge ne peut plus servir de miroir pour son partenaire de reprise après incident. Pour permettre la mise en miroir de reprise après incident, la mise en miroir passe automatiquement sur le partenaire auxiliaire de reprise après incident. Une fois le retour réussi, la mise en miroir est automatiquement renvoyée au partenaire de reprise sur incident.</block>
   <block id="3004a827b229d6d94b4a4273a63ad3ad" category="paragraph">Par exemple, le noeud_B_1 échoue et est repris par le noeud_B_2. Le cache local du noeud_A_1 ne peut plus être mis en miroir sur le noeud_B_1. La mise en miroir passe au partenaire auxiliaire DR, nœud_B_2.</block>
-  <block id="82653e8d2dad00738373b5f73316f538" category="image-alt">exemple de mise en miroir nvram mcc exemple de reprise après incident dynamique aux</block>
   <block id="9414d24a184fe3737a1eb7a965a12d8d" category="section-title">Types d'incidents et de méthodes de reprise</block>
   <block id="09f81e5c41b5cbf59e868532256e9c4d" category="paragraph">Vous devez être familiarisé avec différents types de défaillances et d'incidents afin de pouvoir utiliser la configuration MetroCluster pour réagir de manière appropriée.</block>
   <block id="5bfc201d41e9f1d875dab1348c8fe184" category="list-text">Panne d'un seul nœud</block>
@@ -2468,7 +2439,6 @@
   <block id="ce2c8aed9c2fa0cfbed56cbda4d8bf07" category="paragraph">Vide</block>
   <block id="98aa8b619d7d21082ddfe2ce9f794b65" category="paragraph">ID du propriétaire d'origine du disque dans la configuration MetroCluster.</block>
   <block id="2c68e845e87dd5500205ee938741670c" category="paragraph">L'illustration et le tableau suivants fournissent un exemple de modification de la propriété pour un disque du pool de disques du nœud_A_1, situé physiquement dans cluster_B.</block>
-  <block id="0329654a27ba1e548c256f5611b20358" category="image-alt">propriété du disque mcc</block>
   <block id="0192fe5273757abfcfdf46931494a78c" category="cell">État du disque MetroCluster</block>
   <block id="f4c6f851b00d5518bf888815de279aba" category="cell">Remarques</block>
   <block id="2ab2be943928b2ba0c280ddd9dbcd465" category="paragraph">Fonctionnement normal avec tous les nœuds.</block>
@@ -2555,7 +2525,6 @@
   <block id="ff1d353c2909a1478fdfb2cf5bd9860c" category="list-text">Vous pouvez exécuter l'opération de rétablissement sans avoir à émettre les commandes de correction.</block>
   <block id="02dc415c3306cb85f54853814433b4b9" category="paragraph">Cette fonctionnalité s'applique aux configurations IP MetroCluster exécutant ONTAP 9.5 et versions ultérieures. Elle ne s'applique pas aux configurations FC de MetroCluster.</block>
   <block id="0fd4c67d0ef97f6912bbb2b2c285e599" category="paragraph">Les commandes de correction manuelle sont toujours nécessaires sur les configurations IP MetroCluster exécutant ONTAP 9.4 et versions antérieures.</block>
-  <block id="af4e1a0f878c3b85a67bc6040b2a8eb6" category="image-alt">mcc so sb avec auto-rétablissement</block>
   <block id="2ce1bc5398c63d1e7d6708e3eed85c31" category="section-title">Correction automatique après un basculement non programmé (à partir de ONTAP 9.6)</block>
   <block id="17d65217bb8765a3f533611cd6b62b23" category="paragraph">La correction automatique après un basculement non planifié est prise en charge sur les configurations IP MetroCluster à partir de ONTAP 9.6. Un basculement non planifié est un basculement dans lequel vous émettez le<block ref="9eaa87e8fc6111207ce11ca28efc6a81" prefix=" " category="inline-code"></block> commande avec<block ref="d5e9cd7870737309142f343d13ccc8f5" prefix=" " category="inline-code"></block> option.</block>
   <block id="86493709b5bd9c8e6f5f1d6cf4cefeee" category="paragraph">La correction automatique après un basculement non planifié n'est pas prise en charge dans les configurations FC MetroCluster et les commandes de correction manuelle sont toujours nécessaires après un basculement non planifié sur les configurations IP MetroCluster exécutant ONTAP 9.5 et versions antérieures.</block>
@@ -2566,7 +2535,6 @@
   <block id="d7b6d5d8a851c875e7746069ade49213" category="paragraph">Si les sites de catastrophe sont restés en service, ils sont immédiatement transférés à l'état « en attente de rétablissement ».</block>
   <block id="9a42b6fa80c318f8459bec375670baf7" category="list-text">Les opérations de correction sont effectuées automatiquement.</block>
   <block id="6a71349cdf5a7f925fd2402128d5da9a" category="paragraph">Vous pouvez confirmer l'état des nœuds du site de secours et effectuer les opérations de correction correctement, en utilisant le<block ref="0d47d8f5f26b2a71aacf597494f0adbb" prefix=" " category="inline-code"></block> commande.</block>
-  <block id="aff209a273ddb467552859b48748adca" category="image-alt">mcc uso avec auto-rétablissement</block>
   <block id="964aee0e86e43584eb13b981fe78a34e" category="section-title">En cas d'échec de la correction automatique</block>
   <block id="33b21a46cef25fbf184f232f8b2c6a7c" category="paragraph">Si l'opération de correction automatique échoue pour une raison quelconque, vous devez émettre le<block ref="c85b4996143a93edc62c1214c1b80d15" prefix=" " category="inline-code"></block> Commandes manuelles comme effectuées dans les versions ONTAP antérieures à ONTAP 9.6. Vous pouvez utiliser le<block ref="0d47d8f5f26b2a71aacf597494f0adbb" prefix=" " category="inline-code"></block> et<block ref="91a9d34a6641eb751940f61ec708e756" prefix=" " category="inline-code"></block> commandes permettant de contrôler l'état de la correction et de déterminer la cause d'une défaillance.</block>
   <block id="397d7a00978a4d2c8dd61baf772aa6bf" category="section-title">La création de SVM pour une configuration MetroCluster</block>
@@ -2629,7 +2597,6 @@
   <block id="f2c23fcbc9198c8c09be1c8289c27cdb" category="section-title">Adresses IP de MetroCluster</block>
   <block id="2e9f9124919abf4bdab5331f355d781e" category="paragraph">Il est important de connaître la mise en œuvre des interfaces et des adresses IP MetroCluster dans une configuration IP MetroCluster, ainsi que les exigences associées.</block>
   <block id="ea777fc32d2604d40e5199a227eeff0f" category="paragraph">Dans une configuration MetroCluster IP, la réplication du stockage et du cache non volatile entre les paires haute disponibilité et les partenaires de reprise après incident s'effectue sur des liaisons dédiées à large bande passante dans la structure MetroCluster IP. Les connexions iSCSI sont utilisées pour la réplication du stockage. Ils sont également utilisés pour l'ensemble du trafic intra-cluster au sein des clusters locaux. Le trafic MetroCluster est conservé séparé du trafic intra-cluster à l'aide de sous-réseaux IP et de VLAN séparés. La structure IP de MetroCluster est distincte et différente du réseau de peering de cluster.</block>
-  <block id="b8783733572a9efdc1cacd62fe1a3b9c" category="image-alt">sous-réseaux ip mcc</block>
   <block id="e27bfb5c2d739cb94c80a070d0a0fb41" category="paragraph">La configuration MetroCluster IP nécessite deux adresses IP sur chaque nœud réservé pour la structure IP MetroCluster back-end. Les adresses IP réservées sont attribuées aux interfaces logiques MetroCluster IP (LIF) lors de la configuration initiale et présentent les exigences suivantes :</block>
   <block id="e6bb39d36eb5cbf85cf568f49309275b" category="admonition">Vous devez soigneusement choisir les adresses IP de MetroCluster, car vous ne pouvez pas les modifier après la configuration initiale.</block>
   <block id="078163a6fd8f9c749cf2d6434c51cb49" category="list-text">Ils doivent se trouver dans une plage IP unique.</block>
@@ -2788,10 +2755,8 @@
   <block id="5d60ef028bf36a52f54aae77aa36dfc3" category="paragraph">Une source peut être un SVM source synchrone avant le basculement ou un SVM de destination synchrone après le basculement.</block>
   <block id="810658fd4ce2eecbdcd415896f940ca7" category="list-text">Lorsqu'une configuration MetroCluster est dans un état stable, le SVM MetroCluster destination ne peut pas être à l'origine d'une relation de reprise d'activité SVM, car les volumes ne sont pas en ligne.</block>
   <block id="5326db7a763b6d52a2731922879e3773" category="paragraph">L'image suivante montre le comportement de reprise après incident du SVM dans un état stable :</block>
-  <block id="2be427a2ade0ffdc529d5a0f9e393811" category="image-alt">svm dr comportement normal</block>
   <block id="19eb42735e21b648289d9858bd191f4f" category="list-text">Lorsque le SVM source synchrone est la source d'une relation de SVM DR, les informations de la relation de SVM DR source sont répliquées vers le partenaire MetroCluster.</block>
   <block id="1cc8b6a0c2e8b6a7fb4b28b5768670b1" category="paragraph">Les mises à jour de reprise après incident du SVM peuvent ainsi se poursuivre après un basculement, comme illustré dans l'image suivante :</block>
-  <block id="3b7d059050394179b3cfd58c0ea5206f" category="image-alt">image svm dr 2</block>
   <block id="94096a7cae42856bb523f3226d08c377" category="list-text">Lors des processus de basculement et de rétablissement, la réplication vers la destination SVM DR peut échouer.</block>
   <block id="27935e833530642467b078749a1a93d2" category="paragraph">Toutefois, une fois le processus de basculement ou de rétablissement terminé, les mises à jour planifiées de reprise sur incident du SVM suivantes seront appliquées.</block>
   <block id="7e7397a7b79323762c61941fc0e6b5f9" category="inline-link">Protection des données</block>
@@ -2799,7 +2764,6 @@
   <block id="e27544e35653757d3bbeedd0fd19c8ed" category="section-title">Resynchronisation des SVM au niveau d'un site de reprise d'activité</block>
   <block id="de42dcceb25e6a518a72dada627d991e" category="paragraph">Pendant la resynchronisation, la source de reprise d'activité des machines virtuelles de stockage (SVM) sur la configuration MetroCluster est restaurée à partir du SVM de destination sur le site non MetroCluster.</block>
   <block id="91cc2f55881fc6920c5c03f74250c20e" category="paragraph">Pendant la resynchronisation, le SVM source (cluster_A) agit temporairement comme un SVM de destination, comme illustré dans l'image suivante :</block>
-  <block id="fa2da5fee56af8bfe141c0477b62be06" category="image-alt">resynchronisation svm dr</block>
   <block id="501ea9694254d0082d472ca76783dd0c" category="section-title">En cas de basculement non planifié lors de la resynchronisation</block>
   <block id="42f8b772cda407a2e86e1fbf16f46a2d" category="paragraph">Les mélangeurs non planifiés qui se produisent pendant la resynchronisation stoppent le transfert de resynchronisation. En cas de basculement non planifié, les conditions suivantes sont vraies :</block>
   <block id="02aec9c4d64664cce02a89d0fa3a0194" category="list-text">Le SVM de destination sur le site MetroCluster (qui était un SVM source avant resynchronisation) reste comme un SVM de destination. Le SVM au cluster partenaire continuera de conserver son sous-type et reste inactif.</block>
@@ -3066,7 +3030,6 @@
   <block id="3c0b099ed689308d23f18f4b0e6d5205" category="list-text">La taille maximale de l'unité de transmission (MTU) du réseau de réplication sera la même que celle utilisée sur le réseau de données.</block>
   <block id="5464feaf47ab5ece52dac29514c066c9" category="list-text">Lorsque les ports de données pour la réplication intercluster sont partagés, les LIFs intercluster peuvent être migrés vers n'importe quel autre port intercluster du même nœud afin de contrôler le port de données spécifique utilisé pour la réplication.</block>
   <block id="4b7a16d6d162a666fd84016cdf343a72" category="paragraph">Les commutateurs back-end MetroCluster sont connectés au réseau IP routé, soit directement aux routeurs (comme indiqué dans l'exemple simplifié suivant), soit via d'autres commutateurs.</block>
-  <block id="39a69537fd3d24cb81ea2bc0e26adec5" category="image-alt">mcc layer3 backend</block>
   <block id="697ea025ecb303d4f40d1bf3a8b4bde0" category="inline-link-macro">Matrice d'interopérabilité NetApp (IMT)</block>
   <block id="ef8a86bee8843988ee84e3ebf370fee9" category="inline-link-macro">Câblage des commutateurs IP</block>
   <block id="fe77866a46d2eb6a7c2af4e6da3afb40" category="inline-link-macro">Configurer les composants matériels de MetroCluster</block>
@@ -3093,7 +3056,6 @@
   <block id="258ba3377e43df3da3fbda0611fd8b0c" category="list-text">Reliez les ports de gestion et de données du contrôleur aux réseaux de gestion et de données du site local.</block>
   <block id="c209703458c468cdf952f490276996a0" category="summary">Vous devez installer chaque nœud dans la configuration MetroCluster de ONTAP, y compris les configurations au niveau des nœuds et la configuration des nœuds en deux sites. Vous devez également implémenter la relation MetroCluster entre les deux sites.</block>
   <block id="780b12826a73e1109ad45282f1b731dc" category="doc">Configuration du logiciel MetroCluster dans ONTAP</block>
-  <block id="ef6b52b87a839f50cbfacc69d34de0af" category="image-alt">workflow mcc ip haut niveau, logiciel de configuration de cluster et de nœud</block>
   <block id="449a2bdc6a969f884c1d33fb66eecea7" category="section-title">Limites de latence et de perte de paquets sur les liens ISL</block>
   <block id="5b39512a68b8704473f81b0e6ba1272e" category="paragraph">Tout périphérique qui contribue à la latence doit être pris en compte.</block>
   <block id="616cfd3e2d847183316a89a2940d8ba6" category="paragraph">Les commutateurs intermédiaires fournis par le client doivent répondre aux exigences suivantes :</block>
@@ -3256,27 +3218,22 @@
   <block id="8be872f5a1facac41f2a276f778bbd9d" category="list-text">Connectivité back-end MetroCluster pour la réplication des données de stockage et du cache non volatile.</block>
   <block id="a85c8746a62aa77fdc473229bfd761e6" category="list-text">Réseau de peering de cluster</block>
   <block id="fa1180e554d57c137440516e207c96ae" category="paragraph">Le réseau de peering de cluster assure la connectivité en miroir de la configuration du cluster, y compris la configuration de la machine virtuelle de stockage (SVM). La configuration de l'ensemble des SVM sur un cluster est mise en miroir sur le cluster partenaire.</block>
-  <block id="a428942c990fa614526774f1e4440cb8" category="image-alt">architecture matérielle mcc ip mcc ip</block>
   <block id="78284c790a6f1ac15ed5405d7d992f0b" category="section-title">Groupes de reprise après incident</block>
   <block id="f1898f95e44ef32c9a081f52fb98f4bb" category="paragraph">Une configuration MetroCluster IP se compose d'un groupe de reprise sur incident de quatre nœuds.</block>
   <block id="3c44c1bbedb79a7ce8632cae9a5df3f9" category="paragraph">L'illustration ci-dessous présente l'organisation des nœuds dans une configuration MetroCluster à quatre nœuds :</block>
-  <block id="cd60e29f6a69af834d314d8b493bb673" category="image-alt">mcc dr groups, nœud 4</block>
   <block id="56a16b5fe0f317d6ac6ef40b86ac3597" category="section-title">Illustration des paires haute disponibilité locales dans une configuration MetroCluster</block>
   <block id="5d358f344458d87daa31bdb60587f034" category="paragraph">Chaque site MetroCluster se compose de contrôleurs de stockage configurés en tant que paire haute disponibilité. Ceci permet la redondance locale afin que, en cas de panne d'un contrôleur de stockage, son partenaire de haute disponibilité local puisse reprendre le contrôle. Il est possible de gérer de telles défaillances sans effectuer de basculement MetroCluster.</block>
   <block id="8c0cae0aa27fd1b2808b3db06cbd524c" category="paragraph">Les opérations de basculement et de rétablissement de la haute disponibilité locale sont exécutées à l'aide des commandes de basculement du stockage, de la même manière qu'une configuration non MetroCluster.</block>
-  <block id="5310be1d33aa12f03867b83248d87de0" category="image-alt">architecture matérielle mcc ip paires haute disponibilité</block>
   <block id="654b5ef83fa66dad8993f3654a8bebb5" category="inline-link">Concepts relatifs à ONTAP</block>
   <block id="f3a7480e0a79ed83429e832d5c0bcfa4" category="paragraph"><block ref="f3a7480e0a79ed83429e832d5c0bcfa4" category="inline-link-rx"></block></block>
   <block id="20d3ce5dec27f8f374403afd88aa2576" category="section-title">Illustration du réseau d'interconnexion de cluster et IP de MetroCluster</block>
   <block id="57b140d2bdb4a32e43e24402fa90a87d" category="paragraph">Les clusters ONTAP incluent généralement un réseau d'interconnexion de cluster pour le trafic entre les nœuds du cluster. Dans les configurations IP MetroCluster, ce réseau est également utilisé pour le trafic de réplication des données entre les sites MetroCluster.</block>
   <block id="5157984370bbb692d3f2d2a41727e668" category="list-text">Deux interfaces IP MetroCluster</block>
   <block id="f413ada03786bcba415f9a26d51d3699" category="paragraph">L'illustration suivante montre ces interfaces. L'utilisation des ports correspond à un système AFF A700 ou FAS9000.</block>
-  <block id="7fa8c692d2fa9493453528081a86e668" category="image-alt">utilisation de la lif ip mcc</block>
   <block id="e39c1c9f6137c6dbe9a36e7da08ce525" category="paragraph"><block ref="e39c1c9f6137c6dbe9a36e7da08ce525" category="inline-link-macro-rx"></block></block>
   <block id="274ba3154fdc5a121a46d74734a9cb60" category="section-title">Illustration du réseau de peering de cluster</block>
   <block id="9d8d4038d4269eed7e1b12e49d6821ca" category="paragraph">Les deux clusters de la configuration MetroCluster sont peering via un réseau de peering de cluster fourni par le client. Le peering de clusters prend en charge la mise en miroir synchrone des machines virtuelles de stockage (SVM, anciennement appelées vServers) entre les sites.</block>
   <block id="4df38af8ba790b028d74b6e1ab5848c5" category="paragraph">Les LIFs intercluster doivent être configurées sur chaque nœud en configuration MetroCluster, et les clusters doivent être configurés pour le peering. Les ports disposant des LIFs intercluster sont connectés au réseau de peering de cluster fourni par le client. La réplication de la configuration SVM est effectuée sur ce réseau via le Service de réplication de configuration.</block>
-  <block id="671efdba76635acb6680428e6178d845" category="image-alt">réseau de peering de clusters à architecture matérielle ip mcc</block>
   <block id="59a45a7f051ccc97450bfc85a22e3683" category="inline-link-macro">Facteurs à prendre en compte lors de la configuration du peering de clusters</block>
   <block id="c49e3aaaa51f771668bea65f43e92229" category="paragraph"><block ref="c49e3aaaa51f771668bea65f43e92229" category="inline-link-macro-rx"></block></block>
   <block id="63ffe4f1eeb56d0485132cbf234244c7" category="inline-link-macro">Câblage des connexions de peering de cluster</block>
@@ -3389,17 +3346,11 @@
   <block id="e13e5f806fc6cae09bcb9fed7eecf125" category="paragraph">Utilisez cette présentation du câblage pour vérifier votre câblage.</block>
   <block id="9ae436c3a98ee403124b8482b69c2296" category="section-title">Câblage de deux configurations MetroCluster aux commutateurs</block>
   <block id="967e7fe5e26ac9c522059f0a938773bb" category="section-title">Exigences ISL</block>
-  <block id="6c3d514454f211b4331e09486e926e74" category="image-alt">changez de trafic avec des commutateurs cisco</block>
   <block id="60878e723ef52f68f389c7c8fd6c072c" category="paragraph">Dans cet exemple, les stratégies et mappages suivants sont créés pour le trafic MetroCluster :</block>
   <block id="69aaacac83508073d197d4bf65062708" category="paragraph">Vous devez configurer les commutateurs intermédiaires avec des mappages d'accès QoS, des classes et des règles correspondants le long du chemin d'accès entre les commutateurs IP MetroCluster. Les commutateurs intermédiaires associent le trafic RDMA à COS5 et le trafic de stockage à COS4.</block>
-  <block id="05b3e3fb6ac0659ae9bfe38cf0c825e9" category="image-alt">changez de trafic avec les commutateurs broadcom</block>
   <block id="37322f94dec561a9cb13c3ba1266cfd1" category="section-title">Exemples de topologies réseau MetroCluster</block>
   <block id="1884419e0250b6ad508f2fd36f98d40d" category="section-title">Configuration réseau partagée avec liens directs</block>
-  <block id="5929fb5bb5d1ff9a7e46817ed17ab0b2" category="image-alt">réseau ip de mcc avec des liens isl partagés</block>
   <block id="fbf66ccc845f0c441c22f8be84b750c9" category="section-title">Infrastructure partagée avec réseaux intermédiaires</block>
-  <block id="de47f3bace55dd3bf08de34a0ed075d6" category="image-alt">réseau ip mcc avec réseaux privés intermédiaires</block>
-  <block id="9111fcd943391a3325aaa7508427ee6f" category="image-alt">mcc ip deux ccm partageant le même réseau sx partagé</block>
-  <block id="c7f89880448c82e7f3ca4625488b3680" category="image-alt">mcc ip non pris en charge deux ccm directs à commutateurs partagés</block>
   <block id="744dd62dbddcfc9601b7e3e7d7cfc329" category="summary">Vous devez peer-to-peer les clusters, mettre en miroir les agrégats racine, créer un agrégat de données en miroir, puis lancer la commande pour mettre en œuvre les opérations MetroCluster.</block>
   <block id="7b0d27454ef980cc3577cf44e3462c41" category="doc">Configuration des clusters dans une configuration MetroCluster</block>
   <block id="ac7917291cfd7cf0825f39be0d3818c1" category="section-title">Désactivation de l'affectation automatique des lecteurs (en cas d'affectation manuelle dans ONTAP 9.4)</block>
@@ -4014,7 +3965,6 @@
   <block id="3c17e9573f8b45dda43321f58bfcd2bf" category="paragraph">Consultez les instructions et l'illustration suivantes lors de la planification de votre solution de couche 3. Pour plus d'informations sur l'implémentation de VIP et BGP dans ONTAP, reportez-vous à la section suivante :</block>
   <block id="e8c0139663de0f382f275109978b357d" category="inline-link">*Configuration des LIFs IP virtuelles (VIP)*</block>
   <block id="0f64075c5a4db39d50ab6b8476c41ebf" category="paragraph"><block ref="0f64075c5a4db39d50ab6b8476c41ebf" category="inline-link-rx"></block></block>
-  <block id="e9cf627e17d9ec53f5a5665bcf4c2317" category="image-alt">vip et bgp dans MetroCluster 2</block>
   <block id="59c752e25a69d70bccc622aa7ccf88b4" category="paragraph">*Limitations de ONTAP*</block>
   <block id="24f5c2e03af26d1b91ce7e346c7991a8" category="paragraph">ONTAP ne vérifie pas automatiquement que tous les nœuds des deux sites de la configuration MetroCluster sont configurés avec le peering BGP.</block>
   <block id="c7e348a88226ebda25604984c8dea034" category="paragraph">ONTAP n'effectue pas l'agrégation de routes, mais annonce en permanence l'ensemble des adresses IP LIF virtuelles individuelles en tant que routes hôtes uniques.</block>
@@ -4615,7 +4565,6 @@
   <block id="946d5b388bd0add5de571fd9bce92cdc" category="list-text">Si vous configurez la gestion IP des ponts, vous avez besoin du câble Ethernet blindé fourni avec les ponts (qui se connecte du port de gestion Ethernet du pont 1 à votre réseau).</block>
   <block id="c6eaf2a37a80db46264a4e2661c4948c" category="list-text">Si vous configurez la gestion IP des ponts, vous devez disposer d'une adresse IP, d'un masque de sous-réseau et d'informations de passerelle pour le port de gestion Ethernet 1 de chaque pont.</block>
   <block id="90fc932ee050a39faa7916b30886ecf0" category="doc">Câblage d'une configuration MetroCluster extensible à deux nœuds Bridge-Attached</block>
-  <block id="4db2eceaa8145339affc67a0413885ce" category="image-alt">installation du matériel de workflow et configuration du pont à 2 nœuds joints</block>
   <block id="5ddac338fa0803205a82e38309aa44f9" category="list-text">Vous ne pouvez pas modifier les paramètres du fuseau horaire d'un nœud défaillant ou du nœud partenaire après le basculement.</block>
   <block id="51f9f77f4b6f08d6cef95e89d987dcd7" category="paragraph">Si vous utilisez le logiciel MetroCluster Tiebreaker, il doit également disposer de son propre serveur NTP.</block>
   <block id="4a4442f93bedaff86c4d502cdec5989f" category="summary">Vous devez câbler les ports du module de contrôleur utilisés pour le peering de cluster, de sorte qu’ils disposent d’une connectivité avec le cluster sur le site partenaire.</block>
@@ -4668,7 +4617,6 @@
   <block id="09856c1072ca086e89cf2b213c6273c6" category="inline-link-macro">Câblage d'une configuration Stretch MetroCluster à deux nœuds avec connexion SAS</block>
   <block id="0c0fa1382f3ba1efffa3113209ab5940" category="list-text"><block ref="0c0fa1382f3ba1efffa3113209ab5940" category="inline-link-macro-rx"></block></block>
   <block id="a55812aab9a776c32d1e16fe37018c12" category="summary">Vous devez installer chaque nœud dans la configuration MetroCluster dans ONTAP. Elle comprend les configurations au niveau des nœuds et la configuration des nœuds en deux sites. Vous devez également implémenter la relation MetroCluster entre les deux sites.</block>
-  <block id="ed9e684b86d9ba9268bfa7bb05da68e3" category="image-alt">logiciel de configuration des nœuds et clusters haute qualité de flux de production</block>
   <block id="0f70569a0bcb298f0f36659f72d7b82d" category="list-text">Collectez les adresses IP requises pour les modules de contrôleur avant de commencer le processus de configuration.</block>
   <block id="ecea54ca3870fb73d8800d487e47f8d7" category="list-text">Complétez la fiche d'informations sur le réseau IP pour le site A.</block>
   <block id="64e75fdc2de3677feb9835849e7dac81" category="section-title">Fiche d'informations sur le réseau IP pour le site A</block>
@@ -4958,7 +4906,6 @@
   <block id="264876b5820d38df7c09807c8a32aff7" category="list-text">Ponts FC-SAS</block>
   <block id="7197592776aadb7365aeb8d29627b9bf" category="paragraph">Le pont FC-to-SAS relie les piles de stockage SAS aux ports d'initiateur FC des contrôleurs, offrant ainsi une passerelle entre les deux protocoles.</block>
   <block id="b138583f358945f52c4c94af395372e0" category="paragraph">L'illustration suivante présente une vue simplifiée de la configuration MetroCluster. Pour certaines connexions, une seule ligne représente plusieurs connexions redondantes entre les composants. Les connexions du réseau de gestion et de données ne sont pas affichées.</block>
-  <block id="0bd097c4ccd9fe5a83d12ee065335a17" category="image-alt">architecture matérielle mcc deux clusters atto à 2 nœuds</block>
   <block id="241d5effa746982d2f7e5b6909f157a7" category="list-text">La configuration se compose de deux clusters à un seul nœud.</block>
   <block id="7a365cd12da877b60fbaf51ea77e78d3" category="list-text">Chaque site dispose d'une ou plusieurs piles de stockage SAS.</block>
   <block id="7a4c75050b0dbc2db2f44779ef59ac8f" category="admonition">Les tiroirs SAS des configurations MetroCluster ne sont pas pris en charge avec le câblage ACP.</block>
@@ -4972,7 +4919,6 @@
   <block id="a2d4b828805dc92004efb97c8e85045a" category="paragraph">Pour les systèmes reçus en usine, les ponts FC-SAS sont préconfigurés et ne requièrent pas de configuration supplémentaire.</block>
   <block id="b6b0aa1e441ae0f9c94362e6f0aae763" category="paragraph">Vous pouvez utiliser d'autres interfaces de gestion, si nécessaire, comme un port série ou Telnet pour configurer et gérer un pont et pour configurer le port de gestion Ethernet 1, et FTP pour mettre à jour le micrologiciel du pont.</block>
   <block id="073faa4c73cacc88495fc9350385c303" category="paragraph">Cette procédure utilise le workflow suivant :</block>
-  <block id="76545d4e8668be942098ed242d25351a" category="image-alt">installation et configuration de workflow bridge</block>
   <block id="eed818e49f4e9b9c4ed8931067fb0efd" category="doc">Différences entre les configurations ONTAP MetroCluster</block>
   <block id="00ba2d14b7be89e77994c1a63febf02b" category="summary">Active IQ Unified Manager et ONTAP System Manager peuvent être utilisés pour la gestion GUI des clusters et le contrôle de la configuration.</block>
   <block id="186047a757cb9863fcb93d32f5c0c989" category="paragraph">Active IQ Unified Manager et ONTAP System Manager peuvent être utilisés pour la gestion des clusters à partir d'une interface graphique et pour le contrôle de la configuration.</block>
@@ -4986,7 +4932,6 @@
   <block id="96ab74ba60182f720e30abead20bbb03" category="doc">Câblage des contrôleurs les uns aux autres et des tiroirs de stockage</block>
   <block id="16e7e199c1100a98976f044e1707cf71" category="paragraph">Cette tâche doit être effectuée sur les deux sites MetroCluster.</block>
   <block id="b3c2cbf020c82a4579ad48c6a2825c87" category="list-text">Brancher les ports FC-VI.</block>
-  <block id="681a20d6cde4b20232cb4e73b7d6f969" category="image-alt">mcc relie le contrôleur fc vi au partenaire</block>
   <block id="a2b91b36fe2f171ecdfe2293a4dedbcb" category="paragraph">L'illustration ci-dessus est une connexion de câble représentative type. Les ports FC-VI spécifiques varient en fonction du module de contrôleur.</block>
   <block id="aa1f747115a4b8313c162b948979c7fd" category="list-text">Vous pouvez commander des modules de contrôleur FAS8200 et AFF A300 avec l'une des deux options de connectivité FC-VI :</block>
   <block id="f6c4685383c21cd45ac1dd62ff0d2357" category="list-text">Les ports intégrés 0e et 0f sont configurés en mode FC-VI.</block>
@@ -4995,10 +4940,8 @@
   <block id="3128e4c9bf47f5173e6fdd67dd0f725a" category="list-text">Les modules contrôleurs des systèmes de stockage AFF A400 et FAS8300 utilisent les ports FC-VI 2a et 2b.</block>
   <block id="0866074540e2383e942cca1f39a3d785" category="list-text">Reliez les ports SAS.</block>
   <block id="8ac606a0dd69d4325efa2a1a90114847" category="paragraph">L'illustration suivante montre les connexions. L'utilisation de vos ports peut être différente selon les ports SAS et FC-VI disponibles sur le module de contrôleur.</block>
-  <block id="669658bc088793bad84241188a655bf0" category="image-alt">mcc configuration d'espace sas optique à deux nœuds</block>
   <block id="b83a1cd537853a437db10ee32011ca04" category="paragraph">Depuis ONTAP 9.5 avec des ponts FiberBridge 7500N ou 7600N, _gestion intrabande_ des ponts est pris en charge comme alternative à la gestion IP des ponts. Depuis la version ONTAP 9.8, la gestion hors bande est obsolète.</block>
   <block id="44b34304fe9dbc559df5c8eec0e37bb6" category="admonition">Avec ONTAP 9.8, le<block ref="f81d99546dcaf16abad6ea08401251c3" prefix=" " category="inline-code"></block> la commande est remplacée par le<block ref="2b29cf959e88719118c992f741474a4f" prefix=" " category="inline-code"></block> commande. Les étapes suivantes présentent le<block ref="f81d99546dcaf16abad6ea08401251c3" prefix=" " category="inline-code"></block> Mais si vous exécutez ONTAP 9.8 ou version ultérieure, le<block ref="2b29cf959e88719118c992f741474a4f" prefix=" " category="inline-code"></block> commande recommandée.</block>
-  <block id="43441b39bffebee3ed9f59ea9dc91306" category="image-alt">installation et configuration du matériel du workflow sas 2 nœuds joints</block>
   <block id="fbe01200b5d7a3c4261e8ea34a15d550" category="list-text">Planifiez le positionnement des composants MetroCluster.</block>
   <block id="ff3374bc6b913cd83c99bdca241ba935" category="paragraph">La quantité d'espace rack nécessaire dépend du modèle de plateforme des contrôleurs de stockage, des types de commutateurs et du nombre de piles de tiroirs disques dans votre configuration.</block>
   <block id="c0d749550ddde23cbac88b531b9ece57" category="list-text">Le respect des pratiques d'atelier standard pour travailler avec des équipements électriques permet de vous assurer que vous êtes correctement mis à la terre.</block>
@@ -5046,7 +4989,6 @@
   <block id="51072c7a051a0ed5cd0de02f8572141d" category="list-text">Pour les piles de tiroirs supplémentaires, répétez l'étape précédente en utilisant le port SAS suivant disponible sur les ponts FiberBridge, en utilisant le port B pour la deuxième pile, le port C pour la troisième pile et le port D pour la quatrième pile.</block>
   <block id="f3159eb6d9bf0d2640aa5c47f1ccf18e" category="admonition">Chaque pile peut utiliser différents modèles d'E/S, mais tous les tiroirs disques d'une pile doivent utiliser le même modèle.</block>
   <block id="027117a19a991f10e8054babbc4d5966" category="paragraph">L'illustration suivante montre les tiroirs disques connectés à une paire de ponts FiberBridge 7600N ou 7500N :</block>
-  <block id="cabad1bab748f10f52cecc964ba3c574" category="image-alt">pont de câblage mcc et pile sas3 avec 7500n et plusieurs piles</block>
   <block id="5380d63de85a85219611f8b45f5c6e20" category="summary">Les adaptateurs FC-VI de chaque contrôleur doivent être câblés directement à son partenaire.</block>
   <block id="c30a34e27a8f90d73144f28a874b413d" category="doc">Câblage des contrôleurs les uns aux autres</block>
   <block id="6ece5477355fab540a1f9e5dcaa54c95" category="paragraph">Les adaptateurs FC-VI de chaque contrôleur doivent être câblés directement à son partenaire.</block>
@@ -5098,7 +5040,6 @@
   <block id="c0c890bcab579d545e455f22cb44fc7e" category="paragraph">Il faut ajouter du stockage supplémentaire, si nécessaire, pour prendre en charge les deux contrôleurs supplémentaires (node_A_2-IP et node_B_2-ip), car la configuration passe d'un arrangement à deux nœuds à quatre nœuds.</block>
   <block id="c588b0a5946b5b7863ad997641be5217" category="list-text">En fonction des disques de spare disponibles dans les tiroirs existants, des disques supplémentaires doivent être ajoutés pour prendre en charge les contrôleurs supplémentaires de la configuration.</block>
   <block id="444f4eb1cb3c241c027151340630ca19" category="paragraph">Cela peut nécessiter des tiroirs de stockage supplémentaires, comme illustré ci-dessous.</block>
-  <block id="32798526955db42460a8568564f46c11" category="image-alt">faites la transition de 2n 4 nouveaux nœuds ip dans les tiroirs</block>
   <block id="c6680d9847f4f8e3992517e01e609d5e" category="paragraph">Vous devez disposer de 14 à 18 disques supplémentaires chacun pour les troisième et quatrième contrôleurs (node_A_2-IP et node_B_2-IP) :</block>
   <block id="28fcb0a1566deb5f1857bdcb7c001aa4" category="list-text">Trois disques dans un pool</block>
   <block id="1c753e975bd6658cf518d4324c55f246" category="list-text">Trois disques dans un pool 1</block>
@@ -5109,7 +5050,6 @@
   <block id="6a2ccd8b8c42cf0af6e0f3005306cbc0" category="section-title">Flux de production pour une transition sans interruption</block>
   <block id="5eca012f85735bdee9797bcffb569255" category="paragraph">Vous devez suivre le flux de travail spécifique pour assurer une transition réussie.</block>
   <block id="ac046f66ab13c68ba1828bf9f03432ef" category="paragraph">Pendant que vous préparez la transition, planifiez les déplacements entre les sites. Notez qu'une fois les nœuds distants mis en rack et câblés, vous devez accéder aux nœuds à partir d'un terminal série. L'accès au processeur de service n'est pas disponible tant que les nœuds ne sont pas configurés.</block>
-  <block id="35cd722a48e1fecdd4c7c55ff286b1e9" category="image-alt">flux de travail 2n transition bsaïque</block>
   <block id="a02b17cdf07ea26b5ebdfc0305bce4c7" category="section-title">Mappage des ports des nœuds FC MetroCluster sur les nœuds IP MetroCluster</block>
   <block id="3bea9cda597a1b7a5b14f6bac94c87f5" category="paragraph">Vous devez ajuster la configuration des ports et LIF du nœud MetroCluster FC, afin qu'il soit compatible avec celle du nœud IP MetroCluster qui le remplace.</block>
   <block id="1a8f09fd15bafc8e8d9d6e87e2082625" category="paragraph">Une fois les nouveaux nœuds démarrés pendant la mise à niveau, chaque nœud utilise la configuration la plus récente du nœud qu'il remplace. Lorsque vous démarrez le nœud_A_1-IP, ONTAP tente d'héberger les LIF sur les mêmes ports qui ont été utilisés sur le nœud_A_1-FC.</block>
@@ -5229,7 +5169,6 @@
   <block id="b0c99e13c2a98cd8e452382d6e568e8b" category="paragraph">Vous devez disposer de 14 à 18 disques supplémentaires pour chaque contrôleur :</block>
   <block id="45fdd8f026a531b1033dbbf0b60eb04e" category="section-title">Flux de production permettant une transition sans interruption lorsque les tiroirs ne sont pas pris en charge par les nouveaux contrôleurs</block>
   <block id="c84930af920e28e8f2dbd9de3bc2c098" category="paragraph">Si les modèles de tiroirs existants ne sont pas pris en charge par les nouveaux modèles de plateforme, vous devez associer les nouveaux tiroirs à l'ancienne configuration, transférer les données vers les nouveaux tiroirs, puis effectuer un transition vers la nouvelle configuration.</block>
-  <block id="b9185cdaad62cf64c674e6621268219c" category="image-alt">workflow 2n transition des anciens tiroirs non pris en charge</block>
   <block id="bd8a7d1e50d9cef875e2b2f7b0a4f4bc" category="section-title">Préparation des nouveaux modules de contrôleur</block>
   <block id="5502b7c788d493c394d1eaf44409249a" category="paragraph">Vous devez effacer la configuration et l'espace disque sur les nouveaux modules de contrôleur et les nouveaux tiroirs de stockage.</block>
   <block id="95d3d0e2d747e0347bca20c1101069fa" category="list-text">Lorsque les nouveaux tiroirs de stockage sont reliés aux nouveaux modules de contrôleur IP MetroCluster, effectuez toutes les étapes de la <block ref="e8679447a78c1d85bc8cd74bd3122785" category="inline-link-macro-rx"></block>.</block>
@@ -5237,7 +5176,6 @@
   <block id="f2cb1384be7d12ed541afe1cbde21a67" category="section-title">Connexion des nouveaux tiroirs disques aux contrôleurs FC MetroCluster existants</block>
   <block id="77fde3720fa7b1b290fd68185efb8977" category="paragraph">Vous devez connecter les nouveaux tiroirs disques aux modules de contrôleur existants avant de passer à une configuration MetroCluster IP.</block>
   <block id="11759b29030dd2daaafd4a73f8385bcb" category="paragraph">L'illustration suivante présente les nouveaux tiroirs reliés à la configuration MetroCluster FC.</block>
-  <block id="e42b2cb6470747ad18dc460e787b053f" category="image-alt">faites passer 2 anciens tiroirs non pris en charge vers les anciens contrôleurs</block>
   <block id="c7b313252c68991d5222ddae282e1d47" category="list-text">Désactiver l'autoassignation des disques sur node_A_1-FC et node_A_2-FC :</block>
   <block id="d10770e08926bc038d1556c0fc5cae60" category="paragraph"><block ref="7fb7ca3a4c6cc2a02cdb8f7d207fb0f8" prefix="" category="inline-code"></block></block>
   <block id="53661a6635a983af3295fd3f02dbed54" category="paragraph">Cette commande doit être émise sur chaque nœud.</block>
@@ -5493,7 +5431,6 @@
   <block id="2308225bfe2c63c72726170b38ad2ef7" category="list-text">En mode de maintenance sur les nœuds FC MetroCluster (node_A_1-FC et node_B_1-FC), vérifiez qu'aucun disque n'est connecté :<block ref="0f27807a5721c642901147ef5c9a87ea" prefix=" " category="inline-code"></block></block>
   <block id="c4eed5dca69df1c52bd138bcdfb73ddd" category="list-text">Mettez les nœuds MetroCluster FC hors tension et retirez-les.</block>
   <block id="5366a9d98a85133ad76efab45bf35d72" category="paragraph">À ce stade, les contrôleurs FC MetroCluster ont été retirés et les tiroirs sont déconnectés de tous les contrôleurs.</block>
-  <block id="679e0ba66a065d3ef6c41baf9bda5cb2" category="image-alt">à la transition 2n, supprimez les nœuds fc</block>
   <block id="ea4f6a54a922436f4da19eeae7b7be02" category="summary">En fonction de la phase du processus de transition, les opérations de basculement, de rétablissement et de rétablissement de MetroCluster utilisent le flux de travail IP MetroCluster FC ou MetroCluster.</block>
   <block id="2169fc2df99c9e0a2b4c8c14a8dea264" category="doc">Les opérations de basculement, de rétablissement et de rétablissement s'effectuent sans interruption de l'activité</block>
   <block id="5dfe60da7e5d2327335ff9aa47ac355c" category="paragraph">Le tableau suivant indique les workflows utilisés à différentes étapes du processus de transition. Le basculement et le rétablissement ne sont parfois pas pris en charge.</block>
@@ -5553,7 +5490,6 @@
   <block id="63fe9e29b71deb782e22b3e872ee34d1" category="summary">Depuis ONTAP 9.8, vous pouvez effectuer la transition des charges de travail et des données d'une configuration FC MetroCluster à deux nœuds vers une nouvelle configuration IP MetroCluster à quatre nœuds. Les tiroirs disques des nœuds FC MetroCluster sont déplacés vers les nœuds IP.</block>
   <block id="4bbea8707e4088cc6fdffe956c4f7177" category="doc">Transition sans interruption d'un FC MetroCluster à deux nœuds vers une configuration IP MetroCluster à quatre nœuds (ONTAP 9.8 et versions ultérieures)</block>
   <block id="5aeb375a0d131f3be9e7b2a27545a8ce" category="paragraph">L'illustration suivante présente la configuration simplifiée avant et après cette procédure de transition.</block>
-  <block id="314ca8312fb2647cd40269196fbaf612" category="image-alt">la transition 2n commence à se terminer</block>
   <block id="3ee9fbe9ad9dfbc4db91462092fc5190" category="list-text">ADP n'est pas pris en charge sur la configuration IP MetroCluster à quatre nœuds créée par cette procédure.</block>
   <block id="49e292661822b08dae8d989fcf74ad41" category="list-text">Les tiroirs de stockage existants sont déplacés vers les nouveaux nœuds IP MetroCluster.</block>
   <block id="f1690457b28d2f74c24f5cf369d656fd" category="list-text">Il est possible d'ajouter des tiroirs de stockage supplémentaires à la configuration, le cas échéant.</block>
@@ -5652,7 +5588,6 @@
   <block id="bd2601437fc0c9c11d99ace1847a76dd" category="paragraph">Vous devez installer et connecter les nouveaux contrôleurs IP MetroCluster aux tiroirs de stockage précédemment connectés aux contrôleurs FC MetroCluster.</block>
   <block id="9f7bc2bf5d04da6b44717226859b44cf" category="paragraph">Ces étapes doivent être réalisées sur chacun des nœuds IP MetroCluster.</block>
   <block id="013059fbd9ce5a15dbff3f3701e85529" category="paragraph">Dans l'exemple suivant, deux tiroirs de stockage supplémentaires sont ajoutés sur chaque site afin de fournir du stockage pour s'adapter aux nouveaux modules de contrôleur.</block>
-  <block id="7984aedf80572923d603aaf1b6a7ff08" category="image-alt">effectuez la transition de 2 n 4 nouveaux nœuds et tiroirs ip</block>
   <block id="d7d5207b6a402327d717590c53126a62" category="list-text">Planifiez le positionnement des nouveaux modules de contrôleur et tiroirs de stockage en fonction des besoins.</block>
   <block id="001201e7e95e93ec36501bc42b2e7e9b" category="paragraph">L'espace rack dépend du modèle de plateforme des modules de contrôleur, des types de switchs et du nombre de tiroirs de stockage de votre configuration.</block>
   <block id="3eb202221c9b4e13a9f5bb33726e208d" category="list-text">Installez le nouvel équipement : contrôleurs, tiroirs de stockage et commutateurs IP.</block>
@@ -5812,7 +5747,6 @@
   <block id="cbb3b42977ad52ce079aa6df9b0745f7" category="paragraph">Vous devez démarrer les nouveaux modules de contrôleur un par un en utilisant l'option correcte dans le menu de démarrage.</block>
   <block id="7a2dbea9bf4b8a2bb0e4e01372c890b0" category="paragraph">Lors de ces étapes, vous démarrez les deux nouveaux nœuds, en étendant ce qui était une configuration à deux nœuds en une configuration à quatre nœuds.</block>
   <block id="8fd3e3c2bd40cb0281b7c6bcd5fba673" category="paragraph">Ces étapes sont réalisées sur les nœuds suivants :</block>
-  <block id="f5ea6ae7029688b9143706d359367e00" category="image-alt">transition 2n amorçage a 2 et b 2</block>
   <block id="318124c0d2b0886a2127573d20f0171a" category="list-text">Démarrez les nouveaux nœuds à l'aide de l'option d'amorçage « 9c ».</block>
   <block id="1efaaabf1d4174f3e904340f1e32b55e" category="paragraph">Le nœud initialise et démarre sur l'assistant de configuration du nœud, comme suit.</block>
   <block id="e569ceac9b8d4ff82c06aa4ec7d2df4f" category="paragraph">Si l'option « 9c » ne fonctionne pas, prenez les mesures suivantes pour éviter toute perte de données :</block>
@@ -5977,7 +5911,6 @@
   <block id="29cbc4935d9208d50d76de781aee7789" category="list-text">Trois disques du pool 1</block>
   <block id="d6ef215e9ee12ea54d86a3aebb395fa4" category="paragraph">Ces informations sont disponibles pour chaque modèle de plate-forme à l'adresse<block ref="f73c85a53b5d65cc9c35da0b9e0d2f09" category="inline-link-rx"></block></block>
   <block id="0f51f8b82cdef56297cd2a8fe92b3371" category="section-title">Workflow de transition fluide lors du déplacement des données et de la désactivation des anciens tiroirs de stockage</block>
-  <block id="ade7d060e8c03ec6ed7a3c2a65eaaf64" category="image-alt">flux de travail 2n transition des données vers de nouveaux tiroirs</block>
   <block id="db53daa46cc857a5ca6ccd9ab19fe451" category="paragraph">Dans les étapes suivantes, vous êtes dirigé vers d'autres procédures. Vous devez effectuer les étapes de chaque procédure référencée dans l'ordre indiqué.</block>
   <block id="f838f04d0eb12f61e5a8349193868fa6" category="list-text">Planifiez le mappage des ports à l'aide des étapes de la section <block ref="fd65b7800487b4d4a915a03682bab881" category="inline-link-macro-rx"></block>.</block>
   <block id="7bcfb864eef556eb0b6169bddc9753f5" category="list-text">Préparez les contrôleurs IP MetroCluster à l'aide des étapes de la section <block ref="e8679447a78c1d85bc8cd74bd3122785" category="inline-link-macro-rx"></block>.</block>
@@ -6034,13 +5967,9 @@
   <block id="27e914a0dbe2bfddb83efa734fdcc898" category="summary">Vous devez suivre le workflow spécifique pour assurer une transition sans interruption.</block>
   <block id="85b0f410dd6ca151d152176d890c3193" category="doc">Flux de travail pour une transition MetroCluster sans interruption</block>
   <block id="183a01af25c77432a01331aae0afe07d" category="paragraph">Le processus de transition commence par une configuration FC MetroCluster à quatre nœuds saine.</block>
-  <block id="eeec4296d101cac002fcfd00ffd1dc43" category="image-alt">effectuer la transition des nœuds fc du groupe de reprise après incident</block>
   <block id="d6a0a05397592d7077bcd0906a42b50f" category="paragraph">Les nouveaux nœuds IP MetroCluster sont ajoutés en tant que second groupe DR.</block>
-  <block id="021e407e15462fb5c73005078a529c30" category="image-alt">transition des groupes de reprise après incident fc et ip</block>
   <block id="9a6bdbd8f9274830c8f5d9018e14570f" category="paragraph">Les données sont transférées de l'ancien groupe de reprise après incident vers le nouveau groupe de reprise après incident, puis les anciens nœuds et leur stockage sont retirés de la configuration et désaffectés. Le processus se termine par une configuration IP MetroCluster à quatre nœuds.</block>
-  <block id="fc00220365bb41006c0d11e46a929f6b" category="image-alt">ip de groupe de reprise sur incident de transition 2</block>
   <block id="f4a3095ccf0a77f5f4202b9a9f4e7aa9" category="paragraph">Vous utiliserez le workflow suivant pour effectuer la transition de la configuration MetroCluster.</block>
-  <block id="561481cfe6283743c849281efb811682" category="image-alt">transition de flux de travail 4n sans interruption</block>
   <block id="a11005c16c651c3dd80e12322e82e729" category="doc">Fin de la transition</block>
   <block id="f294434df21fc34b1e326400ebd8a9ae" category="paragraph">Pour terminer la transition, vous devez vérifier le fonctionnement de la nouvelle configuration IP de MetroCluster.</block>
   <block id="5a69797dc90175afad3338666029bd0e" category="list-text">Vérifiez la configuration IP de MetroCluster.</block>
@@ -6312,7 +6241,6 @@
   <block id="ba6437ec6a5b86f7113439313eac431a" category="list-text">Node_B_2-A900</block>
   <block id="d6a05f216ff3e2d50b361bbcdff5ee3d" category="section-title">Flux de production de mise à niveau des contrôleurs dans une configuration MetroCluster IP</block>
   <block id="8b9cf8e3d13d6e63ca169861310c3b62" category="paragraph">Vous pouvez utiliser le diagramme de workflow pour planifier les tâches de mise à niveau.</block>
-  <block id="ea10aa2075899edae7e9fbbdb6876804" category="image-alt">mise à niveau ip du workflow</block>
   <block id="2e93b137ca8dae100d477cd0ce20ea2f" category="section-title">Préparation à la mise à niveau</block>
   <block id="39636ee3d838e1ad79f4b6b17f397cb2" category="paragraph">Avant d'apporter des modifications à la configuration MetroCluster existante, vous devez vérifier l'état de santé de la configuration, préparer les nouvelles plateformes et effectuer d'autres tâches diverses.</block>
   <block id="07861cb79e114503ecd43d810982548c" category="section-title">Désactivez le connecteur 7 sur le contrôleur AFF A700 ou FAS9000</block>
@@ -6393,7 +6321,6 @@
   <block id="332d6b9e68571fab560335a786aee2d6" category="paragraph">Vous devez basculer la configuration vers site_A afin de pouvoir mettre à niveau les plateformes du site_B.</block>
   <block id="2ed2f89a99daa3452e8fc315262c95f5" category="paragraph">Cette tâche doit être effectuée sur site_A.</block>
   <block id="efa982219e642bd5186be6c92fb7a64f" category="paragraph">Une fois cette tâche effectuée, site_A est actif et transmet les données aux deux sites. Site_B est inactif et prêt à commencer le processus de mise à niveau.</block>
-  <block id="1ab09d70d6824875fab00d3405138192" category="image-alt">mcc mise à niveau du cluster a dans le cadre du basculement A900</block>
   <block id="19e5fa2e94382f90d18bf6ea6ee57e9a" category="list-text">Basculer la configuration MetroCluster sur site_A afin de mettre à niveau les nœuds site_B :</block>
   <block id="cf88bd4ca7f9abb34dda4d2a47769931" category="list-text">Exécutez la commande suivante sur site_A :</block>
   <block id="10e690310a4775deb6bc703a3d667b8c" category="paragraph"><block ref="71b269d201dc030c963a1b0b33ee014f" prefix="" category="inline-code"></block></block>
@@ -6410,7 +6337,6 @@
   <block id="f6cb76da900c86fece5eb404a84c66d1" category="list-text">Détachez le câble de la console, le cas échéant, et le câble de gestion du module de contrôleur avant de retirer le module de contrôleur.</block>
   <block id="dfa9bdf3553d14d1f1265d5adf46b338" category="list-text">Déverrouiller et retirer le module de contrôleur du châssis.</block>
   <block id="c1ed0cd23ea77c49b5611e5929537b3f" category="list-text">Faites glisser le bouton orange sur la poignée de came vers le bas jusqu'à ce qu'il se déverrouille.</block>
-  <block id="b5da16aeb772a8949c023bb31bb3d2b7" category="image-alt">module de contrôleur</block>
   <block id="1a08d4399aa1cca3c1e1468f4fd2f4f9" category="inline-image-macro">Numéro 1</block>
   <block id="dd81025bcaa658357182b704e883f3ef" category="cell"><block ref="dd81025bcaa658357182b704e883f3ef" category="inline-image-macro-rx" type="image"></block></block>
   <block id="b05aea0ff1931b3ce07289e5c24c4357" category="cell">Bouton de déverrouillage de la poignée de came</block>
@@ -6425,7 +6351,6 @@
   <block id="97bf9cd87a9cbb5619926733a7d23035" category="list-text">Appuyer sur le bouton « came » numéroté et numéroté. Le bouton de came s'éloigne du châssis.</block>
   <block id="3e40de17d289a21aa0995b29466f1eab" category="list-text">Faites pivoter le loquet de came vers le bas jusqu'à ce qu'il soit en position horizontale. Le NVS se désengage du châssis et se déplace de quelques pouces.</block>
   <block id="14fddb164ec13c3ab68d7ba81a70f9ac" category="list-text">Retirez le NVS du châssis en tirant sur les languettes de traction situées sur les côtés de la face du module.</block>
-  <block id="ae6364697691c6be3fd29e2d7291d42d" category="image-alt">déposer le module</block>
   <block id="6e5bc02812454d72aa1b3361bc2f6c73" category="inline-image-macro">Numéro 1</block>
   <block id="e115f69e5e34b6d392f6ac1cb103734d" category="cell"><block ref="e115f69e5e34b6d392f6ac1cb103734d" category="inline-image-macro-rx" type="image"></block></block>
   <block id="c6e52defde912721ad3ec5315c5d9664" category="cell">Loquet de came d'E/S numéroté et numéroté</block>
@@ -6607,7 +6532,6 @@
   <block id="79db05c6325341be1f197094f1f39dfe" category="paragraph">Suivez cette étape sur tous les SVM, si nécessaire.</block>
   <block id="06909dd9c08fe502cc96f625a1038a5b" category="section-title">Retournez la configuration MetroCluster</block>
   <block id="dba3f9f02c6f652d3660c771b87088da" category="paragraph">Cette tâche vous permet d'effectuer le rétablissement, et la configuration MetroCluster revient à un fonctionnement normal. Les nœuds du site_A sont toujours en attente de mise à niveau.</block>
-  <block id="968f84559c2abd0caee37a550c003bec" category="image-alt">cluster de mise à niveau mcc a rétablissement A900</block>
   <block id="6cfc40927d48ae02cd2d52dce98f7b35" category="list-text">Émettez le<block ref="4d06f3844212ac745a73965bbb3f6e51" prefix=" " category="inline-code"></block> Commande du site_B et vérifiez la sortie.</block>
   <block id="ca9c56ab0bb83d382fd25049223670de" category="list-text">Vérifiez que les nouveaux nœuds sont correctement représentés.</block>
   <block id="432c93ecd647e7ed568dae42c320bb9a" category="list-text">Vérifiez que les nouveaux nœuds sont en attente de rétablissement.</block>
@@ -7015,7 +6939,6 @@
   <block id="a935a365a62e9c51ec22e6740bc18910" category="list-text">Node_B_1 : 4068741254</block>
   <block id="353024e475a7604e40871e8aa07253b1" category="paragraph">Pour plus d'informations, reportez-vous à la section<block ref="17c328b6561af0ba38f0debcfa14ec48" category="inline-link-rx"></block>.</block>
   <block id="11f455c88de297768de186a1110cfdf6" category="paragraph">Une fois cette tâche terminée, cluster_A est actif et assure le service des données des deux sites. Cluster_B est inactif et prêt à démarrer le processus de mise à niveau, comme illustré ci-dessous.</block>
-  <block id="803c81253d05dfea0833a4f1be138dea" category="image-alt">mcc mise à niveau du cluster a en basculement</block>
   <block id="84662b9fedef1d258fb8d10005e76090" category="list-text">Exécutez la commande suivante sur cluster_A :</block>
   <block id="f02f75fbbe89500c3766deab4ccf2d4d" category="paragraph">Pour assurer la reprise du réseau correctement sur les nouveaux contrôleurs, vous devez déplacer les LIF vers un port commun, puis supprimer la configuration réseau des anciens contrôleurs.</block>
   <block id="dd3d39a72e683fc82c6e4dd4c8f79169" category="list-text">Cette tâche doit être effectuée sur chacun des anciens nœuds.</block>
@@ -7083,7 +7006,6 @@
   <block id="c24d2fcd8511c8b51a6aef773200e0d8" category="paragraph">Avant l'opération de rétablissement, vous devez installer les licences des nouveaux contrôleurs.</block>
   <block id="07beb3f4161a6f204edf78213ee21dd3" category="list-text"><block ref="07beb3f4161a6f204edf78213ee21dd3" category="inline-link-macro-rx"></block></block>
   <block id="1d3a92008f392950faeb257ca2a9e106" category="paragraph">Cette tâche vous permet d'effectuer le rétablissement et de rétablir le fonctionnement normal de la configuration MetroCluster. Les nœuds du site_A sont toujours en attente de mise à niveau.</block>
-  <block id="11d18258d14c6b6638680b58c7d402a0" category="image-alt">rétablissement de la mise à niveau du cluster mcc</block>
   <block id="d07bebb0e23926af3c78f855a3108b26" category="admonition">Après avoir exécuté<block ref="c2966f2f3bfc7e81dae5df7c44ce66ea" prefix=" " category="inline-code"></block> et<block ref="da68e7539bf844a8366ded5d17b246d7" prefix=" " category="inline-code"></block>, un message d'erreur similaire à ce qui suit s'affiche :</block>
   <block id="0a52730597fb4ffa01fc117d9e71e3a9" category="listing-title">Exemple</block>
   <block id="6870468a3fe6a4b5c829d30e0702c5fd" category="paragraph">Ce comportement est attendu en raison d'une incompatibilité du contrôleur pendant le processus de mise à niveau et le message d'erreur peut être ignoré en toute sécurité.</block>
@@ -7099,7 +7021,6 @@
   <block id="1755c11f42867f510a9b6db158e645e4" category="list-text">Cette procédure ne génère aucune interruption et prend environ un jour (sauf le rack et la pile) lors de la mise à zéro des disques.</block>
   <block id="b9ea4b691c646fd3f44033809ac41ac9" category="paragraph">Avant d'effectuer cette procédure, la configuration FC MetroCluster se compose de quatre nœuds, avec une paire haute disponibilité sur chaque site :</block>
   <block id="2d5a8c54328bd3846f2c284f8b9f1082" category="paragraph">Au terme de cette procédure, la configuration FC MetroCluster est constituée de deux paires HA sur chaque site :</block>
-  <block id="efe4097a762524c1e1628fcad46084ae" category="image-alt">mcc dr groups, nœud 8</block>
   <block id="2c6c5464685a9a3cd7105cf64524bc6c" category="paragraph">Les deux sites doivent être étendus de la même manière. Une configuration MetroCluster FC ne peut pas comprendre un nombre irrégulier de nœuds.</block>
   <block id="b2fa14e3df9342c7d9ce9f5ac1643744" category="paragraph">Vous pouvez utiliser les procédures de la documentation _installation et Setup_ pour votre plate-forme et vos tiroirs disques.</block>
   <block id="95b65883f84353940114b168cc4a2fb7" category="summary">Avant de terminer la configuration du nouveau module de contrôleur via netboot, vous devez affecter les disques.</block>
@@ -7255,7 +7176,6 @@
   <block id="4daa8d96b8b74ad2dbd463df0799b913" category="paragraph">Dans les exemples de cette procédure, l'invite de console est utilisée<block ref="99a809c9b56ef4c47eeb7bddf433cbe6" prefix=" " category="inline-code"></block>.</block>
   <block id="824535d62d67c83dfe66d0a3e0a799fa" category="list-text">Les modules de contrôleur qui sont ajoutés sont appelés _New_ Controller modules ; les exemples de cette procédure sont indiqués par l'invite de la console<block ref="964fd23bcfd87466dff52809fdfed697" prefix=" " category="inline-code"></block>.</block>
   <block id="746d86a125d1c5723b1963d9fd563f94" category="list-text">Cette tâche utilise le workflow suivant :</block>
-  <block id="2a273c846af91d733dbb202c265751b5" category="image-alt">workflow mcc extension de 2 à 4 nœuds ajout de nœuds</block>
   <block id="3b889d3c5322b48147e7fc9ac55e9c53" category="summary">Après avoir ajouté de nouveaux modules de contrôleur à la configuration MetroCluster, vous devez activer le basculement du stockage sur les deux modules de contrôleur et activer séparément la haute disponibilité du cluster.</block>
   <block id="cfd8867a9479bfcf51fef02d25bc1930" category="doc">Activation du basculement du stockage sur les deux modules de contrôleur et activation de la haute disponibilité du cluster</block>
   <block id="ccdc8d88c83bcf7dad7c92cbf781eee7" category="paragraph">La configuration MetroCluster doit avoir déjà été actualisée à l'aide du<block ref="7b61e46b8e4fceaa3b96a2ac23ad8213" prefix=" " category="inline-code"></block> commande.</block>
@@ -7297,13 +7217,11 @@
   <block id="75f592488d6be5738040725bd9891f31" category="list-text">L'équipement que vous ajoutez doit être pris en charge et répondre à toutes les exigences décrites dans les procédures suivantes :</block>
   <block id="f0ce72ff8693693704f1bcbbfbcb9de9" category="list-text">Cette procédure est perturbatrice et s'effectue en quatre heures environ.</block>
   <block id="247538e1ad1846112969182bcc11ab33" category="list-text">Avant d'effectuer cette procédure, la configuration MetroCluster FC se compose de deux clusters à un seul nœud :</block>
-  <block id="4593bb11da3b431f4f5b38cc09043e76" category="image-alt">mcc dr groups 2 nœuds</block>
   <block id="3ff4e122a2d789b5bece1efdb66a26c0" category="paragraph">À l'issue de cette procédure, la configuration MetroCluster FC se compose de deux paires HA, une sur chaque site :</block>
   <block id="cd7c2fd8a1917d85aeb67138732114f1" category="list-text">Les deux sites doivent être étendus de la même manière.</block>
   <block id="a001cac1448be1594234dfbb4a741070" category="paragraph">Une configuration MetroCluster ne peut pas comprendre un nombre irrégulier de nœuds.</block>
   <block id="80324bf101110a5af7fb1c96368ec7bf" category="list-text">Cette procédure peut prendre plus d'une heure par site, avec un temps supplémentaire pour des tâches telles que l'initialisation des disques et le démarrage réseau des nouveaux nœuds.</block>
   <block id="329e2202b67234724674932873a0bd94" category="paragraph">Le temps nécessaire à l'initialisation des disques dépend de la taille des disques.</block>
-  <block id="b9c0eaf4a16701cf889abe8268023f52" category="image-alt">workflow mcc 2 à 4 nœuds, extension haut niveau</block>
   <block id="a1b11df58600d9eb13a2901f3b33b814" category="summary">Si vous utilisez des systèmes AFF dans une configuration avec des agrégats en miroir et que les nœuds ne disposent pas des disques \(SSD\) correctement affectés, vous devez attribuer la moitié des disques de chaque tiroir à un nœud local et l'autre moitié des disques à son nœud partenaire haute disponibilité. Vous devez créer une configuration dans laquelle chaque nœud a le même nombre de disques dans ses pools de disques locaux et distants.</block>
   <block id="277ebe31f2e0aa7a8abfc5016cbd5190" category="doc">Assignation de la propriété des disques dans les systèmes AFF</block>
   <block id="71588c1d6213698413e60cdf71eea775" category="paragraph">Si vous utilisez des systèmes AFF dans une configuration avec des agrégats en miroir et que les nœuds ne disposent pas des disques (SSD) correctement affectés, vous devez attribuer la moitié des disques de chaque tiroir à un nœud local et l'autre moitié des disques à son nœud partenaire haute disponibilité. Vous devez créer une configuration dans laquelle chaque nœud a le même nombre de disques dans ses pools de disques locaux et distants.</block>
@@ -7545,17 +7463,13 @@
   <block id="97544c597d5047c89f8d806033395de8" category="list-text">Les références aux « anciens nœuds » désignent les nœuds que vous souhaitez remplacer.</block>
   <block id="c07217a12145454189c265ecf5f40173" category="list-text">Collecte des informations des anciens nœuds.</block>
   <block id="220023d80ca24d69e962de981075e392" category="paragraph">À ce stade, la configuration à quatre nœuds apparaît comme illustré sur l'image suivante :</block>
-  <block id="bcf9f8bb6be3a3d38d87e026dd4cfe95" category="image-alt">mcc dr groupe a</block>
   <block id="75aa8d2f84e0be26d2847e91f37f74e2" category="list-text">Pour éviter la génération automatique de dossiers de demande de support, envoyez un message AutoSupport pour indiquer que la mise à niveau est en cours.</block>
   <block id="3e47f65a0c143cd4a51a7540fd2001fa" category="list-text">Lancer la commande suivante : +<block ref="9062a94bcc646043cfb8c2ffec3011d8" prefix=" " category="inline-code"></block></block>
-  <block id="6837dd1f788164eabd6d97dbcbe7e4c9" category="paragraph">L'exemple suivant spécifie une fenêtre de maintenance de 10 heures. Selon votre plan, il est possible que vous souhaitiez accorder plus de temps.</block>
   <block id="37c43c60431d0988dbc66af885d529aa" category="paragraph">Lorsque la procédure d'extension est terminée, la configuration s'affiche comme illustré dans l'image suivante :</block>
-  <block id="82100af698d65aee7d8eee88a9f650ea" category="image-alt">mcc dr groupe b</block>
   <block id="8bcdf2e6243e634b6f778a006ca38abf" category="list-text">Déplacez les volumes CRS.</block>
   <block id="79e90867e68054d16a6abbb1208fa244" category="admonition">Vous pouvez choisir de mettre en miroir l'agrégat lors de sa création ou après sa création.</block>
   <block id="ce5bbb10a781d48b96bba3c0fb1b8281" category="list-text">Suivez les étapes de la procédure de suppression de l'ancien groupe DR.</block>
   <block id="f8d577c9976367a6e41d78a00f8aacaf" category="paragraph">Après avoir supprimé l'ancien groupe DR (groupe DR un), la configuration s'affiche comme illustré dans l'image suivante :</block>
-  <block id="b40a53693e112d3e63df2022f1ea538b" category="image-alt">groupe dr mcc d</block>
   <block id="f0c5b568bbaab2490082e4d2aaf08123" category="paragraph"><block ref="7efa6fc838c006d396e42638b4ff25d1" category="inline-link-macro-rx"></block> Dans le _MetroCluster Tiebreaker installation et configuration_.</block>
   <block id="ae0930527dc1f23b45618d9c343cf9e0" category="summary">Avant de procéder à la mise à niveau vers une paire haute disponibilité, vérifiez que votre système fonctionne avec toutes les exigences et que vous disposez de toutes les informations nécessaires.</block>
   <block id="1efe4497214b901f523cf96a2c33ab26" category="list-text">Identifiez les disques non assignés ou les disques de spare que vous pouvez affecter au nouveau module de contrôleur à l'aide des commandes suivantes :</block>
@@ -7890,24 +7804,18 @@
   <block id="f24ed5039bd87c6dfa3dd9e60bc6aeb2" category="list-text">Si aucun stockage ne nécessite de remplacement, vous pouvez suivre la procédure de remplacement des FRU du module de contrôleur pour le modèle de plateforme.</block>
   <block id="24a2bd57ed6846b75c69f9446698c9b5" category="list-text">Si le stockage nécessite un remplacement, vous pouvez utiliser la procédure de restauration du module multi-contrôleur.</block>
   <block id="7f6c181baba7747b00505345bae7f60f" category="paragraph">Ce scénario s'applique également aux configurations MetroCluster à quatre nœuds.</block>
-  <block id="301426d46f0aa16984714ed99751db41" category="image-alt">mcc dr regroupe 8 nœuds avec une seule panne de contrôleur</block>
   <block id="27fdb05915f163f0d52355fc71c607c3" category="section-title">Deux pannes de module de contrôleur dans un seul groupe DR</block>
   <block id="d302774d437f250343ed8977292e71d7" category="paragraph">Dans ce cas, la défaillance nécessite un basculement. Vous pouvez utiliser la procédure de récupération de panne du module multi-contrôleur.</block>
-  <block id="99b165b658bbdcae190a3a570167a1ed" category="image-alt">mcc dr regroupe 8 nœuds avec une panne de plusieurs contrôleurs</block>
   <block id="1175acd661fe4d3d11fe05b21be2d153" category="section-title">Pannes de module de contrôleur unique dans des groupes DR distincts</block>
   <block id="f30e672cd86c8a10e01e3218bc1060cc" category="paragraph">Dans ce cas, la défaillance est limitée à des paires haute disponibilité distinctes.</block>
   <block id="8c89c9133bc76e5b16a8c83e5c307af4" category="paragraph">La procédure de remplacement des FRU est effectuée deux fois, une fois pour chaque module de contrôleur défaillant.</block>
-  <block id="5b2a45c1086fe7a4710b3b2e0847378f" category="image-alt">mcc dr group 8 nœuds avec deux défaillances de contrôleur unique</block>
   <block id="c112d555f8c20c9c4b789d6e75292e46" category="section-title">Pannes de trois modules de contrôleur réparties sur les groupes de DR</block>
   <block id="6f521f77a54361de0405ecf437ff6e6c" category="paragraph">Dans ce cas, la défaillance nécessite un basculement. Vous pouvez utiliser la procédure de récupération de panne du module multi-contrôleur pour le groupe DR un.</block>
   <block id="a896f3d096ed79686beae6c1df61a6c3" category="paragraph">Vous pouvez utiliser la procédure de remplacement des FRU du module de contrôleur spécifique à la plate-forme pour le groupe DR deux.</block>
-  <block id="c7f1d3ee10e6c83c28c677d01937b31e" category="image-alt">mcc dr group 8 nœuds avec une panne de contrôleur 3</block>
   <block id="8a022ecef25783e9fc7c5ddc2631721d" category="section-title">Scénarios de défaillance de module de contrôleur dans des configurations MetroCluster à 2 nœuds</block>
   <block id="7361eeef3ab5dee602e0963012dd7ae4" category="paragraph">La procédure que vous utilisez dépend de l'étendue de la panne.</block>
-  <block id="4d3ea6cbb078103ec4e216dd33790cfa" category="image-alt">mcc dr groups 2 nœuds avec une seule panne de contrôleur</block>
   <block id="9c93bb389638277181f586c3dd49f836" category="summary">Utilisez le workflow pour effectuer une reprise après incident.</block>
   <block id="51097e1b5f0307e291ad0936cb4d1694" category="doc">Flux de travail pour la reprise après incident</block>
-  <block id="b783592c080ad8561662acaa3fca0b88" category="image-alt">reprise après incident des flux de travail</block>
   <block id="bec24d73bc5d82fa556487b63c50173b" category="summary">Si vous avez remplacé des disques lors de la restauration du matériel sur le site de secours, vous devez attribuer la propriété aux disques concernés.</block>
   <block id="93040e10ceab17160d457da7dc410e86" category="paragraph">Si vous avez remplacé des disques lors de la restauration du matériel sur le site de secours ou si vous deviez zéro disque ou retirer la propriété, vous devez attribuer la propriété aux disques concernés.</block>
   <block id="42aab7b4e471d7e8283fefe782064a8b" category="paragraph">Le site de secours doit avoir au moins autant de disques disponibles qu'il l'avait fait avant l'incident.</block>
@@ -7975,7 +7883,6 @@
   <block id="7973f5d14899037a87987aa43fdfe835" category="summary">Vous devez effectuer certaines tâches afin de préparer la configuration IP MetroCluster pour l'opération de rétablissement.</block>
   <block id="281d3052f468c5814a71ad0a6ed1db8d" category="doc">Préparez le rétablissement en configuration IP MetroCluster</block>
   <block id="cc7819055cde3194bb3b136bad5cf58d" category="paragraph">nbsp;</block>
-  <block id="7d9eb2a2ea236bd30b0c33d293620cf2" category="image-alt">préparation du workflow pour le rétablissement dans la reprise sur incident ip mcc</block>
   <block id="6b1a2eef5ea82e265caa75d1009aaae1" category="summary">Si des composants matériels doivent être remplacés, vous devez les remplacer à l'aide de leurs guides individuels de remplacement et d'installation de matériel.</block>
   <block id="83a10d9e95eee16293468c7f346cce1e" category="paragraph">Les contrôleurs de stockage doivent être mis hors tension ou restent suspendus (affichage de l'invite DU CHARGEUR).</block>
   <block id="b5de74a1fd2187d9589df11fe3f78707" category="list-text">Remplacer les composants si nécessaire.</block>
@@ -8327,7 +8234,6 @@
   <block id="4ec51c7a14aec89211955ef5982bc635" category="paragraph"><block ref="9d20893d97b1f685de0a5e2bbba0f4a9" category="inline-link-macro-rx"></block>.</block>
   <block id="bf2e2751dcaaaee268be12b1bacadb6b" category="paragraph"><block ref="72a3a195ac0fa089c021b23e356908eb" category="inline-link-macro-rx"></block>.</block>
   <block id="d8dfcd71dcf8c400455bfbfc7ec188d2" category="list-text">Les exemples de cette procédure illustrent des configurations à deux ou quatre nœuds. Si vous disposez d'une configuration à huit nœuds (deux groupes de reprise après incident), vous devez prendre en compte toute défaillance et effectuer la tâche de restauration requise sur les modules de contrôleur supplémentaires.</block>
-  <block id="c79468b94118562478a247649c7e919d" category="image-alt">récupération de cratère de fumeur de flux de travail</block>
   <block id="333c2429701c5b1407dd5f1815377913" category="paragraph">Cette procédure peut être utilisée lors de l'exécution de la restauration sur un système en période de transition intermédiaire lorsque la défaillance s'est produite. Dans ce cas, vous devez effectuer les étapes appropriées pour préparer le rétablissement, comme indiqué dans la procédure.</block>
   <block id="7a1017786a361ceadf336d2b2154ebb8" category="summary">Une fois le rétablissement de l'agrégat terminé pour les agrégats racine et de données, vous devez démarrer le ou les nœuds sur le site de reprise après incident.</block>
   <block id="468593af13a5bd30c38497b351a5043c" category="doc">Démarrage des nouveaux modules de contrôleur (configurations MetroCluster FC)</block>
@@ -8497,7 +8403,6 @@
   <block id="5fbb52ab0ccc2914c72b1ce04d94f538" category="summary">Chaque structure de commutation comprend des liaisons \(ISL\) intercommutateurs qui relient les sites. Les données sont répliquées de site à site via le système ISL. Chaque switch doit se trouver sur des chemins physiques différents pour assurer la redondance.</block>
   <block id="057d39d20a60e359f693d2aa4cf243c0" category="doc">Commutateurs FC redondants</block>
   <block id="ec25303fa6412309bf87b276dbbd7a8c" category="paragraph">Chaque structure de commutation comprend des liens ISL (Inter-switch Links) qui relient les sites. Les données sont répliquées de site à site via le système ISL. Chaque switch doit se trouver sur des chemins physiques différents pour assurer la redondance.</block>
-  <block id="09011b1854f3ff9c194f9a18281f450c" category="image-alt">structures de commutation de l'architecture matérielle mcc</block>
   <block id="ee4d8ac218c460dfd7125a49735b885d" category="paragraph"><block ref="ee4d8ac218c460dfd7125a49735b885d" category="inline-link-macro-rx"></block></block>
   <block id="1da4d9acb2ddf3dadc76f2d24f6e0fff" category="inline-link-macro">Illustration de ponts FC-SAS redondants</block>
   <block id="17b763891dc41f73db80a8c33a9fe082" category="paragraph"><block ref="17b763891dc41f73db80a8c33a9fe082" category="inline-link-macro-rx"></block></block>
@@ -9039,7 +8944,6 @@
   <block id="06eff1ae70df860b6c817c9ab3858d3d" category="list-text">Utilisez les procédures négociées de basculement, de rétablissement et de rétablissement<block ref="6d6ef49fcb406c2ba2bda06977913f53" category="inline-link-rx"></block>.</block>
   <block id="267f48079d5a0c20b3bac37bdeae2c4e" category="paragraph"><block ref="44b2f25d75b18863833dc90317518de4" prefix="" category="inline-code"></block></block>
   <block id="cbbfaef273014b8355328497ea2a64a8" category="summary">Les ponts FC-SAS fournissent un pontage de protocoles entre les disques connectés par SAS et la structure des commutateurs FC.</block>
-  <block id="6ae03157542266ed3043d8026451ccf4" category="image-alt">piles de tiroirs à architecture matérielle mcc</block>
   <block id="91e18356a7709afa40abb10b89a17636" category="summary">Vous devez activer la structure de commutation FC et vous assurer que les commutateurs et les dispositifs fonctionnent correctement.</block>
   <block id="812485d2987632a33cf46fd5403f564d" category="doc">Réactivation de la structure du commutateur et vérification du fonctionnement</block>
   <block id="c941b5c4cf46259dd41b222aa38a58f3" category="paragraph"><block ref="c57adbd597a5e409e88abfb2461bec0b" prefix="" category="inline-code"></block></block>
@@ -9071,7 +8975,6 @@
   <block id="2283aeba9a8b2a086fb5b2ef95e65235" category="list-text">Active IQ Unified Manager (anciennement OnCommand Unified Manager)</block>
   <block id="25e406bace0d04355538052e51cb9463" category="admonition">S'assurer que tous les composants nécessaires à cette configuration se trouvent dans le<block ref="ae0acc7a1cf35a69eb7b42685c902841" category="inline-link-rx"></block>. Pour plus d'informations sur les configurations prises en charge, consultez la section Remarques de l'outil Interoperability Matrix Tool.</block>
   <block id="2f02a7617f22d45dd2c91c2ad0c9bf2b" category="summary">Les deux clusters de la configuration MetroCluster sont peering via un réseau de peering de cluster fourni par le client. Le peering de clusters prend en charge la mise en miroir synchrone des machines virtuelles de stockage \(SVM, anciennement appelées vServers\) entre les sites.</block>
-  <block id="4ff9b388af4d661484920a7b2002bc50" category="image-alt">peering de clusters d'architecture matérielle mcc</block>
   <block id="8bd0cd6715687fc71d09455137c040b9" category="paragraph"><block ref="8bd0cd6715687fc71d09455137c040b9" category="inline-link-macro-rx"></block></block>
   <block id="2cc78fe607addfc425964003bfef4c37" category="paragraph"><block ref="2cc78fe607addfc425964003bfef4c37" category="inline-link-macro-rx"></block></block>
   <block id="4382ff0992965ffdabb9c638b6f2ecf2" category="list-text">Les systèmes de stockage AFF A900 ou FAS9500 nécessitent huit ports FC-VI. Si vous utilisez un AFF A900 ou FAS9500, vous devez utiliser la configuration à huit ports. Si la configuration inclut les autres modèles de système de stockage, utilisez le câblage indiqué dans les tableaux, mais ignorez le câblage pour les ports FC-VI inutiles.</block>
@@ -9431,7 +9334,6 @@
   <block id="f1190003d30a921ac41b035b58d34756" category="list-text">Copier la configuration mise à jour dans la configuration de démarrage sur les deux commutateurs :</block>
   <block id="d075a441edf541106af4d65ae06a84cc" category="paragraph">Vous devez configurer les ports de commutateur FCIP qui connectent les ports ISL (E-ports) en créant des profils et des interfaces FCIP, puis en les affectant aux interfaces IPStorage1/1 et IPStorage1/2 GbE.</block>
   <block id="a417bc740f358b0cb1b69729e8d69fbc" category="paragraph">Cette tâche s'applique uniquement aux configurations qui utilisent un lien ISL double par structure de commutation, en utilisant les interfaces IPStorage1/1 et IPStorage1/2 GbE sur chaque commutateur.</block>
-  <block id="8c306f3226d1f0f2782a03d5f706f678" category="image-alt">fcip : deux ports isl</block>
   <block id="b0e4bae4bb0d88a3e9b173bddb567a90" category="paragraph">La tâche et les exemples utilisent les tables de configuration de profil suivantes :</block>
   <block id="f575658668f78c8405c69dbd4ca31d1f" category="list-text"><block ref="5ee22ee5326bcfb34da5c38156b8512c" category="inline-xref-macro-rx"></block></block>
   <block id="68558817a02b05768704b0cde7f9205d" category="list-text"><block ref="a8c786b91ca4c948d90d74530998919f" category="inline-xref-macro-rx"></block></block>
@@ -9601,7 +9503,6 @@
   <block id="c860f7f0a8aaf5b10a9ec71f48b87682" category="inline-link-macro">Configuration des LIFs IP virtuelles</block>
   <block id="255e6fa1222b0f5f7521f1965844c1bf" category="paragraph">Consultez les instructions et l'illustration suivantes lors de la planification de votre solution de couche 3. Pour plus d'informations sur l'implémentation des protocoles VIP et BGP dans ONTAP, consultez <block ref="245303d2c60ac1935683ed89eb13f165" category="inline-link-macro-rx"></block>.</block>
   <block id="d84d4239724af43bfdc3b74836c335fe" category="paragraph">Une fois configuré, l'existence du v0a (v0b, etc.) valide en permanence la connectivité, garantissant ainsi qu'une migration ou un basculement de LIF réussit (contrairement à L2, où une configuration interrompue n'est visible qu'après l'interruption de service).</block>
-  <block id="da677daf9723918166ed931256a804a8" category="image-alt">installation et configuration du matériel dans le flux de travail fabric à 4 nœuds ou 2 nœuds</block>
   <block id="0dddffd8cf99c04ddb89559281d8d451" category="cell">LEM2-9</block>
   <block id="61034ea4c48aeebf00c78c16ee398c07" category="cell">LEM2-10</block>
   <block id="8082164e318ca645ecef714ee3200c01" category="cell">LEM2-11</block>
@@ -10139,15 +10040,11 @@
   <block id="d730fca512c2a7a63bcf1c049a89ab26" category="list-text">Une interconnexion de cluster entre chaque contrôleur du cluster local</block>
   <block id="0e8bf4388f6d25d0263ba3e2affcb1d2" category="section-title">Configuration Fabric MetroCluster à quatre nœuds</block>
   <block id="489e699314070ba12b3c6feebc17b75d" category="paragraph">L'illustration suivante présente une vue simplifiée d'une configuration Fabric MetroCluster à quatre nœuds. Pour certaines connexions, une seule ligne représente plusieurs connexions redondantes entre les composants. Les connexions du réseau de gestion et de données ne sont pas affichées.</block>
-  <block id="9215f1c3c0f5e1c38b694ff32c1c5e63" category="image-alt">architecture matérielle mcc deux clusters</block>
   <block id="93c05d0e06051a54dbe6a5d863f63c90" category="paragraph">L'illustration ci-dessous présente une vue plus détaillée de la connectivité au sein d'un seul cluster MetroCluster (la même configuration est utilisée pour les deux clusters) :</block>
-  <block id="6f28eb2d8d3d928954424b683ed144a0" category="image-alt">cluster d'architecture matérielle mcc a avec 7500n</block>
   <block id="a1dd89c3c97af611e374e6a399a1a4fb" category="section-title">Configuration Fabric MetroCluster à deux nœuds</block>
   <block id="a66468b263281fa7023ab8804f9b629a" category="paragraph">L'illustration suivante présente une vue simplifiée d'une configuration Fabric MetroCluster à deux nœuds. Pour certaines connexions, une seule ligne représente plusieurs connexions redondantes entre les composants. Les connexions du réseau de gestion et de données ne sont pas affichées.</block>
-  <block id="535bb42aaa8033ed8c21aaab79cd7378" category="image-alt">architecture matérielle mcc deux clusters structure à 2 nœuds</block>
   <block id="fe82336d2d5444869744be261dbe3393" category="paragraph">Une configuration à deux nœuds se compose de deux clusters, un sur chaque site géographiquement séparé. Cluster_A est situé sur le premier site MetroCluster. Cluster_B est situé sur le second site MetroCluster. Chaque site dispose d'une pile de stockage SAS. D'autres piles de stockage sont prises en charge, mais une seule s'affiche sur chaque site.</block>
   <block id="b2a293398308870116967adc52539a16" category="admonition">Dans une configuration à deux nœuds, les nœuds ne sont pas configurés en tant que paire haute disponibilité.</block>
-  <block id="209b833780d744e53ac910e974978c97" category="image-alt">architecture matérielle mcc en cluster avec 2 nœuds avec 7500n</block>
   <block id="febdbb472d4231f68f07181008d4ff98" category="paragraph">Une configuration à deux nœuds comprend les connexions suivantes :</block>
   <block id="dd34d6c2baa631e25fe6f9612d3cc1bd" category="list-text">Des connexions FC entre l'adaptateur FC-VI sur chaque module de contrôleur</block>
   <block id="c5a2612b0e0e94188e94a35e08774581" category="list-text">Des connexions FC reliant les HBA de chaque module de contrôleur au pont FC-SAS pour chaque pile de tiroirs SAS</block>
@@ -10656,16 +10553,11 @@
   <block id="3590c734ea7d31811bb06e6baeb89747" category="section-title">Flux de production de la transition d'une configuration FC à quatre nœuds</block>
   <block id="5b07506ebe022aa6945ad44b0cda5013" category="section-title">Workflow de transition de la configuration FC à huit nœuds</block>
   <block id="926b6426ad1a2491d649c8474d38f0db" category="paragraph">Le processus de transition commence par une configuration FC MetroCluster saine à huit nœuds.</block>
-  <block id="1af649626413a03f251f9a4c472e947b" category="image-alt">mcc dr groupe c1</block>
   <block id="8a5133631c31fdbaaf6923247c22e665" category="paragraph">Les nouveaux nœuds IP MetroCluster sont ajoutés en troisième groupe de reprise après incident.</block>
-  <block id="0f45be12e3fdc02453476d6aa8aae017" category="image-alt">mcc dr groupe c2</block>
   <block id="56921c990c07a8724d93d1e5150e4105" category="paragraph">Les données sont transférées de DR_Group_1-FC vers DR_Group_1-IP, puis les anciens nœuds et leur stockage sont supprimés de la configuration et désaffectés.</block>
   <block id="89ab8f8036966d10863f53d47d1a56a2" category="admonition">Si vous souhaitez passer d'une configuration FC à huit nœuds à une configuration IP à quatre nœuds, vous devez transférer toutes les données de DR_Group_1-FC et DR_Group_2-FC au nouveau groupe IP DR (DR_Group_1-IP). Vous pouvez ensuite désaffecter les deux groupes DR FC. Après la suppression des groupes DR FC, le processus se termine par une configuration IP MetroCluster à quatre nœuds.</block>
-  <block id="65b5b7e1c217903d6e531cfa03dabeae" category="image-alt">mcc dr groupe c8</block>
   <block id="efe65f05ea8aa4be04872bc5fc3592fa" category="paragraph">Ajoutez les nœuds IP MetroCluster restants à la configuration MetroCluster existante. Répétez le processus pour transférer les données des nœuds DR_Group_2-FC aux nœuds DR_Group_2-IP.</block>
-  <block id="eea4c5637cb859e2000dbcdf78548d9c" category="image-alt">mcc dr groupe c7</block>
   <block id="7882ff17d8c8170e2a07510acdefa52b" category="paragraph">Après avoir supprimé DR_Group_2-FC, le processus se termine par une configuration IP MetroCluster à huit nœuds.</block>
-  <block id="3801c840bf76921c2b00fc213010c0d4" category="image-alt">mcc dr groupe c6</block>
   <block id="7bfd4ffe50f69a1805344bce9b252c81" category="section-title">Processus de transition</block>
   <block id="feb6447b54e85b35757c82bf8e07abf7" category="summary">À partir de ONTAP 9.13.1, vous pouvez effectuer la transition sans interruption des charges de travail et des données d'une configuration MetroCluster FC à huit nœuds existante vers une nouvelle configuration IP MetroCluster.</block>
   <block id="3d24a5eddf097cddc7e369398b35f959" category="paragraph">Vous pouvez effectuer des transitions de charges de travail et de données sans interruption depuis une configuration MetroCluster FC existante vers une nouvelle configuration MetroCluster IP.</block>
@@ -10700,8 +10592,6 @@
   <block id="7c332afd15fb912a3e325674359f7556" category="list-text">Si vous avez une configuration à quatre nœuds, votre système doit exécuter ONTAP 9.8 ou une version ultérieure.</block>
   <block id="754c49529520fa11e1c669a74ccc0157" category="list-text">Si vous mettez également à niveau les commutateurs IP, vous devez les mettre à niveau avant d'effectuer cette procédure d'actualisation.</block>
   <block id="3143fc3898209e4326c307ba9fca7f8c" category="list-text">Cette procédure décrit les étapes requises pour actualiser un groupe DR à quatre nœuds. Si vous avez une configuration à huit nœuds (deux groupes DR), vous pouvez actualiser l'un des groupes DR, ou les deux.</block>
-  <block id="0e2f3faf301851917c69f0747162b9c4" category="paragraph">Si vous actualisez les deux groupes DR, vous devez actualiser un groupe DR à la fois.</block>
-  <block id="1fd5fb51244bb2f9e31caff05e49083d" category="list-text">Pour les configurations à huit nœuds, la combinaison de plateformes MetroCluster à huit nœuds source et cible doit être prise en charge.</block>
   <block id="79d720fb95bb200ede7a9f6c0dbfc3d0" category="admonition">Si vous actualisez les deux groupes DR, il se peut que la combinaison de plateformes ne soit pas prise en charge après l'actualisation du premier groupe DR. Vous devez actualiser les deux groupes DR pour obtenir une configuration à huit nœuds prise en charge.</block>
   <block id="abd99efcea2674d79facbe22bbbbecc7" category="list-text">Vous ne pouvez actualiser que des modèles de plate-forme spécifiques en suivant cette procédure dans une configuration MetroCluster IP.</block>
   <block id="9a7b8abaf725425f1194c7e34ab14ebb" category="list-text">Pour plus d'informations sur les combinaisons de mise à niveau de la plate-forme prises en charge, consultez le tableau d'actualisation de l'IP MetroCluster dans <block ref="ca31e6122d170c1a660e1ab5d0a9430f" category="inline-link-macro-rx"></block>.</block>
@@ -10712,13 +10602,10 @@
   <block id="8785d96b922a1a66136207792a0400c5" category="paragraph">Une fois la procédure d'extension terminée, la configuration temporaire s'affiche comme illustré dans les images suivantes :</block>
   <block id="7d7fd277012689535b693bcae0693459" category="image-title">Configuration temporaire à huit nœuds</block>
   <block id="cb3b06d4f89d32589bbce6abb75941fc" category="image-title">Configuration temporaire à douze nœuds</block>
-  <block id="830d9e0f5e1de2a97686d67c2397dae5" category="image-alt">mcc dr groupe c4</block>
   <block id="bbe65d15d9db73ecb088957ca54464a4" category="list-text">Modifiez l'adresse IP de l'homologue de cluster des nœuds transférés pour chaque cluster :</block>
   <block id="5f733ea5e4f1c7cf03ff4e0dcc486e49" category="list-text">Suivez les étapes de la section <block ref="e5ebde3067c5558de277c40cd868d611" category="inline-link-macro-rx"></block> Pour supprimer l'ancien groupe DR.</block>
-  <block id="91658906d8262381ddcdb44c01a8989d" category="list-text">Si vous souhaitez actualiser les deux groupes DR dans une configuration à huit nœuds, vous devez répéter la procédure complète pour chaque groupe DR.</block>
   <block id="e50b66bedcb52077182d77c650db0ca0" category="paragraph">Après avoir supprimé l'ancien groupe DR, la configuration s'affiche comme illustré dans les images suivantes :</block>
   <block id="47468b9007c8d1b64ee8a7229933b739" category="image-title">Configuration à huit nœuds</block>
-  <block id="e73093705babe6125a16df08eedb00cc" category="image-alt">mcc dr groupe c5</block>
   <block id="d64734f1819a8d6339e74ffe37dc5430" category="paragraph">Si votre plate-forme n'est pas répertoriée, aucune combinaison de mise à niveau du contrôleur n'est prise en charge.</block>
   <block id="183ffd679adb1c9e843df285f2b91466" category="list-text">Remarque 2 : les mises à niveau des contrôleurs sont prises en charge sur les systèmes exécutant ONTAP 9.13.1 ou version ultérieure.</block>
   <block id="5abae7190ce598d45fe390e44304cde0" category="paragraph">9.13.1 et versions ultérieures</block>
@@ -10747,7 +10634,6 @@
   <block id="7e6b37741503afb3e7ddb433e2eb7924" category="list-text">Vert : vous n'avez pas besoin de changer le câblage.</block>
   <block id="f06f8cd222932224a11a995ec4ef0ccf" category="list-text">Jaune : vous devez déplacer des ports avec une configuration identique ou différente.</block>
   <block id="b7450015b71c12c709e06c6df0960192" category="list-text">Bleu : ports qui sont de nouvelles connexions.</block>
-  <block id="64a60a68eb306ec5af2b3794eebf0acc" category="paragraph"><block ref="64a60a68eb306ec5af2b3794eebf0acc" category="inline-image-macro-rx" type="image"></block></block>
   <block id="633cc15b1e59b48a46d3c777359a1055" category="list-text">[[all_step1]]Vérifiez l'état de santé de la configuration.</block>
   <block id="7882a4b556b6996eaf604413a9e602d9" category="inline-xref">Étape 4</block>
   <block id="081cd064d2071e8aa77edcf5d45444be" category="paragraph">Si vous réutilisez des commutateurs existants, passez à l' <block ref="046a26a191748a2899dce4a2c37c0cb7" category="inline-xref-macro-rx"></block>.</block>
@@ -11428,7 +11314,6 @@ Le réseau peut se composer d'une série de commutateurs et de commutateurs xWDM
   <block id="b6c4e1e2f2a0c06e8d9a324d954bc763" category="list-text">Le VLAN par défaut du commutateur n'est pas autorisé</block>
   <block id="3f3bba6728c947cfa6f369c605b7118b" category="section-title">Considérations relatives aux réseaux de couche 2</block>
   <block id="64dd6d9e6b2c1c66728d029e3b45abd2" category="paragraph">Les switchs backend MetroCluster sont connectés au réseau du client.</block>
-  <block id="11ab87f335ed35c8bcf058a70cebc2be" category="image-alt">Couche MCC 2</block>
   <block id="6acf5532efb336e0d8001419f26ef951" category="list-text">Le réseau intermédiaire doit fournir les mêmes VLAN entre les sites. Cela doit correspondre aux VLAN MetroCluster définis dans le fichier RCF.</block>
   <block id="ac8a1f1bfd836ba146d1ab2feb59b2fa" category="list-text">Le RcfFileGenerator peut restreindre l'utilisation de certains ID de VLAN, par exemple, s'ils sont destinés à une utilisation ultérieure. En règle générale, les VLAN réservés sont jusqu'à 100 inclus.</block>
   <block id="d4a11c01614c17bddc7d41960498137a" category="paragraph-title">Configuration VLAN dans ONTAP</block>
@@ -12056,7 +11941,6 @@ L'exemple suivant montre que vous utilisez SCP pour télécharger le fichier<blo
   <block id="9311605dda14c8d475dd817b196dbe33" category="list-text">Remarque 1 : les mises à niveau des contrôleurs sont prises en charge sur les systèmes exécutant ONTAP 9.13.1 ou version ultérieure.</block>
   <block id="e201b3063a835c6ab815286f4d0dc126" category="paragraph-title">Prise en charge des mises à niveau des contrôleurs FC AFF et FAS MetroCluster</block>
   <block id="9226549359438ca0927aca7ed11e792d" category="paragraph">Le tableau suivant présente les combinaisons de plateformes prises en charge pour la mise à niveau d'un système AFF ou FAS dans une configuration FC MetroCluster :</block>
-  <block id="42fdabcf525a2dc5ddf8a1947d5c021c" category="image-alt">MetroCluster fc table de mise à niveau AFF FAS</block>
   <block id="9de01608b3afdda557e8dc72a8f54f9d" category="paragraph-title">Mises à niveau du contrôleur FC ASA MetroCluster prises en charge</block>
   <block id="4936f470b844f0a840df121f57a42c28" category="paragraph">Le tableau suivant présente les combinaisons de plateformes prises en charge pour la mise à niveau d'un système ASA dans une configuration MetroCluster FC :</block>
   <block id="c0764f159306f05d07f48e0541152883" category="cell">Source : plateforme FC MetroCluster</block>
@@ -12075,7 +11959,6 @@ L'exemple suivant montre que vous utilisez SCP pour télécharger le fichier<blo
   <block id="a3a15df2eb8fb472342a575b30857763" category="image-alt">Combinaisons de mises à jour technologiques MetroCluster IP ASA</block>
   <block id="dd7839e40ca87d3a10325ec8faa9f00a" category="paragraph-title">Prise en charge des combinaisons de mises à jour technologiques AFF et FAS MetroCluster FC</block>
   <block id="e92f8af91d314776a12f672c7baff7dc" category="paragraph">Le tableau suivant présente les combinaisons de plateformes prises en charge pour l'actualisation d'un système AFF ou FAS dans une configuration FC MetroCluster :</block>
-  <block id="88ea8505ba0420be98c64dcb7f91e23c" category="image-alt">mise à jour technologique MetroCluster fc</block>
   <block id="d97a61d7c707c4943aa3fc012673ac5f" category="paragraph-title">Combinaisons de mises à jour technologiques ASA MetroCluster FC prises en charge</block>
   <block id="15113532723434e57bb04f9f92c80622" category="paragraph">Le tableau suivant présente les combinaisons de plateformes prises en charge pour l'actualisation d'un système ASA dans une configuration MetroCluster FC :</block>
   <block id="e77b4fbf2d652f95ca1b769a66ffc98d" category="section-title">Choisissez une procédure d'actualisation</block>
@@ -13718,7 +13601,6 @@ L'exemple suivant montre que vous utilisez SCP pour télécharger le fichier<blo
   <block id="7eaabdc7d2364e9a43feeb5cf07593dc" category="paragraph">Si la colonne affiche *OTHER* ou si<block ref="a559b87068921eec05086ce5485e9784" prefix=" " category="inline-code"></block> le<block ref="7a19db03ac26c54be196969b77d657a6" prefix=" " category="inline-code"></block> champ affiche *FALSE*, ONTAP ne peut pas surveiller le commutateur. Une valeur de *AUTRE* indique généralement que ONTAP ne prend pas en charge ce commutateur pour la surveillance de l'intégrité.</block>
   <block id="8d86e89da688f620dafbc70269059388" category="paragraph">Le<block ref="7a19db03ac26c54be196969b77d657a6" prefix=" " category="inline-code"></block> champ est défini sur *FALSE* pour la raison spécifiée dans le<block ref="fffcb4d1e12c96b2f571f77ad25878b8" prefix=" " category="inline-code"></block> champ.</block>
   <block id="f9f5c952edf43434e02a625f00102b19" category="inline-link-macro">Gérer la surveillance des commutateurs Ethernet</block>
-  <block id="f6ec6bfa57123a9616038a55e7f332a5" category="paragraph">Si un commutateur n'est pas répertorié dans la sortie de la commande, ONTAP ne l'a probablement pas détecté. Vérifiez que le commutateur est correctement câblé. Si nécessaire, vous pouvez ajouter le commutateur manuellement. Voir <block ref="ee7db2a0a5f0654c3c81941bc38adb11" category="inline-link-macro-rx"></block> pour plus de détails.</block>
   <block id="ed7061b9b8f8c50684797c64a5576941" category="section-title">Vérifiez que les versions du firmware et des fichiers RCF sont à jour</block>
   <block id="43558d02214bf83729998ce237b6cdea" category="inline-link">Page des téléchargements du support NetApp</block>
   <block id="9be0ccf5f4aae992d69ea7f079f6d048" category="paragraph">Assurez-vous que le commutateur exécute le micrologiciel le plus récent pris en charge et qu'un fichier RCF compatible a été appliqué. Plus d'informations sont disponibles sur le <block ref="49046ae6b122d9765935bb9b378618a5" category="inline-link-rx"></block>.</block>
@@ -13935,9 +13817,6 @@ L'exemple suivant montre que vous utilisez SCP pour télécharger le fichier<blo
   <block id="5f972a786e3a36fb039bc945267e120a" category="paragraph">3132Q-V</block>
   <block id="f403fff2bbc7f3e506dae47b9dff52fc" category="paragraph">3232C</block>
   <block id="addb9e70976c2f94b8ccfc3736a31888" category="paragraph-title">Informations importantes</block>
-  <block id="4debc1eb094b4eed6a7da2386ab54e6c" category="paragraph">Lors des procédures de transition, d'actualisation et d'extension, vous pouvez ajouter un nouveau modèle de plateforme à votre configuration MetroCluster. À tout moment de ces procédures, si votre configuration MetroCluster existante contient une plateforme utilisant des ports de cluster/HA partagés, vous ne pouvez pas ajouter de plateforme utilisant des ports MetroCluster/HA partagés sans mettre à niveau votre version d'ONTAP vers ONTAP 9.15.1P11 ou ONTAP 9.16.1P4 ou une version ultérieure.</block>
-  <block id="d10323563cbf4f5c4867c9d231bc7a43" category="paragraph">Avant d'utiliser cette procédure, consultez attentivement les informations du tableau suivant. Si votre plateforme existante est répertoriée dans la première colonne et que la plateforme que vous souhaitez ajouter à la configuration est répertoriée dans la deuxième colonne, tous les nœuds de la configuration doivent exécuter ONTAP 9.15.1P11 ou ONTAP 9.16.1P4 ou une version ultérieure pour prendre en charge cette procédure.</block>
-  <block id="2a42ab8cc2bb0692767bdb976d98e5de" category="admonition">La plate-forme existante et la plate-forme que vous souhaitez ajouter à la configuration doivent toutes deux exécuter ONTAP 9.15.1P11 ou ONTAP 9.16.1P4 ou une version ultérieure.</block>
   <block id="38c9e66a6eb25313e0ea3390ba7ee1fc" category="cell">Si votre MetroCluster existant contient...</block>
   <block id="afe6ad7caef50aaad15afb83c6f40ca0" category="cell">Et la plateforme que vous ajoutez est...</block>
   <block id="12f30f47d5034530ccaa816ade9953fc" category="paragraph">Un système AFF utilisant des *ports de cluster/HA partagés* :</block>
@@ -13949,7 +13828,6 @@ L'exemple suivant montre que vous utilisez SCP pour télécharger le fichier<blo
   <block id="c352fb103e076b7d23028394a1aa47c7" category="paragraph">*Remarque :* pour utiliser les ports de commutation 13 et 14, vous devez sélectionner deux modes de vitesse.</block>
   <block id="c82f2ff1cbd6e1d62e65daba43978db4" category="paragraph">Cisco 9336C-FX2 partagé (36 ports)</block>
   <block id="d44a3adbc7ddf926ace3174c29e594fe" category="paragraph">*Remarque :* pour utiliser les ports de commutation 11 et 12, vous devez sélectionner deux modes de vitesse.</block>
-  <block id="22e6a6026dec5bb5059565b00cc3631c" category="paragraph">Lors des procédures de transition, d'actualisation, d'installation à huit nœuds et d'extension à quatre nœuds, vous pouvez ajouter un nouveau modèle de plateforme à votre configuration MetroCluster. À tout moment de ces procédures, si votre configuration MetroCluster existante contient une plateforme utilisant des ports de cluster/HA partagés, vous ne pouvez pas ajouter de plateforme utilisant des ports de cluster/HA partagés sans mettre à niveau votre version d'ONTAP vers ONTAP 9.15.1P11 ou ONTAP 9.16.1P4 ou une version ultérieure.</block>
   <block id="a65cd2f2d334d9927f9c0f2a89dbb2d0" category="paragraph">Découvrez les nouveautés de la plate-forme IP MetroCluster et de la prise en charge des commutateurs.</block>
   <block id="cf42f488bd58e2f8f8819f7c720b93a1" category="paragraph">Vous devez effectuer cette étape sur chaque cluster en mode privilège avancé.</block>
   <block id="c836d30393b0f25c968423f5df80b134" category="paragraph">Déplacez les interfaces de cluster de la configuration MetroCluster FC vers les commutateurs IP.</block>
@@ -14237,10 +14115,6 @@ L'exemple suivant montre que vous utilisez SCP pour télécharger le fichier<blo
   <block id="45fc6e02d529201467decbef1f3eacab" category="paragraph">Se référer à la <block ref="9c839fcdfb8699a63c787254d7b1ae03" category="inline-link-macro-rx"></block> pour plus d'informations.</block>
   <block id="567a833b899417b8be640e2472fc9c60" category="paragraph">Mise à jour du micrologiciel FibreBridge à l'aide des informations d'identification</block>
   <block id="5a870516b9d31d269ea6a8afce2ec1e6" category="paragraph">Vous pouvez mettre à jour le micrologiciel sur les ponts FibreBridge à l'aide des informations d'identification si elles sont requises par le serveur pour télécharger le package du micrologiciel.</block>
-  <block id="8474060528358956023cd7dd6e922365" category="paragraph"><block ref="8474060528358956023cd7dd6e922365" category="inline-image-macro-rx" type="image"></block></block>
-  <block id="b422edb1dc6d4a214adab9c76d2349ad" category="paragraph"><block ref="b422edb1dc6d4a214adab9c76d2349ad" category="inline-image-macro-rx" type="image"></block></block>
-  <block id="d75d3909245f6be3f0b1d65e8247b183" category="paragraph"><block ref="d75d3909245f6be3f0b1d65e8247b183" category="inline-image-macro-rx" type="image"></block></block>
-  <block id="4c9562556794c6d64ce9c73693133ac9" category="paragraph"><block ref="4c9562556794c6d64ce9c73693133ac9" category="inline-image-macro-rx" type="image"></block></block>
   <block id="798a9759457492658d53527d57355221" category="paragraph">Red Hat Enterprise Linux (RHEL) 9.5</block>
   <block id="b225d9c59432e8a8fb3706648e471b89" category="paragraph">RHEL 9.4</block>
   <block id="5a4423695d5636fb42d9142a09b58340" category="paragraph">RHEL 9.3</block>
@@ -14400,4 +14274,154 @@ L'exemple suivant montre que vous utilisez SCP pour télécharger le fichier<blo
   <block id="e1bde148bbf0582fd279d9a3c915b31a" category="list-text">Définir le niveau de privilège administrateur :</block>
   <block id="5465fc7f055cf03040fda6f777f9a2da" category="list-text">Vérifiez que le cluster HA est activé dans le nouveau groupe DR.  Si nécessaire, réactivez le cluster HA :</block>
   <block id="4e7f0491b8337902ce9619e04977796b" category="sidebar">Affectations de ports de plate-forme pour les commutateurs Cisco 9336C-FX2 à 36 ports connectant le stockage NS224</block>
+  <block id="8228ee21c2ba287b99721837a199bf49" category="image-alt">Groupes DR MetroCluster à huit nœuds avec défaillance d'un seul contrôleur</block>
+  <block id="b6209f83f0e19d02dd6f9274a888a749" category="image-alt">Groupes DR MetroCluster à huit nœuds avec défaillance de plusieurs contrôleurs</block>
+  <block id="323510b9950e698debea09d8e3c3a7c9" category="image-alt">Groupes DR MetroCluster à huit nœuds avec deux pannes de contrôleur unique</block>
+  <block id="2af6f225fb991b48331d8329eefb5d8a" category="image-alt">Groupes DR MetroCluster à huit nœuds avec trois pannes de contrôleur</block>
+  <block id="23d65ce451ffeccb03c17221bb33bb85" category="image-alt">Groupes DR MetroCluster à deux nœuds avec défaillance d'un seul contrôleur</block>
+  <block id="9c2444dd005f87cd8ce0070c9be598e2" category="image-alt">Workflow de préparation au retour en arrière dans la reprise après sinistre de MetroCluster IP</block>
+  <block id="0262a3dd30afbd17e8b29f91e61778a7" category="image-alt">Flux de travail pour la récupération après panne de plusieurs contrôleurs</block>
+  <block id="7782268eceb34667af0da56911e194bf" category="image-alt">Architecture matérielle montrant un réseau de peering de cluster dans la configuration MetroCluster</block>
+  <block id="977670d8fc0e2e37c0c583412284a3a5" category="image-alt">Workflow pour la configuration de nœuds et de clusters de haut niveau</block>
+  <block id="bfda770ceef015667868ac92f7ac10d8" category="image-alt">IP virtuelle et protocole de passerelle frontalière dans MetroCluster</block>
+  <block id="3664e778a60f73bd8b5f6dc782ca9b1b" category="image-alt">Récupération après sinistre SVM pendant le fonctionnement en régime permanent</block>
+  <block id="4606a0d534316f5bd7ff956105a4db9d" category="image-alt">Récupération après sinistre SVM après basculement</block>
+  <block id="73b51d83b7b05d6a8200d66d9f78ed69" category="image-alt">Resynchronisation de la reprise après sinistre SVM</block>
+  <block id="0615fe832332c6ac69713d6187f02f92" category="image-alt">Ponts FC vers SAS avec architecture matérielle montrant des piles d'étagères</block>
+  <block id="29e1c3e8cbc761ffef8f839c1921a98a" category="image-alt">Paires HA locales d'architecture matérielle MetroCluster</block>
+  <block id="a24defe80697c1e6103e46df2374a231" category="image-alt">MetroCluster DR regroupe huit nœuds</block>
+  <block id="c252432341097a706038be4291188b12" category="image-alt">MetroCluster DR regroupe quatre nœuds</block>
+  <block id="b1ba3aa018f93c263a623f195b8634db" category="image-alt">Configuration MetroCluster à quatre nœuds pour les deux clusters</block>
+  <block id="fa94603215db75ab8dedfffaa56ef4bc" category="image-alt">Connectivité du cluster A MetroCluster avec les ponts FibreBridge 7500N</block>
+  <block id="68e2cbe766428cdfb99253b61e91accf" category="image-alt">Configuration MetroCluster à deux nœuds pour les deux clusters</block>
+  <block id="fa8d07c53338e15cb0dd4d3770443e89" category="image-alt">Connectivité du cluster MetroCluster A à deux nœuds avec les ponts FibreBridge 7500N</block>
+  <block id="f50d3b77c96d8d0eaaa7ac0613f9698c" category="image-alt">Architecture matérielle MetroCluster , matrices de commutation redondantes</block>
+  <block id="ea2af497d858aad76516ba8ee05a4b1a" category="image-alt">Installation et configuration du matériel de flux de travail sur une structure à quatre ou deux nœuds</block>
+  <block id="6a322d79cc829cae0de4701dc672ffca" category="image-alt">Diagramme montrant les ports FCIP avec une configuration ISL double sur chaque commutateur</block>
+  <block id="d0c92c7c34253959ed1ec5127a53af0a" category="image-alt">Installation et configuration du pont FC vers SAS</block>
+  <block id="74a4dfe29ccc8cc96b410e9b0a5d1c1b" category="image-alt">Câblage MetroCluster pour FibreBridge avec plusieurs piles SAS3</block>
+  <block id="91808658b22ba7487b8c09753a426fbe" category="image-alt">Configuration de nœuds et de clusters de haut niveau du flux de travail dans ONTAP</block>
+  <block id="42ceaa81d7a1ae07decd6672f9c77b45" category="image-alt">Configuration du réseau de couche 2 MetroCluster</block>
+  <block id="9abaaa939f8a0df07de4dc260378e835" category="image-alt">Configuration du réseau backend de couche 3 de MetroCluster</block>
+  <block id="623fd1b20a7dbd0dcbc1a35f2641d584" category="image-alt">Paramètres requis lors de l'utilisation de commutateurs Cisco validés par NetApp pour le trafic MetroCluster</block>
+  <block id="71137c9ca5d44b13047e3e95740e0bb0" category="image-alt">Paramètres requis pour le réseau partagé lors de l'utilisation de commutateurs IP Broadcom</block>
+  <block id="5d8136956aa6babebe0d5073164240a1" category="image-alt">Exemple de réseau IP MetroCluster avec ISL partagés</block>
+  <block id="2a13c1c49a4ea9fa1a47929184899f35" category="image-alt">Exemple de réseau IP MetroCluster avec réseaux privés intermédiaires</block>
+  <block id="2b6d6bc490858a73dccee7f6825bf618" category="image-alt">Câblage IP MetroCluster avec deux configurations partageant le même réseau intermédiaire</block>
+  <block id="02722b554dd297f659ae78cd6b6788ff" category="image-alt">Exemple de configuration non prise en charge de deux MetroClusters câblés directement à des commutateurs partagés</block>
+  <block id="8985527b0728321c2f79eb5e3ffd6e89" category="image-alt">Workflow MetroCluster IP configuration de nœuds et de clusters de haut niveau dans ONTAP</block>
+  <block id="8a295bf1e4c5ae8efdcefcd98b15a587" category="image-alt">Séparation des sous-réseaux IP et des VLAN MetroCluster</block>
+  <block id="f0687d3527fea04e35ee00795c5f384b" category="image-alt">Mises à jour SVM après le basculement</block>
+  <block id="f99421386904e645aa2ae230a935d82a" category="image-alt">Architecture matérielle IP MetroCluster</block>
+  <block id="1f890f1a4d0f801ae96abf17d4820ea7" category="image-alt">Groupes DR MetroCluster dans une configuration à quatre nœuds</block>
+  <block id="38b094a5b86af8a62491dcf3c80696b1" category="image-alt">Paires HA d'architecture matérielle IP MetroCluster</block>
+  <block id="fd0066ed32f19257e98f68dddc2a2e48" category="image-alt">Architecture matérielle IP MetroCluster Interconnexion IP</block>
+  <block id="3fcf0304e89998cd4b51f7c6ab5c7bcd" category="image-alt">Utilisation du LIF IP MetroCluster</block>
+  <block id="3b02f678ce1f388b09e965a33cb74b9a" category="image-alt">Réseau de peering de cluster d'architecture matérielle IP MetroCluster</block>
+  <block id="0862ad0f7776942c99ebd5bb91f3dbe1" category="paragraph">Si un commutateur n’est pas répertorié dans la sortie de commande, ONTAP ne l’a probablement pas découvert. Vérifiez que le commutateur est correctement câblé. Si nécessaire, vous pouvez ajouter le commutateur manuellement. Voir <block ref="ba1ca38a0bc63ade7c865d33bc05e53b" category="inline-link-macro-rx"></block> pour plus de détails.</block>
+  <block id="12d267baad6679d46c078c9c7e5fc0bb" category="image-alt">Diagramme de flux de travail pour la configuration des nœuds et des clusters dans ONTAP</block>
+  <block id="69c2393c5ad6b0a52facdfb89a2e4abe" category="image-alt">Architecture matérielle MetroCluster à deux nœuds, les deux clusters avec des ponts FC vers SAS</block>
+  <block id="b56d8e3273fea0f591aa5948f01a409e" category="image-alt">Câblage du contrôleur FC VI de MetroCluster vers le partenaire</block>
+  <block id="646b132e58124b6ca00e9063bf8f806f" category="image-alt">Configuration SAS optique à deux nœuds</block>
+  <block id="49b0f512c4dc2d0e1f2bc41c5ababa0e" category="image-alt">Configuration matérielle du flux de travail Configuration connectée à un pont à deux nœuds</block>
+  <block id="4f4b570a04d684abf4458f578a253f6d" category="image-alt">Configuration matérielle du flux de travail : configuration SAS extensible à deux nœuds attachés</block>
+  <block id="c0b729940b27076050c7cd208384fcbd" category="image-alt">Flux de travail pour l'installation et la configuration d'un pont FC vers SAS</block>
+  <block id="3fe99e94a94e25fea62035b1bb8bbf70" category="image-alt">Câblage MetroCluster Configuration FibreBridge avec plusieurs piles SAS3</block>
+  <block id="39a86925b7e8531efca8c0e29f36076d" category="image-alt">MetroCluster avec cluster éteint pour maintenance</block>
+  <block id="114e6810f8837e875d8858f1147c85b7" category="image-alt">Consolidation des piles avant le remplacement de FibreBridge</block>
+  <block id="1bcdf68a2eb4b8cd9ada5d9945d80b38" category="image-alt">Consolidation des piles avec le premier FibreBridge 7500N en place</block>
+  <block id="3cb732e41bfd46f19e5091f13dbb3ce4" category="inline-image-macro">Consolidation des piles avec le deuxième FibreBridge 7500N en place</block>
+  <block id="34ed841959e993cdfea8773502638dca" category="list-text">Ne connectez pas le port FC1 du pont FibreBridge 7600N ou 7500N pour le moment. <block ref="a10c9ce81e83377ac405a66afe386224" category="inline-image-macro-rx" type="image"></block></block>
+  <block id="85aba9f2e196fee87facf4ca8e16009d" category="image-alt">Consolidation des piles SAS avant le câblage vers FibreBridge 7500N</block>
+  <block id="307984bbd4a726f5f728015f493e698f" category="image-alt">Câblage supérieur du SAS après consolidation</block>
+  <block id="80b48f745e06687a37e861c1d4ae06f7" category="image-alt">Câblage SAS vert avant consolidation sur l'étagère inférieure</block>
+  <block id="e15084d4758edfa132d8bcdae3b7b17b" category="image-alt">Câblage inférieur SAS après consolidation</block>
+  <block id="4aafff80ae58b01bf1b8170a8333b86d" category="image-alt">Câblage inférieur SAS pour quatre piles</block>
+  <block id="e85d61663bef4d2531d627e1b954533c" category="image-alt">Consolidation du zonage sur le site A avant les changements de FibreBridge</block>
+  <block id="f2cf9f9b491d373e303a2a0d09262657" category="image-alt">Consolidation du zonage sur le site A après les changements de FibreBridge</block>
+  <block id="508760fd47d8d924ad8bbea1ec20228a" category="image-alt">Câblage du port FC2 après consolidation vers FC_switch_A_2</block>
+  <block id="fbd8ff0b0269ce24c5543cd1b729dbdc" category="image-alt">Câblage final de consolidation de la pile</block>
+  <block id="64331dd7cf42722af455c7964c42e875" category="image-alt">Workflow pour la mise hors tension du Cluster_B dans la configuration MetroCluster pour la maintenance</block>
+  <block id="21d1316ca1e5e316a933be34346182ea" category="image-alt">Ponts de remplacement d'étagères avec pile unique</block>
+  <block id="3d81015116013944b164c3cd2c0253f9" category="image-alt">Ponts de remplacement à quatre piles</block>
+  <block id="fae9f06517a75531dd85d785f9b39bda" category="image-alt">Architecture matérielle de MetroCluster IP montrant les liens entre les commutateurs et les types de commutateurs</block>
+  <block id="d06a934b0d86d4f7731ec0f3e478ed9c" category="inline-image-macro">Workflow pour l'utilisation des ports IP de MetroCluster et les changements de câblage lors du remplacement d'un commutateur</block>
+  <block id="a83d7669d45988cc4061849d2d16bb14" category="paragraph"><block ref="a83d7669d45988cc4061849d2d16bb14" category="inline-image-macro-rx" type="image"></block></block>
+  <block id="8c00521f633fbed83ab9e6d261d208e1" category="image-alt">Mise à niveau de Brocade vers G620 après achèvement</block>
+  <block id="64a5de1ffd2ec3321230f0e548aacac9" category="image-alt">Mise à niveau Brocade vers G620 avec fabric 1 désactivé</block>
+  <block id="1b39b26f17957253e4c7cb89dfaa0ee6" category="image-alt">Mise à niveau de Brocade vers G620 avec remplacement de A1</block>
+  <block id="b2733bc635138868b4875a38a415d0c8" category="image-alt">Mise à niveau de Brocade vers G620 avec remplacement du B1</block>
+  <block id="6532851e6341d8a02115eb3ee58acbf6" category="image-alt">Workflow pour MetroCluster après le remplacement et la mise à niveau des commutateurs Brocade G620</block>
+  <block id="6bca527f6f2a9e63289dd3d9f9fc5ee4" category="image-alt">HA local dans une configuration MetroCluster</block>
+  <block id="2a3344f6540dcdc061e65df9c3edc364" category="image-alt">Mise en miroir des SVM par MetroCluster</block>
+  <block id="defb178304c8ac89e6f883be03833706" category="image-alt">SVM MetroCluster après le passage au numérique</block>
+  <block id="c62c1f6d1ff306321d3c1bc927197bfa" category="image-alt">Mise en miroir des pools de stockage par MetroCluster</block>
+  <block id="2c2f0472cd858cffc68d72d07aad03ea" category="inline-image-macro">Mise en quarts du cache non volatile dans une configuration MetroCluster</block>
+  <block id="ec00c747ac85fe4761e7ad41bf04cdd4" category="paragraph"><block ref="ec00c747ac85fe4761e7ad41bf04cdd4" category="inline-image-macro-rx" type="image"></block></block>
+  <block id="2ff3d8756e836ab7f916f01c741a5bf2" category="inline-image-macro">Division du cache non-volatile dans une paire HA non-MetroCluster</block>
+  <block id="76d4479f1d4b44d8f372f9f82d8bf65c" category="paragraph"><block ref="76d4479f1d4b44d8f372f9f82d8bf65c" category="inline-image-macro-rx" type="image"></block></block>
+  <block id="b717502014770e06b2f3680a44c00081" category="image-alt">Exemple de mise en miroir NVRAM de MetroCluster</block>
+  <block id="9cc17b781ef0abd2322572e757128ec4" category="image-alt">MetroCluster NVRAM mirroring avec DR auxiliaire</block>
+  <block id="e68401ee00f11a5231c9b699c2420095" category="image-alt">Propriété des disques MetroCluster</block>
+  <block id="639e9568107b5a1492bb79a497c6a466" category="image-alt">Basculement et rétablissement de MetroCluster avec autoheal</block>
+  <block id="620fb6d49b844df3f45dce93a10df8d0" category="image-alt">Commutation non programmée de MetroCluster avec autoheal</block>
+  <block id="7d75b765033881d6427904f346b2af70" category="image-alt">Processus pour effectuer un basculement négocié et un retour à la normale</block>
+  <block id="a9df5c35dc8d16b1357b057f348b9b78" category="paragraph">Les conseils suivants concernent un scénario peu courant dans lequel vous devez ajouter un ancien modèle de plate-forme (plates-formes publiées avant ONTAP 9.15.1) à une configuration MetroCluster existante qui contient un modèle de plate-forme plus récent (plates-formes publiées dans ONTAP 9.15.1 ou plus récent). Pour une transition FC vers IP à huit nœuds, ce guide s'applique si vous avez fait la transition de votre premier groupe DR FC vers un modèle de plateforme introduit dans ONTAP 9.15.1 ou plus récent et que vous prévoyez de faire la transition du second groupe DR vers une plateforme introduite avant ONTAP 9.15.1.</block>
+  <block id="c8efd71f5dfcaa3170cfb9e870570d0c" category="paragraph">Si votre configuration MetroCluster existante contient une plate-forme qui utilise des ports *shared cluster/HA* (plates-formes publiées dans ONTAP 9.15.1 ou plus tard), vous ne pouvez pas ajouter une plate-forme qui utilise des ports *shared MetroCluster/HA* (plates-formes publiées avant ONTAP 9.15.1) sans mettre à niveau tous les nœuds de la configuration vers ONTAP 9.15.1P11 ou ONTAP 9.16.1P4 ou plus tard.</block>
+  <block id="bbd4f8afd941a4f9092590e529ea65aa" category="paragraph">L'ajout d'un ancien modèle de plate-forme qui utilise des ports *partagés/MetroCluster HA* à un MetroCluster contenant un modèle de plate-forme plus récent qui utilise des ports *partagés cluster/HA* est un scénario peu courant et la plupart des combinaisons ne sont pas affectées.</block>
+  <block id="08d2b7abcd5b6aa419d380eb2e816dae" category="paragraph">Utilisez le tableau suivant pour vérifier si votre combinaison est affectée. Si votre plate-forme existante est répertoriée dans la première colonne et que la plate-forme que vous souhaitez ajouter à la configuration est répertoriée dans la deuxième colonne, tous les nœuds de la configuration doivent exécuter ONTAP 9.15.1P11 ou ONTAP 9.16.1P4 ou une version ultérieure pour ajouter le nouveau groupe DR.</block>
+  <block id="21c46632ec731f4be55ce4557663e507" category="image-alt">Transition avec quatre nouveaux nœuds IP sur les étagères existantes</block>
+  <block id="1e0490b479cfe90476d9225ca238cf02" category="image-alt">Flux de travail pour la transition à deux nœuds</block>
+  <block id="305b5ad24ea95dd1803f299dea23021d" category="image-alt">Nœuds FC de transition dans le groupe DR 1</block>
+  <block id="0e1c9ccf6b54d1765aafd7e5ebf38323" category="image-alt">Groupe DR de transition avec présence de nœuds FC et IP</block>
+  <block id="b1c2bad75d5cf3e802090480c332a914" category="image-alt">Transition DR groupe 2 Nœuds IP</block>
+  <block id="4f8c151b27f293b2eb679b4dcaeff4d7" category="image-alt">Configuration MetroCluster FC à huit nœuds avant la transition</block>
+  <block id="43229d52dd50f3d26ec75d70d1d2603d" category="image-alt">Configuration à huit nœuds avec ajout de nœuds IP en tant que troisième groupe DR</block>
+  <block id="178ab91644b555e4c62039a6c9cd3712" category="image-alt">Configuration à huit nœuds après la première transition de groupe DR</block>
+  <block id="4c07c51d0a459b16f8b5b4a1044279f2" category="image-alt">Configuration à huit nœuds avec ajout des nœuds IP restants</block>
+  <block id="32b1c7650ea6e5f8f045593229ac33ea" category="image-alt">Configuration IP de MetroCluster à huit nœuds après la transition</block>
+  <block id="0d2a1761149118d0677c7834ab1f4573" category="image-alt">Flux de travail pour une transition non perturbatrice à quatre nœuds</block>
+  <block id="db616b49f397ea08b1cce69c42464ba3" category="image-alt">Câblage des nouveaux nœuds IP et des étagères pour la transition</block>
+  <block id="6bfd4f6af6ee9b2970233d2525d16a11" category="image-alt">Démarrage de nouveaux nœuds IP pendant la transition</block>
+  <block id="4a8212fdde11ac3267e903afbb73d442" category="image-alt">Passage d'une configuration FC à deux nœuds à une configuration IP à quatre nœuds</block>
+  <block id="ed42ec94b71ec17268d9a6d6e92859ac" category="image-alt">Processus de transition lorsque les anciennes tablettes ne sont plus prises en charge</block>
+  <block id="4a83a62734885c358e9d4b436f41d497" category="image-alt">Câblage des nouvelles tablettes aux anciens contrôleurs pendant la transition</block>
+  <block id="a855f2a2f4f653dd6e2541902e2efdfa" category="image-alt">Flux de travail pour déplacer les données vers de nouvelles étagères pendant la transition</block>
+  <block id="b400c3782a4a1c629a07be7b83028403" category="image-alt">Suppression des nœuds FC pendant la transition</block>
+  <block id="b7b6e118187f83d59bfd9460212ace45" category="image-alt">Combinaisons de plates-formes prises en charge pour les mises à niveau des contrôleurs MetroCluster FC</block>
+  <block id="38f2ca581d07ba7b032fa9e924ae0dee" category="inline-image-macro">Combinaisons de rafraîchissement du système pour les plates-formes AFF et FAS groupe 1</block>
+  <block id="d251efadd38acbbe7ed81c0acb48293e" category="paragraph"><block ref="d251efadd38acbbe7ed81c0acb48293e" category="inline-image-macro-rx" type="image"></block></block>
+  <block id="4e752fcbfb4273f909ab3a0fb2fe8d76" category="inline-image-macro">Combinaisons de rafraîchissement du système pour les plates-formes AFF et FAS groupe 2</block>
+  <block id="63f5ff7f318719ee931c701c775550b0" category="paragraph"><block ref="63f5ff7f318719ee931c701c775550b0" category="inline-image-macro-rx" type="image"></block></block>
+  <block id="61e915ea9f1c8e0913becae925b6f940" category="image-alt">Combinaisons de plates-formes prises en charge pour la mise à jour technologique de MetroCluster FC</block>
+  <block id="e251d0707eac8daa689dbe48b80749b7" category="image-alt">Configuration MetroCluster avec huit nœuds dans deux groupes DR</block>
+  <block id="66062ddbc8135a4a216b660a97775456" category="image-alt">Configuration MetroCluster avec quatre nœuds après la suppression du groupe DR</block>
+  <block id="755fdb5f6666b16201d6f13e9ce048de" category="image-alt">Processus d'ajout de nouveaux modules de contrôle dans l'extension de MetroCluster de 2 à 4 nœuds</block>
+  <block id="a7a895673b87d47194b2e18512090493" category="image-alt">Configuration MetroCluster FC avec quatre nœuds avant extension</block>
+  <block id="e45a2d89ac17d2095a884a69781ffbc6" category="image-alt">Configuration MetroCluster FC avec huit nœuds après extension</block>
+  <block id="61ba15123fa5ea2051484d2636c45025" category="paragraph">Les conseils suivants concernent un scénario peu courant dans lequel vous devez ajouter un ancien modèle de plate-forme (plates-formes publiées avant ONTAP 9.15.1) à une configuration MetroCluster existante qui contient un modèle de plate-forme plus récent (plates-formes publiées dans ONTAP 9.15.1 ou plus tard).</block>
+  <block id="acb8977107a5cca726ceac858f9c3779" category="inline-image-macro">Combinaisons d'extension pour les plates-formes AFF et FAS groupe 1 dans MetroCluster IP</block>
+  <block id="ac5f4532fdcd505f3171b01abb288c19" category="paragraph"><block ref="ac5f4532fdcd505f3171b01abb288c19" category="inline-image-macro-rx" type="image"></block></block>
+  <block id="179881ca73d5a066e365e72a916925fe" category="inline-image-macro">Combinaisons d'extension pour les plates-formes AFF et FAS groupe 2 dans MetroCluster IP</block>
+  <block id="695da84e68db0dc951febf597ede885b" category="paragraph"><block ref="695da84e68db0dc951febf597ede885b" category="inline-image-macro-rx" type="image"></block></block>
+  <block id="49f4b25e59c80c2702857b53bb002b9e" category="image-alt">Configuration MetroCluster FC avec deux nœuds avant extension</block>
+  <block id="15b805f5254f0fc120b9a46087b93238" category="image-alt">Configuration MetroCluster FC avec quatre nœuds après extension</block>
+  <block id="a500e462061b08e4fc5e15ad2bf3f49b" category="image-alt">Workflow pour l'extension de MetroCluster FC de 2 nœuds à 4 nœuds</block>
+  <block id="c3cd0974e731f71af11b214d4718fea7" category="image-alt">Configuration MetroCluster à quatre nœuds avant extension</block>
+  <block id="6208da6edbc891a9fde0cbf346e2274e" category="image-alt">Configuration de MetroCluster après expansion et migration des volumes CRS</block>
+  <block id="4d063c90308c68ce256a724b897d4137" category="image-alt">Configuration de MetroCluster après suppression de l'ancien groupe DR</block>
+  <block id="f3ba3051bd462d1b63e2cab28012a76e" category="image-alt">Configuration de MetroCluster IP à quatre nœuds avant extension</block>
+  <block id="e3b2aef1fa3fc7f8022067e98803a9af" category="image-alt">Configuration MetroCluster IP avec huit nœuds après extension</block>
+  <block id="8b7dcaebfdcda3d527168e4baadc98e1" category="paragraph">L'exemple suivant spécifie une fenêtre de maintenance de 10 heures. Prévoyez un délai supplémentaire en fonction de votre plan.</block>
+  <block id="730a146883e25b660f7902e4a2175442" category="image-alt">Configuration temporaire de MetroCluster à douze nœuds</block>
+  <block id="23e401ca1af0db0896b834394381aa00" category="list-text">Si vous devez rafraîchir les deux groupes DR dans une configuration à huit nœuds, répétez l'ensemble de la procédure pour chaque groupe DR.</block>
+  <block id="ed5b62d356376f4c05f0d8dcea1886cf" category="image-alt">Configuration finale de MetroCluster à huit nœuds</block>
+  <block id="f0a984d6457e71c41e8b1b3fece29a7f" category="image-alt">Site_B inactif et prêt à être mis à niveau</block>
+  <block id="1e46e20553f5a1435382af6f5df8dce1" category="image-alt">Processus de mise à niveau des contrôleurs dans la configuration IP de MetroCluster</block>
+  <block id="ce800afc177956088aa84145a11ac21c" category="image-alt">Site_B inactif et prêt à être mis à niveau après le basculement de MetroCluster</block>
+  <block id="58df7ad69c0afc2a54f133df73e6084b" category="image-alt">Retrait du module de commande du châssis : déverrouiller et faire glisser le module vers l'extérieur</block>
+  <block id="b9eb1e6e7014c9303799152164affdf5" category="image-alt">Retrait du module NVRAM du châssis : déverrouiller et tirer les languettes</block>
+  <block id="55eb6bfcca1bd3820b0fdab3d788f833" category="image-alt">Installation du module NVRAM dans le châssis : aligner et verrouiller en place</block>
+  <block id="40a8cc8505d7467bde3321410a6e4017" category="image-alt">Installation du module de commande dans le châssis : aligner, placer et câbler</block>
+  <block id="ede06bff35d481aeb275fc59e8e85067" category="image-alt">Site_A en attente d'une mise à niveau après le basculement de MetroCluster</block>
 </blocks>
