@@ -20,7 +20,7 @@ Vous pouvez tester les scénarios d'échec pour vérifier le bon fonctionnement 
 Vous pouvez tester le basculement négocié (planifié) pour confirmer la disponibilité ininterrompue des données.
 
 .Description de la tâche
-Ce test vérifie que la disponibilité des données n'est pas affectée (à l'exception des protocoles Microsoft Server message Block (SMB) et Solaris Fibre Channel) en commutant le cluster sur le second data Center.
+Ce test valide que la disponibilité des données n'est pas affectée (à l'exception des protocoles SMB et Fibre Channel) par le basculement du cluster vers le deuxième centre de données.
 
 Ce test devrait prendre environ 30 minutes.
 
@@ -100,8 +100,6 @@ Remote: cluster_B               not-reachable          -
 +
 [listing]
 ----
-cluster_A::>  metrocluster operation show
-
 cluster_A::> metrocluster operation show
   Operation: switchover
       State: successful
@@ -175,7 +173,7 @@ Group Cluster Node               State          Mirroring Mode
               node_A_1         configured     enabled   heal roots completed
       cluster_B
               node_B_2         unreachable    -         switched over
-42 entries were displayed.metrocluster operation show
+42 entries were displayed.
 ----
 +
 Si l'opération de correction automatique échoue pour une raison quelconque, vous devez émettre le `metrocluster heal` Commandes manuelles comme effectuées dans les versions ONTAP antérieures à ONTAP 9.5. Vous pouvez utiliser le `metrocluster operation show` et `metrocluster operation history show -instance` commandes permettant de contrôler l'état de la correction et de déterminer la cause d'une défaillance.

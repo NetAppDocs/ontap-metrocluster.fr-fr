@@ -3651,7 +3651,6 @@
   <block id="af6415b8e23291050b1c66bd2a86ffaf" category="paragraph">Vous devez effectuer un contrôle après la configuration initiale et après avoir apporté des modifications à la configuration MetroCluster.</block>
   <block id="def4f4e87a159ca662e15a890598d539" category="paragraph">Vous devez également effectuer une vérification avant le basculement (prévu) ou le rétablissement.</block>
   <block id="7ad4770864f194efb59a5eb45626bdf3" category="list-text">Affiche des résultats plus détaillés à partir de la commande MetroCluster check run la plus récente :</block>
-  <block id="2e012ade7bab556f0392337c78739376" category="paragraph">L'exemple suivant montre la sortie de la commande MetroCluster check cluster show pour une configuration MetroCluster à quatre nœuds saine. Il indique que les clusters sont prêts à effectuer un basculement négocié si nécessaire.</block>
   <block id="ccc25c1a9a6f63d4acf6c9390b850b64" category="section-title">Finalisation de la configuration ONTAP</block>
   <block id="938a9f49acfde2902a8737d1aadbf6a1" category="paragraph">Après la configuration, l'activation et la vérification de la configuration MetroCluster, vous pouvez terminer la configuration du cluster en ajoutant des SVM, des interfaces réseau et d'autres fonctionnalités ONTAP supplémentaires, si nécessaire.</block>
   <block id="7a56c93af328a3c1fa4e3fccdc177cb5" category="summary">Dans une configuration IP MetroCluster qui n'est pas préconfigurée en usine, vous devez vérifier que l'état ha-config des composants du contrôleur et du châssis est défini sur mcclip afin qu'ils s'démarrent correctement. Pour les systèmes reçus en usine, cette valeur est préconfigurée et vous n'avez pas besoin de la vérifier.</block>
@@ -4131,7 +4130,6 @@
   <block id="feda56ed0396074f051138ea4466f982" category="doc">Test de la configuration MetroCluster</block>
   <block id="397065d1ea76a7267c1165f18aff1479" category="section-title">Vérification du basculement négocié</block>
   <block id="03daa0db748f01eb3873a439b3ee1ab5" category="paragraph">Vous pouvez tester le basculement négocié (planifié) pour confirmer la disponibilité ininterrompue des données.</block>
-  <block id="3b84985a3046a49bcea85f56e3a28bac" category="paragraph">Ce test vérifie que la disponibilité des données n'est pas affectée (à l'exception des protocoles Microsoft Server message Block (SMB) et Solaris Fibre Channel) en commutant le cluster sur le second data Center.</block>
   <block id="224eed3317652f7fd4510c7cd1f9c926" category="paragraph">Ce test devrait prendre environ 30 minutes.</block>
   <block id="962f0cdcd4aeaa5d7a845c907458b869" category="paragraph">Cette procédure présente les résultats attendus suivants :</block>
   <block id="1faa3b4e66d97f34777f91b4ea9930d9" category="list-text">Le<block ref="803740ddd57a4d0c8a51c6ede10e3096" prefix=" " category="inline-code"></block> la commande affiche une invite d'avertissement.</block>
@@ -7655,8 +7653,6 @@
   <block id="086931408c5e31d7ddeb337f5faf83eb" category="paragraph"><block ref="b0b01614edded1dbef1e1334c4f5723d" prefix="" category="inline-code"></block></block>
   <block id="45793c6373c7317ce40fb3f662407b87" category="list-text">Affectez des disques sans propriété à pool0 sur le nœud local</block>
   <block id="f433c39c3c339b913b2223e31d633f9d" category="list-text">Revenir au mode Maintenance.</block>
-  <block id="b89bea07847accf12561ace475459c4d" category="list-text">Démarrer le nœud sur maintenance :</block>
-  <block id="fd02d447099008ddc827133dc034246f" category="paragraph"><block ref="fb866cc030e3e6a5a60ea75e17f86cea" prefix="" category="inline-code"></block></block>
   <block id="77036813f81882d81f97721da98db74b" category="list-text">Arrêter les nœuds : +<block ref="4a1bde0ea8bcda2a591f42646813c477" prefix=" " category="inline-code"></block></block>
   <block id="6b94bbc1027af03d0236cf3e340aaee9" category="list-text">Une fois les nœuds démarrent, vérifiez leur état :</block>
   <block id="0161fa0543afb66faaedd2d30421113b" category="inline-link-macro">Préparation du rétablissement en configuration IP MetroCluster</block>
@@ -11765,8 +11761,6 @@ L'exemple suivant montre que vous utilisez SCP pour télécharger le fichier<blo
   <block id="daf3fcb291d6eb9e42a7777197caa458" category="sidebar">Conversion de MetroCluster FC en MetroCluster IP</block>
   <block id="822970998ef8866cd59ed6ba8d63af83" category="sidebar">Mettre à niveau les fichiers RCF IP MetroCluster</block>
   <block id="b7c02f1bc7ffc889ddb9e99702663c56" category="sidebar">Firmware du pont ATTO</block>
-  <block id="ddac5beff5f77bf22595caa98bac08f9" category="sidebar">FiberBridge 7600N</block>
-  <block id="dcb741f9e6e5d6050aeb3d8fd347e9fd" category="sidebar">FibreBridge 7500N</block>
   <block id="dfcc398099d6a64026e51ab282e16253" category="sidebar">Ressources supplémentaires</block>
   <block id="fa0344a10c89a05b4e9232391d5feb01" category="sidebar">NetApp Config Advisor</block>
   <block id="3f2b90ec5a9b43745b9c8c9fedf48d8d" category="sidebar">Base de connaissances du support NetApp</block>
@@ -13816,7 +13810,6 @@ L'exemple suivant montre que vous utilisez SCP pour télécharger le fichier<blo
   <block id="912e887f8c2036c3f03ac7df63957dfd" category="paragraph">9336C-FX2 (36 ports)</block>
   <block id="5f972a786e3a36fb039bc945267e120a" category="paragraph">3132Q-V</block>
   <block id="f403fff2bbc7f3e506dae47b9dff52fc" category="paragraph">3232C</block>
-  <block id="addb9e70976c2f94b8ccfc3736a31888" category="paragraph-title">Informations importantes</block>
   <block id="38c9e66a6eb25313e0ea3390ba7ee1fc" category="cell">Si votre MetroCluster existant contient...</block>
   <block id="afe6ad7caef50aaad15afb83c6f40ca0" category="cell">Et la plateforme que vous ajoutez est...</block>
   <block id="12f30f47d5034530ccaa816ade9953fc" category="paragraph">Un système AFF utilisant des *ports de cluster/HA partagés* :</block>
@@ -14424,4 +14417,11 @@ L'exemple suivant montre que vous utilisez SCP pour télécharger le fichier<blo
   <block id="55eb6bfcca1bd3820b0fdab3d788f833" category="image-alt">Installation du module NVRAM dans le châssis : aligner et verrouiller en place</block>
   <block id="40a8cc8505d7467bde3321410a6e4017" category="image-alt">Installation du module de commande dans le châssis : aligner, placer et câbler</block>
   <block id="ede06bff35d481aeb275fc59e8e85067" category="image-alt">Site_A en attente d'une mise à niveau après le basculement de MetroCluster</block>
+  <block id="cee412eec19a9c7ecf8848f3e299f815" category="list-text">Démarrez le nœud en mode maintenance :</block>
+  <block id="a9efd65de6ec4fcf881629fcb763598c" category="paragraph">Ce test valide que la disponibilité des données n'est pas affectée (à l'exception des protocoles SMB et Fibre Channel) par le basculement du cluster vers le deuxième centre de données.</block>
+  <block id="85d885cec8ed47ee2262192224675e42" category="paragraph-title">Informations importantes si vous ajoutez un modèle de plate-forme plus ancien</block>
+  <block id="5176f2410e7713f8043052235a3684ca" category="inline-link-macro">définir le bootarg requis</block>
+  <block id="101589f08b3d384effc16cfe928ff010" category="admonition">*Vous devez exécuter cette procédure comme indiqué à chaque fois que vous mettez à niveau vos contrôleurs.* Lorsque de nouvelles plateformes sont lancées, il peut y avoir des étapes nouvelles ou modifiées à suivre. Par exemple, lors de la mise à niveau vers des plates-formes introduites dans ONTAP 9.15.1 ou version ultérieure, vous devez <block ref="c06c0a0b6c863a89cb5464010bbb6325" category="inline-link-macro-rx"></block> et effectuez d’autres étapes supplémentaires pour une mise à niveau réussie.</block>
+  <block id="362bfa10bf4c8597f25d4428db1f1ff6" category="admonition">*Vous devez exécuter cette procédure comme indiqué à chaque fois que vous mettez à niveau vos contrôleurs.* Lorsque de nouvelles plateformes sont lancées, il peut y avoir des étapes nouvelles ou modifiées à suivre. Par exemple, lors de la mise à niveau vers des plates-formes introduites dans ONTAP 9.15.1 ou version ultérieure, vous devez <block ref="cecfc2493a1700137e5c8906925909ad" category="inline-link-macro-rx"></block> et effectuez d’autres étapes supplémentaires pour une mise à niveau réussie.</block>
+  <block id="8fe05c00237e990eab631a7b042cf93c" category="sidebar">Téléchargements du micrologiciel ATTO FibreBridge</block>
 </blocks>

@@ -17,7 +17,7 @@ Vous pouvez utiliser cette procédure pour mettre à niveau les contrôleurs et 
 
 À partir de ONTAP 9.8, vous pouvez mettre à niveau les contrôleurs et le stockage d'une configuration IP MetroCluster à quatre nœuds en développant la configuration pour devenir une configuration temporaire à huit nœuds, puis en supprimant l'ancien groupe DR.
 
-.Informations importantes
+.Informations importantes si vous ajoutez un modèle de plate-forme plus ancien
 Les conseils suivants concernent un scénario peu courant dans lequel vous devez ajouter un ancien modèle de plate-forme (plates-formes publiées avant ONTAP 9.15.1) à une configuration MetroCluster existante qui contient un modèle de plate-forme plus récent (plates-formes publiées dans ONTAP 9.15.1 ou plus tard).
 
 Si votre configuration MetroCluster existante contient une plate-forme qui utilise des ports *shared cluster/HA* (plates-formes publiées dans ONTAP 9.15.1 ou plus tard), vous ne pouvez pas ajouter une plate-forme qui utilise des ports *shared MetroCluster/HA* (plates-formes publiées avant ONTAP 9.15.1) sans mettre à niveau tous les nœuds de la configuration vers ONTAP 9.15.1P11 ou ONTAP 9.16.1P4 ou plus tard.
