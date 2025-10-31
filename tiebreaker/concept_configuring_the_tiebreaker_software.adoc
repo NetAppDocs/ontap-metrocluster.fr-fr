@@ -4,7 +4,7 @@ sidebar: sidebar
 keywords: installation, tiebreaker, software, add, modify, metrocluster, configuration, remove, configuring, configure, launch, cli, add, command, modify, removing 
 summary: 'Après avoir installé ce logiciel, vous pouvez ajouter ou modifier des configurations MetroCluster ou les supprimer du logiciel disjoncteur d"attache.' 
 ---
-= Configuration du logiciel disjoncteur d'attache
+= Configurer le logiciel de départage MetroCluster
 :allow-uri-read: 
 :icons: font
 :imagesdir: ../media/
@@ -15,7 +15,7 @@ Après avoir installé ce logiciel, vous pouvez ajouter ou modifier des configur
 
 
 
-== Lancement de l'interface de ligne de commande du logiciel disjoncteur d'attache
+== Lancez l'interface de ligne de commande du logiciel Tiebreaker.
 
 Après avoir installé le logiciel Tiebreaker, vous devez lancer son interface de ligne de commande pour configurer le logiciel.
 
@@ -28,7 +28,7 @@ Après avoir installé le logiciel Tiebreaker, vous devez lancer son interface d
 
 
 
-== Ajout des configurations MetroCluster
+== Ajouter des configurations MetroCluster
 
 Après avoir installé le logiciel NetApp MetroCluster Tiebreaker, vous pouvez ajouter d'autres configurations MetroCluster, une à la fois.
 
@@ -78,6 +78,39 @@ Are you sure you want to enable automatic switchover capability for monitor "8pa
 
 .Informations associées
 link:concept_risks_and_limitation_of_using_mcc_tiebreaker_in_active_mode.html["Risques et limitations liés à l'utilisation de MetroCluster Tiebreaker en mode actif"]
+
+
+
+== Certificats d'importation
+
+Pour activer une surveillance transparente dans Tiebreaker 1.6 ou version ultérieure, vous devez importer le certificat SSL (Secure Sockets Layer) du serveur, le certificat intermédiaire (s'il existe) et le certificat racine d' ONTAP dans le magasin de clés de la machine virtuelle Java (JVM).
+
+.Description de la tâche
+* Cette tâche est requise dans Tiebreaker 1.6 ou version ultérieure.
+* Vous effectuez cette tâche après avoir ajouté avec succès une configuration MetroCluster à Tiebreaker ou si vos certificats expirent.
+
+
+.Étape
+. Exécutez la commande suivante pour chaque certificat que vous devez importer (serveur SSL, intermédiaire ou racine).
++
+`/opt/netapp/java/bin/keytool -import -trustcacerts -file <certificate_file_name> -keystore "/opt/netapp/java/lib/security/cacerts" -alias <certificate>`
+
++
+** Le `<certificate_file_name>` La valeur spécifie le nom du fichier du certificat que vous souhaitez importer.
+** Le `-alias <certificate>` La valeur spécifie le nom sous lequel vous souhaitez enregistrer le certificat après son importation dans la JVM.
++
+L'exemple suivant montre comment importer un certificat racine avec le nom de fichier `root.crt` et un certificat de serveur SSL avec le nom de fichier `ssl_cert.crt`:
+
++
+[listing]
+----
+/opt/netapp/java/bin/keytool -import -trustcacerts -file root.crt -keystore "/opt/netapp/java/lib/security/cacerts" -alias root
+
+/opt/netapp/java/bin/keytool -import -trustcacerts -file ssl_cert.crt -keystore "/opt/netapp/java/lib/security/cacerts" -alias ssl_cert
+----
+
+
+
 
 
 
@@ -180,7 +213,7 @@ Le mot de passe utilisateur a été mis à jour
 |===
 
 
-== Suppression des configurations MetroCluster
+== Supprimer les configurations MetroCluster
 
 Vous pouvez supprimer la configuration MetroCluster surveillée par ce logiciel quand vous ne souhaitez plus surveiller une configuration MetroCluster.
 
