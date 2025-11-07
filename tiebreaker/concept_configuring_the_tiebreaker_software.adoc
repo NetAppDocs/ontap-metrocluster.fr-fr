@@ -90,7 +90,7 @@ Pour activer une surveillance transparente dans Tiebreaker 1.6 ou version ultér
 * Vous effectuez cette tâche après avoir ajouté avec succès une configuration MetroCluster à Tiebreaker ou si vos certificats expirent.
 
 
-.Étape
+.Étapes
 . Exécutez la commande suivante pour chaque certificat que vous devez importer (serveur SSL, intermédiaire ou racine).
 +
 `/opt/netapp/java/bin/keytool -import -trustcacerts -file <certificate_file_name> -keystore "/opt/netapp/java/lib/security/cacerts" -alias <certificate>`
@@ -109,6 +109,10 @@ L'exemple suivant montre comment importer un certificat racine avec le nom de fi
 /opt/netapp/java/bin/keytool -import -trustcacerts -file ssl_cert.crt -keystore "/opt/netapp/java/lib/security/cacerts" -alias ssl_cert
 ----
 
+
+. Redémarrez le logiciel de départage :
++
+`systemctl restart netapp-metrocluster-tiebreaker-software`
 
 
 

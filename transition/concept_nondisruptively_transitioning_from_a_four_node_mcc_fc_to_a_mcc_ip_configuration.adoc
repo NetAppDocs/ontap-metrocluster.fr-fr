@@ -15,9 +15,9 @@ Vous pouvez effectuer des transitions de charges de travail et de données sans 
 
 À partir de ONTAP 9.13.1, cette procédure est prise en charge dans les configurations MetroCluster IP dans lesquelles le MetroCluster et les tiroirs disques sont connectés aux mêmes commutateurs IP (une configuration de commutateur de stockage partagé).
 
-À partir de ONTAP 9.13.1, vous pouvez effectuer la transition sans interruption des charges de travail et des données d'une configuration MetroCluster FC à huit nœuds existante vers une nouvelle configuration IP MetroCluster.
+À partir d' ONTAP 9.13.1, vous pouvez effectuer une transition sans interruption des charges de travail et des données d'une configuration MetroCluster FC à huit nœuds existante vers une nouvelle configuration MetroCluster IP à huit nœuds.  Vous utilisez cette procédure pour faire basculer un groupe FC DR à quatre nœuds, supprimer le groupe FC DR vide, puis répéter la procédure pour le deuxième groupe FC DR. 
 
-À partir de ONTAP 9.8, vous pouvez effectuer une transition sans interruption des charges de travail et des données d'une configuration MetroCluster FC à quatre nœuds existante vers une nouvelle configuration IP MetroCluster.
+À partir d' ONTAP 9.8, vous pouvez effectuer une transition sans interruption des charges de travail et des données d'une configuration MetroCluster FC à quatre nœuds existante vers une nouvelle configuration MetroCluster IP à quatre nœuds.  Une fois la transition terminée, vous pouvez étendre votre configuration à huit nœuds MetroCluster IP si nécessaire. Voirlink:../upgrade/task_expand_a_four_node_mcc_ip_configuration.html["Développez une configuration MetroCluster IP"] .
 
 * Cette procédure ne génère aucune interruption.
 +
@@ -28,6 +28,10 @@ La configuration MetroCluster peut continuer à transmettre des données pendant
 Si vous disposez d'une configuration FC MetroCluster à deux nœuds, reportez-vous à la section link:concept_choosing_your_transition_procedure_mcc_transition.html["Choix de la procédure de transition"].
 
 * Cette procédure décrit les étapes nécessaires à la transition d'un groupe de reprise après incident FC à quatre nœuds. Si vous disposez d'une configuration à huit nœuds (deux groupes DR FC), vous devez répéter l'intégralité de la procédure pour chaque groupe DR FC.
++
+
+NOTE: Lorsque vous ajoutez ou supprimez un groupe DR dans le cadre de cette procédure, vous devez vérifier que la suppression ou l'ajout du groupe DR a réussi avant d'ajouter ou de supprimer un autre groupe DR.
+
 * Vous devez répondre à toutes les exigences et suivre toutes les étapes de la procédure.
 
 
