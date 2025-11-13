@@ -4,7 +4,7 @@ sidebar: sidebar
 keywords: drive auto-assignment, drive, adp, advanced disk partitioning, root disk, unmirrored root, data partition, root partition, shelf-by-shelf, AFF A320, AFF A220, AFF A250, C250, AFF A300, AFF A400, C400, AFF A700, AFF A800, FAS2750, FAS8200, FAS500f, FAS9000 
 summary: 'Depuis ONTAP 9.4, les configurations MetroCluster IP prennent en charge les nouvelles installations avec les systèmes AFF à l"aide du partitionnement de disque avancé (ADP).' 
 ---
-= Considérations IP MetroCluster pour l'attribution automatique des lecteurs et les systèmes ADP
+= Exigences IP de MetroCluster pour l'attribution automatique des lecteurs et les systèmes ADP
 :allow-uri-read: 
 :icons: font
 :imagesdir: ../media/
@@ -13,7 +13,7 @@ summary: 'Depuis ONTAP 9.4, les configurations MetroCluster IP prennent en charg
 [role="lead"]
 Depuis ONTAP 9.4, les configurations IP de MetroCluster prennent en charge les nouvelles installations à l'aide d'un partitionnement de disque avancé et d'une affectation automatique des disques.
 
-Lorsque vous utilisez ADP avec des configurations MetroCluster IP, vous devez prendre en compte les considérations suivantes :
+Lors de l'utilisation d'ADP avec des configurations IP MetroCluster , il convient de tenir compte des points suivants :
 
 * ONTAP 9.4 et versions ultérieures sont nécessaires pour utiliser ADP avec les configurations IP MetroCluster sur les systèmes AFF et ASA.
 * ADPv2 est pris en charge dans les configurations MetroCluster IP.
@@ -238,9 +238,11 @@ Le fonctionnement du partitionnement de disque avancé et de l'affectation autom
 
 NOTE: Dans les systèmes utilisant ADP, des agrégats sont créés à l'aide de partitions dans lesquelles chaque disque est partitionné en partitions P1, P2 et P3. L'agrégat racine est créé à l'aide de partitions P3.
 
-Vous devez respecter les limites MetroCluster pour le nombre maximal de disques pris en charge, entre autres.
+Veuillez prendre connaissance des exigences suivantes avant d'utiliser les tableaux :
 
-https://hwu.netapp.com["NetApp Hardware Universe"]
+* Vous devez respecter les limites de MetroCluster concernant le nombre maximal de disques pris en charge et les autres directives. Reportez-vous à la https://hwu.netapp.com["NetApp Hardware Universe"] .
+* Si vous réutilisez un rack de disque externe, vérifiez que la propriété du disque sur le rack a été supprimée avant de le connecter au contrôleur. Se référer àlink:https://docs.netapp.com/us-en/ontap/disks-aggregates/remove-ownership-disk-task.html["Supprimer la propriété ONTAP d'un disque"^] .
+
 
 
 
@@ -839,6 +841,60 @@ Sans objet
 Nombre minimal de disques pris en charge (par site)
  a| 
 24 disques
+ a| 
+Les lecteurs sont répartis en quatre groupes égaux. Chaque tiroir est automatiquement attribué à un pool distinct.
+ a| 
+Sans objet
+
+|===
+
+
+=== Attribution de disque sur les systèmes FAS50 avec cache Flash
+
+À partir d' ONTAP 9.18.1, le cache Flash est pris en charge sur les systèmes FAS50 pour les configurations IP MetroCluster .
+
+[CAUTION]
+====
+* Vous ne pouvez pas avoir à la fois des agrégats de données et l'agrégat racine avec des disques Flash Cache sur le châssis interne.
+* Les emplacements 0 et 23 sont utilisés pour les disques Flash Cache.
+* Si vous réutilisez un rack de disque externe, vérifiez que la propriété du disque sur le rack a été supprimée avant de le connecter au contrôleur. Se référer àlink:https://docs.netapp.com/us-en/ontap/disks-aggregates/remove-ownership-disk-task.html["Supprimer la propriété ONTAP d'un disque"] .
+
+
+====
+|===
+
+
+| Directive | Nombre de disques par site | Règles d'affectation de disques | Mise en page ADP pour la partition racine 
+
+
+.2+| Minimum de disques recommandés (par site)  a| 
+48 disques (disques externes uniquement, pas de disques internes)
+ a| 
+Les disques de chaque tiroir externe sont divisés en deux groupes égaux (moitiés). Chaque demi-tiroir est automatiquement attribué à un pool distinct.
+ a| 
+Sans objet
+
+
+
+ a| 
+36 disques (12 disques internes et 24 disques externes – avec les agrégats de données sur le plateau externe et l'agrégat racine sur le plateau interne)
+ a| 
+Les disques internes sont divisés en quatre groupes égaux (quartiers).  Chaque trimestre est automatiquement attribué à un groupe distinct.  Les disques situés sur les étagères externes sont divisés en quatre groupes égaux (quartiers).  Chaque quart d'étagère est automatiquement affecté à un pool distinct.
+
+*Remarques :*
+
+* Si vous utilisez des disques internes et externes, vous devez d'abord installer ONTAP et configurer le cluster local avec uniquement les disques internes.  Vous connectez ensuite manuellement l'étagère externe une fois votre tâche d'installation ou de configuration terminée.
+* Un minimum de 12 disques internes est requis pour l'agrégat racine.  Vous devez placer les disques internes racine dans l'emplacement 1.  Par exemple, pour 12 disques internes, utilisez les emplacements 1-3, 6-8, 12-14 et 18-20.
+
+ a| 
+Sans objet
+
+
+
+ a| 
+Nombre minimal de disques pris en charge (par site)
+ a| 
+24 disques durs externes
  a| 
 Les lecteurs sont répartis en quatre groupes égaux. Chaque tiroir est automatiquement attribué à un pool distinct.
  a| 

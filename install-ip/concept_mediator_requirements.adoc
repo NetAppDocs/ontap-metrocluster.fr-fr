@@ -21,9 +21,9 @@ Les exigences suivantes s'appliquent à un seul groupe de reprise d'activité (D
 +
 La connectivité entre le médiateur ONTAP et chaque site doit être composée de deux domaines de panne distincts.
 
-* ONTAP Mediator peut prendre en charge jusqu'à cinq configurations MetroCluster simultanément.
 * Le basculement non planifié automatique est pris en charge dans ONTAP 9.7 et versions ultérieures.
-* IPv6 n'est pas pris en charge par le médiateur ONTAP.
+* À partir d' ONTAP 9.18.1 et ONTAP Mediator 1.11, une seule instance ONTAP Mediator peut gérer jusqu'à dix configurations MetroCluster simultanément.  Dans les versions précédentes, ONTAP Mediator pouvait prendre en charge jusqu'à cinq configurations MetroCluster simultanément.
+* À partir d' ONTAP 9.18.1, IPv6 est pris en charge pour ONTAP Mediator 1.11 ou ultérieur dans une configuration IP MetroCluster .
 
 
 
@@ -64,7 +64,6 @@ Une connectivité indépendante entre chaque site et le médiateur ONTAP est req
 Vous devez vous assurer que la configuration répond à plusieurs exigences d'hôte.
 
 * Le médiateur ONTAP doit être installé sur un site externe qui est physiquement séparé des deux clusters ONTAP.
-* Le médiateur ONTAP prend en charge un nombre maximum de cinq configurations MetroCluster.
 * Le médiateur ONTAP ne nécessite pas plus que la configuration minimale requise par le système d'exploitation hôte pour le processeur et la mémoire (RAM).
 * Outre les exigences minimales du système d'exploitation hôte, 30 Go d'espace disque utilisable supplémentaires doivent être disponibles.
 +
