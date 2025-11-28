@@ -240,6 +240,10 @@ NOTE: Si vous mettez à niveau ou déclarez les réseaux, répétez toutes les �
 ----
 network interface modify -vserver <vserver_name> -lif <lif_name> -auto-revert true
 ----
+. Rétablir les ports d'origine de toutes les interfaces réseau du cluster qui ne sont pas actuellement connectées à leurs ports d'origine :
++
+`network interface revert -vserver * -lif *`
+
 . Vous pouvez également déplacer les tiroirs NS224.
 +
 Si vous reconfigurez une configuration IP MetroCluster qui ne connecte pas les tiroirs NS224 aux commutateurs IP MetroCluster, suivez la procédure appropriée pour ajouter ou déplacer les tiroirs NS224 :
