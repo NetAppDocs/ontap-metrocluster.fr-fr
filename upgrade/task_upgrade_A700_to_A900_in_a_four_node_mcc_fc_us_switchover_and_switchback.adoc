@@ -796,12 +796,22 @@ NOTE: Ne tenez pas compte du message suivant : `This procedure is not supported 
 
 . Procédez comme suit pour redémarrer le module de contrôleur :
 +
-.. Entrez `n` pour ignorer la récupération de sauvegarde lorsque l'invite suivante s'affiche :
-`Do you want to restore the backup configuration now? {y|n}`
-.. Entrez `y` pour redémarrer lorsque vous voyez l'invite suivante :
-`The node must be rebooted to start using the newly installed software. Do you want to reboot now? {y|n}`
+.. Entrer `n` pour ignorer la restauration de la sauvegarde lorsque vous voyez l'invite suivante :
++
+[listing]
+----
+Do you want to restore the backup configuration now? {y|n} n
+----
+.. Entrer `y` redémarrez lorsque vous voyez l'invite suivante :
++
+`The node must be rebooted to start using the newly installed software. Do you want to reboot now? {y|n} y`
+
 +
 Le module de contrôleur redémarre mais s'arrête au menu d'amorçage car le périphérique d'amorçage a été reformaté et les données de configuration doivent être restaurées.
+
++
+
+NOTE: Vous devez redémarrer le nœud pour pouvoir utiliser le logiciel nouvellement installé.
 
 
 
