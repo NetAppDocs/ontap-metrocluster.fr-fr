@@ -44,8 +44,9 @@ Les remarques suivantes s'appliquent aux deux groupes :
 
 * Remarque 1 : les mises à niveau des contrôleurs sont prises en charge sur les systèmes exécutant ONTAP 9.13.1 ou version ultérieure.
 * Remarque 2 : la plateforme cible ne peut pas avoir de disques internes tant que la mise à niveau du contrôleur n'est pas terminée. Vous pouvez ajouter les lecteurs internes après la mise à niveau.
-* Remarque 3 : nécessite le remplacement des modules de contrôleur.
-* Remarque 4 : requiert des modules IOM pour convertir les anciens contrôleurs en tiroir SAS externe. Pour connaître les modules IOM pris en charge, reportez-vous aulink:https://hwu.netapp.com/["Hardware Universe"^].
+* Remarque 3 : Les mises à niveau des systèmes intégrés (disque et contrôleurs dans le même châssis) nécessitent le remplacement des modules de contrôleur tout en conservant le châssis et les disques existants.
+* Remarque 4 : Nécessite des modules IOM pour convertir les anciens contrôleurs en un châssis SAS externe. Consultez la link:https://hwu.netapp.com/["Hardware Universe"^] pour connaître les modules IOM compatibles.
+* Remarque 5 : Nécessite ONTAP 9.18.1GA ou version ultérieure.
 
 
 [role="tabbed-block"]
@@ -61,7 +62,7 @@ image:../media/assisted-group-1.png["Affiche les combinaisons de mise à niveau 
 --
 Consultez les combinaisons de mises à niveau prises en charge pour les systèmes AFF C60, AFF A50, FAS70, AFF C800, AFF A800, FAS9500, FAS9000, AFF A700, AFF A70, AFF A900, AFF C80, FAS90, AFF A90 et AFF A1K.
 
-image:../media/assisted-group-2-updated.png["Affiche les combinaisons de mise à niveau AFF et FAS groupe 2"]
+image:../media/assisted-group-2-a70-a90-updated.png["Affiche les combinaisons de mise à niveau AFF et FAS groupe 2"]
 
 --
 ====
