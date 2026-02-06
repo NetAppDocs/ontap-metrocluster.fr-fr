@@ -4,14 +4,14 @@ sidebar: sidebar
 keywords: configure, configuring, metrocluster, software, ontap 
 summary: Vous devez installer chaque nœud dans la configuration MetroCluster de ONTAP, y compris les configurations au niveau des nœuds et la configuration des nœuds en deux sites. 
 ---
-= Configuration du logiciel MetroCluster dans ONTAP
+= Configurez le MetroCluster logiciel FC dans ONTAP
 :allow-uri-read: 
 :icons: font
 :imagesdir: ../media/
 
 
 [role="lead"]
-Vous devez installer chaque nœud dans la configuration MetroCluster de ONTAP, y compris les configurations au niveau des nœuds et la configuration des nœuds en deux sites. Vous devez également implémenter la relation MetroCluster entre les deux sites.
+Vous devez configurer chaque nœud dans la configuration FC MetroCluster dans ONTAP, y compris les configurations au niveau du nœud et la configuration des nœuds en deux sites. Vous devez également implémenter la relation MetroCluster entre les deux sites.
 
 image::../media/workflow_high_level_node_and_cluster_configuration_software.gif[Workflow pour la configuration de nœuds et de clusters de haut niveau]
 
@@ -89,7 +89,7 @@ Lors de la création du cluster, vous avez besoin des informations suivantes :
  a| 
 Nom du cluster
 
-Exemple utilisé dans ce guide : site_A
+Exemple utilisé dans cette procédure : site_A
  a| 
 
 
@@ -132,7 +132,7 @@ Vous avez besoin d'une adresse IP de gestion, d'un masque de réseau et d'une pa
  a| 
 Nœud 1
 
-Exemple utilisé dans ce guide : Controller_A_1
+Exemple utilisé dans cette procédure : Controller_A_1
  a| 
  a| 
  a| 
@@ -145,7 +145,7 @@ Nœud 2
 
 Non requis si vous utilisez une configuration MetroCluster à deux nœuds (un nœud sur chaque site).
 
-Exemple utilisé dans ce guide : Controller_A_2
+Exemple utilisé dans cette procédure : Controller_A_2
  a| 
  a| 
  a| 
@@ -388,7 +388,7 @@ Lors de la création du cluster, vous avez besoin des informations suivantes :
  a| 
 Nom du cluster
 
-Exemple utilisé dans ce guide : site_B
+Exemple utilisé dans cette procédure : site_B
  a| 
 
 
@@ -431,7 +431,7 @@ Vous avez besoin d'une adresse IP de gestion, d'un masque de réseau et d'une pa
  a| 
 Nœud 1
 
-Exemple utilisé dans ce guide : Controller_B_1
+Exemple utilisé dans cette procédure : controller_B_1
  a| 
  a| 
  a| 
@@ -444,7 +444,7 @@ Nœud 2
 
 Non requis pour les configurations MetroCluster à deux nœuds (un nœud sur chaque site).
 
-Exemple utilisé dans ce guide : Controller_B_2
+Exemple utilisé dans cette procédure : controller_B_2
  a| 
  a| 
  a| 
@@ -2509,6 +2509,7 @@ Vous devez créer un agrégat de données en miroir sur chaque nœud du groupe d
 * Si votre système compte plusieurs types de disques (stockage hétérogène), vous devez comprendre comment vous assurer que le type de disque approprié est sélectionné.
 * Les disques sont détenus par un nœud spécifique ; lorsque vous créez un agrégat, tous les disques de cet agrégat doivent être détenus par le même nœud, qui devient le nœud de rattachement de cet agrégat.
 * Les noms d'agrégats doivent être conformes au schéma de nommage que vous avez déterminé lors de la planification de votre configuration MetroCluster. Voir link:https://docs.netapp.com/us-en/ontap/disks-aggregates/index.html["Gestion des disques et des agrégats"^].
+* Les noms des agrégats doivent être uniques sur l'ensemble des MetroCluster sites. Cela signifie que vous ne pouvez pas avoir deux agrégats différents portant le même nom sur le site A et le site B.
 
 
 .Étapes

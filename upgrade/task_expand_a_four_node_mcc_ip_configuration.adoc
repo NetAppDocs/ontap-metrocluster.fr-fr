@@ -1187,9 +1187,13 @@ NOTE: Vous n'avez pas besoin de redémarrer les nœuds dans un ordre spécifique
 `storage aggregate create -aggregate <aggregate-name> -node <node-name> -diskcount <no-of-disks> -mirror true`
 
 +
+[NOTE]
+====
+** Vous devez créer au moins un agrégat de données en miroir par site. Il est recommandé d'avoir deux agrégats de données en miroir par site sur des nœuds IP MetroCluster pour héberger les volumes MDV. Cependant, un seul agrégat par site est pris en charge (mais non recommandé). Il est acceptable qu'un site du MetroCluster dispose d'un seul agrégat de données en miroir et que l'autre site possède plusieurs agrégats en miroir.
+** Les noms des agrégats doivent être uniques sur l'ensemble des MetroCluster sites. Cela signifie que vous ne pouvez pas avoir deux agrégats différents portant le même nom sur le site A et le site B.
 
-NOTE: Vous devez créer au moins un agrégat de données en miroir par site. Il est recommandé d'avoir deux agrégats de données en miroir par site sur des nœuds IP MetroCluster pour héberger les volumes MDV. Cependant, un seul agrégat par site est pris en charge (mais non recommandé). Il est acceptable qu'un site du MetroCluster dispose d'un seul agrégat de données en miroir et que l'autre site possède plusieurs agrégats en miroir.
 
+====
 +
 L'exemple suivant montre la création d'un agrégat du node_A_1-New.
 
