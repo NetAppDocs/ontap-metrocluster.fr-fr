@@ -26,11 +26,24 @@ Si vous disposez d'un commutateur Cisco 9336C-FX2 à 12 ports, utilisez les tabl
 
 NOTE: Le commutateur Cisco 9336C-FX2 à 12 ports ne prend pas en charge la connexion des étagères NS224 au commutateur MetroCluster.
 
-* Lorsque vous câblez un commutateur Cisco 9336C-FX2 pour connecter un stockage NS224, vous ne pouvez avoir qu’un maximum de deux configurations MetroCluster ou groupes DR. Au moins une configuration MetroCluster ou un groupe DR doit connecter des étagères NS224 au commutateur MetroCluster. Si l’une de vos configurations MetroCluster ou groupes DR est un système qui ne prend pas en charge les étagères NS224, il ne peut être connecté qu’en tant que deuxième configuration MetroCluster ou groupe DR.
+* Lorsque vous câblez un commutateur Cisco 9336C-FX2 pour connecter un stockage NS224, vous ne pouvez avoir qu’un maximum de deux configurations MetroCluster ou groupes DR. Au moins une configuration MetroCluster ou un groupe DR doit connecter des étagères NS224 au commutateur MetroCluster.
 +
-Si votre deuxième groupe MetroCluster ou DR ne connecte pas les étagères NS224 au commutateur MetroCluster, suivez les instructions <<tables_not_connecting_ns224,Tableaux de câblage pour les contrôleurs ne connectant pas les étagères NS224 connectées par commutateur>> .
+Si l'une de vos configurations MetroCluster ou groupes DR ne connecte pas les étagères NS224 au commutateur MetroCluster, suivez le <<tables_not_connecting_ns224,Tableaux de câblage pour les contrôleurs ne connectant pas les étagères NS224 connectées par commutateur>>.
 
 * Le RcfFileGenerator affiche uniquement les plates-formes éligibles lorsque la première plate-forme est sélectionnée.
+* Si vous étendez une configuration MetroCluster standard qui ne prend pas en charge le stockage NS224 connecté au commutateur et que vous souhaitez ajouter une configuration MetroCluster qui prend en charge le stockage NS224 connecté au commutateur, consultez les informations suivantes :
++
+** Dans l’link:https://mysupport.netapp.com/site/tools/tool-eula/rcffilegenerator["RcfFileGenerator"^] outil, vous devez d’abord sélectionner la plateforme qui prend en charge le stockage NS224 connecté au commutateur, puis sélectionner la plateforme qui ne prend pas en charge le stockage NS224 connecté au commutateur.
++
+Cela signifie que lorsque vous générez le RCF pour votre nouvelle configuration, vous devrez peut-être sélectionner les plateformes dans l'outil RcfFileGenerator dans l'ordre suivant :
+
++
+... Sélectionnez la plateforme qui prend en charge le stockage NS224 connecté au commutateur dans le *second champ déroulant*.
+... Sélectionnez la plateforme qui ne prend pas en charge le stockage NS224 connecté au commutateur dans le *premier champ déroulant*.
+
+
+
+
 * La connexion d'une configuration MetroCluster à huit ou deux nœuds requiert ONTAP 9.14.1 ou version ultérieure.
 
 

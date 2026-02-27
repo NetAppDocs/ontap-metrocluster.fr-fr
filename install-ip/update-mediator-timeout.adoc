@@ -1,0 +1,42 @@
+---
+permalink: install-ip/update-mediator-timeout.html 
+sidebar: sidebar 
+keywords: ontap, metrocluster, mediator, timeout, settings, change, update, default, value 
+summary:  
+---
+= Augmentez le délai d'expiration par défaut de la boîte aux lettres du médiateur ONTAP dans les configurations IP MetroCluster
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+MetroCluster IP peut accéder aux disques de boîte aux lettres ONTAP Mediator à l'aide de sessions iSCSI, qui ont un délai d'expiration de connexion par défaut de 10 secondes, incluant une seule nouvelle tentative après 5 secondes. Selon votre version d'ONTAP et votre environnement, vous pouvez augmenter le délai d'expiration de la boîte aux lettres jusqu'à un maximum de 60 secondes pour éviter toute interruption du basculement non planifié assisté par Mediator (MAUSO).
+
+NetApp recommande d’augmenter le délai d’expiration par défaut de la connexion à la boîte aux lettres si vous utilisez des protocoles de redondance réseau (tels que HSRP ou VRRP), des protocoles d’évitement de boucles (tels que STP), ou si la latence réseau dans votre environnement dépasse le délai d’expiration par défaut de 10 secondes.
+
+.Avant de commencer
+Vous devez évaluer la fenêtre d'indisponibilité, c'est-à-dire le temps nécessaire pour reconnecter les nœuds IP MetroCluster au médiateur ONTAP. Si cela prend plus de 10 secondes, vous devez définir la valeur du délai d'expiration à quelques secondes de plus que le temps nécessaire pour reconnecter les nœuds IP MetroCluster.
+
+Si la connectivité est maintenue indépendamment depuis chaque site et que la panne sur un site n'affecte pas la connectivité au ONTAP Mediator depuis le site restant, la valeur par défaut de 10 secondes est suffisante et vous ne devez pas modifier le délai d'expiration de la mailbox.
+
+.Description de la tâche
+* Les versions ONTAP suivantes prennent en charge l'augmentation du délai d'expiration de la boîte aux lettres du médiateur ONTAP :
++
+** ONTAP 9.18.1GA ou version ultérieure
+** ONTAP 9.17.1P3 ou versions correctives ultérieures de ONTAP 9.17.1
+** ONTAP 9.16.1P10 ou versions ultérieures des correctifs de ONTAP 9.16.1
+** ONTAP 9.15.1P16 ou versions correctives ultérieures de ONTAP 9.15.1
+
+
+* L'augmentation du délai d'expiration des boîtes aux lettres est prise en charge sur toutes les versions de ONTAP Mediator.
+* La valeur du délai d'attente autorisée est comprise entre 10 et 60 secondes. Si vous spécifiez une valeur hors de cette plage, ONTAP la rétablit automatiquement à la valeur par défaut de 10 secondes.
+* Si la reconnexion des nœuds MetroCluster au ONTAP Mediator prend plus de 10 secondes, vous devez définir la valeur du délai d'attente à quelques secondes de plus que le temps nécessaire aux nœuds pour se connecter.
+
+
+.Étape
+. Pour augmenter le délai d'expiration par défaut de la boîte aux lettres ONTAP Mediator, reportez-vous à la link:https://kb.netapp.com/on-prem/ontap/mc/MC-KBs/How_to_Increase_Mediator_Mailbox_Timeout_for_environments_where_network_latency_exceeds_10_seconds["NetApp Knowledge Base article : Comment augmenter le délai d’expiration de la boîte aux lettres du médiateur dans les environnements où la latence réseau dépasse 10 secondes"^]
+
+
+.Informations associées
+link:concept-ontap-mediator-supports-automatic-unplanned-switchover.html["Découvrez comment ONTAP Mediator prend en charge la commutation automatique non planifiée dans les configurations IP MetroCluster."]
