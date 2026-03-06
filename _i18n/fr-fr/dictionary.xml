@@ -11150,7 +11150,6 @@ Le réseau peut se composer d'une série de commutateurs et de commutateurs xWDM
   <block id="f530740ac9e609fc21d073ac7a1005eb" category="list-text">Définissez COS 5</block>
   <block id="905698c568b08ffae010badfede2c3d9" category="list-text">Facultatif : mise en forme du débit à 20 Gbit/s.</block>
   <block id="6f9086eed365c3a2db1521fa98bb7fad" category="list-text">Classification du trafic iSCSI :</block>
-  <block id="bfee253ff06448698780744ab1762cba" category="list-text">Correspondance : port TCP 62500, source, destination ou les deux</block>
   <block id="b6b4cd52ee0814cd111c7646f3ec71cf" category="list-text">Correspondance facultative : COS 4</block>
   <block id="bc0161255c709f2bfdb09ade9fbc1364" category="list-text">Correspondance facultative : DSCP 32</block>
   <block id="18b58e1c9302e2acb18218c02c62dab7" category="list-text">Définissez DSCP 32</block>
@@ -14476,7 +14475,6 @@ L'exemple suivant montre que vous utilisez SCP pour télécharger le fichier<blo
   <block id="6671def4e7da861590fb38e5fc66314e" category="list-text">Sélectionnez la plateforme qui ne prend pas en charge le stockage NS224 connecté au commutateur dans le *premier champ déroulant*.</block>
   <block id="ddbce4d78273fadb6714307de4be2067" category="doc">Augmentez le délai d'expiration par défaut de la boîte aux lettres du médiateur ONTAP dans les configurations IP MetroCluster</block>
   <block id="2782611b81a323af0ab55dcdc0bed9b0" category="paragraph">MetroCluster IP peut accéder aux disques de boîte aux lettres ONTAP Mediator à l'aide de sessions iSCSI, qui ont un délai d'expiration de connexion par défaut de 10 secondes, incluant une seule nouvelle tentative après 5 secondes. Selon votre version d'ONTAP et votre environnement, vous pouvez augmenter le délai d'expiration de la boîte aux lettres jusqu'à un maximum de 60 secondes pour éviter toute interruption du basculement non planifié assisté par Mediator (MAUSO).</block>
-  <block id="dc2661dcef8886857b7dbbc6bea4baa5" category="paragraph">NetApp recommande d’augmenter le délai d’expiration par défaut de la connexion à la boîte aux lettres si vous utilisez des protocoles de redondance réseau (tels que HSRP ou VRRP), des protocoles d’évitement de boucles (tels que STP), ou si la latence réseau dans votre environnement dépasse le délai d’expiration par défaut de 10 secondes.</block>
   <block id="5989de7ef1290d3b1851ce9197407a9a" category="paragraph">Vous devez évaluer la fenêtre d'indisponibilité, c'est-à-dire le temps nécessaire pour reconnecter les nœuds IP MetroCluster au médiateur ONTAP. Si cela prend plus de 10 secondes, vous devez définir la valeur du délai d'expiration à quelques secondes de plus que le temps nécessaire pour reconnecter les nœuds IP MetroCluster.</block>
   <block id="96da1e735aedafb1dcf6dc852a630b69" category="paragraph">Si la connectivité est maintenue indépendamment depuis chaque site et que la panne sur un site n'affecte pas la connectivité au ONTAP Mediator depuis le site restant, la valeur par défaut de 10 secondes est suffisante et vous ne devez pas modifier le délai d'expiration de la mailbox.</block>
   <block id="d7960d10ef798af16bf54c0dcc02e80b" category="list-text">Les versions ONTAP suivantes prennent en charge l'augmentation du délai d'expiration de la boîte aux lettres du médiateur ONTAP :</block>
@@ -14497,4 +14495,8 @@ L'exemple suivant montre que vous utilisez SCP pour télécharger le fichier<blo
   <block id="33e1bc7f8120f8d7e792eda1953f5c0d" category="list-text">Vérifiez que le partner-sysid est correct :</block>
   <block id="d9e511ce59427a6a6f5e2d82b3caa85c" category="list-text">Une fois les LIF inter-clusters opérationnels, vérifiez l'état des entre cluster et rétablissez le peering de cluster si nécessaire.</block>
   <block id="9aadb95a414b8c0423f92f9ec9df69d8" category="sidebar">Augmentez le délai d'expiration par défaut de la boîte aux lettres du ONTAP Mediator</block>
+  <block id="27a4277d57a9c4676312c7a5013a9b75" category="list-text">Correspondance : port TCP 65200, source, destination ou les deux</block>
+  <block id="e2bba64dd4e20eb5cd27b969fbf8dbce" category="paragraph">NetApp recommande d’augmenter le délai d’expiration de la connexion à la boîte aux lettres par défaut si l’un des cas suivants s’applique à votre environnement :</block>
+  <block id="d57bb94baa67d066f16fc9fc5b6def7e" category="list-text">Vous utilisez des protocoles de redondance réseau (tels que HSRP ou VRRP) ou des protocoles d'évitement de boucles (tels que STP).</block>
+  <block id="29c1e5df7e26dbc34a0230732d8e3a0c" category="list-text">Le temps de reconvergence du réseau (par exemple, la stabilisation des protocoles de routage ou HSRP/VRRP devenant actifs après une réélection) peut dépasser le délai d'expiration par défaut de 10 secondes.</block>
 </blocks>

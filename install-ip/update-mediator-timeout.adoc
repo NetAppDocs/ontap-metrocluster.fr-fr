@@ -13,7 +13,11 @@ summary:
 [role="lead"]
 MetroCluster IP peut accéder aux disques de boîte aux lettres ONTAP Mediator à l'aide de sessions iSCSI, qui ont un délai d'expiration de connexion par défaut de 10 secondes, incluant une seule nouvelle tentative après 5 secondes. Selon votre version d'ONTAP et votre environnement, vous pouvez augmenter le délai d'expiration de la boîte aux lettres jusqu'à un maximum de 60 secondes pour éviter toute interruption du basculement non planifié assisté par Mediator (MAUSO).
 
-NetApp recommande d’augmenter le délai d’expiration par défaut de la connexion à la boîte aux lettres si vous utilisez des protocoles de redondance réseau (tels que HSRP ou VRRP), des protocoles d’évitement de boucles (tels que STP), ou si la latence réseau dans votre environnement dépasse le délai d’expiration par défaut de 10 secondes.
+NetApp recommande d’augmenter le délai d’expiration de la connexion à la boîte aux lettres par défaut si l’un des cas suivants s’applique à votre environnement :
+
+* Vous utilisez des protocoles de redondance réseau (tels que HSRP ou VRRP) ou des protocoles d'évitement de boucles (tels que STP).
+* Le temps de reconvergence du réseau (par exemple, la stabilisation des protocoles de routage ou HSRP/VRRP devenant actifs après une réélection) peut dépasser le délai d'expiration par défaut de 10 secondes.
+
 
 .Avant de commencer
 Vous devez évaluer la fenêtre d'indisponibilité, c'est-à-dire le temps nécessaire pour reconnecter les nœuds IP MetroCluster au médiateur ONTAP. Si cela prend plus de 10 secondes, vous devez définir la valeur du délai d'expiration à quelques secondes de plus que le temps nécessaire pour reconnecter les nœuds IP MetroCluster.
