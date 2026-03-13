@@ -4,19 +4,19 @@ sidebar: sidebar
 keywords: metrocluster, maintain, service, power, off, entire, metrocluster, ip, configuration 
 summary: 'Vous devez mettre hors tension la totalité de la configuration IP d"MetroCluster et de tout l"équipement avant le début des opérations de maintenance ou de relocalisation.' 
 ---
-= Mise hors tension de l'intégralité d'une configuration MetroCluster IP
+= Mettez hors tension toute une configuration IP MetroCluster
 :allow-uri-read: 
 :icons: font
 :imagesdir: ../media/
 
 
 [role="lead"]
-Vous devez mettre hors tension la totalité de la configuration IP d'MetroCluster et de tout l'équipement avant le début des opérations de maintenance ou de relocalisation.
+Mettez hors tension l'ensemble de la configuration IP MetroCluster et de tous les équipements avant de commencer la maintenance ou le déplacement.
 
 
 NOTE: Avec ONTAP 9.8, le `*storage switch*` la commande est remplacée par `*system switch*`. Les étapes suivantes présentent le `*storage switch*` Mais si vous exécutez ONTAP 9.8 ou version ultérieure, le `*system switch*` commande recommandée.
 
-. Vérifier la configuration MetroCluster des deux sites de la configuration MetroCluster.
+. Vérifiez la configuration MetroCluster depuis les deux sites.
 +
 .. Vérifier que la configuration MetroCluster et le mode opérationnel sont normaux. +
 `*metrocluster show*`
@@ -53,7 +53,7 @@ cluster_A_site_A::*>metrocluster modify -auto-switchover-failure-domain auso-dis
 ----
 +
 
-NOTE: Dans une configuration MetroCluster IP, le domaine de défaillance AUSO est déjà défini sur 'auso-Disabled' à moins que la configuration ne soit configurée avec le médiateur ONTAP.
+NOTE: Dans une configuration IP MetroCluster, le domaine de défaillance AUSO est déjà défini sur 'auso-disabled' sauf si la configuration utilise ONTAP Mediator.
 
 . Vérifiez la modification à l'aide de la commande
 +
@@ -70,14 +70,12 @@ NOTE: Dans une configuration MetroCluster IP, le domaine de défaillance AUSO es
         End Time: 4/25/2020 20:20:36
           Errors: -
 ----
-. Arrêter les nœuds :
-+
-`*halt*`
-
+. Arrêtez les nœuds sur les deux sites :
 +
 [listing]
 ----
-system node halt -node node1_SiteA -inhibit-takeover true -ignore-quorum-warnings true
+cluster_A::*>system node halt -node * -inhibit-takeover true -ignore-quorum-warnings true
+cluster_B::*>system node halt -node * -inhibit-takeover true -ignore-quorum-warnings true
 ----
 . Mettez hors tension l'équipement suivant sur le site :
 +

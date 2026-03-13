@@ -17,7 +17,7 @@ Les liens ISL (Inter-Switch Links) transportant le trafic MetroCluster sur toute
 
 == Exigences ISL de MetroCluster
 
-Ce qui suit s'applique aux liens ISL sur toutes les configurations MetroCluster IP :
+Ces exigences s'appliquent aux ISL sur toutes les configurations IP MetroCluster :
 
 * Les deux tissus doivent avoir le même nombre de liens ISL.
 * Les liens ISL sur une structure doivent tous être de la même vitesse et de la même longueur.
@@ -26,7 +26,7 @@ Ce qui suit s'applique aux liens ISL sur toutes les configurations MetroCluster 
 * Les liens ISL doivent avoir la même topologie. Par exemple, ils doivent tous être des liens directs, ou si la configuration utilise WDM, ils doivent tous utiliser WDM.
 * La vitesse ISL minimale requise dépend du modèle de plate-forme :
 +
-** À compter de ONTAP 9.18.1, les plateformes disposant d'un port dorsal IP MetroCluster à 100Gbps requièrent une vitesse de liaison ISL minimale de 100Gbps. L'utilisation d'une vitesse ISL différente nécessite une Feature Product Variance Request (FPVR). Pour déposer une FPVR, contactez votre équipe commerciale NetApp.
+** À compter de ONTAP 9.18.1, les plateformes disposant d’un port backend IP MetroCluster de 100Gbps requièrent une vitesse de liaison ISL minimale de 100Gbps. L’utilisation d’une vitesse ISL différente nécessite une demande de Feature Policy Variance Request (FPVR). Pour soumettre une FPVR, contactez votre équipe commerciale NetApp.
 +
 
 CAUTION: Les mises à niveau vers ONTAP 9.18.1 et versions ultérieures sur les plateformes qui ne répondent pas actuellement à l'exigence ISL de 100Gbps ne sont pas bloquées et peuvent être effectuées. Cependant, NetApp recommande fortement aux clients de migrer vers une connectivité ISL de 100Gbps afin de maintenir les niveaux de performance et de disponibilité attendus.
@@ -49,7 +49,6 @@ Ce qui suit s'applique au trafic aller-retour entre les commutateurs IP MetroClu
 * La perte de paquets doit être inférieure ou égale à 0.01 %. La perte maximale de paquets est la somme de toutes les pertes sur toutes les liaisons sur le chemin entre les nœuds MetroCluster et la perte sur les interfaces IP MetroCluster locales.
 * La valeur de gigue prise en charge est de 3 ms pour un aller-retour (ou 1,5 ms pour un aller-simple).
 * Le réseau doit allouer et maintenir la quantité de bande passante SLA requise pour le trafic MetroCluster, indépendamment des microrafales et des pics de trafic.
-* Si vous utilisez ONTAP 9.7 ou une version ultérieure, le réseau intermédiaire entre les deux sites doit fournir une bande passante minimale de 4,5 Gbit/s pour la configuration IP de MetroCluster.
 
 
 
