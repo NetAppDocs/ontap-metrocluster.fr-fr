@@ -7489,7 +7489,6 @@
   <block id="0e686abbd3bcb91ae9940167b2105563" category="list-text">Node_A_4-New</block>
   <block id="0fce4e3e5f75e84bfe53404400231b3f" category="list-text">Node_B_3-New</block>
   <block id="6a20549ca29f831ca0d4f2e90f2f535b" category="list-text">Node_B_4-New</block>
-  <block id="0bc247e1fb33acc5636986c990aa1e9a" category="section-title">Suppression de la configuration des applications de surveillance</block>
   <block id="ae81bff40f90f640ae14eb37aaf345ea" category="paragraph">Si la configuration existante est contrôlée avec le logiciel MetroCluster Tiebreaker, le médiateur ONTAP ou d'autres applications tierces (par exemple, ClusterLion) qui peuvent lancer un basculement, vous devez supprimer la configuration MetroCluster du logiciel de surveillance avant la mise à niveau.</block>
   <block id="a4aa69385ab0a1b92a7a5635cdb2f2b2" category="paragraph"><block ref="903819e2154a41f8227f7c0192db71f6" category="inline-link-macro-rx"></block>.</block>
   <block id="20a404f6395aff4a82f8b5763259c362" category="paragraph">Vous devez préparer les quatre nouveaux nœuds MetroCluster et installer la version correcte de ONTAP.</block>
@@ -7509,7 +7508,6 @@
   <block id="5dc920411c59b1b9f32058239fb24330" category="list-text">Vérifiez que les connexions sont correctement établies :<block ref="e7acb1ae14be0e5233d619851263fdae" prefix=" " category="inline-code"></block></block>
   <block id="2dccf53d6ed326f889d8e764529b9794" category="list-text">Vérifiez l'affectation automatique et le partitionnement des disques :</block>
   <block id="3f95b2ea711d433e26a8b5eb63bbd17a" category="paragraph"><block ref="02b924a96c72679822883a70dfe48211" prefix="" category="inline-code"></block></block>
-  <block id="6c46e592d5f16891d3a16e5f364e031b" category="section-title">Finalisation de l'ajout des nouveaux nœuds</block>
   <block id="7d7a3fc828a61ba2a0ef14619b7c2ccb" category="list-text">Vérifiez que les nœuds sont ajoutés à leur groupe de reprise après incident.</block>
   <block id="b0d21d87e852192022d32882c31d8709" category="paragraph">L'exemple suivant montre les volumes MDV dans<block ref="0c5606ed319753bb2d86a485f23c8f6d" prefix=" " category="inline-code"></block> résultat :</block>
   <block id="aacab676cefc900d32e2155650f1b66e" category="paragraph">L'exemple suivant montre la commande et la sortie pour le déplacement de "MDV_CRS_d6b0b313ff5611e9837100a098544e51_A" vers "Data_a3" sur "node_A_3".</block>
@@ -12545,10 +12543,6 @@ L'exemple suivant montre que vous utilisez SCP pour télécharger le fichier<blo
   <block id="be4fd0012ddc006ea303591c9df6f76d" category="paragraph"><block ref="39b06b9a26b49c3db6d9409a6abaa9d8" prefix="" category="inline-code"></block></block>
   <block id="9e1d9b9e8b88355df08194559af6865a" category="summary">Lors d'un basculement, certaines opérations ne doivent pas être effectuées.</block>
   <block id="fa33dcb38c0cd6e15dd757f1ef3072ee" category="doc">Limitations lors du basculement de la configuration MetroCluster</block>
-  <block id="5722cde27dfa05f795a5466b6d0859c9" category="paragraph">Lorsque le système est en cours de basculement, certaines opérations ne doivent pas être effectuées. En savoir plus sur les opérations restreintes lors du basculement du système.</block>
-  <block id="b72a4837907e7fef0771c42da901c811" category="section-title">Opérations restreintes lors du basculement</block>
-  <block id="1b5f91752d52b3bac4319cf07ea0efb8" category="paragraph">Lorsque le système est en mode de basculement, les opérations suivantes ne sont pas prises en charge :</block>
-  <block id="272c8dfc8e0821088d85ed5d0fe037a8" category="list-text">Création ou suppression d'agrégats et de volumes</block>
   <block id="d825dd35fde2fe33a56ef95c52f545a0" category="list-text">Création ou suppression de SVM</block>
   <block id="8c120d60e412429a6f43b748c02dc233" category="list-text">Création ou suppression de LIFs</block>
   <block id="9cc6607cba1650bc799439425f9b085e" category="list-text">Ajout ou retrait de disques (uniquement si vous les remplacez dans le cadre d'une procédure de récupération)</block>
@@ -13436,7 +13430,6 @@ L'exemple suivant montre que vous utilisez SCP pour télécharger le fichier<blo
   <block id="4e4facc560c88d40d47ce2b1369d5552" category="doc">Configurer la collecte de journaux sur un commutateur IP MetroCluster</block>
   <block id="d5a5c9619599da12d87af6daeab1ece6" category="paragraph">Dans une configuration IP MetroCluster, vous pouvez configurer la collecte de journaux pour collecter les journaux de commutation à des fins de débogage.</block>
   <block id="7c51c84110459cf460a444094be133c4" category="admonition">Sur les commutateurs Broadcom et Cisco, un nouvel utilisateur est requis pour chaque cluster avec collecte de journaux. Par exemple, MetroCluster 1, MetroCluster 2, MetroCluster 3 et MetroCluster 4 nécessitent tous la configuration d'un utilisateur distinct sur les commutateurs. L'utilisation de plusieurs clés SSH pour un même utilisateur n'est pas prise en charge.</block>
-  <block id="8ac20e3719b6b58e94e5a4385e87b52e" category="paragraph">Le moniteur d'état des commutateurs Ethernet (CSHM) est chargé de garantir l'intégrité opérationnelle des commutateurs du réseau Cluster et Storage et de collecter les journaux des commutateurs à des fins de débogage. Cette procédure vous guide tout au long du processus de configuration de la collecte, de demande de journaux *support* détaillés et d'activation d'une collecte horaire de données *périodiques* collectées par AutoSupport.</block>
   <block id="2ded3ff3862adfc6f54d2a2f3ebf1147" category="paragraph">*REMARQUE :* si vous activez le mode FIPS, vous devez effectuer les opérations suivantes :</block>
   <block id="81f0d5b127adfd87f50ce10bc85e1e65" category="list-text">Régénérer les clés SSH sur le commutateur en suivant les instructions du fournisseur.</block>
   <block id="a60a00967db7342947b326a8f7618f52" category="list-text">Régénérer les clés SSH dans ONTAP à l'aide de<block ref="c079360670e0f4f9441a54ac1d262788" prefix=" " category="inline-code"></block></block>
@@ -14500,4 +14493,15 @@ L'exemple suivant montre que vous utilisez SCP pour télécharger le fichier<blo
   <block id="108a4ad72df5c318a77dad90928d8770" category="admonition">Dans une configuration IP MetroCluster, le domaine de défaillance AUSO est déjà défini sur 'auso-disabled' sauf si la configuration utilise ONTAP Mediator.</block>
   <block id="6ba9661e38afca32fe30fec08ca5c4ab" category="list-text">Arrêtez les nœuds sur les deux sites :</block>
   <block id="f759ce596ef74c921d7bddaf277a11c8" category="paragraph">*Remarque :* 25 GbE speed nécessite l’adaptateur émetteur-récepteur MAM1Q00A-QSA28.</block>
+  <block id="316fa55db721e45107647fc0de79704f" category="paragraph">Le contrôle de l'état des commutateurs Ethernet (CSHM) est responsable de garantir l'intégrité opérationnelle des commutateurs réseau et de collecter les journaux des commutateurs à des fins de débogage. Cette procédure vous guide tout au long du processus de configuration de la collecte, de la demande de journaux *Support* détaillés et de l'activation d'une collecte horaire des données *Periodic* qui sont collectées par AutoSupport.</block>
+  <block id="4526d2820ba573572df0eafdc557014c" category="paragraph">Lorsque le système est en phase de basculement, NetApp recommande d'éviter certaines opérations.</block>
+  <block id="6efa43350457e5d9dbe5d6c555eb32f9" category="paragraph">Les opérations suivantes sont déconseillées pendant la phase de basculement du système et ne doivent être effectuées que sous la supervision du service d'assistance NetApp :</block>
+  <block id="9ea78d85c08becd89d5d23daef8687fa" category="list-text">Création ou suppression d'agrégats</block>
+  <block id="56f10876ae2bed5f3da63c125772429f" category="list-text">Création ou suppression de volumes (y compris les volumes chiffrés)</block>
+  <block id="6e05136dba32fad75bd64f601602c77e" category="section-title">Supprimez la configuration des applications de surveillance</block>
+  <block id="a8b426026583d79d39676c969bdc3456" category="section-title">Préparez les nouveaux modules de contrôleur</block>
+  <block id="af8fde2f19f4ba506d9bb950533f5776" category="list-text">En mode maintenance, saisissez la commande halt pour quitter le mode maintenance :</block>
+  <block id="b8bbebbdaa85ea395d4339565372cafe" category="list-text">Démarrez le système et accédez à la configuration du cluster :</block>
+  <block id="e219586e70791b35867f7d4dc343163f" category="section-title">Configurez les LIF inter-clusters, créez les interfaces MetroCluster et mettez en miroir les agrégats racines</block>
+  <block id="8780af330d271744603135da4ae91fd9" category="section-title">Finaliser l'ajout des nouveaux nœuds</block>
 </blocks>
