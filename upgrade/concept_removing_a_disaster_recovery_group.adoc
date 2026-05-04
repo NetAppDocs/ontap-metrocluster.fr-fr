@@ -14,7 +14,7 @@ summary: 'Depuis ONTAP 9.8, vous pouvez supprimer un groupe de reprise après in
 À partir d' ONTAP 9.8, vous pouvez supprimer un groupe de reprise après sinistre (DR) d'une configuration MetroCluster à huit nœuds pour créer une configuration MetroCluster à quatre nœuds.
 
 
-NOTE: Vous utilisez ces étapes pendant les workflows de transition et d’actualisation du système.
+NOTE: Vous utilisez ces étapes lors des flux de travail de transition et de mise à jour du système. Il est possible que vous ayez déjà effectué certaines étapes de cette procédure dans le cadre de ces flux de travail.
 
 
 
@@ -37,17 +37,17 @@ Consultez l'article de la base de connaissances link:https://kb.netapp.com/Suppo
 Cette procédure est prise en charge à partir d' ONTAP 9.8.  Pour les systèmes exécutant ONTAP 9.7 ou une version antérieure, consultez l'article de la base de connaissances :link:https://kb.netapp.com/Advice_and_Troubleshooting/Data_Protection_and_Security/MetroCluster/How_to_remove_a_DR-Group_from_a_MetroCluster["Comment supprimer un groupe de reprise sur incident d'une configuration MetroCluster"^] .
 
 .Description de la tâche
-Une configuration à huit nœuds comprend huit nœuds organisés sous forme de deux groupes de reprise après incident à quatre nœuds.
-
+* Vous devez effectuer cette tâche sur les deux clusters.
+* Une configuration à huit nœuds comprend huit nœuds organisés sous forme de deux groupes de reprise après incident à quatre nœuds.
++
 image::../media/mcc_dr_groups_8_node.gif[Configuration MetroCluster avec huit nœuds dans deux groupes DR]
 
++
 Lorsque vous supprimez un groupe DR, quatre nœuds restent dans la configuration.
 
++
 image::../media/mcc_dr_groups_4_node.gif[Configuration MetroCluster avec quatre nœuds après la suppression du groupe DR]
 
-.Avant de commencer
-* Vous devez effectuer cette étape sur les deux clusters.
-* Le `metrocluster remove-dr-group` La commande n'est prise en charge que sur ONTAP 9.8 et les versions ultérieures.
 
 
 .Étapes
@@ -97,13 +97,13 @@ NOTE: Les agrégats racine ne sont pas supprimés.
 +
 [listing]
 ----
-ClusterA::> set advanced
+ClusterA::> set advanced -prompt-timestamp above
 ClusterA::*> cluster show
 Move epsilon if needed
 ClusterA::*> cluster modify -node nodename -epsilon false
 ClusterA::*> cluster modify -node nodename -epsilon true
 
-ClusterB::> set advanced
+ClusterB::> set advanced -prompt-timestamp above
 ClusterB::*> cluster show
 ClusterB::*> cluster modify -node nodename -epsilon false
 ClusterB::*> cluster modify -node nodename -epsilon true
@@ -119,6 +119,10 @@ ClusterB::*> set admin
 
 .. Supprimer les nœuds du groupe DR : +
 `metrocluster remove-dr-group -dr-group-id 1`
++
+
+NOTE: Le `metrocluster remove-dr-group` La commande n'est prise en charge que sur ONTAP 9.8 et les versions ultérieures.
+
 +
 L'exemple suivant montre la suppression de la configuration du groupe de reprise sur incident sur cluster_A.
 
@@ -169,6 +173,9 @@ cluster_A::*>
 
 . Si vous êtes dans une configuration IP MetroCluster , procédez comme suit pour supprimer les plex distants des agrégats racines et supprimer la propriété du disque sur les nœuds de l'ancien groupe DR.
 +
+Dans une configuration FC MetroCluster, passez à l’étape pour <<fc_step_7_remove_nodes,suppression des anciens nœuds du groupe DR>>.
+
++
 Ces étapes doivent être effectuées pour les deux nœuds de la paire HA sur chaque site.
 
 +
@@ -195,7 +202,7 @@ NOTE: Utilisez une liste séparée par des virgules dans le `-owner <node_names>
 --
 ... Définissez le niveau de privilège sur avancé :
 +
-`set advanced`
+`set advanced -prompt-timestamp above`
 
 ... Afficher les disques distants :
 +
@@ -208,7 +215,7 @@ NOTE: Utilisez une liste séparée par des virgules dans le `-owner <node_names>
 --
 ... Définissez le niveau de privilège sur avancé :
 +
-`set advanced`
+`set advanced -prompt-timestamp above`
 
 ... Afficher les disques distants :
 +
@@ -222,7 +229,7 @@ NOTE: Utilisez une liste séparée par des virgules dans le `-owner <node_names>
 +
 `disk option modify -node <node_names_in_the_DR_group_to_be_deleted>  -autoassign off`
 
-.. Supprimez la propriété des disques pool1 sur chaque nœud de groupe DR à supprimer.  Effectuez ces étapes sur chaque nœud à supprimer.
+.. Supprimez la propriété des disques de pool1 sur chaque nœud du groupe DR à supprimer. Effectuez ces étapes sur chaque nœud à supprimer. Dans les exemples utilisés dans cette étape, node_A_1 est supprimé.
 +
 ... Accédez au nodeshell :
 +
@@ -230,23 +237,62 @@ NOTE: Utilisez une liste séparée par des virgules dans le `-owner <node_names>
 
 ... Identifiez les disques pool1 :
 +
-`aggr status -s`
+`disk show`
 
 +
-Tous les disques de rechange sont affichés, y compris les disques de rechange pool0 et pool1 appartenant au nœud.
+Tous les disques sont affichés, y compris les disques Pool1 appartenant au nœud. L'exemple suivant présente un affichage tronqué où le disque 0n.4 et ses partitions sont affectés à Pool1. L'affichage peut varier selon votre configuration.
 
-... Supprimer la propriété du disque pour chaque disque de rechange du pool1 :
++
+[listing]
+----
+  DISK       OWNER                 POOL   SERIAL NUMBER         HOME                    DR HOME
+------------ -------------         -----  -------------         -------------           -------------
+0n.4         node_A1(537102267)    Pool1  S3N9NX0J500267        node_A1(537102267)
+0n.4P1       node_A1(537102267)    Pool1  S3N9NX0J500267NP001   node_A1(537102267)
+0n.4P2       node_A1(537102267)    Pool1  S3N9NX0J500267NP002   node_A1(537102267)
+0n.4P3       node_A1(537102267)    Pool1  S3N9NX0J500267NP003   node_A1(537102267)
+----
+... Définissez le niveau de privilège sur avancé :
++
+`set -privilege advanced -prompt-timestamp above`
+
+... Supprimer la propriété du disque pour chaque disque du pool1 :
++
+Si votre configuration contient des disques partitionnés, vous devez d'abord supprimer la propriété de chaque disque partitionné, puis supprimer la propriété du disque conteneur :
+
 +
 `disk remove_ownership <disk_name>`
 
 +
-Pour les disques partitionnés, supprimez la propriété de la partition, puis supprimez la propriété du disque conteneur.
+Dans l'exemple suivant, la propriété des disques partitionnés est supprimée avant la propriété du disque conteneur `0n.4` est supprimée :
 
++
+[listing]
+----
+*> disk remove_ownership 0n.4P1
+Volumes must be taken offline. Are all impacted volumes offline(y/n)?? y
+Removing the ownership of aggregate disks may lead to partition of aggregates between high-availability pair.
+Do you want to continue(y/n)? y
+*> disk remove_ownership 0n.4P2
+Volumes must be taken offline. Are all impacted volumes offline(y/n)?? y
+Removing the ownership of aggregate disks may lead to partition of aggregates between high-availability pair.
+Do you want to continue(y/n)? y
+*> disk remove_ownership 0n.4P3
+Volumes must be taken offline. Are all impacted volumes offline(y/n)?? y
+Removing the ownership of aggregate disks may lead to partition of aggregates between high-availability pair.
+Do you want to continue(y/n)? y
+*> disk remove_ownership 0n.4
+Volumes must be taken offline. Are all impacted volumes offline(y/n)?? y
+*>
+----
 
 
 
 
 . Si vous êtes dans une configuration IP MetroCluster , supprimez les connexions MetroCluster sur les nœuds de l'ancien groupe DR.
++
+Dans une configuration FC MetroCluster, passez à l’étape pour <<fc_step_7_remove_nodes,suppression des anciens nœuds du groupe DR>>.
+
 +
 Ces commandes peuvent être émises à partir de l’un ou l’autre cluster et s’appliquent à l’ensemble du groupe DR couvrant les deux clusters.
 
@@ -287,17 +333,17 @@ NOTE: Cette étape doit être répétée sur chaque nœud du groupe DR.
 `metrocluster configuration-settings dr-group delete`
 
 
-. Dissocier les nœuds de l'ancien groupe DR.
+. [[fc_step_7_remove_nodes]]Supprimez les nœuds de l'ancien groupe DR.
 +
 Effectuez cette étape sur chaque cluster.
 
 +
 .. Définissez le niveau de privilège avancé :
 +
-`set -privilege advanced`
+`set -privilege advanced -prompt-timestamp above`
 
-.. Déconnecter le nœud : +
-`cluster unjoin -node <node-name>`
+.. Supprimer le nœud : +
+`cluster remove-node -node <node-name>`
 +
 Répétez cette étape pour l'autre nœud local de l'ancien groupe DR.
 
@@ -316,3 +362,6 @@ Effectuez cette étape sur chaque cluster.
 
 . Arrêtez, mettez hors tension et retirez les anciens modules de contrôleur et tiroirs de stockage.
 
+
+.Informations associées
+En savoir plus sur les commandes utilisées dans cette procédure dans le link:https://docs.netapp.com/us-en/ontap-cli/["Référence des commandes ONTAP"^].
