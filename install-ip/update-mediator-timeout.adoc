@@ -13,6 +13,9 @@ summary:
 [role="lead"]
 MetroCluster IP peut accéder aux disques de boîte aux lettres ONTAP Mediator à l'aide de sessions iSCSI, qui ont un délai d'expiration de connexion par défaut de 10 secondes, incluant une seule nouvelle tentative après 5 secondes. Selon votre version d'ONTAP et votre environnement, vous pouvez augmenter le délai d'expiration de la boîte aux lettres jusqu'à un maximum de 60 secondes pour éviter toute interruption du basculement non planifié assisté par Mediator (MAUSO).
 
+
+NOTE: Cette tâche concerne uniquement un ONTAP Mediator configuré avec iSCSI. Cette tâche ne concerne pas un ONTAP Mediator utilisant HTTPS.
+
 NetApp recommande d’augmenter le délai d’expiration de la connexion à la boîte aux lettres par défaut si l’un des cas suivants s’applique à votre environnement :
 
 * Vous utilisez des protocoles de redondance réseau (tels que HSRP ou VRRP) ou des protocoles d'évitement de boucles (tels que STP).
