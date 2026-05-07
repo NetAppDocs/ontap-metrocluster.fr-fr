@@ -22,8 +22,7 @@ Les exigences suivantes s'appliquent à un seul groupe de reprise d'activité (D
 La connectivité entre le médiateur ONTAP et chaque site doit être composée de deux domaines de panne distincts.
 
 * Le basculement non planifié automatique est pris en charge dans ONTAP 9.7 et versions ultérieures.
-* À partir d'ONTAP 9.19.1 et ONTAP Mediator 1.12, vous pouvez configurer un ONTAP Mediator qui utilise HTTPS pour la communication au lieu d'iSCSI. Lorsque ONTAP Mediator est configuré avec HTTPS, une seule configuration IP MetroCluster par instance d'ONTAP Mediator peut être surveillée. Pour plus d'informations, voir <<Sélectionnez un protocole de communication pour ONTAP Mediator>>.
-* À partir d'ONTAP 9.18.1 et ONTAP Mediator 1.11, une instance d'ONTAP Mediator configurée avec iSCSI peut gérer jusqu'à dix MetroCluster configurations simultanément. Dans ONTAP 9.17.1 et ONTAP Mediator 1.10 et versions antérieures, un ONTAP Mediator configuré avec iSCSI peut prendre en charge jusqu'à cinq MetroCluster configurations simultanément.
+* À partir d'ONTAP 9.18.1 et d'ONTAP Mediator 1.11, une seule instance d'ONTAP Mediator peut gérer jusqu'à dix MetroCluster configurations simultanément. Dans les versions antérieures, ONTAP Mediator peut prendre en charge jusqu'à cinq MetroCluster configurations simultanément.
 * À partir d' ONTAP 9.18.1, IPv6 est pris en charge pour ONTAP Mediator 1.11 ou ultérieur dans une configuration IP MetroCluster .
 
 
@@ -75,24 +74,72 @@ Vous devez vous assurer que la configuration répond à plusieurs exigences d'h�
 
 
 
-== Sélectionnez un protocole de communication pour ONTAP Mediator
+== Exigences relatives au pare-feu pour ONTAP Mediator
 
-Par défaut, les nœuds IP MetroCluster accèdent aux LUN de boîte aux lettres ONTAP Mediator à l'aide de sessions iSCSI. ONTAP Mediator repose sur le package SCST pour fournir iSCSI. Les sessions iSCSI sont authentifiées à l'aide du protocole Challenge Handshake Authentication Protocol (CHAP) avec une clé pré-partagée générée par la machine et obfusquée, mais ne sont pas entièrement chiffrées.
+ONTAP Mediator utilise plusieurs ports pour communiquer avec des services spécifiques.
 
-À partir d'ONTAP 9.19.1 et d'ONTAP Mediator 1.12, vous pouvez configurer une instance d'ONTAP Mediator utilisant HTTPS pour la communication au lieu d'iSCSI. HTTPS est un protocole de communication sécurisé qui chiffre l'intégralité des sessions à l'aide de SSL/TLS, offrant ainsi une sécurité accrue par rapport à iSCSI.
+Si vous utilisez un pare-feu tiers :
 
-Vous pouvez uniquement configurer un ONTAP Mediator utilisant HTTPS via l'interface de ligne de commande (CLI). System Manager n'est pas pris en charge.
+* L'accès HTTPS doit être activé.
+* Il doit être configuré pour autoriser l'accès sur les ports 31784 et 3260.
++
+Lors de l'utilisation du pare-feu par défaut de Red Hat ou CentOS, celui-ci est automatiquement configuré lors de l'installation de Mediator.
 
-[CAUTION]
+
+
+Le tableau suivant répertorie les ports que vous devez autoriser dans votre pare-feu :
+
+[NOTE]
 ====
-* Si vous configurez ONTAP Mediator avec HTTPS, une seule instance d'ONTAP Mediator ne peut surveiller qu'une seule configuration IP MetroCluster. La surveillance simultanée de plusieurs configurations IP MetroCluster n'est pas prise en charge.
-* Si vous devez configurer ONTAP Mediator avec HTTPS pour surveiller plusieurs configurations IP MetroCluster, vous devez configurer des instances distinctes d'ONTAP Mediator pour chaque configuration IP MetroCluster. Vous devez évaluer soigneusement les exigences de votre environnement IP MetroCluster avant de choisir de configurer ONTAP Mediator avec HTTPS pour MetroCluster IP.
-* Si vous souhaitez utiliser une seule instance d'ONTAP Mediator pour surveiller plusieurs configurations IP MetroCluster, vous devez configurer ONTAP Mediator en utilisant iSCSI au lieu de HTTPS.
+* Le port iSCSI n'est requis que dans une configuration IP MetroCluster.
+* Le port 22/tcp n'est pas nécessaire au fonctionnement normal, mais vous pouvez l'activer temporairement pour la maintenance et le désactiver une fois la session de maintenance terminée.
 
 
 ====
-Pour plus d'informations, consultez link:https://docs.netapp.com/us-en/ontap/mediator/index.html#https-iscsi-installation["Options d'installation HTTPS et iSCSI pour ONTAP Mediator"^].
+|===
 
+
+| Port/services | Source | Direction | Destination | Objectif 
+
+
+ a| 
+22/tcp
+ a| 
+Hôte de gestion
+ a| 
+Entrant
+ a| 
+ONTAP Mediator
+ a| 
+Gestion du médiateur SSH / ONTAP
+
+
+
+ a| 
+31784/tcp
+ a| 
+LIF cluster-mgmt et node-mgmt
+ a| 
+Entrant
+ a| 
+Serveur web ONTAP Mediator
+ a| 
+API REST (HTTPS)
+
+
+
+ a| 
+3260/tcp
+ a| 
+LIFs de gestion de nœud
+ a| 
+Entrant
+ a| 
+Cibles iSCSI du médiateur ONTAP
+ a| 
+Connexion de données iSCSI pour les boîtes aux lettres
+
+|===
 
 
 == Directives pour la mise à niveau d'ONTAP Mediator dans une configuration MetroCluster
