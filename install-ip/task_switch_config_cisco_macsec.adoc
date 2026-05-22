@@ -2,37 +2,33 @@
 permalink: install-ip/task_switch_config_cisco_macsec.html 
 sidebar: sidebar 
 keywords: cisco, MACsec encryption 
-summary: 'Vous devez uniquement configurer le cryptage MACsec sur les ports WAN ISL qui s"exécutent entre les sites. Vous devez configurer MACsec après avoir appliqué le fichier RCF correct.' 
+summary: Si nécessaire, configurez le chiffrement MACsec uniquement sur les ports WAN ISL reliant les sites. Si vous optez pour le chiffrement MACsec, configurez-le après avoir appliqué le fichier RCF approprié. 
 ---
-= Configurer le cryptage MACsec sur les commutateurs Cisco 9336C dans un site IP MetroCluster
+= Configurer le chiffrement MACsec sur les commutateurs Cisco 9336C dans un site IP MetroCluster (facultatif)
 :allow-uri-read: 
 :icons: font
 :imagesdir: ../media/
-:firstname: [.lead]
-:author: [.lead]
-:authorinitials: [
-:authors: [.lead]
-:revdate: You can configure MACsec encryption on the WAN ISL ports that run between the sites. You must configure MACsec after applying the correct RCF file.
 
 
+[role="lead"]
+Si nécessaire, vous pouvez configurer le chiffrement MACsec sur les ports WAN ISL reliant les sites. Si vous optez pour le chiffrement MACsec, vous devez le configurer après avoir appliqué le fichier RCF approprié.
 
-NOTE: Le cryptage MACsec ne peut être appliqué qu'aux ports WAN ISL.
-
-
-
-== Configurez le cryptage MACsec sur les commutateurs Cisco 9336C
-
-Vous devez uniquement configurer le cryptage MACsec sur les ports WAN ISL qui s'exécutent entre les sites. Vous devez configurer MACsec après avoir appliqué le fichier RCF correct.
-
+[NOTE]
+====
+* Le chiffrement MACsec ne peut être appliqué qu'aux ports WAN ISL qui relient les sites.
+* La configuration du chiffrement MACsec est facultative lors de la configuration des commutateurs Cisco 9336C.
 
 
-=== Conditions de licence pour MACsec
+====
+
+
+== Conditions de licence pour MACsec
 
 MACsec nécessite une licence de sécurité. Pour une explication complète du schéma de licence Cisco NX-OS et de la manière d'obtenir et de demander des licences, consultez le https://www.cisco.com/c/en/us/td/docs/switches/datacenter/sw/nx-os/licensing/guide/b_Cisco_NX-OS_Licensing_Guide/b_Cisco_NX-OS_Licensing_Guide_chapter_01.html["Guide des licences Cisco NX-OS"^]
 
 
 
-=== Activez les liens ISL de Cisco MACsec dans les configurations IP de MetroCluster
+== Activez les liens ISL de Cisco MACsec dans les configurations IP de MetroCluster
 
 Vous pouvez activer le cryptage MACsec pour les commutateurs Cisco 9336C sur les liens ISL WAN dans une configuration IP MetroCluster.
 
@@ -69,7 +65,7 @@ IP_switch_A_1(config)# copy running-config startup-config
 
 
 
-=== Configurer une chaîne de clé MACsec et des clés
+== Configurer une chaîne de clé MACsec et des clés
 
 Vous pouvez créer une chaîne de clés MACsec ou des clés sur votre configuration.
 
@@ -172,7 +168,7 @@ IP_switch_A_1(config-macseckeychain-macseckey)# show key chain 1
 
 
 
-=== Configurez une stratégie MACsec
+== Configurez une stratégie MACsec
 
 .Étapes
 . Passer en mode de configuration globale :
@@ -296,7 +292,7 @@ IP_switch_A_1(config-macsec-policy)# show macsec policy
 
 
 
-=== Activez le cryptage Cisco MACsec sur les interfaces
+== Activez le cryptage Cisco MACsec sur les interfaces
 
 . Passer en mode de configuration globale :
 +
@@ -341,7 +337,7 @@ IP_switch_A_1(config)# copy running-config startup-config
 
 
 
-=== Désactivez les liens ISL de Cisco MACsec dans les configurations IP de MetroCluster
+== Désactivez les liens ISL de Cisco MACsec dans les configurations IP de MetroCluster
 
 Vous devrez peut-être désactiver le cryptage MACsec pour les commutateurs Cisco 9336C sur les liens ISL du réseau étendu dans une configuration IP MetroCluster.
 
@@ -402,7 +398,7 @@ IP_switch_A_1(config)# copy running-config startup-config
 
 
 
-=== Vérification de la configuration MACsec
+== Vérification de la configuration MACsec
 
 .Étapes
 . Répétez *tous* des procédures précédentes sur le deuxième commutateur de la configuration pour établir une session MACsec.
