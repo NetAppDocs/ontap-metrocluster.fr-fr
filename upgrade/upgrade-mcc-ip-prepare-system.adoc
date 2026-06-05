@@ -623,27 +623,99 @@ Collectez le résultat des commandes suivantes :
 ** `ucadmin show`
 
 
-. Si le volume racine est chiffré, collectez et enregistrez la phrase de passe utilisée pour le gestionnaire de clés :
+. Si les nœuds MetroCluster sont configurés avec un gestionnaire de clés externe pour la SVM d'administration (cluster), copiez les informations du serveur de clés dans un emplacement sécurisé. Si le gestionnaire de clés intégré est configuré, copiez les informations de sauvegarde et la phrase secrète dans un emplacement sécurisé.
 +
-`security key-manager backup show`
+[role="tabbed-block"]
+====
+.Gestionnaire de clés embarqué
+--
+.. Exécutez la commande suivante pour afficher la sauvegarde du Onboard Key Manager :
++
+`security key-manager onboard show-backup`
 
-. Si les nœuds MetroCluster utilisent le chiffrement pour des volumes ou des agrégats, copiez les informations concernant les clés et les clés de phrase secrète.
++
+Vous aurez également besoin de la phrase secrète la plus récente du Onboard Key Manager plus tard dans la procédure de mise à niveau.
+
 +
 Pour plus d'informations, voir https://docs.netapp.com/ontap-9/topic/com.netapp.doc.pow-nve/GUID-1677AE0A-FEF7-45FA-8616-885AA3283BCF.html["Sauvegardez manuellement les informations intégrées de gestion des clés"].
 
+
+
+--
+.Gestionnaire de clés externes
+--
+Rassemblez les informations de gestion des clés externes dont vous aurez besoin pour restaurer la configuration du gestionnaire de clés ultérieurement dans la procédure.
+
+.. Afficher le nom du SVM d'administration (cluster).
 +
-.. Si le gestionnaire de clés intégré est configuré : +
-`security key-manager onboard show-backup`
+`vserver show -type admin`
+
 +
-Vous avez besoin de la phrase de passe plus tard dans la procédure de mise à niveau.
+Dans cet exemple, le nom de la SVM d'administration est cluster_B :
 
-.. Si le protocole KMIP (Enterprise Key Management) est configuré, exécutez les commandes suivantes :
 +
-`security key-manager external show -instance`
-`security key-manager key query`
+[listing]
+----
+cluster_B::*> vserver show -type admin
+                               Admin      Operational Root
+Vserver     Type    Subtype    State      State       Volume     Aggregate
+----------- ------- ---------- ---------- ----------- ---------- ----------
+cluster_B
+            admin   -          -          -           -          -
+----
+.. Obtenez l'adresse et le numéro de port d'un serveur de clé primaire associé au gestionnaire de clés externe configuré sur le SVM d'administration (cluster) :
++
+[NOTE]
+====
+*** Le SVM d'administration peut avoir jusqu'à quatre serveurs de clés primaires, mais vous n'aurez besoin que du numéro de port et de l'adresse de l'un des serveurs de clés primaires pour restaurer la configuration de gestion des clés plus tard dans la procédure.
+*** Si un nom d'utilisateur et un mot de passe sont associés au serveur de clé primaire que vous choisissez, vous aurez également besoin de ces informations pour le processus de récupération.
+
+
+====
++
+`security key-manager external show -instance -vserver <admin_svm_name>`
+
++
+[listing]
+----
+cluster_B::> security key-manager external show -instance -vserver cluster_B
+
+                  Vserver: cluster_B
+       Client Certificate: NTAPKM_C
+   Server CA Certificates: NTAPKM_I, NTAPKM_R
+       Primary Key Server: 172.18.27.34:12014
+                  Timeout: 25
+                 Username:
+              Policy name: -
+    Secondary Key Servers: -
+    Create/Remove Timeout: 10
+
+----
+.. Si vous utilisez ONTAP 9.16.1 ou une version ultérieure, obtenez l'UUID du keystore pour la SVM d'administration.
++
+`security key-manager show-key-store -vserver <admin_svm_name> -fields uuid`
+
++
+[listing]
+----
+cluster_B::*>  security key-manager show-key-store -vserver cluster_B -fields uuid
+vserver         uuid
+--------------- ------------------------------------
+cluster_B        f281aa55-d635-11f0-93bc-005056bb68f2
+
+cluster_B::*
+----
+.. Enregistrez les informations recueillies dans un endroit sûr pour une utilisation ultérieure dans la procédure. Vous devriez maintenant avoir recueilli les informations suivantes :
++
+*** Le numéro de port et l'adresse de l'un des serveurs de clés primaires pour la SVM d'administration
+*** Le nom d'utilisateur et le mot de passe si l'un est associé au serveur de clé primaire choisi
+*** L'UUID du magasin de clés pour la SVM d'administration (requis dans ONTAP 9.16.1 ou version ultérieure)
 
 
 
+
+--
+====
 . Collectez les ID système des nœuds existants :
 +
 `metrocluster node show -fields node-systemid,ha-partner-systemid,dr-partner-systemid,dr-auxiliary-systemid`

@@ -416,31 +416,99 @@ Vous devez collecter le résultat des commandes suivantes :
 ** `ucadmin show`
 
 
-. Si le volume racine est chiffré, collectez et enregistrez la phrase secrète utilisée pour le gestionnaire de clés :
+. Si les nœuds MetroCluster sont configurés avec un gestionnaire de clés externe pour la SVM d'administration (cluster), copiez les informations du serveur de clés dans un emplacement sécurisé. Si le gestionnaire de clés intégré est configuré, copiez les informations de sauvegarde et la phrase secrète dans un emplacement sécurisé.
 +
-`security key-manager backup show`
-
-. Si les nœuds MetroCluster utilisent le chiffrement pour des volumes ou des agrégats, copiez les informations concernant les clés et les clés de phrase secrète.
-+
-Pour plus d'informations, reportez-vous à la section https://docs.netapp.com/us-en/ontap/encryption-at-rest/backup-key-management-information-manual-task.html["Sauvegarde manuelle des informations de gestion intégrée des clés"^].
-
-+
-.. Si le gestionnaire de clés intégré est configuré :
+[role="tabbed-block"]
+====
+.Gestionnaire de clés embarqué
+--
+.. Exécutez la commande suivante pour afficher la sauvegarde du Onboard Key Manager :
 +
 `security key-manager onboard show-backup`
 
 +
-Vous aurez besoin de la phrase de passe plus tard dans la procédure de mise à niveau.
-
-.. Si le protocole KMIP (Enterprise Key Management) est configuré, exécutez les commandes suivantes :
-+
-`security key-manager external show -instance`
+Vous aurez également besoin de la phrase secrète la plus récente du Onboard Key Manager plus tard dans la procédure de mise à niveau.
 
 +
-`security key-manager key query`
+Pour plus d'informations, voir https://docs.netapp.com/ontap-9/topic/com.netapp.doc.pow-nve/GUID-1677AE0A-FEF7-45FA-8616-885AA3283BCF.html["Sauvegardez manuellement les informations intégrées de gestion des clés"].
 
 
 
+--
+.Gestionnaire de clés externes
+--
+Rassemblez les informations de gestion des clés externes dont vous aurez besoin pour restaurer la configuration du gestionnaire de clés ultérieurement dans la procédure.
+
+.. Afficher le nom du SVM d'administration (cluster).
++
+`vserver show -type admin`
+
++
+Dans cet exemple, le nom de la SVM d'administration est cluster_B :
+
++
+[listing]
+----
+cluster_B::*> vserver show -type admin
+                               Admin      Operational Root
+Vserver     Type    Subtype    State      State       Volume     Aggregate
+----------- ------- ---------- ---------- ----------- ---------- ----------
+cluster_B
+            admin   -          -          -           -          -
+----
+.. Obtenez l'adresse et le numéro de port d'un serveur de clé primaire associé au gestionnaire de clés externe configuré sur le SVM d'administration (cluster) :
++
+[NOTE]
+====
+*** Le SVM d'administration peut avoir jusqu'à quatre serveurs de clés primaires, mais vous n'aurez besoin que du numéro de port et de l'adresse de l'un des serveurs de clés primaires pour restaurer la configuration de gestion des clés plus tard dans la procédure.
+*** Si un nom d'utilisateur et un mot de passe sont associés au serveur de clé primaire que vous choisissez, vous aurez également besoin de ces informations pour le processus de récupération.
+
+
+====
++
+`security key-manager external show -instance -vserver <admin_svm_name>`
+
++
+[listing]
+----
+cluster_B::> security key-manager external show -instance -vserver cluster_B
+
+                  Vserver: cluster_B
+       Client Certificate: NTAPKM_C
+   Server CA Certificates: NTAPKM_I, NTAPKM_R
+       Primary Key Server: 172.18.27.34:12014
+                  Timeout: 25
+                 Username:
+              Policy name: -
+    Secondary Key Servers: -
+    Create/Remove Timeout: 10
+
+----
+.. Si vous utilisez ONTAP 9.16.1 ou une version ultérieure, obtenez l'UUID du keystore pour la SVM d'administration.
++
+`security key-manager show-key-store -vserver <admin_svm_name> -fields uuid`
+
++
+[listing]
+----
+cluster_B::*>  security key-manager show-key-store -vserver cluster_B -fields uuid
+vserver         uuid
+--------------- ------------------------------------
+cluster_B        f281aa55-d635-11f0-93bc-005056bb68f2
+
+cluster_B::*
+----
+.. Enregistrez les informations recueillies dans un endroit sûr pour une utilisation ultérieure dans la procédure. Vous devriez maintenant avoir recueilli les informations suivantes :
++
+*** Le numéro de port et l'adresse de l'un des serveurs de clés primaires pour la SVM d'administration
+*** Le nom d'utilisateur et le mot de passe si l'un est associé au serveur de clé primaire choisi
+*** L'UUID du magasin de clés pour la SVM d'administration (requis dans ONTAP 9.16.1 ou version ultérieure)
+
+
+
+
+--
+====
 
 
 
@@ -1136,7 +1204,7 @@ Cette tâche doit être effectuée sur tous les nouveaux contrôleurs.
 `setenv bootarg.kmip.init.interface _interface-id_`
 
 . Afficher le menu de démarrage : `boot_ontap menu`
-. Si le cryptage racine est utilisé, lancez la commande boot menu pour votre configuration de gestion des clés.
+. Si le SVM d'administration du système MetroCluster est configuré avec un gestionnaire de clés, sélectionnez l'option de menu de démarrage appropriée à votre configuration de gestion des clés.
 +
 |===
 
@@ -1147,14 +1215,28 @@ Cette tâche doit être effectuée sur tous les nouveaux contrôleurs.
  a| 
 Gestion intégrée des clés
  a| 
-Option 10 et suivez les invites pour fournir les entrées requises pour récupérer ou restaurer la configuration du gestionnaire de clés
+Option `10`
+
+Suivez les instructions pour fournir les informations suivantes afin de récupérer et de restaurer la configuration du gestionnaire de clés :
+
+** Sauvegarde et phrase secrète du gestionnaire de clés intégré
+
 
 
 
  a| 
 Gestion externe des clés
  a| 
-Option 11 et suivez les invites pour fournir les entrées requises pour récupérer ou restaurer la configuration du gestionnaire de clés
+Option `11`
+
+Suivez les instructions pour fournir les informations suivantes afin de récupérer et de restaurer la configuration du gestionnaire de clés :
+
+** Le numéro de port et l'adresse de l'un des serveurs de clés primaires pour la SVM d'administration
+** Le nom d'utilisateur et le mot de passe si l'un est associé au serveur de clé primaire choisi
+** L'UUID du magasin de clés pour la SVM d'administration (requis dans ONTAP 9.16.1 ou version ultérieure)
+
+
+*Remarque :* Bien que le SVM d’administration puisse avoir jusqu’à quatre serveurs de clés primaires, seules les informations d’un seul serveur de clés primaires peuvent être spécifiées lors du processus de récupération.
 
 |===
 . Si AUTOBOOT est activé, interrompez l'AUTOBOOT en appuyant sur Control-C.
@@ -1188,14 +1270,28 @@ Si le partenaire-sysid n'est pas correct, définissez-le : `setenv partner-sysid
  a| 
 Gestion intégrée des clés
  a| 
-Option 10 et suivez les invites pour fournir les entrées requises pour récupérer ou restaurer la configuration du gestionnaire de clés
+Option `10`
+
+Suivez les instructions pour fournir les informations suivantes afin de récupérer et de restaurer la configuration du gestionnaire de clés :
+
+** Sauvegarde et phrase secrète du gestionnaire de clés intégré
+
 
 
 
  a| 
 Gestion externe des clés
  a| 
-Option 11 et suivez les invites pour fournir les entrées requises pour récupérer ou restaurer la configuration du gestionnaire de clés
+Option `11`
+
+Suivez les instructions pour fournir les informations suivantes afin de récupérer et de restaurer la configuration du gestionnaire de clés :
+
+** Le numéro de port et l'adresse de l'un des serveurs de clés primaires pour la SVM d'administration
+** Le nom d'utilisateur et le mot de passe si l'un est associé au serveur de clé primaire choisi
+** L'UUID du magasin de clés pour la SVM d'administration (requis dans ONTAP 9.16.1 ou version ultérieure)
+
+
+*Remarque :* Bien que le SVM d’administration puisse avoir jusqu’à quatre serveurs de clés primaires, seules les informations d’un seul serveur de clés primaires peuvent être spécifiées lors du processus de récupération.
 
 |===
 +
@@ -1257,7 +1353,7 @@ Pour plus d'informations, voir link:https://docs.netapp.com/us-en/ontap/encrypti
  a| 
 Gestion externe des clés
  a| 
-`security key-manager external restore -vserver _SVM_ -node _node_ -key-server _host_name|IP_address:port_ -key-id key_id -key-tag key_tag _node-name_`
+`security key-manager external restore -vserver <admin-svm> -key-server <host_name|IP_address:port>`
 
 Pour plus d'informations, voir link:https://docs.netapp.com/us-en/ontap/encryption-at-rest/restore-external-encryption-keys-93-later-task.html["Restauration des clés de chiffrement externes de gestion des clés"^].
 
