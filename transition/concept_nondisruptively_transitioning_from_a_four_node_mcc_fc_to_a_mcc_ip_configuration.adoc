@@ -35,7 +35,59 @@ NOTE: Lorsque vous ajoutez ou supprimez un groupe DR dans le cadre de cette proc
 * Vous devez répondre à toutes les exigences et suivre toutes les étapes de la procédure.
 
 
-.Informations importantes si vous ajoutez un modèle de plate-forme plus ancien
+
+
+== Scénarios de transition pris en charge par cette procédure
+
+Consultez le tableau suivant pour en savoir plus sur les scénarios de transition pris en charge par cette procédure.
+
+
+NOTE: Dans tous les scénarios de transition, vous ne pouvez ajouter ou supprimer qu'un seul groupe de reprise après sinistre à la fois. Après l'ajout ou la suppression réussie du groupe de reprise après sinistre, vous devez vérifier que le MetroCluster est sain et fonctionne normalement avant de poursuivre.
+
+[cols="2*"]
+|===
+| Pour ce scénario de transition... | Effectuez les opérations suivantes... 
+
+
+ a| 
+Configuration FC à quatre nœuds vers configuration IP à quatre nœuds
+ a| 
+Suivez cette procédure à la lettre.
+
+
+
+ a| 
+Configuration FC à quatre nœuds vers configuration IP à huit nœuds
+ a| 
+Nécessite l'ajout d'un groupe IP DR MetroCluster. Après avoir ajouté le premier groupe IP DR MetroCluster, vérifiez l'état général du cluster et répétez les étapes pour le deuxième groupe IP DR MetroCluster.
+
+
+
+ a| 
+Configuration FC à huit nœuds vers configuration IP à quatre nœuds
+ a| 
+Suivez scrupuleusement cette procédure. Durant la transition, la configuration MetroCluster passera de huit à douze nœuds. Une fois la transition terminée et tous les nœuds FC MetroCluster déconnectés, la configuration finale sera une configuration IP MetroCluster à quatre nœuds.
+
+
+
+ a| 
+Configuration FC à huit nœuds vers IP à huit nœuds
+ a| 
+Cette transition nécessite l'ajout d'un groupe IP DR MetroCluster au cluster.
+
+Après avoir vérifié l'intégrité de la configuration à douze nœuds, déplacez les données et les LIF (le cas échéant) d'un des groupes MetroCluster FC DR vers le groupe MetroCluster IP DR. Lorsqu'un des groupes MetroCluster FC DR est vide, supprimez ce groupe DR et retirez ces nœuds. La configuration résultante est un cluster à huit nœuds composé d'un groupe MetroCluster FC DR et d'un groupe MetroCluster IP DR.
+
+Ensuite, ajoutez le deuxième groupe IP DR MetroCluster au cluster et effectuez la transition des données et des LIF (le cas échéant). Lorsque le dernier groupe FC DR MetroCluster restant est vide, supprimez-le et retirez ces nœuds du cluster.
+
+À aucun moment durant la transition, le nombre de nœuds dans la MetroCluster configuration ne dépasse douze nœuds.
+
+|===
+Pour plus d'informations, consultez le link:concept_transition_workflow_fc_to_ip_transition.html["Flux de travail pour une transition MetroCluster sans interruption"].
+
+
+
+== Informations importantes lors de l'ajout d'un modèle de plateforme plus ancien
+
 Les conseils suivants concernent un scénario peu courant dans lequel vous devez ajouter un ancien modèle de plate-forme (plates-formes publiées avant ONTAP 9.15.1) à une configuration MetroCluster existante qui contient un modèle de plate-forme plus récent (plates-formes publiées dans ONTAP 9.15.1 ou plus récent). Pour une transition FC vers IP à huit nœuds, ce guide s'applique si vous avez fait la transition de votre premier groupe DR FC vers un modèle de plateforme introduit dans ONTAP 9.15.1 ou plus récent et que vous prévoyez de faire la transition du second groupe DR vers une plateforme introduite avant ONTAP 9.15.1.
 
 Si votre configuration MetroCluster existante contient une plate-forme qui utilise des ports *shared cluster/HA* (plates-formes publiées dans ONTAP 9.15.1 ou plus tard), vous ne pouvez pas ajouter une plate-forme qui utilise des ports *shared MetroCluster/HA* (plates-formes publiées avant ONTAP 9.15.1) sans mettre à niveau tous les nœuds de la configuration vers ONTAP 9.15.1P11 ou ONTAP 9.16.1P4 ou plus tard.

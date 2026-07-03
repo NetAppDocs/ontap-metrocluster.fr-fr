@@ -4,7 +4,7 @@ sidebar: sidebar
 keywords: metrocluster, maintain, service, upgrade, downgrade, firmware, brocade, fc, switch 
 summary: Pour mettre à niveau ou rétrograder le micrologiciel sur un commutateur FC Brocade, vous devez utiliser les commandes spécifiques à Brocade pour désactiver le commutateur, effectuer et vérifier la modification du micrologiciel, puis redémarrer et réactiver le commutateur. 
 ---
-= Mettez à niveau ou déclaradez le micrologiciel sur un commutateur FC Brocade
+= Mettre à niveau ou rétrograder le firmware sur un commutateur FC Brocade MetroCluster
 :allow-uri-read: 
 :icons: font
 :imagesdir: ../media/
@@ -12,6 +12,24 @@ summary: Pour mettre à niveau ou rétrograder le micrologiciel sur un commutate
 
 [role="lead"]
 Pour mettre à niveau ou rétrograder le micrologiciel sur un commutateur FC Brocade, vous devez utiliser les commandes spécifiques à Brocade pour désactiver le commutateur, effectuer et vérifier la modification du micrologiciel, puis redémarrer et réactiver le commutateur.
+
+.Avant de commencer
+Veuillez lire attentivement les informations suivantes avant d'utiliser cette procédure :
+
+* À partir de Fabric OS 10.x, Brocade ne prend en charge que SHA-512 pour l'authentification SNMP. ONTAP ne prend actuellement pas en charge SHA-512, la prise en charge étant limitée à SHA-256.
++
+Si vous mettez à jour le firmware de votre commutateur FC MetroCluster vers Fabric OS 10.x, la visibilité de la surveillance SNMP depuis ONTAP sera perdue. Cela augmente les risques lors du dépannage et entraîne la perte des alertes proactives.
+
++
+Si vous effectuez une mise à niveau vers ou une rétrogradation depuis Fabric OS 10.x, vous devez effectuer les tâches obligatoires décrites dans link:https://techdocs.broadcom.com/us/en/fibre-channel-networking/fabric-os/fabric-os-software-upgrade/10-0-x/Upgrading-and-Downgrading-Firmware/v24512876.html["Brocade Fabric OS Software Upgrade Guide, 10.0.x - Prérequis pour la mise à niveau ou la rétrogradation"^].
+
++
+
+CAUTION: Vous devez examiner attentivement ces limitations avant de procéder à la mise à niveau vers ou à la rétrogradation de Fabric OS 10.x ou version ultérieure.
+
+* À partir de Fabric OS 9.0.1, SNMPv2 n'est plus pris en charge sur les commutateurs Brocade. Si vous effectuez une mise à niveau vers Fabric OS 9.0.1 ou une version ultérieure, vous devez utiliser SNMPv3 pour la surveillance de l'état. Pour plus d'informations, consultez link:../install-fc/concept_configure_the_mcc_software_in_ontap.html#snmpv3-mcc-fc["Configuration du protocole SNMPv3 dans une configuration MetroCluster"].
+* Si vous effectuez une mise à niveau vers Fabric OS 9.2.x ou une version ultérieure, vous devez disposer d'un certificat Brocade TruFOS installé. Consultez link:https://techdocs.broadcom.com/us/en/fibre-channel-networking/fabric-os/fabric-os-software-upgrade/9-2-x/Obtaining-Firmware/download-prerequisites-new/brocade-trufos-certificates.html["Guide de mise à niveau du logiciel Brocade Fabric OS, 9.2.x"^] pour plus d'informations.
+
 
 .Description de la tâche
 Vérifiez que vous avez vérifié et effectué les tâches suivantes pour votre configuration :
@@ -32,10 +50,6 @@ link:enable-console-logging-before-maintenance.html["Activer la journalisation d
 
 
 La structure des commutateurs est désactivée lors d'une mise à niveau ou d'une mise à niveau vers une version antérieure du firmware, et la configuration MetroCluster s'appuie sur la deuxième structure pour continuer le fonctionnement.
-
-À partir de Fabric OS 9.0.1, SNMPv2 n'est pas pris en charge sur les commutateurs Brocade. Si vous effectuez une mise à niveau vers Fabric OS 9.0.1 ou une version ultérieure, vous devez utiliser SNMPv3 pour la surveillance de l'état de santé. Pour plus d'informations, voir link:../install-fc/concept_configure_the_mcc_software_in_ontap.html#configuring-snmpv3-in-a-metrocluster-configuration["Configuration du protocole SNMPv3 dans une configuration MetroCluster"].
-
-Si vous effectuez une mise à niveau vers Fabric OS version 9.2.x ou ultérieure, vous devez avoir installé un certificat Brocade TruFOS. Pour plus d'informations, reportez-vous à la sectionlink:https://techdocs.broadcom.com/us/en/fibre-channel-networking/fabric-os/fabric-os-software-upgrade/9-2-x/Obtaining-Firmware/download-prerequisites-new/brocade-trufos-certificates.html["Guide de mise à niveau du logiciel Brocade Fabric OS, 9.2.x"^].
 
 Cette tâche doit être effectuée successivement sur chaque structure de commutation afin que tous les commutateurs exécutent la même version de micrologiciel.
 
