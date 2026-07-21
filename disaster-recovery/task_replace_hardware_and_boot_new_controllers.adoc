@@ -15,6 +15,7 @@ Si des composants matériels doivent être remplacés, vous devez les remplacer 
 
 
 
+[[replace-hardware-at-the-disaster-site]]
 == Remplacez le matériel sur le site de reprise après incident
 
 .Avant de commencer
@@ -134,6 +135,7 @@ link:http://docs.netapp.com/platstor/index.jsp["Documentation des systèmes mat�
 
 
 
+[[determine-the-system-ids-and-vlan-ids-of-the-old-controller-modules]]
 == Déterminez les ID système et VLAN des anciens modules de contrôleur
 
 Après avoir remplacé tout le matériel sur le site de secours, vous devez déterminer les ID système des modules de contrôleur remplacés. Vous avez besoin des anciens identifiants système lorsque vous réaffectez des disques aux nouveaux modules de contrôleur. Si les systèmes sont AFF A220, AFF A250, AFF A400, AFF A800, FAS2750, Modèles FAS500f, FAS8300 ou FAS8700, vous devez également déterminer les ID VLAN utilisés par les interfaces IP MetroCluster.
@@ -328,6 +330,7 @@ Node_A_2 Node_A_1 HA      enabled  online
 
 
 
+[[isolate-replacement-drives-from-the-surviving-site-metrocluster-ip-configurations]]
 == Isolation des disques de remplacement du site survivant (configurations MetroCluster IP)
 
 Vous devez isoler des disques de remplacement en mettant hors service les connexions des initiateurs iSCSI MetroCluster des autres nœuds.
@@ -367,6 +370,7 @@ site_B::*> storage iscsi-initiator disconnect -node node_B_2 -label *
 
 
 
+[[clear-the-configuration-on-a-controller-module]]
 == Effacez la configuration d'un module de contrôleur
 
 Avant d'utiliser un nouveau module de contrôleur dans la configuration MetroCluster, il faut effacer la configuration existante.
@@ -406,6 +410,7 @@ Répondez `yes` à l'invite de confirmation.
 
 
 
+[[netboot-the-new-controller-modules]]
 == NetBoot les nouveaux modules de contrôleur
 
 Si la version de ONTAP des nouveaux modules de contrôleur est différente de celle des modules survivants, vous devez effectuer le démarrage sur le réseau des nouveaux modules de contrôleur.
@@ -486,6 +491,7 @@ NOTE: Vous devez redémarrer le nœud pour pouvoir utiliser le logiciel nouvelle
 
 
 
+[[determine-the-system-ids-of-the-replacement-controller-modules]]
 == Déterminez les ID système des modules de contrôleur de remplacement
 
 Après avoir remplacé tout le matériel sur le site de secours, vous devez déterminer l'ID système du ou des modules du contrôleur de stockage nouvellement installé.
@@ -626,6 +632,7 @@ Dans l'exemple suivant, le nouvel ID système local est 1574774991 :
 
 
 
+[[verify-the-ha-config-state-of-components]]
 == Vérifiez l'état des composants HA-config
 
 Dans une configuration MetroCluster, l'état ha-config du module de contrôleur et des composants du châssis doit être défini sur « mcc » ou « mcc-2n » afin qu'ils s'démarrent correctement.
@@ -732,6 +739,7 @@ Configuration MetroCluster IP
 
 
 
+[[determine-if-end-to-end-encryption-was-enabled-on-the-original-systems]]
 == Déterminez si le chiffrement de bout en bout a été activé sur les systèmes d'origine
 
 Vous devez vérifier si les systèmes d'origine ont été configurés pour un chiffrement de bout en bout.

@@ -26,6 +26,7 @@ Si vous disposez d'une configuration FC MetroCluster à quatre nœuds, reportez-
 
 
 
+[[enable-console-logging]]
 == Activer la journalisation de la console
 
 NetApp vous recommande vivement d'activer la journalisation de la console sur les périphériques que vous utilisez et d'effectuer les actions suivantes lors de l'exécution de cette procédure :
@@ -40,6 +41,7 @@ Consultez l'article de la base de connaissances link:https://kb.netapp.com/Suppo
 
 
 
+[[requirements-for-transition-when-retiring-old-shelves]]
 == Exigences de transition lors de la retrait d'anciens tiroirs
 
 Avant de lancer le processus de transition, vous devez vérifier que la configuration FC MetroCluster existante répond aux exigences.
@@ -88,6 +90,7 @@ Vous devez disposer d'un accès à distance à la console pour les six nœuds de
 
 
 
+[[workflow-for-disruptive-transition-when-moving-data-and-retiring-old-storage-shelves]]
 == Workflow de transition fluide lors du déplacement des données et de la désactivation des anciens tiroirs de stockage
 
 Vous devez suivre le flux de travail spécifique pour assurer une transition réussie.
@@ -98,6 +101,7 @@ image::../media/workflow_2n_transition_moving_data_to_new_shelves.png[Flux de tr
 
 
 
+[[transitioning-the-configuration]]
 == Transition de la configuration
 
 Vous devez suivre la procédure de transition détaillée.
@@ -136,6 +140,7 @@ Suivez les étapes de la section link:task_configure_the_new_nodes_and_complete_
 
 
 
+[[migrating-the-root-aggregates]]
 == Migration des agrégats racine
 
 Une fois la transition terminée, migrez les agrégats racine existants restants de la configuration MetroCluster FC vers les nouveaux tiroirs de la configuration IP MetroCluster.
@@ -183,6 +188,7 @@ Vous pouvez utiliser la commande Storage aggrégats show pour vérifier l'état 
 
 
 
+[[migrating-the-data-aggregates]]
 == Migration des agrégats de données
 
 Créez des agrégats de données sur les nouveaux tiroirs et utilisez le déplacement des volumes pour transférer les volumes de données des anciens tiroirs vers les agrégats du nouveau tiroir.
@@ -195,6 +201,7 @@ http://docs.netapp.com/platstor/topic/com.netapp.doc.hw-upgrade-controller/GUID-
 
 
 
+[[retiring-shelves-moved-from-nodea1-fc-and-nodea2-fc]]
 == Retrait des tiroirs déplacés du nœud_A_1-FC et du nœud_A_2-FC
 
 Vous retirez les anciens tiroirs de stockage de la configuration FC MetroCluster d'origine. Ces tiroirs étaient initialement détenus par les nœuds node_A_1-FC et node_A_2-FC.
@@ -274,6 +281,7 @@ cluster_B::>
 
 
 
+[[completing-transition]]
 == Fin de la transition
 
 Lorsque les anciens modules de contrôleur sont supprimés, vous pouvez terminer le processus de transition.

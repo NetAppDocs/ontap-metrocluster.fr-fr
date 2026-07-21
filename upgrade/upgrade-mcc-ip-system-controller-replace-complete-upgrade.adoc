@@ -15,6 +15,7 @@ Terminez le processus de mise à niveau automatique du contrôleur en vérifiant
 
 
 
+[[verify-network-reachability]]
 == Vérifiez l'accessibilité du réseau
 
 L'automatisation exécute des vérifications du système, puis s'interrompt pour que vous puissiez vérifier la capacité d'accès au réseau. Une fois la vérification terminée, la phase de récupération des ressources est lancée, et l'opération d'automatisation exécute le rétablissement sur le site A et s'interrompt après les vérifications de mise à niveau. Une fois que vous avez rétabli l'opération d'automatisation, il effectue les vérifications post-mise à niveau et, si aucune erreur n'est détectée, marque la mise à niveau comme terminée.
@@ -42,6 +43,7 @@ Si les vérifications post-mise à niveau n'ont pas signalé d'erreurs, la mise 
 
 
 
+[[upgrade-the-nodes-on-clustera]]
 == Mettre à niveau les nœuds sur cluster_A
 
 Vous devez répéter les tâches de mise à niveau pour mettre à niveau les nœuds sur le cluster_A sur le site A.
@@ -55,6 +57,7 @@ Lorsque vous répétez la procédure, toutes les références d’exemple aux cl
 
 
 
+[[re-add-internal-drives-to-the-new-controller]]
 == Réajouter les lecteurs internes au nouveau contrôleur
 
 Si vous avez effectué une mise à niveau d'un système uniquement équipé de disques externes vers un système équipé de disques externes et internes (disques et contrôleurs dans le même châssis), vous pouvez ajouter ou réinstaller les disques retirés des emplacements internes du nouveau système. Vous pouvez le faire à tout moment une fois la mise à niveau terminée sur les deux sites et le cluster en bon état.
@@ -66,6 +69,7 @@ NOTE: Cette tâche s'applique uniquement à certaines combinaisons de mise à ni
 
 
 
+[[reconfigure-ontap-mediator]]
 == Reconfigurer le médiateur ONTAP
 
 Configurez manuellement le médiateur ONTAP qui a été automatiquement supprimé avant de commencer la mise à niveau.
@@ -75,6 +79,7 @@ Configurez manuellement le médiateur ONTAP qui a été automatiquement supprim�
 
 
 
+[[restore-tiebreaker-monitoring]]
 == Restaurez la surveillance du logiciel disjoncteur d'attache
 
 Si le logiciel disjoncteur d'attache a déjà été configuré pour la surveillance de la configuration MetroCluster, vous pouvez restaurer la connexion ce dernier.
@@ -84,6 +89,7 @@ Si le logiciel disjoncteur d'attache a déjà été configuré pour la surveilla
 
 
 
+[[configure-end-to-end-encryption]]
 == Configurez le chiffrement de bout en bout
 
 Si votre système le prend en charge, vous pouvez chiffrer le trafic back-end, tel que les données NVlog et de réplication du stockage, entre les sites IP MetroCluster. Reportez-vous à la section link:../maintain/task-configure-encryption.html["Configurez le chiffrement de bout en bout"] pour en savoir plus.

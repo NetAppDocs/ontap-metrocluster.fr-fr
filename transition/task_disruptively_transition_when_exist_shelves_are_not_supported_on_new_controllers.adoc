@@ -25,6 +25,7 @@ Si vous disposez d'une configuration FC MetroCluster à quatre nœuds, reportez-
 
 
 
+[[enable-console-logging]]
 == Activer la journalisation de la console
 
 NetApp vous recommande vivement d'activer la journalisation de la console sur les périphériques que vous utilisez et d'effectuer les actions suivantes lors de l'exécution de cette procédure :
@@ -39,6 +40,7 @@ Consultez l'article de la base de connaissances link:https://kb.netapp.com/Suppo
 
 
 
+[[requirements-for-transition-when-shelves-are-not-supported-on-the-new-nodes]]
 == Exigences à réaliser lorsque les tiroirs ne sont pas pris en charge sur les nouveaux nœuds
 
 Avant de lancer le processus de transition, vous devez vérifier que la configuration répond aux exigences.
@@ -87,6 +89,7 @@ https://hwu.netapp.com["NetApp Hardware Universe"]
 
 
 
+[[workflow-for-disruptive-transition-when-shelves-are-not-supported-by-new-controllers]]
 == Flux de production permettant une transition sans interruption lorsque les tiroirs ne sont pas pris en charge par les nouveaux contrôleurs
 
 Si les modèles de tiroirs existants ne sont pas pris en charge par les nouveaux modèles de plateforme, vous devez associer les nouveaux tiroirs à l'ancienne configuration, transférer les données vers les nouveaux tiroirs, puis effectuer un transition vers la nouvelle configuration.
@@ -97,6 +100,7 @@ image::../media/workflow_2n_transition_old_shelves_not_supported.png[Processus d
 
 
 
+[[preparing-the-new-controller-modules]]
 == Préparation des nouveaux modules de contrôleur
 
 Vous devez effacer la configuration et l'espace disque sur les nouveaux modules de contrôleur et les nouveaux tiroirs de stockage.
@@ -108,6 +112,7 @@ Vous devez effacer la configuration et l'espace disque sur les nouveaux modules 
 
 
 
+[[attaching-the-new-disk-shelves-to-the-existing-metrocluster-fc-controllers]]
 == Connexion des nouveaux tiroirs disques aux contrôleurs FC MetroCluster existants
 
 Vous devez connecter les nouveaux tiroirs disques aux modules de contrôleur existants avant de passer à une configuration MetroCluster IP.
@@ -136,6 +141,7 @@ Reportez-vous aux exigences et procédures de la section link:../maintain/task_h
 
 
 
+[[migrate-root-aggregates-and-move-data-to-the-new-disk-shelves]]
 == Migration des agrégats racine et déplacement des données vers les nouveaux tiroirs disques
 
 Vous devez déplacer les agrégats racine des anciens tiroirs disques vers les nouveaux tiroirs disques qui seront utilisés par les nœuds IP MetroCluster.
@@ -490,6 +496,7 @@ Reportez-vous à la section http://docs.netapp.com/platstor/topic/com.netapp.doc
 
 
 
+[[transitioning-the-configuration]]
 == Transition de la configuration
 
 Vous devez suivre la procédure de transition détaillée.

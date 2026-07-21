@@ -15,6 +15,7 @@ Avant de lancer le processus de transition, vous devez vérifier que la configur
 
 
 
+[[enable-console-logging]]
 == Activer la journalisation de la console
 
 NetApp vous recommande vivement d'activer la journalisation de la console sur les périphériques que vous utilisez et d'effectuer les actions suivantes lors de l'exécution de cette procédure :
@@ -29,6 +30,7 @@ Consultez l'article de la base de connaissances link:https://kb.netapp.com/Suppo
 
 
 
+[[general-requirements-for-disruptive-fc-to-ip-transition]]
 == Exigences générales pour une transition sans interruption de FC-à-IP
 
 La configuration FC MetroCluster existante doit répondre aux exigences suivantes :
@@ -52,12 +54,14 @@ Vous devez disposer d'un accès à distance à la console pour les six nœuds de
 
 
 
+[[drive-shelf-reuse-and-drive-requirements-for-disruptive-fc-to-ip-transition]]
 == Réutilisation des tiroirs disques et des exigences des disques pour une transition FC vers IP sans interruption
 
 Vous devez vous assurer que les tiroirs de stockage contiennent des disques de spare et bien l'espace racine au niveau des agrégats.
 
 
 
+[[reusing-the-existing-storage-shelves]]
 === Réutilisation des tiroirs de stockage existants
 
 Lors de l'utilisation de cette procédure, les tiroirs de stockage existants sont conservés et utilisés par la nouvelle configuration. Lorsque node_A_1-FC et node_B_1-FC sont supprimés, les tiroirs disques existants sont connectés au nœud_A_1-IP et au nœud_A_2-IP sur cluster_A et au nœud_B_1-IP et au nœud_B_2-IP sur cluster_B.
@@ -74,6 +78,7 @@ https://hwu.netapp.com["NetApp Hardware Universe"^]
 
 
 
+[[storage-requirements-for-the-additional-controllers]]
 === Exigences de stockage pour les contrôleurs supplémentaires
 
 Il faut ajouter du stockage supplémentaire, si nécessaire, pour prendre en charge les deux contrôleurs supplémentaires (node_A_2-IP et node_B_2-ip), car la configuration passe d'un arrangement à deux nœuds à quatre nœuds.
@@ -106,6 +111,7 @@ https://hwu.netapp.com["NetApp Hardware Universe"^]
 
 
 
+[[workflow-for-disruptive-transition]]
 == Flux de production pour une transition sans interruption
 
 Vous devez suivre le flux de travail spécifique pour assurer une transition réussie.
@@ -116,6 +122,7 @@ image::../media/workflow_2n_transition_bsaic.png[Flux de travail pour la transit
 
 
 
+[[mapping-ports-from-the-metrocluster-fc-nodes-to-the-metrocluster-ip-nodes]]
 == Mappage des ports des nœuds FC MetroCluster sur les nœuds IP MetroCluster
 
 Vous devez ajuster la configuration des ports et LIF du nœud MetroCluster FC, afin qu'il soit compatible avec celle du nœud IP MetroCluster qui le remplace.
@@ -566,6 +573,7 @@ Port intercluster
 
 
 
+[[preparing-the-metrocluster-ip-controllers]]
 == Préparation des contrôleurs IP MetroCluster
 
 Vous devez préparer les quatre nouveaux nœuds IP MetroCluster et installer la version ONTAP appropriée.
@@ -687,6 +695,7 @@ Une fois que « 9a » est terminé, les nœuds retournent automatiquement au men
 
 
 
+[[verifying-the-health-of-the-metrocluster-fc-configuration]]
 == Vérification de l'état de santé de la configuration MetroCluster FC
 
 Vous devez vérifier l'état et la connectivité de la configuration MetroCluster FC avant d'effectuer la transition
@@ -734,6 +743,7 @@ https://mysupport.netapp.com/site/tools/tool-eula/activeiq-configadvisor["Télé
 
 
 
+[[removing-the-existing-configuration-from-the-tiebreaker-or-other-monitoring-software]]
 == Suppression de la configuration existante du logiciel disjoncteur d'attache ou autre logiciel de surveillance
 
 Si la configuration existante est contrôlée avec la configuration MetroCluster Tiebreaker ou d'autres applications tierces (telles que ClusterLion) capables d'effectuer un basculement, vous devez supprimer la configuration MetroCluster du logiciel disjoncteur d'attache ou d'autres logiciels avant la transition.

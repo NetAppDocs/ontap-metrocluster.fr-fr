@@ -15,6 +15,7 @@ Pour préparer la configuration à la transition, vous ajoutez les nouveaux nœu
 
 
 
+[[sending-a-custom-autosupport-message-prior-to-maintenance]]
 == Envoi d'un message AutoSupport personnalisé avant la maintenance
 
 Avant d'effectuer la maintenance, vous devez envoyer un message AutoSupport pour informer le support technique de NetApp que la maintenance est en cours. Informer le support technique que la maintenance est en cours empêche l'ouverture d'un dossier en supposant une interruption de l'activité.
@@ -38,6 +39,7 @@ Cette tâche doit être effectuée sur chaque site MetroCluster.
 
 
 
+[[enabling-transition-mode-and-disabling-cluster-ha]]
 == Activation du mode transition et désactivation de la haute disponibilité du cluster
 
 Vous devez activer le mode de transition MetroCluster pour permettre aux anciens et nouveaux nœuds de fonctionner ensemble dans la configuration MetroCluster, et désactiver le cluster HA.
@@ -157,6 +159,7 @@ cluster_B::>
 
 
 
+[[joining-the-metrocluster-ip-nodes-to-the-clusters]]
 == Connexion des nœuds IP MetroCluster aux clusters
 
 Vous devez ajouter les quatre nouveaux nœuds IP MetroCluster à la configuration MetroCluster existante.
@@ -236,6 +239,7 @@ Do you want to use this configuration? {yes, no} [yes]: yes
 
 
 
+[[configuring-intercluster-lifs-creating-the-metrocluster-interfaces-and-mirroring-root-aggregates]]
 == Configuration des LIFs intercluster, création des interfaces MetroCluster, et mise en miroir des agrégats racines
 
 Vous devez créer des LIF de peering de cluster, créer les interfaces MetroCluster sur les nouveaux nœuds IP MetroCluster.
@@ -608,6 +612,7 @@ aggr_data_a2
 
 
 
+[[finalizing-the-addition-of-the-metrocluster-ip-nodes]]
 == Finalisation de l'ajout des nœuds IP MetroCluster
 
 Vous devez intégrer le nouveau groupe de reprise après incident à la configuration MetroCluster et créer des agrégats de données en miroir sur les nouveaux nœuds.

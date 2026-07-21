@@ -22,12 +22,14 @@ Si nécessaire, vous pouvez configurer le chiffrement MACsec sur les ports WAN I
 ====
 
 
+[[licensing-requirements-for-macsec]]
 == Conditions de licence pour MACsec
 
 MACsec nécessite une licence de sécurité. Pour une explication complète du schéma de licence Cisco NX-OS et de la manière d'obtenir et de demander des licences, consultez le https://www.cisco.com/c/en/us/td/docs/switches/datacenter/sw/nx-os/licensing/guide/b_Cisco_NX-OS_Licensing_Guide/b_Cisco_NX-OS_Licensing_Guide_chapter_01.html["Guide des licences Cisco NX-OS"^]
 
 
 
+[[enable-cisco-macsec-encryption-wan-isls-in-metrocluster-ip-configurations]]
 == Activez les liens ISL de Cisco MACsec dans les configurations IP de MetroCluster
 
 Vous pouvez activer le cryptage MACsec pour les commutateurs Cisco 9336C sur les liens ISL WAN dans une configuration IP MetroCluster.
@@ -65,6 +67,7 @@ IP_switch_A_1(config)# copy running-config startup-config
 
 
 
+[[configure-a-macsec-key-chain-and-keys]]
 == Configurer une chaîne de clé MACsec et des clés
 
 Vous pouvez créer une chaîne de clés MACsec ou des clés sur votre configuration.
@@ -168,6 +171,7 @@ IP_switch_A_1(config-macseckeychain-macseckey)# show key chain 1
 
 
 
+[[configure-a-macsec-policy]]
 == Configurez une stratégie MACsec
 
 .Étapes
@@ -292,6 +296,7 @@ IP_switch_A_1(config-macsec-policy)# show macsec policy
 
 
 
+[[enable-cisco-macsec-encryption-on-the-interfaces]]
 == Activez le cryptage Cisco MACsec sur les interfaces
 
 . Passer en mode de configuration globale :
@@ -337,6 +342,7 @@ IP_switch_A_1(config)# copy running-config startup-config
 
 
 
+[[disable-cisco-macsec-encryption-wan-isls-in-metrocluster-ip-configurations]]
 == Désactivez les liens ISL de Cisco MACsec dans les configurations IP de MetroCluster
 
 Vous devrez peut-être désactiver le cryptage MACsec pour les commutateurs Cisco 9336C sur les liens ISL du réseau étendu dans une configuration IP MetroCluster.
@@ -398,6 +404,7 @@ IP_switch_A_1(config)# copy running-config startup-config
 
 
 
+[[verifying-the-macsec-configuration]]
 == Vérification de la configuration MACsec
 
 .Étapes

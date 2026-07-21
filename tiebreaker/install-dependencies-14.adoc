@@ -41,6 +41,8 @@ Red Hat Enterprise Linux 8
 
 
 
+[[install-jdk]]
+[[install-java-1-8]]
 == Installez JDK
 
 Vous devez installer JDK sur votre système hôte avant d'installer ou de mettre à niveau le logiciel Tiebreaker. Tiebreaker 1.4 et versions antérieures prend en charge JDK 1.8.0. (JRE 8).
@@ -90,6 +92,8 @@ Complete!
 
 
 
+[[install-mysql-server-5-5-30-or-later-and-5-6-x-versions-on-red-hat-enterprise-linux-7-or-centos-7]]
+[[install-mysql-redhat]]
 == Installez MySQL Server 5.5.30 ou version ultérieure et les versions 5.6.x sur Red Hat Enterprise Linux 7 ou CentOS 7
 
 Vous devez installer MySQL Server 5.5.30 ou version ultérieure et 5.6.x sur votre système hôte avant d'installer ou de mettre à niveau le logiciel disjoncteur d'attache.  Pour Red Hat Enterprise Linux 8, <<install-mariadb,Installez le serveur MariaDB>>.
@@ -389,6 +393,7 @@ Lorsque la connexion MySQL fonctionne comme prévu, la sortie se termine au nive
 
 
 
+[[enable-the-mysql-autostart-setting]]
 === Activez le paramètre de démarrage automatique MySQL
 
 Vous devez vérifier que la fonction de démarrage automatique est activée pour le démon MySQL. L'activation du démon MySQL redémarre automatiquement MySQL si le système sur lequel réside le logiciel MetroCluster Tiebreaker. Si le démon MySQL n'est pas en cours d'exécution, le logiciel disjoncteur d'attache continue à fonctionner, mais il ne peut pas être redémarré et des modifications de configuration ne peuvent pas être effectuées.
@@ -413,6 +418,8 @@ Si MySQL n'est pas activé pour démarrer automatiquement au démarrage, consult
 
 
 
+[[install-mariadb-server-on-red-hat-enterprise-linux-8]]
+[[install-mariadb]]
 == Installez le serveur MariaDB sur Red Hat Enterprise Linux 8
 
 Vous devez installer le serveur MariaDB sur votre système hôte avant d'installer ou de mettre à niveau le logiciel disjoncteur d'attache.  Pour Red Hat Enterprise Linux 7 ou CentOS 7, <<install-mysql-redhat,Installez MySQL Server>>.
@@ -583,6 +590,7 @@ Thanks for using MariaDB!
 
 
 
+[[enable-the-autostart-setting-for-the-mariadb-server]]
 === Activez le paramètre de démarrage automatique pour le serveur MariaDB
 
 Vérifiez que la fonction de démarrage automatique est activée pour le serveur MariaDB. Si vous n'activez pas la fonctionnalité de démarrage automatique et si le système sur lequel réside le logiciel MetroCluster Tiebreaker doit être redémarré, alors le logiciel disjoncteur d'attache continue d'être en cours d'exécution, mais le service MariaDB ne peut pas être redémarré et les modifications de configuration ne peuvent pas être effectuées.

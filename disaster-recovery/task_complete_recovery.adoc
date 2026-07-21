@@ -15,6 +15,7 @@ Exécutez les tâches requises pour effectuer la restauration en cas de défaill
 
 
 
+[[reestablishing-object-stores-for-fabricpool-configurations]]
 == Rétablir les magasins d'objets pour les configurations FabricPool
 
 Si l'un des magasins d'objets d'un miroir FabricPool était en colocation avec le site de secours MetroCluster et qu'il a été détruit, vous devez rétablir le magasin d'objets et le miroir FabricPool.
@@ -30,6 +31,7 @@ Si l'un des magasins d'objets d'un miroir FabricPool était en colocation avec l
 
 
 
+[[verifying-licenses-on-the-replaced-nodes]]
 == Vérification des licences sur les nœuds remplacés
 
 Vous devez installer de nouvelles licences pour les nœuds de remplacement si les nœuds douteux utilisent les fonctionnalités ONTAP qui nécessitent une licence standard (nœud verrouillé). Pour les fonctionnalités avec licences standard, chaque nœud du cluster doit avoir sa propre clé pour cette fonctionnalité.
@@ -116,6 +118,7 @@ NOTE: Les nouvelles clés de licence dont vous avez besoin sont générées auto
 
 
 
+[[restoring-key-management]]
 == Restauration de la gestion des clés
 
 Si les volumes de données sont chiffrés, vous devez restaurer la gestion des clés. Si le volume racine est chiffré, vous devez récupérer la gestion des clés.
@@ -152,6 +155,7 @@ Pour plus d'informations, voir https://docs.netapp.com/ontap-9/topic/com.netapp.
 
 
 
+[[performing-a-switchback]]
 == Exécution d'un rétablissement
 
 Après avoir rétablissement la configuration MetroCluster, vous pouvez exécuter l'opération de rétablissement MetroCluster. L'opération de rétablissement MetroCluster renvoie la configuration à son état de fonctionnement normal, avec les SVM (Storage Virtual machines) source synchrone sur le site de reprise après incident et permettant l'accès aux données depuis les pools de disques locaux.
@@ -249,6 +253,7 @@ Dans ONTAP 8.3, vous devez rétablir manuellement une configuration SnapMirror p
 
 
 
+[[verifying-a-successful-switchback]]
 == Vérification du rétablissement réussi
 
 Après le rétablissement, il vous faut vérifier que tous les agrégats et les serveurs virtuels de stockage sont basculés et en ligne.
@@ -344,6 +349,7 @@ Vous devez répéter les sections précédentes pour effectuer le rétablissemen
 
 
 
+[[mirroring-the-root-aggregates-of-the-replacement-nodes]]
 == Mise en miroir des agrégats racine des nœuds de remplacement
 
 Si des disques ont été remplacés, vous devez mettre en miroir les agrégats racine des nouveaux nœuds sur le site de secours.
@@ -448,6 +454,7 @@ Tout agrégat racine qui n'est pas à l'état mis en miroir doit être mis en mi
 
 
 
+[[reconfiguring-ontap-mediator-metrocluster-ip-configurations]]
 == Reconfiguration du médiateur ONTAP (configurations IP MetroCluster)
 
 Si vous disposez d'une configuration IP MetroCluster configurée avec ONTAP Mediator, vous devez supprimer et reconfigurer l'association avec ONTAP Mediator.
@@ -470,6 +477,7 @@ Si vous disposez d'une configuration IP MetroCluster configurée avec ONTAP Medi
 
 
 
+[[verifying-the-health-of-the-metrocluster-configuration]]
 == Vérification de l'état de santé de la configuration MetroCluster
 
 Vous devez vérifier l'état de santé de la configuration MetroCluster pour vérifier que celle-ci fonctionne correctement.

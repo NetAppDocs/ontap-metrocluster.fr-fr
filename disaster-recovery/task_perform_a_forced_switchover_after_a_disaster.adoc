@@ -22,6 +22,7 @@ Pour déterminer si un incident s'est produit, procédez comme suit :
 
 
 
+[[fencing-off-the-disaster-site]]
 == Escrime hors site de la catastrophe
 
 Après l'incident, si les nœuds du site de reprise doivent être remplacés, vous devez les arrêter pour que le site puisse reprendre le service. Si les clients accèdent aux nœuds avant la fin de la procédure de remplacement, vous risquez une corruption des données.
@@ -38,6 +39,7 @@ Si les nœuds du site de secours ont été détruits ou ne peuvent pas être sto
 
 
 
+[[performing-a-forced-switchover]]
 == Effectuer un basculement forcé
 
 Le processus de basculement, en plus d'assurer la continuité de l'activité lors des tests et de la maintenance, permet la restauration après une défaillance de site à l'aide d'une seule commande.
@@ -93,12 +95,14 @@ Les relations SnapMirror doivent être réétablies après le basculement.
 
 
 
+[[output-for-the-storage-aggregate-plex-show-command-is-indeterminate-after-a-metrocluster-switchover]]
 == Le résultat de la commande plex show de l'agrégat de stockage est indéterminé après un basculement de MetroCluster
 
 Lorsque vous exécutez le `storage aggregate plex show` Commande après un basculement MetroCluster, l'état du plex0 de l'agrégat racine commuté est indéterminé et s'affiche comme ayant échoué. Pendant ce temps, la racine de commutation n'est pas mise à jour. L'état réel de ce plex ne peut être déterminé qu'après la phase de guérison MetroCluster.
 
 
 
+[[accessing-volumes-in-nvfail-state-after-a-switchover]]
 == Accès aux volumes dans l'état NVFAIL après un basculement
 
 Après un basculement, vous devez effacer l'état NVFAIL en réinitialisant le `-in-nvfailed-state` paramètre du `volume modify` commande de suppression de la restriction d'accès des clients aux données.

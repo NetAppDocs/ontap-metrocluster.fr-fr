@@ -22,12 +22,14 @@ image::../media/workflow_high_level_node_and_cluster_configuration_software.gif[
 
 
 
+[[ip-network-information-worksheet-for-site-a]]
 == Fiche d'informations sur le réseau IP pour le site A
 
 Avant de configurer le système, vous devez obtenir des adresses IP et d'autres informations réseau pour le premier site MetroCluster (site A) de votre administrateur réseau.
 
 
 
+[[site-a-cluster-creation-information]]
 === Informations de création du site À partir d'un cluster
 
 Lors de la création du cluster, vous avez besoin des informations suivantes :
@@ -69,6 +71,7 @@ Mot de passe administrateur
 |===
 
 
+[[site-a-node-information]]
 === Information sur un nœud du site
 
 Vous avez besoin d'une adresse IP de gestion, d'un masque de réseau et d'une passerelle par défaut pour chaque nœud du cluster.
@@ -100,6 +103,7 @@ Exemple utilisé dans ces informations : Controller_A_2
 |===
 
 
+[[site-a-lifs-and-ports-for-cluster-peering]]
 === Site A LIFs et ports pour le peering de cluster
 
 Pour chaque nœud du cluster, vous devez disposer des adresses IP de deux LIF intercluster, y compris un masque de réseau et une passerelle par défaut. Les LIFs intercluster sont utilisés pour mutualiser les clusters.
@@ -129,6 +133,7 @@ Nœud 1 ci LIF 2
 |===
 
 
+[[site-a-time-server-information]]
 === Informations sur le serveur de temps du site A.
 
 Vous devez synchroniser l'heure, qui nécessite un ou plusieurs serveurs de temps NTP.
@@ -158,6 +163,7 @@ Serveur NTP 2
 |===
 
 
+[[site-a-nbsp-autosupport-information]]
 === Site A nbsp; informations AutoSupport
 
 Vous devez configurer le AutoSupport sur chaque nœud, qui nécessite les informations suivantes :
@@ -217,6 +223,7 @@ Partenaires
 |===
 
 
+[[site-a-sp-information]]
 === Site A informations sur le processeur de service
 
 Vous devez activer l'accès au processeur de service de chaque nœud pour le dépannage et la maintenance. Pour ce faire, les informations réseau suivantes sont nécessaires pour chaque nœud :
@@ -236,12 +243,14 @@ Nœud 1
 |===
 
 
+[[ip-network-information-worksheet-for-site-b]]
 == Fiche d'informations sur le réseau IP pour le site B
 
 Avant de configurer le système, vous devez obtenir des adresses IP et d'autres informations réseau pour le second site MetroCluster (site B) de votre administrateur réseau.
 
 
 
+[[site-b-cluster-creation-information]]
 === Informations de création de cluster du site B
 
 Lors de la création du cluster, vous avez besoin des informations suivantes :
@@ -283,6 +292,7 @@ Mot de passe administrateur
 |===
 
 
+[[site-b-node-information]]
 === Informations sur le nœud du site B.
 
 Vous avez besoin d'une adresse IP de gestion, d'un masque de réseau et d'une passerelle par défaut pour chaque nœud du cluster.
@@ -314,6 +324,7 @@ Exemple utilisé dans ces informations : Controller_B_2
 |===
 
 
+[[site-b-lifs-and-ports-for-cluster-peering]]
 === Les LIF du site B et les ports pour le peering de clusters
 
 Pour chaque nœud du cluster, vous devez disposer des adresses IP de deux LIF intercluster, y compris un masque de réseau et une passerelle par défaut. Les LIFs intercluster sont utilisés pour mutualiser les clusters.
@@ -343,6 +354,7 @@ Nœud 1 ci LIF 2
 |===
 
 
+[[site-b-time-server-information]]
 === Informations sur le serveur de temps du site B.
 
 Vous devez synchroniser l'heure, qui nécessite un ou plusieurs serveurs de temps NTP.
@@ -372,6 +384,7 @@ Serveur NTP 2
 |===
 
 
+[[site-b-nbsp-autosupport-information]]
 === Site B nbsp; informations AutoSupport
 
 Vous devez configurer le AutoSupport sur chaque nœud, qui nécessite les informations suivantes :
@@ -431,6 +444,7 @@ Partenaires
 |===
 
 
+[[site-b-nbsp-sp-information]]
 === Site B nbsp; informations SP
 
 Vous devez activer l'accès au processeur de service de chaque nœud pour le dépannage et la maintenance. Pour ce faire, vous devez disposer des informations réseau suivantes pour chaque nœud :
@@ -450,6 +464,7 @@ Nœud 1 (contrôleur_B_1)
 |===
 
 
+[[similarities-and-differences-between-standard-cluster-and-metrocluster-configurations]]
 == Similarités et différences entre les configurations cluster standard et MetroCluster
 
 La configuration des nœuds de chaque cluster dans une configuration MetroCluster est similaire à celle des nœuds d'un cluster standard.
@@ -518,6 +533,7 @@ Obligatoire
 |===
 
 
+[[restoring-system-defaults-and-configuring-the-hba-type-on-a-controller-module]]
 == Restauration des paramètres par défaut du système et configuration du type de HBA sur un module de contrôleur
 
 Pour garantir la réussite de l'installation de MetroCluster, réinitialisez et restaurez les valeurs par défaut sur les modules de contrôleur.
@@ -652,6 +668,7 @@ Please choose one of the following:
 
 
 
+[[configuring-fc-vi-ports-on-a-x1132a-r6-quad-port-card-on-fas8020-systems]]
 == Configuration des ports FC-VI sur une carte X1132A-R6 à quatre ports sur les systèmes FAS8020
 
 Si vous utilisez la carte X1132A-R6 à quatre ports sur un système FAS8020, vous pouvez passer en mode de maintenance pour configurer les ports 1a et 1b pour FC-VI et pour l'utilisation d'un initiateur. Cela n'est pas nécessaire pour les systèmes MetroCluster reçus en usine, dans lesquels les ports sont configurés de façon appropriée pour votre configuration.
@@ -758,6 +775,7 @@ controller_B_1
 
 
 
+[[verifying-disk-assignment-in-maintenance-mode-in-a-two-node-configuration]]
 == Vérification de l'affectation du disque en mode maintenance dans une configuration à deux nœuds
 
 Avant de démarrer entièrement le système sur ONTAP, vous pouvez également démarrer le système en mode maintenance et vérifier l'affectation des disques sur les nœuds. Il convient d'attribuer aux disques pour créer une configuration entièrement symétrique avec les deux sites possédant leurs propres tiroirs disques et servant les données, où chaque nœud et chaque pool disposent d'un nombre égal de disques en miroir qui leur sont affectés.
@@ -912,6 +930,7 @@ Si le contrôleur de stockage node_B_1 dispose de quatre tiroirs, vous exécutez
 
 
 
+[[verifying-the-ha-state-of-components]]
 == Vérification de l'état des composants HA
 
 Dans une configuration MetroCluster étendue qui n'est pas préconfigurée en usine, vous devez vérifier que l'état HA du contrôleur et du composant de châssis est défini sur « `mcc-2n` pour qu'ils s'démarrent correctement. Pour les systèmes reçus en usine, cette valeur est préconfigurée et vous n'avez pas besoin de la vérifier.
@@ -946,6 +965,7 @@ Attendez que le nœud soit de nouveau à l'invite DU CHARGEUR.
 
 
 
+[[setting-up-ontap-in-a-two-node-metrocluster-configuration]]
 == Configuration d'ONTAP dans une configuration MetroCluster à deux nœuds
 
 Dans une configuration MetroCluster à deux nœuds, sur chaque cluster, vous devez démarrer le nœud, quitter l'assistant de configuration du cluster et utiliser `cluster setup` commande permettant de configurer le nœud dans un cluster à un seul nœud.
@@ -1042,12 +1062,14 @@ S'il est nécessaire de modifier les paramètres que vous avez saisis pour le SV
 
 
 
+[[configuring-the-clusters-into-a-metrocluster-configuration]]
 == Configuration des clusters dans une configuration MetroCluster
 
 Vous devez peer-to-peer les clusters, mettre en miroir les agrégats racine, créer un agrégat de données en miroir, puis lancer la commande pour mettre en œuvre les opérations MetroCluster.
 
 
 
+[[peering-the-clusters]]
 === Peering des clusters
 
 Les clusters de la configuration MetroCluster doivent être dans une relation de pairs, de sorte qu'ils puissent communiquer entre eux et exécuter la mise en miroir des données essentielle à la reprise sur incident de MetroCluster.
@@ -1684,6 +1706,7 @@ cluster01-02
 
 
 
+[[mirroring-the-root-aggregates]]
 === Mise en miroir des agrégats racine
 
 Pour assurer la protection des données, vous devez mettre en miroir les agrégats racine.
@@ -1722,6 +1745,7 @@ https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-concepts/home.html["
 
 
 
+[[creating-a-mirrored-data-aggregate-on-each-node]]
 === Crée un agrégat de données en miroir sur chaque nœud
 
 Vous devez créer un agrégat de données en miroir sur chaque nœud du groupe de reprise sur incident.
@@ -1791,6 +1815,7 @@ cluster_A::> storage aggregate create aggr1_node_A_1 -diskcount 10 -node node_A_
 
 
 
+[[creating-unmirrored-data-aggregates]]
 === Création d'agrégats de données sans mise en miroir
 
 Vous pouvez choisir de créer des agrégats de données non mis en miroir pour des données ne nécessitant pas la mise en miroir redondante fournie par les configurations MetroCluster.
@@ -1861,6 +1886,7 @@ controller_A_1::> storage aggregate create aggr1_controller_A_1 -diskcount 10 -n
 
 
 
+[[implementing-the-metrocluster-configuration]]
 === Mise en œuvre de la configuration MetroCluster
 
 Vous devez exécuter le `metrocluster configure` Commande pour démarrer la protection des données en configuration MetroCluster.
@@ -2002,6 +2028,7 @@ Remote: cluster_A         Configuration state configured
 
 
 
+[[configuring-fc-to-sas-bridges-for-health-monitoring]]
 === Configuration de ponts FC-SAS pour le contrôle de l'état du système
 
 Dans les systèmes exécutant des versions ONTAP antérieures à 9.8, si votre configuration inclut des ponts FC-SAS, vous devez effectuer quelques étapes de configuration spéciales pour surveiller les ponts FC-SAS dans la configuration MetroCluster.
@@ -2070,6 +2097,7 @@ ATTO_10.10.20.13  atto04        true          ok              Atto   FibreBridge
 
 
 
+[[checking-the-metrocluster-configuration]]
 === Vérification de la configuration MetroCluster
 
 Vous pouvez vérifier que les composants et les relations de la configuration MetroCluster fonctionnent correctement. Vous devez effectuer un contrôle après la configuration initiale et après avoir apporté des modifications à la configuration MetroCluster. Vous devez également effectuer une vérification avant le basculement (prévu) ou le rétablissement.
@@ -2204,6 +2232,7 @@ link:https://docs.netapp.com/us-en/ontap/network-management/index.html["Gestion 
 
 
 
+[[checking-for-metrocluster-configuration-errors-with-config-advisor]]
 == Vérification des erreurs de configuration MetroCluster avec Config Advisor
 
 Vous pouvez accéder au site de support NetApp et télécharger l'outil Config Advisor pour vérifier les erreurs de configuration courantes.
@@ -2222,6 +2251,7 @@ https://mysupport.netapp.com/site/tools/tool-eula/activeiq-configadvisor["Télé
 
 
 
+[[verifying-switchover-healing-and-switchback]]
 == Vérification du basculement, de la résolution et du rétablissement
 
 Il est recommandé de vérifier les opérations de basculement, de rétablissement et de rétablissement de la configuration MetroCluster.
@@ -2231,6 +2261,7 @@ Il est recommandé de vérifier les opérations de basculement, de rétablisseme
 
 
 
+[[protecting-configuration-backup-files]]
 == Protection des fichiers de sauvegarde de configuration
 
 Vous pouvez fournir une protection supplémentaire pour les fichiers de sauvegarde de la configuration du cluster en spécifiant une URL distante (HTTP ou FTP) dans laquelle les fichiers de sauvegarde de configuration seront chargés en plus des emplacements par défaut dans le cluster local.

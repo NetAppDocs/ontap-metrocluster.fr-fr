@@ -103,6 +103,7 @@ Lorsque vous ajoutez de nouveaux nœuds à un cluster existant sans broadcast do
 
 
 
+[[enable-console-logging]]
 == Activer la journalisation de la console
 
 NetApp vous recommande vivement d'activer la journalisation de la console sur les périphériques que vous utilisez et d'effectuer les actions suivantes lors de l'exécution de cette procédure :
@@ -117,6 +118,7 @@ Consultez l'article de la base de connaissances link:https://kb.netapp.com/Suppo
 
 
 
+[[example-naming-in-this-procedure]]
 == Exemple de dénomination dans cette procédure
 
 Cette procédure utilise des exemples de noms au cours de l'ensemble pour identifier les groupes de reprise sur incident, les nœuds et les commutateurs impliqués.
@@ -154,6 +156,7 @@ dr_group_2-new
 |===
 
 
+[[supported-platform-combinations-when-adding-a-second-dr-group]]
 == Combinaisons de plateformes prises en charge lors de l'ajout d'un deuxième groupe de reprise après incident
 
 Les tableaux suivants présentent les combinaisons de plateformes prises en charge pour les configurations IP MetroCluster à huit nœuds.
@@ -169,6 +172,7 @@ Les tableaux suivants présentent les combinaisons de plateformes prises en char
 ====
 
 
+[[supported-aff-and-fas-metrocluster-ip-expansion-combinations]]
 === Combinaisons d'extension IP AFF et FAS MetroCluster prises en charge
 
 Les tableaux suivants présentent les combinaisons de plates-formes prises en charge pour l'extension d'un système AFF ou FAS dans une configuration IP MetroCluster. Les tables sont divisées en deux groupes :
@@ -202,6 +206,7 @@ image:../media/expand-ip-group-2-updated.png["Combinaisons d'extension pour les 
 ====
 
 
+[[supported-asa-metrocluster-ip-expansion-combinations]]
 === Combinaisons d'extension IP ASA MetroCluster prises en charge
 
 Le tableau suivant présente les combinaisons de plateformes prises en charge pour l'extension d'un système ASA dans une configuration MetroCluster IP :
@@ -210,6 +215,7 @@ image::../media/8node_comb_ip_asa.png[Combinaisons de plateformes pour configura
 
 
 
+[[send-a-custom-autosupport-message-prior-to-maintenance]]
 == Envoyer un message AutoSupport personnalisé avant la maintenance
 
 Avant d'effectuer la maintenance, vous devez envoyer un message AutoSupport pour informer le support technique de NetApp que la maintenance est en cours. Informer le support technique que la maintenance est en cours empêche l'ouverture d'un dossier en supposant une interruption de l'activité.
@@ -240,6 +246,7 @@ Si la maintenance est terminée avant le temps écoulé, vous pouvez appeler un 
 
 
 
+[[considerations-for-vlans-when-adding-a-new-dr-group]]
 == Considérations relatives aux VLAN lors de l'ajout d'un nouveau groupe DR
 
 * Les considérations VLAN suivantes s'appliquent lors de l'extension d'une configuration MetroCluster IP :
@@ -305,6 +312,7 @@ Plages VLAN valides :
 
 
 
+[[verify-the-health-of-the-metrocluster-configuration]]
 == Vérifier l'état de santé de la configuration MetroCluster
 
 Vous devez vérifier l'intégrité et la connectivité de la configuration MetroCluster avant d'effectuer l'extension.
@@ -442,6 +450,7 @@ cluster_A::>
 
 
 
+[[remove-the-configuration-from-monitoring-applications]]
 == Supprimez la configuration des applications de surveillance
 
 Si la configuration existante est contrôlée avec le logiciel MetroCluster Tiebreaker, le médiateur ONTAP ou d'autres applications tierces (par exemple, ClusterLion) qui peuvent lancer un basculement, vous devez supprimer la configuration MetroCluster du logiciel de surveillance avant la mise à niveau.
@@ -486,6 +495,7 @@ Reportez-vous à la documentation de l'application.
 
 
 
+[[prepare-the-new-controller-modules]]
 == Préparez les nouveaux modules de contrôleur
 
 Vous devez préparer les quatre nouveaux nœuds MetroCluster et installer la version correcte de ONTAP.
@@ -535,6 +545,7 @@ Ne terminez pas encore l'assistant de cluster ou l'assistant de nœud pour le mo
 
 
 
+[[upgrade-rcf-files]]
 == Mettre à niveau les fichiers RCF
 
 Si vous installez un nouveau firmware du commutateur, vous devez installer le micrologiciel du commutateur avant de mettre à niveau le fichier RCF.
@@ -621,6 +632,7 @@ NOTE: Si vous disposez d'une configuration réseau L2 partagée ou L3, il se peu
 
 
 
+[[join-the-new-nodes-to-the-clusters]]
 == Reliez les nouveaux nœuds aux clusters
 
 Vous devez ajouter les quatre nouveaux nœuds IP MetroCluster à la configuration MetroCluster existante.
@@ -704,6 +716,7 @@ Do you want to use this configuration? {yes, no} [yes]: yes
 
 
 
+[[configure-intercluster-lifs-for-cluster-peering]]
 == Configurer les LIF intercluster pour le peering de clusters
 
 Vous devez créer des LIFs intercluster sur les ports utilisés pour la communication entre les clusters partenaires MetroCluster. Vous pouvez utiliser des ports ou ports dédiés qui ont également le trafic de données.
@@ -979,6 +992,7 @@ cluster01
 ====
 
 
+[[create-the-metrocluster-interfaces-and-mirror-root-aggregates]]
 == Créer les interfaces MetroCluster et les agrégats racines en miroir
 
 Vous devez créer les interfaces MetroCluster sur les nouveaux nœuds IP MetroCluster et mettre en miroir les agrégats racine.
@@ -1432,6 +1446,7 @@ aggr_data_a2
 
 
 
+[[finalize-the-addition-of-the-new-nodes]]
 == Finaliser l'ajout des nouveaux nœuds
 
 Vous devez intégrer le nouveau groupe de reprise après incident à la configuration MetroCluster et créer des agrégats de données en miroir sur les nouveaux nœuds.

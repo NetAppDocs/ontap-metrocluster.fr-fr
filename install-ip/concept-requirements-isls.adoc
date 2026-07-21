@@ -15,6 +15,7 @@ Les liens ISL (Inter-Switch Links) transportant le trafic MetroCluster sur toute
 
 
 
+[[metrocluster-isl-requirements]]
 == Exigences ISL de MetroCluster
 
 Ces exigences s'appliquent aux ISL sur toutes les configurations IP MetroCluster :
@@ -39,6 +40,7 @@ CAUTION: Les mises à niveau vers ONTAP 9.18.1 et versions ultérieures sur les 
 
 
 
+[[latency-and-packet-loss-limits-in-the-isls]]
 === Limites de latence et de perte de paquets sur les liens ISL
 
 Ce qui suit s'applique au trafic aller-retour entre les commutateurs IP MetroCluster sur site_A et site_B, avec la configuration MetroCluster en état de fonctionnement stable :
@@ -53,6 +55,7 @@ Ce qui suit s'applique au trafic aller-retour entre les commutateurs IP MetroClu
 
 
 
+[[transceiver-and-cable-considerations]]
 == Considérations relatives à l'émetteur-récepteur et au câble
 
 Tous les SFP ou SFP pris en charge par le fournisseur de l'équipement sont pris en charge pour les liens ISL de MetroCluster. Les SFP et QSFP fournis par NetApp ou le fournisseur de l'équipement doivent être pris en charge par le commutateur et le micrologiciel du commutateur.
@@ -66,6 +69,7 @@ NOTE: Si vous configurez une FCR, vérifiez que vous sélectionnez le mode de vi
 
 
 
+[[using-xwdm-tdm-and-external-encryption-devices]]
 == Utilisation de xWDM, TDM et de périphériques de cryptage externes
 
 Lorsque vous utilisez des périphériques xWDM/TDM ou des périphériques fournissant un cryptage dans une configuration IP MetroCluster, votre environnement doit satisfaire aux exigences suivantes :
@@ -76,6 +80,7 @@ Lorsque vous utilisez des périphériques xWDM/TDM ou des périphériques fourni
 
 
 
+[[supported-number-of-isls-and-breakout-cables]]
 == Nombre pris en charge de liens ISL et de câbles de dérivation
 
 Le tableau suivant indique le nombre maximal de liens ISL pris en charge qui peuvent être configurés sur un commutateur IP MetroCluster à l'aide de la configuration du fichier de configuration de référence (RCF).

@@ -21,6 +21,7 @@ Une fois l'équipement sur le site de secours soumis à toute opération de main
 
 
 
+[[enable-console-logging]]
 == Activer la journalisation de la console
 
 NetApp vous recommande vivement d'activer la journalisation de la console sur les périphériques que vous utilisez et d'effectuer les actions suivantes lors de l'exécution de cette procédure :
@@ -35,6 +36,7 @@ Consultez l'article de la base de connaissances link:https://kb.netapp.com/Suppo
 
 
 
+[[healing-the-configuration-in-a-metrocluster-configuration]]
 == Correction de la configuration dans une configuration MetroCluster
 
 Dans les configurations MetroCluster FC, vous effectuez les opérations de correction dans un ordre spécifique afin de restaurer la fonctionnalité MetroCluster après un basculement.
@@ -57,6 +59,7 @@ L'opération de réparation doit d'abord être effectuée sur les agrégats de d
 
 
 
+[[healing-the-data-aggregates]]
 === Corrigez les agrégats de données
 
 Vous devez réparer et remplacer tout matériel sur le site de reprise après incident. Ce processus resynchronise les agrégats de données et prépare le site de reprise sur incident (maintenant réparé) pour un fonctionnement normal. Vous devez corriger les agrégats de données avant d'entreprendre le traitement des agrégats racine.
@@ -124,6 +127,7 @@ aggr_b2   227.1GB  227.1GB   0%    online  0      mcc1-a2      raid_dp, mirrored
 
 
 
+[[healing-the-root-aggregates-after-a-disaster]]
 === Corrigez les agrégats racine après un incident
 
 Une fois les agrégats de données résolus, vous devez corriger les agrégats racine en vue de l'opération de rétablissement.
@@ -164,6 +168,7 @@ mcc1A::> metrocluster operation show
 
 
 
+[[verifying-that-your-system-is-ready-for-a-switchback]]
 == Vérifier que votre système est prêt pour le rétablissement
 
 Si votre système est déjà dans l'état de basculement, vous pouvez utiliser le `-simulate` option permettant d'afficher un aperçu des résultats d'une opération de rétablissement.
@@ -241,6 +246,7 @@ Le résultat indique si l'opération de rétablissement s'exécuterait en erreur
 
 
 
+[[example-of-verification-results]]
 === Exemple de résultats de vérification
 
 L'exemple suivant illustre la vérification réussie d'une opération de rétablissement :
@@ -272,6 +278,7 @@ Job ID Name                 Vserver    Node           State
 ----
 
 
+[[performing-a-switchback]]
 == Exécution d'un rétablissement
 
 Après avoir rétablissement la configuration MetroCluster, vous pouvez exécuter l'opération de rétablissement MetroCluster. L'opération de rétablissement MetroCluster renvoie la configuration à son état de fonctionnement normal, avec les SVM (Storage Virtual machines) source synchrone sur le site de reprise après incident et permettant l'accès aux données depuis les pools de disques locaux.
@@ -372,6 +379,7 @@ Dans ONTAP 8.3, vous devez rétablir manuellement une configuration SnapMirror p
 
 
 
+[[verifying-a-successful-switchback]]
 == Vérification du rétablissement réussi
 
 Après le rétablissement, il vous faut vérifier que tous les agrégats et les serveurs virtuels de stockage sont basculés et en ligne.
@@ -469,6 +477,7 @@ Vous devez répéter les sections précédentes pour effectuer le rétablissemen
 
 
 
+[[deleting-stale-aggregate-listings-after-switchback]]
 == Suppression des listes d'agrégats obsolètes après le rétablissement
 
 Dans certains cas, après le rétablissement, vous remarquerez peut-être la présence d'agrégats _obsolètes_. Les agrégats obsolètes sont des agrégats qui ont été supprimés du ONTAP, mais dont les informations restent enregistrées sur le disque. Les agrégats obsolètes s'affichent avec le `nodeshell aggr status -r` mais pas avec le `storage aggregate show` commande. Vous pouvez supprimer ces enregistrements afin qu'ils ne s'affichent plus.

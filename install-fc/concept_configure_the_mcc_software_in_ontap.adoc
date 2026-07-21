@@ -17,12 +17,14 @@ image::../media/workflow_high_level_node_and_cluster_configuration_software.gif[
 
 
 
+[[gathering-required-information]]
 == Collecte des informations requises
 
 Vous devez rassembler les adresses IP requises pour les modules de contrôleur avant de commencer le processus de configuration.
 
 
 
+[[ip-network-information-worksheet-for-site-a]]
 === Fiche d'informations sur le réseau IP pour le site A
 
 Avant de configurer le système, vous devez obtenir des adresses IP et d'autres informations réseau pour le premier site MetroCluster (site A) de votre administrateur réseau.
@@ -322,6 +324,7 @@ Non requis pour les configurations MetroCluster à deux nœuds (un nœud sur cha
 |===
 
 
+[[ip-network-information-worksheet-for-site-b]]
 === Fiche d'informations sur le réseau IP pour le site B
 
 Avant de configurer le système, vous devez obtenir des adresses IP et d'autres informations réseau pour le second site MetroCluster (site B) de votre administrateur réseau.
@@ -619,6 +622,7 @@ Non requis pour les configurations MetroCluster à deux nœuds (un nœud sur cha
 |===
 
 
+[[similarities-and-differences-between-standard-cluster-and-metrocluster-configurations]]
 == Similarités et différences entre les configurations cluster standard et MetroCluster
 
 La configuration des nœuds de chaque cluster dans une configuration MetroCluster est similaire à celle des nœuds d'un cluster standard.
@@ -674,6 +678,7 @@ Obligatoire
 |===
 
 
+[[verifying-and-configuring-the-ha-state-of-components-in-maintenance-mode]]
 == Vérification et configuration de l'état HA des composants en mode maintenance
 
 Lors de la configuration d'un système de stockage dans une configuration MetroCluster FC, vous devez vous assurer que l'état haute disponibilité (HA) du module de contrôleur et des composants du châssis est mcc ou mcc-2n afin que ces composants puissent démarrer correctement. Bien que cette valeur doive être préconfigurée sur les systèmes reçus de l'usine, vous devez toujours vérifier le réglage avant de continuer.
@@ -790,6 +795,7 @@ Configuration IP MetroCluster à huit ou quatre nœuds
 
 
 
+[[restoring-system-defaults-and-configuring-the-hba-type-on-a-controller-module]]
 == Restauration des paramètres par défaut du système et configuration du type de HBA sur un module de contrôleur
 
 .Description de la tâche
@@ -927,6 +933,7 @@ Please choose one of the following:
 --
 
 
+[[configuring-fc-vi-ports-on-a-x1132a-r6-quad-port-card-on-fas8020-systems]]
 == Configuration des ports FC-VI sur une carte X1132A-R6 à quatre ports sur les systèmes FAS8020
 
 Si vous utilisez la carte X1132A-R6 à quatre ports sur un système FAS8020, vous pouvez passer en mode de maintenance pour configurer les ports 1a et 1b pour FC-VI et pour l'utilisation d'un initiateur. Cela n'est pas nécessaire pour les systèmes MetroCluster reçus en usine, dans lesquels les ports sont configurés de façon appropriée pour votre configuration.
@@ -1033,6 +1040,7 @@ controller_B_1
 
 
 
+[[verifying-disk-assignment-in-maintenance-mode-in-an-eight-node-or-a-four-node-configuration]]
 == Vérification de l'affectation du disque en mode maintenance dans une configuration à huit ou quatre nœuds
 
 Avant de démarrer entièrement le système sur ONTAP, vous pouvez également démarrer en mode maintenance et vérifier l'affectation des disques sur les nœuds. Les disques doivent être affectés pour créer une configuration active-active entièrement symétrique, où chaque pool a le même nombre de disques qui leur sont affectés.
@@ -1232,6 +1240,7 @@ L'utilisation de caractères génériques dans la commande vous permet d'affecte
 
 
 
+[[assigning-disk-ownership-in-non-aff-systems]]
 === Assignation de la propriété des disques dans des systèmes non-AFF
 
 Si les nœuds MetroCluster ne sont pas affectés correctement, ou si vous utilisez des tiroirs disques DS460C dans votre configuration, il est nécessaire d'attribuer des disques à chacun des nœuds de la configuration MetroCluster selon le tiroir par tiroir. Vous allez créer une configuration dans laquelle chaque nœud a le même nombre de disques dans ses pools de disques locaux et distants.
@@ -1389,6 +1398,7 @@ Si le contrôleur de stockage Controller_B_2 dispose de quatre tiroirs, vous ex�
 
 
 
+[[assigning-disk-ownership-in-aff-systems]]
 === Assignation de la propriété des disques dans les systèmes AFF
 
 Si vous utilisez des systèmes AFF dans une configuration avec des agrégats en miroir et que les nœuds ne disposent pas des disques (SSD) correctement affectés, vous devez attribuer la moitié des disques de chaque tiroir à un nœud local et l'autre moitié des disques à son nœud partenaire haute disponibilité. Vous devez créer une configuration dans laquelle chaque nœud a le même nombre de disques dans ses pools de disques locaux et distants.
@@ -1505,6 +1515,7 @@ Si le contrôleur de stockage Controller_B_2 dispose de quatre tiroirs, chacun d
 
 
 
+[[verifying-disk-assignment-in-maintenance-mode-in-a-two-node-configuration]]
 == Vérification de l'affectation du disque en mode maintenance dans une configuration à deux nœuds
 
 Avant de démarrer entièrement le système sur ONTAP, vous pouvez également démarrer le système en mode maintenance et vérifier l'affectation des disques sur les nœuds. Il convient d'attribuer aux disques pour créer une configuration entièrement symétrique avec les deux sites possédant leurs propres tiroirs disques et servant les données, où chaque nœud et chaque pool disposent d'un nombre égal de disques en miroir qui leur sont affectés.
@@ -1622,6 +1633,7 @@ Si le contrôleur de stockage node_B_1 dispose de quatre tiroirs, vous exécutez
 
 
 
+[[setting-up-ontap]]
 == Configuration de ONTAP
 
 Vous devez configurer le protocole ONTAP sur chaque module de contrôleur.
@@ -1635,6 +1647,8 @@ Si vous avez besoin de netboot sur les nouveaux contrôleurs, reportez-vous à l
 
 
 
+[[setting-up-ontap-in-a-two-node-metrocluster-configuration]]
+[[setup_ontap_2node_MCC]]
 === Configuration d'ONTAP dans une configuration MetroCluster à deux nœuds
 
 Dans une configuration MetroCluster à deux nœuds, sur chaque cluster, vous devez démarrer le nœud, quitter l'assistant de configuration des clusters et utiliser la commande cluster setup pour configurer le nœud en tant que cluster à un seul nœud.
@@ -1731,6 +1745,8 @@ Si il devient nécessaire de modifier l'un des paramètres que vous avez saisis 
 
 
 
+[[setting-up-ontap-in-an-eight-node-or-four-node-metrocluster-configuration]]
+[[setup_ontap_8node_4node_MCC]]
 === Configuration de ONTAP dans une configuration MetroCluster à huit ou quatre nœuds
 
 Après le démarrage de chaque nœud, vous êtes invité à exécuter l'outil System Setup afin d'effectuer une configuration de nœud et de cluster de base. Une fois le cluster configuré, vous revenez à l'interface de ligne de commandes de ONTAP pour créer des agrégats et créer la configuration MetroCluster.
@@ -1864,6 +1880,7 @@ Revenez à l'interface de ligne de commandes ONTAP et terminez la configuration 
 
 
 
+[[configuring-the-clusters-into-a-metrocluster-configuration]]
 == Configuration des clusters dans une configuration MetroCluster
 
 Vous devez peer-to-peer les clusters, mettre en miroir les agrégats racine, créer un agrégat de données en miroir, puis lancer la commande pour mettre en œuvre les opérations MetroCluster.
@@ -1873,12 +1890,14 @@ Avant de courir `metrocluster configure`, Le mode HA et la mise en miroir DR ne 
 
 
 
+[[peering-the-clusters]]
 === Peering des clusters
 
 Les clusters de la configuration MetroCluster doivent être dans une relation de pairs, de sorte qu'ils puissent communiquer entre eux et exécuter la mise en miroir des données essentielle à la reprise sur incident de MetroCluster.
 
 
 
+[[configuring-intercluster-lifs]]
 === Configuration des LIFs intercluster
 
 Vous devez créer des LIFs intercluster sur les ports utilisés pour la communication entre les clusters partenaires MetroCluster. Vous pouvez utiliser des ports ou ports dédiés qui ont également le trafic de données.
@@ -1890,6 +1909,7 @@ Vous devez créer des LIFs intercluster sur les ports utilisés pour la communic
 
 
 
+[[config_LIFs_dedicated]]
 ==== Configuration des LIFs intercluster sur des ports dédiés
 
 Vous pouvez configurer les LIFs intercluster sur des ports dédiés. Cela augmente généralement la bande passante disponible pour le trafic de réplication.
@@ -2106,6 +2126,7 @@ Pour déterminer si l'utilisation d'un port dédié pour la réplication intercl
 
 
 
+[[config_LIFs_shared_data]]
 ==== Configuration des LIFs intercluster sur des ports data partagés
 
 Vous pouvez configurer les LIFs intercluster sur des ports partagés avec le réseau de données. Cela réduit le nombre de ports nécessaires pour la mise en réseau intercluster.
@@ -2246,6 +2267,7 @@ link:concept_prepare_for_the_mcc_installation.html["Points à prendre en compte 
 
 
 
+[[creating-a-cluster-peer-relationship]]
 === Création d'une relation entre clusters
 
 Vous devez créer la relation entre clusters MetroCluster.
@@ -2463,6 +2485,7 @@ cluster01-02
 
 
 
+[[mirroring-the-root-aggregates]]
 === Mise en miroir des agrégats racine
 
 Pour assurer la protection des données, vous devez mettre en miroir les agrégats racine.
@@ -2501,6 +2524,7 @@ link:https://docs.netapp.com/us-en/ontap/volumes/index.html["Gestion du stockage
 
 
 
+[[creating-a-mirrored-data-aggregate-on-each-node]]
 === Crée un agrégat de données en miroir sur chaque nœud
 
 Vous devez créer un agrégat de données en miroir sur chaque nœud du groupe de reprise sur incident.
@@ -2564,6 +2588,7 @@ cluster_A::> storage aggregate create aggr1_node_A_1 -diskcount 10 -node node_A_
 
 
 
+[[creating-unmirrored-data-aggregates]]
 === Création d'agrégats de données sans mise en miroir
 
 Vous pouvez choisir de créer des agrégats de données non mis en miroir pour des données ne nécessitant pas la mise en miroir redondante fournie par les configurations MetroCluster.
@@ -2637,6 +2662,7 @@ link:https://docs.netapp.com/us-en/ontap/disks-aggregates/index.html["Gestion de
 
 
 
+[[implementing-the-metrocluster-configuration]]
 === Mise en œuvre de la configuration MetroCluster
 
 Vous devez exécuter le `metrocluster configure` Commande pour démarrer la protection des données en configuration MetroCluster.
@@ -2792,6 +2818,7 @@ Remote: cluster_A         Configuration state configured
 
 
 
+[[configuring-in-order-delivery-or-out-of-order-delivery-of-frames-on-ontap-software]]
 === Configuration de la livraison en commande ou de la livraison hors commande des trames sur le logiciel ONTAP
 
 Vous devez configurer soit la livraison dans l'ordre (IOD), soit la livraison hors commande (OOD) des trames en fonction de la configuration du commutateur Fibre Channel (FC).
@@ -2901,6 +2928,8 @@ mcc4-b2      mlx4_0          IB      Up     false     192.0.2.10  	ib2b
 
 
 
+[[configuring-snmpv3-in-a-metrocluster-fc-configuration]]
+[[snmpv3-mcc-fc]]
 === Configuration de SNMPv3 dans une configuration MetroCluster FC
 
 .Avant de commencer
@@ -3030,6 +3059,7 @@ NOTE: Vous devez également définir des mots de passe pour les comptes inutilis
 
 
 
+[[configuring-metrocluster-components-for-health-monitoring]]
 === Configuration des composants MetroCluster pour le contrôle de l'état du système
 
 Vous devez effectuer certaines étapes de configuration spéciales avant de surveiller les composants dans une configuration MetroCluster.
@@ -3204,6 +3234,7 @@ ATTO_10.10.20.13  atto04        true          ok              Atto   FibreBridge
 
 
 
+[[checking-the-metrocluster-configuration]]
 === Vérification de la configuration MetroCluster
 
 Vous pouvez vérifier que les composants et les relations de la configuration MetroCluster fonctionnent correctement.
@@ -3340,6 +3371,7 @@ link:https://docs.netapp.com/us-en/ontap/network-management/index.html["Gestion 
 
 
 
+[[checking-for-metrocluster-configuration-errors-with-config-advisor]]
 == Vérification des erreurs de configuration MetroCluster avec Config Advisor
 
 Vous pouvez accéder au site de support NetApp et télécharger l'outil Config Advisor pour vérifier les erreurs de configuration courantes.
@@ -3360,6 +3392,7 @@ https://mysupport.netapp.com/site/tools/tool-eula/activeiq-configadvisor["Télé
 
 
 
+[[verifying-local-ha-operation]]
 == Vérification du fonctionnement de la haute disponibilité locale
 
 Si vous disposez d'une configuration MetroCluster à quatre nœuds, vérifiez le fonctionnement des paires haute disponibilité locales dans la configuration MetroCluster. Cette opération n'est pas requise dans les configurations à deux nœuds.
@@ -3468,6 +3501,7 @@ link:https://docs.netapp.com/us-en/ontap/cloud/high-availability-concept.html["C
 
 
 
+[[verifying-switchover-healing-and-switchback]]
 == Vérification du basculement, de la résolution et du rétablissement
 
 Il est recommandé de vérifier les opérations de basculement, de rétablissement et de rétablissement de la configuration MetroCluster.
@@ -3478,6 +3512,7 @@ Il est recommandé de vérifier les opérations de basculement, de rétablisseme
 
 
 
+[[protecting-configuration-backup-files]]
 == Protection des fichiers de sauvegarde de configuration
 
 Vous pouvez fournir une protection supplémentaire pour les fichiers de sauvegarde de la configuration du cluster en spécifiant une URL distante (HTTP ou FTP) dans laquelle les fichiers de sauvegarde de configuration seront chargés en plus des emplacements par défaut dans le cluster local.

@@ -19,6 +19,7 @@ Après la perte de données NVRAM pendant le basculement ou la récupération de
 
 
 
+[[how-nvfail-impacts-access-to-nfs-volumes-or-luns]]
 == Impact de NVFAIL sur l'accès aux volumes NFS ou aux LUN
 
 L'état NVFAIL est défini lorsque ONTAP détecte des erreurs NVRAM au démarrage, lorsqu'une opération de basculement MetroCluster se produit ou lors d'une opération de basculement HA si l'option NVFAIL est définie sur le volume. Si aucune erreur n'est détectée au démarrage, le service de fichiers démarre normalement. Toutefois, si des erreurs NVRAM sont détectées ou si un traitement NVFAIL est appliqué en cas d'incident, ONTAP arrête la réponse des instances de base de données.
@@ -75,6 +76,7 @@ Les LUN du volume sont mises hors ligne. Le `in-nvfailed-state` L'option sur le 
 |===
 
 
+[[commands-for-monitoring-data-loss-events]]
 == Commandes pour le contrôle des événements de perte de données
 
 Si vous activez l'option NVFAIL, vous recevez une notification en cas de panne système provoquée par des incohérences de la mémoire NVRAM ou un basculement MetroCluster.
@@ -117,6 +119,7 @@ Consultez la page man pour chaque commande pour plus d'informations.
 
 
 
+[[accessing-volumes-in-nvfail-state-after-a-switchover]]
 == Accès aux volumes dans l'état NVFAIL après un basculement
 
 Après un basculement, vous devez effacer l'état NVFAIL en réinitialisant le `-in-nvfailed-state` paramètre du `volume modify` commande de suppression de la restriction d'accès des clients aux données.
@@ -141,6 +144,7 @@ link:../manage/concept_monitoring_and_protecting_database_validity_by_using_nvfa
 
 
 
+[[recovering-luns-in-nvfail-states-after-switchover]]
 == Restauration des LUN dans les États NVFAIL après le basculement
 
 Après un basculement, l'hôte n'a plus accès aux données des LUN qui sont dans les États NVFAIL. Vous devez effectuer plusieurs actions avant que la base de données n'ait accès aux LUN.

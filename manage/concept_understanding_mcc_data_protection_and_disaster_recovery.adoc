@@ -17,6 +17,7 @@ MetroCluster utilise la mise en miroir pour protéger les données d'un cluster.
 
 
 
+[[how-eight-and-four-node-metrocluster-configurations-provide-local-failover-and-switchover]]
 == Comment les configurations MetroCluster à 8 et 4 nœuds permettent le basculement et le basculement local
 
 Les configurations MetroCluster à 8 et 4 nœuds protègent les données au niveau local et du cluster. Si vous configurez une configuration MetroCluster, vous devez savoir comment les configurations MetroCluster protègent vos données.
@@ -25,6 +26,7 @@ Les configurations MetroCluster protègent les données à l'aide de deux cluste
 
 
 
+[[how-local-ha-data-protection-works-in-a-metrocluster-configuration]]
 === Fonctionnement de la protection des données locales haute disponibilité dans une configuration MetroCluster
 
 Il faut comprendre le fonctionnement des paires haute disponibilité dans la configuration MetroCluster.
@@ -40,12 +42,14 @@ link:https://docs.netapp.com/us-en/ontap/high-availability/index.html["Configura
 
 
 
+[[how-metrocluster-configurations-provide-data-and-configuration-replication]]
 == Réplication des données et des configurations MetroCluster
 
 Les configurations MetroCluster utilisent plusieurs fonctionnalités ONTAP pour assurer une réplication synchrone des données et une configuration entre les deux sites MetroCluster.
 
 
 
+[[configuration-protection-with-the-configuration-replication-service]]
 === Configurez la protection avec le service de réplication de configuration
 
 Le service de réplication de configuration de ONTAP protège la configuration de MetroCluster en répliquant automatiquement les informations sur le partenaire de reprise après incident.
@@ -56,6 +60,7 @@ Les informations répliquées incluent la configuration du cluster et la configu
 
 
 
+[[replication-of-svms-during-metrocluster-operations]]
 === Réplication des SVM au cours des opérations MetroCluster
 
 Le service de réplication de configuration (CRS) de ONTAP permet la configuration redondante des serveurs de données et la mise en miroir des volumes de données appartenant à la SVM. En cas de basculement, le SVM source est désactivé et le SVM de destination, situé sur le cluster survivant, devient actif.
@@ -111,6 +116,7 @@ https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-sag/home.html["Admin
 
 
 
+[[how-metrocluster-configurations-use-syncmirror-to-provide-data-redundancy]]
 === Comment les configurations MetroCluster assurent la redondance des données grâce à SyncMirror
 
 Les agrégats en miroir utilisant la fonctionnalité SyncMirror assurent la redondance des données et contiennent les volumes détenus par le SVM (Storage Virtual machine) source et de destination. Les données sont répliquées dans des pools de disques sur le cluster partenaire. Les agrégats non mis en miroir sont également pris en charge.
@@ -167,6 +173,7 @@ image::../media/mcc_mirroring_of_pools.gif[Mise en miroir des pools de stockage 
 
 
 
+[[how-nvram-or-nvmem-cache-mirroring-and-dynamic-mirroring-work-in-metrocluster-configurations]]
 === Fonctionnement de la mise en miroir de cache NVRAM ou NVMEM et de la mise en miroir dynamique dans les configurations MetroCluster
 
 La mémoire non volatile (NVRAM ou NVMEM, selon le modèle de plateforme) des contrôleurs de stockage est mise en miroir localement vers un partenaire de haute disponibilité locale, et à distance vers un partenaire de reprise sur incident à distance sur le site du partenaire. En cas de basculement ou de basculement local, cette configuration permet de préserver les données du cache non volatile.
@@ -226,6 +233,7 @@ image::../media/mcc_nvram_mirroring_example_dynamic_dr_aux.gif[MetroCluster NVRA
 
 
 
+[[types-of-disasters-and-recovery-methods]]
 == Types d'incidents et de méthodes de reprise
 
 Vous devez être familiarisé avec différents types de défaillances et d'incidents afin de pouvoir utiliser la configuration MetroCluster pour réagir de manière appropriée.
@@ -287,6 +295,7 @@ NOTE: L'option AUSO (basculement automatique non planifié) n'est pas prise en c
 |===
 
 
+[[how-an-eight-node-or-four-node-metrocluster-configuration-provides-nondisruptive-operations]]
 == Continuité de l'activité grâce à une configuration MetroCluster à huit ou quatre nœuds
 
 Dans le cas d'un problème limité à un seul nœud, un basculement et un retour au sein de la paire haute disponibilité locale assurent un fonctionnement sans interruption. Dans ce cas, la configuration MetroCluster ne nécessite pas de basculement vers le site distant.
@@ -301,6 +310,7 @@ En cas de seconde défaillance après un basculement local, l'événement MetroC
 
 
 
+[[switchover-and-switchback-during-metrocluster-transition]]
 === Basculement et rétablissement lors de la transition MetroCluster
 
 La transition FC-à-IP de MetroCluster implique l'ajout de nœuds IP MetroCluster et de commutateurs IP à une configuration FC MetroCluster existante, puis le retrait des nœuds FC MetroCluster. En fonction du stade du processus de transition, les opérations de basculement, de rétablissement et de rétablissement de MetroCluster utilisent des flux de travail différents.
@@ -309,6 +319,7 @@ Voir http://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-mcc-upgrade/GUID-18
 
 
 
+[[consequences-of-local-failover-after-switchover]]
 === Conséquences du basculement local après le basculement
 
 En cas de basculement MetroCluster et lorsqu'un problème survient sur un site survivant, un basculement local assure une continuité de l'activité continue. Toutefois, le système est exposé à un risque, car il ne se trouve plus dans une configuration redondante.
@@ -317,6 +328,7 @@ En cas de basculement local après un basculement, un contrôleur unique transme
 
 
 
+[[how-a-two-node-metrocluster-configuration-provides-nondisruptive-operations]]
 == Comment une configuration MetroCluster à deux nœuds assure la continuité de l'activité
 
 Si le problème rencontré par l'un des deux sites est très critique, le basculement MetroCluster assure une continuité de l'activité. Si les pannes d'alimentation affectent à la fois le nœud et le stockage, le basculement n'est pas automatique et une perturbation s'effectue jusqu'à ce que le `metrocluster switchover` la commande est émise.
@@ -330,6 +342,7 @@ link:concept_understanding_mcc_data_protection_and_disaster_recovery.html["Bascu
 
 
 
+[[overview-of-the-switchover-process]]
 == Présentation du processus de basculement
 
 Le basculement MetroCluster assure une reprise immédiate des services à la suite d'un incident en déplaçant l'accès du client et du stockage depuis le cluster source vers le site distant. Vous devez connaître les changements à attendre et les actions à effectuer en cas de basculement.
@@ -360,6 +373,7 @@ NOTE: Cette procédure ne doit être utilisée que si l'autre site est stable et
 
 
 
+[[availability-of-commands-during-switchover]]
 === Disponibilité des commandes lors du basculement
 
 Le tableau suivant indique la disponibilité des commandes lors du basculement :
@@ -480,6 +494,7 @@ Il est possible d'interrompre une relation SnapMirror entre un terminal source e
 |===
 
 
+[[differences-in-switchover-between-metrocluster-fc-and-ip-configurations]]
 === Différences de basculement entre les configurations FC et IP de MetroCluster
 
 Dans les configurations IP MetroCluster, les disques distants étant accessibles via les nœuds partenaires DR distants qui agissent comme des cibles iSCSI, les disques distants ne sont pas accessibles en cas de panne des nœuds distants. Cette situation se traduit par des différences avec les configurations MetroCluster FC :
@@ -493,6 +508,7 @@ NOTE: Lorsque des agrégats non mis en miroir sont pris en charge sur une config
 
 
 
+[[disk-ownership-changes-during-ha-takeover-and-metrocluster-switchover-in-a-four-node-metrocluster-configuration]]
 === Modification de la propriété des disques lors du basculement haute disponibilité et du basculement du MetroCluster dans une configuration MetroCluster à quatre nœuds
 
 La propriété des disques évolue temporairement automatiquement lors des opérations de haute disponibilité et de MetroCluster. Il est utile de savoir comment le système suit quel nœud possède quels disques.
@@ -628,6 +644,7 @@ sans objet
 |===
 
 
+[[considerations-when-using-unmirrored-aggregates]]
 === Considérations relatives à l'utilisation d'agrégats non mis en miroir
 
 Si votre configuration inclut des agrégats sans mise en miroir, vous devez connaître les problèmes d'accès potentiels après les opérations de basculement.
@@ -666,6 +683,7 @@ Une LUN ne doit pas être située sur un agrégat sans miroir. La configuration 
 
 
 
+[[automatic-unplanned-switchover-in-metrocluster-fc-configurations]]
 === Basculement non planifié automatique dans les configurations MetroCluster FC
 
 Dans les configurations FC MetroCluster, certains scénarios peuvent déclencher un basculement automatique non planifié dans le cas d'une défaillance de contrôleur au niveau du site. La fonction AUSO peut être désactivée si vous le souhaitez.
@@ -734,18 +752,21 @@ link:task_perform_switchover_for_tests_or_maintenance.html["Effectuer un bascule
 
 
 
+[[mediator-assisted-automatic-unplanned-switchover-in-metrocluster-ip-configurations]]
 === Basculement automatique non planifié assisté par médiateur dans les configurations IP MetroCluster
 
 link:../install-ip/concept-ontap-mediator-supports-automatic-unplanned-switchover.html["Découvrez comment le médiateur ONTAP prend en charge le basculement automatique non planifié dans les configurations MetroCluster IP"].
 
 
 
+[[what-happens-during-healing-metrocluster-fc-configurations]]
 == Que se passe-t-il lors de la correction (configurations MetroCluster FC)
 
 Lors de la réparation dans les configurations FC MetroCluster, la resynchronisation des agrégats en miroir consiste à réaliser une étape qui prépare les nœuds sur le site réparé pour assurer le rétablissement. Cet événement est planifié et vous offre ainsi un contrôle total sur chaque étape afin de réduire les temps d'arrêt. La fonctionnalité de correction est un processus en deux étapes survenant sur les composants de stockage et de contrôleur.
 
 
 
+[[data-aggregate-healing]]
 === Réparation d'agrégats de données
 
 Une fois le problème résolu sur le site d'incident, vous démarrez la phase de résolution du stockage :
@@ -764,6 +785,7 @@ link:../manage/task_verifiy_that_your_system_is_ready_for_a_switchover.html["Cor
 
 
 
+[[root-aggregate-healing]]
 === Autorétablissement d'agrégat racine
 
 Une fois les agrégats synchronisés, vous démarrez la phase de résolution du contrôleur en rédonnant les agrégats CFO et les agrégats racine à leurs partenaires de reprise après incident respectifs.
@@ -772,12 +794,14 @@ link:../manage/task_verifiy_that_your_system_is_ready_for_a_switchover.html["Cor
 
 
 
+[[what-happens-during-healing-metrocluster-ip-configurations]]
 == Que se passe-t-il lors de la correction (configurations MetroCluster IP)
 
 Lors de la réparation dans les configurations IP MetroCluster, la resynchronisation des agrégats en miroir consiste à réaliser une étape qui prépare les nœuds sur le site réparé pour assurer le rétablissement. Cet événement est planifié et vous offre ainsi un contrôle total sur chaque étape afin de réduire les temps d'arrêt. La fonctionnalité de correction est un processus en deux étapes survenant sur les composants de stockage et de contrôleur.
 
 
 
+[[differences-with-metrocluster-fc-configurations]]
 === Différences avec les configurations MetroCluster FC
 
 Dans les configurations IP MetroCluster, vous devez démarrer les nœuds du cluster sur le site de reprise après incident avant l'opération de réparation.
@@ -788,6 +812,7 @@ Si les nœuds du site de reprise ne sont pas en cours d'exécution, l'opération
 
 
 
+[[data-aggregate-healing]]
 === Réparation d'agrégats de données
 
 Une fois le problème résolu sur le site d'incident, vous démarrez la phase de résolution du stockage :
@@ -806,6 +831,7 @@ link:../manage/task_verifiy_that_your_system_is_ready_for_a_switchover.html["Cor
 
 
 
+[[root-aggregate-healing]]
 === Autorétablissement d'agrégat racine
 
 Une fois les agrégats synchronisés, la phase de réparation des agrégats racines s'effectue. Dans les configurations IP MetroCluster, cette phase confirme que les agrégats ont été guéris.
@@ -814,12 +840,14 @@ link:../manage/task_verifiy_that_your_system_is_ready_for_a_switchover.html["Cor
 
 
 
+[[automatic-healing-of-aggregates-on-metrocluster-ip-configurations-after-switchover]]
 == Autorétablissement des agrégats sur les configurations IP MetroCluster après le basculement
 
 Depuis ONTAP 9.5, la fonctionnalité de correction est automatisée lors des opérations de basculement négociées sur les configurations IP MetroCluster. Depuis ONTAP 9.6, la correction automatisée après le basculement non planifié est prise en charge. Cela supprime l'exigence d'émettre le `metrocluster heal` commandes.
 
 
 
+[[automatic-healing-after-negotiated-switchover-beginning-with-ontap-9-5]]
 === Autorétablissement après basculement négocié (à partir de ONTAP 9.5)
 
 Après avoir effectué un basculement négocié (une commande de basculement émise sans l'option « force-on-Disaster true »), la fonctionnalité d'autorétablissement simplifie la procédure à suivre pour rétablir le fonctionnement normal du système. Sur les systèmes avec correction automatique, les actions suivantes se produisent après le basculement :
@@ -843,6 +871,7 @@ image::../media/mcc_so_sb_with_autoheal.gif[Basculement et rétablissement de Me
 
 
 
+[[automatic-healing-after-unscheduled-switchover-beginning-with-ontap-9-6]]
 === Correction automatique après un basculement non programmé (à partir de ONTAP 9.6)
 
 La correction automatique après un basculement non planifié est prise en charge sur les configurations IP MetroCluster à partir de ONTAP 9.6. Un basculement non planifié est un basculement dans lequel vous émettez le `switchover` commande avec `-forced-on-disaster true` option.
@@ -869,12 +898,14 @@ image::../media/mcc_uso_with_autoheal.gif[Commutation non programmée de MetroCl
 
 
 
+[[if-automatic-healing-fails]]
 === En cas d'échec de la correction automatique
 
 Si l'opération de correction automatique échoue pour une raison quelconque, vous devez émettre le `metrocluster heal` Commandes manuelles comme effectuées dans les versions ONTAP antérieures à ONTAP 9.6. Vous pouvez utiliser le `metrocluster operation show` et `metrocluster operation history show -instance` commandes permettant de contrôler l'état de la correction et de déterminer la cause d'une défaillance.
 
 
 
+[[creating-svms-for-a-metrocluster-configuration]]
 == La création de SVM pour une configuration MetroCluster
 
 Vous pouvez créer des SVM pour une configuration MetroCluster afin d'assurer une reprise après incident synchrone et une haute disponibilité des données dans les clusters configurés pour une configuration MetroCluster.
@@ -959,6 +990,7 @@ Les SVM pour la configuration MetroCluster sont créés avec une taille de volum
 
 
 
+[[what-happens-during-a-switchback]]
 == Que se passe-t-il lors d'un rétablissement
 
 Une fois que le site de reprise sur incident et que les agrégats ont été résolus, le processus de rétablissement MetroCluster renvoie l'accès au client et au stockage depuis le site de reprise sur incident vers le cluster de base.

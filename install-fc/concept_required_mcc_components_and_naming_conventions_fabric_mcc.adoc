@@ -15,6 +15,7 @@ Lors de la planification de votre configuration MetroCluster FC, vous devez conn
 
 
 
+[[supported-software-and-hardware]]
 == Logiciels et matériel pris en charge
 
 Le matériel et le logiciel doivent être pris en charge pour la configuration MetroCluster FC.
@@ -28,12 +29,14 @@ NOTE: Les SFP longue durée ne sont pas pris en charge par les commutateurs de s
 
 
 
+[[hardware-redundancy-in-the-metrocluster-fc-configuration]]
 == Redondance matérielle dans la configuration MetroCluster FC
 
 Du fait de la redondance matérielle dans la configuration FC MetroCluster, chaque composant se trouve sur chaque site. Les lettres A et B sont attribuées arbitrairement aux sites et les chiffres 1 et 2 sont attribués de façon arbitraire aux composants individuels.
 
 
 
+[[requirement-for-two-ontap-clusters]]
 == Configuration requise pour deux clusters ONTAP
 
 La configuration FC MetroCluster FAS-Attached requiert deux clusters ONTAP, un sur chaque site MetroCluster.
@@ -48,6 +51,7 @@ Exemples de noms :
 
 
 
+[[requirement-for-four-fc-switches]]
 == Configuration requise pour quatre commutateurs FC
 
 La configuration FC MetroCluster connectée au fabric nécessite quatre commutateurs FC (modèles Brocade ou Cisco pris en charge).
@@ -58,6 +62,7 @@ Le nom doit être unique dans la configuration MetroCluster.
 
 
 
+[[requirement-for-two-four-or-eight-controller-modules]]
 == Configuration requise pour deux, quatre ou huit modules de contrôleur
 
 La configuration MetroCluster FC dans une structure nécessite deux, quatre ou huit modules de contrôleur.
@@ -91,6 +96,7 @@ Exemples de noms :
 
 
 
+[[requirement-for-four-cluster-interconnect-switches]]
 == Quatre commutateurs d'interconnexion de cluster sont nécessaires
 
 La configuration FC MetroCluster FAS requiert quatre commutateurs d'interconnexion de cluster (si vous n'utilisez pas de clusters à deux nœuds sans commutateur)
@@ -99,6 +105,7 @@ Ces commutateurs assurent la communication de cluster entre les modules de contr
 
 
 
+[[requirement-for-fc-to-sas-bridges]]
 == Conditions requises pour les ponts FC-SAS
 
 La configuration FC MetroCluster FAS requiert une paire de ponts FC-SAS pour chaque groupe de piles de tiroirs SAS.
@@ -115,6 +122,7 @@ Les noms suggérés utilisés comme exemples dans cette documentation identifien
 
 
 
+[[pool-and-drive-requirements-minimum-supported]]
 == Exigences relatives au pool et au disque (minimum pris en charge)
 
 Il est recommandé d'utiliser huit tiroirs disques SAS (quatre tiroirs sur chaque site) pour autoriser la propriété des disques par tiroir.
@@ -144,6 +152,7 @@ Les configurations MetroCluster prennent en charge RAID-DP et RAID4
 
 
 
+[[drive-location-considerations-for-partially-populated-shelves]]
 == Considérations relatives à l'emplacement des disques pour les tiroirs partiellement remplis
 
 Pour l'affectation automatique correcte des disques lorsque des tiroirs sont à moitié remplis (12 disques dans un tiroir de 24 disques), les disques doivent être situés dans les emplacements 0-5 et 18-23.
@@ -152,6 +161,7 @@ Dans une configuration avec un tiroir partiellement rempli, les disques doivent 
 
 
 
+[[bridge-naming-conventions]]
 == Conventions de nommage des ponts
 
 Les ponts utilisent l'exemple de dénomination suivant :

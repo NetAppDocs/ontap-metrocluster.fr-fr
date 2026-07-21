@@ -15,6 +15,7 @@ Il est possible d'utiliser le basculement MetroCluster pour fournir un service s
 
 
 
+[[supported-platform-combinations]]
 == Combinaisons de plateformes prises en charge
 
 Vous pouvez mettre à niveau certaines plateformes en utilisant l'opération de basculement et de rétablissement dans une configuration MetroCluster FC.
@@ -25,6 +26,7 @@ Reportez-vous à la section https://docs.netapp.com/us-en/ontap-metrocluster/upg
 
 
 
+[[about-this-task]]
 == Description de la tâche
 
 * Cette procédure ne peut être utilisée que pour la mise à niveau du contrôleur.
@@ -99,6 +101,7 @@ Les exemples de noms suivants sont utilisés dans cette procédure :
 
 
 
+[[enable-console-logging]]
 == Activer la journalisation de la console
 
 NetApp vous recommande vivement d'activer la journalisation de la console sur les périphériques que vous utilisez et d'effectuer les actions suivantes lors de l'exécution de cette procédure :
@@ -113,12 +116,14 @@ Consultez l'article de la base de connaissances link:https://kb.netapp.com/Suppo
 
 
 
+[[prepare-for-the-upgrade]]
 == Préparation à la mise à niveau
 
 Avant d'apporter des modifications à la configuration MetroCluster existante, vous devez vérifier l'état de santé de la configuration, préparer les nouvelles plateformes et effectuer d'autres tâches diverses.
 
 
 
+[[verify-the-health-of-the-metrocluster-configuration]]
 === Vérifier l'état de santé de la configuration MetroCluster
 
 Vous vérifiez l’intégrité et la connectivité de la configuration MetroCluster avant d’effectuer la mise à niveau.
@@ -211,6 +216,7 @@ https://mysupport.netapp.com/site/tools/tool-eula/activeiq-configadvisor["Télé
 
 
 
+[[map-ports-from-the-old-nodes-to-the-new-nodes]]
 === Mappage des ports des anciens nœuds sur les nouveaux nœuds
 
 Vous devez planifier le mappage des LIFs sur les ports physiques des anciens nœuds sur les ports physiques des nouveaux nœuds.
@@ -404,6 +410,7 @@ Port intercluster
 
 
 
+[[gather-information-before-the-upgrade]]
 === Recueillez les informations avant la mise à niveau
 
 Avant de procéder à la mise à niveau, vous devez recueillir des informations pour chacun des anciens nœuds et, si nécessaire, ajuster les domaines de diffusion réseau, supprimer les VLAN et les groupes d'interface et collecter des informations de chiffrement.
@@ -583,6 +590,7 @@ cluster_B::*
 
 
 
+[[remove-the-existing-configuration-from-the-tiebreaker-or-other-monitoring-software]]
 === Supprimez la configuration existante du logiciel disjoncteur d'attache ou tout autre logiciel de surveillance
 
 Si la configuration existante est contrôlée avec la configuration MetroCluster Tiebreaker ou d'autres applications tierces (telles que ClusterLion) capables d'effectuer un basculement, vous devez supprimer la configuration MetroCluster du logiciel disjoncteur d'attache ou d'autres logiciels avant la transition.
@@ -600,6 +608,7 @@ Reportez-vous à la documentation de l'application.
 
 
 
+[[send-a-custom-autosupport-message-prior-to-maintenance]]
 === Envoyer un message AutoSupport personnalisé avant la maintenance
 
 Avant d'effectuer la maintenance, vous devez envoyer un message AutoSupport pour informer le support technique de NetApp que la maintenance est en cours. Informer le support technique que la maintenance est en cours empêche l'ouverture d'un dossier en supposant une interruption de l'activité.
@@ -627,6 +636,7 @@ Cette tâche doit être effectuée sur chaque site MetroCluster.
 
 
 
+[[switch-over-the-metrocluster-configuration]]
 == Basculer la configuration MetroCluster
 
 Vous devez basculer la configuration vers site_A afin de pouvoir mettre à niveau les plateformes du site_B.
@@ -717,6 +727,7 @@ cluster_A::> metrocluster operation show
 
 
 
+[[prepare-the-network-configuration-of-the-old-controllers]]
 == Préparer la configuration réseau des anciens contrôleurs
 
 Pour assurer la reprise du réseau correctement sur les nouveaux contrôleurs, vous devez déplacer les LIF vers un port commun, puis supprimer la configuration réseau des anciens contrôleurs.
@@ -818,6 +829,7 @@ Cette étape doit être effectuée sur les deux nœuds.
 
 
 
+[[remove-the-old-platforms]]
 == Supprimer les anciennes plateformes
 
 Les anciens contrôleurs doivent être supprimés de la configuration.
@@ -834,12 +846,14 @@ Cette tâche est effectuée sur site_B.
 
 
 
+[[configure-the-new-controllers]]
 == Configuration des nouveaux contrôleurs
 
 Vous devez installer et installer les contrôleurs, effectuer la configuration requise en mode maintenance, puis démarrer les contrôleurs, et vérifier la configuration LIF sur les contrôleurs.
 
 
 
+[[set-up-the-new-controllers]]
 === Configurer les nouveaux contrôleurs
 
 Vous devez installer et câbler les nouveaux contrôleurs.
@@ -870,6 +884,7 @@ https://docs.netapp.com/platstor/index.jsp["Documentation des systèmes matérie
 
 
 
+[[netboot-the-new-controllers]]
 === NetBoot les nouveaux contrôleurs
 
 Une fois les nouveaux nœuds installés, vous devez démarrage sur le réseau pour vous assurer que la version des nouveaux nœuds exécute la même version de ONTAP que les nœuds d'origine. Le terme netboot signifie que vous êtes en cours de démarrage à partir d'une image ONTAP stockée sur un serveur distant. Lorsque vous vous préparez à netboot, vous devez placer une copie de l'image de démarrage ONTAP 9 sur un serveur web auquel le système peut accéder.
@@ -942,6 +957,7 @@ NOTE: Vous devez redémarrer le nœud pour pouvoir utiliser le logiciel nouvelle
 
 
 
+[[clear-the-configuration-on-a-controller-module]]
 === Effacez la configuration d'un module de contrôleur
 
 Avant d'utiliser un nouveau module de contrôleur dans la configuration MetroCluster, il faut effacer la configuration existante.
@@ -981,6 +997,7 @@ Répondez `yes` à l'invite de confirmation.
 
 
 
+[[restore-the-hba-configuration]]
 === Restaurez la configuration HBA
 
 En fonction de la présence et de la configuration des cartes HBA dans le module de contrôleur, vous devez les configurer correctement pour l'utilisation de votre site.
@@ -1063,6 +1080,7 @@ FC
 
 
 
+[[set-the-ha-state-on-the-new-controllers-and-chassis]]
 === Définissez l'état de haute disponibilité sur les nouveaux contrôleurs et châssis
 
 Vous devez vérifier l'état haute disponibilité des contrôleurs et du châssis, et mettre à jour si nécessaire l'état en fonction de la configuration du système.
@@ -1124,6 +1142,7 @@ mcc
 
 
 
+[[reassign-root-aggregate-disks]]
 === Réallouer les disques racine de l'agrégat
 
 Réaffectez les disques de l'agrégat racine au nouveau module de contrôleur, en utilisant les sysids réunis précédemment
@@ -1239,6 +1258,7 @@ aggr0_node_b_1-root    online      raid_dp, aggr    root, nosnap=on,
 
 
 
+[[boot-up-the-new-controllers]]
 === Démarrer les nouveaux contrôleurs
 
 Vous devez redémarrer les contrôleurs à partir du menu de démarrage pour mettre à jour l'image flash du contrôleur. Des étapes supplémentaires sont nécessaires si le chiffrement est configuré.
@@ -1501,6 +1521,7 @@ Pour plus d'informations, voir https://docs.netapp.com/ontap-9/topic/com.netapp.
 
 
 
+[[verify-lif-configuration]]
 === Vérifier la configuration de LIF
 
 Vérifiez que les LIF sont hébergées sur le nœud/port approprié avant le rétablissement. Les étapes suivantes doivent être effectuées
@@ -1537,6 +1558,7 @@ Suivez cette étape sur tous les SVM, si nécessaire.
 
 
 
+[[install-the-new-licenses]]
 === Installez les nouvelles licences
 
 Avant l'opération de rétablissement, vous devez installer les licences des nouveaux contrôleurs.
@@ -1547,6 +1569,7 @@ Avant l'opération de rétablissement, vous devez installer les licences des nou
 
 
 
+[[switch-back-the-metrocluster-configuration]]
 == Retournez la configuration MetroCluster
 
 Une fois les nouveaux contrôleurs configurés, il suffit de revenir à la configuration MetroCluster pour rétablir le fonctionnement normal.
@@ -1610,6 +1633,7 @@ Si un rétablissement prend beaucoup de temps, vous pouvez vérifier l'état des
 
 
 
+[[check-the-health-of-the-metrocluster-configuration]]
 == Vérifier l'état de santé de la configuration MetroCluster
 
 Après la mise à niveau des modules de contrôleur, vous devez vérifier l'état de santé de la configuration MetroCluster.
@@ -1652,6 +1676,7 @@ Ce comportement est attendu en raison d'une incompatibilité du contrôleur pend
 
 
 
+[[upgrade-the-nodes-on-clustera]]
 == Mettre à niveau les nœuds sur cluster_A
 
 Vous devez répéter les tâches de mise à niveau sur cluster_A.
@@ -1665,6 +1690,7 @@ Lorsque vous répétez la procédure, toutes les références d’exemple aux cl
 
 
 
+[[send-a-custom-autosupport-message-after-maintenance]]
 == Envoyez un message AutoSupport personnalisé après la maintenance
 
 Une fois la mise à niveau terminée, envoyer un message AutoSupport indiquant la fin de la maintenance. La création automatique de dossier peut reprendre.
@@ -1683,6 +1709,7 @@ Une fois la mise à niveau terminée, envoyer un message AutoSupport indiquant l
 
 
 
+[[restore-tiebreaker-monitoring]]
 == Restaurez la surveillance du logiciel disjoncteur d'attache
 
 Si le logiciel disjoncteur d'attache a déjà été configuré pour la surveillance de la configuration MetroCluster, vous pouvez restaurer la connexion ce dernier.

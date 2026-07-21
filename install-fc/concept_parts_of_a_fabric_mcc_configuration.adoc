@@ -15,6 +15,7 @@ Lors de la planification de votre configuration MetroCluster, vous devez connaî
 
 
 
+[[disaster-recovery-dr-groups]]
 == Groupes de reprise après incident
 
 Une configuration Fabric MetroCluster se compose d'un ou deux groupes DR, selon le nombre de nœuds dans la configuration MetroCluster. Chaque groupe de reprise sur incident se compose de quatre nœuds.
@@ -33,6 +34,7 @@ image::../media/mcc_dr_groups_4_node.gif[MetroCluster DR regroupe quatre nœuds]
 
 
 
+[[key-hardware-elements]]
 == Principaux éléments matériels
 
 La configuration MetroCluster inclut les éléments matériels clés suivants :
@@ -57,6 +59,7 @@ Le réseau de peering de cluster assure la connectivité en miroir de la configu
 
 
 
+[[eight-node-fabric-metrocluster-configuration]]
 == Configuration MetroCluster à 8 nœuds
 
 Une configuration à huit nœuds se compose de deux clusters, un sur chaque site géographiquement séparé. Cluster_A est situé sur le premier site MetroCluster. Cluster_B est situé sur le second site MetroCluster. Chaque site dispose d'une pile de stockage SAS. D'autres piles de stockage sont prises en charge, mais une seule s'affiche sur chaque site. Les paires haute disponibilité sont configurées comme des clusters sans commutateur, sans commutateurs d'interconnexion de cluster. Une configuration commutée est prise en charge, mais n'est pas affichée.
@@ -79,6 +82,7 @@ La configuration de SVM est répliquée sur le réseau de peering de cluster.
 
 
 
+[[four-node-fabric-metrocluster-configuration]]
 == Configuration Fabric MetroCluster à quatre nœuds
 
 L'illustration suivante présente une vue simplifiée d'une configuration Fabric MetroCluster à quatre nœuds. Pour certaines connexions, une seule ligne représente plusieurs connexions redondantes entre les composants. Les connexions du réseau de gestion et de données ne sont pas affichées.
@@ -91,6 +95,7 @@ image::../media/mcc_hardware_architecture_cluster_a_with_7500n.gif[Connectivité
 
 
 
+[[two-node-fabric-metrocluster-configuration]]
 == Configuration Fabric MetroCluster à deux nœuds
 
 L'illustration suivante présente une vue simplifiée d'une configuration Fabric MetroCluster à deux nœuds. Pour certaines connexions, une seule ligne représente plusieurs connexions redondantes entre les composants. Les connexions du réseau de gestion et de données ne sont pas affichées.

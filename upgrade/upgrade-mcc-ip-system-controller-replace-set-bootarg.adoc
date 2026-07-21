@@ -18,6 +18,7 @@ NOTE: Si votre combinaison de mise à niveau est affectée, la définition d'un 
 
 
 
+[[step-1-determine-whether-you-need-to-set-a-bootarg-on-the-old-controllers]]
 == Étape 1 : Déterminez si vous devez définir un bootarg sur les anciens contrôleurs
 
 Avant de commencer la mise à niveau, déterminez si vous devez définir un bootarg sur les anciens contrôleurs en utilisant les informations suivantes :
@@ -45,12 +46,14 @@ CAUTION: Si votre mise à niveau ne nécessite pas la définition d'arguments de
 
 
 
+[[step-2-determine-the-bootarg-you-need-to-set-on-the-old-controllers]]
 == Étape 2 : Déterminez le bootarg à définir sur les anciens contrôleurs
 
 La plupart des mises à niveau concernées nécessitent que vous définissiez le `hw.cxgbe.toe_keepalive_disable` bootarg sur les anciens contrôleurs.  Cependant, certains chemins de mise à niveau nécessitent que vous définissiez le `bootarg.siw.interop_enabled` bootarg à la place.
 
 Utilisez le tableau suivant pour déterminer quel bootarg vous devez définir pour votre combinaison de mise à niveau spécifique.
 
+[[upgrade_paths_bootarg_assisted]]
 [cols="2*"]
 |===
 | Pour cette mise à niveau... | Définir le bootarg... 
@@ -76,6 +79,7 @@ Toutes les autres mises à niveau vers les systèmes AFF A70, AFF A90, AFF A1K, 
 |===
 
 
+[[step-3-set-the-required-bootarg-on-the-old-controllers]]
 == Étape 3 : définissez le bootarg requis sur les anciens contrôleurs
 
 Après avoir déterminé le bootarg requis pour votre combinaison de mise à niveau, suivez les étapes pour définir le bootarg sur les anciens contrôleurs.

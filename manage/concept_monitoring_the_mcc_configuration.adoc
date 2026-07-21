@@ -15,6 +15,7 @@ Vous pouvez utiliser les commandes ONTAP MetroCluster et Active IQ Unified Manag
 
 
 
+[[checking-the-metrocluster-configuration]]
 == Vérification de la configuration MetroCluster
 
 Vous pouvez vérifier que les composants et les relations de la configuration MetroCluster fonctionnent correctement. Vous devez effectuer un contrôle après la configuration initiale et après avoir apporté des modifications à la configuration MetroCluster. Vous devez également effectuer une vérification avant le basculement (prévu) ou le rétablissement.
@@ -127,12 +128,14 @@ mccint-fas9000-0304
 
 
 
+[[commands-for-checking-and-monitoring-the-metrocluster-configuration]]
 == Commandes de vérification et de contrôle de la configuration MetroCluster
 
 Il existe des commandes ONTAP spécifiques pour contrôler la configuration d'MetroCluster et vérifier les opérations MetroCluster.
 
 
 
+[[commands-for-checking-metrocluster-operations]]
 === Commandes pour la vérification des opérations MetroCluster
 
 |===
@@ -186,6 +189,7 @@ Afficher les erreurs de placement des LIF dans la configuration MetroCluster
 |===
 
 
+[[commands-for-monitoring-the-metrocluster-interconnect]]
 === Commandes de contrôle de l'interconnexion MetroCluster
 
 |===
@@ -202,6 +206,7 @@ Afficher l'état de la mise en miroir haute disponibilité et reprise après inc
 |===
 
 
+[[commands-for-monitoring-metrocluster-svms]]
 === Commandes de contrôle des SVM MetroCluster
 
 |===
@@ -218,6 +223,7 @@ Afficher tous les SVM des deux sites dans la configuration MetroCluster
 |===
 
 
+[[using-the-metrocluster-tiebreaker-or-ontap-mediator-to-monitor-the-configuration]]
 == Contrôler la configuration à l'aide du logiciel MetroCluster Tiebreaker ou du logiciel ONTAP
 
 Voir link:../install-ip/concept_considerations_mediator.html["Différences entre le médiateur ONTAP et le logiciel MetroCluster Tiebreaker"] Pour comprendre les différences entre ces deux méthodes de surveillance de votre configuration MetroCluster et initier un basculement automatique.
@@ -230,6 +236,7 @@ Utilisez les liens suivants pour installer et configurer le logiciel disjoncteur
 
 
 
+[[how-the-netapp-metrocluster-tiebreaker-software-detects-failures]]
 == Comment le logiciel NetApp MetroCluster Tiebreaker détecte les défaillances
 
 Il réside sur un hôte Linux Vous n'avez besoin du logiciel disjoncteur d'attache que si vous voulez surveiller deux clusters et connaître l'état de connectivité entre eux depuis un troisième site. Dans un cluster, ceci permet à chaque partenaire de distinguer une panne de liaison ISL ou de liaison intersite d'une panne de site.
@@ -238,6 +245,7 @@ Après avoir installé le logiciel disjoncteur d'attache sur un hôte Linux, vou
 
 
 
+[[how-the-tiebreaker-software-detects-intersite-connectivity-failures]]
 === Comment le logiciel disjoncteur d'attache détecte les défaillances de connectivité intersite
 
 Ce logiciel vous alerte en cas de perte de toute connectivité entre les sites. MetroCluster
@@ -270,6 +278,7 @@ Le logiciel disjoncteur d'attache récupère régulièrement l'état de la conne
 
 
 
+[[how-the-tiebreaker-software-detects-site-failures]]
 === Détection des pannes de site par le logiciel disjoncteur d'attache
 
 Le logiciel NetApp MetroCluster Tiebreaker vérifie les nœuds dans une configuration MetroCluster et le cluster, afin de déterminer s'il y a lieu une défaillance sur site. Le logiciel disjoncteur d'attache déclenche également une alerte dans certaines conditions.
@@ -310,6 +319,7 @@ Le logiciel disjoncteur d'attache déclenche une alerte, mais ONTAP véto ce qu'
 
 
 
+[[how-the-ontap-mediator-supports-automatic-unplanned-switchover]]
 === Prise en charge du protocole ONTAP pour le basculement automatique non planifié
 
 link:../install-ip/concept-ontap-mediator-supports-automatic-unplanned-switchover.html["Découvrez comment le médiateur ONTAP prend en charge le basculement automatique non planifié dans les configurations MetroCluster IP"].

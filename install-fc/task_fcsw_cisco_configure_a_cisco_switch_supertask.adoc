@@ -59,6 +59,7 @@ https://mysupport.netapp.com/matrix["Matrice d'interopérabilité NetApp"]
 
 
 
+[[cisco-switch-license-requirements]]
 == Conditions requises pour la licence des commutateurs Cisco
 
 Certaines licences basées sur les fonctionnalités peuvent être nécessaires pour les commutateurs Cisco dans une configuration Fabric-Attached MetroCluster. Ces licences vous permettent d'utiliser des fonctionnalités telles que la QoS ou les crédits en mode longue distance sur les commutateurs. Vous devez installer les licences basées sur les fonctionnalités requises sur les quatre commutateurs d'une configuration MetroCluster.
@@ -89,6 +90,7 @@ NOTE: Les commutateurs Cisco MDS 9250i disposent de deux ports de services de st
 
 
 
+[[setting-the-cisco-fc-switch-to-factory-defaults]]
 == Définition des paramètres par défaut du commutateur Cisco FC
 
 Pour garantir la réussite de la configuration, vous devez définir les paramètres par défaut du commutateur. Cela permet de s'assurer que le commutateur commence à partir d'une configuration propre.
@@ -137,6 +139,7 @@ FC_Switch_B_1# write erase
 ----
 
 
+[[configure-the-cisco-fc-switch-basic-settings-and-community-string]]
 == Configurez les paramètres de base et la chaîne de communauté du commutateur FC Cisco
 
 Vous devez spécifier les paramètres de base avec le `setup` ou après l'émission du `reload` commande.
@@ -185,6 +188,7 @@ FC_switch_B_1# setup
 
 
 
+[[acquiring-licenses-for-ports]]
 == Acquisition de licences pour les ports
 
 Vous n'avez pas besoin d'utiliser des licences de commutateurs Cisco sur une plage continue de ports ; vous pouvez acquérir des licences pour des ports spécifiques utilisés et supprimer les licences des ports inutilisés.
@@ -249,6 +253,7 @@ Déterminez les ports qui nécessitent des licences. Si certains de ces ports ne
 
 
 
+[[removing-and-acquiring-a-license-on-a-port]]
 === Suppression et acquisition d'une licence sur un port
 
 Cet exemple montre une licence en cours de retrait du port fc1/2, port fc1/1 devenu admissible à l'acquisition d'une licence, et la licence acquise sur le port fc1/1 :
@@ -288,6 +293,7 @@ Switch_A_1# show port-resources module 1
 ----
 
 
+[[enabling-ports-in-a-cisco-mds-9148-or-9148s-switch]]
 == Activation des ports dans un commutateur Cisco MDS 9148 ou 9148S
 
 Dans les commutateurs Cisco MDS 9148 ou 9148S, vous devez activer manuellement les ports requis dans une configuration MetroCluster.
@@ -342,6 +348,7 @@ switch(config-if)# end
 
 
 
+[[configuring-the-f-ports-on-a-cisco-fc-switch]]
 == Configuration des F-ports sur un commutateur Cisco FC
 
 Vous devez configurer les ports F sur le commutateur FC.
@@ -422,6 +429,7 @@ FC_switch_B_1# copy running-config startup-config
 ----
 
 
+[[assigning-buffer-to-buffer-credits-to-f-ports-in-the-same-port-group-as-the-isl]]
 == Attribution de crédits tampon à tampon aux ports F dans le même groupe de ports que l'ISL
 
 Vous devez attribuer les crédits tampon à tampon aux ports F s'ils se trouvent dans le même groupe de ports que l'ISL. Si les ports ne disposent pas des crédits tampon à tampon requis, l'ISL risque de ne pas fonctionner.
@@ -540,6 +548,7 @@ fc1/39                                      1        8.0 dedicated
 ----
 
 
+[[creating-and-configuring-vsans-on-cisco-fc-switches]]
 == Création et configuration de VSAN sur des commutateurs Cisco FC
 
 Vous devez créer un VSAN pour les ports FC-VI et un VSAN pour les ports de stockage sur chaque switch FC dans la configuration MetroCluster.
@@ -935,6 +944,7 @@ FC_switch_B_1# copy running-config startup-config
 
 
 
+[[configuring-e-ports]]
 == Configuration des E-ports
 
 Vous devez configurer les ports de switch qui connectent l'ISL (il s'agit des ports E-).
@@ -949,6 +959,8 @@ La procédure que vous utilisez dépend de l'interrupteur que vous utilisez :
 
 
 
+[[configuring-the-e-ports-on-the-cisco-fc-switch]]
+[[config-e-ports-cisco-fc]]
 === Configuration des E-ports sur le commutateur Cisco FC
 
 Vous devez configurer les ports de commutation FC qui connectent la liaison interswitch (ISL).
@@ -1188,6 +1200,8 @@ Vous devez vérifier que vous utilisez les affectations de ports spécifiées lo
 
 
 
+[[configuring-fcip-ports-for-a-single-isl-on-cisco-9250i-fc-switches]]
+[[config-fcip-ports-single-isl-cisco-9250i]]
 === Configuration des ports FCIP pour un seul ISL sur des commutateurs Cisco 9250i FC
 
 Vous devez configurer les ports de commutateur FCIP qui connectent les ports ISL (E-ports) en créant des profils et des interfaces FCIP, puis en les affectant à l'interface IPStorage1/1 GbE.
@@ -1597,6 +1611,8 @@ FC_switch_B_1# copy running-config startup-config
 
 
 
+[[configuring-fcip-ports-for-a-dual-isl-on-cisco-9250i-fc-switches]]
+[[config-fcip-ports-dual-isl-cisco-9250i]]
 === Configuration des ports FCIP pour un double ISL sur des commutateurs Cisco 9250i FC
 
 Vous devez configurer les ports de commutateur FCIP qui connectent les ports ISL (E-ports) en créant des profils et des interfaces FCIP, puis en les affectant aux interfaces IPStorage1/1 et IPStorage1/2 GbE.
@@ -1614,6 +1630,7 @@ La tâche et les exemples utilisent les tables de configuration de profil suivan
 * <<fabric2_table>>
 
 
+[[fabric1_table]]
 *Tableau de configuration des profils Fabric 1*
 
 |===
@@ -1761,6 +1778,7 @@ b.b..b/3223
 20
 
 |===
+[[fabric2_table]]
 *Tableau de configuration du profil Fabric 2*
 
 |===
@@ -2411,6 +2429,7 @@ exit
 ----
 
 
+[[configuring-zoning-on-a-cisco-fc-switch]]
 == Configuration de la segmentation sur un commutateur Cisco FC
 
 Vous devez attribuer les ports de commutateur à des zones distinctes pour isoler le trafic de stockage (HBA) et de contrôleur (FC-VI).
@@ -2689,6 +2708,7 @@ FC_switch_A_1# copy running-config startup-config
 
 
 
+[[ensuring-the-fc-switch-configuration-is-saved]]
 == Vérification de l'enregistrement de la configuration du commutateur FC
 
 Vous devez vous assurer que la configuration du commutateur FC est enregistrée dans la configuration de démarrage sur tous les commutateurs.

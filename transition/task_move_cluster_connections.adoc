@@ -15,6 +15,7 @@ Déplacez les interfaces de cluster de la configuration MetroCluster FC vers les
 
 
 
+[[step-1-move-the-cluster-connections-on-the-metrocluster-fc-nodes]]
 == Étape 1 : Déplacer les connexions du cluster sur les nœuds MetroCluster FC
 
 Déplacez les connexions du cluster des nœuds MetroCluster FC vers les commutateurs IP. La procédure à suivre varie selon que vous utilisez des commutateurs IP existants ou de nouveaux commutateurs IP.
@@ -25,6 +26,7 @@ Déplacez les connexions du cluster des nœuds MetroCluster FC vers les commutat
 
 
 
+[[which-connections-to-move]]
 === Les connexions à déplacer
 
 La tâche suivante suppose qu'un module de contrôleur utilise deux ports pour les connexions au cluster. Certains modèles de modules de contrôleur utilisent au moins quatre ports pour la connexion en cluster. Dans cet exemple, les ports sont divisés en deux groupes, alternant entre eux.
@@ -155,6 +157,7 @@ Interface de cluster locale sur un nœud FC
 |===
 
 
+[[move-the-local-cluster-connections-when-using-new-ip-switches]]
 === Déplacer les connexions du cluster local lors de l'utilisation de nouveaux commutateurs IP
 
 Si vous utilisez de nouveaux commutateurs IP, vous déplacez physiquement les connexions de cluster des nœuds MetroCluster FC existants vers les nouveaux commutateurs.
@@ -278,6 +281,7 @@ cluster_A::*>
 
 
 
+[[move-the-local-cluster-connections-when-reusing-existing-ip-switches]]
 === Déplacer les connexions du cluster local lors de la réutilisation des commutateurs IP existants
 
 Si vous réutilisez des commutateurs IP existants, vous mettez à jour le micrologiciel, reconfigurez les commutateurs avec les fichiers de configuration de référence (RCF) corrects et déplacez les connexions vers les ports corrects, un commutateur à la fois.
@@ -409,6 +413,7 @@ Cluster-A::*>
 
 
 
+[[step-2-verify-that-the-cluster-connections-are-moved-and-the-cluster-is-healthy]]
 == Étape 2 : Vérifiez que les connexions du cluster sont déplacées et que le cluster est sain
 
 Pour garantir une connectivité adéquate et que la configuration est prête à procéder au processus de transition, vérifiez que les connexions du cluster sont déplacées correctement, que les commutateurs du cluster sont reconnus et que le cluster est sain.

@@ -18,12 +18,14 @@ http://docs.netapp.com/ontap-9/topic/com.netapp.doc.exp-clus-peer/home.html["Con
 
 
 
+[[prerequisites-for-cluster-peering]]
 == Conditions préalables au peering de clusters
 
 Avant de configurer le peering de cluster, vous devez vérifier que la connectivité entre le port, l'adresse IP, le sous-réseau, le pare-feu et les exigences de nommage des clusters sont respectées.
 
 
 
+[[connectivity-requirements]]
 === Les besoins en connectivité
 
 Chaque LIF intercluster du cluster local doit pouvoir communiquer avec chaque LIF intercluster sur le cluster distant.
@@ -45,6 +47,7 @@ NOTE: ONTAP 9 vous permet de migrer vos réseaux de peering d'IPv4 vers IPv6 en 
 
 
 
+[[port-requirements]]
 === Configuration requise pour les ports
 
 Vous pouvez utiliser des ports dédiés pour la communication intercluster ou partager les ports utilisés par le réseau de données. Les ports doivent répondre aux exigences suivantes :
@@ -64,6 +67,7 @@ Les ports ajoutés à un domaine de diffusion peuvent être des ports réseau ph
 
 
 
+[[firewall-requirements]]
 === Exigences relatives au pare-feu
 
 Les pare-feu et la politique de pare-feu intercluster doivent autoriser les protocoles suivants :
@@ -77,6 +81,7 @@ La politique de pare-feu intercluster par défaut permet l'accès via le protoco
 
 
 
+[[considerations-when-using-dedicated-ports]]
 == Considérations relatives à l'utilisation de ports dédiés
 
 Pour déterminer si l'utilisation d'un port dédié pour la réplication intercluster est la bonne solution réseau intercluster, vous devez tenir compte des configurations et des exigences telles que le type de LAN, la bande passante WAN disponible, l'intervalle de réplication, le taux de changement et le nombre de ports.
@@ -94,6 +99,7 @@ La bande passante du port est partagée entre tous les VLAN et le port de base.
 
 
 
+[[considerations-when-sharing-data-ports]]
 == Points à prendre en compte lors du partage de ports de données
 
 Lors de la détermination du partage d'un port de données pour la réplication intercluster est la bonne solution réseau intercluster, vous devez tenir compte des configurations et des exigences telles que le type de LAN, la bande passante WAN disponible, l'intervalle de réplication, le taux de changement et le nombre de ports.

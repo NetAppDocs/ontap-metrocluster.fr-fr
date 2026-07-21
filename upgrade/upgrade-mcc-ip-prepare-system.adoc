@@ -15,6 +15,7 @@ Avant d'apporter des modifications à la configuration MetroCluster existante, v
 
 
 
+[[update-the-metrocluster-switch-rcfs-before-upgrading-controllers]]
 == Mettre à jour les contrôleurs MetroCluster switch RCF avant de mettre à niveau les contrôleurs
 
 Selon l'ancien et le nouveau modèle de plate-forme, il se peut que vous deviez mettre à jour les fichiers de configuration de référence du commutateur MetroCluster avant de mettre à niveau les contrôleurs.
@@ -115,6 +116,7 @@ Suivez les étapes de la section pour votre fournisseur de commutateurs :
 
 
 
+[[map-ports-from-the-old-nodes-to-the-new-nodes]]
 == Mappage des ports des anciens nœuds sur les nouveaux nœuds
 
 Vous devez vérifier que les ports physiques du nœud_A_1-Old correspondent correctement aux ports physiques du nœud_A_1-New. Cela permet à node_A_1-New de communiquer avec les autres nœuds du cluster et avec le réseau après la mise à niveau.
@@ -304,6 +306,7 @@ Port intercluster
 
 
 
+[[netboot-the-new-controllers]]
 == NetBoot les nouveaux contrôleurs
 
 Une fois les nouveaux nœuds installés, vous devez démarrage sur le réseau pour vous assurer que la version des nouveaux nœuds exécute la même version de ONTAP que les nœuds d'origine. Le terme netboot signifie que vous êtes en cours de démarrage à partir d'une image ONTAP stockée sur un serveur distant. Lorsque vous vous préparez à netboot, vous devez placer une copie de l'image de démarrage ONTAP 9 sur un serveur web auquel le système peut accéder.
@@ -386,6 +389,7 @@ NOTE: Vous devez redémarrer le nœud pour pouvoir utiliser le logiciel nouvelle
 
 
 
+[[clear-the-configuration-on-a-controller-module]]
 == Effacez la configuration d'un module de contrôleur
 
 Avant d'utiliser un nouveau module de contrôleur dans la configuration MetroCluster, il faut effacer la configuration existante.
@@ -425,6 +429,7 @@ Répondez `yes` à l'invite de confirmation.
 
 
 
+[[verify-metrocluster-health-before-site-upgrade]]
 == Vérifier l'état de santé des MetroCluster avant la mise à niveau du site
 
 Vous vérifiez l’intégrité et la connectivité de la configuration MetroCluster avant d’effectuer la mise à niveau.
@@ -504,6 +509,7 @@ https://mysupport.netapp.com/site/tools/tool-eula/activeiq-configadvisor["Télé
 
 
 
+[[gather-information-before-the-upgrade]]
 == Recueillez les informations avant la mise à niveau
 
 Avant la mise à niveau, vous devez collecter les informations de chacun des nœuds et, si nécessaire, ajuster les domaines de diffusion réseau, supprimer tous les VLAN et groupes d'interfaces et collecter des informations de cryptage.
@@ -740,6 +746,7 @@ dr-group-id cluster     node     node-systemid ha-partner-systemid dr-partner-sy
 
 
 
+[[remove-mediator-or-tiebreaker-monitoring]]
 == Retirer le système de surveillance du médiateur ou du disjoncteur d'attache
 
 Avant de mettre à niveau les plates-formes, vous devez supprimer la surveillance si la configuration MetroCluster est surveillée à l'aide de l'utilitaire Tiebreaker ou Mediator.
@@ -783,6 +790,7 @@ Reportez-vous à la documentation du produit.
 
 
 
+[[send-a-custom-autosupport-message-prior-to-maintenance]]
 == Envoyer un message AutoSupport personnalisé avant la maintenance
 
 Avant d'effectuer la maintenance, vous devez envoyer un message AutoSupport pour informer le support technique de NetApp que la maintenance est en cours. Informer le support technique que la maintenance est en cours empêche l'ouverture d'un dossier en supposant une interruption de l'activité.

@@ -81,6 +81,7 @@ link:task_recover_from_a_multi_controller_and_or_storage_failure.html["La restau
 |===
 
 
+[[controller-module-failure-scenarios-during-metrocluster-installation]]
 == Scénarios de panne du module de contrôleur lors de l'installation de MetroCluster
 
 La réponse à une défaillance du module de contrôleur pendant la procédure de configuration du MetroCluster dépend de la présence ou non du `metrocluster configure` commande terminée avec succès.
@@ -95,6 +96,7 @@ NOTE: Vous devez vous assurer d'effectuer les étapes de la section link:https:/
 
 
 
+[[controller-module-failure-scenarios-during-metrocluster-fc-to-ip-transition]]
 == Scénarios de panne du module de contrôleur lors de la transition MetroCluster FC vers IP
 
 La procédure de restauration peut être utilisée en cas de défaillance d'un site pendant la transition. Cependant, elle ne peut être utilisée que si la configuration est une configuration mixte stable, avec un groupe FC DR et un groupe IP DR entièrement configurés. La sortie du `metrocluster node show` La commande doit afficher les deux groupes de reprise sur incident avec les huit nœuds.
@@ -104,6 +106,7 @@ IMPORTANT: Si la panne s'est produite lors de la transition lorsque des nœuds s
 
 
 
+[[controller-module-failure-scenarios-in-eight-node-metrocluster-configurations]]
 == Scénarios de défaillance du module de contrôleur dans des configurations MetroCluster à 8 nœuds
 
 Scénarios de défaillance :
@@ -116,6 +119,7 @@ Scénarios de défaillance :
 
 
 
+[[single-controller-module-failures-in-a-single-dr-group]]
 === Pannes de module de contrôleur unique dans un seul groupe DR
 
 Dans ce cas, la panne est limitée à une paire haute disponibilité.
@@ -138,6 +142,7 @@ image::../media/mcc_dr_groups_8_node_with_a_single_controller_failure.gif[Groupe
 
 
 
+[[two-controller-module-failures-in-a-single-dr-group]]
 === Deux pannes de module de contrôleur dans un seul groupe DR
 
 Dans ce cas, la défaillance nécessite un basculement. Vous pouvez utiliser la procédure de récupération de panne du module multi-contrôleur.
@@ -150,6 +155,7 @@ image::../media/mcc_dr_groups_8_node_with_a_multi_controller_failure.gif[Groupes
 
 
 
+[[single-controller-module-failures-in-separate-dr-groups]]
 === Pannes de module de contrôleur unique dans des groupes DR distincts
 
 Dans ce cas, la défaillance est limitée à des paires haute disponibilité distinctes.
@@ -171,6 +177,7 @@ image::../media/mcc_dr_groups_8_node_with_two_single_controller_failures.gif[Gro
 
 
 
+[[three-controller-module-failures-spread-across-the-dr-groups]]
 === Pannes de trois modules de contrôleur réparties sur les groupes de DR
 
 Dans ce cas, la défaillance nécessite un basculement. Vous pouvez utiliser la procédure de récupération de panne du module multi-contrôleur pour le groupe DR un.
@@ -185,6 +192,7 @@ image::../media/mcc_dr_groups_8_node_with_a_3_controller_failure.gif[Groupes DR 
 
 
 
+[[controller-module-failure-scenarios-in-two-node-metrocluster-configurations]]
 == Scénarios de défaillance de module de contrôleur dans des configurations MetroCluster à 2 nœuds
 
 La procédure que vous utilisez dépend de l'étendue de la panne.
