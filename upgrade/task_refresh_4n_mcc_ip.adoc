@@ -22,13 +22,15 @@ Les conseils suivants concernent un scénario peu courant dans lequel vous devez
 
 Si votre configuration MetroCluster existante contient une plate-forme qui utilise des ports *shared cluster/HA* (plates-formes publiées dans ONTAP 9.15.1 ou plus tard), vous ne pouvez pas ajouter une plate-forme qui utilise des ports *shared MetroCluster/HA* (plates-formes publiées avant ONTAP 9.15.1) sans mettre à niveau tous les nœuds de la configuration vers ONTAP 9.15.1P11 ou ONTAP 9.16.1P4 ou plus tard.
 
+Utilisez le tableau suivant pour vérifier si votre combinaison est concernée. Si votre plateforme existante figure dans la première colonne et que la plateforme que vous souhaitez ajouter à la configuration figure dans la deuxième colonne, tous les nœuds de la configuration doivent exécuter ONTAP 9.15.1P11 ou ONTAP 9.16.1P4 ou une version ultérieure (en fonction de la version d'ONTAP prise en charge par la plateforme) pour ajouter le nouveau groupe de DR.
+
 [CAUTION]
 ====
-L'ajout d'un ancien modèle de plate-forme qui utilise des ports *partagés/MetroCluster HA* à un MetroCluster contenant un modèle de plate-forme plus récent qui utilise des ports *partagés cluster/HA* est un scénario peu courant et la plupart des combinaisons ne sont pas affectées.
+* L'ajout d'un modèle de plateforme plus ancien utilisant des *ports partagés MetroCluster/HA* à un MetroCluster contenant un modèle de plateforme plus récent utilisant des *ports partagés cluster/HA* est un scénario rare et la plupart des combinaisons ne sont pas affectées.
+* Le tableau présente tous les modèles de plateforme qui utilisent des *ports MetroCluster/HA partagés* et des *ports de cluster/HA partagés*. Toutes les combinaisons ne sont pas prises en charge par cette procédure. Reportez-vous à la link:concept_choosing_tech_refresh_mcc.html#supported-metrocluster-ip-tech-refresh-combinations["combinaisons de plateformes prises en charge"] pour vérifier si votre combinaison d'actualisation est prise en charge.
+
 
 ====
-Utilisez le tableau suivant pour vérifier si votre combinaison est affectée. Si votre plate-forme existante est répertoriée dans la première colonne et que la plate-forme que vous souhaitez ajouter à la configuration est répertoriée dans la deuxième colonne, tous les nœuds de la configuration doivent exécuter ONTAP 9.15.1P11 ou ONTAP 9.16.1P4 ou une version ultérieure pour ajouter le nouveau groupe DR.
-
 [cols="20,20,20,20,20"]
 |===
 2+| Si votre MetroCluster existant contient... 2+| Et la plateforme que vous ajoutez est... | Alors... 

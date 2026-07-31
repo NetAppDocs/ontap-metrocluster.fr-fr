@@ -752,6 +752,10 @@ dr-group-id cluster     node     node-systemid ha-partner-systemid dr-partner-sy
 Avant de mettre à niveau les plates-formes, vous devez supprimer la surveillance si la configuration MetroCluster est surveillée à l'aide de l'utilitaire Tiebreaker ou Mediator.
 
 .Étapes
+. Changement au niveau de privilège avancé :
++
+`set -privilege advanced`
+
 . Collectez les valeurs de sortie de la commande suivante :
 +
 `storage iscsi-initiator show`
