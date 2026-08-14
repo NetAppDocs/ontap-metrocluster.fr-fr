@@ -87,6 +87,55 @@ Que l'opération de rétablissement ou de rétablissement-continuation-agent soi
 Effectuez la correction suggérée fournie dans la sortie du `metrocluster operation show` commande.
 
 |===
+. Effectuez les vérifications suivantes pour confirmer que le basculement entre les deux clusters est opérationnel :
++
+.. À partir du cluster de reprise après sinistre, vérifiez si un basculement du cluster survivant vers le cluster de reprise après sinistre est possible :
++
+`metrocluster switchover -simulate`
+
+.. À partir du cluster survivant, vérifiez si un basculement du cluster de reprise après sinistre vers le cluster survivant est possible :
++
+`metrocluster switchover -simulate`
+
+.. Vérifiez que les composants MetroCluster sont sains :
++
+`metrocluster check run`
+
++
+[listing]
+----
+cluster_A::*> metrocluster check run
+----
++
+L'opération s'exécute en arrière-plan.
+
+.. Après le `metrocluster check run` l'opération se termine, exécutez :
++
+`metrocluster check show`
+
++
+Après environ cinq minutes, les résultats suivants s'affichent :
+
++
+[listing]
+----
+cluster_A:::*> metrocluster check show
+
+Component           Result
+------------------- ---------
+nodes               ok
+lifs                ok
+config-replication  ok
+aggregates          ok
+clusters            ok
+connections         ok
+volumes             ok
+7 entries were displayed.
+----
++
+
+NOTE: Dans un environnement FC MetroCluster, les « connexions » doivent apparaître comme « non applicable » dans la sortie de la commande.
 
 
-Vous devez répéter les sections précédentes pour effectuer le rétablissement dans la direction opposée. Si site_A a effectué un basculement du site_B, demandez à site_B de basculer du site_A.
+
+

@@ -168,6 +168,59 @@ mcc1A::> metrocluster operation show
 
 
 
+[[verify-and-restore-lif-configuration]]
+== Vérification et restauration de la configuration LIF
+
+Vérifiez que les LIF sont hébergées sur les nœuds et ports appropriés avant d'effectuer un rétablissement.
+
+.Étapes
+. Vérifiez que les LIF sont hébergées sur les nœuds et ports appropriés avant d’effectuer un basculement.
++
+.. Changement au niveau de privilège avancé :
++
+`set -privilege advanced`
+
+.. Afficher les LIFs et vérifier que chaque LIF de données utilise le bon port home :
++
+`network interface show`
+
+.. Modifier les LIFs qui n'utilisent pas le bon port de home :
++
+`network interface modify -vserver <svm-name> -lif <data-lif> -home-port <port-id>`
+
++
+Si la commande renvoie une erreur, vous pouvez remplacer la configuration des ports :
+
++
+`vserver config override -command "network interface modify -vserver <svm-name> -home-port <active_port_after_upgrade> -lif <lif_name> -home-node <new_node_name>"`
+
++
+Lors de la saisie de la commande network interface modify dans le `vserver config override` vous ne pouvez pas utiliser la fonction de saisie semi-automatique de l'onglet. Vous pouvez créer le réseau `interface modify` à l'aide de la commande auto complete, puis placez-la dans le `vserver config override` commande.
+
+.. Vérifier que toutes les LIFs data se trouvent sur le bon port de home :
++
+`network interface show`
+
+.. Retour au niveau de privilège admin :
++
+`set -privilege admin`
+
+
+
+. Revert les interfaces sur leur home node :
++
+`network interface revert * -vserver <svm-name>`
+
++
+Suivez cette étape sur tous les SVM, si nécessaire.
+
+
+
+
+CAUTION: Vous devez vérifier que l'emplacement des LIF de données est correct sur les nouveaux nœuds avant d'effectuer un rétablissement. Lorsque vous rétablissez la configuration, ONTAP tente de reprendre le trafic sur le port d'attache utilisé par les LIF. Une défaillance d'E/S peut survenir lorsque la connexion du port d'attache au port du commutateur et au VLAN est incorrecte. Si vous rencontrez des problèmes pour placer les LIF sur les nœuds ou ports appropriés, n'effectuez pas le rétablissement et contactez le support technique de NetApp.
+
+
+
 [[verifying-that-your-system-is-ready-for-a-switchback]]
 == Vérifier que votre système est prêt pour le rétablissement
 
@@ -451,8 +504,7 @@ vs1a           data    sync-source
 +
 `metrocluster operation show`
 
-
-
++
 |===
 
 
@@ -472,8 +524,58 @@ Que l'opération de rétablissement ou `switchback-continuation-agent` l'opérat
 Effectuez la correction suggérée fournie dans la sortie du `metrocluster operation show` commande.
 
 |===
-.Une fois que vous avez terminé
-Vous devez répéter les sections précédentes pour effectuer le rétablissement dans la direction opposée. Si site_A a effectué un basculement du site_B, demandez à site_B de basculer du site_A.
+. Effectuez les vérifications suivantes pour confirmer que le basculement entre les deux clusters est opérationnel :
++
+.. À partir du cluster de reprise après sinistre, vérifiez si un basculement du cluster survivant vers le cluster de reprise après sinistre est possible :
++
+`metrocluster switchover -simulate`
+
+.. À partir du cluster survivant, vérifiez si un basculement du cluster de reprise après sinistre vers le cluster survivant est possible :
++
+`metrocluster switchover -simulate`
+
+.. Vérifiez que les composants MetroCluster sont sains :
++
+`metrocluster check run`
+
++
+[listing]
+----
+cluster_A::*> metrocluster check run
+----
++
+L'opération s'exécute en arrière-plan.
+
+.. Après le `metrocluster check run` l'opération se termine, exécutez :
++
+`metrocluster check show`
+
++
+Après environ cinq minutes, les résultats suivants s'affichent :
+
++
+[listing]
+----
+cluster_A:::*> metrocluster check show
+
+Component           Result
+------------------- ---------
+nodes               ok
+lifs                ok
+config-replication  ok
+aggregates          ok
+clusters            ok
+connections         ok
+volumes             ok
+7 entries were displayed.
+----
++
+
+NOTE: Dans un environnement FC MetroCluster, les « connexions » doivent apparaître comme « non applicable » dans la sortie de la commande.
+
+
+
+
 
 
 
