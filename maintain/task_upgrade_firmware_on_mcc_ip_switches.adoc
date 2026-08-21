@@ -155,6 +155,7 @@ volumes             ok
 
 
 
+. link:../install-ip/switch-move-cluster-lifs.html["Déplacez les LIF du cluster"]avant de commencer la mise à niveau.
 . Installer le logiciel sur le premier commutateur.
 +
 
@@ -169,6 +170,10 @@ Suivez les étapes d'installation du logiciel du commutateur dans la rubrique co
 ** link:../install-ip/task_switch_config_nvidia.html#download-and-install-the-cumulus-software["Téléchargez et installez le logiciel Cumulus du commutateur NVIDIA SN2100"]
 
 
-. Répéter l'étape précédente pour chacun des commutateurs.
+. Répétez les étapes précédentes pour chacun des commutateurs.
++
+
+NOTE: Après avoir configuré les commutateurs du premier fabric (Switch_A_1, Switch_B_1), vous devez répéter les étapes pour déplacer les LIF du cluster sur le deuxième fabric (Switch_A_2, Switch_B_2). Reportez-vous à link:../install-ip/task_install_and_cable_the_mcc_components.html["Découvrez comment configurer les commutateurs IP MetroCluster"].
+
 . Recommencez <<step_1_fw_upgrade,Étape 1>> pour vérifier l'état de santé de la configuration.
 

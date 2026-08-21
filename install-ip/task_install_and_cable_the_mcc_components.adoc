@@ -4,16 +4,44 @@ sidebar: sidebar
 keywords: ip, switch, configuring 
 summary: Vous devez configurer les switchs IP pour assurer la connectivité IP MetroCluster back-end. 
 ---
-= Choisissez la procédure de configuration du commutateur IP MetroCluster appropriée
+= Découvrez comment configurer les commutateurs IP MetroCluster
 :allow-uri-read: 
 :icons: font
 :imagesdir: ../media/
 
 
 [role="lead"]
-Vous devez configurer les switchs IP pour assurer la connectivité IP MetroCluster back-end. La procédure à suivre dépend de votre fournisseur de commutateur.
+Vous devez configurer les commutateurs IP pour assurer la connectivité IP backend MetroCluster. La procédure que vous suivez dépend de votre fournisseur de commutateurs et du fait que vous configuriez vos commutateurs dans le cadre d'une nouvelle installation de MetroCluster IP ou dans le cadre d'une autre procédure.
+
+
+
+[[fresh-metrocluster-ip-installation]]
+== Nouvelle installation IP MetroCluster
+
+Si vous effectuez une nouvelle installation IP MetroCluster, choisissez la procédure de configuration du commutateur en fonction de votre fournisseur de commutateurs :
 
 * link:../install-ip/task_switch_config_broadcom.html["Configurez les commutateurs IP Broadcom"]
 * link:../install-ip/task_switch_config_cisco.html["Configuration des commutateurs IP Cisco"]
 * link:../install-ip/task_switch_config_nvidia.html["Configurez les commutateurs IP NVIDIA"]
+
+
+
+
+[[switch-replacement-and-rcf-or-firmware-updates]]
+== Remplacement du commutateur et mises à jour RCF ou du micrologiciel
+
+Dans le cadre d'autres procédures IP MetroCluster, telles que le remplacement ou la mise à niveau d'un commutateur, il peut être nécessaire de mettre à jour le microprogramme du commutateur, le fichier de configuration de référence (RCF), ou les deux. Dans ces scénarios, vous devez déplacer les LIF du cluster avant de configurer les commutateurs IP. Les étapes générales pour ces scénarios sont les suivantes :
+
+
+NOTE: Vous devez mettre à jour les commutateurs dans l'ordre suivant Switch_A_1, Switch_B_1, Switch_A_2, Switch_B_2.
+
+. link:../install-ip/switch-move-cluster-lifs.html["Déplacez les LIF du cluster"]
+. Après avoir déplacé les LIF du cluster vers le commutateur partenaire, vous pouvez suivre les procédures de configuration standard de votre fournisseur de commutateur :
++
+** link:../install-ip/task_switch_config_broadcom.html["Configurez les commutateurs IP Broadcom"]
+** link:../install-ip/task_switch_config_cisco.html["Configuration des commutateurs IP Cisco"]
+** link:../install-ip/task_switch_config_nvidia.html["Configurez les commutateurs IP NVIDIA"]
+
+
+. Après avoir configuré les commutateurs dans le premier fabric (Switch_A_1, Switch_B_1), vous devez répéter les étapes sur le deuxième fabric (Switch_A_2, Switch_B_2), en commençant par link:../install-ip/switch-move-cluster-lifs.html["Déplacez les LIF du cluster"].
 

@@ -48,6 +48,7 @@ NOTE: Toutes les autres modifications de configuration qui se produisent pendant
 * Vous devez répéter ces étapes sur chacun des commutateurs IP de la configuration MetroCluster IP.
 * Vous devez être connecté au commutateur par une connexion de console série.
 * Cette tâche réinitialise la configuration du réseau de gestion.
+* Si vous utilisez ces étapes dans le cadre d'une autre procédure, telle qu'un remplacement ou une mise à niveau de commutateur, vérifiez si vous devez déplacer les LIF du cluster vers le commutateur partenaire pour permettre des opérations de cluster non perturbatrices. link:task_install_and_cable_the_mcc_components.html["Découvrez comment configurer les commutateurs IP MetroCluster"].
 
 
 .Étapes
@@ -128,6 +129,7 @@ Suivez ces étapes pour réinitialiser complètement le commutateur en appliquan
 NOTE: Pour plus d'informations sur l'installation de Cumulus Linux, voir link:https://docs.netapp.com/us-en/ontap-systems-switches/switch-nvidia-sn2100/configure-overview-sn2100-cluster.html#initial-configuration-overview["Présentation de l'installation et de la configuration des switchs NVIDIA SN2100"^]
 
 * Vous devez avoir le mot de passe root pour `sudo` accès aux commandes.
+* Si vous utilisez ces étapes dans le cadre d'une autre procédure, telle qu'un remplacement ou une mise à niveau de commutateur, vérifiez si vous devez déplacer les LIF du cluster vers le commutateur partenaire pour permettre des opérations de cluster non perturbatrices. link:task_install_and_cable_the_mcc_components.html["Découvrez comment configurer les commutateurs IP MetroCluster"].
 
 
 .Étapes
@@ -314,10 +316,14 @@ Vous devez générer et installer le fichier RCF des switchs sur chaque switch d
 
 NOTE: Si vous effectuez une autre configuration après la réinitialisation du commutateur et avant d'appliquer le fichier RCF, cette procédure ne peut pas être utilisée.
 
+* Si vous utilisez ces étapes dans le cadre d'une autre procédure, telle qu'un remplacement ou une mise à niveau de commutateur, vérifiez si vous devez déplacer les LIF du cluster vers le commutateur partenaire pour permettre des opérations de cluster non perturbatrices. link:task_install_and_cable_the_mcc_components.html["Découvrez comment configurer les commutateurs IP MetroCluster"].
 
 
 .Description de la tâche
 Vous devez répéter ces étapes sur chacun des commutateurs IP de la configuration IP MetroCluster (nouvelle installation) ou sur le commutateur de remplacement (remplacement du commutateur).
+
+
+NOTE: Vous devez mettre à jour les commutateurs dans l'ordre suivant : Switch_A_1, Switch_B_1, Switch_A_2, Switch_B_2. Si votre procédure nécessite de déplacer les LIF de cluster, vous devez répéter les étapes pour déplacer les LIF de cluster sur le second fabric (Switch_A_2, Switch_B_2) après avoir configuré les commutateurs du premier fabric (Switch_A_1, Switch_B_1). Reportez-vous à link:task_install_and_cable_the_mcc_components.html["Découvrez comment configurer les commutateurs IP MetroCluster"].
 
 Si vous utilisez une carte QSFP-to-SFP+, vous devrez peut-être configurer le port ISL en mode de vitesse natif au lieu du mode de vitesse d'arrachage. Consultez la documentation du fournisseur du commutateur pour déterminer le mode de vitesse du port ISL.
 
@@ -405,6 +411,81 @@ cumulus@IP_switch_A_1:mgmt:~$
 +
 
 NOTE: Lorsque vous définissez l'option DAC pour plusieurs ports de commutateur, vous ne devez redémarrer le commutateur qu'une seule fois.
+
+. Vérifiez que la restauration automatique est activée pour les LIF du cluster :
++
+`network interface show -vserver Cluster -fields auto-revert`
+
++
+
+CAUTION: Vous devez vous assurer que la restauration automatique est activée pour les LIF du cluster.
+
+. Si la restauration automatique n'est pas activée, modifiez toutes les LIF du cluster pour activer la restauration automatique :
++
+
+NOTE: Si vous effectuez ces étapes dans le cadre d'une autre procédure, telle qu'un remplacement ou une mise à niveau de commutateur, vous avez peut-être désactivé la restauration automatique dans le cadre des étapes de link:switch-move-cluster-lifs.html["Déplacez les LIF du cluster"].
+
++
+.. Réactivez la restauration automatique :
++
+`network interface modify -vserver Cluster -lif * -auto-revert true`
+
++
+[listing]
+----
+cluster_A::*> network interface modify -vserver Cluster -lif * -auto-revert true
+
+Warning: Changes to a cluster LIF can affect the health of the Cluster. Are you
+         sure you want to continue? {y|n}: y
+4 entries were modified.
+
+cluster_A::*>
+----
+.. Rétablir les ports d'origine de toutes les interfaces réseau du cluster qui ne sont pas actuellement connectées à leurs ports d'origine :
++
+`network interface revert -vserver Cluster -lif *`
+
++
+Veuillez patienter quelques minutes le temps que les LIF reviennent à leur port d'attache :
+
+.. Confirmez que tous les LIF sont sur leurs ports d'attache :
++
+[listing]
+----
+cluster_A::*> network interface show -role cluster
+            Logical        Status     Network            Current       Current Is
+Vserver     Interface      Admin/Oper Address/Mask       Node          Port    Home
+----------- -------------- ---------- ------------------ ------------- ------- ----
+Cluster
+            node_A_1_clus1 up/up      192.168.204.88/18  node_A_1      e4a     true
+            node_A_1_clus2 up/up      192.168.204.93/18  node_A_1      e4b     true
+            node_A_2_clus1 up/up      192.168.204.96/18  node_A_2      e4a     true
+            node_A_2_clus2 up/up      192.168.204.97/18  node_A_2      e4b     true
+4 entries were displayed.
+----
+.. Vérifiez l'état des nœuds MetroCluster :
++
+`metrocluster node show`
+
++
+[listing]
+----
+cluster_A::*> metrocluster node show
+
+DR                               Configuration  DR
+Group Cluster Node               State          Mirroring Mode
+----- ------- ------------------ -------------- --------- --------------------
+1     cluster_A
+              node_A_1           configured     enabled   normal
+              node_A_2           configured     enabled   normal
+      cluster_B
+              node_B_1           configured     enabled   normal
+              node_B_2           configured     enabled   normal
+4 entries were displayed.
+
+cluster_A::*>
+----
+
 
 
 

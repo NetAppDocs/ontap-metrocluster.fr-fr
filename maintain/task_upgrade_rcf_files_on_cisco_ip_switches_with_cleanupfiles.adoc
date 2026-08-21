@@ -11,7 +11,7 @@ summary: 'La mise à niveau d"un fichier RCF peut être nécessaire sur un commu
 
 
 [role="lead"]
-La mise à niveau d'un fichier RCF peut être nécessaire sur un commutateur IP Cisco. Par exemple, une mise à niveau de ONTAP ou une mise à niveau du firmware du switch nécessite tous deux un nouveau fichier RCF.
+Vous pourriez avoir besoin de mettre à niveau un fichier de configuration de référence (RCF) sur un commutateur IP Cisco. Par exemple, une mise à niveau d'ONTAP ou une mise à niveau du microprogramme du commutateur nécessite un nouveau RCF.
 
 .Description de la tâche
 * À partir de la version 1.4a de RcfFileGenerator, il existe une nouvelle option permettant de modifier (mise à niveau, rétrogradation ou remplacement) la configuration du commutateur sur les commutateurs IP Cisco sans avoir à effectuer de « effacement d'écriture ».
@@ -22,7 +22,7 @@ La mise à niveau d'un fichier RCF peut être nécessaire sur un commutateur IP 
 +
 [cols="3*"]
 |===
-| Si vous connectez le stockage suivant... | Choisissez le type de stockage Cisco 9336C-FX2... | Exemple de bannière/MOTD du fichier RCF 
+| Si vous connectez le stockage suivant... | Choisissez le type de stockage Cisco 9336C-FX2... | Exemple de bannière RCF/MOTD 
 
 
  a| 
@@ -56,13 +56,13 @@ NOTE: Au moins un tiroir NVMe connecté Ethernet est requis
 Vous pouvez utiliser cette méthode si votre configuration répond aux exigences suivantes :
 
 * La configuration FCR standard est appliquée.
-* Le https://mysupport.netapp.com/site/tools/tool-eula/rcffilegenerator["RcfFileGenerator"] Doit pouvoir créer le même fichier RCF appliqué avec la même version et la même configuration (plateformes ou VLAN).
-* Le fichier RCF appliqué n'a pas été fourni par NetApp pour une configuration spéciale.
-* Le fichier RCF n'a pas été modifié avant son application.
-* Les étapes permettant de réinitialiser les paramètres d'usine du commutateur ont été suivies avant d'appliquer le fichier RCF actuel.
+* Le  https://mysupport.netapp.com/site/tools/tool-eula/rcffilegenerator["RcfFileGenerator"] doit pouvoir créer le même RCF que celui appliqué, avec la même version et la même configuration (plateformes, VLANs).
+* Le RCF appliqué n'a pas été fourni par NetApp pour une configuration spéciale.
+* Le RCF n'a pas été modifié avant son application.
+* La procédure de réinitialisation du commutateur aux paramètres d'usine a été suivie avant d'appliquer le RCF actuel.
 * Aucune modification n'a été apportée à la configuration du switch(port) après l'application de la FCR.
 +
-Si vous ne répondez pas à ces exigences, vous ne pouvez pas utiliser les fichiers CleanUpFiles créés lors de la génération des fichiers RCF. Cependant, vous pouvez utiliser la fonction pour créer des CleanUpFiles génériques -- le nettoyage à l'aide de cette méthode est dérivé de la sortie de `show running-config` et il s'agit des meilleures pratiques.
+Si vous ne remplissez pas ces conditions, vous ne pouvez pas utiliser les CleanUpFiles qui sont créés lors de la génération des RCFs. Cependant, vous pouvez tirer parti de la fonction pour créer des CleanUpFiles génériques -- le nettoyage à l'aide de cette méthode est dérivé du résultat de  `show running-config` et constitue une bonne pratique.
 
 +
 
@@ -71,7 +71,8 @@ NOTE: Vous devez mettre à jour les commutateurs dans l'ordre suivant : switch_A
 
 
 .Étapes
-. Déterminez la version actuelle du fichier RCF, ainsi que les ports et les VLAN utilisés : `IP_switch_A_1# show banner motd`
+. link:../install-ip/switch-move-cluster-lifs.html["Déplacez les LIF du cluster"]avant de commencer la mise à niveau.
+. Déterminez la version RCF actuelle, ainsi que les ports et les VLAN utilisés : `IP_switch_A_1# show banner motd`
 +
 
 NOTE: Vous devez obtenir ces informations à partir des quatre commutateurs et remplir le tableau d'information suivant.
@@ -114,7 +115,7 @@ IP_switch_A_1#
 | Informations génériques | MetroCluster | Les données 
 
 
-| Version du fichier RCF |  | 1.81 
+| version RCF |  | 1.81 
 
 
 | Type de commutateur |  | NX9336 
@@ -159,31 +160,31 @@ IP_switch_A_1#
 
 | 2 | 11 février 12 | 259 | 259 
 |===
-. [[Create-RCF-files-and-CleanUpFiles-or-create-generic-CleanUpFiles]]] Créez les fichiers RCF et CleanUpFiles ou créez des CleanUpFiles génériques pour la configuration actuelle.
+. [[Create-RCF-files-and-CleanUpFiles-or-create-generic-CleanUpFiles]] Créez les fichiers RCF et CleanUpFiles, ou créez des CleanUpFiles génériques pour la configuration actuelle.
 +
 Si votre configuration répond aux exigences décrites dans les conditions préalables, sélectionnez *option 1*. Si votre configuration ne répond pas * aux exigences décrites dans les conditions préalables, sélectionnez *option 2*.
 
 +
 [role="tabbed-block"]
 ====
-.Option 1 : créez les fichiers RCF et CleanUpFiles
+.Option 1 : Créez les RCF et CleanUpFiles
 --
 Utiliser cette procédure si la configuration répond aux exigences.
 
 .Étapes
-.. Utilisez le RcfFileGenerator 1.4a (ou version ultérieure) pour créer les fichiers RCF avec les informations récupérées à l'étape 1. La nouvelle version de RcfFileGenerator crée un jeu supplémentaire de CleanUpFiles que vous pouvez utiliser pour rétablir une certaine configuration et préparer le commutateur pour appliquer une nouvelle configuration RCF.
-.. Comparez la bannière motd avec les fichiers FCR actuellement appliqués. Les types de plate-forme, le type de commutateur, le port et le VLAN doivent être identiques.
+.. Utilisez le RcfFileGenerator 1.4a (ou ultérieur) pour créer les RCF avec les informations que vous avez récupérées à l’étape 1. La nouvelle version du RcfFileGenerator crée un ensemble supplémentaire de CleanUpFiles que vous pouvez utiliser pour annuler une configuration et préparer le commutateur à appliquer une nouvelle configuration RCF.
+.. Comparez le banner motd avec les RCF actuellement appliqués. Les types de plateforme, de commutateur, de port et d'utilisation de VLAN doivent être identiques.
 +
 
-NOTE: Vous devez utiliser les CleanUpFiles de la même version que le fichier RCF et pour la même configuration. L'utilisation d'un CleanUpFile ne fonctionnera pas et peut nécessiter une réinitialisation complète du commutateur.
-
-+
-
-NOTE: La version ONTAP pour laquelle le fichier RCF est créé n'est pas pertinente. Seule la version du fichier RCF est importante.
+NOTE: Vous devez utiliser le CleanUpFiles de la même version que le RCF et pour exactement la même configuration. Utiliser n'importe quel CleanUpFile ne fonctionnera pas et pourrait nécessiter une réinitialisation complète du commutateur.
 
 +
 
-NOTE: Le fichier RCF (même si sa version est identique) peut lister un nombre inférieur ou supérieur à celui-ci. Assurez-vous que votre plate-forme est répertoriée.
+NOTE: La version d'ONTAP pour laquelle le RCF a été créé n'est pas pertinente. Seule la version du RCF est importante.
+
++
+
+NOTE: Le fichier RCF (même s'il s'agit de la même version) peut indiquer moins ou plus de plateformes. Assurez-vous que votre plateforme y figure.
 
 
 
@@ -206,25 +207,25 @@ Utilisez cette procédure si la configuration ne répond pas * à toutes les exi
 
 --
 ====
-. [[Create-the-New-RCF-files-for-the-New-configuration]] Créez les fichiers RCF « nouveaux » pour la nouvelle configuration. Créez ces fichiers de la même manière que vous avez créé les fichiers à l'étape précédente, à l'exception de choisir la version respective des fichiers ONTAP et RCF.
+. Créez les « nouveaux » fichiers RCF pour la nouvelle configuration. Créez ces fichiers de la même manière que vous avez créé les fichiers à l'étape précédente, sauf que vous devez choisir la version ONTAP et RCF respective.
 +
-Une fois cette étape terminée, vous devez avoir deux jeux de fichiers RCF, chacun composé de douze fichiers.
+Une fois cette étape terminée, vous devriez avoir deux ensembles de RCF, chaque ensemble composé de douze fichiers.
 
 . Téléchargez les fichiers sur le bootflash.
 +
-.. Téléchargez les CleanUpFiles que vous avez créés dans <<Create-RCF-files-and-CleanUpFiles-or-create-generic-CleanUpFiles,Créez les fichiers RCF et les fichiers CleanUpFiles ou créez des fichiers CleanUpFiles génériques pour la configuration actuelle>>
+.. Téléchargez le fichier CleanUpFiles que vous avez créé dans <<Create-RCF-files-and-CleanUpFiles-or-create-generic-CleanUpFiles,Créez les RCF et CleanUpFiles, ou créez des CleanUpFiles génériques pour la configuration actuelle>>
 +
 
-NOTE: Ce fichier CleanUpFile est destiné au fichier FCR en cours qui est appliqué et *NON* pour la nouvelle FCR vers laquelle vous souhaitez effectuer la mise à niveau.
+NOTE: Ce CleanUpFile concerne le RCF actuel appliqué et *NON* le nouveau RCF vers lequel vous souhaitez effectuer la mise à niveau.
 
 +
 Exemple de fichier CleanUpFile pour Switch-A1 : `Cleanup_NX9336_v1.81_Switch-A1.txt`
 
-.. Téléchargez les « nouveaux » fichiers RCF que vous avez créés dans <<Create-the-new-RCF-files-for-the-new-configuration,Créez les fichiers RCF « nouveaux » pour la nouvelle configuration.>>
+.. Téléchargez les « nouveaux » RCF que vous avez créés dans <<Create-the-new-RCF-files-for-the-new-configuration,Créez les « nouveaux » RCF pour la nouvelle configuration.>>
 +
-Exemple de fichier RCF pour Switch-A1 : `NX9336_v1.90_Switch-A1.txt`
+Exemple de RCF pour Switch-A1 : `NX9336_v1.90_Switch-A1.txt`
 
-.. Téléchargez les CleanUpFiles que vous avez créés dans <<Create-the-new-RCF-files-for-the-new-configuration,Créez les fichiers RCF « nouveaux » pour la nouvelle configuration.>> Cette étape est facultative -- vous pouvez utiliser le fichier ultérieurement pour mettre à jour la configuration du commutateur. Elle correspond à la configuration actuellement appliquée.
+.. Téléchargez le CleanUpFiles que vous avez créé dans <<Create-the-new-RCF-files-for-the-new-configuration,Créez les « nouveaux » RCF pour la nouvelle configuration.>> Cette étape est facultative -- vous pouvez utiliser le fichier à l'avenir pour mettre à jour la configuration du commutateur. Il correspond à la configuration actuellement appliquée.
 +
 Exemple de fichier CleanUpFile pour Switch-A1 : `Cleanup_NX9336_v1.90_Switch-A1.txt`
 
@@ -294,13 +295,13 @@ La configuration actuelle doit indiquer :
 ** Aucun profil de port n'est configuré
 ** Toutes les interfaces Ethernet (à l'exception de mgmt0 qui ne doivent pas afficher de configuration, et seul le VLAN 1 doit être configuré).
 +
-Si l'un des éléments ci-dessus est configuré, il est possible que vous ne puissiez pas appliquer une nouvelle configuration de fichier RCF. Cependant, vous pouvez revenir à la configuration précédente en rechargeant le commutateur *sans* enregistrer la configuration en cours d'exécution dans la configuration de démarrage. Le commutateur s'active avec la configuration précédente.
+Si vous constatez que l’un des éléments ci-dessus est configuré, il se peut que vous ne puissiez pas appliquer une nouvelle configuration RCF. Cependant, vous pouvez revenir à la configuration précédente en redémarrant le commutateur *sans* enregistrer la configuration en cours dans la configuration de démarrage. Le commutateur démarrera avec la configuration précédente.
 
 
 
-. Appliquer le fichier RCF et vérifier que les ports sont en ligne.
+. Appliquez le RCF et vérifiez que les ports sont en ligne.
 +
-.. Appliquez les fichiers RCF.
+.. Appliquez le RCF.
 +
 [listing]
 ----
@@ -328,4 +329,67 @@ IP_switch_A_1# copy running-config startup-config
 
 IP_switch_A_1# reload
 ----
+. Modifiez tous les LIF du cluster pour activer la restauration automatique :
++
+.. Réactivez la restauration automatique :
++
+`network interface modify -vserver Cluster -lif * -auto-revert true`
+
++
+[listing]
+----
+cluster_A::*> network interface modify -vserver Cluster -lif * -auto-revert true
+
+Warning: Changes to a cluster LIF can affect the health of the Cluster. Are you
+         sure you want to continue? {y|n}: y
+4 entries were modified.
+
+cluster_A::*>
+----
+.. Rétablir les ports d'origine de toutes les interfaces réseau du cluster qui ne sont pas actuellement connectées à leurs ports d'origine :
++
+`network interface revert -vserver Cluster -lif *`
+
++
+Veuillez patienter quelques minutes le temps que les LIF reviennent à leur port d'attache :
+
+.. Confirmez que tous les LIF sont sur leurs ports d'attache :
++
+[listing]
+----
+cluster_A::*> network interface show -role cluster
+            Logical        Status     Network            Current       Current Is
+Vserver     Interface      Admin/Oper Address/Mask       Node          Port    Home
+----------- -------------- ---------- ------------------ ------------- ------- ----
+Cluster
+            node_A_1_clus1 up/up      192.168.204.88/18  node_A_1      e4a     true
+            node_A_1_clus2 up/up      192.168.204.93/18  node_A_1      e4b     true
+            node_A_2_clus1 up/up      192.168.204.96/18  node_A_2      e4a     true
+            node_A_2_clus2 up/up      192.168.204.97/18  node_A_2      e4b     true
+4 entries were displayed.
+----
+.. Vérifiez l'état des nœuds MetroCluster :
++
+`metrocluster node show`
+
++
+[listing]
+----
+cluster_A::*> metrocluster node show
+
+DR                               Configuration  DR
+Group Cluster Node               State          Mirroring Mode
+----- ------- ------------------ -------------- --------- --------------------
+1     cluster_A
+              node_A_1           configured     enabled   normal
+              node_A_2           configured     enabled   normal
+      cluster_B
+              node_B_1           configured     enabled   normal
+              node_B_2           configured     enabled   normal
+4 entries were displayed.
+
+cluster_A::*>
+----
+
+
 

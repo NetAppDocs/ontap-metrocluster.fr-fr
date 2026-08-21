@@ -21,7 +21,7 @@ Vous devez effectuer toutes les étapes des deux commutateurs pour assurer la co
 La procédure suivante suppose que vous remplacez un ISL de 10 Go connecté au port du commutateur eth1/24/1 par deux liens ISL de 100 Go connectés aux ports de commutation 17 et 18.
 
 
-NOTE: Si vous utilisez un commutateur Cisco 9336C-FX2 dans une configuration partagée qui connecte des tiroirs NS224, la modification des liens ISL peut nécessiter un nouveau fichier RCF. Vous n'avez pas besoin d'un nouveau fichier RCF si la vitesse ISL actuelle et la nouvelle vitesse sont de 40 Gbit/s et de 100 Gbit/s. Toute autre modification de la vitesse ISL requiert un nouveau fichier RCF. Par exemple, changer la vitesse des liens ISL de 40 Gbits/s à 100 Gbits/s ne nécessite pas de nouveau fichier RCF. En revanche, pour passer de 10 Gbits/s à 40 Gbits/s, la vitesse des liens ISL nécessite la création d'un nouveau fichier RCF.
+NOTE: Si vous utilisez un commutateur Cisco 9336C-FX2 en configuration partagée pour connecter des baies NS224, la modification des ISL peut nécessiter un nouveau fichier de configuration (RCF). Vous ne nécessitez pas de nouveau RCF si vos vitesses ISL actuelles et nouvelles sont de 40 Gbps et 100 Gbps. Toute autre modification de la vitesse ISL nécessite un nouveau RCF. Par exemple, changer la vitesse ISL de 40 Gbps à 100 Gbps ne nécessite pas de nouveau RCF, mais changer la vitesse ISL de 10 Gbps à 40 Gbps nécessite un nouveau RCF.
 
 .Avant de commencer
 Reportez-vous à la section *commutateurs* du link:https://hwu.netapp.com/["NetApp Hardware Universe"^] pour vérifier les émetteurs-récepteurs pris en charge.
@@ -59,7 +59,7 @@ switch_B_1#
 . Modifiez le port ISL si nécessaire.
 +
 
-NOTE: Si vous utilisez des switchs Cisco 9336C-FX2 dans une configuration partagée qui connecte des tiroirs NS224, et que vous devez mettre à niveau le fichier RCF et appliquer la nouvelle configuration pour les nouveaux ports ISL, suivez les étapes à link:task_upgrade_rcf_files_on_mcc_ip_switches.html["Mettez à niveau les fichiers RCF sur les switchs IP MetroCluster."]
+NOTE: Si vous utilisez des commutateurs Cisco 9336C-FX2 en configuration partagée connectant des baies NS224, et que vous devez mettre à niveau le RCF et appliquer la nouvelle configuration aux nouveaux ports ISL, suivez les étapes à link:task_upgrade_rcf_files_on_mcc_ip_switches.html["Mettre à niveau les RCF sur les commutateurs IP MetroCluster."]
 
 +
 [cols="30,70"]

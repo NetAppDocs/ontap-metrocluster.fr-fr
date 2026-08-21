@@ -129,13 +129,19 @@ Si vous réutilisez des commutateurs existants, passez à l' <<existing_step4,É
 NOTE: Si vous mettez à niveau ou déclariez les commutateurs, vous devez configurer tous les commutateurs du réseau.
 
 +
-Suivez les étapes de la section _Configuration des commutateurs IP_ dans link:https://docs.netapp.com/us-en/ontap-metrocluster/install-ip/using_rcf_generator.html["Installation et configuration de MetroCluster IP."]
+Suivez les étapes pour votre fournisseur de commutateur :
 
++
+** link:../install-ip/task_switch_config_broadcom.html["Configurez les commutateurs IP Broadcom"]
+** link:../install-ip/task_switch_config_cisco.html["Configuration des commutateurs IP Cisco"]
+** link:../install-ip/task_switch_config_nvidia.html["Configurez les commutateurs IP NVIDIA"]
 +
 Assurez-vous d'appliquer le fichier RCF approprié pour le commutateur _A_1, _A_2, _B_1 ou _B_2. Si le nouveau switch est identique à l'ancien switch, vous devez appliquer le même fichier RCF.
 
 +
 Si vous mettez à niveau ou déclasser un commutateur, appliquez le fichier RCF le plus récent pris en charge pour le nouveau commutateur.
+
+
 
 . Lancer la commande port show pour afficher des informations sur les ports réseau :
 +
@@ -148,6 +154,11 @@ Si vous mettez à niveau ou déclasser un commutateur, appliquez le fichier RCF 
 ----
 network interface modify -vserver <vserver_name> -lif <lif_name> -auto-revert false
 ----
+.. link:../install-ip/switch-move-cluster-lifs.html["Déplacez les LIF du cluster"].
++
+
+NOTE: Vous devez mettre à jour les commutateurs dans l'ordre suivant : Switch_A_1, Switch_B_1, Switch_A_2, Switch_B_2. Vous devez répéter les étapes pour déplacer les LIF du cluster sur le deuxième fabric (Switch_A_2, Switch_B_2) après avoir configuré les commutateurs dans le premier fabric (Switch_A_1, Switch_B_1). Reportez-vous à link:../install-ip/task_install_and_cable_the_mcc_components.html["Découvrez comment configurer les commutateurs IP MetroCluster"].
+
 
 
 . [[existing_step4]]déconnectez les connexions de l'ancien commutateur.
@@ -190,7 +201,7 @@ Pour configurer les switchs existants, suivez la procédure d'installation et de
 
 . Câbler les commutateurs.
 +
-Vous pouvez suivre les étapes de la section _câblage des commutateurs IP_ de la section link:https://docs.netapp.com/us-en/ontap-metrocluster/install-ip/using_rcf_generator.html["Installation et configuration de MetroCluster IP"].
+Vous pouvez suivre les étapes dans link:../install-ip/using_rcf_generator.html["Branchez les câbles des commutateurs IP MetroCluster"].
 
 +
 Câblez les interrupteurs dans l'ordre suivant (si nécessaire) :
@@ -225,15 +236,15 @@ Câblez les interrupteurs dans l'ordre suivant (si nécessaire) :
 
 . Mettez le ou les commutateurs sous tension.
 +
-Si le nouveau commutateur est le même, mettez le nouveau commutateur sous tension. Si vous effectuez une mise à niveau ou une rétrogradation des commutateurs, mettez les deux commutateurs sous tension. La configuration peut fonctionner avec deux commutateurs différents sur chaque site jusqu'à la mise à jour du second réseau.
+Si le nouveau commutateur est identique, mettez-le sous tension. Si vous effectuez une mise à niveau ou une rétrogradation des commutateurs, mettez les deux commutateurs sous tension. La configuration peut fonctionner avec deux commutateurs différents sur chaque site jusqu'à la mise à jour du second réseau.
 
 . Vérifiez que la configuration MetroCluster fonctionne correctement en répétant cette procédure <<all_step1,Étape 1>>.
 +
-Si vous effectuez une mise à niveau ou une rétrogradation des commutateurs du premier réseau, vous pouvez voir certaines alertes relatives à la mise en grappe locale.
+Si vous mettez à niveau ou rétrogradez les commutateurs du premier fabric, vous pourriez voir des alertes liées au clustering local.
 
 +
 
-NOTE: Si vous mettez à niveau ou déclarez les réseaux, répétez toutes les étapes pour le second réseau.
+NOTE: Si vous mettez à niveau ou rétrogradez le fabric, répétez toutes les étapes pour le second fabric.
 
 . Modifier toutes les LIFs de cluster pour réactiver auto-revert :
 +

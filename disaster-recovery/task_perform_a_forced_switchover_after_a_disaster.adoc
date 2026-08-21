@@ -52,9 +52,6 @@ Cette approche permet d'éviter la concurrence avec l'opération de basculement 
 
 
 
-
-NOTE: Les configurations SnapMirror et SnapVault sont supprimées automatiquement.
-
 .Description de la tâche
 Le `metrocluster switchover` La commande bascule les nœuds dans tous les groupes DR dans la configuration MetroCluster. Par exemple, dans une configuration MetroCluster à 8 nœuds, il bascule les nœuds sur les deux groupes de reprise après incident.
 
@@ -89,9 +86,6 @@ mcc1A::> metrocluster operation show
 Si le basculement est vetoté, vous avez la possibilité de réémettre le `metrocluster switchover-forced-on-disaster true` commande avec `--override-vetoes` option. Si vous utilisez ce paramètre facultatif, le système remplace tout veto logiciel qui a empêché le basculement.
 
 
-
-.Une fois que vous avez terminé
-Les relations SnapMirror doivent être réétablies après le basculement.
 
 
 
