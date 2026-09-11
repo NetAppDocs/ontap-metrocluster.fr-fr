@@ -977,24 +977,50 @@ Vous devez vérifier l'état haute disponibilité des contrôleurs et du châssi
 `ha-config show`
 
 +
-L'état HA pour tous les composants doit être mcc.
+L'état HA de tous les composants doit être `mcc`.
 
-. Si l'état système affiché du contrôleur ou du châssis n'est pas correct, définissez l'état HA :
+. Si l'état du système affiché du contrôleur n'est pas correct, définissez l'état HA pour le module de contrôleur et le châssis :
 +
 `ha-config modify controller mcc`
 
 +
 `ha-config modify chassis mcc`
 
-. Arrêter le nœud : `halt`Le nœud doit s'arrêter au niveau du `LOADER>` à l'invite.
-. Sur chaque nœud, vérifiez la date, l'heure et le fuseau horaire du système : `Show date`
-. Si nécessaire, définissez la date en heure UTC ou GMT (GMT) : `set date <mm/dd/yyyy>`
-. Vérifiez l'heure à l'aide de la commande suivante à l'invite de l'environnement d'amorçage : `show time`
-. Si nécessaire, définissez l'heure en UTC ou GMT : `set time <hh:mm:ss>`
-. Enregistrer les paramètres : `saveenv`
-. Collecter les variables d'environnement : `printenv`
-. Redémarrez le nœud en mode maintenance pour que les modifications de configuration prennent effet :
+. Arrêter le nœud :
++
+`halt`
+
++
+Le nœud doit s'arrêter au niveau du `LOADER>` à l'invite.
+
+. Sur chaque nœud, vérifiez la date, l'heure et le fuseau horaire du système :
++
+`show date`
+
+. Si nécessaire, définissez la date en UTC ou en temps moyen de Greenwich (GMT) :
++
+`set date <mm/dd/yyyy>`
+
+. Vérifiez l'heure en utilisant la commande suivante à l'invite de l'environnement de démarrage :
++
+`show time`
+
+. Si nécessaire, réglez l'heure en UTC ou GMT :
++
+`set time <hh:mm:ss>`
+
+. Enregistrez les paramètres :
++
+`saveenv`
+
+. Rassemblez les variables d'environnement :
++
+`printenv`
+
+. Redémarrez le nœud en mode Maintenance pour appliquer les modifications de configuration :
++
 `boot_ontap maint`
+
 . Vérifiez que les modifications que vous avez effectuées sont efficaces et ucadmin affiche les ports d'initiateur FC en ligne.
 +
 |===
@@ -1016,9 +1042,13 @@ FC
 `fcadmin show`
 
 |===
-. Vérifiez le mode ha-config : `ha-config show`
+. Vérifiez le mode ha-config :
 +
-.. Vérifiez que vous disposez du résultat suivant :
+`ha-config show`
+
++
+Le résultat doit être similaire à l’exemple suivant :
+
 +
 [listing]
 ----
@@ -1026,70 +1056,6 @@ FC
 Chassis HA configuration: mcc
 Controller HA configuration: mcc
 ----
-
-
-
-
-
-
-[[set-the-ha-state-on-the-new-controllers-and-chassis]]
-=== Définissez l'état de haute disponibilité sur les nouveaux contrôleurs et châssis
-
-Vous devez vérifier l'état haute disponibilité des contrôleurs et du châssis, et mettre à jour si nécessaire l'état en fonction de la configuration du système.
-
-.Étapes
-. En mode Maintenance, afficher l'état HA du module de contrôleur et du châssis :
-+
-`ha-config show`
-
-+
-L'état HA pour tous les composants doit être mcc.
-
-+
-|===
-
-
-| Si la configuration MetroCluster a... | L'état de la HA doit être... 
-
-
- a| 
-Deux nœuds
- a| 
-mcc-2n
-
-
-
- a| 
-Quatre ou huit nœuds
- a| 
-mcc
-
-|===
-. Si l'état du système affiché du contrôleur n'est pas correct, définissez l'état HA pour le module de contrôleur et le châssis :
-+
-|===
-
-
-| Si la configuration MetroCluster a... | Lancer ces commandes... 
-
-
- a| 
-*Deux nœuds*
- a| 
-`ha-config modify controller mcc-2n`
-
-`ha-config modify chassis mcc-2n`
-
-
-
- a| 
-*Quatre ou huit noeuds*
- a| 
-`ha-config modify controller mcc`
-
-`ha-config modify chassis mcc`
-
-|===
 
 
 

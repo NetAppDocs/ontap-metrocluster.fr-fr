@@ -6612,15 +6612,9 @@
   <block id="e3dcb6e98d703b4041ac7a4b6d40412e" category="list-text">Sélectionnez option<block ref="e4da3b7fbbce2345d7772b0674a318d5" prefix=" " category="inline-code"></block> pour passer en mode maintenance à partir du menu de démarrage. Réponse<block ref="a6105c0a611b41b08f1209506350279e" prefix=" " category="inline-code"></block> sur les invites jusqu'à ce que le nœud s'arrête en mode maintenance et à l'invite de commande<block ref="2cf8a3bab83c4d2618c18eeeca9ebc98" prefix=" " category="inline-code"></block>.</block>
   <block id="f3fced65783d96fe674e1249b62fdd67" category="list-text">Vérifiez les paramètres actuels des ports :<block ref="773b5d44fd1b5ae080ff3a379be13169" prefix=" " category="inline-code"></block></block>
   <block id="9c1c5be053b28ba5edd13b92cac80497" category="paragraph">L'état HA pour tous les composants doit être mcc.</block>
-  <block id="9c70e72e74a5beec346c7fba9e09ac77" category="list-text">Arrêter le nœud :<block ref="4a1bde0ea8bcda2a591f42646813c477" prefix=" " category="inline-code"></block>Le nœud doit s'arrêter au niveau du<block ref="b4e58ddfd75fec23180551a08c0e87c6" prefix=" " category="inline-code"></block> à l'invite.</block>
-  <block id="a9c684b6388493b28c8bae9224fcb530" category="list-text">Sur chaque nœud, vérifiez la date, l'heure et le fuseau horaire du système :<block ref="8b3eefb87c2c3f87f2074f49e91acf4b" prefix=" " category="inline-code"></block></block>
-  <block id="19940e0e663b8b77ef5ae9bed0adc639" category="list-text">Si nécessaire, définissez la date en heure UTC ou GMT (GMT) :<block ref="ce2b665b5815a9c7e13cdb6fc96a5a98" prefix=" " category="inline-code"></block></block>
-  <block id="17cd34e04880fa15bf7da7bdee12d187" category="list-text">Redémarrez le nœud en mode maintenance pour que les modifications de configuration prennent effet :<block ref="cce56b203b8705f3487342813b7117be" prefix=" " category="inline-code"></block></block>
   <block id="92864f4a1e3e8b31f329dde898c399e7" category="list-text">Vérifiez que les modifications que vous avez effectuées sont efficaces et ucadmin affiche les ports d'initiateur FC en ligne.</block>
   <block id="9be73b3dd95d39ff15e33b30275709d3" category="cell">Si vous avez ce type de HBA…</block>
   <block id="8ad2992d6c032a4514706c63ee5d4d1b" category="cell">Utilisez cette commande…</block>
-  <block id="6f991264f748ca5e72084279b6293fcc" category="list-text">Vérifiez le mode ha-config :<block ref="fb4e6c2e33b945c3ff4d042cb66d2ed4" prefix=" " category="inline-code"></block></block>
-  <block id="351a906b91969bd3f60ac4f7ef2b51fe" category="list-text">Vérifiez que vous disposez du résultat suivant :</block>
   <block id="fe8b2cbe27aeee8cf3fd12fd4f19075c" category="cell">Si la configuration MetroCluster a...</block>
   <block id="7a0cb0e9d6bfae35a7d862f122269833" category="cell">L'état de la HA doit être...</block>
   <block id="2f49b4fc6ba0e45f4fa1687271900aa7" category="paragraph">Deux nœuds</block>
@@ -10811,7 +10805,6 @@
   <block id="16d9a40603d44eea561b00730eec3d91" category="paragraph">ONTAP 9.12.1 et versions ultérieures</block>
   <block id="4951fe611f97b799b2abaf7474848aa1" category="inline-link-macro">Matrice de prise en charge du système d'exploitation</block>
   <block id="30177b72c8d5a1bab13142ff42dfc513" category="paragraph">Reportez-vous à la <block ref="9f4435e7cf286b329f02bc934ba0dd4b" category="inline-link-macro-rx"></block> pour plus d'informations.</block>
-  <block id="e27eee16ff4c1ce2072fea31052ce7d5" category="paragraph">Aucune. Les dépendances sont incluses dans l'installation.</block>
   <block id="4a558332080902b1daf6c9eb900f075a" category="summary">La procédure d'installation de Tiebreaker que vous suivez dépend de la version de Tiebreaker que vous installez.</block>
   <block id="686cbe9ae98dac9e3c34fe747bedda27" category="doc">Choisissez votre procédure d'installation</block>
   <block id="de537937e28d6ff9bfed73c24f238620" category="paragraph">Disjoncteur d'attache 1.6</block>
@@ -14744,4 +14737,23 @@ L'exemple suivant montre que vous utilisez SCP pour télécharger le fichier<blo
   <block id="edb9b445f13c3e9e05b61cc6e0b3efdc" category="doc">Configurez les commutateurs NVIDIA IP SN2100 pour une configuration IP MetroCluster</block>
   <block id="20e757ff864b6acd14ec41e7165a63f9" category="doc">Augmentez le délai d'expiration de la boîte aux lettres du médiateur ONTAP dans une configuration IP MetroCluster</block>
   <block id="f081a35160d006cd5323e0740d06220e" category="doc">Tableaux de ports pour les configurations IP MetroCluster</block>
+  <block id="e0ff38f1490ce2495524f7429045ad81" category="inline-link-macro">l’article de la Knowledge Base « Cluster and HA communication issues during back-end switch replacement »</block>
+  <block id="93c539486532bcd2c15f294efff69106" category="admonition">Si vous devez effectuer un remplacement de commutateur sur les plateformes AFF A220, AFF A250 ou FAS2750, reportez-vous à <block ref="3468e696d0ad9ec4d429e1b845c952a7" category="inline-link-macro-rx"></block>.</block>
+  <block id="fe4617c4a015a1feba78882255c11625" category="paragraph">Les débits de liaison mixtes ne sont pas pris en charge sur les plateformes utilisant une carte d'interface réseau X60134A. Pour vérifier si votre plateforme est concernée, consultez la<block ref="a9613e1dbacf145285c45df4264fe797" category="inline-link-rx"></block>.</block>
+  <block id="5f0a2538bca6fe75656437edc2b047c7" category="inline-link-macro">l'article de la base de connaissances « 100G link not coming online during MetroCluster back-end switch replacement »</block>
+  <block id="657f971f966b2ce2da53f2f9bf9abb4b" category="paragraph">Si vous remplacez un commutateur utilisant des ports 25G par un nouveau commutateur utilisant des ports 100G sur une plateforme concernée (par exemple, en remplaçant un commutateur BES-53248 par un commutateur Cisco 9336C sur une plateforme AFF A50), reportez-vous à <block ref="6b31e2facf5f0ecbaec230ff30732341" category="inline-link-macro-rx"></block>.</block>
+  <block id="2c949cfd6a2e8390ab22577d8fcb8862" category="paragraph">Aucun. OpenJDK 19.0.2 est inclus dans l'installation.</block>
+  <block id="cbf667b7a6abb8a525741cdc92045f34" category="paragraph">L'état HA de tous les composants doit être<block ref="f46f944e351f8b92e40c3308318738a3" prefix=" " category="inline-code"></block>.</block>
+  <block id="de63ff438cd7316a835d354fccfe0c46" category="list-text">Sur chaque nœud, vérifiez la date, l'heure et le fuseau horaire du système :</block>
+  <block id="3e72511c09e554faf49052f79d627689" category="paragraph"><block ref="7e17e2b336dbdd66c2f45405573b53de" prefix="" category="inline-code"></block></block>
+  <block id="1bf5eb31de796d79cb8b6dfd332d4bb6" category="list-text">Si nécessaire, définissez la date en UTC ou en temps moyen de Greenwich (GMT) :</block>
+  <block id="833ce90830a0406f310191c0da1f76da" category="paragraph"><block ref="ce2b665b5815a9c7e13cdb6fc96a5a98" prefix="" category="inline-code"></block></block>
+  <block id="b6d433a7d610fd177455bd83030adfbf" category="list-text">Vérifiez l'heure en utilisant la commande suivante à l'invite de l'environnement de démarrage :</block>
+  <block id="667f3a6a11750e110d0c1442d2aa20e7" category="paragraph"><block ref="33f065aac47385ce7b7c4bc5d49f430b" prefix="" category="inline-code"></block></block>
+  <block id="3cc2598fed5ed84edf9cf18c5a8293c6" category="list-text">Si nécessaire, réglez l'heure en UTC ou GMT :</block>
+  <block id="25a249a3cdba620e6eba67639be13589" category="paragraph"><block ref="aa979bf34f52b205295408bd829f28b6" prefix="" category="inline-code"></block></block>
+  <block id="e02ed2f754f906507b04045b6d64c6a8" category="list-text">Enregistrez les paramètres :</block>
+  <block id="be169689a01b80888d8e5aa7db10c6e9" category="list-text">Rassemblez les variables d'environnement :</block>
+  <block id="c464415fe9040cd42442afd5413727d2" category="list-text">Vérifiez le mode ha-config :</block>
+  <block id="bb903f8039d8d74f0348f46c24a33392" category="paragraph">Le résultat doit être similaire à l’exemple suivant :</block>
 </blocks>

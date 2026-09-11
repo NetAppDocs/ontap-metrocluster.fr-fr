@@ -13,11 +13,21 @@ summary: 'Vous devrez peut-être remplacer un commutateur défectueux ou mettre 
 [role="lead"]
 Vous devrez peut-être remplacer un commutateur défectueux, mettre à niveau ou rétrograder un commutateur, ou modifier l'utilisation des commutateurs IP MetroCluster existants.
 
+
+CAUTION: Si vous devez effectuer un remplacement de commutateur sur les plateformes AFF A220, AFF A250 ou FAS2750, reportez-vous à link:https://kb.netapp.com/on-prem/ontap/mc/MC-KBs/Cluster_and_HA_communication_issues_during_back-end_switch_replacement["l’article de la Knowledge Base « Cluster and HA communication issues during back-end switch replacement »"^].
+
 .Description de la tâche
 Cette procédure s'applique lorsque vous utilisez des commutateurs validés par NetApp. Si vous utilisez des switchs conformes à MetroCluster, reportez-vous au fournisseur du commutateur.
 
 link:enable-console-logging-before-maintenance.html["Activer la journalisation de la console"] avant d'effectuer cette tâche.
 
+[NOTE]
+====
+Les débits de liaison mixtes ne sont pas pris en charge sur les plateformes utilisant une carte d'interface réseau X60134A. Pour vérifier si votre plateforme est concernée, consultez la https://hwu.netapp.com/["Hardware Universe"^].
+
+Si vous remplacez un commutateur utilisant des ports 25G par un nouveau commutateur utilisant des ports 100G sur une plateforme concernée (par exemple, en remplaçant un commutateur BES-53248 par un commutateur Cisco 9336C sur une plateforme AFF A50), reportez-vous à link:https://kb.netapp.com/on-prem/ontap/mc/MC-KBs/100G_link_not_coming_online_during_MetroCluster_back-end_switch_replacement?caseId=2010523490["l'article de la base de connaissances « 100G link not coming online during MetroCluster back-end switch replacement »"^].
+
+====
 Cette procédure prend en charge les conversions suivantes :
 
 * Modification du fournisseur, du type ou des deux commutateurs. Le nouveau commutateur peut être identique à l'ancien commutateur en cas de défaillance d'un commutateur ou vous pouvez modifier le type de commutateur (mettre à niveau ou rétrograder le commutateur).
