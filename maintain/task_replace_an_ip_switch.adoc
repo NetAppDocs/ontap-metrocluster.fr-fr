@@ -256,15 +256,23 @@ Si vous mettez à niveau ou rétrogradez les commutateurs du premier fabric, vou
 
 NOTE: Si vous mettez à niveau ou rétrogradez le fabric, répétez toutes les étapes pour le second fabric.
 
-. Modifier toutes les LIFs de cluster pour réactiver auto-revert :
+. Rétablissez toutes les LIF de cluster sur leur port d'attache.
++
+
+CAUTION: Ne rétablissez pas les LIF du cluster sur leurs ports d'attache tant que vous n'avez pas terminé les étapes précédentes pour tous les commutateurs nécessitant une mise à jour.
+
++
+.. Modifier toutes les LIFs de cluster pour réactiver auto-revert :
 +
 [source, cli]
 ----
 network interface modify -vserver <vserver_name> -lif <lif_name> -auto-revert true
 ----
-. Rétablir les ports d'origine de toutes les interfaces réseau du cluster qui ne sont pas actuellement connectées à leurs ports d'origine :
+.. Rétablissez manuellement sur leur port d'attache tous les LIF de cluster qui ne se trouvent pas actuellement sur leur port d'attache :
 +
-`network interface revert -vserver * -lif *`
+`network interface revert -vserver Cluster -lif *`
+
+
 
 . Vous pouvez également déplacer les tiroirs NS224.
 +
