@@ -33,17 +33,10 @@ Cette procédure diffère de la procédure de résolution pour les configuration
 +
 Si le système affiche l'invite DU CHARGEUR, exécutez le `boot_ontap` commande.
 
-. Réaliser la phase de guérison de l'agrégat racine : `metrocluster heal root-aggregates`
+. Réparation des agrégats de données :
 +
-[listing]
-----
-cluster_A::> metrocluster heal root-aggregates
-[Job 137] Job succeeded: Heal Root-Aggregates is successful
-----
-+
-Si le réajustement est vetoé, vous avez la possibilité de réémission de la commande MetroCluster Heal root-Aggregates avec le paramètre --override-vetoes. Si vous utilisez ce paramètre facultatif, le système remplace tout veto logiciel qui empêche l'opération de correction.
+`metrocluster heal aggregates`
 
-. Resynchroniser les agrégats : `metrocluster heal aggregates`
 +
 [listing]
 ----
@@ -51,9 +44,22 @@ cluster_A::> metrocluster heal aggregates
 [Job 137] Job succeeded: Heal Aggregates is successful
 ----
 +
-Si la correction est vetotée, vous avez la possibilité de réémission de la commande MetroCluster Heal avec le paramètre --override-vetos. Si vous utilisez ce paramètre facultatif, le système remplace tout veto logiciel qui empêche l'opération de correction.
+Si la guérison est vetotée, vous avez la possibilité de réémettre le `metrocluster heal` commande avec `--override-vetoes` paramètre. Si vous utilisez ce paramètre facultatif, le système remplace tout veto logiciel qui empêche l'opération de correction.
 
-. Vérifiez que l'opération d'autorétablissement est terminée en exécutant la commande MetroCluster opération show sur le cluster sain :
+. Corriger les agrégats racine :
++
+`metrocluster heal root-aggregates`
+
++
+[listing]
+----
+cluster_A::> metrocluster heal root-aggregates
+[Job 137] Job succeeded: Heal Root-Aggregates is successful
+----
++
+Si la réparation est refusée, vous pouvez relancer la `metrocluster heal root-aggregates` commande avec le `--override-vetoes` paramètre. Si vous utilisez ce paramètre optionnel, le système annule tout refus temporaire empêchant l'opération de réparation.
+
+. Vérifiez que l'opération de correction est terminée en exécutant le `metrocluster operation show` commande sur le cluster sain :
 +
 [listing]
 ----

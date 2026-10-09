@@ -250,7 +250,16 @@ NOTE: Effectuez cette étape pour tous les plexes dont les disques sont distants
 
 
 
-. De manière persistante hors ligne les ports de commutateur ISL en fonction du type de commutateur.
+. Mettez hors ligne les ports du commutateur ISL. Sélectionnez la procédure appropriée à votre type de commutateur.
++
+Les procédures suivantes montrent comment désactiver les ports ISL inutilisés, vous pouvez utiliser les mêmes commandes pour désactiver tous les ports ISL actifs dans le cadre de cette procédure.
+
++
+** link:../install-ip/task_switch_config_cisco.html#disable-unused-isl-ports-and-port-channels["Désactiver les ports ISL sur les commutateurs IP Cisco"]
+** link:../install-ip/task_switch_config_broadcom.html#disable-unused-isl-ports-and-port-channels["Désactiver les ports ISL sur les commutateurs IP Broadcom"]
+** link:../install-ip/task_switch_config_nvidia.html#disable-unused-isl-ports-and-port-channels["Désactiver les ports ISL sur les commutateurs IP NVIDIA"]
+
+
 . Arrêtez les nœuds en exécutant la commande suivante sur chaque nœud :
 +
 `node halt -inhibit-takeover true -skip-lif-migration true -node <node-name>`
