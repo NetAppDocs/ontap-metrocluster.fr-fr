@@ -22,7 +22,15 @@ La procédure de mise à jour du système que vous utilisez dépend du modèle d
 * Tous les nœuds de la configuration MetroCluster doivent exécuter la même version de ONTAP. Par exemple, si vous avez une configuration à huit nœuds, les huit nœuds doivent exécuter la même version de ONTAP. Reportez-vous au link:https://hwu.netapp.com["Hardware Universe"^]pour connaître la version minimale de ONTAP prise en charge pour votre combinaison.
 * Ne dépassez pas les limites d'objet du « bas » des plates-formes de la combinaison. Appliquez la limite inférieure des objets des deux plates-formes.
 * Si les limites de la plateforme cible sont inférieures aux limites MetroCluster, vous devez reconfigurer le MetroCluster pour qu'il atteigne ou dépasse les limites de la plateforme cible avant d'ajouter les nouveaux nœuds.
-* Reportez-vous à la link:https://hwu.netapp.com["Hardware Universe"^] pour les limites de plateforme.
++
+Reportez-vous à la link:https://hwu.netapp.com["Hardware Universe"^] pour les limites de plateforme.
+
+* Lors d'une actualisation du système, l'ancien et le nouveau type de plateforme *doivent* correspondre :
++
+** Vous pouvez ajouter un système FAS à un système FAS, ou une AFF A-Series à une AFF A-Series.
+** Vous ne pouvez pas ajouter un système FAS à une AFF A-Series, ni une AFF A-Series à une AFF C-Series.
+
+
 
 
 
@@ -77,6 +85,12 @@ image::../media/mcc-ip-techrefresh-asa-9161.png[Combinaisons de mises à jour te
 * Ne dépassez pas les limites d'objet du « bas » des plates-formes de la combinaison. Appliquez la limite inférieure des objets des deux plates-formes.
 * Si les limites de la plateforme cible sont inférieures aux limites de la MetroCluster, vous devez reconfigurer la MetroCluster pour qu'elle se situe au niveau ou en dessous des limites de la plateforme cible avant d'ajouter les nouveaux nœuds.
 * Reportez-vous à la link:https://hwu.netapp.com["Hardware Universe"^] pour les limites de plateforme.
+* Lors d'une actualisation du système, l'ancien et le nouveau type de plateforme *doivent* correspondre :
++
+** Vous pouvez ajouter un système FAS à un système FAS, ou une AFF A-Series à une AFF A-Series.
+** Vous ne pouvez pas ajouter un système FAS à une AFF A-Series, ni une AFF A-Series à une AFF C-Series.
+
+
 
 
 
