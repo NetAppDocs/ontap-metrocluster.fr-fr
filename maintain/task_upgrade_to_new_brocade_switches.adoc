@@ -76,6 +76,10 @@ image::../media/brocade_upgr_to_g620_replaced_b_1.gif[Mise à niveau de Brocade 
 
 
 . Mettez les nouveaux commutateurs sous tension et laissez-les démarrer.
+. Pour revenir à l'invite du commutateur, vérifiez la version du micrologiciel du commutateur :
++
+`firmwareShow`
+
 . Configurez les commutateurs Brocade FC à l'aide de l'une des procédures suivantes :
 +
 link:../install-fc/task_reset_the_brocade_fc_switch_to_factory_defaults.html["Configuration des commutateurs FC Brocade avec des fichiers RCF"]
@@ -143,16 +147,6 @@ slot 0: FC Host Adapter 0g (QLogic 8324 rev. 2, N-port, <UP>)**<=== Initiator po
 		.
 		.
 ----
-. Pour revenir à l'invite du commutateur, vérifiez la version du micrologiciel du commutateur :
-+
-`firmwareShow`
-
-+
-Les commutateurs doivent exécuter le dernier firmware pris en charge.
-
-+
-https://mysupport.netapp.com/matrix["Matrice d'interopérabilité NetApp"]
-
 . Simuler une opération de basculement :
 +
 .. Depuis l'invite d'un nœud, passez au niveau de privilège avancé : +

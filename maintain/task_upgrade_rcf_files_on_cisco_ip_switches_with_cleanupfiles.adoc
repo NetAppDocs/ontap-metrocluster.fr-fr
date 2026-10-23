@@ -261,14 +261,11 @@ Une partie de la configuration est rétablie et les ports de commutation sont «
 IP_switch_A_1# show running-config diff
 IP_switch_A_1#
 ----
-
-
-. Si vous voyez la sortie du système, enregistrez la configuration en cours d'exécution dans la configuration de démarrage : `copy running-config startup-config`
+.. Si vous voyez la sortie du système, enregistrez la configuration en cours d'exécution dans la configuration de démarrage : `copy running-config startup-config`
 +
 
 NOTE: Le résultat du système indique que la configuration de démarrage et la configuration en cours d'exécution sont différentes et en attente de modifications. Si vous n'enregistrez pas les modifications en attente, vous ne pouvez pas revenir en arrière à l'aide d'un rechargement du commutateur.
 
-+
 .. Appliquer le fichier CleanUpFile :
 +
 [listing]
@@ -329,6 +326,11 @@ IP_switch_A_1# copy running-config startup-config
 
 IP_switch_A_1# reload
 ----
+. Répétez les étapes précédentes pour chacun des commutateurs.
++
+
+NOTE: Après avoir configuré les commutateurs du premier fabric (Switch_A_1, Switch_B_1), vous devez répéter les étapes pour déplacer les LIF du cluster sur le deuxième fabric (Switch_A_2, Switch_B_2). Reportez-vous à link:../install-ip/task_install_and_cable_the_mcc_components.html["Découvrez comment configurer les commutateurs IP MetroCluster"].
+
 . Modifiez tous les LIF du cluster pour activer la restauration automatique :
 +
 .. Réactivez la restauration automatique :
