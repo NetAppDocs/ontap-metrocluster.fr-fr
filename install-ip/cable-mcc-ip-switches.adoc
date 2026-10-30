@@ -1,0 +1,38 @@
+---
+permalink: install-ip/cable-mcc-ip-switches.html 
+sidebar: sidebar 
+keywords: cabling, cable, component, link, site, management, network, hardware, component, switch, cluster, connection, management, data, configuring, configure, rcf, file, generator, RcfFileGenerator 
+summary: Vous devez comprendre comment utiliser les informations des tables de ports pour générer correctement vos fichiers RCF. 
+---
+= Câblez vos commutateurs IP MetroCluster à l'aide de l'outil RCFfilegenerator et de Hardware Universe
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous devez comprendre comment utiliser l'outil RCFfilegenerator et les informations du NetApp Hardware Universe pour câbler correctement vos commutateurs.
+
+.Avant de commencer
+Veuillez consulter les informations dans link:using_rcf_generator.html["Découvrez comment câbler les commutateurs IP MetroCluster"] avant d'effectuer cette tâche.
+
+.Étapes
+. Téléchargez et installez l' https://mysupport.netapp.com/site/tools/tool-eula/rcffilegenerator["RcfFileGenerator pour MetroCluster IP"^]outil depuis le site de support NetApp.
+. Suivez les étapes de la section link:https://kb.netapp.com/on-prem/ontap/mc/MC-KBs/How_to_use_the_RCF_Generator_for_MetroCluster_IP["Comment utiliser le générateur RCF pour MetroCluster IP"^] pour renseigner les champs relatifs à votre configuration.
++
+L'outil génère un aperçu du câblage par port pour chaque commutateur.
+
++
+
+NOTE: Le RcfFileGenerator affiche uniquement les plates-formes éligibles lorsque la première plate-forme est sélectionnée.
+
+. Accédez à link:https://hwu.netapp.com/DetailViews/Home.aspx["Hardware Universe"^]
+. Sélectionnez votre type de plateforme dans l'onglet *Produits*, puis sélectionnez votre plateforme spécifique et indiquez si vous câblez une configuration IP MetroCluster à quatre ou huit nœuds.
+. Sélectionnez la version ONTAP dans la fenêtre d'affichage, puis sélectionnez *Afficher les résultats*.
+. Sélectionnez *Connexions prises en charge* et sélectionnez l’onglet *Connexion au stockage*
+. Rassemblez les informations relatives aux ports du contrôleur pour votre configuration.
++
+
+NOTE: Les informations relatives aux ports du contrôleur ne sont pas incluses dans l’aperçu du câblage généré par l’outil RcfFileGenerator ; vous devez donc utiliser Hardware Universe pour recueillir ces informations.
+
+

@@ -130,9 +130,108 @@ To check if the nodes are ready to do a switchover or switchback operation, run 
 .. Vérifier qu'il n'y a pas d'alerte de santé : `*system health alert show*`
 
 
+. Si votre configuration IP MetroCluster comporte des baies NVMe connectées aux commutateurs IP MetroCluster, exécutez les commandes suivantes pour vérifier l'état des baies.
++
+.. Afficher l'état du tiroir :
++
+`storage shelf show`
+
++
+.Afficher un exemple
+[%collapsible]
+====
+[listing]
+----
+cluster_A::> storage shelf show
+                                                        Module  Operational
+       Shelf Name Shelf ID Serial Number   Model        Type    Status
+----------------- -------- --------------- ------------ ------- -----------
+              1.0        0 952123456789    NS224NSM100  NSM100  Normal
+              1.2        0 952987654321    NS224NSM100  NSM100  Normal
+cluster_A::>
+----
+====
+.. Afficher la connectivité des baies NVMe connectées au commutateur :
++
+`storage shelf show -shelf <shelf_name> -connectivity`
+
++
+.Afficher un exemple
+[%collapsible]
+====
+[listing]
+----
+cluster_A::> storage shelf show -shelf 1.0 -connectivity
+            Shelf Name: 1.0
+             Stack ID: 1
+             Shelf ID: 0
+            Shelf UID: 00:00:00:00:00:00:00:00
+        Serial Number: 952123456789
+          Module Type: NSM100
+                Model: NS224NSM100
+         Shelf Vendor: NETAPP
+           Disk Count: 24
+      Connection Type: NVMe
+          Shelf State: Online
+               Status: Normal
+Paths:
+
+Controller         Initiator Initiator Side Switch Port Target Side Switch Port    Target Port        TPGN
+------------------ --------- -------------------------- -------------------------- ------------------ ------
+cluster_A-01       0x        -                          0x                         05000005abff0000   67
+cluster_A-02       0x        -                          0x                         030f0005abff0000   44
+
+cluster_A::>
+----
+====
+.. Si nécessaire, collectez les noms des périphériques distants (commutateurs MetroCluster) :
++
+.Afficher un exemple
+[%collapsible]
+====
+[listing]
+----
+cluster_A::> storage shelf port show -fields remote-device
+
+shelf id remote-device
+----- -- -------------
+1.0   0  IP_switch_A_1
+1.0   1  IP_switch_B_1
+1.0   2  IP_switch_A_2
+1.0   3  IP_switch_B_2
+4 entries were displayed
+----
+====
+.. Affichez la connectivité des ports de tiroir pour les tiroirs NVMe connectés au commutateur :
++
+`storage shelf port show -remote-device <switch name>`
+
++
+.Afficher un exemple
+[%collapsible]
+====
+[listing]
+----
+cluster_A::> storage shelf port show -remote-device IP_switch_A_1
+
+Shelf ID Module State        Internal?
+----- -- ------ ------------ ---------
+1.0
+       1 A      connected    false
+       3 B      connected    false
+1.2
+       1 A      connected    false
+       3 B      connected    false
+4 entries were displayed.
+
+cluster_A::>
+----
+====
+
+
 . Configurer le nouveau commutateur avant l'installation.
 +
-Si vous réutilisez des commutateurs existants, passez à l' <<existing_step4,Étape 4>>.
+Si vous réutilisez des commutateurs existants, passez à <<existing_disconnect,l'étape consistant à déconnecter les connexions de l'ancien commutateur>>.
 
 +
 
@@ -142,36 +241,23 @@ NOTE: Si vous mettez à niveau ou déclariez les commutateurs, vous devez config
 Suivez les étapes pour votre fournisseur de commutateur :
 
 +
-** link:../install-ip/task_switch_config_broadcom.html["Configurez les commutateurs IP Broadcom"]
-** link:../install-ip/task_switch_config_cisco.html["Configuration des commutateurs IP Cisco"]
-** link:../install-ip/task_switch_config_nvidia.html["Configurez les commutateurs IP NVIDIA"]
-+
 Assurez-vous d'appliquer le fichier RCF approprié pour le commutateur _A_1, _A_2, _B_1 ou _B_2. Si le nouveau switch est identique à l'ancien switch, vous devez appliquer le même fichier RCF.
 
 +
 Si vous mettez à niveau ou déclasser un commutateur, appliquez le fichier RCF le plus récent pris en charge pour le nouveau commutateur.
 
++
+** link:../install-ip/task_switch_config_broadcom.html["Configurez les commutateurs IP Broadcom"]
+** link:../install-ip/task_switch_config_cisco.html["Configuration des commutateurs IP Cisco"]
+** link:../install-ip/task_switch_config_nvidia.html["Configurez les commutateurs IP NVIDIA"]
 
 
-. Lancer la commande port show pour afficher des informations sur les ports réseau :
-+
-`*network port show*`
-
-+
-.. Modifier toutes les LIFs de cluster pour désactiver auto-revert :
-+
-[source, cli]
-----
-network interface modify -vserver <vserver_name> -lif <lif_name> -auto-revert false
-----
-.. link:../install-ip/switch-move-cluster-lifs.html["Déplacez les LIF du cluster"].
+. link:../install-ip/switch-move-cluster-lifs.html["Déplacez les LIF du cluster"].
 +
 
 NOTE: Vous devez mettre à jour les commutateurs dans l'ordre suivant : Switch_A_1, Switch_B_1, Switch_A_2, Switch_B_2. Vous devez répéter les étapes pour déplacer les LIF du cluster sur le deuxième fabric (Switch_A_2, Switch_B_2) après avoir configuré les commutateurs dans le premier fabric (Switch_A_1, Switch_B_1). Reportez-vous à link:../install-ip/task_install_and_cable_the_mcc_components.html["Découvrez comment configurer les commutateurs IP MetroCluster"].
 
-
-
-. [[existing_step4]]déconnectez les connexions de l'ancien commutateur.
+. [[existing_disconnect]]Déconnectez les connexions de l’ancien commutateur.
 +
 
 NOTE: Vous ne déconnectez que les connexions qui n'utilisent pas le même port dans les anciennes et les nouvelles configurations. Si vous utilisez de nouveaux commutateurs, vous devez déconnecter toutes les connexions.
@@ -191,13 +277,13 @@ Dans l'exemple <<port_usage_worksheet>>, les commutateurs ne changent pas. Les l
 
 . Si vous utilisez de nouveaux commutateurs, mettez l'ancien commutateur hors tension, retirez les câbles et retirez physiquement l'ancien commutateur.
 +
-Si vous réutilisez des commutateurs existants, passez à l' <<existing_step6,Étape 6>>.
+Si vous réutilisez des commutateurs existants, passez à <<existing_configure,l'étape de configuration des commutateurs existants>>.
 
 +
 
 NOTE: Ne câblez *pas* les nouveaux commutateurs à l'exception de l'interface de gestion (le cas échéant).
 
-. [[existing_step6]]configurez les commutateurs existants.
+. [[existing_configure]]Configurez les commutateurs existants.
 +
 Si vous avez déjà préconfiguré les commutateurs, vous pouvez ignorer cette étape.
 
@@ -224,11 +310,19 @@ Câblez les interrupteurs dans l'ordre suivant (si nécessaire) :
 [NOTE]
 ====
 *** Les ports utilisés peuvent être différents de ceux de l'ancien commutateur si le type de commutateur est différent. Si vous effectuez une mise à niveau ou une rétrogradation des commutateurs, procédez à *PAS* de câble reliant les liens ISL locaux. Connectez les liens ISL locaux uniquement si vous mettez à niveau ou rétrogradiez les switchs du second réseau, et que les deux commutateurs d'un site présentent le même type et le même câblage.
-*** Si vous mettez à niveau les commutateurs A1 et B1, vous devez effectuer les étapes 1 à 6 pour les commutateurs A2 et B2.
 
 
 ====
 
+
+. Mettez le ou les commutateurs sous tension.
++
+Si le nouveau commutateur est identique, mettez-le sous tension. Si vous effectuez une mise à niveau ou une rétrogradation des commutateurs, mettez les deux commutateurs sous tension.
+
+. Répétez les étapes précédentes pour la seconde structure (Switch_A_2 et Switch_B_2) après avoir mis à jour la première structure (Switch_A_1 et Switch_B_1).
++
+
+NOTE: Si vous remplacez un commutateur défectueux par un commutateur du même type, il vous suffit de mettre à jour le commutateur défectueux et vous n’avez pas besoin de répéter les étapes pour le second fabric.
 
 . Finalisez le câblage local du cluster.
 +
@@ -244,18 +338,7 @@ Câblez les interrupteurs dans l'ordre suivant (si nécessaire) :
 
 
 
-. Mettez le ou les commutateurs sous tension.
-+
-Si le nouveau commutateur est identique, mettez-le sous tension. Si vous effectuez une mise à niveau ou une rétrogradation des commutateurs, mettez les deux commutateurs sous tension. La configuration peut fonctionner avec deux commutateurs différents sur chaque site jusqu'à la mise à jour du second réseau.
-
 . Vérifiez que la configuration MetroCluster fonctionne correctement en répétant cette procédure <<all_step1,Étape 1>>.
-+
-Si vous mettez à niveau ou rétrogradez les commutateurs du premier fabric, vous pourriez voir des alertes liées au clustering local.
-
-+
-
-NOTE: Si vous mettez à niveau ou rétrogradez le fabric, répétez toutes les étapes pour le second fabric.
-
 . Rétablissez toutes les LIF de cluster sur leur port d'attache.
 +
 
@@ -285,3 +368,6 @@ Si vous reconfigurez une configuration IP MetroCluster qui ne connecte pas les t
 
 
 
+
+.Une fois que vous avez terminé
+link:../install-ip/task-configure-log-collection-mccip.html["Configurer la collecte de journaux sur un commutateur IP MetroCluster"]
