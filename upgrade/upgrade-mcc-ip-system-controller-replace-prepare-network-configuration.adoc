@@ -16,6 +16,9 @@ Une fois que vous avez recueilli les informations et repris l'opération, l'opé
 .Avant de commencer
 Avant de lancer le basculement, l'automatisation s'interrompt pour que vous puissiez vérifier manuellement que toutes les LIF sont « en service » sur le site B. Si nécessaire, apportez toutes les LIF « propres » à « UP » et reprenez l'opération d'automatisation à l'aide du `system controller replace resume` commande.
 
+
+NOTE: Avant d'effectuer une commutation, veuillez consulter link:../manage/switchover-limitations.html["Limitations lors du basculement de la configuration MetroCluster"].
+
 L'opération d'automatisation lance les opérations de basculement. Une fois ces opérations terminées, l'opération s'interrompt à *interrompu pour l'intervention de l'utilisateur*. Vous pouvez ainsi installer les contrôleurs, démarrer les contrôleurs partenaires et réaffecter les disques d'agrégat racine au nouveau module de contrôleur à partir de la sauvegarde flash à l'aide de la `sysids` précédente.
 
 .Description de la tâche

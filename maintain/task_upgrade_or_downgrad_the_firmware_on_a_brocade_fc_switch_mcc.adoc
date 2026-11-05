@@ -16,9 +16,9 @@ Pour mettre à niveau ou rétrograder le micrologiciel sur un commutateur FC Bro
 .Avant de commencer
 Veuillez lire attentivement les informations suivantes avant d'utiliser cette procédure :
 
-* À partir de Fabric OS 10.x, Brocade ne prend en charge que SHA-512 pour l'authentification SNMP. ONTAP ne prend actuellement pas en charge SHA-512, la prise en charge étant limitée à SHA-256.
+* À partir d’ONTAP 9.20.1, ONTAP prend en charge SHA-512 pour l’authentification SNMP. Dans Fabric OS 10.x et versions ultérieures, Brocade prend uniquement en charge SHA-512 pour l’authentification SNMP.
 +
-Si vous mettez à jour le firmware de votre commutateur FC MetroCluster vers Fabric OS 10.x, la visibilité de la surveillance SNMP depuis ONTAP sera perdue. Cela augmente les risques lors du dépannage et entraîne la perte des alertes proactives.
+Si vous exécutez une version d’ONTAP antérieure à 9.20.1 et mettez à niveau le firmware du commutateur FC MetroCluster vers Fabric OS 10.x, la visibilité de la surveillance SNMP depuis ONTAP sera perdue. Cela entraîne un risque accru lors du dépannage ainsi que la perte des alertes proactives.
 
 +
 Si vous effectuez une mise à niveau vers ou une rétrogradation depuis Fabric OS 10.x, vous devez effectuer les tâches obligatoires décrites dans link:https://techdocs.broadcom.com/us/en/fibre-channel-networking/fabric-os/fabric-os-software-upgrade/10-0-x/Upgrading-and-Downgrading-Firmware/v24512876.html["Brocade Fabric OS Software Upgrade Guide, 10.0.x - Prérequis pour la mise à niveau ou la rétrogradation"^].

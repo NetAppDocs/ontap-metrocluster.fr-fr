@@ -27,10 +27,15 @@ Ces exigences s'appliquent aux ISL sur toutes les configurations IP MetroCluster
 * Les liens ISL doivent avoir la même topologie. Par exemple, ils doivent tous être des liens directs, ou si la configuration utilise WDM, ils doivent tous utiliser WDM.
 * La vitesse ISL minimale requise dépend du modèle de plate-forme :
 +
-** À compter de ONTAP 9.18.1, les plateformes disposant d’un port backend IP MetroCluster de 100Gbps requièrent une vitesse de liaison ISL minimale de 100Gbps. L’utilisation d’une vitesse ISL différente nécessite une demande de Feature Policy Variance Request (FPVR). Pour soumettre une FPVR, contactez votre équipe commerciale NetApp.
+** À partir de ONTAP 9.20.1, vous pouvez activer le contrôle de la congestion des liaisons intercommutateurs WAN (ISL) dans les configurations IP MetroCluster afin que les ISL fonctionnant à des bandes passantes plus faibles ou mixtes, telles que 10 Gbit/s, 25 Gbit/s ou 40 Gbit/s, puissent être utilisées avec des plateformes dont la vitesse du port de backend IP MetroCluster est de 100 Gbit/s. Pour plus d'informations, consultez link:../install-ip/mcc-congestion-control.html["Configurer le contrôle de la congestion de l'ISL WAN"].
 +
 
-CAUTION: Les mises à niveau vers ONTAP 9.18.1 et versions ultérieures sur les plateformes qui ne répondent pas actuellement à l'exigence ISL de 100Gbps ne sont pas bloquées et peuvent être effectuées. Cependant, NetApp recommande fortement aux clients de migrer vers une connectivité ISL de 100Gbps afin de maintenir les niveaux de performance et de disponibilité attendus.
+CAUTION: La configuration du contrôle de la congestion WAN ISL ne garantit pas que les problèmes de performances susceptibles de survenir lors de l’utilisation d’ISL à bande passante inférieure ne se produiront pas. NetApp recommande vivement de passer à une connectivité ISL de 100 Gbit/s pour des performances optimales.
+
+** Dans ONTAP 9.18.1 et ONTAP 9.19.1, les plateformes avec une vitesse de port backend IP MetroCluster de 100 Gbit/s nécessitent une vitesse de liaison ISL minimale de 100 Gbit/s. L'utilisation d'une vitesse ISL différente sur les plateformes concernées exécutant ces versions d'ONTAP nécessite une Feature Policy Variance Request (FPVR). Pour soumettre une FPVR, contactez votre équipe commerciale NetApp.
++
+
+CAUTION: Les mises à niveau du logiciel ONTAP sur les plateformes qui ne répondent pas actuellement à l'exigence ISL de 100 Gbit/s ne sont pas bloquées et peuvent être effectuées. Cependant, NetApp recommande vivement aux clients de passer à une connectivité ISL de 100 Gbit/s afin de maintenir les niveaux de performance et de disponibilité attendus.
 
 ** Sur toutes les autres plateformes, la vitesse de liaison ISL minimale prise en charge est de 10 Gbit/s.
 

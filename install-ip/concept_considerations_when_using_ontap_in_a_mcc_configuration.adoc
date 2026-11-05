@@ -34,6 +34,31 @@ La configuration ONTAP des deux clusters, y compris la mise en réseau, doit êt
 
 
 
+[[svm-storage-limit-support-in-a-metrocluster-ip-configuration]]
+== Prise en charge de la limite de stockage SVM dans une configuration IP MetroCluster
+
+À partir d'ONTAP 9.20.1, des limites de stockage peuvent être configurées pour les SVM qui font partie d'une configuration IP MetroCluster.
+
+
+CAUTION: Vous devez vous assurer que votre configuration MetroCluster ne dépasse pas les limites de votre plateforme indiquées dans le https://hwu.netapp.com/["Hardware Universe"^].
+
+* En fonctionnement normal (hors basculement), vous pouvez modifier la configuration des limites de stockage uniquement sur la *sync-source SVM*. Vous ne pouvez ni activer, ni désactiver, ni modifier les limites de stockage sur la *sync-destination SVM*.
+* Pendant le basculement, les restrictions suivantes s'appliquent à la *sync-destination SVM* :
++
+** Vous ne pouvez pas utiliser la `vserver modify -storage-limit` commande pour activer ou désactiver la limite de stockage sur la SVM de destination de synchronisation. Autrement dit, vous ne pouvez pas modifier la valeur de 0 à une valeur non nulle, ni d'une valeur non nulle à 0. La commande échoue avec l'erreur suivante :
++
+`This operation is not permitted on a Vserver that is configured as the destination of a MetroCluster Vserver relationship`
+
+** Vous pouvez toujours modifier la limite de stockage et la faire passer d'une valeur non nulle à une autre (par exemple, de 100 To à 200 To). Cette nouvelle valeur est conservée après le switchback.
+** Pour activer ou désactiver la limite de stockage, attendez la fin du switchback, puis effectuez la modification sur la *sync-source SVM*. La valeur est ensuite répliquée sur la sync-destination SVM.
+
+
+
+
+Pour plus d'informations, veuillez consulter link:https://docs.netapp.com/us-en/ontap/volumes/manage-svm-capacity.html["Gérer la capacité des SVM ONTAP"^]
+
+
+
 [[metrocluster-operations-in-ontap-system-manager]]
 == Opérations MetroCluster dans ONTAP System Manager
 

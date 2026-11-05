@@ -1,0 +1,178 @@
+---
+permalink: maintain/mcc-congestion-control.html 
+sidebar: sidebar 
+keywords: metrocluster, ip, congestion, control, flow, network, isl, bandwidths, replication, traffic, throttling, enable, disable, 
+summary: 'À partir d"ONTAP 9.20.1, les configurations IP MetroCluster qui utilisent des adaptateurs réseau de 100 Gbit/s peuvent se connecter via des liaisons intercommutateurs (ISL) fonctionnant à des bandes passantes inférieures ou mixtes, telles que 10 Gbit/s, 25 Gbit/s ou 40 Gbit/s.' 
+---
+= Configurer le contrôle de congestion de MetroCluster pour l’ISL WAN IP
+:allow-uri-read: 
+
+
+[role="lead"]
+À partir d'ONTAP 9.20.1, vous pouvez activer le contrôle de la congestion des liaisons inter-commutateurs WAN (ISL) dans les configurations IP MetroCluster afin que les ISL fonctionnant à des bandes passantes inférieures ou mixtes, telles que 10 Gbit/s, 25 Gbit/s ou 40 Gbit/s, puissent être utilisées avec des plateformes dont la vitesse du port backend IP MetroCluster est de 100 Gbit/s.
+
+Le trafic de réplication généré par l'adaptateur 100 Gbit/s peut saturer les liaisons inter-réseaux (ISL) à débit inférieur, entraînant une surcharge des tampons de commutation, une contre-pression PAUSE, des pertes de paquets et une instabilité potentielle de la réplication. Le contrôle de congestion WAN ISL résout ce problème en calculant un débit maximal sortant à partir de la bande passante de l'ISL et du nombre de nœuds. Ce débit maximal sert de seuil de débit sortant, limitant ainsi le trafic de transfert d'interconnexion. Si le débit sortant mesuré dépasse le débit maximal calculé, le transfert est rejeté, ce qui applique le seuil de débit sortant sur le réseau d'interconnexion.
+
+
+CAUTION: La configuration du contrôle de la congestion WAN ISL ne garantit pas que les problèmes de performances susceptibles de survenir lors de l’utilisation d’ISL à bande passante inférieure ne se produiront pas. NetApp recommande vivement de passer à une connectivité ISL de 100 Gbit/s pour des performances optimales.
+
+.Description de la tâche
+* La configuration IP MetroCluster doit exécuter ONTAP 9.20.1 ou une version ultérieure.
+* Le contrôle de la congestion WAN ISL est désactivé par défaut et vous devez l’activer explicitement.
+* Vous devez contacter l’assistance NetApp pour configurer cette fonctionnalité dans les scénarios suivants :
++
+** Si les informations ISL ne peuvent pas être obtenues automatiquement lorsque vous essayez d'activer ou d'actualiser la fonctionnalité
+** Si vous avez deux configurations IP MetroCluster à quatre nœuds connectées aux mêmes commutateurs
+** Si vous devez modifier le plafond calculé après l’activation de la fonctionnalité
+
+
+* Vous devez actualiser la configuration du contrôle de la congestion pour calculer le nouveau plafond si la topologie change après l’activation du contrôle de la congestion. Par exemple, si le nombre ou la vitesse des ISL change, ou si vous ajoutez un nouveau nœud à la configuration MetroCluster IP.
+* Chaque site calcule son plafond indépendamment. Lorsque vous exécutez la `metrocluster interconnect congestion-control enable` commande sur le site local, cela déclenche les actions suivantes :
++
+** Le site local prépare et calcule son plafond.
+** Le site partenaire prépare et calcule également le plafond, indépendamment du site local où la commande est exécutée. Bien que cela soit techniquement improbable, il est possible que les plafonds calculés diffèrent entre le site local et le site partenaire. Ce comportement est normal et n'indique ni une panne ni une erreur de configuration.
+** Chaque site inscrit sa valeur calculée comme état souhaité, et le noyau l'applique ensuite.
+
+
+* Le contrôle de la congestion WAN ISL fonctionne automatiquement une fois activé.
+
+
+
+
+[[enable-congestion-control]]
+== Activer le contrôle de la congestion
+
+Pour activer le contrôle de congestion WAN ISL, suivez ces étapes sur le cluster local.
+
+
+CAUTION: Si vous avez deux configurations IP MetroCluster à quatre nœuds connectées aux mêmes commutateurs, contactez le support NetApp pour activer cette fonctionnalité.
+
+.Étapes
+. Activez le contrôle de la congestion WAN ISL sur cluster_A:
++
+[source, cli]
+----
+metrocluster interconnect congestion-control enable
+----
++
+Si la commande échoue avec l' `MCC_CC_ISL_INFO_UNAVAILABLE`erreur, les informations ISL ne peuvent pas être obtenues automatiquement et vous devez contacter NetApp Support pour activer cette fonctionnalité.
+
+. Vérifiez que le contrôle de congestion WAN ISL est activé :
++
+[source, cli]
+----
+metrocluster interconnect congestion-control show
+----
++
+[listing]
+----
+cluster_A::> metrocluster interconnect congestion-control show
+
+Node            Enabled Ceiling (MiB/s)
+--------------- ------- ---------------
+cluster_A-01    true    1250
+cluster_A-02    true    1250
+2 entries were displayed.
+----
+
+
+
+NOTE: Si vous devez modifier le plafond calculé après l’activation de cette fonctionnalité, contactez le support NetApp.
+
+
+
+[[refresh-congestion-control]]
+== Actualiser le contrôle de congestion
+
+Pour actualiser la configuration de contrôle de la congestion WAN ISL, suivez ces étapes sur le cluster local. Vous devez actualiser la configuration de contrôle de la congestion chaque fois que la topologie change, par exemple lorsque le nombre ou la vitesse des ISL changent, ou lorsqu'un nouveau nœud est ajouté à la configuration IP MetroCluster.
+
+.Étapes
+. Actualisez la configuration de contrôle de congestion WAN ISL sur le cluster_A :
++
+[source, cli]
+----
+metrocluster interconnect congestion-control refresh
+----
++
+ONTAP calcule un nouveau plafond en fonction des conditions actuelles du réseau et l'applique automatiquement.
+
++
+Si la commande échoue avec l’ `MCC_CC_ISL_INFO_UNAVAILABLE`erreur, il est impossible d’obtenir automatiquement les informations ISL et vous devez contacter NetApp Support pour actualiser votre configuration.
+
+
+
+
+
+[[monitor-wan-isl-congestion-control-activity]]
+== Surveiller l'activité de contrôle de la congestion WAN ISL
+
+Vous pouvez utiliser la commande suivante pour vérifier que le contrôle de la congestion fonctionne comme prévu :
+
+[source, cli]
+----
+metrocluster interconnect congestion-control show
+----
+Lorsqu’elle est activée, la sortie devrait être similaire à l’exemple suivant :
+
+[listing]
+----
+cluster_A::> metrocluster interconnect congestion-control show
+
+Node            Enabled Ceiling (MiB/s)
+--------------- ------- ---------------
+cluster_A-01    true    1250
+cluster_A-02    true    1250
+2 entries were displayed.
+----
+Vous pouvez également consulter des informations plus détaillées pour chaque nœud en utilisant le `-instance` paramètre :
+
+[source, cli]
+----
+metrocluster interconnect congestion-control show -instance
+----
+[listing]
+----
+cluster_A::> metrocluster interconnect congestion-control show -instance
+
+                        Node Name: cluster_A-01
+       Congestion Control Enabled: true
+       Throughput Ceiling (MiB/s): 1250
+
+                        Node Name: cluster_A-02
+       Congestion Control Enabled: true
+       Throughput Ceiling (MiB/s): 1250
+2 entries were displayed.
+----
+
+
+[[disable-congestion-control]]
+== Désactiver le contrôle de la congestion
+
+.Étapes
+. Désactiver le contrôle de la congestion WAN ISL sur cluster_A :
++
+[source, cli]
+----
+metrocluster interconnect congestion-control disable
+----
+. Vérifiez que la fonctionnalité est désactivée :
++
+[source, cli]
+----
+metrocluster interconnect congestion-control show
+----
++
+Le résultat doit être similaire à l’exemple suivant :
+
++
+[listing]
+----
+cluster_A::> metrocluster interconnect congestion-control show
+
+Node            Enabled Ceiling (MiB/s)
+--------------- ------- ---------------
+cluster_A-01    false   -
+cluster_A-02    false   -
+2 entries were displayed.
+----
+

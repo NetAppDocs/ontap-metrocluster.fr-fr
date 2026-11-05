@@ -491,6 +491,22 @@ Vous pouvez déplacer un volume pour les SVM source et de destination synchrone.
  a| 
 Il est possible d'interrompre une relation SnapMirror entre un terminal source et de destination d'un miroir de protection des données.
 
+
+
+ a| 
+`vserver modify -storage-limit`
+ a| 
+À partir d'ONTAP 9.20.1, des limites de stockage peuvent être configurées pour les SVM qui font partie d'une configuration IP MetroCluster.
+
+Les limitations suivantes s'appliquent à l'activation ou à la désactivation des limites de stockage lors d'une commutation MetroCluster:
+
+* Sur le SVM de destination de synchronisation, il est impossible d'utiliser la `vserver modify -storage-limit` commande pour activer ou désactiver la limite de stockage. Autrement dit, vous ne pouvez pas modifier la valeur de 0 à une valeur non nulle, ni inversement. La commande échoue avec l'erreur suivante :
++
+`This operation is not permitted on a Vserver that is configured as the destination of a MetroCluster Vserver relationship`
+
+* Vous pouvez toujours modifier la limite de stockage et la faire passer d'une valeur non nulle à une autre (par exemple, de 100 To à 200 To). Cette nouvelle valeur est conservée après le switchback.
+
+
 |===
 
 

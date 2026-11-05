@@ -13,6 +13,7 @@ summary: Un basculement négocié arrête clairement les processus sur le site p
 [role="lead"]
 Un basculement négocié arrête clairement les processus sur le site partenaire, puis bascule les opérations sur le site partenaire. Vous pouvez utiliser un basculement négocié pour réaliser des opérations de maintenance sur un site MetroCluster ou tester la fonctionnalité de basculement.
 
+.Avant de commencer
 * Toutes les modifications de la configuration précédente doivent être effectuées avant d'effectuer une opération de rétablissement.
 +
 Cette approche permet d'éviter la concurrence avec l'opération de basculement ou de rétablissement négociée.
@@ -29,11 +30,12 @@ https://docs.netapp.com/ontap-9/topic/com.netapp.doc.dot-cm-sag/home.html["Admin
 * L'option Replication.create_Data_protection_rels.enable doit être défini sur ON des deux sites de configuration MetroCluster avant de créer une nouvelle relation SnapMirror.
 * Dans le cas d'une configuration MetroCluster à deux nœuds, une nouvelle relation SnapMirror ne doit pas être créée lors de la mise à niveau si les versions d'ONTAP entre les sites ne correspondent pas.
 * Dans le cas d'une configuration MetroCluster à quatre nœuds, les versions de ONTAP non correspondantes ne sont pas prises en charge.
+* Examinez link:switchover-limitations.html["Limitations lors du basculement de la configuration MetroCluster"] avant d'effectuer une commutation négociée.
 
 
 Le site de restauration peut se rétablissement en quelques heures.
 
-La commande MetroCluster switchover permet de basculer sur les nœuds de tous les groupes DR dans la configuration MetroCluster. Par exemple, dans une configuration MetroCluster à 8 nœuds, il bascule les nœuds sur les deux groupes de reprise après incident.
+Le `metrocluster switchover` La commande bascule les nœuds dans tous les groupes DR dans la configuration MetroCluster. Par exemple, dans une configuration MetroCluster à 8 nœuds, il bascule les nœuds sur les deux groupes de reprise après incident.
 
 Lors de la préparation et de l'exécution d'un basculement négocié, vous ne devez pas modifier la configuration dans un cluster, ni effectuer des opérations de basculement ou de rétablissement.
 
@@ -47,7 +49,7 @@ Pour les configurations MetroCluster FC :
 Pour les configurations MetroCluster IP :
 
 
-NOTE: Avant d'effectuer des tâches de maintenance, vous devez supprimer la surveillance si la configuration MetroCluster est surveillée à l'aide de l'utilitaire Tiebreaker ou Mediator.link:../maintain/concept_remove_mediator_or_tiebreaker_when_performing_maintenance_tasks.html["Retirez le programme de surveillance du médiateur ONTAP ou du disjoncteur d'attache avant d'effectuer des tâches de maintenance"]
+NOTE: Avant d'effectuer des tâches de maintenance, vous devez désactiver la surveillance si la configuration MetroCluster est surveillée par l'utilitaire Tiebreaker ou Mediator. link:../maintain/concept_remove_mediator_or_tiebreaker_when_performing_maintenance_tasks.html["Retirez le programme de surveillance du médiateur ONTAP ou du disjoncteur d'attache avant d'effectuer des tâches de maintenance"].
 
 * Pour ONTAP 9.4 et versions antérieures :
 +
@@ -63,13 +65,17 @@ NOTE: Avant d'effectuer des tâches de maintenance, vous devez supprimer la surv
 * Pour ONTAP 9.8 et versions ultérieures :
 +
 ** En cas de perte de l'accès au stockage distant, les agrégats non mis en miroir qui se trouvent sur le site de reprise après incident deviennent indisponibles. Cela peut entraîner une panne du contrôleur.
-+
-... Utilisez les commandes MetroCluster check run, MetroCluster check show et MetroCluster check config-réplication show pour vérifier qu'aucune mise à jour de configuration n'est en cours ou en attente. Exécutez ces commandes depuis le site qui resteront opérationnelles.
-... Depuis le site qui restera opérationnel, mettez en œuvre le basculement : `metrocluster switchover`
+
+
+
+
+.Étapes
+. Utilisez les commandes MetroCluster check run, MetroCluster check show et MetroCluster check config-réplication show pour vérifier qu'aucune mise à jour de configuration n'est en cours ou en attente. Exécutez ces commandes depuis le site qui resteront opérationnelles.
+. Depuis le site qui restera opérationnel, mettez en œuvre le basculement : `metrocluster switchover`
 +
 L'opération peut prendre plusieurs minutes.
 
-... Surveiller la fin du basculement : `metrocluster operation show`
+. Surveiller la fin du basculement : `metrocluster operation show`
 +
 [listing]
 ----
@@ -87,9 +93,5 @@ cluster_A::*> metrocluster operation show
    End time: 10/4/2012 19:04:22
      Errors: -
 ----
-... Rétablir toutes les configurations SnapMirror ou SnapVault.
-
-
-
-
+. Rétablir toutes les configurations SnapMirror ou SnapVault.
 

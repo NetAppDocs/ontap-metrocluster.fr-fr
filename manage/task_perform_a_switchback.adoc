@@ -13,6 +13,9 @@ summary: 'Après avoir réparé la configuration MetroCluster, effectuez l"opér
 [role="lead"]
 Après avoir rétablissement la configuration MetroCluster, vous pouvez exécuter l'opération de rétablissement MetroCluster. L'opération de rétablissement MetroCluster renvoie la configuration à son état de fonctionnement normal, avec les SVM (Storage Virtual machines) source synchrone sur le site de reprise après incident et permettant l'accès aux données depuis les pools de disques locaux.
 
+.Description de la tâche
+Prenez connaissance des exigences suivantes avant d’effectuer le rétablissement :
+
 * Le cluster de secours doit avoir basculé avec succès vers le cluster survivant.
 * La réparation doit avoir été effectuée sur les agrégats racine et de données.
 * Les autres nœuds du cluster ne doivent pas être en état de basculement haute disponibilité (tous les nœuds doivent être opérationnels pour chaque paire haute disponibilité).
@@ -20,8 +23,10 @@ Après avoir rétablissement la configuration MetroCluster, vous pouvez exécute
 * L'agrégat racine doit être mis en miroir.
 * Les liens ISL doivent être en ligne.
 * Toutes les licences requises doivent être installées sur le système.
-+
-.. Vérifiez que tous les nœuds sont en état activé : `metrocluster node show`
+
+
+.Étapes
+. Vérifiez que tous les nœuds sont en état activé : `metrocluster node show`
 +
 L'exemple suivant présente les nœuds qui sont actuellement à l'état activé :
 
@@ -41,10 +46,10 @@ Group Cluster Node        State          Mirroring Mode
               node_B_2    configured     enabled   waiting for switchback recovery
 4 entries were displayed.
 ----
-.. Confirmer que la resynchronisation est terminée sur tous les SVM : `metrocluster vserver show`
-.. Vérifier que toute migration LIF automatique effectuée par les opérations de correction a été réalisée avec succès : `metrocluster check lif show`
-.. Effectuez un rétablissement simulé pour vérifier que le système est prêt : `metrocluster switchback -simulate`
-.. Vérifiez la configuration :
+. Confirmer que la resynchronisation est terminée sur tous les SVM : `metrocluster vserver show`
+. Vérifier que toute migration LIF automatique effectuée par les opérations de correction a été réalisée avec succès : `metrocluster check lif show`
+. Effectuez un rétablissement simulé pour vérifier que le système est prêt : `metrocluster switchback -simulate`
+. Vérifiez la configuration :
 +
 `metrocluster check run`
 
@@ -76,8 +81,8 @@ clusters            ok
 connections         ok
 6 entries were displayed.
 ----
-.. Exécutez le rétablissement en exécutant la commande MetroCluster alternative depuis n'importe quel nœud du cluster survivant : `metrocluster switchback`
-.. Vérifier la progression de l'opération de rétablissement : `metrocluster show`
+. Exécutez le rétablissement en exécutant la commande MetroCluster alternative depuis n'importe quel nœud du cluster survivant : `metrocluster switchback`
+. Vérifier la progression de l'opération de rétablissement : `metrocluster show`
 +
 L'opération de rétablissement est toujours en cours lorsque la sortie affiche attente-rétablissement :
 
@@ -112,7 +117,5 @@ Remote: cluster_A         Configuration state configured
 ----
 +
 Si un rétablissement prend beaucoup de temps, vous pouvez vérifier l'état des lignes de base en cours en utilisant le `metrocluster config-replication resync-status show` commande. Cette commande est au niveau de privilège avancé.
-
-
 
 

@@ -2936,12 +2936,24 @@ mcc4-b2      mlx4_0          IB      Up     false     192.0.2.10  	ib2b
 Les protocoles d'authentification et de confidentialité sur les switches et sur le système ONTAP doivent être identiques.
 
 .Description de la tâche
-ONTAP prend actuellement en charge AES-128 pour la confidentialité (chiffrement) et SHA-256 pour l'authentification.
+* À partir de ONTAP 9.20.1, ONTAP prend en charge SHA-512 pour l'authentification SNMP.
+* ONTAP prend en charge les protocoles suivants pour l’authentification et le chiffrement :
++
+** Confidentialité (chiffrement): AES-128
+** Authentification:
++
+*** SHA-512 (à partir d'ONTAP 9.20.1)
+*** SHA-256
+
+
+
+
+
 
 [CAUTION]
 ====
-* Dans Fabric OS 10.x et versions ultérieures, Brocade prend uniquement en charge SHA-512 pour l'authentification SNMP. ONTAP ne prend actuellement pas en charge SHA-512, avec une prise en charge limitée à SHA‑256.
-* Si vos commutateurs FC MetroCluster exécutent Fabric OS 10.x ou une version ultérieure, vous ne pouvez pas configurer SNMP et vous ne pouvez pas ajouter ces commutateurs à la surveillance de l'état ONTAP. Si vous souhaitez rétrograder le firmware du commutateur, vous pouvez suivre les étapes dans link:../maintain/task_upgrade_or_downgrad_the_firmware_on_a_brocade_fc_switch_mcc.html["Mettez à niveau ou déclaradez le micrologiciel sur un commutateur FC Brocade"].
+* Dans Fabric OS 10.x et versions ultérieures, Brocade prend uniquement en charge SHA-512 pour l'authentification SNMP.
+* Si vous utilisez une version d’ONTAP antérieure à 9.20.1 et que vos commutateurs FC MetroCluster exécutent Fabric OS 10.x ou une version ultérieure, vous ne pouvez pas configurer SNMP ni ajouter ces commutateurs à la surveillance de l’état d’ONTAP. Si vous souhaitez rétrograder le micrologiciel du commutateur, vous pouvez suivre les étapes dans link:../maintain/task_upgrade_or_downgrad_the_firmware_on_a_brocade_fc_switch_mcc.html["Mettez à niveau ou déclaradez le micrologiciel sur un commutateur FC Brocade"].
 
 
 ====
@@ -2961,12 +2973,15 @@ Controller_A_1::> security login create -user-or-group-name snmpv3user -applicat
 NOTE: Pour EngineID, appuyez sur *ENTRÉE* pour attribuer la valeur par défaut.
 
 +
+Le résultat suivant est donné à titre d'exemple uniquement, vous devez choisir les paramètres pris en charge dans votre environnement.
+
++
 [listing]
 ----
 
 Enter the authoritative entity's EngineID [remote EngineID]:
 
-Which authentication protocol do you want to choose (none, md5, sha, sha2-256) [none]: sha
+Which authentication protocol do you want to choose (none, md5, sha, sha2-256, sha512) [none]: sha512
 
 Enter the authentication protocol password (minimum 8 characters long):
 
