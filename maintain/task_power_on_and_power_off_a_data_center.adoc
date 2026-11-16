@@ -219,10 +219,6 @@ Oui. Les disques sont distants du cluster A.
  a| 
 Node_B_1_aggr1/plex0
 
-Node_B_1_aggr0/plex0
-
-Node_B_2_aggr0/plex0
-
 Node_B_2_aggr1/plex0
 
 
@@ -242,11 +238,11 @@ Non Les disques sont locaux au cluster A.
 +
 [listing]
 ----
-storage aggregate plex offline -aggregate Node_B_1_aggr0 -plex plex0
+storage aggregate plex offline -aggregate Node_B_1_aggr1 -plex plex0
 ----
 +
 
-NOTE: Effectuez cette étape pour tous les plexes dont les disques sont distants sur le cluster_A.
+NOTE: Ne mettez pas hors ligne les plexes des agrégats racine Cluster_B (aggr0).
 
 
 

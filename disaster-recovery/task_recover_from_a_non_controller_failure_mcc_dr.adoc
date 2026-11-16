@@ -239,7 +239,7 @@ Lancer la commande : `boot_ontap`
 
 --
 ====
-. Une fois le démarrage du nœud terminé, vérifiez que les agrégats racine sont mis en miroir.
+. Une fois le démarrage du nœud terminé, vérifiez que les agrégats racine et de données sont en miroir.
 +
 [role="tabbed-block"]
 ====
@@ -258,9 +258,21 @@ Lancer la commande : `boot_ontap`
 --
 .Si un plex est hors ligne :
 --
-En ligne le plex :
+.. Depuis le site sinistré, vérifiez les plexes de l’agrégat racine :
++
+`storage aggregate plex show`
 
++
+Si un plex d'agrégat racine est hors ligne, remettez-le en ligne à partir du site de secours :
+
++
 `storage aggregate plex online -aggregate <aggregate_name> -plex <plex_name>`
+
+.. Depuis le site survivant, mettez en ligne tous les plexes hors ligne :
++
+`storage aggregate plex online -aggregate <aggregate_name> -plex <plex_name>`
+
+
 
 --
 .Si les deux plex sont présents :
